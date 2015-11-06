@@ -17,7 +17,7 @@ class FileFinder:
         print(self.file_types)
 
         self.set_files()
-        print('\nFile List:')
+        print('\nList of Files Found:')
         self.print_collection(self.files)
 
     # Takes a list or tuple as input and prints each item.
