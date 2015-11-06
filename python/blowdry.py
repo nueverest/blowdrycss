@@ -1,7 +1,10 @@
-from os import chdir, getcwd, path
+from os import chdir, getcwd, path, walk
+from glob import glob
 
 # Custom classes
 from filefinder import FileFinder
+__author__ = 'chad nelson'
+__project__ = 'blow dry css'
 
 
 # Set project_directory to the one containing the files you want to DRY out.
@@ -13,7 +16,7 @@ project_directory = path.join(getcwd() + '\ExampleSite')    # Change to whatever
 file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
 
 # Get all files associated with defined file_types in project_directory
-file_finder = FileFinder(project_directory, file_types)
+file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
 
 # Detect all defined classes
 
