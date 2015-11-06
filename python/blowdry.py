@@ -1,11 +1,19 @@
-import os
-os.path.dirname(os.path.abspath(__file__))
+from os import chdir, getcwd, path
 
-# Set project directory.
-project_directory = "..\ExampleSite"
+# Custom classes
+from filefinder import FileFinder
 
-# Get all files in project directory
 
+# Set project_directory to the one containing the files you want to DRY out.
+# In this case it is set to the "ExampleSite" by default for demonstration purposes.
+chdir('..')                                                 # Navigate up one directory relative to this script.
+project_directory = path.join(getcwd() + '\ExampleSite')    # Change to whatever you want.
+
+# Define File all file types/extensions to search for in project_directory
+file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
+
+# Get all files associated with defined file_types in project_directory
+file_finder = FileFinder(project_directory, file_types)
 
 # Detect all defined classes
 
