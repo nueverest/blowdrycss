@@ -1,5 +1,4 @@
-from os import chdir, getcwd, path, walk
-from glob import glob
+from os import chdir, getcwd, path
 
 # Custom classes
 from filefinder import FileFinder

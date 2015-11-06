@@ -1,4 +1,4 @@
-from os import chdir, getcwd, path, walk
+from os import path, walk
 from glob import glob
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
