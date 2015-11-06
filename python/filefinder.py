@@ -27,6 +27,8 @@ class FileFinder:
             print(item)
 
     # Get all files associated with defined file_types in project directory
+    # Reference:
+    # stackoverflow.com/questions/954504/how-to-get-files-in-a-directory-including-all-subdirectories#answer-954948
     def set_files(self):
         for directory, _, _ in walk(self.project_directory):
             for file_type in self.file_types:

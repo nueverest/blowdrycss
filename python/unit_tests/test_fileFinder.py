@@ -1,3 +1,4 @@
+import unittest
 from unittest import TestCase
 from os import chdir, path, getcwd
 from filefinder import FileFinder
@@ -6,14 +7,15 @@ __project__ = 'blow dry css'
 
 
 class TestFileFinder(TestCase):
+    # Reference:
+    # http://stackoverflow.com/questions/4219717/how-to-assert-output-with-nosetest-unittest-in-python#answer-4220278
     def test_print_collection1(self):
         import sys
         from io import StringIO
 
         expected_output = 'test1\ntest2'
         file_finder = FileFinder()
-        collection1 = ['test1','test2']
-        collection2 = ('test1','test2')
+        collection1 = ['test1', 'test2']
         saved_stdout = sys.stdout
         try:
             out = StringIO()
@@ -30,7 +32,7 @@ class TestFileFinder(TestCase):
 
         expected_output = 'test1\ntest2'
         file_finder = FileFinder()
-        collection2 = ('test1','test2')
+        collection2 = ('test1', 'test2')
         saved_stdout = sys.stdout
         try:
             out = StringIO()
@@ -49,3 +51,6 @@ class TestFileFinder(TestCase):
         file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
         file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
         self.assertEquals(file_finder.files, expected_files)
+
+if __name__ == '__main__':
+    unittest.main()
