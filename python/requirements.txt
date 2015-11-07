@@ -2,10 +2,5 @@
 unittest
 coverage>=4.0.2
 
-# HTML Parser
-# If using Windows
-# Go here http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml
-# Download the .whl file for your version of windows and python
-# Navigate to the .whl file download location
-# Run "pip install <file name>.whl"
-lxml
+# CSS Creation
+cssutils>=1.0.1
