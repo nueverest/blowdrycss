@@ -33,3 +33,19 @@ class FileFinder:
         for directory, _, _ in walk(self.project_directory):
             for file_type in self.file_types:
                 self.files.extend(glob(path.join(directory, file_type)))
+
+
+class FileConverter:
+    # Converts text files to strings.
+    # Ensure the existence of the file_path.
+    def __init__(self, file_path=''):
+        if path.isfile(file_path):
+            self.file_path = file_path
+        else:
+            raise FileNotFoundError('No file found at: ' + file_path)
+
+    # Convert the file to a string and return it.
+    def get_file_as_string(self):
+        with open(self.file_path, 'r') as file:
+            file_as_string = file.read().replace('\n', '')
+        return file_as_string

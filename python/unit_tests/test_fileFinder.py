@@ -1,7 +1,7 @@
 import unittest
 from unittest import TestCase
 from os import chdir, path, getcwd
-from filefinder import FileFinder
+from filehandler import FileFinder, FileConverter
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -44,13 +44,27 @@ class TestFileFinder(TestCase):
             sys.stdout = saved_stdout
 
     def test_set_files(self):
-        expected_files = ['C:\\Users\\Chad Nu\\PycharmProjects\\BlowDryCSS\\ExampleSite\\index.html']
+        expected_files = [
+            'C:\\Users\\Chad Nu\\PycharmProjects\\BlowDryCSS\\ExampleSite\\index.html',
+            'C:\\Users\\Chad Nu\\PycharmProjects\\BlowDryCSS\\ExampleSite\\test.html'
+        ]
 
         chdir('..\..')                                              # Navigate up two directories.
         project_directory = path.join(getcwd() + '\ExampleSite')    # Change to whatever you want.
         file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
         file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
         self.assertEquals(file_finder.files, expected_files)
+
+    def test_fileconverter_wrongpath(self):
+        wrong_file_path = 'C:\\this\\is\\wrong\\file\\path'
+        self.assertRaises(FileNotFoundError, FileConverter, wrong_file_path)
+
+    def test_get_file_as_string(self):
+        test_file_path = 'C:\\Users\\Chad Nu\\PycharmProjects\\BlowDryCSS\\ExampleSite\\test.html'
+        expected_string = '<html>	<body>		<h1 class="c-blue text-align-center">Blow Dry CSS</h1>		' \
+                          '<div class="padding-10 margin-20">Testing 1 2 3</div>	</body></html>'
+        file_converter = FileConverter(file_path=test_file_path)
+        self.assertEquals(file_converter.get_file_as_string(), expected_string)
 
 if __name__ == '__main__':
     unittest.main()
