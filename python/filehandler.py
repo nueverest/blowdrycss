@@ -8,18 +8,20 @@ class FileFinder(object):
     file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
 
     def __init__(self, project_directory='', file_types=file_types):
-        # TODO: Add a check that ensure the project directory exists() else throw exception
-        self.project_directory = project_directory
-        self.file_types = file_types
-        self.files = []
-        print('Project Directory:')
-        print(project_directory)
-        print('\nFile Types')
-        print(self.file_types)
+        if path.isdir(project_directory):
+            self.project_directory = project_directory
+            self.file_types = file_types
+            self.files = []
+            print('Project Directory:')
+            print(project_directory)
+            print('\nFile Types')
+            print(self.file_types)
 
-        self.set_files()
-        print('\nList of Files Found:')
-        self.print_collection(self.files)
+            self.set_files()
+            print('\nList of Files Found:')
+            self.print_collection(self.files)
+        else:
+            raise NotADirectoryError(project_directory, ' is not a directory.')
 
     # Takes a list or tuple as input and prints each item.
     @staticmethod

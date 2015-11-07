@@ -7,6 +7,10 @@ __project__ = 'blow dry css'
 
 
 class TestFileFinder(TestCase):
+    def test_file_finder_wrong_path(self):
+        not_a_directory = 'C:\\this\\is\\not\\a\\directory.txt'
+        self.assertRaises(NotADirectoryError, FileFinder, not_a_directory)
+
     # Reference:
     # http://stackoverflow.com/questions/4219717/how-to-assert-output-with-nosetest-unittest-in-python#answer-4220278
     def test_print_collection1(self):
