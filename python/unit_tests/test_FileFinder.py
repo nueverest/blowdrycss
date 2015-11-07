@@ -18,7 +18,7 @@ class TestFileFinder(TestCase):
         from io import StringIO
 
         expected_output = 'test1\ntest2'
-        file_finder = FileFinder()
+        file_finder = FileFinder(project_directory=getcwd())
         collection1 = ['test1', 'test2']
         saved_stdout = sys.stdout
         try:
@@ -35,7 +35,7 @@ class TestFileFinder(TestCase):
         from io import StringIO
 
         expected_output = 'test1\ntest2'
-        file_finder = FileFinder()
+        file_finder = FileFinder(project_directory=getcwd())
         collection2 = ('test1', 'test2')
         saved_stdout = sys.stdout
         try:

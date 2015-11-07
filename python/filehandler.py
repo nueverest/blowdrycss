@@ -1,4 +1,4 @@
-from os import path, walk
+from os import path, walk, getcwd
 from glob import glob
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -7,7 +7,7 @@ __project__ = 'blow dry css'
 class FileFinder(object):
     file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
 
-    def __init__(self, project_directory='', file_types=file_types):
+    def __init__(self, project_directory=getcwd(), file_types=file_types):
         if path.isdir(project_directory):
             self.project_directory = project_directory
             self.file_types = file_types
@@ -21,7 +21,7 @@ class FileFinder(object):
             print('\nList of Files Found:')
             self.print_collection(self.files)
         else:
-            raise NotADirectoryError(project_directory, ' is not a directory.')
+            raise NotADirectoryError(project_directory + ' is not a directory.')
 
     # Takes a list or tuple as input and prints each item.
     @staticmethod
