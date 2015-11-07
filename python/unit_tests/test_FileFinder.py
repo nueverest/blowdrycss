@@ -61,8 +61,9 @@ class TestFileFinder(TestCase):
 
     def test_get_file_as_string(self):
         test_file_path = 'C:\\Users\\Chad Nu\\PycharmProjects\\BlowDryCSS\\ExampleSite\\test.html'
-        expected_string = '<html>	<body>		<h1 class="c-blue text-align-center">Blow Dry CSS</h1>		' \
-                          '<div class="padding-10 margin-20">Testing 1 2 3</div>	</body></html>'
+        expected_string = '<html>	<body>		<h1 class="c-blue text-align-center padding-10">Blow Dry CSS</h1>' \
+                          '        <div class="padding-10 margin-20">Testing<br class="hide" />1 2 3</div>	' \
+                          '</body></html>'
         file_converter = FileConverter(file_path=test_file_path)
         self.assertEquals(file_converter.get_file_as_string(), expected_string)
 
