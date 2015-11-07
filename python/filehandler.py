@@ -4,10 +4,11 @@ __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-class FileFinder:
+class FileFinder(object):
     file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
 
     def __init__(self, project_directory='', file_types=file_types):
+        # TODO: Add a check that ensure the project directory exists() else throw exception
         self.project_directory = project_directory
         self.file_types = file_types
         self.files = []
@@ -35,7 +36,7 @@ class FileFinder:
                 self.files.extend(glob(path.join(directory, file_type)))
 
 
-class FileConverter:
+class FileConverter(object):
     # Converts text files to strings.
     # Ensure the existence of the file_path.
     def __init__(self, file_path=''):

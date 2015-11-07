@@ -1,7 +1,8 @@
 from os import chdir, getcwd, path
 
 # Custom classes
-from filehandler import FileFinder, FileConverter
+from filehandler import FileFinder
+from htmlattributeparser import HTMLClassParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -17,12 +18,8 @@ file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
 # Get all files associated with defined file_types in project_directory
 file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
 
-for file in file_finder.files:
-    file_converter = FileConverter(file_path=file)
-    print(file_converter.get_file_as_string())
-
-# Detect all defined classes
-
+# Get set of all defined classes
+class_parser = HTMLClassParser(files=file_finder.files)
 
 # Determine which class names match the format
 
