@@ -26,11 +26,11 @@ class HTMLAttributeParser(HTMLParser):
                 self.attribute_value_list.append(value)
 
     # Used for debugging functions.
-    @staticmethod
-    def print_class_value(self, tag, attrs):
-        for name, value in attrs:
-            if name == self.attribute_name:
-                print("tag:", tag, "\t\t", self.attribute_name, ":", value)
+    # @staticmethod
+    # def print_class_value(self, tag, attrs):
+    #     for name, value in attrs:
+    #         if name == self.attribute_name:
+    #             print("tag:", tag, "\t\t", self.attribute_name, ":", value)
 
 
 class HTMLClassParser(object):
@@ -48,11 +48,9 @@ class HTMLClassParser(object):
             class_parser.feed(file_string)
 
             # Convert list of class strings to set
-            print(class_parser.attribute_value_list)
+            print("Class List:\t", class_parser.attribute_value_list)
             self.set_class_set(class_parser.attribute_value_list)
-            print(self.class_set)
-
-            break   # TODO Remove after testing.
+            print(" Class Set:\t", self.class_set)
 
     def set_class_set(self, attribute_value_list):
         for value in attribute_value_list:
