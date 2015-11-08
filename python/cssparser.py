@@ -126,7 +126,7 @@ class ClassPropertyParser(object):
 
     # Strip property name from encoded_property_value if applicable and return encoded_property_value.
     @staticmethod
-    def strip_property_name(self, property_name='', encoded_property_value=''):
+    def strip_property_name(property_name='', encoded_property_value=''):
         # Deny empty string. If it doesn't have a property name ignore it.
         if property_name == '':
             raise ValueError('CSS property_name cannot be empty.')
