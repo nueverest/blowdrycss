@@ -4,7 +4,7 @@ __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-class ClassPropertyParser(object):
+class CSSPropertyParser(object):
     # Class Format Legend
     # Dashes separate word in multi-word property names/aliases.
     # property-name
