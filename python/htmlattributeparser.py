@@ -2,6 +2,8 @@ from html.parser import HTMLParser
 
 # Custom Classes
 from filehandler import FileConverter
+__author__ = 'chad nelson'
+__project__ = 'blow dry css'
 
 
 class HTMLAttributeParser(HTMLParser):
@@ -36,7 +38,7 @@ class HTMLAttributeParser(HTMLParser):
 class HTMLClassParser(object):
     def __init__(self, files):
         for file in files:
-            self.class_set = {}
+            self.class_set = set()
 
             # Convert file to string.
             file_converter = FileConverter(file_path=file)
