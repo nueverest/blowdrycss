@@ -30,6 +30,7 @@ class ClassPropertyParser(object):
         css = u'''/* Generated with BlowDryCSS. */'''
         self.sheet = parseString(css)
         self.rules = []
+        self.importance_designator = '-i'       # '-i' is used to designate that the priority level is '!important'
         self.removed_class_set = set()
         self.class_set = class_set
         self.clean_class_set()
@@ -39,7 +40,7 @@ class ClassPropertyParser(object):
         #   css property name as 'keys'
         #   list of aliases as 'values' - An alias can be shorthand for the property name.
         self.property_dict = {
-            'font-weight': ['normal', 'b', 'bold', 'bolder', 'lighter', 'initial', 'inherit', 'fw'],
+            'font-weight': ['normal', 'bold', 'bolder', 'lighter', 'initial', 'fw-'],
         }
 
     # Take list, tuple, or set of strings an convert to lowercase.
@@ -102,6 +103,8 @@ class ClassPropertyParser(object):
             self.class_set.remove(invalid_css_class)
             self.removed_class_set.add(invalid_css_class)
 
+    # Property Name
+    #
     # Class returns the property_name or removes/cleans the unrecognized class and returns ''.
     # Classes that use identical property names must set a property value
     # i.e. 'font-weight' is invalid because no value is included AND 'font-weight-700' is valid because 700 is a value.
@@ -121,15 +124,10 @@ class ClassPropertyParser(object):
             self.removed_class_set.add(css_class)
             return ''
 
-    # Strip property name and priority from a given css_class and return encoded_property_value
-    # '-i' is used to designate that the priority level is '!important'
+    # Strip property name from encoded_property_value if applicable and return encoded_property_value.
     @staticmethod
-    def get_encoded_property_value(self, property_name='', css_class=''):
-        encoded_property_value = css_class
-        important = '-i'
-
+    def strip_property_name(self, property_name='', encoded_property_value=''):
         # Deny empty string. If it doesn't have a property name ignore it.
-        # Wrap in try/catch to allow user to define custom css classes.
         if property_name == '':
             raise ValueError('CSS property_name cannot be empty.')
         # Append '-' to property to match the class format.
@@ -138,12 +136,49 @@ class ClassPropertyParser(object):
 
         # Strip property name
         if encoded_property_value.startswith(property_name):
-            encoded_property_value = encoded_property_value[len(property_name):]
+            return encoded_property_value[len(property_name):]
+        else:
+            return encoded_property_value
 
-            # Strip priority designator
-            if encoded_property_value.endswith(important):
-                encoded_property_value = encoded_property_value[:-len(important)]
+    # Some alias could be abbreviations e.g. 'fw-' stands for 'font-weight-'
+    # In these cases a dash is added in the dictionary to indicate an abbreviation.
+    @staticmethod
+    def alias_is_abbreviation(alias=''):
+        return alias.endswith('-')
 
+    # Returns a list of all property abbreviations appearing in property_dict
+    def get_property_abbreviations(self, property_name=''):
+        property_abbreviations = list()
+        for property_name, aliases in self.property_dict.items():
+            for alias in aliases:
+                if self.alias_is_abbreviation(alias=alias):
+                    property_abbreviations.append(alias)
+
+        return property_abbreviations
+
+    # Strip property abbreviation from encoded_property_value if applicable and return encoded_property_value.
+    def strip_property_abbreviation(self, property_name='', encoded_property_value=''):
+        property_abbreviations = self.get_property_abbreviations(property_name=property_name)
+
+        for property_abbreviation in property_abbreviations:
+            if encoded_property_value.startswith(property_abbreviation):
+                return encoded_property_value[len(property_name):]
+
+        return encoded_property_value
+
+    # Property Value
+    #
+    # Strip property name or abbreviation prefix and property priority designator
+    # Examples:
+    # 'fw-bold-i' --> 'bold'                [abbreviated font-weight property_name]
+    # 'padding-1-10-10-5-i' --> '1-10-10-5' [standard property_name]
+    # 'height-7_25rem-i' --> '7_25rem'      [contains underscores]
+    # The term encoded_property_value means a property value that may or may not contain dashes and underscores.
+    def get_encoded_property_value(self, property_name='', css_class=''):
+        encoded_property_value = css_class
+        encoded_property_value = self.strip_property_name(encoded_property_value=encoded_property_value)
+        encoded_property_value = self.strip_property_abbreviation(encoded_property_value=encoded_property_value)
+        encoded_property_value = self.strip_priority_designator(encoded_property_value=encoded_property_value)
         return encoded_property_value
 
     # Accepts an encoded_property_value that's been stripped of it's property named and priority
@@ -152,12 +187,20 @@ class ClassPropertyParser(object):
         # TODO: Call CSSPropertyValueParser
         return ''
 
-    @staticmethod
-    def get_property_priority(css_class=''):
-        if css_class.endswith('-i'):
-            return 'IMPORTANT'
+    # Property Priority
+    #
+    def is_important(self, css_class=''):
+        return css_class.endswith(self.importance_designator)
+
+    # Strip priority designator from the end of enconded_property_value.
+    def strip_priority_designator(self, encoded_property_value=''):
+        if self.is_important(css_class=encoded_property_value):
+            return encoded_property_value[:-len(self.importance_designator)]
         else:
-            return ''
+            return encoded_property_value
+
+    def get_property_priority(self, css_class=''):
+        return 'IMPORTANT' if self.is_important(css_class=css_class) else ''
 
 
 # Accepts a clean encoded_property_value.

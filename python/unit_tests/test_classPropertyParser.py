@@ -54,14 +54,14 @@ class TestClassPropertyParser(TestCase):
         self.assertEquals(class_parser.class_set, expected_empty_set)
 
     def test_get_property_name_alias(self):
-        identical_set = {'normal', 'b', 'bold', 'bolder', 'lighter', 'initial', 'inherit', 'fw'}
+        identical_set = {'normal', 'bold', 'bolder', 'lighter', 'initial', 'fw-'}
         expected_property_name = 'font-weight'
         class_parser = ClassPropertyParser(class_set=identical_set)
 
         class_list = list(class_parser.class_set)
         for i, css_class in enumerate(class_list):
             property_name = class_parser.get_property_name(css_class=css_class)
-            self.assertEquals(property_name, expected_property_name)
+            self.assertEquals(property_name, expected_property_name, msg=css_class)
 
     def test_get_property_name_non_matching(self):
         non_matching = {'font-weight', 'font-weight-', '-font-weight'}
@@ -74,6 +74,24 @@ class TestClassPropertyParser(TestCase):
             property_name = class_parser.get_property_name(css_class=css_class)
             self.assertEquals(property_name, expected_property_name)
         self.assertEquals(class_parser.class_set, expected_empty_set)
+
+    def test_alias_is_abbreviation(self):
+        expected_true = ['fw-', 'p-', 'h-', 'w-']
+        expected_false = ['fw', 'p', 'height', 'width']
+        class_parser = ClassPropertyParser(class_set=set())
+
+        for _true in expected_true:
+            self.assertTrue(class_parser.alias_is_abbreviation(_true), msg=_true)
+
+        for _false in expected_false:
+            self.assertFalse(class_parser.alias_is_abbreviation(_false), msg=_false)
+
+    def test_get_property_abbreviations(self):
+        expected_abbreviations = ['fw-']
+        property_name = 'font-weight'
+        class_parser = ClassPropertyParser(class_set=set())
+        abbreviations = class_parser.get_property_abbreviations(property_name=property_name)
+        self.assertEquals(abbreviations, expected_abbreviations)
 
     #def test_get_encoded_property_value(self):
 
