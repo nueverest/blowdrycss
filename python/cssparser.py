@@ -4,7 +4,7 @@ __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-class CSSPropertyParser(object):
+class ClassPropertyParser(object):
     # Class Format Legend
     # Dashes separate word in multi-word property names/aliases.
     # property-name
@@ -31,7 +31,7 @@ class CSSPropertyParser(object):
         self.sheet = parseString(css)
         self.rules = []
         self.class_set = class_set
-        self.clean_class_set()
+        #self.clean_class_set()
 
         # TODO: move this to a CSV file and autogenerate this dictionary from CSV.
         # Dictionary contains:
@@ -45,13 +45,14 @@ class CSSPropertyParser(object):
     def class_set_to_lowercase(self):
         self.class_set = {css_class.lower() for css_class in self.class_set}
 
+    # Validate underscore usage in a single css_class.
     # Underscores are only allowed to designate a decimal point between numbers.
     #   Valid: '6_3'
-    # Invalid: '-_2", '2_rem', 'm_px', and '__'
+    # Invalid: '_b', 'b_', 'padding-_2", '2_rem', 'm_px', and '__'
     @staticmethod
     def underscores_valid(css_class=''):
         # underscore is not allowed to be the first or last character of css_class
-        if css_class[0] != '_' != css_class[-1]:
+        if css_class[0] == '_' or css_class[-1] == '_':
             return False
 
         # Check character before and after underscore index.

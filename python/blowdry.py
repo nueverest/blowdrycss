@@ -3,7 +3,7 @@ from os import chdir, getcwd, path
 # Custom classes
 from filehandler import FileFinder
 from htmlattributeparser import HTMLClassParser
-from cssparser import CSSPropertyParser
+from cssparser import ClassPropertyParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -23,7 +23,7 @@ file_finder = FileFinder(project_directory=project_directory, file_types=file_ty
 class_parser = HTMLClassParser(files=file_finder.files)
 
 # Determine which class names match the format
-class_property_parser = CSSPropertyParser(class_set=class_parser.class_set)
+class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
 print('class_property_parser.class_set =', class_property_parser.class_set)
 
 # Generate a DRY CSS file.
