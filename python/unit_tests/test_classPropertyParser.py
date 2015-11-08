@@ -81,5 +81,18 @@ class TestClassPropertyParser(TestCase):
     # def test_get_property_value(self):
     #     self.fail()
     #
-    # def test_get_property_priority(self):
-    #     self.fail()
+    def test_get_property_priority_important(self):
+        expected_property_priority = 'IMPORTANT'
+        class_set = {'font-weight-bold-i', 'font-weight-700-i', 'bold-i', 'normal-i'}
+        class_parser = ClassPropertyParser(class_set=class_set)
+        for css_class in class_parser.class_set:
+            property_priority = class_parser.get_property_priority(css_class=css_class)
+            self.assertEquals(property_priority, expected_property_priority)
+
+    def test_get_property_priority_not_important(self):
+        expected_property_priority = ''
+        class_set = {'font-weight-bold', 'font-weight-700', 'bold', 'normal'}
+        class_parser = ClassPropertyParser(class_set=class_set)
+        for css_class in class_parser.class_set:
+            property_priority = class_parser.get_property_priority(css_class=css_class)
+            self.assertEquals(property_priority, expected_property_priority)

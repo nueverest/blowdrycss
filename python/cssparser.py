@@ -153,7 +153,7 @@ class ClassPropertyParser(object):
         return ''
 
     @staticmethod
-    def get_property_priority(self, css_class=''):
+    def get_property_priority(css_class=''):
         if css_class.endswith('-i'):
             return 'IMPORTANT'
         else:
