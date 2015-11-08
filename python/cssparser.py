@@ -30,15 +30,16 @@ class ClassPropertyParser(object):
         css = u'''/* Generated with BlowDryCSS. */'''
         self.sheet = parseString(css)
         self.rules = []
+        self.removed_class_set = set()
         self.class_set = class_set
-        #self.clean_class_set()
+        self.clean_class_set()
 
         # TODO: move this to a CSV file and autogenerate this dictionary from CSV.
         # Dictionary contains:
-        #   css property name as keys
-        #   aliases as values - An alias can be thought of as a shorthand means of
+        #   css property name as 'keys'
+        #   list of aliases as 'values' - An alias can be shorthand for the property name.
         self.property_dict = {
-            'font-weight': ['normal', 'b', 'bold', 'bolder', 'lighter', 'initial', 'inherit', 'fw', 'font-weight']
+            'font-weight': ['normal', 'b', 'bold', 'bolder', 'lighter', 'initial', 'inherit', 'fw'],
         }
 
     # Take list, tuple, or set of strings an convert to lowercase.
@@ -99,17 +100,25 @@ class ClassPropertyParser(object):
         # Remove invalid_css_classes from self.class_set
         for invalid_css_class in invalid_css_classes:
             self.class_set.remove(invalid_css_class)
+            self.removed_class_set.add(invalid_css_class)
 
+    # Class returns the property_name or removes/cleans the unrecognized class and returns ''.
+    # Classes that use identical property names must set a property value
+    # i.e. 'font-weight' is invalid because no value is included AND 'font-weight-700' is valid because 700 is a value.
     def get_property_name(self, css_class=''):
         for property_name, aliases in self.property_dict.items():
-            # Try exact match first. An exact match must also end with a '-' dash to be valid.
+            # Try identical match first. An exact match must also end with a '-' dash to be valid.
             if css_class.startswith(property_name + '-'):
                 return property_name
-            # Try matching with alias
+
+            # Try matching with alias. An alias is not required to end with a dash.
             for alias in aliases:
                 if css_class.startswith(alias):
-                        return property_name
-            # No match found
+                    return property_name
+
+            # No match found. Remove from class_set.
+            self.class_set.remove(css_class)
+            self.removed_class_set.add(css_class)
             return ''
 
     # Strip property name and priority from a given css_class and return encoded_property_value
