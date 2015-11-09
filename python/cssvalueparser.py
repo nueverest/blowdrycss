@@ -1,4 +1,4 @@
-from re import findall
+from re import search, findall
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -11,17 +11,18 @@ class CSSPropertyValueParser(object):
     
     # Important: these methods are intended to be called in the order they are declared.
 
-    # Delete leading '-' example: '-bold' --> 'bold'
-    # '-' becomes spaces example: '1-5-1-5' --> '1 5 1 5'
+    # Delete leading    example: '-bold' --> 'bold'
+    # Delete trailing   example: 'white-' --> 'white'
+    # Replace internal  example: '1-5-1-5' --> '1 5 1 5'
     @staticmethod
-    def replace_dashes(self, value=''):
-        if value.startswith('-'):
-            value = value[1:]
+    def replace_dashes(value=''):
+        value = value[1:] if value.startswith('-') else value
+        value = value[:-1] if value.endswith('-') else value
         return value.replace('-', ' ')
 
     @staticmethod
     def contains_a_digit(value=''):
-        return True if len(findall(r"\D([0-9])\D", ' ' + value + ' ')) >= 1 else False
+        return True if search(r"[0-9]", value) else False
 
     # '_' becomes '.'   example: '1_32rem' --> '1.32rem'
     def replace_underscore_with_decimal(self, value=''):
@@ -50,6 +51,7 @@ class CSSPropertyValueParser(object):
     # TODO: implement
     @staticmethod
     def property_name_allows_color(property_name=''):
+        # Reference: http://www.w3.org/TR/CSS21/propidx.html
         color_property_names = {
             'color', 'background-color', 'border-color', 'border-top-color', 'border-right-color', 'border-bottom-color',
             'border-left-color', 'outline_color',
@@ -67,9 +69,9 @@ class CSSPropertyValueParser(object):
         _len = len(value)              # _len includes 'h'
         if value.startswith('h'):
             if _len == 4:           # 'h' + 3 hex digits
-                is_valid = True if len(findall(r"\D([0-9a-f]{3})\D", ' ' + value + ' ')) == 1 else False
+                is_valid = True if len(findall(r"([0-9a-f]{3})", value)) == 1 else False
             if _len == 7:           # 'h' + 6 hex digits
-                is_valid = True if len(findall(r"\D([0-9a-f]{6})\D", ' ' + value + ' ')) == 1 else False
+                is_valid = True if len(findall(r"([0-9a-f]{6})", value)) == 1 else False
         return is_valid
 
     # Declaring hex (prepend 'h'):
@@ -116,5 +118,5 @@ class CSSPropertyValueParser(object):
     # nice to have 16px = 1em
     # convert px to rem
     # def px_to_em(self, px):
-    #     # TODO: write this.
+    # TODO: write this.
     #     pass
