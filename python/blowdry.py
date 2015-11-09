@@ -3,7 +3,7 @@ from os import chdir, getcwd, path
 # Custom classes
 from filehandler import FileFinder
 from htmlattributeparser import HTMLClassParser
-from cssparser import ClassPropertyParser
+from classpropertyparser import ClassPropertyParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 

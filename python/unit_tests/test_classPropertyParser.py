@@ -1,5 +1,5 @@
 from unittest import TestCase
-from cssparser import ClassPropertyParser
+from classpropertyparser import ClassPropertyParser
 
 
 class TestClassPropertyParser(TestCase):
@@ -171,10 +171,13 @@ class TestClassPropertyParser(TestCase):
         self.assertFalse(class_parser.is_important(css_class=expected_false))
 
     def test_strip_priority_designator(self):
-        encoded_property_value = 'p-10-i'
+        important = 'p-10-i'
+        not_important = 'p-10'
         expected_value = 'p-10'
         class_parser = ClassPropertyParser(class_set=set())
-        value = class_parser.strip_priority_designator(encoded_property_value=encoded_property_value)
+        value = class_parser.strip_priority_designator(encoded_property_value=important)    # important
+        self.assertEquals(value, expected_value)
+        value = class_parser.strip_priority_designator(encoded_property_value=not_important)    # not important
         self.assertEquals(value, expected_value)
 
     def test_get_property_priority_important(self):
