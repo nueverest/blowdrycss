@@ -17,12 +17,27 @@ class TestCSSPropertyValueParser(TestCase):
         css_property_parser = CSSPropertyValueParser(encoded_property_value=internal)
         self.assertEquals(css_property_parser.property_value, internal_expected)
 
-    # def test_contains_a_digit(self):
-    #     self.fail()
-    #
+    def test_contains_a_digit_true(self):
+        digits = ['n12px', '1p 7p 1p 7p', '-1_25em', '-1.35%']
+        css_property_parser = CSSPropertyValueParser(encoded_property_value='')
+        for value in digits:
+            self.assertTrue(css_property_parser.contains_a_digit(value=value), msg=value)
+
+    def test_contains_a_digit_false(self):
+        no_digits = ['bold', 'none', 'left']
+        css_property_parser = CSSPropertyValueParser(encoded_property_value='')
+        for value in no_digits:
+            self.assertFalse(css_property_parser.contains_a_digit(value=value), msg=value)
+
     # def test_replace_underscore_with_decimal(self):
-    #     self.fail()
-    #
+    #     # '_' becomes '.'   example: '1_32rem' --> '1.32rem'
+    #     test_values = ['1_32rem', '0_0435p']
+    #     expected = ['1.32rem', '0.0435p']
+    #     css_property_parser = CSSPropertyValueParser(encoded_property_value='')
+    #     for value in test_values:
+    #         css_property_parser.
+
+
     # def test_replace_p_with_percent(self):
     #     self.fail()
     #
