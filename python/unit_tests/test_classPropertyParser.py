@@ -42,7 +42,7 @@ class TestClassPropertyParser(TestCase):
             self.assertEquals(property_name, expected_property_name)
 
     def test_get_property_name_by_identical_name_invalid(self):
-        invalid_identical_set = {'font-weight', 'font-weight-', '-font-weight'}
+        invalid_identical_set = {'font-weight', 'font-weight-', '-font-weight', 'font%weight'}
         expected_property_name = ''
         expected_empty_set = set()
         class_parser = ClassPropertyParser(class_set=invalid_identical_set)
@@ -54,11 +54,11 @@ class TestClassPropertyParser(TestCase):
         self.assertEquals(class_parser.class_set, expected_empty_set)
 
     def test_get_property_name_by_alias(self):
-        alias_set = {'normal', 'bold', 'bolder', 'lighter', 'initial', 'fw-'}
+        class_alias_set = {'normal', 'bold', 'bolder', 'lighter', 'initial', 'fw-'}
         expected_property_name = 'font-weight'
         class_parser = ClassPropertyParser(class_set=set())
 
-        class_list = list(alias_set)
+        class_list = list(class_alias_set)
         for css_class in class_list:
             property_name = class_parser.get_property_name(css_class=css_class)
             self.assertEquals(property_name, expected_property_name, msg=css_class)
@@ -96,6 +96,12 @@ class TestClassPropertyParser(TestCase):
             encoded_property_value=encoded_property_value
         )
         self.assertEquals(encoded_property_value, expected_encoded_property_value)
+
+    def test_strip_property_name_empty(self):
+        empty_property_name = ''
+        encoded_property_value = 'bold'
+        class_parser = ClassPropertyParser(class_set=set())
+        self.assertRaises(ValueError, class_parser.strip_property_name, empty_property_name, encoded_property_value)
 
     def test_alias_is_abbreviation(self):
         expected_true = ['fw-', 'p-', 'h-', 'w-']
@@ -156,6 +162,21 @@ class TestClassPropertyParser(TestCase):
     # def test_get_property_value(self):
     #     self.fail()
     #
+
+    def test_is_important(self):
+        expected_true = 'p-10-i'
+        expected_false = 'height-50'
+        class_parser = ClassPropertyParser(class_set=set())
+        self.assertTrue(class_parser.is_important(css_class=expected_true))
+        self.assertFalse(class_parser.is_important(css_class=expected_false))
+
+    def test_strip_priority_designator(self):
+        encoded_property_value = 'p-10-i'
+        expected_value = 'p-10'
+        class_parser = ClassPropertyParser(class_set=set())
+        value = class_parser.strip_priority_designator(encoded_property_value=encoded_property_value)
+        self.assertEquals(value, expected_value)
+
     def test_get_property_priority_important(self):
         expected_property_priority = 'IMPORTANT'
         class_set = {'font-weight-bold-i', 'font-weight-700-i', 'bold-i', 'normal-i'}

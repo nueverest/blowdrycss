@@ -121,10 +121,10 @@ class ClassPropertyParser(object):
                 if css_class.startswith(alias):
                     return property_name
 
-            # No match found. Remove from class_set.
-            self.class_set.remove(css_class)
-            self.removed_class_set.add(css_class)
-            return ''
+        # No match found. Remove from class_set.
+        self.class_set.remove(css_class)
+        self.removed_class_set.add(css_class)
+        return ''
 
     # Strip property name from encoded_property_value if applicable and return encoded_property_value.
     @staticmethod
