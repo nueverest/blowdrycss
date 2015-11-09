@@ -56,6 +56,23 @@ class ClassPropertyParser(object):
             'height': ['h-'],
         }
 
+        # TODO: explore another way
+        #allowed = self.allowed_unit_characters()
+        # self.property_dict = {
+        #     'font-weight': [['normal', 'bold', 'bolder', 'lighter', 'initial', 'fw-'], r"([0-9a-z-])"],
+        #     'padding': [['p-'], r"([0-9" + allowed + "_-])"],
+        #     'height': [['h-'], r"([0-9" + allowed + "_-])"],
+        # }
+
+    # Reduces css_units to a minimum set of allowed characters.
+    # Used in property_dict regex.
+    # Example: converts {'px', 'em', 'rem'} --> 'pxemr' thus eliminating duplicate 'e' and 'm'
+    # def allowed_unit_characters(self):
+    #     allowed = ''
+    #     for css_unit in self.css_units:
+    #         allowed += css_unit
+    #     return allowed
+
     # Take list, tuple, or set of strings an convert to lowercase.
     def class_set_to_lowercase(self):
         self.class_set = {css_class.lower() for css_class in self.class_set}
