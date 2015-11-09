@@ -47,6 +47,19 @@ class CSSPropertyValueParser(object):
                 value = '-' + value[1:]     # add minus sign and chop first character
         return value
 
+    # TODO: implement
+    @staticmethod
+    def property_name_allows_color(property_name=''):
+        color_property_names = {
+            'color', 'background-color', 'border-color', 'border-top-color', 'border-right-color', 'border-bottom-color',
+            'border-left-color', 'outline_color',
+            'background', 'border-top', 'border-right', 'border-bottom', 'border-left', 'border', 'outline',
+        }
+        for color_property_name in color_property_names:
+            if property_name == color_property_name:
+                return True
+        return False
+
     # Expects a value of the form: h0ff48f or hfaf i.e. 'h' + a 3 or 6 digit hexidecimal value 0-f.
     @staticmethod
     def is_valid_hex(value=''):
@@ -60,11 +73,12 @@ class CSSPropertyValueParser(object):
         return is_valid
 
     # Declaring hex (prepend 'h'):
-    # h0ff24f --> #0ff24f   (6 digit)
-    # hf4f --> #fff         (3 digit)
-    def replace_h_with_hash(self, value=''):
-        if self.is_valid_hex(value=value):
-            value = value.replace('h', '#')
+    # h0ff24f   --> #0ff24f (6 digit)
+    # hf4f      --> #fff    (3 digit)
+    def replace_h_with_hash(self, property_name='', value=''):
+        if self.property_name_allows_color(property_name=property_name):
+            if self.is_valid_hex(value=value):
+                value = value.replace('h', '#')
         return value
 
     # Convert parenthetical color values:
@@ -72,15 +86,16 @@ class CSSPropertyValueParser(object):
     # rgba: rgba 255 0 0 0_5
     #  hsl: hsl 120 60% 70%
     # hsla: hsla 120 60% 70% 0_3
-    def add_color_parenthetical(self, value=''):
-        if self.contains_a_digit(value=value):
-            keywords = {'rgb ', 'rbga ', 'hsl ', 'hsla '}
-            for key in keywords:
-                if value.startswith(key):
-                    value = value.replace(key, key.strip() + '(')   # Remove key whitespace and add opening '('
-                    value += ')'                                    # Add closing ')'
-                    value = value.replace(' ', ', ')                # Add commas
-                    break
+    def add_color_parenthetical(self, property_name='', value=''):
+        if self.property_name_allows_color(property_name=property_name):
+            if self.contains_a_digit(value=value):
+                keywords = {'rgb ', 'rbga ', 'hsl ', 'hsla '}
+                for key in keywords:
+                    if value.startswith(key):
+                        value = value.replace(key, key.strip() + '(')   # Remove key whitespace and add opening '('
+                        value += ')'                                    # Add closing ')'
+                        value = value.replace(' ', ', ')                # Add commas
+                        break
         return value
 
     def decode_property_value(self, value=''):
@@ -92,7 +107,7 @@ class CSSPropertyValueParser(object):
         value = self.replace_p_with_percent(value=value)
         value = self.replace_n_with_minus(value=value)
 
-        # The following two only apply when particular property names are used, but property_names are not passed in.
+        # The following two only apply when particular property names are used.
         value = self.replace_h_with_hash(value=value)
         value = self.add_color_parenthetical(value=value)           # Also required to contain digits.
 

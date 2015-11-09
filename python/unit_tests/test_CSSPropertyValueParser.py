@@ -12,20 +12,20 @@ class TestCSSPropertyValueParser(TestCase):
         leading_expected = 'bold'
         internal = '1-5-1-5'
         internal_expected = '1 5 1 5'
-        css_property_parser = CSSPropertyValueParser(encoded_property_value=leading)
+        css_property_parser = CSSPropertyValueParser()
         self.assertEquals(css_property_parser.property_value, leading_expected)
-        css_property_parser = CSSPropertyValueParser(encoded_property_value=internal)
+        css_property_parser = CSSPropertyValueParser()
         self.assertEquals(css_property_parser.property_value, internal_expected)
 
     def test_contains_a_digit_true(self):
         digits = ['n12px', '1p 7p 1p 7p', '-1_25em', '-1.35%']
-        css_property_parser = CSSPropertyValueParser(encoded_property_value='')
+        css_property_parser = CSSPropertyValueParser()
         for value in digits:
             self.assertTrue(css_property_parser.contains_a_digit(value=value), msg=value)
 
     def test_contains_a_digit_false(self):
         no_digits = ['bold', 'none', 'left']
-        css_property_parser = CSSPropertyValueParser(encoded_property_value='')
+        css_property_parser = CSSPropertyValueParser()
         for value in no_digits:
             self.assertFalse(css_property_parser.contains_a_digit(value=value), msg=value)
 
