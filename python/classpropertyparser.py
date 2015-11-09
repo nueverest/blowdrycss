@@ -26,10 +26,21 @@ class ClassPropertyParser(object):
     # alias = value
     # font-weight-bold OR bold OR b
     # font-weight-bold-i OR bold-i OR b-i
+    #
+    # Declaring colors:
+    #  rgb: font-color-rgb-0-255-0
+    # rgba: font-color-rgba-255-0-0-0_5
+    #  hex: font-color-h0ff23f (prepend 'h')
+    #  hsl: font-color-hsl-120-60p-70p
+    # hsla: font-color-hsla-120-60p-70p-0_3
+    #
+    # CSS Unit Reference: http://www.w3schools.com/cssref/css_units.asp
+    # CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
     def __init__(self, class_set=set()):
         css = u'''/* Generated with BlowDryCSS. */'''
         self.sheet = parseString(css)
         self.rules = []
+        self.css_units = {'px', 'em', 'rem', 'p', 'ex', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'vh', 'vw', 'vmin', 'vmax'}
         self.importance_designator = '-i'       # '-i' is used to designate that the priority level is '!important'
         self.removed_class_set = set()
         self.class_set = class_set
@@ -169,6 +180,14 @@ class ClassPropertyParser(object):
 
     # Property Value
     #
+    # Valid encoded_property_values: '1p-2p-1p-1p', '5rem', '6ex', 'bold'
+    def encoded_property_value_is_valid(self, encoded_property_value):
+        for value in self.text_only_values:
+            if encoded_property_value == value:
+                return True
+            # handle suffix
+
+
     # Strip property name or abbreviation prefix and property priority designator
     # Examples:
     # 'fw-bold-i' --> 'bold'                [abbreviated font-weight property_name]
