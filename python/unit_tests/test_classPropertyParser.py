@@ -53,13 +53,13 @@ class TestClassPropertyParser(TestCase):
             self.assertEquals(property_name, expected_property_name)
         self.assertEquals(class_parser.class_set, expected_empty_set)
 
-    def test_get_property_name_alias(self):
-        identical_set = {'normal', 'bold', 'bolder', 'lighter', 'initial', 'fw-'}
+    def test_get_property_name_by_alias(self):
+        alias_set = {'normal', 'bold', 'bolder', 'lighter', 'initial', 'fw-'}
         expected_property_name = 'font-weight'
-        class_parser = ClassPropertyParser(class_set=identical_set)
+        class_parser = ClassPropertyParser(class_set=set())
 
-        class_list = list(class_parser.class_set)
-        for i, css_class in enumerate(class_list):
+        class_list = list(alias_set)
+        for css_class in class_list:
             property_name = class_parser.get_property_name(css_class=css_class)
             self.assertEquals(property_name, expected_property_name, msg=css_class)
 
@@ -84,7 +84,7 @@ class TestClassPropertyParser(TestCase):
             property_name=property_name,
             encoded_property_value=encoded_property_value
         )
-        self.assertEquals(expected_encoded_property_value, encoded_property_value)
+        self.assertEquals(encoded_property_value, expected_encoded_property_value)
 
     def test_strip_property_name_not_matching(self):
         property_name = 'font-weight'
@@ -95,7 +95,7 @@ class TestClassPropertyParser(TestCase):
             property_name=property_name,
             encoded_property_value=encoded_property_value
         )
-        self.assertEquals(expected_encoded_property_value, encoded_property_value)
+        self.assertEquals(encoded_property_value, expected_encoded_property_value)
 
     def test_alias_is_abbreviation(self):
         expected_true = ['fw-', 'p-', 'h-', 'w-']
@@ -124,7 +124,7 @@ class TestClassPropertyParser(TestCase):
             property_name=property_name,
             encoded_property_value=encoded_property_value
         )
-        self.assertEquals(expected_encoded_property_value, encoded_property_value)
+        self.assertEquals(encoded_property_value, expected_encoded_property_value)
 
     def test_strip_property_abbreviation_not_matching(self):
         property_name = 'font-weight'
@@ -135,10 +135,23 @@ class TestClassPropertyParser(TestCase):
             property_name=property_name,
             encoded_property_value=encoded_property_value
         )
-        self.assertEquals(expected_encoded_property_value, encoded_property_value)
+        self.assertEquals(encoded_property_value, expected_encoded_property_value)
 
-    #def test_get_encoded_property_value(self):
+    def test_get_encoded_property_value(self):
+        # 'fw-bold-i' --> 'bold'                [abbreviated font-weight property_name]
+        # 'padding-1-10-10-5-i' --> '1-10-10-5' [standard property_name]
+        # 'height-7_25rem-i' --> '7_25rem'      [contains underscores]
+        property_names = ['font-weight', 'padding', 'height']
+        css_classes = ['fw-bold-i', 'padding-1-10-10-5-i', 'height-7_25rem-i']
+        expected_encoded_property_values = ['bold', '1-10-10-5', '7_25rem']
+        class_parser = ClassPropertyParser(class_set=set())
 
+        for i, css_class in enumerate(css_classes):
+            encoded_property_value = class_parser.get_encoded_property_value(
+                property_name=property_names[i],
+                css_class=css_class
+            )
+            self.assertEquals(encoded_property_value, expected_encoded_property_values[i], msg=property_names)
 
     # def test_get_property_value(self):
     #     self.fail()

@@ -41,6 +41,8 @@ class ClassPropertyParser(object):
         #   list of aliases as 'values' - An alias can be shorthand for the property name.
         self.property_dict = {
             'font-weight': ['normal', 'bold', 'bolder', 'lighter', 'initial', 'fw-'],
+            'padding': ['p-'],
+            'height': ['h-'],
         }
 
     # Take list, tuple, or set of strings an convert to lowercase.
@@ -114,7 +116,7 @@ class ClassPropertyParser(object):
             if css_class.startswith(property_name + '-'):
                 return property_name
 
-            # Try matching with alias. An alias is not required to end with a dash.
+            # Try matching with alias. An alias is not required to end with a dash, but could if it is an abbreviation.
             for alias in aliases:
                 if css_class.startswith(alias):
                     return property_name
@@ -149,10 +151,9 @@ class ClassPropertyParser(object):
     # Returns a list of all property abbreviations appearing in property_dict
     def get_property_abbreviations(self, property_name=''):
         property_abbreviations = list()
-        for property_name, aliases in self.property_dict.items():
-            for alias in aliases:
-                if self.alias_is_abbreviation(alias=alias):
-                    property_abbreviations.append(alias)
+        for alias in self.property_dict[property_name]:
+            if self.alias_is_abbreviation(alias=alias):
+                property_abbreviations.append(alias)
 
         return property_abbreviations
 
@@ -162,7 +163,7 @@ class ClassPropertyParser(object):
 
         for property_abbreviation in property_abbreviations:
             if encoded_property_value.startswith(property_abbreviation):
-                return encoded_property_value[len(property_name):]
+                return encoded_property_value[len(property_abbreviation):]
 
         return encoded_property_value
 
@@ -176,9 +177,9 @@ class ClassPropertyParser(object):
     # The term encoded_property_value means a property value that may or may not contain dashes and underscores.
     def get_encoded_property_value(self, property_name='', css_class=''):
         encoded_property_value = css_class
-        encoded_property_value = self.strip_property_name(encoded_property_value=encoded_property_value)
-        encoded_property_value = self.strip_property_abbreviation(encoded_property_value=encoded_property_value)
-        encoded_property_value = self.strip_priority_designator(encoded_property_value=encoded_property_value)
+        encoded_property_value = self.strip_property_name(property_name, encoded_property_value)
+        encoded_property_value = self.strip_property_abbreviation(property_name, encoded_property_value)
+        encoded_property_value = self.strip_priority_designator(encoded_property_value)
         return encoded_property_value
 
     # Accepts an encoded_property_value that's been stripped of it's property named and priority
