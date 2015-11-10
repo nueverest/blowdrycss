@@ -3,7 +3,7 @@ __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-# Accepts a clean encoded_property_value e.g. 'bold', '1-5-1-5', '1_32rem', '1p-10p-3p-1p', 'n12px', 'n5_25cm-n6_1cm',
+# Accepts a clean encoded_property_value e.g. 'bold', '1-5-1-5', '1_32rem', '1p-10p-3p-1p', 'n12px', 'n5_25cm-n6_1cm'
 # Decodes a css property_value from a clean encoded_property_value.
 class CSSPropertyValueParser(object):
     def __init__(self):
@@ -40,7 +40,10 @@ class CSSPropertyValueParser(object):
         return value
     
     # mind the space
-    # ' n' becomes ' -' example: 'n5cm n6cm' --> '-5cm -6cm'
+    # ' n' becomes ' -'
+    # examples:
+    # 'n5cm n6cm' --> '-5cm -6cm'
+    # 'n9in' --> '-9in' (note that the 'n' at the end is not touched)
     def replace_n_with_minus(self, value=''):
         if self.contains_a_digit(value=value):
             value = value.replace(' n', ' -')
@@ -63,6 +66,7 @@ class CSSPropertyValueParser(object):
         return False
 
     # Expects a value of the form: h0ff48f or hfaf i.e. 'h' + a 3 or 6 digit hexidecimal value 0-f.
+    # Returns #0ff48f or #faf
     @staticmethod
     def is_valid_hex(value=''):
         is_valid = False
@@ -84,14 +88,14 @@ class CSSPropertyValueParser(object):
         return value
 
     # Convert parenthetical color values:
-    #  rgb: rgb 0 255 0
-    # rgba: rgba 255 0 0 0_5
-    #  hsl: hsl 120 60% 70%
-    # hsla: hsla 120 60% 70% 0_3
+    #  rgb: rgb 0 255 0             -->  rgb(0, 255, 0)
+    # rgba: rgba 255 0 0 0.5        --> rgba(255, 0, 0, 0.5)
+    #  hsl: hsl 120 60% 70%         -->  hsl(120, 60%, 70%)
+    # hsla: hsla 120 60% 70% 0.3    --> hsla(120, 60%, 70%, 0.3)
     def add_color_parenthetical(self, property_name='', value=''):
         if self.property_name_allows_color(property_name=property_name):
             if self.contains_a_digit(value=value):
-                keywords = {'rgb ', 'rbga ', 'hsl ', 'hsla '}
+                keywords = {'rgb ', 'rgba ', 'hsl ', 'hsla '}
                 for key in keywords:
                     if value.startswith(key):
                         value = value.replace(key, key.strip() + '(')   # Remove key whitespace and add opening '('
@@ -100,7 +104,7 @@ class CSSPropertyValueParser(object):
                         break
         return value
 
-    def decode_property_value(self, value=''):
+    def decode_property_value(self, property_name='', value=''):
         # Apply to all.
         value = self.replace_dashes(value=value)
 
@@ -110,8 +114,8 @@ class CSSPropertyValueParser(object):
         value = self.replace_n_with_minus(value=value)
 
         # The following two only apply when particular property names are used.
-        value = self.replace_h_with_hash(value=value)
-        value = self.add_color_parenthetical(value=value)           # Also required to contain digits.
+        value = self.replace_h_with_hash(property_name=property_name, value=value)
+        value = self.add_color_parenthetical(property_name=property_name, value=value)           # Also required to contain digits.
 
         return value
 
