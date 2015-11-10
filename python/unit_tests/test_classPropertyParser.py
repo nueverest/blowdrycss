@@ -19,8 +19,8 @@ class TestClassPropertyParser(TestCase):
     def test_underscores_valid_is_false(self):
         # Invalid: '-_2", '2_rem', 'm_px', and '__'
         invalid_classes = {'_bold', 'lighter-1_', 'width-_2', 'margin-2_rem', 'height-m_px', 'bg-color__blue'}
-        class_parser = ClassPropertyParser(class_set=invalid_classes)
-        for css_class in class_parser.class_set:
+        class_parser = ClassPropertyParser(class_set=set())
+        for css_class in invalid_classes:
             self.assertFalse(class_parser.underscores_valid(css_class=css_class), msg=css_class)
 
     def test_clean_class_set(self):

@@ -70,6 +70,3 @@ class TestFileFinder(TestCase):
                           '</body></html>'
         file_converter = FileConverter(file_path=test_file_path)
         self.assertEquals(file_converter.get_file_as_string(), expected_string)
-
-if __name__ == '__main__':
-    unittest.main()

@@ -18,5 +18,6 @@ class TestFileConverter(TestCase):
         file_converter = FileConverter(file_path=test_file_path)
         self.assertEquals(file_converter.get_file_as_string(), expected_string)
 
-if __name__ == '__main__':
-    unittest.main()
+# Breaks 100% test coverage
+# if __name__ == '__main__':
+#     unittest.main()
