@@ -1,4 +1,6 @@
 from re import search, findall
+from cssutils.css import Property
+from xml.dom import SyntaxErr
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -115,9 +117,21 @@ class CSSPropertyValueParser(object):
 
         # The following two only apply when particular property names are used.
         value = self.replace_h_with_hash(property_name=property_name, value=value)
-        value = self.add_color_parenthetical(property_name=property_name, value=value)           # Also required to contain digits.
+        value = self.add_color_parenthetical(property_name=property_name, value=value)  # Must contain digits.
 
         return value
+
+    # Accepts a property name and value
+    # Validation occurs after the property value is decoded.
+    @staticmethod
+    def property_is_valid(name='', value='', priority=''):
+        try:
+            css_property = Property(name=name, value=value, priority=priority)
+            is_valid = css_property.valid
+            return is_valid
+        except SyntaxErr:
+            return False
+
 
     # nice to have 16px = 1em
     # convert px to rem

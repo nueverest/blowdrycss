@@ -147,7 +147,7 @@ class TestCSSPropertyValueParser(TestCase):
             )
 
     # These patterns represent invalid CSS that still gets blindly processed. This is expected behavior as this
-    # functions is not responsible for validation.
+    # functions is not responsible for validation.  Validation occurs after the property value is decoded.
     def test_decode_property_value_pass_through_invalid_patterns(self):
         valid_property_name = 'color'
         encoded_property_values = ['bold-50', '5u5', 'b1-a5-c1p-e5', '5pxrem', '1ap-10xp-3qp-1mp3', 'p12px']
@@ -159,3 +159,18 @@ class TestCSSPropertyValueParser(TestCase):
                 expected_property_values[i],
                 msg=value
             )
+
+    def test_property_is_valid_true(self):
+        property_name = 'color'
+        valid_values = ['blue', 'white', '#fff', '#0ff48f', 'rgba(255, 0, 0, 0.5)', 'hsla(120, 60%, 70%, 0.3)']
+        property_parser = CSSPropertyValueParser()
+        for value in valid_values:
+            self.assertTrue(property_parser.property_is_valid(name=property_name, value=value, priority=''))
+
+    def test_property_is_valid_false(self):
+        property_name = 'color'
+        invalid_values = ['a pm', 'bold-50', 'whatever', '1% 5% 1% 5%', '-12.7rem', '5u5', '5pxrem', 'p12px',
+                          'b1 a5 c1% e5', '1a% 10x% 3q% 1mp3', ]    # The last two raise SyntaxErr
+        property_parser = CSSPropertyValueParser()
+        for value in invalid_values:
+            self.assertFalse(property_parser.property_is_valid(name=property_name, value=value, priority=''))
