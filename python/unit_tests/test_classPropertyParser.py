@@ -159,9 +159,34 @@ class TestClassPropertyParser(TestCase):
             )
             self.assertEquals(encoded_property_value, expected_encoded_property_values[i], msg=property_names)
 
-    # def test_get_property_value(self):
-    #     self.fail()
-    #
+    def test_get_property_value_valid_patterns(self):
+        property_name = 'color'
+        encoded_property_values = [
+            'bold', '55', '1-5-1-5', '1_32rem', '1p-10p-3p-1p', 'n12px', 'n5_25in-n6_1in', 'n0_0435p',
+            'h0ff48f', 'hfff', 'rgba-255-0-0-0_5', 'hsla-120-60p-70p-0_3',
+        ]
+        expected_property_values = [
+            'bold', '55', '1 5 1 5', '1.32rem', '1% 10% 3% 1%', '-12px', '-5.25in -6.1in', '-0.0435%',
+            '#0ff48f', '#fff', 'rgba(255, 0, 0, 0.5)', 'hsla(120, 60%, 70%, 0.3)',
+        ]
+        class_parser = ClassPropertyParser(class_set=set())
+        for i, value in enumerate(encoded_property_values):
+            self.assertEquals(
+                class_parser.get_property_value(property_name=property_name, encoded_property_value=value),
+                expected_property_values[i]
+            )
+
+    # Invalid CSS patterns that yield an invalid output.
+    def test_get_property_value_invalid_patterns(self):
+        property_name = 'color'
+        encoded_property_values = ['bold-50', '5u5', 'b1-a5-c1p-e5', '5pxrem', '1ap-10xp-3qp-1mp3', 'p12px']
+        expected_property_values = ['bold 50', '5u5', 'b1 a5 c1% e5', '5pxrem', '1a% 10x% 3q% 1mp3', 'p12px']
+        class_parser = ClassPropertyParser(class_set=set())
+        for i, value in enumerate(encoded_property_values):
+            self.assertEquals(
+                class_parser.get_property_value(property_name=property_name, encoded_property_value=value),
+                expected_property_values[i]
+            )
 
     def test_is_important(self):
         expected_true = 'p-10-i'

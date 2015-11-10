@@ -118,7 +118,6 @@ class CSSPropertyValueParser(object):
         # The following two only apply when particular property names are used.
         value = self.replace_h_with_hash(property_name=property_name, value=value)
         value = self.add_color_parenthetical(property_name=property_name, value=value)  # Must contain digits.
-
         return value
 
     # Accepts a property name and value
@@ -131,7 +130,6 @@ class CSSPropertyValueParser(object):
             return is_valid
         except SyntaxErr:
             return False
-
 
     # nice to have 16px = 1em
     # convert px to rem

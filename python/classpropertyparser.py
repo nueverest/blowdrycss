@@ -1,5 +1,7 @@
 from cssutils import parseString
 from string import ascii_lowercase, digits
+# Custom
+from cssvalueparser import CSSPropertyValueParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -57,7 +59,7 @@ class ClassPropertyParser(object):
         }
 
         # TODO: explore another way
-        #allowed = self.allowed_unit_characters()
+        # allowed = self.allowed_unit_characters()
         # self.property_dict = {
         #     'font-weight': [['normal', 'bold', 'bolder', 'lighter', 'initial', 'fw-'], r"([0-9a-z-])"],
         #     'padding': [['p-'], r"([0-9" + allowed + "_-])"],
@@ -182,7 +184,6 @@ class ClassPropertyParser(object):
         for alias in self.property_dict[property_name]:
             if self.alias_is_abbreviation(alias=alias):
                 property_abbreviations.append(alias)
-
         return property_abbreviations
 
     # Strip property abbreviation from encoded_property_value if applicable and return encoded_property_value.
@@ -192,18 +193,16 @@ class ClassPropertyParser(object):
         for property_abbreviation in property_abbreviations:
             if encoded_property_value.startswith(property_abbreviation):
                 return encoded_property_value[len(property_abbreviation):]
-
         return encoded_property_value
 
     # Property Value
     #
     # Valid encoded_property_values: '1p-2p-1p-1p', '5rem', '6ex', 'bold'
-    def encoded_property_value_is_valid(self, encoded_property_value):
-        for value in self.text_only_values:
-            if encoded_property_value == value:
-                return True
-            # handle suffix
-
+    # def encoded_property_value_is_valid(self, encoded_property_value):
+    #     for value in self.text_only_values:
+    #         if encoded_property_value == value:
+    #             return True
+    #         handle suffix
 
     # Strip property name or abbreviation prefix and property priority designator
     # Examples:
@@ -219,10 +218,11 @@ class ClassPropertyParser(object):
         return encoded_property_value
 
     # Accepts an encoded_property_value that's been stripped of it's property named and priority
-    # Returns the property value.
-    def get_property_value(self, encoded_property_value=''):
-        # TODO: Call CSSPropertyValueParser
-        return ''
+    # Returns property value that may or may not be valid CSS.
+    @staticmethod
+    def get_property_value(property_name='', encoded_property_value=''):
+        property_parser = CSSPropertyValueParser()
+        return property_parser.decode_property_value(property_name=property_name, value=encoded_property_value)
 
     # Property Priority
     #
