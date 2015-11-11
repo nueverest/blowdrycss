@@ -24,12 +24,32 @@ class TestClassPropertyParser(TestCase):
             self.assertFalse(class_parser.underscores_valid(css_class=css_class), msg=css_class)
 
     def test_clean_class_set(self):
-        valid_classes = {'width-6_3', 'padding-5_2rem', 'height-24_48p', 'padding-7_3-8_5-9_7-10_2'}
-        invalid_classes = {'_b', 'lighter-1_', 'width-_2', 'margin-2_rem', 'height-m_px', 'bg-color__blue'}
-        class_parser = ClassPropertyParser(class_set=valid_classes.union(invalid_classes))
-        class_parser.clean_class_set()                              # Called explicitly even though called by init().
-        self.assertEquals(class_parser.class_set, valid_classes)    # Only valid classes should remain.
-        self.assertEquals(class_parser.removed_class_set, invalid_classes)
+        # Covers all invalid cases: first char, allowed chars, last char, and underscores.
+        valid_classes = {
+            'color-hfff', 'font-color-hsla-120-60p-70p-0_3', 'padding-5_2rem', 'height-24_48p',
+            'padding-7_3-8_5-9_7-10_2',
+        }
+        invalid_classes = {
+            '*b', 'bg-color__blue', 'height-m_px', 'lighter-1$', 'margin-2_rem', 'padding-@1px-2px-1px-2px', 'width-_2',
+            'bold-', 'green_',
+        }
+        expected_removed = {
+            '*b (Only a-z allowed for first character of class.)',            
+            'bg-color__blue (Invalid underscore usage in class.)',                        
+            'height-m_px (Invalid underscore usage in class.)',                        
+            'lighter-1$ (Only a-z, 0-9, "_", and "-" are allowed in class name.)',    
+            'margin-2_rem (Invalid underscore usage in class.)',                        
+            'padding-@1px-2px-1px-2px (Only a-z, 0-9, "_", and "-" are allowed in class name.)',    
+            'width-_2 (Invalid underscore usage in class.)',                        
+            'bold- (Only a-z and 0-9 allowed for last character of class.)',     
+            'green_ (Only a-z and 0-9 allowed for last character of class.)',     
+        }
+        
+        class_parser = ClassPropertyParser(class_set=set())             # Prevents the implicit call in __init__()
+        class_parser.class_set = valid_classes.union(invalid_classes)   # Mix valid and invalid classes
+        class_parser.clean_class_set()
+        self.assertEqual(class_parser.class_set, valid_classes)         # Only valid classes should remain.
+        self.assertTrue(class_parser.removed_class_set == expected_removed, msg=expected_removed)
 
     def test_get_property_name_by_identical_name_valid(self):
         valid_identical_set = {'font-weight-bold', 'font-weight-700'}
@@ -161,32 +181,35 @@ class TestClassPropertyParser(TestCase):
 
     def test_get_property_value_valid_patterns(self):
         property_name = 'color'
-        encoded_property_values = [
-            'bold', '55', '1-5-1-5', '1_32rem', '1p-10p-3p-1p', 'n12px', 'n5_25in-n6_1in', 'n0_0435p',
-            'h0ff48f', 'hfff', 'rgba-255-0-0-0_5', 'hsla-120-60p-70p-0_3',
-        ]
-        expected_property_values = [
-            'bold', '55', '1 5 1 5', '1.32rem', '1% 10% 3% 1%', '-12px', '-5.25in -6.1in', '-0.0435%',
-            '#0ff48f', '#fff', 'rgba(255, 0, 0, 0.5)', 'hsla(120, 60%, 70%, 0.3)',
-        ]
-        class_parser = ClassPropertyParser(class_set=set())
+        encoded_property_values = ['green', 'h0ff48f', 'hfff', 'rgba-255-0-0-0_5', 'hsla-120-60p-70p-0_3']
+        expected_property_values = ['green', '#0ff48f', '#fff', 'rgba(255, 0, 0, 0.5)', 'hsla(120, 60%, 70%, 0.3)']
         for i, value in enumerate(encoded_property_values):
+            css_class = property_name + '-' + value
+            class_parser = ClassPropertyParser(class_set={css_class})
             self.assertEquals(
-                class_parser.get_property_value(property_name=property_name, encoded_property_value=value),
+                class_parser.get_property_value(
+                    css_class=css_class, property_name=property_name, encoded_property_value=value, property_priority=''
+                ),
                 expected_property_values[i]
             )
+            self.assertEquals(class_parser.class_set, {css_class})
 
-    # Invalid CSS patterns that yield an invalid output.
+    # Invalid CSS patterns that result in the class being removed from self.class_set.
     def test_get_property_value_invalid_patterns(self):
+        empty_set = set()
+        empty_string = ''
         property_name = 'color'
         encoded_property_values = ['bold-50', '5u5', 'b1-a5-c1p-e5', '5pxrem', '1ap-10xp-3qp-1mp3', 'p12px']
-        expected_property_values = ['bold 50', '5u5', 'b1 a5 c1% e5', '5pxrem', '1a% 10x% 3q% 1mp3', 'p12px']
-        class_parser = ClassPropertyParser(class_set=set())
         for i, value in enumerate(encoded_property_values):
+            css_class = property_name + '-' + value
+            class_parser = ClassPropertyParser(class_set={css_class})
             self.assertEquals(
-                class_parser.get_property_value(property_name=property_name, encoded_property_value=value),
-                expected_property_values[i]
+                class_parser.get_property_value(
+                    css_class=css_class, property_name=property_name, encoded_property_value=value, property_priority=''
+                ),
+                empty_string
             )
+            self.assertEquals(class_parser.class_set, empty_set)
 
     def test_is_important(self):
         expected_true = 'p-10-i'

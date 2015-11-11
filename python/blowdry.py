@@ -22,7 +22,7 @@ file_finder = FileFinder(project_directory=project_directory, file_types=file_ty
 # Get set of all defined classes
 class_parser = HTMLClassParser(files=file_finder.files)
 
-# Determine which class names match the format
+# Filter class names and Build a set() of valid css properties.
 class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
 print('class_property_parser.class_set =', class_property_parser.class_set)
 

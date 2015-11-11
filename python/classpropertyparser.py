@@ -119,21 +119,32 @@ class ClassPropertyParser(object):
         allowed_last = set(ascii_lowercase + digits)
 
         # Gather invalid_css_classes
-        invalid_css_classes = set()
+        invalid_css_classes = []
+        reason = []
+
+        # 'continue' is used to prevent the same css_class from being added to the invalid_css_classes multiple times.
         for css_class in self.class_set:
             if not set(css_class[0]) <= allowed_first:              # First character
-                invalid_css_classes.add(css_class)
+                invalid_css_classes.append(css_class)
+                reason.append(' (Only a-z allowed for first character of class.)')
+                continue
             if not set(css_class) <= allowed_middle:                # All characters
-                invalid_css_classes.add(css_class)
+                invalid_css_classes.append(css_class)
+                reason.append(' (Only a-z, 0-9, "_", and "-" are allowed in class name.)')
+                continue
             if not set(css_class[-1]) <= allowed_last:              # Last character
-                invalid_css_classes.add(css_class)
+                invalid_css_classes.append(css_class)
+                reason.append(' (Only a-z and 0-9 allowed for last character of class.)')
+                continue
             if not self.underscores_valid(css_class=css_class):     # Underscore
-                invalid_css_classes.add(css_class)
+                invalid_css_classes.append(css_class)
+                reason.append(' (Invalid underscore usage in class.)')
+                continue
 
         # Remove invalid_css_classes from self.class_set
-        for invalid_css_class in invalid_css_classes:
+        for i, invalid_css_class in enumerate(invalid_css_classes):
             self.class_set.remove(invalid_css_class)
-            self.removed_class_set.add(invalid_css_class)
+            self.removed_class_set.add(invalid_css_class + reason[i])
 
     # Property Name
     #
@@ -153,7 +164,7 @@ class ClassPropertyParser(object):
 
         # No match found. Remove from class_set.
         self.class_set.remove(css_class)
-        self.removed_class_set.add(css_class)
+        self.removed_class_set.add(css_class + ' (Property name does not match patterns in self.property_dict.)')
         return ''
 
     # Strip property name from encoded_property_value if applicable and return encoded_property_value.
@@ -218,11 +229,18 @@ class ClassPropertyParser(object):
         return encoded_property_value
 
     # Accepts an encoded_property_value that's been stripped of it's property named and priority
-    # Returns property value that may or may not be valid CSS.
-    @staticmethod
-    def get_property_value(property_name='', encoded_property_value=''):
+    # Returns a valid css property value or ''.
+    def get_property_value(self, css_class='', property_name='', encoded_property_value='', property_priority=''):
         property_parser = CSSPropertyValueParser()
-        return property_parser.decode_property_value(property_name=property_name, value=encoded_property_value)
+        value = property_parser.decode_property_value(property_name=property_name, value=encoded_property_value)
+
+        if property_parser.property_is_valid(name=property_name, value=value, priority=property_priority):
+            return value
+
+        # property_value is invalid
+        self.class_set.remove(css_class)
+        self.removed_class_set.add(css_class + ' (cssutils declared property value invalid.)')
+        return ''
 
     # Property Priority
     #
