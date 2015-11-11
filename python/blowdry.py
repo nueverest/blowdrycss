@@ -22,9 +22,12 @@ file_finder = FileFinder(project_directory=project_directory, file_types=file_ty
 # Get set of all defined classes
 class_parser = HTMLClassParser(files=file_finder.files)
 
-# Filter class names and Build a set() of valid css properties.
+# Filter class names only keeping classes that match the defined class encoding.
 class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
-print('class_property_parser.class_set =', class_property_parser.class_set)
+print('class_property_parser.class_set: \n', class_property_parser.class_set)
+
+# Build a set() of valid css properties. Some classes may still be removed in this process during cssutils validation.
+
 
 # Generate a DRY CSS file.
 

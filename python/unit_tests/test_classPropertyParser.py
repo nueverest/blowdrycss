@@ -31,7 +31,7 @@ class TestClassPropertyParser(TestCase):
         }
         invalid_classes = {
             '*b', 'bg-color__blue', 'height-m_px', 'lighter-1$', 'margin-2_rem', 'padding-@1px-2px-1px-2px', 'width-_2',
-            'bold-', 'green_',
+            'bold-', 'green_', 'font-color-#000'
         }
         expected_removed = {
             '*b (Only a-z allowed for first character of class.)',            
@@ -42,7 +42,8 @@ class TestClassPropertyParser(TestCase):
             'padding-@1px-2px-1px-2px (Only a-z, 0-9, "_", and "-" are allowed in class name.)',    
             'width-_2 (Invalid underscore usage in class.)',                        
             'bold- (Only a-z and 0-9 allowed for last character of class.)',     
-            'green_ (Only a-z and 0-9 allowed for last character of class.)',     
+            'green_ (Only a-z and 0-9 allowed for last character of class.)',
+            'font-color-#000 (Only a-z, 0-9, "_", and "-" are allowed in class name.)',
         }
         
         class_parser = ClassPropertyParser(class_set=set())             # Prevents the implicit call in __init__()

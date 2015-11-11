@@ -47,6 +47,7 @@ class ClassPropertyParser(object):
         self.removed_class_set = set()
         self.class_set = class_set
         self.clean_class_set()
+        print('clean ran')
 
         # TODO: move this to a CSV file and autogenerate this dictionary from CSV.
         # Dictionary contains:
@@ -58,7 +59,7 @@ class ClassPropertyParser(object):
             'height': ['h-'],
         }
 
-        # TODO: explore another way
+        # TODO: explore another way using regex for property (no cssutils already does regex validation)
         # allowed = self.allowed_unit_characters()
         # self.property_dict = {
         #     'font-weight': [['normal', 'bold', 'bolder', 'lighter', 'initial', 'fw-'], r"([0-9a-z-])"],
