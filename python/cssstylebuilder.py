@@ -42,17 +42,17 @@ class CSSStyleBuilder(object):
                     self.css_properties.add(css_property)
                 else:
                     invalid_css_classes.append(css_class)
-                    reasons.append(' (cssutils invalid property value)')
+                    reasons.append(' (cssutils invalid property value: ' + value + ')')
                     continue
             except SyntaxErr:
                 invalid_css_classes.append(css_class)
-                reasons.append(' (cssutils SyntaxErr invalid property value)')
+                reasons.append(' (cssutils SyntaxErr invalid property value: ' + value + ')')
                 continue
 
         # Clean out invalid CSS Classes.
         for i, invalid_css_class in enumerate(invalid_css_classes):
             self.property_parser.class_set.remove(invalid_css_class)
-            self.property_parser.removed_class_set.add(reasons[i])
+            self.property_parser.removed_class_set.add(invalid_css_class + reasons[i])
 
         css_text = self.get_css_text()
         self.css_style_declaration.cssText = css_text

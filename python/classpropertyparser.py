@@ -1,5 +1,6 @@
 from cssutils import parseString
 from string import ascii_lowercase, digits
+from collections import OrderedDict
 # Custom
 from cssvalueparser import CSSPropertyValueParser
 __author__ = 'chad nelson'
@@ -163,10 +164,20 @@ class ClassPropertyParser(object):
     # Classes that use identical property names must set a property value
     # i.e. 'font-weight' is invalid because no value is included AND 'font-weight-700' is valid because 700 is a value.
     def get_property_name(self, css_class=''):
-        for property_name, aliases in self.property_dict.items():
-            # Try identical match first. An exact match must also end with a '-' dash to be valid.
+        # Sort property_dict with the longest items first as the most verbose match is preferred.
+        # i.e. If css_class == 'margin-top' Then we want it to match the property_dict key 'margin-top' not 'margin'
+        # TODO: Instead of doing this multiple times do it once in self.property_dict.
+        ordered_property_dict = OrderedDict(sorted(self.property_dict.items(), key=lambda t: len(t[0]), reverse=True))
+
+        for property_name, aliases in ordered_property_dict.items():
+            # Try identical key match first. An exact css_class match must also end with a '-' dash to be valid.
             if css_class.startswith(property_name + '-'):
                 return property_name
+
+            # Sort the aliases by descending string length
+            # This is necessary when the css_class == 'bolder' since 'bold' appears before 'bolder'
+            # TODO: Instead of doing this multiple times do it once in self.property_dict.
+            aliases = sorted(aliases, key=len, reverse=True)
 
             # Try matching with alias. An alias is not required to end with a dash, but could if it is an abbreviation.
             for alias in aliases:
