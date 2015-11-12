@@ -8,7 +8,7 @@ __project__ = 'blow dry css'
 
 class CSSStyleBuilder(object):
     def __init__(self, property_parser=ClassPropertyParser()):
-        print('CSSStyleBuilder Running')
+        print('\nCSSStyleBuilder Running:')
         self.property_parser = property_parser
         self.css_properties = set()
         self.css_style_declaration = CSSStyleDeclaration(cssText='')
@@ -16,7 +16,6 @@ class CSSStyleBuilder(object):
         invalid_css_classes = []
         reasons = []
         for css_class in self.property_parser.class_set:
-            print('css_class:', css_class)
             name = self.property_parser.get_property_name(css_class=css_class)
 
             # 'name' can return an empty string '' if css_class does not match any patterns in the property_dict.
@@ -57,20 +56,9 @@ class CSSStyleBuilder(object):
 
         css_text = self.get_css_text()
         self.css_style_declaration.cssText = css_text
-        print('CSS Text:\n', css_text)
 
     def get_css_text(self):
         css_text = ''
         for css_property in self.css_properties:
             css_text += css_property.cssText + '; '
         return css_text
-
-    # Accepts a property name and value
-    # Validation occurs after the property value is decoded.
-    # def build_css_property(self, name='', value='', priority=''):
-    #     try:
-    #         css_property = Property(name=name, value=value, priority=priority)
-    #         is_valid = css_property.valid
-    #         return css_property
-    #     except SyntaxErr:
-    #         return False

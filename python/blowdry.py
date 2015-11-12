@@ -27,11 +27,10 @@ class_parser = HTMLClassParser(files=file_finder.files)
 class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
 print('class_property_parser.class_set: \n', class_property_parser.class_set)
 
-# Build a set() of valid css properties. Some classes may still be removed in this process during cssutils validation.
+# Build a set() of valid css properties. Some classes may be removed during cssutils validation.
 style_builder = CSSStyleBuilder(property_parser=class_property_parser)
-
-# Generate a DRY CSS file.
-
+print('CSS Text:')
+print(style_builder.css_style_declaration.cssText)
 
 # Output the DRY CSS file. (user command option)
 
