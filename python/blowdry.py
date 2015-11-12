@@ -4,6 +4,7 @@ from os import chdir, getcwd, path
 from filehandler import FileFinder
 from htmlattributeparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
+from cssstylebuilder import CSSStyleBuilder
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -27,7 +28,7 @@ class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
 print('class_property_parser.class_set: \n', class_property_parser.class_set)
 
 # Build a set() of valid css properties. Some classes may still be removed in this process during cssutils validation.
-
+style_builder = CSSStyleBuilder(property_parser=class_property_parser)
 
 # Generate a DRY CSS file.
 
