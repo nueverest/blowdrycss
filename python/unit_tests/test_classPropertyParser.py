@@ -63,19 +63,18 @@ class TestClassPropertyParser(TestCase):
             self.assertEquals(property_name, expected_property_name)
 
     def test_get_property_name_by_identical_name_invalid(self):
-        invalid_identical_set = {'font-weight', 'font-weight-', '-font-weight', 'font%weight'}
+        invalid_identical_set = {'font-weight-', '-font-weight', 'font%weight'}
         expected_property_name = ''
         expected_empty_set = set()
         class_parser = ClassPropertyParser(class_set=invalid_identical_set)
-
         class_list = list(class_parser.class_set)
         for i, css_class in enumerate(class_list):
             property_name = class_parser.get_property_name(css_class=css_class)
             self.assertEquals(property_name, expected_property_name)
-        self.assertEquals(class_parser.class_set, expected_empty_set)
+        self.assertEquals(class_parser.class_set, expected_empty_set, msg=class_parser.class_set)
 
     def test_get_property_name_by_alias(self):
-        class_alias_set = {'normal', 'bold', 'bolder', 'lighter', 'initial', 'fw-'}
+        class_alias_set = {'normal', 'bold', 'bolder', 'lighter', 'initial', 'fweight-', 'f-weight-', 'fw-'}
         expected_property_name = 'font-weight'
         class_parser = ClassPropertyParser(class_set=set())
 
@@ -85,7 +84,7 @@ class TestClassPropertyParser(TestCase):
             self.assertEquals(property_name, expected_property_name, msg=css_class)
 
     def test_get_property_name_non_matching(self):
-        non_matching = {'font-weight', 'font-weight-', '-font-weight'}
+        non_matching = {'font-weight-', '-font-weight'}
         expected_property_name = ''
         expected_empty_set = set()
         class_parser = ClassPropertyParser(class_set=non_matching)
@@ -136,7 +135,7 @@ class TestClassPropertyParser(TestCase):
             self.assertFalse(class_parser.alias_is_abbreviation(_false), msg=_false)
 
     def test_get_property_abbreviations(self):
-        expected_abbreviations = ['fw-']
+        expected_abbreviations = ['fweight-', 'f-weight-', 'fw-']
         property_name = 'font-weight'
         class_parser = ClassPropertyParser(class_set=set())
         abbreviations = class_parser.get_property_abbreviations(property_name=property_name)
@@ -195,12 +194,11 @@ class TestClassPropertyParser(TestCase):
             )
             self.assertEquals(class_parser.class_set, {css_class})
 
-    # Invalid CSS patterns that result in the class being removed from self.class_set.
+    # Invalid CSS patterns that can be returned by this method.
     def test_get_property_value_invalid_patterns(self):
-        empty_set = set()
-        empty_string = ''
         property_name = 'color'
         encoded_property_values = ['bold-50', '5u5', 'b1-a5-c1p-e5', '5pxrem', '1ap-10xp-3qp-1mp3', 'p12px']
+        expected_values = ['bold 50', '5u5', 'b1 a5 c1% e5', '5pxrem', '1a% 10x% 3q% 1mp3', 'p12px']
         for i, value in enumerate(encoded_property_values):
             css_class = property_name + '-' + value
             class_parser = ClassPropertyParser(class_set={css_class})
@@ -208,9 +206,8 @@ class TestClassPropertyParser(TestCase):
                 class_parser.get_property_value(
                     css_class=css_class, property_name=property_name, encoded_property_value=value, property_priority=''
                 ),
-                empty_string
+                expected_values[i]
             )
-            self.assertEquals(class_parser.class_set, empty_set)
 
     def test_is_important(self):
         expected_true = 'p-10-i'
