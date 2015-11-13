@@ -29,8 +29,10 @@ class TestCSSFile(TestCase):
         for extension in extensions:
             self.assertRaises(ValueError, css_file.file_path, extension)
 
+    def test_write(self):
+        css_directory = path.join(getcwd(), 'test_css')
+        css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
+        css_file.write()
 
-    # def test_write(self):
-    #
     # def test_minify(self):
 

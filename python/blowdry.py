@@ -38,9 +38,12 @@ def main():
     # Output the DRY CSS file. (user command option)
     css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
     css_file.write(css_text=css_text)
+    print(css_file.file_name + '.css', "created.")
 
     # Output the Minified DRY CSS file. (user command option)
     css_file.minify(css_text=css_text)
+    print(css_file.file_name + '.min.css', "created.")
+    print('--- Complete ---')
 
 if __name__ == '__main__':
     main()

@@ -69,7 +69,7 @@ class CSSFile(object):
     # Only allow '.', '0-9', and 'a-z' characters.
     def file_path(self, extension=''):
         extension = extension.lower()
-        if len(findall(r"([.0-9a-z]})", extension)) == 1:
+        if len(findall(r"([.0-9a-z])", extension)) == len(extension):
             return path.join(self.file_directory, self.file_name + extension)
         else:
             raise ValueError(extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.')
