@@ -1,5 +1,6 @@
 from os import path, walk, getcwd
 from glob import glob
+from cssutils import parseString, ser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -52,3 +53,30 @@ class FileConverter(object):
         with open(self.file_path, 'r') as file:
             file_as_string = file.read().replace('\n', '')
         return file_as_string
+
+
+class CSSFile(object):
+    # File name does not include extension.
+    def __init__(self, file_directory=getcwd(), file_name='blowdry'):
+        if path.isdir(file_directory):
+            self.file_directory = file_directory
+            self.file_name = file_name
+        else:
+            raise NotADirectoryError(file_directory + ' is not a directory.')
+
+    def file_path(self, extension=''):
+        return path.join(self.file_directory, self.file_name + extension)
+
+    # Output a human readable version of the css file.
+    # Note: Overwrites any pre-existing files with the same name.
+    def write(self, css_text=''):
+        with open(self.file_path(extension='.css'), 'w') as css_file:
+            css_file.write(css_text)
+
+    # Output a minified version of the css file.
+    # Note: Overwrites any pre-existing files with the same name.
+    def minify(self, css_text=''):
+        parse_string = parseString(css_text)
+        ser.prefs.useMinified()                 # Enables Minification
+        with open(self.file_path(extension='.min.css'), 'w') as css_file:
+            css_file.write(parse_string.cssText.decode('utf-8'))
