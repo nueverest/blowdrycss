@@ -1,4 +1,4 @@
-from cssutils.css import CSSStyleDeclaration, Property
+from cssutils.css import Property, CSSStyleRule, CSSStyleSheet
 from xml.dom import SyntaxErr
 # Custom
 from classpropertyparser import ClassPropertyParser
@@ -6,12 +6,12 @@ __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-class CSSStyleBuilder(object):
+class CSSBuilder(object):
     def __init__(self, property_parser=ClassPropertyParser()):
-        print('\nCSSStyleBuilder Running:')
+        print('\nCSSBuilder Running:')
         self.property_parser = property_parser
-        self.css_properties = set()
-        self.css_style_declaration = CSSStyleDeclaration(cssText='')
+        self.css_rules = set()
+        self.css_stylesheet = CSSStyleSheet()
 
         invalid_css_classes = []
         reasons = []
@@ -35,11 +35,13 @@ class CSSStyleBuilder(object):
                 encoded_property_value=encoded_property_value,
                 property_priority=priority      # TODO: Why is priority required???? Validation does not occur anymore.
             )
-            # Build CSS Property AND Add to css_properties OR Remove invalid css_class from class_set.
+            # Build CSS Property AND Add to css_rules OR Remove invalid css_class from class_set.
             try:
                 css_property = Property(name=name, value=value, priority=priority)
                 if css_property.valid:
-                    self.css_properties.add(css_property)
+                    css_class = '.' + css_class                         # prepend dot selector to class name.
+                    css_rule = CSSStyleRule(selectorText=css_class, style=css_property.cssText)
+                    self.css_rules.add(css_rule)
                 else:
                     invalid_css_classes.append(css_class)
                     reasons.append(' (cssutils invalid property value: ' + value + ')')
@@ -54,11 +56,12 @@ class CSSStyleBuilder(object):
             self.property_parser.class_set.remove(invalid_css_class)
             self.property_parser.removed_class_set.add(invalid_css_class + reasons[i])
 
-        css_text = self.get_css_text()
-        self.css_style_declaration.cssText = css_text
+        self.build_stylesheet()
+
+    def build_stylesheet(self):
+        for css_rule in self.css_rules:
+            self.css_stylesheet.add(rule=css_rule)
 
     def get_css_text(self):
-        css_text = ''
-        for css_property in self.css_properties:
-            css_text += css_property.cssText + '; '
-        return css_text
+        return self.css_stylesheet.cssText
+

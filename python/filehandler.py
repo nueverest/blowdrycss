@@ -67,13 +67,15 @@ class CSSFile(object):
     def file_path(self, extension=''):
         return path.join(self.file_directory, self.file_name + extension)
 
-    # Output a human readable version of the css file.
+    # Output a human readable version of the css file in utf-8 format.
     # Note: Overwrites any pre-existing files with the same name.
     def write(self, css_text=''):
+        parse_string = parseString(css_text)
+        ser.prefs.useDefaults()                # Enables Default / Verbose Mode
         with open(self.file_path(extension='.css'), 'w') as css_file:
-            css_file.write(css_text)
+            css_file.write(parse_string.cssText.decode('utf-8'))
 
-    # Output a minified version of the css file.
+    # Output a minified version of the css file in utf-8 format.
     # Note: Overwrites any pre-existing files with the same name.
     def minify(self, css_text=''):
         parse_string = parseString(css_text)

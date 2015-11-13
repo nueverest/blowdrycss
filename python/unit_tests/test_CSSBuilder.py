@@ -1,7 +1,7 @@
 from unittest import TestCase
 # Custom
 from classpropertyparser import ClassPropertyParser
-from cssstylebuilder import CSSStyleBuilder
+from cssbuilder import CSSBuilder
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -19,7 +19,7 @@ class TestCSSStyleBuilder(TestCase):
         }
         expected_removed_set = {'b (property_name not found in self.property_dict.)', 'margin-20 (cssutils invalid property value: 20)', 'padding-10 (cssutils invalid property value: 10)', 'margin-top-10 (cssutils invalid property value: 10)', 'font-size-48 (cssutils invalid property value: 48)', 'width-150 (cssutils invalid property value: 150)', 'padding-top-10 (cssutils invalid property value: 10)', 'hide (property_name not found in self.property_dict.)', 'height-200 (cssutils invalid property value: 200)', 'width-50 (cssutils invalid property value: 50)'}
         property_parser = ClassPropertyParser(class_set=class_set)
-        style_builder = CSSStyleBuilder(property_parser=property_parser)
+        style_builder = CSSBuilder(property_parser=property_parser)
         self.assertTrue(style_builder.property_parser.class_set == expected_clean_set, msg=style_builder.property_parser.class_set)
         self.assertTrue(style_builder.property_parser.removed_class_set == expected_removed_set, msg=style_builder.property_parser.removed_class_set)
 
@@ -34,8 +34,8 @@ class TestCSSStyleBuilder(TestCase):
             'text-align: center;', 'height: 50px;', 'height: 150px;', 'font-weight: bold;', 'color: #fff;'
         ]
         property_parser = ClassPropertyParser(class_set=class_set)
-        style_builder = CSSStyleBuilder(property_parser=property_parser)
-        css_text = style_builder.get_css_text()
+        style_builder = CSSBuilder(property_parser=property_parser)
+        css_text = style_builder.build_stylesheet()
 
         for expected in expected_properties:
             self.assertTrue(expected in css_text)

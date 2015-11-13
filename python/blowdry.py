@@ -4,7 +4,7 @@ from os import chdir, getcwd, path
 from filehandler import FileFinder, CSSFile
 from htmlattributeparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
-from cssstylebuilder import CSSStyleBuilder
+from cssbuilder import CSSBuilder
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -30,16 +30,17 @@ def main():
     print('class_property_parser.class_set: \n', class_property_parser.class_set)
 
     # Build a set() of valid css properties. Some classes may be removed during cssutils validation.
-    style_builder = CSSStyleBuilder(property_parser=class_property_parser)
+    css_builder = CSSBuilder(property_parser=class_property_parser)
+    css_text = css_builder.get_css_text()
     print('CSS Text:')
-    print(style_builder.css_style_declaration.cssText)
+    print(css_text)
 
     # Output the DRY CSS file. (user command option)
     css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
-    css_file.write(css_text=style_builder.css_style_declaration.cssText)
+    css_file.write(css_text=css_text)
 
     # Output the Minified DRY CSS file. (user command option)
-    css_file.minify(css_text=style_builder.css_style_declaration.cssText)
+    css_file.minify(css_text=css_text)
 
 if __name__ == '__main__':
     main()
