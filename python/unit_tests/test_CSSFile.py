@@ -1,5 +1,5 @@
 from unittest import TestCase
-from os import path, getcwd
+from os import path, getcwd, remove
 
 # Custom
 from filehandler import CSSFile
@@ -29,10 +29,27 @@ class TestCSSFile(TestCase):
         for extension in extensions:
             self.assertRaises(ValueError, css_file.file_path, extension)
 
-    def test_write(self):
+    def test_write_created(self):
         css_directory = path.join(getcwd(), 'test_css')
-        css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
-        css_file.write()
+        file_name = 'blowdry'
+        css_file = CSSFile(file_directory=css_directory, file_name=file_name)
+        file_path = path.join(css_directory, css_file.file_name + '.css')
 
-    # def test_minify(self):
+        if path.isfile(file_path):      # Ensure that file is deleted before testing.
+            remove(file_path)
+
+        css_file.write()
+        self.assertTrue(path.isfile(file_path))
+
+    def test_minify_created(self):
+        css_directory = path.join(getcwd(), 'test_css')
+        file_name = 'blowdry'
+        css_file = CSSFile(file_directory=css_directory, file_name=file_name)
+        file_path = path.join(css_directory, css_file.file_name + '.min.css')
+
+        if path.isfile(file_path):      # Ensure that file is deleted before testing.
+            remove(file_path)
+
+        css_file.minify()
+        self.assertTrue(path.isfile(file_path))
 
