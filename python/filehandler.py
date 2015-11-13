@@ -1,5 +1,6 @@
 from os import path, walk, getcwd
 from glob import glob
+from re import findall
 from cssutils import parseString, ser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -64,8 +65,14 @@ class CSSFile(object):
         else:
             raise NotADirectoryError(file_directory + ' is not a directory.')
 
+    # Transform extension to lowercase.
+    # Only allow '.', '0-9', and 'a-z' characters.
     def file_path(self, extension=''):
-        return path.join(self.file_directory, self.file_name + extension)
+        extension = extension.lower()
+        if len(findall(r"([.0-9a-z]})", extension)) == 1:
+            return path.join(self.file_directory, self.file_name + extension)
+        else:
+            raise ValueError(extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.')
 
     # Output a human readable version of the css file in utf-8 format.
     # Note: Overwrites any pre-existing files with the same name.

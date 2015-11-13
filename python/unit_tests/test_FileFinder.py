@@ -8,7 +8,7 @@ __project__ = 'blow dry css'
 
 class TestFileFinder(TestCase):
     def test_file_finder_wrong_path(self):
-        not_a_directory = '\\this\\is\\not\\a\\directory.txt'
+        not_a_directory = 'not/a/valid/directory/file.txt'
         self.assertRaises(NotADirectoryError, FileFinder, not_a_directory)
 
     # Reference:
@@ -60,7 +60,7 @@ class TestFileFinder(TestCase):
         self.assertEquals(file_finder.files, expected_files)
 
     def test_fileconverter_wrongpath(self):
-        wrong_file_path = '\\this\is\\wrong\\file\\path'
+        wrong_file_path = '/this/is/wrong/file/path'
         self.assertRaises(FileNotFoundError, FileConverter, wrong_file_path)
 
     def test_get_file_as_string(self):
