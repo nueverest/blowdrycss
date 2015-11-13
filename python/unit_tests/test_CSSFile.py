@@ -1,6 +1,5 @@
 from unittest import TestCase
 from os import path, getcwd, remove
-from cssutils import parseString, ser
 # Custom
 from filehandler import CSSFile
 __author__ = 'chad nelson'
