@@ -8,7 +8,7 @@ __project__ = 'blow dry css'
 
 class TestFileFinder(TestCase):
     def test_file_finder_wrong_path(self):
-        not_a_directory = 'C:\\this\\is\\not\\a\\directory.txt'
+        not_a_directory = '\\this\\is\\not\\a\\directory.txt'
         self.assertRaises(NotADirectoryError, FileFinder, not_a_directory)
 
     # Reference:
@@ -54,13 +54,13 @@ class TestFileFinder(TestCase):
         ]
 
         chdir('..\..')                                              # Navigate up two directories.
-        project_directory = path.join(getcwd() + '\ExampleSite')    # Change to whatever you want.
+        project_directory = path.join(getcwd() + '\\ExampleSite')   # Change to whatever you want.
         file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
         file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
         self.assertEquals(file_finder.files, expected_files)
 
     def test_fileconverter_wrongpath(self):
-        wrong_file_path = 'C:\\this\\is\\wrong\\file\\path'
+        wrong_file_path = '\\this\is\\wrong\\file\\path'
         self.assertRaises(FileNotFoundError, FileConverter, wrong_file_path)
 
     def test_get_file_as_string(self):
