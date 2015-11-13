@@ -46,6 +46,7 @@ class CSSBuilder(object):
                     invalid_css_classes.append(css_class)
                     reasons.append(' (cssutils invalid property value: ' + value + ')')
                     continue
+            # This exception can't be tested as clean_class_set() and get_property_value() prevent it.
             except SyntaxErr:
                 invalid_css_classes.append(css_class)
                 reasons.append(' (cssutils SyntaxErr invalid property value: ' + value + ')')
