@@ -62,6 +62,12 @@ docs/_build/
 # PyBuilder
 target/
 
+#######
+# CSS #
+#######
+css/
+*.css
+
 ###########
 # NODE.JS #
 ###########
