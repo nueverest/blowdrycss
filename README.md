@@ -163,6 +163,7 @@ Upcoming Features:
     TODO: Document
     Currently two classes are being created with the same properties.  The preferred solution would be two assign
     both classes to the same property.
+    
     Scenario 1:
     bold                --> .bold { font-weight: bold }
     font-weight-bold    --> .font-weight-bold { font-weight: bold }

@@ -2,6 +2,8 @@ from re import search, findall
 from cssutils.css import Property
 from xml.dom import SyntaxErr
 from string import digits
+# Custom
+from datalibrary import default_property_units_dict
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -10,76 +12,7 @@ __project__ = 'blow dry css'
 # Decodes a css property_value from a clean encoded_property_value.
 class CSSPropertyValueParser(object):
     def __init__(self):
-        # Reference: http://www.w3.org/TR/CSS21/propidx.html
-        # Extracted all properties containing Values of <angle>, <percentage>, <length>, <time>, <frequency>
-        # IDEA: Build webscraper that auto-extracts these.
-        # TODO: Move to library.py
-        self.default_property_units_dict = {  # Possible Occurrences:
-            'background-position': '%',       # single or double
-
-            # 'border': 'px',                 # single   Shorthand Property unit addition Not implemented
-            'border-top': 'px',               # single
-            'border-right': 'px',             # single
-            'border-bottom': 'px',            # single
-            'border-left': 'px',              # single
-            'border-spacing': 'px',           # single
-
-            'border-width': 'px',             # single
-            'border-top-width': 'px',         # single
-            'border-right-width': 'px',       # single
-            'border-bottom-width': 'px',      # single
-            'border-left-width': 'px',        # single
-
-            'elevation': 'deg',               # single
-
-            # 'font': 'px',                   # single    Shorthand Property unit addition Not implemented
-            'font-size': 'px',                # single
-
-            'height': 'px',                   # single
-            'max-height': 'px',               # single
-            'min-height': 'px',               # single
-
-            'letter-spacing': 'px',           # single
-            'word-spacing': 'px',             # single
-
-            'line-height': 'px',              # single
-
-            'top': 'px',                      # single
-            'right': 'px',                    # single
-            'bottom': 'px',                   # single
-            'left': 'px',                     # single
-
-            'margin': 'px',                   # single, double, quadruple
-            'margin-top': 'px',               # single
-            'margin-right': 'px',             # single
-            'margin-bottom': 'px',            # single
-            'margin-left': 'px',              # single
-
-            # 'outline': 'px',                # single    Shorthand Property unit addition Not implemented
-            'outline-width': 'px',            # single
-
-            'padding': 'px',                  # single, double, quadruple
-            'padding-top': 'px',              # single
-            'padding-right': 'px',            # single
-            'padding-bottom': 'px',           # single
-            'padding-left': 'px',             # single
-
-            'pause': 'ms',                    # single, double
-            'pause-after': 'ms',              # single
-            'pause-before': 'ms',             # single
-
-            'pitch': 'Hz',                    # single
-
-            'text-indent': 'px',              # single
-
-            'vertical-align': '%',            # single
-
-            'volume': '%',                    # single
-
-            'width': 'px',                    # single
-            'max-width': 'px',                # single
-            'min-width': 'px',                # single
-        }
+        pass
     
     # Important: these methods are intended to be called in the order they are declared.
 
@@ -211,7 +144,7 @@ class CSSPropertyValueParser(object):
     def add_units(self, property_name='', property_value=''):
         new_value = []
         try:
-            default_units = self.default_property_units_dict[property_name]     # See if property name is a key.
+            default_units = default_property_units_dict[property_name]     # See if property name is a key.
             for val in property_value.split():                                  # Handle double and quadruple values.
                 if val[-1] in digits:                                           # If value have units.
                     new_value.append(val + default_units)                       # Add default units.
