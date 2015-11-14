@@ -114,3 +114,6 @@ Unsupported Features:
     Properties Values that contain 'url()' are not supported as they are too bulky and verbose. These sorts of
     declarations belong in your custom CSS class definitions.
     background-image: url("/home/images/sample/image.png")
+
+Valuable Reference:
+    W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
