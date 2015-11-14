@@ -8,35 +8,6 @@ __project__ = 'blow dry css'
 
 
 class ClassPropertyParser(object):
-    # Class Format Legend
-    # Dashes separate word in multi-word property names/aliases.
-    # property-name
-    # font-weight
-    #
-    # Dashes separate CSS property_name/alias from property_value
-    # alias-value
-    # font-weight-700
-    #
-    # Dashes separate multiple values for properties that take multiple values.
-    # alias-value-value-value-value
-    # padding-10-20-10-10
-    #
-    # Dashes separate !important priority indicator '-i' (append to the end of the string)
-    # alias-value-i
-    # font-weight-bold-i
-    #
-    # Shorthand can be used in cases where the alias is the unambiguously the value.
-    # alias = value
-    # font-weight-bold OR bold OR b
-    # font-weight-bold-i OR bold-i OR b-i
-    #
-    # Declaring colors:
-    #  rgb: font-color-rgb-0-255-0
-    # rgba: font-color-rgba-255-0-0-0_5
-    #  hex: font-color-h0ff23f (prepend 'h')
-    #  hsl: font-color-hsl-120-60p-70p
-    # hsla: font-color-hsla-120-60p-70p-0_3
-    #
     # CSS Unit Reference: http://www.w3schools.com/cssref/css_units.asp
     # CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
     def __init__(self, class_set=set()):

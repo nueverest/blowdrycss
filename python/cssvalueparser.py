@@ -96,12 +96,14 @@ class CSSPropertyValueParser(object):
     def contains_a_digit(value=''):
         return True if search(r"[0-9]", value) else False
 
+    # Use underscores to indicate Decimal point '_' --> '.'
     # '_' becomes '.'   example: '1_32rem' --> '1.32rem'
     def replace_underscore_with_decimal(self, value=''):
         if self.contains_a_digit(value=value):
             value = value.replace('_', '.')
         return value
 
+    # Using Percentages 'p' --> '%'
     # mind the space
     # 'p ' becomes '% ' example: '1p 10p 3p 1p' --> '1% 10% 3% 1%' AND ' 1p' --> ' 1%'
     def replace_p_with_percent(self, value=''):
@@ -110,7 +112,8 @@ class CSSPropertyValueParser(object):
             if value.endswith('p'):
                 value = value[:-1] + '%'    # chop last character and add percentage sign
         return value
-    
+
+    # Declaring negative values
     # mind the space
     # ' n' becomes ' -'
     # examples:
@@ -242,6 +245,7 @@ class CSSPropertyValueParser(object):
     # background-image-url-_home_images_sample__image_1.png --> background-image: url("/home/images/sample/image_1.png")
 
     # TODO: Handle font-family names with dashes in them same thing for "voice-family"
+    # TODO: Consider using '--' to represent '-' dash could be an escape character
     # e.g. font: 15px sans-serif OR font: sans-serif 15px OR font-family: sans-serif
     # ERROR font-15px-sans-serif --> font: 15px sans serif
     # Might require a font name dictionary.
