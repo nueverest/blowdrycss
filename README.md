@@ -58,6 +58,29 @@ Advantages
     -Built for the real world in which deadlines and division of labor is not always taken into account.
     -Integrated minification.
 
+What it is not
+    This tool is not designed to replace the need manually write more complicated CSS.  Background images, url() values,
+    and shortcut properties are not fully supported.
+
+    The following is an example of something this tool in not intended to generate, and something that still needs to
+    be written by hand.
+
+    .home-banner {
+        min-height: 191px;
+        background: url("https://somewhere.net/images/banner/home-mainbanner-bg.jpg") no-repeat;
+        background-size: 100% 100%;
+        color: white;
+        font-size: 3.5625rem;
+        font-family: "Gentium Book Basic","Open Sans","Source Sans Pro",Arial;
+        line-height: 3.6875rem;
+        text-align: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        min-height: 7rem;
+        text-shadow: -2px 2px 4px rgba(0,0,0,0.5);
+        font-family: "Open Sans","Source Sans Pro",Arial;
+    }
+
 Dissecting Encoded CSS Class
     encoded class == font-size-25
     property_name/alias = 'font-size'
@@ -136,7 +159,7 @@ Encoded Classes Format Rules
 
 Upcoming Features:
     Make DRYer:
-    TODO: Implement this.
+    TODO: Implement this essential feature.
     TODO: Document
     Currently two classes are being created with the same properties.  The preferred solution would be two assign
     both classes to the same property.
@@ -149,6 +172,11 @@ Upcoming Features:
     padding-10          --> .padding-10 { padding: 10px }
     padding-10px        --> .padding-10px { padding: 10px }
     DRY solution 2      --> .padding-10, .padding-10px { padding: 10px }    (preferred)
+
+    Trigger automatic CSS generation on file change:
+    In the event that a file with a designated extension is saved.
+    TODO: Implement this essential feature.
+    TODO: Document
 
     Automatic px --> rem Unit Conversion:
     TODO: Implement this really cool feature.
