@@ -174,3 +174,25 @@ class TestCSSPropertyValueParser(TestCase):
         property_parser = CSSPropertyValueParser()
         for value in invalid_values:
             self.assertFalse(property_parser.property_is_valid(name=property_name, value=value, priority=''))
+
+    def test_add_units_multi_value(self):
+        # Handles cases input like: '12', '35 15', '1 2 1 2'
+        # Outputs: '12px', '35px 15px', '1px 2px 1px 2px'
+        property_name = 'padding'
+        property_values = ['12', '35 15', '1 2 1 2', '20% 20%', '5em 6em 5em 6em']
+        expected_values = ['12px', '35px 15px', '1px 2px 1px 2px', '20% 20%', '5em 6em 5em 6em']
+        property_parser = CSSPropertyValueParser()
+
+        for i, value in enumerate(property_values):
+            new_value = property_parser.add_units(property_name=property_name, property_value=value)
+            self.assertEqual(new_value, expected_values[i], msg=i)
+
+    def test_add_units_margin_top(self):
+        property_name = 'margin-top'
+        property_values = ['1', '20', '15px', '60rem']
+        expected_values = ['1px', '20px', '15px', '60rem']
+        property_parser = CSSPropertyValueParser()
+
+        for i, value in enumerate(property_values):
+            new_value = property_parser.add_units(property_name=property_name, property_value=value)
+            self.assertEqual(new_value, expected_values[i], msg=i)

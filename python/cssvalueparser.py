@@ -1,6 +1,7 @@
 from re import search, findall
 from cssutils.css import Property
 from xml.dom import SyntaxErr
+from string import digits
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -9,7 +10,76 @@ __project__ = 'blow dry css'
 # Decodes a css property_value from a clean encoded_property_value.
 class CSSPropertyValueParser(object):
     def __init__(self):
-        pass
+        # Reference: http://www.w3.org/TR/CSS21/propidx.html
+        # Extracted all properties containing Values of <angle>, <percentage>, <length>, <time>, <frequency>
+        # IDEA: Build webscraper that auto-extracts these.
+        # TODO: Move to library.py
+        self.default_property_units_dict = {  # Possible Occurrences:
+            'background-position': '%',       # single or double
+
+            # 'border': 'px',                 # single   Shorthand Property unit addition Not implemented
+            'border-top': 'px',               # single
+            'border-right': 'px',             # single
+            'border-bottom': 'px',            # single
+            'border-left': 'px',              # single
+            'border-spacing': 'px',           # single
+
+            'border-width': 'px',             # single
+            'border-top-width': 'px',         # single
+            'border-right-width': 'px',       # single
+            'border-bottom-width': 'px',      # single
+            'border-left-width': 'px',        # single
+
+            'elevation': 'deg',               # single
+
+            # 'font': 'px',                   # single    Shorthand Property unit addition Not implemented
+            'font-size': 'px',                # single
+
+            'height': 'px',                   # single
+            'max-height': 'px',               # single
+            'min-height': 'px',               # single
+
+            'letter-spacing': 'px',           # single
+            'word-spacing': 'px',             # single
+
+            'line-height': 'px',              # single
+
+            'top': 'px',                      # single
+            'right': 'px',                    # single
+            'bottom': 'px',                   # single
+            'left': 'px',                     # single
+
+            'margin': 'px',                   # single, double, quadruple
+            'margin-top': 'px',               # single
+            'margin-right': 'px',             # single
+            'margin-bottom': 'px',            # single
+            'margin-left': 'px',              # single
+
+            # 'outline': 'px',                # single    Shorthand Property unit addition Not implemented
+            'outline-width': 'px',            # single
+
+            'padding': 'px',                  # single, double, quadruple
+            'padding-top': 'px',              # single
+            'padding-right': 'px',            # single
+            'padding-bottom': 'px',           # single
+            'padding-left': 'px',             # single
+
+            'pause': 'ms',                    # single, double
+            'pause-after': 'ms',              # single
+            'pause-before': 'ms',             # single
+
+            'pitch': 'Hz',                    # single
+
+            'text-indent': 'px',              # single
+
+            'vertical-align': '%',            # single
+
+            'volume': '%',                    # single
+
+            'width': 'px',                    # single
+            'max-width': 'px',                # single
+            'min-width': 'px',                # single
+        }
     
     # Important: these methods are intended to be called in the order they are declared.
 
@@ -118,6 +188,7 @@ class CSSPropertyValueParser(object):
         # The following two only apply when particular property names are used.
         value = self.replace_h_with_hash(property_name=property_name, value=value)
         value = self.add_color_parenthetical(property_name=property_name, value=value)  # Must contain digits.
+        value = self.add_units(property_name=property_name, property_value=value)       # Add units if necessary.
         return value
 
     # Accepts a property name and value
@@ -131,8 +202,48 @@ class CSSPropertyValueParser(object):
         except SyntaxErr:
             return False
 
+    # For property_name's that require units apply the default units defined in default_property_units_dict.
+    # Handles cases input like: '12', '35 15', '1 2 1 2'
+    # Outputs: '12px', '35% 15%', '1px 2px 1px 2px'
+    def add_units(self, property_name='', property_value=''):
+        new_value = []
+        try:
+            default_units = self.default_property_units_dict[property_name]     # See if property name is a key.
+            for val in property_value.split():                                  # Handle double and quadruple values.
+                if val[-1] in digits:                                           # If value have units.
+                    new_value.append(val + default_units)                       # Add default units.
+                else:
+                    new_value.append(val)                                       # Leave current value unchanged
+            property_value = ' '.join(new_value)                                # Put the new values back together
+        except KeyError:
+            pass                                                                # Property does not need units.
+        return property_value
+
     # nice to have 16px = 1em
     # convert px to rem
     # def px_to_em(self, px):
     # TODO: write this.
     #     pass
+
+    # TODO: Implement media query handling using:
+    # allow user to define a dict
+    # 'xsmall': (0, 240),
+    # 'small': (0, 480), etc...
+    #
+    # hide-for-, show-for-
+    # -small-only, -small-down, -small-up, hide-for-480px-down, show-for-480px-up, hide-for-480-down, show-for-480-down
+
+    # TODO: Are URIs ridiculous? or should we implement syntax
+    # background-image-url-image.png --> background-image: url("image.png")
+    # background-image-url-_home_images_sample_image.png --> background-image: url("/home/images/sample/image.png")
+    # IN THE LAST CASE images with underscores would not work could use a double underscore to represent final directory
+    # but this is getting ridiculous example double underscore signifies final directory
+    # allowing underscore in file name:
+    # background-image-url-_home_images_sample__image_1.png --> background-image: url("/home/images/sample/image_1.png")
+
+    # TODO: Handle font-family names with dashes in them same thing for "voice-family"
+    # e.g. font: 15px sans-serif OR font: sans-serif 15px OR font-family: sans-serif
+    # ERROR font-15px-sans-serif --> font: 15px sans serif
+    # Might require a font name dictionary.
+    # What about commas?
+    # Could just use font-family name explicity e.g. sans-serif, arial, source-sans-pro

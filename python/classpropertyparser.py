@@ -43,7 +43,13 @@ class ClassPropertyParser(object):
         css = u'''/* Generated with BlowDryCSS. */'''
         self.sheet = parseString(css)
         self.rules = []
-        self.css_units = {'px', 'em', 'rem', 'p', 'ex', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'vh', 'vw', 'vmin', 'vmax'}
+        self.css_units = {
+            'px', 'em', 'rem', 'p', 'ex', 'cm', 'mm', 'in', 'pt', 'pc', 'ch', 'vh', 'vw', 'vmin', 'vmax',   # distance
+            'deg', 'grad', 'rad',                                                                           # angle
+            'ms', 's',                                                                                      # time
+            'Hz', 'kHz',                                                                                    # frequency
+
+        }
         self.importance_designator = '-i'       # '-i' is used to designate that the priority level is '!important'
         self.removed_class_set = set()
         self.class_set = class_set
@@ -69,6 +75,11 @@ class ClassPropertyParser(object):
             'vertical-align': ['valign-', 'v-align-', ],
             'width': ['w-', ],
         }
+        # Sort property_dict with the longest items first as the most verbose match is preferred.
+        # i.e. If css_class == 'margin-top' Then we want it to match the property_dict key 'margin-top' not 'margin'
+        self.ordered_property_dict = OrderedDict(
+            sorted(self.property_dict.items(), key=lambda t: len(t[0]), reverse=True)
+        )
 
         # TODO: explore another way using regex for property (no cssutils already does regex validation)
         # allowed = self.allowed_unit_characters()
@@ -164,12 +175,7 @@ class ClassPropertyParser(object):
     # Classes that use identical property names must set a property value
     # i.e. 'font-weight' is invalid because no value is included AND 'font-weight-700' is valid because 700 is a value.
     def get_property_name(self, css_class=''):
-        # Sort property_dict with the longest items first as the most verbose match is preferred.
-        # i.e. If css_class == 'margin-top' Then we want it to match the property_dict key 'margin-top' not 'margin'
-        # TODO: Instead of doing this multiple times do it once in self.property_dict.
-        ordered_property_dict = OrderedDict(sorted(self.property_dict.items(), key=lambda t: len(t[0]), reverse=True))
-
-        for property_name, aliases in ordered_property_dict.items():
+        for property_name, aliases in self.ordered_property_dict.items():
             # Try identical key match first. An exact css_class match must also end with a '-' dash to be valid.
             if css_class.startswith(property_name + '-'):
                 return property_name
