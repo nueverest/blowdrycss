@@ -1,16 +1,65 @@
-# BlowDry
+# BlowDryCSS
 Tool used to auto-generate DRY CSS from encoded classes for in *.html, *.aspx, *.ascx, *.master, or add your own
 file extension under FileFinder.file_types.
 
 TODO: Provide simple instructions for how to get up and running quickly.
 
+Motivation
+     I created this tool after seeing how many companies manage their CSS files. The following are a couple of
+     scenarios.
+
+     Scenario 1 - Inside a CSS file you find the following:
+     .header-1 { font-weight: bold; font-size: 12px; font-color: red; }
+     .header-2 { font-weight: bold; font-size: 16px; font-color: blue; }
+     .header-3 { font-weight: bold; font-size: 12px; font-color: green; }
+
+     The property 'font-weight: bold;' appears three times, and 'font-size: 12px;' appears twice.
+     This is not DRY (Don't Repeat Yourself).
+
+     Six months later the person who wrote this CSS is then asked to remove header-2 and header-3 from the homepage.
+     More often than not the front-end developer will remove the CSS class from the HTML file,
+     but not from the CSS file.
+
+     Some reasons for this:
+     Forgetting to delete the rule from the CSS file.
+     Fear that the class is used somewhere else and that it might break the site.
+     Being too busy to search all of the files in their project for other potential use cases.
+
+     The result is that multiple kilobytes worth of unused CSS data remain.
+
+    Scenario 2 - CSS Pre-compiler:
+     CSS Pre-compilation with SASS/SCSS or LESS is awesome and makes writing lots of CSS rules easy. For instance, you can
+     now auto-generate hundreds of header rules like the ones above if care is not taken. The power of the precompiler
+     represents a double edged sword.
+
+     SCSS Mixin example from a recent project:
+     @mixin text($font-color, $font-size, $font-family:"Open Sans", $line-height:inherit) {
+        color: $font-color;
+        font-size: $font-size;
+        font-family: $font-family, $default-font-family;
+        line-height: $line-height;
+    }
+
+    This mixin is called using @include as follows:
+    @include text($color-blue, rem-calc(14px), $default-font-family);
+
+    It turns out that @include text(...) is called 627 times in our CSS.  The number of the @include statements with
+    at least one matching input parameter is about 60%. That's a lot of duplicate CSS properties.
+
+    Autogenerating `font-size: 1rem;` 500 times is now easy with a pre-compiler.
+    Some might say, "Well we minified it to save space." Yes but, "Why did you write the same property 500 times?".
+
+    CSS File size does matter: [TODO: add link to articles.]
 
 Advantages
-    Rapid Development: Less time spent writing CSS.
-    DRY: Reduce the size of CSS file by only defining properties once.
+    -Rapid Development: Less time spent writing CSS, and cleaning up unused properties.
+    -DRY: Reduce the size of CSS file by only defining properties once.
+    -Greater confidence that your CSS is not filled with unused or duplicate class definitions.
+    -Built for the real world in which deadlines and division of labor is not always taken into account.
+    -Integrated minification.
 
 Dissecting Encoded CSS Class
-    encoded class = font-size-25
+    encoded class == font-size-25
     property_name/alias = 'font-size'
     property_value = '25'
 
@@ -101,7 +150,6 @@ Upcoming Features:
     padding-10px        --> .padding-10px { padding: 10px }
     DRY solution 2      --> .padding-10, .padding-10px { padding: 10px }    (preferred)
 
-
     Automatic px --> rem Unit Conversion:
     TODO: Implement this really cool feature.
     TODO: Document
@@ -114,6 +162,10 @@ Upcoming Features:
     TODO: Implement this really cool feature.
     TODO: Document
     font-size-25-r
+
+    Allow Class Encodings to match Zen CSS / Emmet Cheatsheet abbreviations
+    TODO: Implement this really cool feature.
+    TODO: Document
 
 Unsupported Features:
 
@@ -138,3 +190,7 @@ Unsupported Features:
 
 Valuable Reference:
     W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
+
+
+PEP8 Compliant
+Unit Tests
