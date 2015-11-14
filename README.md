@@ -4,6 +4,11 @@ file extension under FileFinder.file_types.
 
 TODO: Provide simple instructions for how to get up and running quickly.
 
+
+Advantages
+    Rapid Development: Less time spent writing CSS.
+    DRY: Reduce the size of CSS file by only defining properties once.
+
 Dissecting Encoded CSS Class
     encoded class = font-size-25
     property_name/alias = 'font-size'
@@ -81,11 +86,27 @@ Encoded Classes Format Rules
     TODO: Document how easy it is to edit blowdry.py
 
 Upcoming Features:
+    Make DRYer:
+    TODO: Implement this.
+    TODO: Document
+    Currently two classes are being created with the same properties.  The preferred solution would be two assign
+    both classes to the same property.
+    Scenario 1:
+    bold                --> .bold { font-weight: bold }
+    font-weight-bold    --> .font-weight-bold { font-weight: bold }
+    DRY solution 1      --> .bold, font-weight-bold { font-weight: bold }   (preferred)
+
+    Scenario 2:
+    padding-10          --> .padding-10 { padding: 10px }
+    padding-10px        --> .padding-10px { padding: 10px }
+    DRY solution 2      --> .padding-10, .padding-10px { padding: 10px }    (preferred)
+
+
     Automatic px --> rem Unit Conversion:
     TODO: Implement this really cool feature.
     TODO: Document
 
-    Create Seamless Media Queries:
+    Create Seamless Media Queries for responsive layouts:
     TODO: Implement this really cool feature.
     TODO: Document
 
