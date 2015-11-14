@@ -63,12 +63,12 @@ class TestClassPropertyParser(TestCase):
             self.assertEquals(property_name, expected_property_name)
 
     def test_get_property_name_by_identical_name_invalid(self):
-        invalid_identical_set = {'font-weight-', '-font-weight', 'font%weight'}
+        invalid_identical_set = ['afont-weight-', '-font-weight', 'font%weight']
         expected_property_name = ''
         expected_empty_set = set()
-        class_parser = ClassPropertyParser(class_set=invalid_identical_set)
-        class_list = list(class_parser.class_set)
-        for i, css_class in enumerate(class_list):
+        class_parser = ClassPropertyParser(class_set=set())
+
+        for css_class in invalid_identical_set:
             property_name = class_parser.get_property_name(css_class=css_class)
             self.assertEquals(property_name, expected_property_name)
         self.assertEquals(class_parser.class_set, expected_empty_set, msg=class_parser.class_set)
@@ -84,13 +84,11 @@ class TestClassPropertyParser(TestCase):
             self.assertEquals(property_name, expected_property_name, msg=css_class)
 
     def test_get_property_name_non_matching(self):
-        non_matching = {'font-weight-', '-font-weight'}
+        non_matching = ['not-a-property-', 'a-font-not-']
         expected_property_name = ''
         expected_empty_set = set()
-        class_parser = ClassPropertyParser(class_set=non_matching)
-
-        class_list = list(class_parser.class_set)
-        for i, css_class in enumerate(class_list):
+        class_parser = ClassPropertyParser(class_set=set())
+        for css_class in non_matching:
             property_name = class_parser.get_property_name(css_class=css_class)
             self.assertEquals(property_name, expected_property_name)
         self.assertEquals(class_parser.class_set, expected_empty_set)
@@ -186,12 +184,10 @@ class TestClassPropertyParser(TestCase):
         for i, value in enumerate(encoded_property_values):
             css_class = property_name + '-' + value
             class_parser = ClassPropertyParser(class_set={css_class})
-            self.assertEquals(
-                class_parser.get_property_value(
+            property_value = class_parser.get_property_value(
                     css_class=css_class, property_name=property_name, encoded_property_value=value, property_priority=''
-                ),
-                expected_property_values[i]
             )
+            self.assertEquals(property_value, expected_property_values[i])
             self.assertEquals(class_parser.class_set, {css_class})
 
     # Invalid CSS patterns that can be returned by this method.
@@ -202,12 +198,10 @@ class TestClassPropertyParser(TestCase):
         for i, value in enumerate(encoded_property_values):
             css_class = property_name + '-' + value
             class_parser = ClassPropertyParser(class_set={css_class})
-            self.assertEquals(
-                class_parser.get_property_value(
+            property_value = class_parser.get_property_value(
                     css_class=css_class, property_name=property_name, encoded_property_value=value, property_priority=''
-                ),
-                expected_values[i]
             )
+            self.assertEquals(property_value, expected_values[i])
 
     def test_is_important(self):
         expected_true = 'p-10-i'

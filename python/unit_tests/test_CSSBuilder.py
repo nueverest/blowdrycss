@@ -15,16 +15,14 @@ class TestCSSStyleBuilder(TestCase):
             'margin-1a% 10x% 3q% 1mp3',
         }
         expected_clean_set = {
+            'margin-top-10', 'margin-20', 'padding-top-10', 'height-200', 'padding-10', 'width-150', 'width-50',
+            'font-size-48',
             'c-blue', 'height-150px', 'bgc-h000', 'bold', 'color-hfff', 'height-50px', 'text-align-center',
             'margin-top-50px', 'valign-middle',
         }
         expected_removed_set = {
-            'b (property_name not found in self.property_dict.)', 'margin-20 (cssutils invalid property value: 20)',
-            'padding-10 (cssutils invalid property value: 10)', 'margin-top-10 (cssutils invalid property value: 10)',
-            'font-size-48 (cssutils invalid property value: 48)', 'width-150 (cssutils invalid property value: 150)',
-            'padding-top-10 (cssutils invalid property value: 10)',
+            'b (property_name not found in self.property_dict.)',
             'hide (property_name not found in self.property_dict.)',
-            'height-200 (cssutils invalid property value: 200)', 'width-50 (cssutils invalid property value: 50)',
             'padding-b1 a5 c1% e5 (Only a-z, 0-9, "_", and "-" are allowed in class name.)',
             'margin-1a% 10x% 3q% 1mp3 (Only a-z, 0-9, "_", and "-" are allowed in class name.)',
         }
