@@ -2,7 +2,7 @@ from cssutils import parseString
 from string import ascii_lowercase, digits
 # Custom
 from cssvalueparser import CSSPropertyValueParser
-from datalibrary import DataLibrary
+from datalibrary import ordered_property_dict, property_alias_dict
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -98,8 +98,7 @@ class ClassPropertyParser(object):
     # i.e. 'font-weight' is invalid because no value is included AND 'font-weight-700' is valid because 700 is a value.
     @staticmethod
     def get_property_name(css_class=''):
-        data_library = DataLibrary()
-        for property_name, aliases in data_library.ordered_property_dict.items():
+        for property_name, aliases in ordered_property_dict.items():
             # Try identical key match first. An exact css_class match must also end with a '-' dash to be valid.
             if css_class.startswith(property_name + '-'):
                 return property_name
@@ -141,8 +140,7 @@ class ClassPropertyParser(object):
     # Returns a list of all property abbreviations appearing in property_alias_dict
     def get_property_abbreviations(self, property_name=''):
         property_abbreviations = list()
-        data_library = DataLibrary()
-        for alias in data_library.property_alias_dict[property_name]:
+        for alias in property_alias_dict[property_name]:
             if self.alias_is_abbreviation(alias=alias):
                 property_abbreviations.append(alias)
         return property_abbreviations

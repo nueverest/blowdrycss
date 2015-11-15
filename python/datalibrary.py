@@ -1,8 +1,10 @@
 from collections import OrderedDict
+from copy import deepcopy
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
+# DataLibrary is not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
 class DataLibrary(object):
     def __init__(self, custom_property_alias_dict=None):
         # Reference: http://www.w3.org/TR/CSS21/propidx.html
@@ -128,8 +130,10 @@ class DataLibrary(object):
         self.property_alias_dict = self.add_custom_aliases(
             property_dict=self.property_alias_dict, custom_dict=custom_property_alias_dict
         )
-        self.clashing_aliases = self.remove_clashing_aliases(property_dict=self.property_alias_dict)
-
+        clashing_alias_dict = self.get_clashing_aliases(property_dict=self.property_alias_dict)
+        self.property_alias_dict = self.remove_clashing_aliases(
+            property_dict=self.property_alias_dict, clashing_alias_dict=clashing_alias_dict
+        )
         self.ordered_property_dict = OrderedDict(
             sorted(self.property_alias_dict.items(), key=lambda t: len(t[0]), reverse=True)
         )
@@ -186,15 +190,35 @@ class DataLibrary(object):
 
     # Remove duplicate/clashing aliases from property_alias_dict
     @staticmethod
-    def remove_clashing_aliases(property_dict=None):
+    def get_clashing_aliases(property_dict=None):
         clone_dict = property_dict
-        _clashing_aliases = set()
+        clashing_alias_dict = {}
         for key1, alias_set1 in property_dict.items():
             for key2, alias_set2 in clone_dict.items():
                 intersection = alias_set1.intersection(alias_set2)
                 if len(intersection) > 0 and key1 != key2:                  # prevent direct comparison of the same key.
-                    _clashing_aliases = _clashing_aliases.union(intersection)
-        return _clashing_aliases
+                    try:
+                        clashing_alias_dict[key1] = clashing_alias_dict[key1].union(intersection)
+                    except KeyError:
+                        clashing_alias_dict[key1] = intersection
+        print('clashing aliases', clashing_alias_dict)
+        return clashing_alias_dict
+
+    @staticmethod
+    def remove_clashing_aliases(property_dict=None, clashing_alias_dict=None):
+        clean_dict = deepcopy(property_dict)
+        for property_name in property_dict:
+            try:
+                clashing_aliases = clashing_alias_dict[property_name]
+                for clashing_alias in clashing_aliases:
+                    if clashing_alias in property_dict[property_name]:                                      # If Exists
+                        clean_dict[property_name] = property_dict[property_name].remove(clashing_alias)     # Remove it.
+                        if clean_dict[property_name] is None:
+                            clean_dict[property_name] = set()               # Replace None with set()
+            except KeyError:
+                pass
+        print('clashing aliases removed', clean_dict)
+        return clean_dict
 
     @staticmethod
     def add_custom_aliases(property_dict=None, custom_dict=None):
@@ -202,3 +226,12 @@ class DataLibrary(object):
             for property_name, alias_set in custom_dict.items():
                 property_dict[property_name] = property_dict[property_name].union(alias_set)
         return property_dict
+
+
+# Not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
+__data_library = DataLibrary()
+
+# Are intended for outside use.
+default_property_units_dict = __data_library.default_property_units_dict
+property_alias_dict = __data_library.property_alias_dict
+ordered_property_dict = __data_library.ordered_property_dict

@@ -3,7 +3,7 @@ from cssutils.css import Property
 from xml.dom import SyntaxErr
 from string import digits
 # Custom
-from datalibrary import DataLibrary
+from datalibrary import default_property_units_dict
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -144,9 +144,8 @@ class CSSPropertyValueParser(object):
     @staticmethod
     def add_units(property_name='', property_value=''):
         new_value = []
-        data_library = DataLibrary()
         try:
-            default_units = data_library.default_property_units_dict[property_name]  # See if property name is a key.
+            default_units = default_property_units_dict[property_name]  # See if property name is a key.
             for val in property_value.split():                                      # Double and quadruple values.
                 if val[-1] in digits:                                               # If value have units.
                     new_value.append(val + default_units)                           # Add default units.
