@@ -3,7 +3,7 @@ from cssutils.css import Property
 from xml.dom import SyntaxErr
 from string import digits
 # Custom
-from datalibrary import default_property_units_dict
+from datalibrary import DataLibrary
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -141,18 +141,20 @@ class CSSPropertyValueParser(object):
     # For property_name's that require units apply the default units defined in default_property_units_dict.
     # Handles cases input like: '12', '35 15', '1 2 1 2'
     # Outputs: '12px', '35% 15%', '1px 2px 1px 2px'
-    def add_units(self, property_name='', property_value=''):
+    @staticmethod
+    def add_units(property_name='', property_value=''):
         new_value = []
+        data_library = DataLibrary()
         try:
-            default_units = default_property_units_dict[property_name]     # See if property name is a key.
-            for val in property_value.split():                                  # Handle double and quadruple values.
-                if val[-1] in digits:                                           # If value have units.
-                    new_value.append(val + default_units)                       # Add default units.
+            default_units = data_library.default_property_units_dict[property_name]  # See if property name is a key.
+            for val in property_value.split():                                      # Double and quadruple values.
+                if val[-1] in digits:                                               # If value have units.
+                    new_value.append(val + default_units)                           # Add default units.
                 else:
-                    new_value.append(val)                                       # Leave current value unchanged
-            property_value = ' '.join(new_value)                                # Put the new values back together
+                    new_value.append(val)                                           # Leave current value unchanged
+            property_value = ' '.join(new_value)                                    # Put the new values back together
         except KeyError:
-            pass                                                                # Property does not need units.
+            pass                                                                    # Property does not need units.
         return property_value
 
     # nice to have 16px = 1em
