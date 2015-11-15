@@ -228,10 +228,10 @@ class DataLibrary(object):
         return property_dict
 
 
-# Not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
+# DataLibrary is not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
 __data_library = DataLibrary()
 
-# Are intended for outside use.
+# Only Variables intended for outside use.
 default_property_units_dict = __data_library.default_property_units_dict
 property_alias_dict = __data_library.property_alias_dict
 ordered_property_dict = __data_library.ordered_property_dict
