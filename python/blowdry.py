@@ -4,7 +4,7 @@ from filehandler import FileFinder, CSSFile
 from htmlattributeparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
-from datalibrary import property_alias_dict
+from datalibrary import property_alias_dict, clashing_aliases
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -46,6 +46,7 @@ def main():
     print('--- Complete ---')
 
     print(property_alias_dict)
+    print('clashing aliases', clashing_aliases)
 
 if __name__ == '__main__':
     main()
