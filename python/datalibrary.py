@@ -139,6 +139,7 @@ class DataLibrary(object):
         }
 
         self.property_alias_dict = self.build_property_alias_dict()
+        print('property_alias_dict', self.property_alias_dict)
 
         # TODO: Review whether this is still necessary
         # Sort property_alias_dict with the longest items first as the most verbose match is preferred.
@@ -147,7 +148,7 @@ class DataLibrary(object):
             sorted(self.property_alias_dict.items(), key=lambda t: len(t[0]), reverse=True)
         )
 
-    # Return abbreviation patterns.
+    # Return a set() abbreviation patterns.
     # No dash: [First three letters]
     # Multi-dash: [First word + First letter after dash, (single, double, triple letter zen css code)]
     # Append dash '-' at the end of each abbreviation.
@@ -157,10 +158,10 @@ class DataLibrary(object):
     # e.g. 'border-top-width' --> 'btw-'
     #
     # Examples
-    # 'border-bottom-width' --> ['border-b-width', 'bbw-']
-    #             'padding' --> ['pad-']
-    #          'margin-top' --> ['margin-t-', 'mt-']
-    #               'color' --> ['']
+    #               'color' --> set()
+    #             'padding' --> {'pad-'}
+    #          'margin-top' --> {'margin-t-', 'mt-'}
+    # 'border-bottom-width' --> {'border-b-width', 'bbw-'}
     @staticmethod
     def get_abbreviated_property_names(property_name=''):
         if len(property_name) <= 5:                                 # Do not abbreviate short words (<= 5 letters).
@@ -205,7 +206,8 @@ class DataLibrary(object):
                 try:
                     property_dict[property_name] = property_dict[property_name].union(alias_set)
                 except KeyError:
-                    print('KeyError: property_name "', property_name, '" not found in property_dict.')
+                    print('KeyError: property_name ->', property_name, '<- not found in property_dict.')
+                    raise KeyError
         return property_dict
 
     # Remove duplicate/clashing aliases from property_alias_dict.
@@ -231,10 +233,8 @@ class DataLibrary(object):
             try:
                 clashing_aliases = clashing_alias_dict[property_name]
                 for clashing_alias in clashing_aliases:
-                    if clashing_alias in property_dict[property_name]:                                      # If Exists
-                        clean_dict[property_name] = property_dict[property_name].remove(clashing_alias)     # Remove it.
-                        if clean_dict[property_name] is None:
-                            clean_dict[property_name] = set()   # Replace None with set()
+                    if clashing_alias in property_dict[property_name]:      # If clashing_alias found.
+                        clean_dict[property_name].remove(clashing_alias)    # Remove it.
             except KeyError:
                 pass
         print('clashing aliases removed', clean_dict)

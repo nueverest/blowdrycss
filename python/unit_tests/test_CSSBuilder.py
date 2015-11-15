@@ -21,10 +21,10 @@ class TestCSSStyleBuilder(TestCase):
             'margin-top-50px', 'valign-middle',
         }
         expected_removed_set = {
-            'b (property_name not found in self.property_alias_dict.)',
-            'hide (property_name not found in self.property_alias_dict.)',
+            'hide (property_name not found in property_alias_dict.)',
             'padding-b1 a5 c1% e5 (Only a-z, 0-9, "_", and "-" are allowed in class name.)',
-            'margin-1a% 10x% 3q% 1mp3 (Only a-z, 0-9, "_", and "-" are allowed in class name.)',
+            'b (property_name not found in property_alias_dict.)',
+            'margin-1a% 10x% 3q% 1mp3 (Only a-z, 0-9, "_", and "-" are allowed in class name.)'
         }
         property_parser = ClassPropertyParser(class_set=class_set)
         style_builder = CSSBuilder(property_parser=property_parser)

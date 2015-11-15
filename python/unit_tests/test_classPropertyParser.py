@@ -74,7 +74,7 @@ class TestClassPropertyParser(TestCase):
         self.assertEquals(class_parser.class_set, expected_empty_set, msg=class_parser.class_set)
 
     def test_get_property_name_by_alias(self):
-        class_alias_set = {'normal', 'bold', 'bolder', 'lighter', 'initial', 'fweight-', 'f-weight-', 'fw-'}
+        class_alias_set = {'bold', 'bolder', 'lighter', 'fweight-', 'f-weight-', 'fw-', 'font-w-'}
         expected_property_name = 'font-weight'
         class_parser = ClassPropertyParser(class_set=set())
 
@@ -133,11 +133,11 @@ class TestClassPropertyParser(TestCase):
             self.assertFalse(class_parser.alias_is_abbreviation(_false), msg=_false)
 
     def test_get_property_abbreviations(self):
-        expected_abbreviations = ['fweight-', 'f-weight-', 'fw-']
+        expected_abbreviations = ['fweight-', 'f-weight-', 'fw-', 'font-w-']
         property_name = 'font-weight'
         class_parser = ClassPropertyParser(class_set=set())
         abbreviations = class_parser.get_property_abbreviations(property_name=property_name)
-        self.assertEquals(abbreviations, expected_abbreviations)
+        self.assertEquals(set(abbreviations), set(expected_abbreviations))
 
     def test_strip_property_abbreviation_matching(self):
         property_name = 'font-weight'
