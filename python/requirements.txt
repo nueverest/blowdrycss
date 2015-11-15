@@ -4,3 +4,6 @@ coverage>=4.0.2
 
 # CSS Creation
 cssutils>=1.0.1
+
+# Automatic CSS generation on save
+watchdog>=0.8.3
