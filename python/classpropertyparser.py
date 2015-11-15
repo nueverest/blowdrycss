@@ -2,7 +2,7 @@ from cssutils import parseString
 from string import ascii_lowercase, digits
 # Custom
 from cssvalueparser import CSSPropertyValueParser
-from datalibrary import property_dict, ordered_property_dict
+from datalibrary import property_alias_dict, ordered_property_dict
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -137,10 +137,10 @@ class ClassPropertyParser(object):
     def alias_is_abbreviation(alias=''):
         return alias.endswith('-')
 
-    # Returns a list of all property abbreviations appearing in property_dict
+    # Returns a list of all property abbreviations appearing in property_alias_dict
     def get_property_abbreviations(self, property_name=''):
         property_abbreviations = list()
-        for alias in property_dict[property_name]:
+        for alias in property_alias_dict[property_name]:
             if self.alias_is_abbreviation(alias=alias):
                 property_abbreviations.append(alias)
         return property_abbreviations

@@ -18,7 +18,7 @@ class CSSBuilder(object):
         for css_class in self.property_parser.class_set:
             name = self.property_parser.get_property_name(css_class=css_class)
 
-            # 'name' can return an empty string '' if css_class does not match any patterns in the property_dict.
+            # 'name' can return an empty string '' if css_class does not match any patterns in the property_alias_dict.
             try:
                 encoded_property_value = self.property_parser.get_encoded_property_value(
                     property_name=name,
@@ -26,7 +26,7 @@ class CSSBuilder(object):
                 )
             except ValueError:
                 invalid_css_classes.append(css_class)
-                reasons.append(' (property_name not found in self.property_dict.)')
+                reasons.append(' (property_name not found in property_alias_dict.)')
                 continue
 
             priority = self.property_parser.get_property_priority(css_class=css_class)
