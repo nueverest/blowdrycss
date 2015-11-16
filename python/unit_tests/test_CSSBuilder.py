@@ -9,7 +9,7 @@ __project__ = 'blow dry css'
 class TestCSSStyleBuilder(TestCase):
     def test_get_css_text_sets(self):
         class_set = {
-            'margin-top-10', 'bgc-h000', 'hide', 'margin-20', 'padding-top-10', 'height-200', 'padding-10',
+            'cue-x5_0p', 'margin-top-10', 'bgc-h000', 'hide', 'margin-20', 'padding-top-10', 'height-200', 'padding-10',
             'valign-middle', 'b', 'width-150', 'width-50', 'font-size-48', 'c-blue', 'margin-top-50px',
             'text-align-center', 'height-50px', 'height-150px', 'bold', 'color-hfff', 'padding-b1 a5 c1% e5',
             'margin-1a% 10x% 3q% 1mp3',
@@ -21,6 +21,7 @@ class TestCSSStyleBuilder(TestCase):
             'margin-top-50px', 'valign-middle',
         }
         expected_removed_set = {
+            'cue-x5_0p (cssutils invalid property value: x5.0%)',
             'hide (property_name not found in property_alias_dict.)',
             'padding-b1 a5 c1% e5 (Only a-z, 0-9, "_", and "-" are allowed in class name.)',
             'b (property_name not found in property_alias_dict.)',
