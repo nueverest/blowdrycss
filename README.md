@@ -9,7 +9,7 @@ This tool was created after seeing how many companies manage their CSS files. Th
 scenarios.
 
 ##### Scenario 1 - Inside a CSS file you find the following:
-    ```css
+    ```javascript
     .header-1 { font-weight: bold; font-size: 12px; font-color: red; }
     .header-2 { font-weight: bold; font-size: 16px; font-color: blue; }
     .header-3 { font-weight: bold; font-size: 12px; font-color: green; }
@@ -26,7 +26,7 @@ More often than not the front-end developer will remove the CSS class from the H
 * Fear that the class is used somewhere else and that it might break the site.
 * Being too busy to search all of the files in their project for other potential use cases.
 
-The result is that multiple kilobytes worth of unused CSS data remain.
+The result is that multiple kilobytes worth of unused, dead CSS data remain.
 
 ##### Scenario 2 - CSS Pre-compiler:
 CSS Pre-compilation with SASS/SCSS or LESS is awesome and makes writing lots of CSS rules easy. For instance, you can
@@ -35,7 +35,7 @@ represents a double edged sword.
 
 ###### SCSS Mixin example from a recent project:
 
-    ```css
+    ```javascript
     @mixin text($font-color, $font-size, $font-family:"Open Sans", $line-height:inherit) {
         color: $font-color;
         font-size: $font-size;
