@@ -368,5 +368,5 @@ Media Queries for responsive style | $1,248 | 2-4 days | $0 | 0% | [![paypal](ht
 Responsive Scaling Fonts '-r' | $200 | 3-4 hr | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BJMHSE7NDSKVU)
 Sphinx Integration | 1-2 wks | $2,000 | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MWGFYZZ4DXD2N)
 Port to Javascript | $10,000 | 1-2 mo | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9NEXW8MRMUXAU)
-Suggest a Feature | ----- | ----- | $0 | 0% | [![paypal]Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ENEWAE88R4LGG)
+Suggest a Feature | ----- | ----- | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ENEWAE88R4LGG)
 
