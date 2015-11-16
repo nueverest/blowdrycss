@@ -65,11 +65,17 @@ Yes but,
 
 ### Advantages of BlowDryCSS
 :one: Rapid Development: Less time spent writing CSS, and cleaning up unused properties.
+
 :two: DRY (Don't Repeat Yourself): Reduces the size of CSS file by only defining properties once.
+
 :three: Greater confidence that your CSS is not filled with unused or over-replicated class definitions.
+
 :four: Built for the real world in which deadlines and division of labor is not always taken into account.
+
 :five: Integrated minification.
+
 :six: PEP8 Compliant
+
 :seven: Full UnitTest Coverage
 
 ### What it is not
