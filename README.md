@@ -46,11 +46,11 @@ Feel free to delete these two files and re-run `python blowdry` to confirm that 
 These two files are not intended to be edited by humans.  Any manual changes made to these two files are overwritten
 when `python blowdry` is run.
 
-### Motivation
+# Motivation
 This tool was created after seeing how many companies manage their CSS files. The following are a couple of
 scenarios.
 
-##### Scenario 1 - Inside a CSS file you find the following:
+#### Scenario 1 - Inside a CSS file you find the following:
 ```css
 .header-1 { font-weight: bold; font-size: 12px; font-color: red; }
 .header-2 { font-weight: bold; font-size: 16px; font-color: blue; }
@@ -63,19 +63,19 @@ DRY (Don't Repeat Yourself).
 Six months later the person who wrote this CSS is then asked to remove header-2 and header-3 from the homepage.
 More often than not the front-end developer will remove the CSS class from the HTML file, but not from the CSS file.
 
-###### Some reasons for this include:
+##### Some reasons for this include:
 * Forgetting to delete the rule from the CSS file.
 * Fear that the class is used somewhere else and that it might break the site.
 * Being too busy to search all of the files in their project for other potential use cases.
 
 The result is that multiple kilobytes worth of unused, dead CSS data remain.
 
-##### Scenario 2 - CSS Pre-compiler:
+#### Scenario 2 - CSS Pre-compiler:
 CSS pre-compilation with SASS/SCSS or LESS is awesome, and makes writing lots of CSS rules easy. For instance, you can
 now auto-generate hundreds of header rules like the ones above if care is not taken. The power of the pre-compiler
 represents a double edged sword.
 
-###### SCSS Mixin example from a recent project:
+##### SCSS Mixin example from a recent project:
 
 ```css
 @mixin text($font-color, $font-size, $font-family:"Open Sans", $line-height:inherit) {
@@ -99,7 +99,7 @@ Some might say,
 **Yes but,** 
 > Why did you write the same property 500 times into your main CSS file? :hear_no_evil: :see_no_evil: :speak_no_evil:
 
-###### CSS File size does matter. Large style files result in the following:
+##### CSS File size does matter. Large style files result in the following:
 * Longer download times increase bounce rates.
 * Data pollution on the Internet. 
 * Increase the likelihood of style bugs.
