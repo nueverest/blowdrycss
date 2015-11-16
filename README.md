@@ -121,7 +121,7 @@ Yes but,
 :nine: MIT License
 
 ### What it is not
-This tool is not designed to replace the need to manually develop complex CSS.  Multi-rule classes, Background images, 
+This tool is not designed to replace the need to hand-craft complex CSS.  Multi-rule classes, Background images, 
 url() values, and shorthand properties are not fully supported.
 
 The following is an example of something this tool in not intended to generate, and something that still needs to
@@ -318,6 +318,10 @@ TODO: Implement this really cool feature.
 TODO: Document
 font-size-25-r
 
+##### Sphinx Integration
+TODO: Integrate Sphinx
+TODO: Put the docs on readthedocs 
+
 ##### Implement using Javascript (consider what this would require)
 TODO: Implement this really cool feature.
 TODO: Document
@@ -346,5 +350,23 @@ font-italic-bold-12px-serif | font: italic bold 12px serif    (valid)
 ### Valuable Reference:
 W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
 
-### Okay, Why the name Blow Dry CSS?
-Well a blow dryer allow the user to `rapidly style` and `dry out` their hair. :ok_woman:
+### How to Contribute
+Raise Issues
+Write Code
+
+Vote for features with a donation. Your contribution directs focus on the most desired features first. Keep in mind
+that all of the time estimates include documentation and unit testing. As features are implemented and donations 
+received the table is manually updated.
+
+Feature | Goal | Time Estimate | Contributions To Date | % Complete | Donate Here
+------- | ---- | ------------- | --------------------- | -------------- | -----------
+Make DRYer. | $300 | 4-6 hours | $0 | 0% |  Donate
+Drop requirement for hexadecimal color values to be prefixed with a property name. | $300 | 4-6 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EY63EWAXXVKJ2)
+Auto-generate CSS on HTML file change. Integrate with watchdog or similar. | $200 | 3-4 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HFU4TJXGB75CW)
+Automatic px :point_right: rem Unit Conversion | $200 | 3-4 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V3DQMK4Q3SJTC) 
+Powerful Media Queries for responsive style | $1,248 | 2-4 days | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E4LEBP5EYSE9N)
+Responsive Fonts that scale based on screen width using '-r' | $200 | 3-4 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BJMHSE7NDSKVU)
+Sphinx Integration | 1-2 weeks | $2,000 | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MWGFYZZ4DXD2N)
+Port to Javascript (consider what this would require) | $10,000 | 1-2 months | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9NEXW8MRMUXAU)
+Suggest a Feature | --- | --- | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ENEWAE88R4LGG)
+
