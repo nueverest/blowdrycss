@@ -75,7 +75,13 @@ Python 3.4+ (required)
 * Find the `+` images and add the class `padding-bottom-4p` directly to the `img` class attribute.
 * Run `python blowdry` 
 * Now refresh the web page running on `localhost`.
-* Feel free to continue experimenting with different property names and values. 
+* Feel free to continue experimenting with different property names and values.  More information about how to form
+write well-form encoded class names is found further down this page.
+
+### Part 4 - Experiment with these classes
+* Apply these to an image: `border-10px-solid-black, p-20-30-20-30, w-50`
+* Apply this to a `<div>`: `display-none`
+* Apply this to text: `uppercase`
 
 ##### Notes about the auto-generated `*.css` files
 The CSS files `blowdry.css` and `blowdry.min.css` are not intended to be edited by humans.  
