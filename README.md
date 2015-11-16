@@ -122,106 +122,154 @@ property_value = '25'
 Consider this dictionary entry found in `datalibrary.py`
 `'font-weight': {'fweight-', 'lighter', 'fw-', 'bolder', 'f-weight-', 'font-w-', 'bold'},`
 
-It maps the alias set `{'fweight-', 'lighter', 'fw-', 'bolder', 'f-weight-', 'font-w-', 'bold'}` to the propert name
-`font-weight`. Meaning that any of the values in the set can be substituted for `font-weight`
+It maps the alias set `{'fweight-', 'lighter', 'fw-', 'bolder', 'f-weight-', 'font-w-', 'bold'}` to the property name
+`font-weight`. Meaning that any of the values in the set can be substituted for `font-weight`. 
+
+The full property name can also be used.
 
 ##### Dashes separate CSS property name/alias from property value
 Class Encoding Format | CSS Rule Output
 --------------------- | ---------------
+property-name-value | .property-name-value { property-name: value }
+alias-value | .alias-value { property-name: value }
 font-weight-700 | .font-weight-700 { font-weight: 700 }
 fw-700 | .fw-700 { font-weight: 700 }
 
 ##### Dashes separate multiple values for properties that take multiple values.
-alias-value-value-value-value
-padding-10-20-10-10                     --> padding: 10px 20px 10px 10px
-p-10-20-10-10                           --> padding: 10px 20px 10px 10px
+Class Encoding Format | CSS Rule Output
+--------------------- | ---------------
+alias-value-value-value-value | .alias-value-value-value-value { property-name: value value value value }
+padding-10-20-10-10 | .padding-10-20-10-10 { padding: 10px 20px 10px 10px }
+p-10-20-10-10 | .p-10-20-10-10 { padding: 10px 20px 10px 10px }
 
 ##### Dashes separate `!important` priority indicator `'-i'` (append to the end of the string)
-alias-value-i
-font-weight-bold-i                      --> font-weight: bold !important
+Class Encoding Format | CSS Rule Output
+--------------------- | ---------------
+alias-value-i | .alias-value-i { property-name: value !important }
+font-weight-bold-i | .font-weight-bold-i { font-weight: bold !important }
 
-##### Shorthand can be used in cases where the alias is the unambiguously the value.
-alias == value
-font-weight-bold                        --> font-weight: bold
-bold                                    --> font-weight: bold
+##### Shorthand can be used in cases where the alias is unambiguously the value.
+Applicable properties include: `color`, `font-weight`, `font-style`, `text-decoration`, and `text-transform`.
 
-##### Color Declarations:
- rgb: font-color-rgb-0-255-0            --> font-color: rgb(0, 255, 0)
-rgba: font-color-rgba-255-0-0-0_5       --> font-color: rgba(255, 0, 0, 0.5)
-hex6: font-color-h0ff23f (prepend 'h')  --> font-color: #0ff23f
-hex3: font-color-h03f    (prepend 'h')  --> font-color: #03f
- hsl: font-color-hsl-120-60p-70p        --> font-color: hsl(120, 60%, 70%)
-hsla: font-color-hsla-120-60p-70p-0_3   --> font-color: hsl(120, 60%, 70%, 0.3)
+Class Encoding Format | CSS Rule Output
+--------------------- | ---------------
+alias | .alias { property-name: alias }
+purple | .purple { color: purple }
+bold | .bold { font-weight: bold }
+lighter | .lighter { font-weight: lighter }
+underline | .underline { text-decoration: underline }
+italic | .italic { font-style: italic }
+lowercase | .lowercase { text-transform: lowercase }
 
-##### Negative Values ('n' --> '-')
-'n5cm n6cm'                             --> '-5cm -6cm'
-'n9in'                                  --> '-9in' (note that the 'n' at the end is not touched)
+##### Color Declarations
+Color Format | Class Encoding Format | CSS Rule Output
+------------ | --------------------- | ---------------
+keyword | color-silver | .color-silver { color: silver }
+ rgb | color-rgb-0-255-0 | .color-rgb-0-255-0 { color: rgb(0, 255, 0) }
+rgba | color-rgba-255-0-0-0_5 | .color-rgba-255-0-0-0_5 { color: rgba(255, 0, 0, 0.5) }
+hex6 | color-h0ff23f (prepend 'h') | .color-h0ff23f { color: C&#35;0ff23f }
+hex3 | color-h03f    (prepend 'h') | .color-h03f { color: C&#35;03f }
+ hsl | color-hsl-120-60p-70p | .color-hsl-120-60p-70p { color: hsl(120, 60%, 70%) }
+hsla | color-hsla-120-60p-70p-0_3 | .color-hsla-120-60p-70p-0_3 { color: hsl(120, 60%, 70%, 0.3) }
 
-Use underscores to indicate Decimal point.
-'_' becomes '.'
-'1_32rem' --> '1.32rem'
+##### Negative Values ('n' :point_right: '-')
+'n5cm n6cm' | '-5cm -6cm'
+'n9in' | '-9in' (note that the 'n' at the end is not touched)
 
-Note: Underscores can only be used in this way.  Other usage of underscores will invalidate the class.
-e.g. 'padding_1', '_padding-1', or 'padding-1_' are considered invalid and will not be decoded.
-You could still define classes with these names, but CSS would not be automatically generated. You would need
-to create CSS manually for unrecognized classes.
+##### Use underscores to indicate Decimal point.
+'_' :point_right: '.'
+Value Encoding Format | CSS Property Value Output
+--------------------- | -------------------------
+'1_32rem' :point_right: '1.32rem'
 
-Using Percentages 'p' becomes '%'
-alias-valuep
-'1p-10p-3p-1p'  --> '1% 10% 3% 1%'
-'32p'           --> '32%'
+###### Special Note: Underscores can 'only' be used as decimal points.  
+Other usage of underscores will invalidate the class. e.g. 'padding_1', '_padding-1', or 'padding-1_' 
+are considered invalid and will not be decoded. Classes may still be defined with these names, but CSS would not 
+be generated by this tool.
 
-Default Units:
-If units are not provided in the class name the script will assign default units were possible.
-padding-50      --> padding: 50px
-elevation-20    --> elevation: 20deg
+##### Using Percentages 'p' becomes '%'
+'p' :point_right: '%'
+Value Encoding Format | CSS Property Value Output
+--------------------- | -------------------------
+'1p-10p-3p-1p' | '1% 10% 3% 1%'
+'32p' | '32%'
 
-Encoding Units in Class Name
-padding-50cm    --> padding: 50cm
-width-120vmin   --> width: 120vmin
+##### Default Units:
+If units are not provided in the class name, then default units were applicable. The default units
+are defined in `DataLibrary.default_property_units_dict` inside `datalibrary.py`.  This makes it possible to
+easily change the default units for a particular property name.
+Value Encoding Format | CSS Property Value Output
+--------------------- | -------------------------
+padding-50| padding: 50px
+elevation-20 | elevation: 20deg
 
-Customize Aliases:
-TODO: Document how easy it is to change alter dictionaries.
+##### Explicitly Encoding Units in Class Name
+Value Encoding Format | CSS Property Value Output
+--------------------- | -------------------------
+padding-50cm | padding: 50cm
+width-120vmin | width: 120vmin
 
-Change the CSS File Name and Location:
+### Good to know
+##### Find Non-matching classes
+If the encoded class name contains a typo or invalid value 
+e.g. `ppadding-5`, `margin-A`, `font-color-h000rem`, or `squirrel-gray` 
+it will be placed in `removed_class_set`.  The variable `removed_class_set` is found in `ClassPropertyParser()` inside 
+of `classpropertyparser.py`.
+
+##### Customize Aliases:
+:one: Open `python/datalibrary.py`
+
+:two: In the `DataLibrary` class edit `self.custom_property_alias_dict`
+
+It's that simple.
+
+##### Change the CSS File Name and Location:
 TODO: Document how easy it is to edit blowdry.py
 
 ### Upcoming Features:
-Make DRYer:
+##### Make DRYer:
 TODO: Implement this essential feature.
 TODO: Document
-Currently two classes are being created with the same properties.  The preferred solution would be two assign
+Currently two classes are being created with the same properties.  The preferred solution would be to assign
 both classes to the same property.
 
-Scenario 1:
-bold                --> .bold { font-weight: bold }
-font-weight-bold    --> .font-weight-bold { font-weight: bold }
-DRY solution 1      --> .bold, font-weight-bold { font-weight: bold }   (preferred)
+###### Scenario 1:
+bold | .bold { font-weight: bold }
+font-weight-bold | .font-weight-bold { font-weight: bold }
+###### DRY solution 1
+.bold, font-weight-bold { font-weight: bold }   (preferred)
 
-Scenario 2:
-padding-10          --> .padding-10 { padding: 10px }
-padding-10px        --> .padding-10px { padding: 10px }
-DRY solution 2      --> .padding-10, .padding-10px { padding: 10px }    (preferred)
+###### Scenario 2:
+padding-10 | .padding-10 { padding: 10px }
+padding-10px | .padding-10px { padding: 10px }
+###### DRY solution 2
+.padding-10, .padding-10px { padding: 10px }    (preferred)
 
-Trigger automatic CSS generation on file change:
-In the event that a file with a designated extension is saved.
+##### Drop requirement for hexadecimal color values to be prefixed with a property name.
+Color Format | Class Encoding Format | CSS Rule Output
+------------ | --------------------- | ---------------
+hex6 | h0ff23f | .h0ff23f { color: C&#35;0ff23f }
+hex3 | hfd4 | .hfd4 { color: C&#35;fd4 }
+
+##### Trigger automatic CSS generation on file change:
+In the event that a file with a designated extension is saved.  Preferably without tons of dependencies or polling.
 TODO: Implement this essential feature.
 TODO: Document
 
-Automatic px --> rem Unit Conversion:
+##### Automatic px :point_right: rem Unit Conversion:
 TODO: Implement this really cool feature.
 TODO: Document
 
-Create Seamless Media Queries for responsive layouts:
+##### Create Seamless Media Queries for responsive layouts:
 TODO: Implement this really cool feature.
 TODO: Document
 
-Build Responsive Fonts with -r:
+##### Build Responsive Fonts with -r:
 TODO: Implement this really cool feature.
 TODO: Document
 font-size-25-r
 
-Allow Class Encodings to match Zen CSS / Emmet Cheatsheet abbreviations
+##### Implement using Javascript (consider what this would require)
 TODO: Implement this really cool feature.
 TODO: Document
 
@@ -230,21 +278,21 @@ TODO: Document
 Use shorthand properties at your own risk. Currently no support is guaranteed for shorthand properties.
 
 ##### No encoding is defined for '/', comma, dash, double quote, '@'.
-font: 12px/14px sans-serif              --> '/' and '-' encoding not available
-font: 16rem "New Century Schoolbook"    --> double quote encoding not available
-font-family: Palatino, serif, arial     --> comma encoding not available
+font: 12px/14px sans-serif | '/' and '-' encoding not available
+font: 16rem "New Century Schoolbook" | double quote encoding not available
+font-family: Palatino, serif, arial | comma encoding not available
 
 ##### Properties Values that contain 'url()' are not supported as they are too bulky and verbose. These sorts of
 declarations belong in your custom CSS class definitions.
 background-image: url("/home/images/sample/image.png")
 
 ##### Some Encoded Property Values containing '-' will become invalid.
-font-family-sans-serif                  --> font-family: sans serif (invalid)
-font-size-x-large                       --> font-size: x large      (invalid)
+font-family-sans-serif| font-family: sans serif (invalid)
+font-size-x-large| font-size: x large      (invalid)
 
 ##### That said "some cases will work" (note that in these examples the units of 'px' are explicitly declared:
-font-30px-arial                         --> font: 30px arial                (valid)
-font-italic-bold-12px-serif             --> font: italic bold 12px serif    (valid)
+font-30px-arial | font: 30px arial                (valid)
+font-italic-bold-12px-serif | font: italic bold 12px serif    (valid)
 
 ### Valuable Reference:
 W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
