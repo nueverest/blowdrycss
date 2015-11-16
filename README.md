@@ -144,6 +144,8 @@ be written by hand.
     font-family: "Open Sans","Source Sans Pro",Arial;
 }
 ```
+
+# Encoded CSS Class Syntax Rules
     
 ### Dissecting Encoded CSS Classes
 Encoded Class | Property Name or Alias | Property Value | CSS Rule Output
@@ -259,7 +261,7 @@ Value Encoding Format | CSS Property Value Output
 padding-50cm | padding: 50cm
 width-120vmin | width: 120vmin
 
-### Good to know
+# Good to know
 ##### Find Non-matching classes
 If the encoded class name contains a typo or invalid value 
 e.g. `ppadding-5`, `margin-A`, `font-color-h000rem`, or `squirrel-gray` 
@@ -274,7 +276,7 @@ of `classpropertyparser.py`.
 ##### Change the CSS File Name and Location:
 TODO: Document how easy it is to edit blowdry.py
 
-### Upcoming Features:
+# Upcoming Features:
 ##### Make DRYer:
 TODO: Implement this essential feature.
 TODO: Document
@@ -282,18 +284,30 @@ Currently two classes are being created with the same properties.  The preferred
 both classes to the same property.
 
 ###### Scenario 1:
+Value Encoding Format | CSS Property Value Output
+--------------------- | -------------------------
 bold | .bold { font-weight: bold }
 font-weight-bold | .font-weight-bold { font-weight: bold }
+
+Duplicates the string `{ font-weight: bold }`.
+
 ###### DRY solution 1
 .bold, font-weight-bold { font-weight: bold }   (preferred)
 
 ###### Scenario 2:
+Value Encoding Format | CSS Property Value Output
+--------------------- | -------------------------
 padding-10 | .padding-10 { padding: 10px }
 padding-10px | .padding-10px { padding: 10px }
+
+Duplicates the string `{ padding: 10px }`
+
 ###### DRY solution 2
 .padding-10, .padding-10px { padding: 10px }    (preferred)
 
 ##### Drop requirement for hexadecimal color values to be prefixed with a property name.
+
+###### Allow
 
 Color Format | Encoded Class Format | CSS Rule Output
 ------------ | --------------------- | ---------------
@@ -302,54 +316,64 @@ hex3 | hfd4 | .hfd4 { color: C&#35;fd4 }
 
 ##### Trigger automatic CSS generation on file change:
 In the event that a file with a designated extension is saved.  Preferably without tons of dependencies or polling.
-TODO: Implement this essential feature.
-<br>
-TODO: Document
+<br>TODO: Implement this essential feature.
+<br>TODO: Document
 
 ##### Automatic px :point_right: rem Unit Conversion:
-TODO: Implement this really cool feature.
-TODO: Document
+<br>TODO: Implement this really cool feature.
+<br>TODO: Document
 
 ##### Create Seamless Media Queries for responsive layouts:
-TODO: Implement this really cool feature.
-TODO: Document
+<br>TODO: Implement this really cool feature.
+<br>TODO: Document
 
-##### Build Responsive Fonts with -r:
-TODO: Implement this really cool feature.
-TODO: Document
-font-size-25-r
+##### Build responsive scaling fonts with -r:
+<br>TODO: Implement this really cool feature.
+<br>TODO: Document
+<br>`font-size-25-r`
 
 ##### Sphinx Integration
-TODO: Integrate Sphinx
-TODO: Put the docs on readthedocs 
+<br>TODO: Integrate Sphinx
+<br>TODO: Put the docs on readthedocs 
 
 ##### Implement using Javascript (consider what this would require)
-TODO: Implement this really cool feature.
-TODO: Document
+<br>TODO: Implement this really cool feature.
+<br>TODO: Document
 
-### Unsupported Features:
+# Unsupported Features:
 ##### Shorthand properties
 Use shorthand properties at your own risk. Currently no support is guaranteed for shorthand properties.
 
 ##### No encoding is defined for '/', comma, dash, double quote, '@'.
-font: 12px/14px sans-serif | '/' and '-' encoding not available
-font: 16rem "New Century Schoolbook" | double quote encoding not available
-font-family: Palatino, serif, arial | comma encoding not available
+
+CSS Property Value | Encodings Not Implemented  
+------------------ | -------------------------
+font: 12px/14px sans-serif | '/' and '-'
+font: 16rem "New Century Schoolbook" | double quote
+font-family: Palatino, serif, arial | comma
 
 ##### Properties Values that contain 'url()' are not supported as they are too bulky and verbose. These sorts of
-declarations belong in your custom CSS class definitions.
-background-image: url("/home/images/sample/image.png")
+`url()` declarations belong in your custom CSS class definitions. 
+
+CSS Property Value | Encodings Not Implemented  
+------------------ | ------------------------- 
+background-image: url("/home/images/sample/image.png") | '/', '(', and double quote
 
 ##### Some Encoded Property Values containing '-' will become invalid.
-font-family-sans-serif| font-family: sans serif (invalid)
-font-size-x-large| font-size: x large      (invalid)
+That said "some cases will work". Note that in the valid examples the units of 'px' are explicitly declared.
 
-##### That said "some cases will work" (note that in these examples the units of 'px' are explicitly declared:
-font-30px-arial | font: 30px arial                (valid)
-font-italic-bold-12px-serif | font: italic bold 12px serif    (valid)
+Value Encoding Format | CSS Property Value Output | Validity
+--------------------- | ------------------------- | :------:
+font-family-sans-serif | font-family: sans serif | invalid missing dash
+font-size-x-large | font-size: x large | invalid missing dash
+font-30px-arial | font: 30px arial | valid
+font-italic-bold-12px-serif | font: italic bold 12px serif | valid
 
-### Valuable Reference:
+### Valuable Reference
 W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
+
+### License
+The MIT License (MIT)
 
 ### How to Contribute
 * Report Issues
@@ -360,8 +384,8 @@ received the table is manually updated. The donation goes to "The Power of 9" wh
 in support of this project. 
 
 ### What is done with donations?
-* Cover travel costs to technology conferences to promote this project.
-* Implement the features in the following table.
+* Cover travel and registrations costs at technology conferences to promote this project.
+* Implement, test, and document the features in the following table.
 
 Feature | Goal | Time | Received | Complete | Donate 
 ------- |:----:|:----:|:--------:|:--------:|:------:
