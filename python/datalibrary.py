@@ -103,9 +103,12 @@ class DataLibrary(object):
         self.custom_property_alias_dict = {
             'background': {'bg-', },
             'background-color': {'bgc-', 'bg-c-', 'bg-color-', },
-            'color': {'c-', },
+            'color': {'c-', 'rgb-', 'rgba-', 'hsl-', 'hsla-', 'aqua', 'black', 'blue', 'fuchsia', 'gray',
+                      'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white',
+                      'yellow'},
             'font-size': {'fsize-', 'f-size-', },
             'font-weight': {'bold', 'bolder', 'lighter', 'fweight-', 'f-weight-', },
+            'font-style': {'italic', 'oblique'},
             'height': {'h-', },
             'margin': {'m-', },
             'margin-top': {'m-top-', },
@@ -113,6 +116,8 @@ class DataLibrary(object):
             'padding': {'p-', 'pad-', },
             'padding-top': {'p-top-', },
             'text-align': {'talign-', 't-align-', },
+            'text-decoration': {'underline', 'overline', 'line-through', 'blink'},
+            'text-transform': {'capitalize', 'uppercase', 'lowercase '},
             'vertical-align': {'valign-', 'v-align-', },
             'width': {'w-', },
         }
