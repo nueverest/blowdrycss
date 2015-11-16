@@ -289,7 +289,7 @@ TODO: Document how easy it is to edit blowdry.py
 # Upcoming Features:
 ### Make DRYer:
 TODO: Implement this essential feature.
-TODO: Document
+<br>TODO: Document
 Currently two classes are being created with the same properties.  The preferred solution would be to assign
 both classes to the same property.
 
