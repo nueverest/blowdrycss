@@ -350,6 +350,11 @@ font-size-25-r
 
 ###### Resulting CSS media query.
 TODO: Add CSS here.
+```css
+.font-size-25-r {
+    font-size: 25px;
+}
+```
 
 ##### Sphinx Integration
 TODO: Integrate Sphinx
@@ -357,6 +362,14 @@ TODO: Integrate Sphinx
 
 ##### Implement using Javascript (consider what this would require)
 TODO: Implement this really cool feature.
+<br>TODO: Document
+
+##### Support basic Tween Capability from GreenSock
+ TODO: Implement (out of scope for the near future)
+ <br>TODO: Document dependencies and basic usage.
+
+##### DRY CSS File Analyzer (possibly belongs in a separate project)
+TODO: Return statistics on how many times a given property value appears in a CSS File.
 <br>TODO: Document
 
 # Unsupported Features:
