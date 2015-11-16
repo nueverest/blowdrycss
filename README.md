@@ -361,7 +361,7 @@ received the table is manually updated. The donation goes to "The Power of 9" wh
 in support of this project. 
 
 
-### What is done with this money?
+### What is done with donations?
 * Cover travel costs to technology conferences to promote this project.
 * Implement the features in the following table.
 
