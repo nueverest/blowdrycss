@@ -32,8 +32,7 @@ class CSSBuilder(object):
             priority = self.property_parser.get_property_priority(css_class=css_class)
             value = self.property_parser.get_property_value(
                 property_name=name,
-                encoded_property_value=encoded_property_value,
-                property_priority=priority      # TODO: Why is priority required???? Validation does not occur anymore.
+                encoded_property_value=encoded_property_value
             )
             # Build CSS Property AND Add to css_rules OR Remove invalid css_class from class_set.
             try:

@@ -185,9 +185,7 @@ class TestClassPropertyParser(TestCase):
         for i, value in enumerate(encoded_property_values):
             css_class = property_name + '-' + value
             class_parser = ClassPropertyParser(class_set={css_class})
-            property_value = class_parser.get_property_value(
-                    css_class=css_class, property_name=property_name, encoded_property_value=value, property_priority=''
-            )
+            property_value = class_parser.get_property_value(property_name=property_name, encoded_property_value=value)
             self.assertEquals(property_value, expected_property_values[i])
             self.assertEquals(class_parser.class_set, {css_class})
 
@@ -199,9 +197,7 @@ class TestClassPropertyParser(TestCase):
         for i, value in enumerate(encoded_property_values):
             css_class = property_name + '-' + value
             class_parser = ClassPropertyParser(class_set={css_class})
-            property_value = class_parser.get_property_value(
-                    css_class=css_class, property_name=property_name, encoded_property_value=value, property_priority=''
-            )
+            property_value = class_parser.get_property_value(property_name=property_name, encoded_property_value=value)
             self.assertEquals(property_value, expected_values[i])
 
     def test_is_important(self):
