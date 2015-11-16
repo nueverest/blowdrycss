@@ -41,8 +41,8 @@ Python 3.4+ (required)
 # How to Run the '/ExampleSite' demo - Basic Tutorial
 ### Part 1 - Start the web browser and view unstyled ExampleSite.
 * Download the project
-* Navigate to `../blowdrycss/ExampleSite/css` find `blowdry.css` and `blowdry.min.css` files.
-* Delete both `blowdry.css` and `blowdry.min.css`.
+* Navigate to `../blowdrycss/ExampleSite/`.
+* Create a directory/folder named `css`.
 * Navigate to `../blowdrycss/ExampleSite`
 * Run `python -m http.server 8080` (Python 3.x) or `python -m SimpleHTTPServer 8080` (Python 2.x)
 * Open a web browser and go to `localhost:8080`
@@ -79,8 +79,8 @@ Python 3.4+ (required)
 write well-form encoded class names is found further down this page.
 
 ### Part 4 - Experiment with these classes
-* Apply these to an image: `border-10px-solid-black, p-20-30-20-30, w-50`
-* Apply this to a `<div>`: `display-none`
+* Apply these to an image: `border-10px-solid-black` `p-20-30-20-30` `w-50`
+* Apply this to a div: `display-none`
 * Apply this to text: `uppercase`
 
 ##### Notes about the auto-generated `*.css` files
@@ -170,25 +170,44 @@ This tool is not designed to replace the need to hand-craft complex CSS.  Multi-
 url() values, and shorthand properties are not fully supported.
 
 The following is an example of something this tool in not intended to generate, and something that still needs to
-be written by hand.
+be written by hand.   
     
 ```css
 .home-banner {
-    min-height: 191px;
     background: url("https://somewhere.net/images/banner/home-mainbanner-bg.jpg") no-repeat;
-    background-size: 100% 100%;
-    color: white;
+    font-family: "Open Sans","Source Sans Pro",Arial;
+    background-repeat: no-repeat;
+    background-size: cover;    
+    min-height: 7rem;
+    font-weight: bold;
     font-size: 3.5625rem;
-    font-family: "Gentium Book Basic","Open Sans","Source Sans Pro",Arial;
+    color: white;    
     line-height: 3.6875rem;
     text-align: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 7rem;
     text-shadow: -2px 2px 4px rgba(0,0,0,0.5);
-    font-family: "Open Sans","Source Sans Pro",Arial;
 }
 ```
+
+#### DRY-ness must be balanced against other factors.  
+The first three properties are not currently supported by `blowdrycss`. Eight out of the eleven style lines or 72% 
+of the lines could be written by hand as encoded classes. However, it would result in the following really long class 
+attribute:  
+
+```html
+<div class="background-size-cover min-h-7rem bold font-size-3_5625rem white line-height-3_6875rem talign-center 
+            t-shadow-n2px-2px-4px-rgba-0-0-0-0_5">
+    <!-- div contents -->
+</div>
+```
+
+This is a case were the DRY principle is subsumed by the value of readability, brevity, and encapsulation. Also, just
+because this tool can decode the class `t-shadow-n2px-2px-4px-rgba-0-0-0-0_5` that doesn't mean it is intended to
+be used in this manner.
+
+#### My CSS is DRY, but my HTML is not.
+Copying and pasting something like `p-10 h-50 w-50 talign-center orange font-size-16` twenty times in an HTML file 
+is not that DRY either. If this is happening, then it might be valuable to pause and hand-craft a CSS class for 
+this repeating class pattern.  
 
 # Encoded Class Formatting and Rules
 
@@ -204,7 +223,7 @@ p-70-10 | p- | 70px 10px | .p-70-10 { padding: 70px 10px }
 
 `font-weight, border-bottom-color, border-bottom-style, border-bottom-width, border-collapse`
 
-###### Aliases
+###### Aliases for property names.
 `f-weight-, bg-c-, bg-color-, t-align-`
 
 ### Dashes are placed at the end of aliases to indicate that it's an alias and not a css property name.
