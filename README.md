@@ -303,6 +303,7 @@ hex3 | hfd4 | .hfd4 { color: C&#35;fd4 }
 ##### Trigger automatic CSS generation on file change:
 In the event that a file with a designated extension is saved.  Preferably without tons of dependencies or polling.
 TODO: Implement this essential feature.
+<br>
 TODO: Document
 
 ##### Automatic px :point_right: rem Unit Conversion:
@@ -347,10 +348,8 @@ font-size-x-large| font-size: x large      (invalid)
 font-30px-arial | font: 30px arial                (valid)
 font-italic-bold-12px-serif | font: italic bold 12px serif    (valid)
 
-
 ### Valuable Reference:
 W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
-
 
 ### How to Contribute
 * Report Issues
@@ -359,7 +358,6 @@ W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
 that all of the time estimates include documentation and unit testing. As features are implemented and donations 
 received the table is manually updated. The donation goes to "The Power of 9" which is setup to manage donations 
 in support of this project. 
-
 
 ### What is done with donations?
 * Cover travel costs to technology conferences to promote this project.
