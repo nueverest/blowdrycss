@@ -137,10 +137,20 @@ green | color- | green | .green { color: green }
 p-70-10 | p- | 70px 10px | .p-70-10 { padding: 70px 10px }
 
 ### Example Usage in HTML Tag:
-`<p class="font-size-25">The font-size is 25px.</p>`
+```html
+<div class="text-align-center margin-top-30">
+    <p class="font-size-25">The font-size is 25px. <span class="green">Green Text</span></p>
+</div>
+```
 
-`font-size-25` gets automatically decoded by this script becoming `.font-size-25 { font-size: 25px }` in the generated
- CSS file.
+BlowDryCSS decodes the class names `text-align-center`, `margin-top-30`, `font-size-25`, and `green`; and generates
+the following CSS in `blowdry.css`:
+```css
+.text-align-center { text-align: center }
+.margin-top-30 { margin-top: 30px }
+.font-size-25 { font-size: 25px }
+.green { color: green }
+```
 
 ### Encoded Classes Format Rules
 ##### Dashes separate words in multi-word property names/aliases.
