@@ -154,8 +154,15 @@ font-size-25 | font-size- | 25 | .font-size-25 { font-size: 25px }
 green | color- | green | .green { color: green }
 p-70-10 | p- | 70px 10px | .p-70-10 { padding: 70px 10px }
 
-### Dashes separate words in multi-word property names/aliases.
-`font-weight`
+### Dashes separate words in multi-word property names and aliases.
+###### A Property Names is a valid CSS property name in accordance with the 
+[W3C Full CSS property table](http://www.w3.org/TR/CSS21/propidx.html)
+`font-weight, border-bottom-color, border-bottom-style, border-bottom-width, border-collapse`
+
+###### Aliases
+`f-weight-, bg-c-, bg-color-, t-align-`
+
+### Dashes are placed at the end of aliases to indicate that it's an alias and not a css property name.
 
 ### Property names may be encoded as an alias.
 Consider this dictionary key, value pair found in `datalibrary.py` dictionary 
