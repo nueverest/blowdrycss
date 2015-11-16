@@ -334,24 +334,29 @@ In the event that a file with a designated extension is saved.  Preferably witho
 <br>TODO: Document
 
 ##### Automatic px :point_right: rem Unit Conversion:
-<br>TODO: Implement this really cool feature.
+TODO: Implement this really cool feature.
 <br>TODO: Document
 
 ##### Create Seamless Media Queries for responsive layouts:
-<br>TODO: Implement this really cool feature.
+TODO: Implement this really cool feature.
 <br>TODO: Document
 
-##### Build responsive scaling fonts with -r:
-<br>TODO: Implement this really cool feature.
+##### Build responsive scaling fonts using -r:
+TODO: Implement this really cool feature.
 <br>TODO: Document
-<br>`font-size-25-r`
+
+###### Encoded Class 
+font-size-25-r
+
+###### Resulting CSS media query.
+TODO: Add CSS here.
 
 ##### Sphinx Integration
-<br>TODO: Integrate Sphinx
+TODO: Integrate Sphinx
 <br>TODO: Put the docs on readthedocs 
 
 ##### Implement using Javascript (consider what this would require)
-<br>TODO: Implement this really cool feature.
+TODO: Implement this really cool feature.
 <br>TODO: Document
 
 # Unsupported Features:
