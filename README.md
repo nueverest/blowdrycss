@@ -302,7 +302,9 @@ font-weight-bold | .font-weight-bold { font-weight: bold }
 Duplicates the string `{ font-weight: bold }`.
 
 ###### DRY solution 1
-`.bold, font-weight-bold { font-weight: bold }`{.css}   
+```css
+.bold, font-weight-bold { font-weight: bold }
+```   
 
 ###### Scenario 2:
 Value Encoding Format | CSS Property Value Output
@@ -313,7 +315,9 @@ padding-10px | .padding-10px { padding: 10px }
 Duplicates the string `{ padding: 10px }`
 
 ###### DRY solution 2
-.padding-10, .padding-10px { padding: 10px }    (preferred)
+```css
+.padding-10, .padding-10px { padding: 10px }
+```
 
 ##### Drop requirement for hexadecimal color values to be prefixed with a property name.
 
