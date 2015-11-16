@@ -35,14 +35,14 @@ represents a double edged sword.
 
 ###### SCSS Mixin example from a recent project:
 
-    ```
-    @mixin text($font-color, $font-size, $font-family:"Open Sans", $line-height:inherit) {
-        color: $font-color;
-        font-size: $font-size;
-        font-family: $font-family, $default-font-family;
-        line-height: $line-height;
-    }
-    ```
+```javascript
+@mixin text($font-color, $font-size, $font-family:"Open Sans", $line-height:inherit) {
+    color: $font-color;
+    font-size: $font-size;
+    font-family: $font-family, $default-font-family;
+    line-height: $line-height;
+}
+```
     
 This mixin is called using `@include` as follows:
 `@include text($color-blue, rem-calc(14px), $default-font-family);`
