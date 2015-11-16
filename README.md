@@ -358,15 +358,15 @@ Vote for features with a donation. Your contribution directs focus on the most d
 that all of the time estimates include documentation and unit testing. As features are implemented and donations 
 received the table is manually updated.
 
-Feature | Goal | Time Estimate | Contributions To Date | % Complete | Donate Here
+Feature | Goal | Time | Received | Complete | Donate Here
 ------- | ---- | ------------- | --------------------- | -------------- | -----------
-Make DRYer. | $300 | 4-6 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EY63EWAXXVKJ2)
-Enable hexadecimal color aliases. Drop requirement for hexadecimal color values to be prefixed with a property name. | $300 | 4-6 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SGQX89U2N7XAN)
-Auto-generate CSS on HTML file change. Integrate with watchdog or similar. | $200 | 3-4 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HFU4TJXGB75CW)
-Automatic px :point_right: rem Unit Conversion | $200 | 3-4 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V3DQMK4Q3SJTC) 
-Powerful Media Queries for responsive style | $1,248 | 2-4 days | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E4LEBP5EYSE9N)
-Responsive Fonts that scale based on screen width using '-r' | $200 | 3-4 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BJMHSE7NDSKVU)
-Sphinx Integration | 1-2 weeks | $2,000 | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MWGFYZZ4DXD2N)
-Port to Javascript (consider what this would require) | $10,000 | 1-2 months | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9NEXW8MRMUXAU)
-Suggest a Feature | --- | --- | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ENEWAE88R4LGG)
+Make DRYer. | $300 | 4-6 hr | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EY63EWAXXVKJ2)
+Enable hexadecimal color aliases. | $300 | 4-6 hr | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SGQX89U2N7XAN)
+Auto-generate CSS on save. | $200 | 3-4 hr | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HFU4TJXGB75CW)
+Automatic px to rem Unit Conversion | $150 | 2-3 hr | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V3DQMK4Q3SJTC) 
+Media Queries for responsive style | $1,248 | 2-4 days | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E4LEBP5EYSE9N)
+Responsive Scaling Fonts '-r' | $200 | 3-4 hr | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BJMHSE7NDSKVU)
+Sphinx Integration | 1-2 wks | $2,000 | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MWGFYZZ4DXD2N)
+Port to Javascript | $10,000 | 1-2 mo | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9NEXW8MRMUXAU)
+Suggest a Feature | ----- | ----- | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ENEWAE88R4LGG)
 
