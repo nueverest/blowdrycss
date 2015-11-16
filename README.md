@@ -35,16 +35,51 @@ Python 3.4+ (required)
 <br>unittest (run unit tests)
 <br>coverage 4.0.2+ (check test coverage)
 
-# How to Run the '/ExampleSite' demo
-:one: Download the project
-<br>:two: Navigate to `../blowdrycss/python` directory
-<br>:three: Run `pip install -r requirements.txt`
-<br>:four: Run `python blowdry` 
-<br>:five: Navigate to `../blowdrycss/ExampleSite/css` find `blowdry.css` and `blowdry.min.css` files.
+# Pre-Requisite Knowledge
+* Basic HTML, CSS, and Python skills.
 
-Feel free to delete these two files and re-run `python blowdry` to confirm that these two files are auto-generated.
-These two files are not intended to be edited by humans.  Any manual changes made to these two files are overwritten
-when `python blowdry` is run.
+# How to Run the '/ExampleSite' demo - Basic Tutorial
+### Part 1 - Start the web browser and view unstyled ExampleSite.
+* Download the project
+* Navigate to `../blowdrycss/ExampleSite/css` find `blowdry.css` and `blowdry.min.css` files.
+* Delete both `blowdry.css` and `blowdry.min.css`.
+* Navigate to `../blowdrycss/ExampleSite`
+* Run `python -m http.server 8080` (Python 3.x) or `python -m SimpleHTTPServer 8080` (Python 2.x)
+* Open a web browser and go to `localhost:8080`
+* The page should contain lots of un-styled text and images.
+
+### Part 2 - Auto-generate CSS
+* Navigate to `../blowdrycss/python`
+* Run `pip install -r requirements.txt`
+* Run `python blowdry` 
+* Navigate to `../blowdrycss/ExampleSite/css` and verify that `blowdry.css` and `blowdry.min.css` now exist.
+* Open a web browser and go to `localhost:8080`. 
+* The page should now be styled better.
+
+### Part 3 - Apply new styles in `index.html`
+##### Lets actually change something.
+* Navigate to `../blowdrycss/ExampleSite`
+* Open `index.html`
+* Find the line `<h1 class="c-blue text-align-center">Blow Dry CSS</h1>`
+* From the class attribute delete `c-blue` and replace it with the word `green`
+* Add the class `font-size-148`
+* The line should now look like this `<h1 class="green font-size-148 text-align-center">Blow Dry CSS</h1>`
+* Now refresh the web page running on `localhost`.
+* What happened? Nothing happened because you need to run `blowdry.py`
+* Navigate to `../blowdrycss/python`
+* Run `python blowdry` 
+* Now refresh the web page running on `localhost`.
+* The title at the top of the page should be large and green.
+* Let's make some more changes.
+* Center the image below the title with the class `t-align-center` in the `<div>` containing the image.
+* Find the `+` images and add the class `padding-bottom-4p` directly to the `img` class attribute.
+* Run `python blowdry` 
+* Now refresh the web page running on `localhost`.
+* Feel free to continue experimenting with different property names and values. 
+
+##### Notes about the auto-generated `*.css` files
+The CSS files `blowdry.css` and `blowdry.min.css` are not intended to be edited by humans.  
+Any manual changes made to these two files are overwritten when `python blowdry` is run.
 
 # Motivation
 This tool was created after seeing how many companies manage their CSS files. The following are a couple of
