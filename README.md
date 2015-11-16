@@ -360,8 +360,8 @@ received the table is manually updated.
 
 Feature | Goal | Time Estimate | Contributions To Date | % Complete | Donate Here
 ------- | ---- | ------------- | --------------------- | -------------- | -----------
-Make DRYer. | $300 | 4-6 hours | $0 | 0% |  Donate
-Drop requirement for hexadecimal color values to be prefixed with a property name. | $300 | 4-6 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EY63EWAXXVKJ2)
+Make DRYer. | $300 | 4-6 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EY63EWAXXVKJ2)
+Enable hexadecimal color aliases. Drop requirement for hexadecimal color values to be prefixed with a property name. | $300 | 4-6 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SGQX89U2N7XAN)
 Auto-generate CSS on HTML file change. Integrate with watchdog or similar. | $200 | 3-4 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HFU4TJXGB75CW)
 Automatic px :point_right: rem Unit Conversion | $200 | 3-4 hours | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V3DQMK4Q3SJTC) 
 Powerful Media Queries for responsive style | $1,248 | 2-4 days | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E4LEBP5EYSE9N)
