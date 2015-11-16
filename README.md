@@ -9,11 +9,11 @@ This tool was created after seeing how many companies manage their CSS files. Th
 scenarios.
 
 ##### Scenario 1 - Inside a CSS file you find the following:
-    ```
-    .header-1 { font-weight: bold; font-size: 12px; font-color: red; }
-    .header-2 { font-weight: bold; font-size: 16px; font-color: blue; }
-    .header-3 { font-weight: bold; font-size: 12px; font-color: green; }
-    ```
+```css
+.header-1 { font-weight: bold; font-size: 12px; font-color: red; }
+.header-2 { font-weight: bold; font-size: 16px; font-color: blue; }
+.header-3 { font-weight: bold; font-size: 12px; font-color: green; }
+```
     
 The property `font-weight: bold;` appears three times, and `font-size: 12px;` appears twice. This is not 
 DRY (Don't Repeat Yourself).
@@ -35,7 +35,7 @@ represents a double edged sword.
 
 ###### SCSS Mixin example from a recent project:
 
-```javascript
+```css
 @mixin text($font-color, $font-size, $font-family:"Open Sans", $line-height:inherit) {
     color: $font-color;
     font-size: $font-size;
