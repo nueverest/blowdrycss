@@ -18,7 +18,7 @@ class TestMain(TestCase):
             sys.stdout = out
 
             # Change to match your file system.
-            chdir('C:\\Users\\Chad Nu\\PycharmProjects\\BlowDryCSS\\python\\')
+            chdir('C:\\Users\\Chad Nu\\PycharmProjects\\blowdrycss\\python\\')
             main()
             output = out.getvalue()
             for substring in substrings:

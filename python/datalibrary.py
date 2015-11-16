@@ -117,7 +117,7 @@ class DataLibrary(object):
             'padding-top': {'p-top-', },
             'text-align': {'talign-', 't-align-', },
             'text-decoration': {'underline', 'overline', 'line-through', 'blink'},
-            'text-transform': {'capitalize', 'uppercase', 'lowercase '},
+            'text-transform': {'capitalize', 'uppercase', 'lowercase'},
             'vertical-align': {'valign-', 'v-align-', },
             'width': {'w-', },
         }

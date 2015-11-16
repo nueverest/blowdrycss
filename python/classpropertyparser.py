@@ -11,7 +11,7 @@ class ClassPropertyParser(object):
     # CSS Unit Reference: http://www.w3schools.com/cssref/css_units.asp
     # CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
     def __init__(self, class_set=set()):
-        css = u'''/* Generated with BlowDryCSS. */'''
+        css = u'''/* Generated with blowdrycss. */'''
         self.sheet = parseString(css)
         self.rules = []
         self.importance_designator = '-i'       # '-i' is used to designate that the priority level is '!important'

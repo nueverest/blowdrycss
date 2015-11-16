@@ -1,4 +1,4 @@
-# BlowDryCSS
+# blowdrycss
 Tool used to quickly auto-generate DRY CSS from encoded classes found in *.html, *.aspx, *.ascx, or *.master files. 
 Add your own file extensions under `filehandler.py: FileFinder.file_types`.
 
@@ -9,7 +9,7 @@ Add your own file extensions under `filehandler.py: FileFinder.file_types`.
 </div>
 ```
 
-BlowDryCSS decodes the class names `text-align-center`, `margin-top-30`, `font-size-25`, and `green`; and generates
+blowdrycss decodes the class names `text-align-center`, `margin-top-30`, `font-size-25`, and `green`; and generates
 the following CSS in `blowdry.css`:
 ```css
 .text-align-center { text-align: center }
@@ -17,21 +17,6 @@ the following CSS in `blowdry.css`:
 .font-size-25 { font-size: 25px }
 .green { color: green }
 ```
-
-# How to Run the '/ExampleSite' demo
-:one: Download the project
-
-:two: Navigate to `../BlowDryCSS/python` directory
-
-:three: Run `pip install -r requirements.txt`
-
-:four: Run `python blowdry` 
-
-:five: Navigate to `../BlowDryCSS/ExampleSite/css` there should be a `blowdry.css` and `blowdry.min.css` file there.
-
-Feel free to delete these two files and re-run `python blowdry` to confirm that these two files are auto-generated.
-These two files are not intended to be edited by humans.  Any manual changes made to these two files are overwritten
-when `python blowdry` is run.
 
 # Requirements
 Python 3.4+ (required)
@@ -41,6 +26,21 @@ cssutils 1.0.1+ (required)
 unittest (run unit tests)
 
 coverage 4.0.2+ (check test coverage)
+
+# How to Run the '/ExampleSite' demo
+:one: Download the project
+
+:two: Navigate to `../blowdrycss/python` directory
+
+:three: Run `pip install -r requirements.txt`
+
+:four: Run `python blowdry` 
+
+:five: Navigate to `../blowdrycss/ExampleSite/css` there should be a `blowdry.css` and `blowdry.min.css` file there.
+
+Feel free to delete these two files and re-run `python blowdry` to confirm that these two files are auto-generated.
+These two files are not intended to be edited by humans.  Any manual changes made to these two files are overwritten
+when `python blowdry` is run.
 
 ### Motivation
 This tool was created after seeing how many companies manage their CSS files. The following are a couple of
@@ -101,7 +101,7 @@ Yes but,
 * Increase the likelihood of style bugs.
 * Increase the amount of time required to implement new changes and deprecate features.
 
-### Advantages of BlowDryCSS
+### Advantages of blowdrycss
 :one: Rapid Development: Less time spent writing CSS, and cleaning up unused properties.
 
 :two: DRY (Don't Repeat Yourself): Reduces the size of CSS file by only defining properties once.
@@ -212,12 +212,18 @@ hex3 | color-h03f    (prepend 'h') | .color-h03f { color: &#35;03f }
  hsl | color-hsl-120-60p-70p | .color-hsl-120-60p-70p { color: hsl(120, 60%, 70%) }
 hsla | color-hsla-120-60p-70p-0_3 | .color-hsla-120-60p-70p-0_3 { color: hsl(120, 60%, 70%, 0.3) }
 
-##### Negative Values ('n' :point_right: '-')
+##### Negative Values 
+'n' :point_right: '-'
+
+Value Encoding Format | CSS Property Value Output
+--------------------- | -------------------------
+'n48' | '-48'
 'n5cm n6cm' | '-5cm -6cm'
-'n9in' | '-9in' (note that the 'n' at the end is not touched)
+'n9in' | '-9in' 
+###### Note that the 'n' at the end of `-9in` is not affected.
 
 ##### Use underscores to indicate Decimal point.
-'_' :point_right: '.'
+'1_25' :point_right: '1.25'
 
 Value Encoding Format | CSS Property Value Output
 --------------------- | -------------------------
@@ -264,8 +270,6 @@ of `classpropertyparser.py`.
 :one: Open `python/datalibrary.py`
 
 :two: In the `DataLibrary` class edit `self.custom_property_alias_dict`
-
-It's that simple.
 
 ##### Change the CSS File Name and Location:
 TODO: Document how easy it is to edit blowdry.py

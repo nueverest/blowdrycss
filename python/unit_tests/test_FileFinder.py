@@ -45,8 +45,8 @@ class TestFileFinder(TestCase):
 
     def test_set_files(self):
         expected_files = [
-            'C:\\Users\\Chad Nu\\PycharmProjects\\BlowDryCSS\\ExampleSite\\index.html',
-            'C:\\Users\\Chad Nu\\PycharmProjects\\BlowDryCSS\\ExampleSite\\test.html'
+            'C:\\Users\\Chad Nu\\PycharmProjects\\blowdrycss\\ExampleSite\\index.html',
+            'C:\\Users\\Chad Nu\\PycharmProjects\\blowdrycss\\ExampleSite\\test.html'
         ]
 
         chdir('..\..')                                              # Navigate up two directories.
@@ -60,7 +60,7 @@ class TestFileFinder(TestCase):
         self.assertRaises(FileNotFoundError, FileConverter, wrong_file_path)
 
     def test_get_file_as_string(self):
-        test_file_path = 'C:\\Users\\Chad Nu\\PycharmProjects\\BlowDryCSS\\ExampleSite\\test.html'
+        test_file_path = 'C:\\Users\\Chad Nu\\PycharmProjects\\blowdrycss\\ExampleSite\\test.html'
         expected_string = '<html>	<body>		<h1 class="c-blue text-align-center padding-10">Blow Dry CSS</h1>' \
                           '        <div class="padding-10 margin-20">Testing<br class="hide" />1 2 3</div>	' \
                           '</body></html>'
