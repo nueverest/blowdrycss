@@ -3,7 +3,7 @@ Tool used to quickly auto-generate DRY CSS from encoded classes found in *.html,
 Add your own file extensions under `filehandler.py: FileFinder.file_types`.
 
 ### Definitions
-> DRY stands for Don't Repeat Yourself.
+> DRY stands for Don't Repeat Yourself.<br>
 > CSS stands for Cascading Style Sheets.
 
 ##### Why the name blowdrycss?
