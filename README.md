@@ -302,7 +302,7 @@ font-weight-bold | .font-weight-bold { font-weight: bold }
 Duplicates the string `{ font-weight: bold }`.
 
 ###### DRY solution 1
-.bold, font-weight-bold { font-weight: bold }   (preferred)
+`.bold, font-weight-bold { font-weight: bold }`{.css}   
 
 ###### Scenario 2:
 Value Encoding Format | CSS Property Value Output
