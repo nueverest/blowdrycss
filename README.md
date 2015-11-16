@@ -1,9 +1,10 @@
 # blowdrycss
 Tool used to quickly auto-generate DRY CSS files from encoded classes found in *.html, *.aspx, *.ascx, or 
-*.master files. Other file extensions can be add under `filehandler.py: FileFinder.file_types`.
+*.master files.
+<br>Other file extensions can be add under `filehandler.py: FileFinder.file_types`.
 
 #### Why the name blowdrycss?
-Inspiration for the name came from the blow dryer. A blow dryer rapidly drys and styles hair.
+Inspiration for the name came from the blow dryer. A blow dryer rapidly drys and styles hair. :ok_woman: 
 
 `blowdrycss` is used to rapidly style HTML and generate DRY CSS files.
 
@@ -95,8 +96,8 @@ Auto-generating `font-size: 1rem;` 500 times is now super easy with a pre-compil
 Some might say, 
 > Well we minified it to save space.
  
-Yes but, 
-> Why did you write the same property 500 times into your main CSS file?
+**Yes but,** 
+> Why did you write the same property 500 times into your main CSS file? :see_no_evil:
 
 ###### CSS File size does matter. Large style files result in the following:
 * Longer download times increase bounce rates.
