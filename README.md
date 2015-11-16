@@ -4,67 +4,82 @@ file extension under FileFinder.file_types.
 
 TODO: Provide simple instructions for how to get up and running quickly.
 
-Motivation
-     I created this tool after seeing how many companies manage their CSS files. The following are a couple of
-     scenarios.
+### Motivation
+This tool was created after seeing how many companies manage their CSS files. The following are a couple of
+scenarios.
 
-     Scenario 1 - Inside a CSS file you find the following:
-     .header-1 { font-weight: bold; font-size: 12px; font-color: red; }
-     .header-2 { font-weight: bold; font-size: 16px; font-color: blue; }
-     .header-3 { font-weight: bold; font-size: 12px; font-color: green; }
+##### Scenario 1 - Inside a CSS file you find the following:
+    ```css
+    .header-1 { font-weight: bold; font-size: 12px; font-color: red; }
+    .header-2 { font-weight: bold; font-size: 16px; font-color: blue; }
+    .header-3 { font-weight: bold; font-size: 12px; font-color: green; }
+    ```
+    
+The property `font-weight: bold;` appears three times, and `font-size: 12px;` appears twice. This is not 
+DRY (Don't Repeat Yourself).
 
-     The property 'font-weight: bold;' appears three times, and 'font-size: 12px;' appears twice.
-     This is not DRY (Don't Repeat Yourself).
+Six months later the person who wrote this CSS is then asked to remove header-2 and header-3 from the homepage.
+More often than not the front-end developer will remove the CSS class from the HTML file, but not from the CSS file.
 
-     Six months later the person who wrote this CSS is then asked to remove header-2 and header-3 from the homepage.
-     More often than not the front-end developer will remove the CSS class from the HTML file,
-     but not from the CSS file.
+###### Some reasons for this include:
+* Forgetting to delete the rule from the CSS file.
+* Fear that the class is used somewhere else and that it might break the site.
+* Being too busy to search all of the files in their project for other potential use cases.
 
-     Some reasons for this:
-     Forgetting to delete the rule from the CSS file.
-     Fear that the class is used somewhere else and that it might break the site.
-     Being too busy to search all of the files in their project for other potential use cases.
+The result is that multiple kilobytes worth of unused CSS data remain.
 
-     The result is that multiple kilobytes worth of unused CSS data remain.
+##### Scenario 2 - CSS Pre-compiler:
+CSS Pre-compilation with SASS/SCSS or LESS is awesome and makes writing lots of CSS rules easy. For instance, you can
+now auto-generate hundreds of header rules like the ones above if care is not taken. The power of the pre-compiler
+represents a double edged sword.
 
-    Scenario 2 - CSS Pre-compiler:
-     CSS Pre-compilation with SASS/SCSS or LESS is awesome and makes writing lots of CSS rules easy. For instance, you can
-     now auto-generate hundreds of header rules like the ones above if care is not taken. The power of the precompiler
-     represents a double edged sword.
+###### SCSS Mixin example from a recent project:
 
-     SCSS Mixin example from a recent project:
-     @mixin text($font-color, $font-size, $font-family:"Open Sans", $line-height:inherit) {
+    ```css
+    @mixin text($font-color, $font-size, $font-family:"Open Sans", $line-height:inherit) {
         color: $font-color;
         font-size: $font-size;
         font-family: $font-family, $default-font-family;
         line-height: $line-height;
     }
+    ```
+    
+This mixin is called using `@include` as follows:
+`@include text($color-blue, rem-calc(14px), $default-font-family);`
 
-    This mixin is called using @include as follows:
-    @include text($color-blue, rem-calc(14px), $default-font-family);
+It turns out that `@include text(...)` is called 627 times in our SCSS.  Most of these `@include` statements include
+at least one matching input parameter resulting in thousands of duplicate CSS properties.
 
-    It turns out that @include text(...) is called 627 times in our CSS.  The number of the @include statements with
-    at least one matching input parameter is about 60%. That's a lot of duplicate CSS properties.
+Auto-generating `font-size: 1rem;` 500 times is now super easy with a pre-compiler. 
+Some might say, 
+> Well we minified it to save space.
+ 
+Yes but, 
+> Why did you write the same property 500 times into your main CSS file?
 
-    Autogenerating `font-size: 1rem;` 500 times is now easy with a pre-compiler.
-    Some might say, "Well we minified it to save space." Yes but, "Why did you write the same property 500 times?".
+###### CSS File size does matter. Large style files result in the following:
+* Longer download times increase bounce rates.
+* Data pollution on the Internet. 
+* Increase the likelihood of style bugs.
+* Increase the amount of time required to implement new changes and deprecate features.
 
-    CSS File size does matter: [TODO: add link to articles.]
+### Advantages of BlowDryCSS
+:one: Rapid Development: Less time spent writing CSS, and cleaning up unused properties.
+:two: DRY (Don't Repeat Yourself): Reduces the size of CSS file by only defining properties once.
+:three: Greater confidence that your CSS is not filled with unused or over-replicated class definitions.
+:four: Built for the real world in which deadlines and division of labor is not always taken into account.
+:five: Integrated minification.
+:six: PEP8 Compliant
+:seven: Full UnitTest Coverage
 
-Advantages
-    -Rapid Development: Less time spent writing CSS, and cleaning up unused properties.
-    -DRY: Reduce the size of CSS file by only defining properties once.
-    -Greater confidence that your CSS is not filled with unused or duplicate class definitions.
-    -Built for the real world in which deadlines and division of labor is not always taken into account.
-    -Integrated minification.
+### What it is not
+This tool is not designed to replace the need manually write more complicated CSS.  Background images, url() values,
+and shortcut properties are not fully supported.
 
-What it is not
-    This tool is not designed to replace the need manually write more complicated CSS.  Background images, url() values,
-    and shortcut properties are not fully supported.
-
-    The following is an example of something this tool in not intended to generate, and something that still needs to
-    be written by hand.
-
+The following is an example of something this tool in not intended to generate, and something that still needs to
+be written by hand.
+    
+    ```
     .home-banner {
         min-height: 191px;
         background: url("https://somewhere.net/images/banner/home-mainbanner-bg.jpg") no-repeat;
@@ -80,18 +95,19 @@ What it is not
         text-shadow: -2px 2px 4px rgba(0,0,0,0.5);
         font-family: "Open Sans","Source Sans Pro",Arial;
     }
-
-Dissecting Encoded CSS Class
+    ```
+    
+### Dissecting Encoded CSS Classes
     encoded class == font-size-25
     property_name/alias = 'font-size'
     property_value = '25'
 
-Example Usage in HTML Tag:
+### Example Usage in HTML Tag:
     <p class="font-size-25">The font-size is 25px.</p>
 
     font-size-25 gets automatically generated by this script becoming .font-size-25 { font-size: 25px } is the CSS file.
 
-Encoded Classes Format Rules
+### Encoded Classes Format Rules
     Dashes separate word in multi-word property names/aliases.
     property-name
     font-weight
@@ -157,7 +173,7 @@ Encoded Classes Format Rules
     Change the CSS File Name and Location:
     TODO: Document how easy it is to edit blowdry.py
 
-Upcoming Features:
+### Upcoming Features:
     Make DRYer:
     TODO: Implement this essential feature.
     TODO: Document
@@ -196,7 +212,7 @@ Upcoming Features:
     TODO: Implement this really cool feature.
     TODO: Document
 
-Unsupported Features:
+### Unsupported Features:
 
     Use shorthand properties at your own risk. Currently no support is guaranteed for shorthand properties since
     no encoding is defined for '/', comma, dash, double quote, '@', or url().
@@ -217,9 +233,5 @@ Unsupported Features:
     declarations belong in your custom CSS class definitions.
     background-image: url("/home/images/sample/image.png")
 
-Valuable Reference:
+### Valuable Reference:
     W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
-
-
-PEP8 Compliant
-Unit Tests
