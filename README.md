@@ -347,8 +347,10 @@ font-size-x-large| font-size: x large      (invalid)
 font-30px-arial | font: 30px arial                (valid)
 font-italic-bold-12px-serif | font: italic bold 12px serif    (valid)
 
+
 ### Valuable Reference:
 W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
+
 
 ### How to Contribute
 * Report Issues
@@ -356,7 +358,12 @@ W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
 * Vote for features with a donation. Your contribution directs focus on the most desired features first. Keep in mind
 that all of the time estimates include documentation and unit testing. As features are implemented and donations 
 received the table is manually updated. The donation goes to "The Power of 9" which is setup to manage donations 
-in support of this project.  
+in support of this project. 
+
+
+### What is done with this money?
+* Cover travel costs to technology conferences to promote this project.
+* Implement the features in the following table.
 
 Feature | Goal | Time | Received | Complete | Donate 
 ------- |:----:|:----:|:--------:|:--------:|:------:
