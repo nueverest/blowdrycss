@@ -19,7 +19,12 @@ when `python blowdry` is run.
 
 # Requirements
 Python 3.4+
+
 cssutils 1.0.1+
+
+unittest            # To run tests
+
+coverage 4.0.2+     # To check test coverage
 
 ### Motivation
 This tool was created after seeing how many companies manage their CSS files. The following are a couple of
@@ -91,9 +96,13 @@ Yes but,
 
 :five: Integrated minification.
 
-:six: PEP8 Compliant
+:six: Parameter customization.
 
-:seven: Full UnitTest Coverage
+:seven: PEP8 Compliant
+
+:eight: Full UnitTest Coverage
+
+:nine: MIT License
 
 ### What it is not
 This tool is not designed to replace the need to manually develop complex CSS.  Multi-rule classes, Background images, 
@@ -121,9 +130,11 @@ be written by hand.
 ```
     
 ### Dissecting Encoded CSS Classes
-encoded class == font-size-25
-property_name/alias = 'font-size'
-property_value = '25'
+Encoded Class | Property Name or Alias | Property Value | CSS Rule Output
+------------- | ---------------------- | -------------- | ---------------
+font-size-25 | font-size- | 25 | .font-size-25 { font-size: 25px }
+green | color- | green | .green { color: green }
+p-70-10 | p- | 70px 10px | .p-70-10 { padding: 70px 10px }
 
 ### Example Usage in HTML Tag:
 `<p class="font-size-25">The font-size is 25px.</p>`
