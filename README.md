@@ -97,7 +97,7 @@ Some might say,
 > Well we minified it to save space.
  
 **Yes but,** 
-> Why did you write the same property 500 times into your main CSS file? :see_no_evil:
+> Why did you write the same property 500 times into your main CSS file? :hear_no_evil: :see_no_evil: :speak_no_evil:
 
 ###### CSS File size does matter. Large style files result in the following:
 * Longer download times increase bounce rates.
