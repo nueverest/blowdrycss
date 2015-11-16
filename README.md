@@ -351,22 +351,22 @@ font-italic-bold-12px-serif | font: italic bold 12px serif    (valid)
 W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
 
 ### How to Contribute
-Raise Issues
-Write Code
-
-Vote for features with a donation. Your contribution directs focus on the most desired features first. Keep in mind
+* Raise Issues
+* Write Code
+* Vote for features with a donation. Your contribution directs focus on the most desired features first. Keep in mind
 that all of the time estimates include documentation and unit testing. As features are implemented and donations 
-received the table is manually updated.
+received the table is manually updated. The donation goes to "The Power of 9" which is setup to manage donations 
+in support of this project.  
 
-Feature | Goal | Time | Received | Complete | Donate Here
-------- | ---- | ------------- | --------------------- | -------------- | -----------
-Make DRYer. | $300 | 4-6 hr | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EY63EWAXXVKJ2)
-Enable hexadecimal color aliases. | $300 | 4-6 hr | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SGQX89U2N7XAN)
-Auto-generate CSS on save. | $200 | 3-4 hr | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HFU4TJXGB75CW)
-Automatic px to rem Unit Conversion | $150 | 2-3 hr | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V3DQMK4Q3SJTC) 
-Media Queries for responsive style | $1,248 | 2-4 days | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E4LEBP5EYSE9N)
-Responsive Scaling Fonts '-r' | $200 | 3-4 hr | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BJMHSE7NDSKVU)
-Sphinx Integration | 1-2 wks | $2,000 | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MWGFYZZ4DXD2N)
-Port to Javascript | $10,000 | 1-2 mo | $0 | 0% | [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9NEXW8MRMUXAU)
+Feature | Goal | Time | Received | Complete | Donate
+------- | ---- | ---- | -------- | -------- | ------
+Make DRYer. | $300 | 4-6 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EY63EWAXXVKJ2)
+Enable hexadecimal color aliases. | $300 | 4-6 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SGQX89U2N7XAN)
+Auto-generate CSS on save. | $250 | 3-4 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HFU4TJXGB75CW)
+Automatic px to rem Unit Conversion | $150 | 2-3 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V3DQMK4Q3SJTC) 
+Media Queries for responsive style | $1,300 | 4-5 days | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E4LEBP5EYSE9N)
+Responsive Scaling Fonts '-r' | $250 | 3-4 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BJMHSE7NDSKVU)
+Sphinx Integration | $3,000 | 1-2 wks | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MWGFYZZ4DXD2N)
+Port to Javascript | $9,000 | 1-2 mo | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9NEXW8MRMUXAU)
 Suggest a Feature | ----- | ----- | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ENEWAE88R4LGG)
 
