@@ -157,6 +157,7 @@ p-70-10 | p- | 70px 10px | .p-70-10 { padding: 70px 10px }
 ### Dashes separate words in multi-word property names and aliases.
 ###### A Property Names is a valid CSS property name in accordance with the 
 [W3C Full CSS property table](http://www.w3.org/TR/CSS21/propidx.html)
+
 `font-weight, border-bottom-color, border-bottom-style, border-bottom-width, border-collapse`
 
 ###### Aliases
@@ -376,7 +377,8 @@ font-30px-arial | font: 30px arial | valid
 font-italic-bold-12px-serif | font: italic bold 12px serif | valid
 
 ### Valuable Reference
-W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
+[W3C Full CSS property table](http://www.w3.org/TR/CSS21/propidx.html)
+[cssutils](https://bitbucket.org/cthedot/cssutils)
 
 ### License
 The MIT License (MIT)
