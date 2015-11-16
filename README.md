@@ -29,7 +29,7 @@ More often than not the front-end developer will remove the CSS class from the H
 The result is that multiple kilobytes worth of unused, dead CSS data remain.
 
 ##### Scenario 2 - CSS Pre-compiler:
-CSS Pre-compilation with SASS/SCSS or LESS is awesome and makes writing lots of CSS rules easy. For instance, you can
+CSS pre-compilation with SASS/SCSS or LESS is awesome, and makes writing lots of CSS rules easy. For instance, you can
 now auto-generate hundreds of header rules like the ones above if care is not taken. The power of the pre-compiler
 represents a double edged sword.
 
