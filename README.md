@@ -2,7 +2,22 @@
 Tool used to auto-generate DRY CSS from encoded classes for in *.html, *.aspx, *.ascx, *.master, or add your own
 file extension under FileFinder.file_types.
 
-TODO: Provide simple instructions for how to get up and running quickly.
+# How to Run
+:one: Download the project
+
+:two: Navigate to `../BlowDryCSS/python` directory
+
+:three: Run `pip install -r requirements.txt`
+
+:four: Run `python blowdry` 
+
+:five: Navigate to `../BlowDryCSS/ExampleSite/css` there should be a `blowdry.css` and `blowdry.min.css` file there.
+Feel free to delete these two files and re-run `python blowdry` to confirm that these two files are auto-generated.
+These two files are not intended to be edited by humans.  Any manual changes made to these two files are overwritten
+when `python blowdry` is run.
+
+# Requirements
+Python 3.4+
 
 ### Motivation
 This tool was created after seeing how many companies manage their CSS files. The following are a couple of
@@ -119,13 +134,15 @@ property_value = '25'
 `font-weight`
 
 ##### Property names may be encoded as an alias.
-Consider this dictionary entry found in `datalibrary.py`
+Consider this dictionary key, value pair found in `datalibrary.py` dictionary 
+`DataLibrary.self.custom_property_alias_dict`.
+
 `'font-weight': {'fweight-', 'lighter', 'fw-', 'bolder', 'f-weight-', 'font-w-', 'bold'},`
 
 It maps the alias set `{'fweight-', 'lighter', 'fw-', 'bolder', 'f-weight-', 'font-w-', 'bold'}` to the property name
 `font-weight`. Meaning that any of the values in the set can be substituted for `font-weight`. 
 
-The full property name can also be used.
+The full property name can also be used in the encoded class i.e. `font-weight-`.
 
 ##### Dashes separate CSS property name/alias from property value
 Class Encoding Format | CSS Rule Output
@@ -296,3 +313,6 @@ font-italic-bold-12px-serif | font: italic bold 12px serif    (valid)
 
 ### Valuable Reference:
 W3C Full CSS property table: http://www.w3.org/TR/CSS21/propidx.html
+
+### Okay, Why the name Blow Dry CSS?
+Well a blow dryer allow the user to `rapidly style` and `dry out` their hair. :ok_woman:
