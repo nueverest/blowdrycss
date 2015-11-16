@@ -2,7 +2,23 @@
 Tool used to quickly auto-generate DRY CSS from encoded classes found in *.html, *.aspx, *.ascx, or *.master files. 
 Add your own file extensions under `filehandler.py: FileFinder.file_types`.
 
-# How to Run
+### Example Usage in HTML Tags:
+```html
+<div class="text-align-center margin-top-30">
+    <p class="font-size-25">The font-size is 25px. <span class="green">Green Text</span></p>
+</div>
+```
+
+BlowDryCSS decodes the class names `text-align-center`, `margin-top-30`, `font-size-25`, and `green`; and generates
+the following CSS in `blowdry.css`:
+```css
+.text-align-center { text-align: center }
+.margin-top-30 { margin-top: 30px }
+.font-size-25 { font-size: 25px }
+.green { color: green }
+```
+
+# How to Run the '/ExampleSite' demo
 :one: Download the project
 
 :two: Navigate to `../BlowDryCSS/python` directory
@@ -18,13 +34,13 @@ These two files are not intended to be edited by humans.  Any manual changes mad
 when `python blowdry` is run.
 
 # Requirements
-Python 3.4+
+Python 3.4+ (required)
 
-cssutils 1.0.1+
+cssutils 1.0.1+ (required)
 
-unittest            # To run tests
+unittest (run unit tests)
 
-coverage 4.0.2+     # To check test coverage
+coverage 4.0.2+ (check test coverage)
 
 ### Motivation
 This tool was created after seeing how many companies manage their CSS files. The following are a couple of
@@ -136,23 +152,7 @@ font-size-25 | font-size- | 25 | .font-size-25 { font-size: 25px }
 green | color- | green | .green { color: green }
 p-70-10 | p- | 70px 10px | .p-70-10 { padding: 70px 10px }
 
-### Example Usage in HTML Tag:
-```html
-<div class="text-align-center margin-top-30">
-    <p class="font-size-25">The font-size is 25px. <span class="green">Green Text</span></p>
-</div>
-```
-
-BlowDryCSS decodes the class names `text-align-center`, `margin-top-30`, `font-size-25`, and `green`; and generates
-the following CSS in `blowdry.css`:
-```css
-.text-align-center { text-align: center }
-.margin-top-30 { margin-top: 30px }
-.font-size-25 { font-size: 25px }
-.green { color: green }
-```
-
-### Encoded Classes Format Rules
+### Encoded Class Format Rules
 ##### Dashes separate words in multi-word property names/aliases.
 `font-weight`
 
@@ -168,22 +168,23 @@ It maps the alias set `{'fweight-', 'lighter', 'fw-', 'bolder', 'f-weight-', 'fo
 The full property name can also be used in the encoded class i.e. `font-weight-`.
 
 ##### Dashes separate CSS property name/alias from property value
-Class Encoding Format | CSS Rule Output
+Encoded Class Format | CSS Rule Output
 --------------------- | ---------------
 property-name-value | .property-name-value { property-name: value }
 alias-value | .alias-value { property-name: value }
 font-weight-700 | .font-weight-700 { font-weight: 700 }
 fw-700 | .fw-700 { font-weight: 700 }
 
+
 ##### Dashes separate multiple values for properties that take multiple values.
-Class Encoding Format | CSS Rule Output
+Encoded Class Format | CSS Rule Output
 --------------------- | ---------------
 alias-value-value-value-value | .alias-value-value-value-value { property-name: value value value value }
 padding-10-20-10-10 | .padding-10-20-10-10 { padding: 10px 20px 10px 10px }
 p-10-20-10-10 | .p-10-20-10-10 { padding: 10px 20px 10px 10px }
 
 ##### Dashes separate `!important` priority indicator `'-i'` (append to the end of the string)
-Class Encoding Format | CSS Rule Output
+Encoded Class Format | CSS Rule Output
 --------------------- | ---------------
 alias-value-i | .alias-value-i { property-name: value !important }
 font-weight-bold-i | .font-weight-bold-i { font-weight: bold !important }
@@ -191,7 +192,7 @@ font-weight-bold-i | .font-weight-bold-i { font-weight: bold !important }
 ##### Shorthand can be used in cases where the alias is unambiguously the value.
 Applicable properties include: `color`, `font-weight`, `font-style`, `text-decoration`, and `text-transform`.
 
-Class Encoding Format | CSS Rule Output
+Encoded Class Format | CSS Rule Output
 --------------------- | ---------------
 alias | .alias { property-name: alias }
 purple | .purple { color: purple }
@@ -202,13 +203,13 @@ italic | .italic { font-style: italic }
 lowercase | .lowercase { text-transform: lowercase }
 
 ##### Color Declarations
-Color Format | Class Encoding Format | CSS Rule Output
+Color Format | Encoded Class Format | CSS Rule Output
 ------------ | --------------------- | ---------------
 keyword | color-silver | .color-silver { color: silver }
  rgb | color-rgb-0-255-0 | .color-rgb-0-255-0 { color: rgb(0, 255, 0) }
 rgba | color-rgba-255-0-0-0_5 | .color-rgba-255-0-0-0_5 { color: rgba(255, 0, 0, 0.5) }
-hex6 | color-h0ff23f (prepend 'h') | .color-h0ff23f { color: C&#35;0ff23f }
-hex3 | color-h03f    (prepend 'h') | .color-h03f { color: C&#35;03f }
+hex6 | color-h0ff23f (prepend 'h') | .color-h0ff23f { color: &#35;0ff23f }
+hex3 | color-h03f    (prepend 'h') | .color-h03f { color: &#35;03f }
  hsl | color-hsl-120-60p-70p | .color-hsl-120-60p-70p { color: hsl(120, 60%, 70%) }
 hsla | color-hsla-120-60p-70p-0_3 | .color-hsla-120-60p-70p-0_3 { color: hsl(120, 60%, 70%, 0.3) }
 
@@ -286,7 +287,7 @@ padding-10px | .padding-10px { padding: 10px }
 .padding-10, .padding-10px { padding: 10px }    (preferred)
 
 ##### Drop requirement for hexadecimal color values to be prefixed with a property name.
-Color Format | Class Encoding Format | CSS Rule Output
+Color Format | Encoded Class Format | CSS Rule Output
 ------------ | --------------------- | ---------------
 hex6 | h0ff23f | .h0ff23f { color: C&#35;0ff23f }
 hex3 | hfd4 | .hfd4 { color: C&#35;fd4 }
