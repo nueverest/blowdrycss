@@ -20,23 +20,16 @@ the following CSS in `blowdry.css`:
 
 # Requirements
 Python 3.4+ (required)
-
-cssutils 1.0.1+ (required)
-
-unittest (run unit tests)
-
-coverage 4.0.2+ (check test coverage)
+<br>cssutils 1.0.1+ (required)
+<br>unittest (run unit tests)
+<br>coverage 4.0.2+ (check test coverage)
 
 # How to Run the '/ExampleSite' demo
 :one: Download the project
-
-:two: Navigate to `../blowdrycss/python` directory
-
-:three: Run `pip install -r requirements.txt`
-
-:four: Run `python blowdry` 
-
-:five: Navigate to `../blowdrycss/ExampleSite/css` there should be a `blowdry.css` and `blowdry.min.css` file there.
+<br>:two: Navigate to `../blowdrycss/python` directory
+<br>:three: Run `pip install -r requirements.txt`
+<br>:four: Run `python blowdry` 
+<br>:five: Navigate to `../blowdrycss/ExampleSite/css` find `blowdry.css` and `blowdry.min.css` files.
 
 Feel free to delete these two files and re-run `python blowdry` to confirm that these two files are auto-generated.
 These two files are not intended to be edited by humans.  Any manual changes made to these two files are overwritten
@@ -155,8 +148,7 @@ green | color- | green | .green { color: green }
 p-70-10 | p- | 70px 10px | .p-70-10 { padding: 70px 10px }
 
 ### Dashes separate words in multi-word property names and aliases.
-###### A Property Names is a valid CSS property name in accordance with the 
-[W3C Full CSS property table](http://www.w3.org/TR/CSS21/propidx.html)
+###### A Property Names is a valid CSS property name in accordance with the [W3C Full CSS property table](http://www.w3.org/TR/CSS21/propidx.html)
 
 `font-weight, border-bottom-color, border-bottom-style, border-bottom-width, border-collapse`
 
