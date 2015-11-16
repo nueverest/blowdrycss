@@ -1,6 +1,6 @@
 # BlowDryCSS
-Tool used to auto-generate DRY CSS from encoded classes for in *.html, *.aspx, *.ascx, *.master, or add your own
-file extension under FileFinder.file_types.
+Tool used to quickly auto-generate DRY CSS from encoded classes found in *.html, *.aspx, *.ascx, or *.master files. 
+Add your own file extensions under `filehandler.py: FileFinder.file_types`.
 
 # How to Run
 :one: Download the project
@@ -12,12 +12,14 @@ file extension under FileFinder.file_types.
 :four: Run `python blowdry` 
 
 :five: Navigate to `../BlowDryCSS/ExampleSite/css` there should be a `blowdry.css` and `blowdry.min.css` file there.
+
 Feel free to delete these two files and re-run `python blowdry` to confirm that these two files are auto-generated.
 These two files are not intended to be edited by humans.  Any manual changes made to these two files are overwritten
 when `python blowdry` is run.
 
 # Requirements
 Python 3.4+
+cssutils 1.0.1+
 
 ### Motivation
 This tool was created after seeing how many companies manage their CSS files. The following are a couple of
