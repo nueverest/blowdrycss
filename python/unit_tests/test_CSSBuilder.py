@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, main
 # Custom
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
@@ -51,3 +51,6 @@ class TestCSSStyleBuilder(TestCase):
             self.assertTrue(expected in css_text, msg=expected + ' and ' + css_text)
             if expected in css_text:
                 css_text = css_text.replace(expected, '')
+
+if __name__ == '__main__':
+    main()

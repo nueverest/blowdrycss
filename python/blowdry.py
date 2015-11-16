@@ -44,5 +44,6 @@ def main():
     print(css_directory + css_file.file_name + '.min.css', "created.")
     print('--- Complete ---')
 
+
 if __name__ == '__main__':
     main()

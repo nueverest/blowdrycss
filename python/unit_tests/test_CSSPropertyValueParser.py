@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, main
 from cssvalueparser import CSSPropertyValueParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -196,3 +196,7 @@ class TestCSSPropertyValueParser(TestCase):
         for i, value in enumerate(property_values):
             new_value = property_parser.add_units(property_name=property_name, property_value=value)
             self.assertEqual(new_value, expected_values[i], msg=i)
+
+
+if __name__ == '__main__':
+    main()

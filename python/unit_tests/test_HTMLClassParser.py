@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, main
 from htmlattributeparser import HTMLClassParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -10,3 +10,8 @@ class TestHTMLClassParser(TestCase):
         test_file_path = 'C:\\Users\\Chad Nu\\PycharmProjects\\BlowDryCSS\\ExampleSite\\test.html'
         class_parser = HTMLClassParser(files=[test_file_path])
         self.assertEquals(class_parser.class_set, expected_output)
+
+
+if __name__ == '__main__':
+    main()
+

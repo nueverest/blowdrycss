@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, main
 from filehandler import FileConverter
 from htmlattributeparser import HTMLAttributeParser
 
@@ -12,3 +12,7 @@ class TestHTMLAttributeParser(TestCase):
         attribute_parser = HTMLAttributeParser(attribute_name='class')
         attribute_parser.feed(file_string)
         self.assertEquals(attribute_parser.attribute_value_list, expected_output)
+
+
+if __name__ == '__main__':
+    main()

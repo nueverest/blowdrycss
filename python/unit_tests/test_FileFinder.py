@@ -1,6 +1,8 @@
-import unittest
-from unittest import TestCase
+from unittest import TestCase, main
 from os import chdir, path, getcwd
+import sys
+from io import StringIO
+# Custom
 from filehandler import FileFinder, FileConverter
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -14,9 +16,6 @@ class TestFileFinder(TestCase):
     # Reference:
     # http://stackoverflow.com/questions/4219717/how-to-assert-output-with-nosetest-unittest-in-python#answer-4220278
     def test_print_collection1(self):
-        import sys
-        from io import StringIO
-
         expected_output = 'test1\ntest2'
         file_finder = FileFinder(project_directory=getcwd())
         collection1 = ['test1', 'test2']
@@ -31,9 +30,6 @@ class TestFileFinder(TestCase):
             sys.stdout = saved_stdout
 
     def test_print_collection2(self):
-        import sys
-        from io import StringIO
-
         expected_output = 'test1\ntest2'
         file_finder = FileFinder(project_directory=getcwd())
         collection2 = ('test1', 'test2')
@@ -70,3 +66,7 @@ class TestFileFinder(TestCase):
                           '</body></html>'
         file_converter = FileConverter(file_path=test_file_path)
         self.assertEquals(file_converter.get_file_as_string(), expected_string)
+
+
+if __name__ == '__main__':
+    main()

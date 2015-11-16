@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, main
 from datalibrary import DataLibrary     # Normally one would never do this.
 
 
@@ -226,3 +226,7 @@ class TestDataLibrary(TestCase):
         }
         actual = self.data_library.build_property_alias_dict()
         self.assertEqual(actual, expected)
+
+
+if __name__ == '__main__':
+    main()

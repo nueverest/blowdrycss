@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, main
 from os import path, getcwd, remove
 # Custom
 from filehandler import CSSFile
@@ -94,3 +94,7 @@ class TestCSSFile(TestCase):
         with open(file_path, 'r') as css_file:
             file_string = css_file.read()
         self.assertEqual(file_string, expected_string, msg=file_string)
+
+
+if __name__ == '__main__':
+    main()

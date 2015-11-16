@@ -1,5 +1,4 @@
-import unittest
-from unittest import TestCase
+from unittest import TestCase, main
 from filehandler import FileConverter
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -18,6 +17,7 @@ class TestFileConverter(TestCase):
         file_converter = FileConverter(file_path=test_file_path)
         self.assertEquals(file_converter.get_file_as_string(), expected_string)
 
-# Breaks 100% test coverage
-# if __name__ == '__main__':
-#     unittest.main()
+
+if __name__ == '__main__':
+    main()
+

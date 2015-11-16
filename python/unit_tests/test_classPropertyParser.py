@@ -1,4 +1,5 @@
-from unittest import TestCase
+from unittest import TestCase, main
+# Custom
 from classpropertyparser import ClassPropertyParser
 
 
@@ -235,3 +236,7 @@ class TestClassPropertyParser(TestCase):
         for css_class in class_parser.class_set:
             property_priority = class_parser.get_property_priority(css_class=css_class)
             self.assertEquals(property_priority, expected_property_priority)
+
+
+if __name__ == '__main__':
+    main()
