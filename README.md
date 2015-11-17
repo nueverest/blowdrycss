@@ -32,6 +32,7 @@ the following CSS in `blowdry.css`:
 # Requirements
 Python 3.4+ (required)
 <br>cssutils 1.0.1+ (required)
+<br>watchdog 0.8.2+ (desired)
 <br>unittest (run unit tests)
 <br>coverage 4.0.2+ (check test coverage)
 
@@ -49,7 +50,7 @@ Python 3.4+ (required)
 ### Part 2 - Auto-generate CSS
 * Navigate to `../blowdrycss/python`
 * Run `pip install -r requirements.txt`
-* Run `python blowdry` 
+* Run `python blowdry.py` 
 * Navigate to `../blowdrycss/examplesite/css` and verify that `blowdry.css` and `blowdry.min.css` now exist.
 * Open a web browser and go to `localhost:8080`. 
 * The page should now be styled better.
@@ -62,28 +63,57 @@ Python 3.4+ (required)
 * From the class attribute delete `c-blue` and replace it with the word `green`
 * Add the class `font-size-148`
 * The line should now look like this `<h1 class="green font-size-148 text-align-center">Blow Dry CSS</h1>`
-* Now refresh the web page running on `localhost`.
+* Now refresh the web page running on [localhost:8080](localhost:8080).
 * What happened? Nothing happened because you need to run `blowdry.py`
 * Navigate to `../blowdrycss/python`
-* Run `python blowdry` 
-* Now refresh the web page running on `localhost`.
+* Run `python blowdry.py` 
+* Now refresh the web page running on [localhost:8080](localhost:8080).
 * The title at the top of the page should be large and green.
 * Let's make some more changes.
 * Center the image below the title with the class `t-align-center` in the `<div>` containing the image.
 * Find the `+` images and add the class `padding-bottom-4p` directly to the `img` class attribute.
-* Run `python blowdry` 
-* Now refresh the web page running on `localhost`.
+* Run `python blowdry.py` 
+* Now refresh the web page running on [localhost:8080](localhost:8080).
 * Feel free to continue experimenting with different property names and values.  More information about how to form
 write well-form encoded class names is found further down this page.
 
-### Part 4 - Experiment with these classes
+### Part 4 - Setup Watchdog
+* At this point having to run `python blowdry.py` could be getting annoying.
+* What if it were possible to detect that `index.html` was saved and run `python blowdry.py` automatically?
+    * This is possible with [`watchdog`](https://pypi.python.org/pypi/watchdog/0.8.3).
+* To setup watchdog run `pip install watchdog`
+* Navigate to `/examplesite` at the command line.
+* From the command line run:
+`watchmedo shell-command --patterns="*.html;" --ignore-directories --recursive --command="python ../python/blowdry.py"`
+* Now add the class `margin-150` to one of the `<div>` tags, and save `index.html`
+* Refresh [localhost:8080](localhost:8080) in the browser, and the change should appear without manually 
+re-running `blowdry.py`.
+
+###### What if refreshing the browser doesn't work?
+* Ensure `watchdog` is running.
+* Check the shell or command prompt where `watchog` is running to see if there are any error messages.
+* Double check that the command is running in the correct directory, and that the python command will run from the
+directory without `watchdog`.
+
+##### Watchdog Parameter Modification
+`--patterns` can be set to any file type that should trigger `blowdry.py`.
+For example: `--patterns="*.html;*.aspx;*.js"`
+
+`--recursive` causes the `watchdog` to monitor all of the files matching `--patterns` in all subdirectories 
+of the current folder.
+
+`--ignore-directories` ignores all directory related events, and only focuses on file changes.
+
+`--command` contains the path to `blowdry.py`. Make sure that this is the correct directory otherwise it will not run.
+
+### Part 5 - Experiment with these classes
 * Apply these to an image: `border-10px-solid-black` `p-20-30-20-30` `w-50`
 * Apply this to a div: `display-none`
 * Apply this to text: `uppercase`
 
 ##### Notes about the auto-generated `*.css` files
 The CSS files `blowdry.css` and `blowdry.min.css` are not intended to be edited by humans.  
-Any manual changes made to these two files are overwritten when `python blowdry` is run.
+Any manual changes made to these two files are overwritten when `python blowdry.py` is run.
 
 # Motivation
 This tool was created after seeing how many companies manage their CSS files. The following are a couple of
@@ -386,11 +416,6 @@ Color Format | Encoded Class Format | CSS Rule Output
 hex6 | h0ff23f | .h0ff23f { color: C&#35;0ff23f }
 hex3 | hfd4 | .hfd4 { color: C&#35;fd4 }
 
-##### Trigger automatic CSS generation on file change:
-In the event that a file with a designated extension is saved.  Preferably without tons of dependencies or polling.
-<br>TODO: Implement this essential feature.
-<br>TODO: Document
-
 ##### Automatic px :point_right: rem Unit Conversion:
 TODO: Implement this really cool feature.
 <br>TODO: Document
@@ -482,7 +507,6 @@ Feature | Goal | Time | Received | Complete | Donate
 ------- |:----:|:----:|:--------:|:--------:|:------:
 Make DRYer | $300 | 4-6 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EY63EWAXXVKJ2)
 Enable hexadecimal color aliases | $300 | 4-6 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SGQX89U2N7XAN)
-Auto-generate CSS on save | $250 | 3-4 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HFU4TJXGB75CW)
 Automatic px to rem unit conversion | $150 | 2-3 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V3DQMK4Q3SJTC) 
 Media queries for responsive style | $1,300 | 4-5 days | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E4LEBP5EYSE9N)
 Responsive scaling fonts '-r' | $250 | 3-4 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BJMHSE7NDSKVU)
