@@ -1,4 +1,4 @@
-from os import path, walk, getcwd
+from os import path, walk, getcwd, makedirs
 from glob import glob
 from re import findall
 from cssutils import parseString, ser
@@ -58,12 +58,16 @@ class FileConverter(object):
 
 class CSSFile(object):
     # File name does not include extension.
+    # Reference: stackoverflow.com
+    # /questions/273192/in-python-check-if-a-directory-exists-and-create-it-if-necessary#answer-14364249
     def __init__(self, file_directory=getcwd(), file_name='blowdry'):
-        if path.isdir(file_directory):
-            self.file_directory = file_directory
-            self.file_name = file_name
-        else:
-            raise NotADirectoryError(file_directory + ' is not a directory.')
+        self.file_directory = file_directory
+        self.file_name = file_name
+        try:                                        # Python 2.7 Compliant
+            makedirs(file_directory)                # Make 'css' directory
+        except OSError:
+            if not path.isdir(file_directory):      # Verify directory existences
+                raise OSError(file_directory + ' is not a directory, and could not be created.')
 
     # Transform extension to lowercase.
     # Only allow '.', '0-9', and 'a-z' characters.

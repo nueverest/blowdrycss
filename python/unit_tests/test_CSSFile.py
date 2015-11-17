@@ -8,9 +8,9 @@ __project__ = 'blow dry css'
 
 class TestCSSFile(TestCase):
     def test_not_a_directory(self):
-        not_a_directory = 'not/a/valid/directory/file.txt'
+        not_a_directory = '/a/ invalid /directory/file.txt'    # Spaces added around 'invalid' to make it invalid.
         file_name = 'some_file'
-        self.assertRaises(NotADirectoryError, CSSFile, not_a_directory, file_name)
+        self.assertRaises(OSError, CSSFile, not_a_directory, file_name)
 
     def test_file_path(self):
         extensions = ['.css', '.min.css', '.txt', '.mp3', '.anything']

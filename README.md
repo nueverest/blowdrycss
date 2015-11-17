@@ -41,8 +41,6 @@ Python 3.4+ (required)
 # How to Run the '/ExampleSite' demo - Basic Tutorial
 ### Part 1 - Start the web browser and view unstyled ExampleSite.
 * Download the project
-* Navigate to `../blowdrycss/ExampleSite/`.
-* Create a directory/folder named `css`.
 * Navigate to `../blowdrycss/ExampleSite`
 * Run `python -m http.server 8080` (Python 3.x) or `python -m SimpleHTTPServer 8080` (Python 2.x)
 * Open a web browser and go to `localhost:8080`
