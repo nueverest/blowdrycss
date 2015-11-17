@@ -6,7 +6,7 @@ Tool used to quickly auto-generate DRY CSS files from encoded classes found in *
 #### Why the name blowdrycss?
 Inspiration for the name came from the blow dryer. A blow dryer rapidly drys and styles hair. :ok_woman: 
 
-`blowdrycss` is used to rapidly style HTML and generate DRY CSS files.
+Similarly, `blowdrycss` is used to rapidly style HTML and generate DRY CSS files.
 
 ##### Decomposition
 > **Blow** means to expel a current of air causing it to be in a state of motion.<br>
