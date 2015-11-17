@@ -39,12 +39,13 @@ Python 3.4+ (required)
 # Pre-Requisite Knowledge
 * Basic HTML, CSS, and Python skills.
 
-# How to Run the '/examplesite' demo - Basic Tutorial
-### Part 1 - Start the web browser and view unstyled examplesite.
+# Basic Tutorial
+## How to Run the '/examplesite' demo
+### Part 1 - Start the web browser to view the unstyled examplesite.
 * Download the project
 * Navigate to `../blowdrycss/examplesite`
 * Run `python -m http.server 8080` (Python 3.x) or `python -m SimpleHTTPServer 8080` (Python 2.x)
-* Open a web browser and go to `localhost:8080`
+* Open a web browser and go to [localhost:8080](http://localhost:8080)
 * The page should contain lots of un-styled text and images.
 
 ### Part 2 - Auto-generate CSS
@@ -52,7 +53,7 @@ Python 3.4+ (required)
 * Run `pip install -r requirements.txt`
 * Run `python blowdry.py` 
 * Navigate to `../blowdrycss/examplesite/css` and verify that `blowdry.css` and `blowdry.min.css` now exist.
-* Open a web browser and go to `localhost:8080`. 
+* Open a web browser and go to [localhost:8080](http://localhost:8080). 
 * The page should now be styled better.
 
 ### Part 3 - Apply new styles in `index.html`
@@ -63,17 +64,17 @@ Python 3.4+ (required)
 * From the class attribute delete `c-blue` and replace it with the word `green`
 * Add the class `font-size-148`
 * The line should now look like this `<h1 class="green font-size-148 text-align-center">Blow Dry CSS</h1>`
-* Now refresh the web page running on [localhost:8080](localhost:8080).
+* Now refresh the web page running on [localhost:8080](http://localhost:8080).
 * What happened? Nothing happened because you need to run `blowdry.py`
 * Navigate to `../blowdrycss/python`
 * Run `python blowdry.py` 
-* Now refresh the web page running on [localhost:8080](localhost:8080).
+* Now refresh the web page running on [localhost:8080](http://localhost:8080).
 * The title at the top of the page should be large and green.
 * Let's make some more changes.
 * Center the image below the title with the class `t-align-center` in the `<div>` containing the image.
 * Find the `+` images and add the class `padding-bottom-4p` directly to the `img` class attribute.
 * Run `python blowdry.py` 
-* Now refresh the web page running on [localhost:8080](localhost:8080).
+* Now refresh the web page running on [localhost:8080](http://localhost:8080).
 * Feel free to continue experimenting with different property names and values.  More information about how to form
 write well-form encoded class names is found further down this page.
 
@@ -86,7 +87,7 @@ write well-form encoded class names is found further down this page.
 * From the command line run:
 `watchmedo shell-command --patterns="*.html;" --ignore-directories --recursive --command="python ../python/blowdry.py"`
 * Now add the class `margin-150` to one of the `<div>` tags, and save `index.html`
-* Refresh [localhost:8080](localhost:8080) in the browser, and the change should appear without manually 
+* Refresh [localhost:8080](http://localhost:8080) in the browser, and the change should appear without manually 
 re-running `blowdry.py`.
 
 ###### What if refreshing the browser doesn't work?
