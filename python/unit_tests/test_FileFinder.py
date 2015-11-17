@@ -2,7 +2,7 @@ from unittest import TestCase, main
 from os import chdir, path, getcwd
 import sys
 from io import StringIO
-# Custom
+# custom
 from filehandler import FileFinder, FileConverter
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -45,12 +45,10 @@ class TestFileFinder(TestCase):
 
     def test_set_files(self):
         expected_files = [
-            'C:\\Users\\Chad Nu\\PycharmProjects\\blowdrycss\\ExampleSite\\index.html',
-            'C:\\Users\\Chad Nu\\PycharmProjects\\blowdrycss\\ExampleSite\\test.html'
+            path.join(getcwd() + '\\test_html\\index.html'),
+            path.join(getcwd() + '\\test_html\\test.html')
         ]
-
-        chdir('..\..')                                              # Navigate up two directories.
-        project_directory = path.join(getcwd() + '\\ExampleSite')   # Change to whatever you want.
+        project_directory = getcwd()
         file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
         file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
         self.assertEquals(file_finder.files, expected_files)
@@ -60,7 +58,7 @@ class TestFileFinder(TestCase):
         self.assertRaises(FileNotFoundError, FileConverter, wrong_file_path)
 
     def test_get_file_as_string(self):
-        test_file_path = 'C:\\Users\\Chad Nu\\PycharmProjects\\blowdrycss\\ExampleSite\\test.html'
+        test_file_path = path.join(getcwd() + '\\test_html\\test.html')
         expected_string = '<html>	<body>		<h1 class="c-blue text-align-center padding-10">Blow Dry CSS</h1>' \
                           '        <div class="padding-10 margin-20">Testing<br class="hide" />1 2 3</div>	' \
                           '</body></html>'

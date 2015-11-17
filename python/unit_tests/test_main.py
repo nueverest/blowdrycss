@@ -1,14 +1,14 @@
-from unittest import TestCase
-from os import chdir, getcwd
+import unittest
+from os import chdir
 import sys
 from io import StringIO
-# Custom
-from blowdry import main
+# custom
+import blowdry
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-class TestMain(TestCase):
+class TestMain(unittest.TestCase):
     def test_main(self):
         substrings = ['clean ran', 'cssblowdry.css created', 'cssblowdry.min.css created']
         complete = '--- Complete ---\n'
@@ -17,9 +17,9 @@ class TestMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            # Change to match your file system.
-            chdir('C:\\Users\\Chad Nu\\PycharmProjects\\blowdrycss\\python\\')
-            main()
+            chdir('..')
+            blowdry.main()
+
             output = out.getvalue()
             for substring in substrings:
                 self.assertTrue(substring in output, msg=output)
@@ -28,5 +28,5 @@ class TestMain(TestCase):
             sys.stdout = saved_stdout
 
 if __name__ == '__main__':
-    main()
+    unittest.main()
 

@@ -1,5 +1,5 @@
 from os import chdir, getcwd, path
-# Custom classes
+# custom classes
 from filehandler import FileFinder, CSSFile
 from htmlattributeparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
@@ -10,10 +10,10 @@ __project__ = 'blow dry css'
 
 def main():
     # Set project_directory to the one containing the files you want to DRY out.
-    # In this case it is set to the "ExampleSite" by default for demonstration purposes.
+    # In this case it is set to the "examplesite" by default for demonstration purposes.
     chdir('..')                                                 # Navigate up one directory relative to this script.
-    project_directory = path.join(getcwd() + '\ExampleSite')    # Change to whatever you want.
-    css_directory = path.join(project_directory + '\css')
+    project_directory = path.join(getcwd() + '\\examplesite')    # Change to whatever you want.
+    css_directory = path.join(project_directory + '\\css')
 
     # Define File all file types/extensions to search for in project_directory
     file_types = ('*.html', '*.aspx', '*.master', '*.ascx')

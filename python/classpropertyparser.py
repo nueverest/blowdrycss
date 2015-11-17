@@ -1,6 +1,6 @@
 from cssutils import parseString
 from string import ascii_lowercase, digits
-# Custom
+# custom
 from cssvalueparser import CSSPropertyValueParser
 from datalibrary import ordered_property_dict, property_alias_dict
 __author__ = 'chad nelson'

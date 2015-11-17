@@ -1,5 +1,5 @@
 from unittest import TestCase, main
-# Custom
+# custom
 from classpropertyparser import ClassPropertyParser
 
 

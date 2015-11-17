@@ -2,7 +2,7 @@ from re import search, findall
 from cssutils.css import Property
 from xml.dom import SyntaxErr
 from string import digits
-# Custom
+# custom
 from datalibrary import default_property_units_dict
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'

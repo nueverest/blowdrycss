@@ -38,10 +38,10 @@ Python 3.4+ (required)
 # Pre-Requisite Knowledge
 * Basic HTML, CSS, and Python skills.
 
-# How to Run the '/ExampleSite' demo - Basic Tutorial
-### Part 1 - Start the web browser and view unstyled ExampleSite.
+# How to Run the '/examplesite' demo - Basic Tutorial
+### Part 1 - Start the web browser and view unstyled examplesite.
 * Download the project
-* Navigate to `../blowdrycss/ExampleSite`
+* Navigate to `../blowdrycss/examplesite`
 * Run `python -m http.server 8080` (Python 3.x) or `python -m SimpleHTTPServer 8080` (Python 2.x)
 * Open a web browser and go to `localhost:8080`
 * The page should contain lots of un-styled text and images.
@@ -50,13 +50,13 @@ Python 3.4+ (required)
 * Navigate to `../blowdrycss/python`
 * Run `pip install -r requirements.txt`
 * Run `python blowdry` 
-* Navigate to `../blowdrycss/ExampleSite/css` and verify that `blowdry.css` and `blowdry.min.css` now exist.
+* Navigate to `../blowdrycss/examplesite/css` and verify that `blowdry.css` and `blowdry.min.css` now exist.
 * Open a web browser and go to `localhost:8080`. 
 * The page should now be styled better.
 
 ### Part 3 - Apply new styles in `index.html`
 ##### Lets actually change something.
-* Navigate to `../blowdrycss/ExampleSite`
+* Navigate to `../blowdrycss/examplesite`
 * Open `index.html`
 * Find the line `<h1 class="c-blue text-align-center">Blow Dry CSS</h1>`
 * From the class attribute delete `c-blue` and replace it with the word `green`

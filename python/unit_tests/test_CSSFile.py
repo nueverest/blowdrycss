@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 from os import path, getcwd, remove
-# Custom
+# custom
 from filehandler import CSSFile
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'

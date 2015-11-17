@@ -1,6 +1,6 @@
 from html.parser import HTMLParser
 
-# Custom Classes
+# custom Classes
 from filehandler import FileConverter
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
