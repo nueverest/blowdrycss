@@ -43,16 +43,16 @@ class HTMLClassParser(object):
             # Convert file to string.
             file_converter = FileConverter(file_path=file)
             file_string = file_converter.get_file_as_string()
-            print(file_string)
+            # print(file_string)
 
             # Generate list of class strings
             class_parser = HTMLAttributeParser(attribute_name='class')
             class_parser.feed(file_string)
 
             # Convert list of class strings to set
-            print("Class List:\t", class_parser.attribute_value_list)
             self.set_class_set(class_parser.attribute_value_list)
-            print(" Class Set:\t", self.class_set)
+            # print("Class List:\t", class_parser.attribute_value_list)
+            # print(" Class Set:\t", self.class_set)
 
     def set_class_set(self, attribute_value_list):
         for value in attribute_value_list:

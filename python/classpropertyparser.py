@@ -18,7 +18,7 @@ class ClassPropertyParser(object):
         self.removed_class_set = set()
         self.class_set = class_set
         self.clean_class_set()
-        print('clean ran')
+        # print('clean ran')
 
     # Take list, tuple, or set of strings an convert to lowercase.
     def class_set_to_lowercase(self):

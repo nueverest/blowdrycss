@@ -26,13 +26,13 @@ def main():
 
     # Filter class names only keeping classes that match the defined class encoding.
     class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
-    print('class_property_parser.class_set: \n', class_property_parser.class_set)
+    # print('\nclass_property_parser.class_set:', class_property_parser.class_set)
 
     # Build a set() of valid css properties. Some classes may be removed during cssutils validation.
     css_builder = CSSBuilder(property_parser=class_property_parser)
     css_text = css_builder.get_css_text()
-    print('CSS Text:')
-    print(css_text)
+    # print('CSS Text:')
+    # print(css_text)
 
     # Output the DRY CSS file. (user command option)
     css_file = CSSFile(file_directory=css_directory, file_name='blowdry')

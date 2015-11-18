@@ -14,10 +14,8 @@ class FileFinder(object):
             self.project_directory = project_directory
             self.file_types = file_types
             self.files = []
-            print('Project Directory:')
-            print(project_directory)
-            print('\nFile Types')
-            print(self.file_types)
+            print('Project Directory:', project_directory)
+            print('\nFile Types:', self.file_types)
 
             self.set_files()
             print('\nList of Files Found:')
