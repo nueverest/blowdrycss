@@ -30,7 +30,7 @@ the following CSS in `blowdry.css`:
 ```
 
 # Requirements
-[Python 3.4+](https://www.python.org/downloads/) (required)
+> [Python 3.4+](https://www.python.org/downloads/) (required)
 <br>[cssutils 1.0.1+](https://bitbucket.org/cthedot/cssutils) (required)
 <br>[watchdog 0.8.2+](https://pypi.python.org/pypi/watchdog/0.8.3) (desired)
 <br>unittest (run unit tests)
@@ -141,9 +141,9 @@ More often than not the front-end developer will remove the CSS class from the H
 The result is that multiple kilobytes worth of unused, dead CSS data remain.
 
 #### Scenario 2 - CSS Pre-compiler:
-CSS pre-compilation with SASS/SCSS or LESS is awesome, and makes writing lots of CSS rules easy. For instance, you can
-now auto-generate hundreds of header rules like the ones above if care is not taken. The power of the pre-compiler
-represents a double edged sword.
+CSS compilation with SASS/SCSS, PostCSS, or LESS is awesome, and makes writing lots of CSS rules easy. 
+Tools like these allow auto-generation of hundreds of header rules like the ones above. If care is not taken 
+this leverage can rapidly grow the CSS file. 
 
 ##### SCSS Mixin example from a recent project:
 
@@ -157,12 +157,14 @@ represents a double edged sword.
 ```
     
 This mixin is called using `@include` as follows:
-`@include text($color-blue, rem-calc(14px), $default-font-family);`
+```css
+@include text($color-blue, rem-calc(14px), $default-font-family);
+```
 
 It turns out that `@include text(...)` is called 627 times in our SCSS.  Most of these `@include` statements include
 at least one matching input parameter resulting in thousands of duplicate CSS properties.
 
-Auto-generating `font-size: 1rem;` 500 times is now super easy with a pre-compiler. 
+Auto-generating `font-size: 1rem;` 500 times is now super easy with a pre-compiler and a for-loop. 
 Some might say, 
 > Well we minified it to save space.
  
@@ -170,7 +172,7 @@ Some might say,
 > Why did you write the same property 500 times into your main CSS file? :hear_no_evil: :see_no_evil: :speak_no_evil:
 
 ##### CSS File size does matter. Large style files result in the following:
-* Longer download times increase bounce rates.
+* Longer download times increase user bounce rates.
 * Data pollution on the Internet. 
 * Increase the likelihood of style bugs.
 * Increase the amount of time required to implement new changes and deprecate features.
@@ -444,6 +446,7 @@ TODO: Add CSS here.
 TODO: Integrate Sphinx
 <br>TODO: Put the docs on readthedocs 
 
+<!--- Commented
 ##### Implement using Javascript (consider what this would require)
 TODO: Implement this really cool feature.
 <br>TODO: Document
@@ -455,6 +458,7 @@ TODO: Implement this really cool feature.
 ##### DRY CSS File Analyzer (possibly belongs in a separate project)
 TODO: Return statistics on how many times a given property value appears in a CSS File.
 <br>TODO: Document
+-->
 
 # Unsupported Features:
 ##### Shorthand properties
@@ -486,8 +490,10 @@ font-30px-arial | font: 30px arial | valid
 font-italic-bold-12px-serif | font: italic bold 12px serif | valid
 
 ### Valuable Reference
-[W3C Full CSS property table](http://www.w3.org/TR/CSS21/propidx.html)
-[cssutils](https://bitbucket.org/cthedot/cssutils)
+> [W3C Full CSS property table](http://www.w3.org/TR/CSS21/propidx.html)
+<br>[Python 3.4+](https://www.python.org/downloads/) (required)
+<br>[cssutils 1.0.1+](https://bitbucket.org/cthedot/cssutils) (required)
+<br>[watchdog 0.8.2+](https://pypi.python.org/pypi/watchdog/0.8.3) (desired)
 
 ### License
 The MIT License (MIT)
@@ -496,6 +502,6 @@ The MIT License (MIT)
 * Report Issues
 * Write Code
 * [Flattr this Project](https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss) 
-<br>&nbsp;&nbsp;&nbsp;<a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" style="text-align:bottom;" alt="Flattr this" title="Flattr this" border="0"></a>
+<br><br>&nbsp;&nbsp;&nbsp;<a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" style="text-align:bottom;" alt="Flattr this" title="Flattr this" border="0"></a>
 
 
