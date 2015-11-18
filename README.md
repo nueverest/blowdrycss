@@ -6,7 +6,7 @@ Tool used to quickly auto-generate DRY CSS files from encoded classes found in *
 #### Why the name blowdrycss?
 Inspiration for the name came from the blow dryer. A blow dryer rapidly drys and styles hair. :ok_woman: 
 
-Similarly, `blowdrycss` is used to rapidly style HTML and generate DRY CSS files.
+Similarly, `blowdrycss` is used to rapidly style HTML and generate DRY CSS files using encoded class names.
 
 ##### Decomposition
 > **Blow** means to expel a current of air causing it to be in a state of motion.<br>
@@ -50,7 +50,7 @@ the following CSS in `blowdry.css`:
 
 ### Part 2 - Auto-generate CSS
 * Navigate to `../blowdrycss/python`
-* Run `pip install -r requirements.txt`
+* Run `pip install -r requirements.txt` If pip is not install [go here](https://pip.pypa.io/en/latest/installing/).
 * Run `python blowdry.py` 
 * Navigate to `../blowdrycss/examplesite/css` and verify that `blowdry.css` and `blowdry.min.css` now exist.
 * Open a web browser and go to [localhost:8080](http://localhost:8080). 
@@ -495,6 +495,7 @@ The MIT License (MIT)
 ### How to Contribute
 * Report Issues
 * Write Code
-* [Flattr](https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss) <a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="//button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+* [Flattr](https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss) 
+<br> <a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
 
 
