@@ -30,9 +30,9 @@ the following CSS in `blowdry.css`:
 ```
 
 # Requirements
-Python 3.4+ (required)
-<br>cssutils 1.0.1+ (required)
-<br>watchdog 0.8.2+ (desired)
+[Python 3.4+](https://www.python.org/downloads/) (required)
+<br>[cssutils 1.0.1+](https://bitbucket.org/cthedot/cssutils) (required)
+<br>[watchdog 0.8.2+](https://pypi.python.org/pypi/watchdog/0.8.3) (desired)
 <br>unittest (run unit tests)
 <br>coverage 4.0.2+ (check test coverage)
 
@@ -495,23 +495,6 @@ The MIT License (MIT)
 ### How to Contribute
 * Report Issues
 * Write Code
-* Vote for features with a donation. Your contribution directs focus on the most desired features first. Keep in mind
-that all of the time estimates include documentation and unit testing. As features are implemented and donations 
-received the table is manually updated. The donation goes to "The Power of 9" which is setup to manage donations 
-in support of this project. 
+* [Flattr](https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss) <a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="//button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
 
-### What is done with donations?
-* Cover travel and registrations costs at technology conferences to promote this project.
-* Implement, test, and document the features in the following table.
-
-Feature | Goal | Time | Received | Complete | Donate 
-------- |:----:|:----:|:--------:|:--------:|:------:
-Make DRYer | $300 | 4-6 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EY63EWAXXVKJ2)
-Enable hexadecimal color aliases | $300 | 4-6 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SGQX89U2N7XAN)
-Automatic px to rem unit conversion | $150 | 2-3 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V3DQMK4Q3SJTC) 
-Media queries for responsive style | $1,300 | 4-5 days | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=E4LEBP5EYSE9N)
-Responsive scaling fonts '-r' | $250 | 3-4 hr | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BJMHSE7NDSKVU)
-Sphinx integration | $3,000 | 1-2 wks | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MWGFYZZ4DXD2N)
-Port to Javascript | $9,000 | 1-2 mo | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9NEXW8MRMUXAU)
-Suggest a Feature | ----- | ----- | $0 | 0% | [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ENEWAE88R4LGG)
 
