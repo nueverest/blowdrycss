@@ -18,7 +18,7 @@ class FileFinder(object):
             print('\nFile Types:', self.file_types)
 
             self.set_files()
-            print('\nList of Files Found:')
+            print('\nProject Files Found:')
             self.print_collection(self.files)
         else:
             raise NotADirectoryError(project_directory + ' is not a directory.')
@@ -78,7 +78,7 @@ class CSSFile(object):
 
     # Output a human readable version of the css file in utf-8 format.
     # Note: Overwrites any pre-existing files with the same name.
-    def write(self, css_text=''):
+    def write_css(self, css_text=''):
         parse_string = parseString(css_text)
         ser.prefs.useDefaults()                # Enables Default / Verbose Mode
         with open(self.file_path(extension='.css'), 'w') as css_file:

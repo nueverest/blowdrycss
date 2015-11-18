@@ -1,4 +1,5 @@
 from os import chdir, getcwd, path
+from datetime import datetime
 # custom classes
 from filehandler import FileFinder, CSSFile
 from htmlattributeparser import HTMLClassParser
@@ -36,13 +37,13 @@ def main():
 
     # Output the DRY CSS file. (user command option)
     css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
-    css_file.write(css_text=css_text)
+    css_file.write_css(css_text=css_text)
     print(css_directory + css_file.file_name + '.css', "created.")
 
     # Output the Minified DRY CSS file. (user command option)
     css_file.minify(css_text=css_text)
     print(css_directory + css_file.file_name + '.min.css', "created.")
-    print('--- Complete ---')
+    print('--- Completed @', datetime.now(), '---')
 
 
 if __name__ == '__main__':

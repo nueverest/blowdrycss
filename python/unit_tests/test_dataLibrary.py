@@ -136,7 +136,7 @@ class TestDataLibrary(TestCase):
         merged_dict = self.data_library.merge_dicts(dict1, custom_dict)
         self.assertEqual(dict1, merged_dict)
 
-    def test_get_clashing_aliases(self):
+    def test_set_clashing_aliases(self):
         expected_clashes = {
             'border-collapse': {'border-c-', 'bc-'}, 'border-style': {'bs-', 'border-s-'},
             'font-style': {'font-s-', 'fs-'}, 'background-repeat': {'br-'}, 'pitch-range': {'pr-'},
@@ -147,7 +147,8 @@ class TestDataLibrary(TestCase):
             'font-size': {'font-s-', 'fs-'}
         }
         initial_dict = self.data_library.initialize_property_alias_dict(property_names=self.data_library.property_names)
-        actual_clashes = self.data_library.get_clashing_aliases(property_dict=initial_dict)
+        self.data_library.set_clashing_aliases(property_dict=initial_dict)
+        actual_clashes = self.data_library.clashing_alias_dict
         self.assertEqual(actual_clashes, expected_clashes)
 
     def test_remove_clashing_aliases(self):
@@ -166,7 +167,8 @@ class TestDataLibrary(TestCase):
             'white-space': {'clash2-'},
             'cursor': {'clash1-'}
         }
-        clash_dict = self.data_library.get_clashing_aliases(property_dict=initial_dict)
+        self.data_library.set_clashing_aliases(property_dict=initial_dict)
+        clash_dict = self.data_library.clashing_alias_dict
         self.assertEqual(clash_dict, expected_clashes, msg=clash_dict)  # Sanity check
         clean_dict = self.data_library.remove_clashing_aliases(initial_dict, clash_dict)
         self.assertEqual(clean_dict, expected_clean_dict)

@@ -10,8 +10,8 @@ __project__ = 'blow dry css'
 
 class TestMain(unittest.TestCase):
     def test_main(self):
-        substrings = ['clean ran', 'cssblowdry.css created', 'cssblowdry.min.css created']
-        complete = '--- Complete ---\n'
+        substrings = ['Project Directory:', 'cssblowdry.css created', 'cssblowdry.min.css created']
+        complete = '---\n'
         saved_stdout = sys.stdout
         try:
             out = StringIO()
