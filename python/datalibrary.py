@@ -153,9 +153,13 @@ class DataLibrary(object):
         self.property_alias_markdown = self.dict_to_markdown(
             key_column_name=u'Property Name', value_column_name=u'Alias Options', _dict=self.property_alias_dict
         )
+
+        # TODO: Create dict_to_html.
+
         # Debug
         # print('property_alias_dict', self.property_alias_dict)
         # print('clashing_alias_markdown', self.clashing_alias_markdown)
+        print('clashing_alias_html', self.clashing_alias_html)
         # print('property_alias_markdown', self.property_alias_markdown)
 
         # TODO: Review whether this is still necessary as [key] notation might fix this issue.
@@ -275,10 +279,14 @@ class DataLibrary(object):
     # TODO: Experiment with ```css\n key | value \n```
     @staticmethod
     def dict_to_markdown(key_column_name='', value_column_name='', _dict=None):
-        markdown = key_column_name + u' | ' + value_column_name + u'\n--- | ---\n'  # Header plus second row.
+        _markdown = u'| ' + key_column_name + u' | ' + value_column_name + u' |\n| --- | --- |\n'  # Header plus second row.
         for key, value in _dict.items():
-            markdown += key + u' | ' + str(value) + u'\n'                           # Key | Value row(s).
-        return markdown
+            if isinstance(value, set):
+                value_str = ''
+                for v in value:
+                    value_str += u"`" + v + u"` "
+            _markdown += u'| ' + key + u' | ' + str(value_str) + u' |\n'                           # Key | Value row(s).
+        return _markdown
 
 
 # DataLibrary is not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
