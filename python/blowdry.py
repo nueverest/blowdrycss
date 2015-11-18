@@ -1,10 +1,11 @@
 from os import chdir, getcwd, path
 from datetime import datetime
 # custom classes
-from filehandler import FileFinder, CSSFile
+from filehandler import FileFinder, CSSFile, HTMLFile
 from htmlattributeparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
+from datalibrary import clashing_alias_html, property_alias_html
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -34,6 +35,14 @@ def main():
     css_text = css_builder.get_css_text()
     # print('CSS Text:')
     # print(css_text)
+
+    # Generate Markdown documentation files.
+
+    # Generate HTML documentation files.
+    html_file = HTMLFile(file_directory=project_directory, file_name='clashing_aliases')
+    html_file.write_html(clashing_alias_html)
+    html_file.file_name = 'property_aliases'    # Change file name.
+    html_file.write_html(property_alias_html)
 
     # Output the DRY CSS file. (user command option)
     css_file = CSSFile(file_directory=css_directory, file_name='blowdry')

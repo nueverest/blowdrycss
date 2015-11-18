@@ -151,7 +151,7 @@ class DataLibrary(object):
             key_title=u'Property Name', value_title=u'Clashing Aliases', _dict=self.clashing_alias_dict
         )
         self.property_alias_markdown = self.dict_to_markdown(
-            key_title=u'Property Name', value_title=u'Alias Options', _dict=self.property_alias_dict
+            key_title=u'Property Name', value_title=u'Valid Aliases', _dict=self.property_alias_dict
         )
 
         # Generate HTML Files
@@ -159,13 +159,13 @@ class DataLibrary(object):
             key_title=u'Property Name', value_title=u'Clashing Aliases', _dict=self.clashing_alias_dict
         )
         self.property_alias_html = self.dict_to_html(
-            key_title=u'Property Name', value_title=u'Alias Options', _dict=self.property_alias_dict
+            key_title=u'Property Name', value_title=u'Valid Aliases', _dict=self.property_alias_dict
         )
 
         # Debug
         # print('property_alias_dict', self.property_alias_dict)
         # print('clashing_alias_markdown', self.clashing_alias_markdown)
-        print('clashing_alias_html\n', self.clashing_alias_html)
+        # print('clashing_alias_html\n', self.clashing_alias_html)
         # print('property_alias_markdown', self.property_alias_markdown)
 
         # TODO: Review whether this is still necessary as [key] notation might fix this issue.
@@ -285,59 +285,73 @@ class DataLibrary(object):
     # TODO: Experiment with ```css\n key | value \n```
     @staticmethod
     def dict_to_markdown(key_title='', value_title='', _dict=None):
-        _markdown = u'| ' + key_title + u' | ' + value_title + u' |\n| --- | --- |\n'  # Header plus second row.
+        _markdown = u'| ' + key_title + u' | ' + value_title + u' |\n| --- | --- |\n'   # Header plus second row.
         for key, value in _dict.items():
             value_str = ''
             if isinstance(value, set):
                 for v in value:
                     value_str += u"`" + v + u"` "
-            _markdown += u'| ' + key + u' | ' + str(value_str) + u' |\n'                           # Key | Value row(s).
+            _markdown += u'| ' + key + u' | ' + str(value_str) + u' |\n'                # Key | Value row(s).
         return _markdown
 
-    # Convert a dictionary into an HTML formatted 2-column <table>.
-    # <table>
-    #   <thead>
-    #       <tr>
-    #           <th>key_title</th>
-    #           <th>value_title</th>
-    #       </tr>
-    #   </thead>
-    # 
-    #   <tbody>
-    #       <tr>
-    #           <td>key[0]</td>
-    #           <td>value</td>
-    #       </tr>        
-    #   </tbody>
-    # </table>    
-    # TODO: Experiment with ```css\n key | value \n```
+    # Convert a dictionary into an HTML formatted 2-column table.
+    # Format:
+    # <html>
+    #   <head><link rel="stylesheet" type="text/css" href="/css/blowdry.min.css" /></head>
+    #
+    #   <body>
+    #       <table>
+    #           <thead>
+    #               <tr>
+    #                   <th>key_title</th>
+    #                   <th>value_title</th>
+    #               </tr>
+    #           </thead>
+    #
+    #           <tbody>
+    #               <tr>
+    #                   <td>key[0]</td>
+    #                   <td>value</td>
+    #               </tr>
+    #           </tbody>
+    #       </table>
+    #   </body>
+    # </html>
     @staticmethod
     def dict_to_html(key_title='', value_title='', _dict=None):
         _html = str(
-            '<table>\n' +
-            '\t<thead>\n' +
-            '\t\t<tr>\n' + 
-            '\t\t\t<th>' + key_title + u'</th>\n' +
-            '\t\t\t<th>' + value_title + u'</th>\n' +
-            '\t\t</tr>\n' +
-            '\t</thead>\n' +
-            '\t<tbody>\n' 
+            '<html>\n' +
+            '\t<head>\n' +
+            '\t\t<meta charset="UTF-8">\n' +
+            '\t\t<link rel="stylesheet" type="text/css" href="/css/blowdry.min.css" />\n' +
+            '\t</head>\n\n' +
+            '\t<body>\n' +
+            '\t\t<table>\n' +
+            '\t\t\t<thead>\n' +
+            '\t\t\t\t<tr>\n' +
+            '\t\t\t\t\t<th>' + key_title + u'</th>\n' +
+            '\t\t\t\t\t<th>' + value_title + u'</th>\n' +
+            '\t\t\t\t</tr>\n' +
+            '\t\t\t</thead>\n\n' +
+            '\t\t\t<tbody>\n'
         )
         
         for key, value in _dict.items():
             value_str = u''
-            _html += u'\t\t<tr>\n'                                      # Open Key | Value row.
+            _html += u'\t\t\t\t<tr>\n'                                      # Open Key | Value row.
             if isinstance(value, set):
                 for v in value:
-                    value_str += u"<code>" + v + u"</code>"
+                    value_str += u"<code>" + v + u"</code>&emsp;"
             _html += str(                                       
-                '\t\t\t<td>' + key + '</td>\n' + 
-                '\t\t\t<td>' + str(value_str) + '</td>\n' +              
-                '\t\t<tr>\n'                                            # Close Key | Value row.
+                '\t\t\t\t\t<td>' + key + '</td>\n' +
+                '\t\t\t\t\t<td>' + str(value_str) + '</td>\n' +
+                '\t\t\t\t</tr>\n'                                           # Close Key | Value row.
             )
         _html += str(
-            '\t</tbody>\n' 
-            '</table>\n'
+            '\t\t\t</tbody>\n' +
+            '\t\t</table>\n' +
+            '\t</body>\n' +
+            '</html>\n'
         )
         return _html
 
@@ -345,7 +359,19 @@ class DataLibrary(object):
 # DataLibrary is not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
 __data_library = DataLibrary()
 
-# Only Variables intended for outside use.
+############################################
+# Only variables intended for outside use. #
+############################################
+
+# Dictionaries
 default_property_units_dict = __data_library.default_property_units_dict
 property_alias_dict = __data_library.property_alias_dict
 ordered_property_dict = __data_library.ordered_property_dict
+
+# Markdown
+clashing_alias_markdown = __data_library.clashing_alias_markdown
+property_alias_markdown = __data_library.property_alias_markdown
+
+# HTML
+clashing_alias_html = __data_library.clashing_alias_html
+property_alias_html = __data_library.property_alias_html

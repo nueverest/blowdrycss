@@ -74,7 +74,9 @@ class CSSFile(object):
         if len(findall(r"([.0-9a-z])", extension)) == len(extension):
             return path.join(self.file_directory, self.file_name + extension)
         else:
-            raise ValueError(extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.')
+            raise ValueError(
+                'Extension: ' + extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.'
+            )
 
     # Output a human readable version of the css file in utf-8 format.
     # Note: Overwrites any pre-existing files with the same name.
@@ -91,3 +93,34 @@ class CSSFile(object):
         ser.prefs.useMinified()                 # Enables Minification
         with open(self.file_path(extension='.min.css'), 'w') as css_file:
             css_file.write(parse_string.cssText.decode('utf-8'))
+
+
+class HTMLFile(object):
+    # File name does not include extension.
+    # Reference: stackoverflow.com
+    # /questions/273192/in-python-check-if-a-directory-exists-and-create-it-if-necessary#answer-14364249
+    def __init__(self, file_directory=getcwd(), file_name=''):
+        self.file_directory = file_directory
+        self.file_name = file_name
+        try:                                        # Python 2.7 Compliant
+            makedirs(file_directory)                # Make 'html' directory
+        except OSError:
+            if not path.isdir(file_directory):      # Verify directory existences
+                raise OSError(file_directory + ' is not a directory, and could not be created.')
+
+    # Transform extension to lowercase.
+    # Only allow '.', '0-9', and 'a-z' characters.
+    def file_path(self, extension=''):
+        extension = extension.lower()
+        if len(findall(r"([.0-9a-z])", extension)) == len(extension):
+            return path.join(self.file_directory, self.file_name + extension)
+        else:
+            raise ValueError(
+                'Extension: ' + extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.'
+            )
+
+    # Output a human readable version of the html file in utf-8 format.
+    # Note: Overwrites any pre-existing files with the same name.
+    def write_html(self, html_text=''):
+        with open(self.file_path(extension='.html'), 'w') as html_file:
+            html_file.write(html_text)
