@@ -143,10 +143,22 @@ class DataLibrary(object):
             'visibility', 'voice-family', 'volume', 'white-space', 'widows', 'width', 'word-spacing', 'z-index'
         }
 
-        self.property_alias_dict = self.build_property_alias_dict()
-        print('property_alias_dict', self.property_alias_dict)
+        self.clashing_alias_dict = {}
+        self.property_alias_dict = self.build_property_alias_dict()     # Calls set_clashing_aliases()
 
-        # TODO: Review whether this is still necessary
+        # Generate Markdown Files
+        self.clashing_alias_markdown = self.dict_to_markdown(
+            key_column_name=u'Property Name', value_column_name=u'Clashing Aliases', _dict=self.clashing_alias_dict
+        )
+        self.property_alias_markdown = self.dict_to_markdown(
+            key_column_name=u'Property Name', value_column_name=u'Alias Options', _dict=self.property_alias_dict
+        )
+        # Debug
+        # print('property_alias_dict', self.property_alias_dict)
+        # print('clashing_alias_markdown', self.clashing_alias_markdown)
+        # print('property_alias_markdown', self.property_alias_markdown)
+
+        # TODO: Review whether this is still necessary as [key] notation might fix this issue.
         # Sort property_alias_dict with the longest items first as the most verbose match is preferred.
         # i.e. If css_class == 'margin-top' Then match the property_alias_dict key 'margin-top' not 'margin'
         self.ordered_property_dict = OrderedDict(
@@ -215,21 +227,19 @@ class DataLibrary(object):
                     raise KeyError
         return property_dict
 
-    # Remove duplicate/clashing aliases from property_alias_dict.
-    @staticmethod
-    def get_clashing_aliases(property_dict=None):
+    # Remove duplicate, clashing aliases from property_alias_dict.
+    def set_clashing_aliases(self, property_dict=None):
         clone_dict = property_dict
-        clashing_alias_dict = {}
+        self.clashing_alias_dict = {}
         for key1, alias_set1 in property_dict.items():
             for key2, alias_set2 in clone_dict.items():
                 intersection = alias_set1.intersection(alias_set2)
                 if len(intersection) > 0 and key1 != key2:                  # prevent direct comparison of the same key.
                     try:
-                        clashing_alias_dict[key1] = clashing_alias_dict[key1].union(intersection)
+                        self.clashing_alias_dict[key1] = self.clashing_alias_dict[key1].union(intersection)
                     except KeyError:
-                        clashing_alias_dict[key1] = intersection
-        print('clashing aliases', clashing_alias_dict)
-        return clashing_alias_dict
+                        self.clashing_alias_dict[key1] = intersection
+        # print('clashing aliases', self.clashing_alias_dict)
 
     @staticmethod
     def remove_clashing_aliases(property_dict=None, clashing_alias_dict=None):
@@ -242,7 +252,7 @@ class DataLibrary(object):
                         clean_dict[property_name].remove(clashing_alias)    # Remove it.
             except KeyError:
                 pass
-        print('clashing aliases removed', clean_dict)
+        # print('clashing aliases removed', clean_dict)
         return clean_dict
 
     # Builds a property_alias_dict using the following steps:
@@ -253,9 +263,22 @@ class DataLibrary(object):
     def build_property_alias_dict(self):
         _dict = self.initialize_property_alias_dict(property_names=self.property_names)                     # Initialize
         _dict = self.merge_dicts(property_dict=_dict, custom_dict=self.custom_property_alias_dict)          # Merge
-        clashing_alias_dict = self.get_clashing_aliases(property_dict=_dict)                                # Get Clash
-        _dict = self.remove_clashing_aliases(property_dict=_dict, clashing_alias_dict=clashing_alias_dict)  # Fix Clash
+        self.set_clashing_aliases(property_dict=_dict)                                                      # Get Clash
+        _dict = self.remove_clashing_aliases(_dict, self.clashing_alias_dict)                               # Fix Clash
         return _dict
+
+    # Convert a dictionary into a markdown formatted 2-column table.
+    # key_column_name | value_column_name
+    # --- | ---
+    # key[0] | value
+    # key[1] | value
+    # TODO: Experiment with ```css\n key | value \n```
+    @staticmethod
+    def dict_to_markdown(key_column_name='', value_column_name='', _dict=None):
+        markdown = key_column_name + u' | ' + value_column_name + u'\n--- | ---\n'  # Header plus second row.
+        for key, value in _dict.items():
+            markdown += key + u' | ' + str(value) + u'\n'                           # Key | Value row(s).
+        return markdown
 
 
 # DataLibrary is not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
