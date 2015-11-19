@@ -2,13 +2,13 @@
 | --- | --- |
 | background-color | `bc-`  |
 | background-repeat | `br-`  |
-| border-collapse | `border-c-` `bc-`  |
-| border-color | `border-c-` `bc-`  |
+| border-collapse | `bc-` `border-c-`  |
+| border-color | `bc-` `border-c-`  |
 | border-right | `br-`  |
 | border-spacing | `bs-` `border-s-`  |
 | border-style | `bs-` `border-s-`  |
-| font-size | `font-s-` `fs-`  |
-| font-style | `font-s-` `fs-`  |
+| font-size | `fs-` `font-s-`  |
+| font-style | `fs-` `font-s-`  |
 | letter-spacing | `ls-`  |
 | list-style | `ls-`  |
 | max-height | `mh-`  |

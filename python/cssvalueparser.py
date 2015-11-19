@@ -75,6 +75,7 @@ class CSSPropertyValueParser(object):
 
     # Expects a value of the form: h0ff48f or hfaf i.e. 'h' + a 3 or 6 digit hexidecimal value 0-f.
     # Returns #0ff48f or #faf
+    # Note: This does not work with shorthand properties border-1px-solid-hddd will not replace the 'h'
     @staticmethod
     def is_valid_hex(value=''):
         is_valid = False
@@ -185,3 +186,9 @@ class CSSPropertyValueParser(object):
     # Might require a font name dictionary.
     # What about commas?
     # Could just use font-family name explicity e.g. sans-serif, arial, source-sans-pro
+    # x--large --> x*d*large --> x-large
+    # OR
+    # Setting everything to lowercase.
+    # Find all dashed keywords x-large san-serif etc.
+    # Replace with uppercase X-LARGE SAN-SERIF
+    # Remove all '-' dashes except the ones between uppercase letters.

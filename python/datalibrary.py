@@ -329,7 +329,6 @@ class DataLibrary(object):
             '<html>\n' +
             '\t<head>\n' +
             '\t\t<meta charset="UTF-8">\n' +
-            '\t\t<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">\n' +
             '\t\t<link rel="icon" type="image/x-icon" href="/images/favicon.ico">\n' +
             '\t\t<title>' + value_title + ' - blowdrycss</title>\n' +
             '\t\t<link rel="stylesheet" type="text/css" href="/css/blowdry.min.css" />\n' +
@@ -368,7 +367,7 @@ class DataLibrary(object):
         return _html
 
 
-# DataLibrary is not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
+# DataLibrary() is not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
 __data_library = DataLibrary()
 
 ############################################
