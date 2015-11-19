@@ -1,11 +1,11 @@
 from os import chdir, getcwd, path
 from datetime import datetime
 # custom classes
-from filehandler import FileFinder, CSSFile, HTMLFile
+from filehandler import FileFinder, CSSFile, GenericFile
 from htmlattributeparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
-from datalibrary import clashing_alias_html, property_alias_html
+from datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, property_alias_html
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -18,12 +18,17 @@ def main():
     css_directory = path.join(project_directory + '\\css')
 
     # Generate Markdown documentation files.
+    generic_file = GenericFile(file_directory=getcwd(), file_name='clashing_aliases')
+    generic_file.write_file(clashing_alias_markdown, extension='.md')
+    generic_file.file_name = 'property_aliases'                     # Changes file name.
+    generic_file.write_file(property_alias_markdown, extension='.md')
 
-    # Generate HTML documentation files.
-    html_file = HTMLFile(file_directory=project_directory, file_name='clashing_aliases')
-    html_file.write_html(clashing_alias_html)
-    html_file.file_name = 'property_aliases'    # Changes file name.
-    html_file.write_html(property_alias_html)
+    # Generate HTML documentation files. (This location is important since it allows encoded css to be included.)
+    generic_file.file_directory = project_directory                 # Change directory to /examplesite
+    generic_file.file_name = 'clashing_aliases'                     # Change file name.
+    generic_file.write_file(clashing_alias_html, extension='.html')
+    generic_file.file_name = 'property_aliases'                     # Change file name.
+    generic_file.write_file(property_alias_html, extension='.html')
 
     # Define File all file types/extensions to search for in project_directory
     file_types = ('*.html', '*.aspx', '*.master', '*.ascx')

@@ -95,7 +95,7 @@ class CSSFile(object):
             css_file.write(parse_string.cssText.decode('utf-8'))
 
 
-class HTMLFile(object):
+class GenericFile(object):
     # File name does not include extension.
     # Reference: stackoverflow.com
     # /questions/273192/in-python-check-if-a-directory-exists-and-create-it-if-necessary#answer-14364249
@@ -119,8 +119,8 @@ class HTMLFile(object):
                 'Extension: ' + extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.'
             )
 
-    # Output a human readable version of the html file in utf-8 format.
+    # Output a human readable version of the file in utf-8 format.
     # Note: Overwrites any pre-existing files with the same name.
-    def write_html(self, html_text=''):
-        with open(self.file_path(extension='.html'), 'w') as html_file:
-            html_file.write(html_text)
+    def write_file(self, text='', extension=''):
+        with open(self.file_path(extension=extension), 'w') as _file:
+            _file.write(text)
