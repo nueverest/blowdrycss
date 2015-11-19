@@ -17,6 +17,14 @@ def main():
     project_directory = path.join(getcwd() + '\\examplesite')    # Change to whatever you want.
     css_directory = path.join(project_directory + '\\css')
 
+    # Generate Markdown documentation files.
+
+    # Generate HTML documentation files.
+    html_file = HTMLFile(file_directory=project_directory, file_name='clashing_aliases')
+    html_file.write_html(clashing_alias_html)
+    html_file.file_name = 'property_aliases'    # Changes file name.
+    html_file.write_html(property_alias_html)
+
     # Define File all file types/extensions to search for in project_directory
     file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
 
@@ -35,14 +43,6 @@ def main():
     css_text = css_builder.get_css_text()
     # print('CSS Text:')
     # print(css_text)
-
-    # Generate Markdown documentation files.
-
-    # Generate HTML documentation files.
-    html_file = HTMLFile(file_directory=project_directory, file_name='clashing_aliases')
-    html_file.write_html(clashing_alias_html)
-    html_file.file_name = 'property_aliases'    # Change file name.
-    html_file.write_html(property_alias_html)
 
     # Output the DRY CSS file. (user command option)
     css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
