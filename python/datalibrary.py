@@ -146,20 +146,24 @@ class DataLibrary(object):
         self.clashing_alias_dict = {}
         self.property_alias_dict = self.build_property_alias_dict()     # Calls set_clashing_aliases()
 
+        # Alphabetical Property Dictionaries
+        self.alphabetical_property_dict = OrderedDict(sorted(self.property_alias_dict.items(), key=lambda t: t[0]))
+        self.alphabetical_clashing_dict = OrderedDict(sorted(self.clashing_alias_dict.items(), key=lambda t: t[0]))
+
         # Generate Markdown Files
         self.clashing_alias_markdown = self.dict_to_markdown(
-            key_title=u'Property Name', value_title=u'Clashing Aliases', _dict=self.clashing_alias_dict
+            key_title=u'Property Name', value_title=u'Clashing Aliases', _dict=self.alphabetical_clashing_dict
         )
         self.property_alias_markdown = self.dict_to_markdown(
-            key_title=u'Property Name', value_title=u'Valid Aliases', _dict=self.property_alias_dict
+            key_title=u'Property Name', value_title=u'Valid Aliases', _dict=self.alphabetical_property_dict
         )
 
         # Generate HTML Files
         self.clashing_alias_html = self.dict_to_html(
-            key_title=u'Property Name', value_title=u'Clashing Aliases', _dict=self.clashing_alias_dict
+            key_title=u'Property Name', value_title=u'Clashing Aliases', _dict=self.alphabetical_clashing_dict
         )
         self.property_alias_html = self.dict_to_html(
-            key_title=u'Property Name', value_title=u'Valid Aliases', _dict=self.property_alias_dict
+            key_title=u'Property Name', value_title=u'Valid Aliases', _dict=self.alphabetical_property_dict
         )
 
         # Debug
@@ -319,6 +323,8 @@ class DataLibrary(object):
     # </html>
     @staticmethod
     def dict_to_html(key_title='', value_title='', _dict=None):
+        common_classes = u' padding-5 border-1px-solid-gray display-inline '
+        alternating_bg = u' bgc-hf8f8f8 '
         _html = str(
             '<html>\n' +
             '\t<head>\n' +
@@ -327,26 +333,29 @@ class DataLibrary(object):
             '\t</head>\n\n' +
             '\t<body>\n' +
             '\t\t<table>\n' +
-            '\t\t\t<thead>\n' +
-            '\t\t\t\t<tr>\n' +
-            '\t\t\t\t\t<th>' + key_title + u'</th>\n' +
-            '\t\t\t\t\t<th>' + value_title + u'</th>\n' +
-            '\t\t\t\t</tr>\n' +
-            '\t\t\t</thead>\n\n' +
             '\t\t\t<tbody>\n'
+            '\t\t\t\t<tr>\n' +
+            '\t\t\t\t\t<td class="' + common_classes + 'talign-center bold">' + key_title + u'</td>\n' +
+            '\t\t\t\t\t<td class="' + common_classes + 'talign-center bold">' + value_title + u'</td>\n' +
+            '\t\t\t\t</tr>\n'
         )
-        
+        count = 1
         for key, value in _dict.items():
+            classes = (common_classes + alternating_bg) if count % 2 == 0 else common_classes   # Alternate Style
             value_str = u''
-            _html += u'\t\t\t\t<tr>\n'                                      # Open Key | Value row.
+            _html += u'\t\t\t\t<tr>\n'                                                          # Open Key | Value row.
             if isinstance(value, set):
+                vcount = 1
                 for v in value:
                     value_str += u"<code>" + v + u"</code>&emsp;"
-            _html += str(                                       
-                '\t\t\t\t\t<td>' + key + '</td>\n' +
-                '\t\t\t\t\t<td>' + str(value_str) + '</td>\n' +
-                '\t\t\t\t</tr>\n'                                           # Close Key | Value row.
+                    value_str += u'<br>' if vcount % 5 == 0 else u''
+                    vcount += 1
+            _html += str(
+                '\t\t\t\t\t<td class="' + classes + '">' + key + '</td>\n' +
+                '\t\t\t\t\t<td class="' + classes + '">' + str(value_str) + '</td>\n'
+                '\t\t\t\t</tr>\n'                                                               # Close Key | Value row.
             )
+            count += 1
         _html += str(
             '\t\t\t</tbody>\n' +
             '\t\t</table>\n' +
