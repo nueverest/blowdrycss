@@ -2,89 +2,89 @@
 | --- | --- |
 | azimuth | `azi-`  |
 | background | `bac-` `bg-`  |
-| background-attachment | `ba-` `background-a-`  |
-| background-color | `bgc-` `bg-c-` `background-c-` `bg-color-`  |
-| background-image | `bi-` `background-i-`  |
-| background-position | `bp-` `background-p-`  |
+| background-attachment | `background-a-` `ba-`  |
+| background-color | `bg-c-` `background-c-` `bgc-` `bg-color-`  |
+| background-image | `background-i-` `bi-`  |
+| background-position | `background-p-` `bp-`  |
 | background-repeat | `background-r-`  |
 | border | `bor-`  |
 | border-bottom | `border-b-` `bb-`  |
-| border-bottom-color | `border-b-color-` `bbc-`  |
+| border-bottom-color | `bbc-` `border-b-color-`  |
 | border-bottom-style | `bbs-` `border-b-style-`  |
 | border-bottom-width | `bbw-` `border-b-width-`  |
 | border-collapse |  |
 | border-color |  |
-| border-left | `bl-` `border-l-`  |
-| border-left-color | `blc-` `border-l-color-`  |
+| border-left | `border-l-` `bl-`  |
+| border-left-color | `border-l-color-` `blc-`  |
 | border-left-style | `bls-` `border-l-style-`  |
 | border-left-width | `border-l-width-` `blw-`  |
 | border-right | `border-r-`  |
 | border-right-color | `brc-` `border-r-color-`  |
-| border-right-style | `border-r-style-` `brs-`  |
-| border-right-width | `brw-` `border-r-width-`  |
+| border-right-style | `brs-` `border-r-style-`  |
+| border-right-width | `border-r-width-` `brw-`  |
 | border-spacing |  |
 | border-style |  |
 | border-top | `bt-` `border-t-`  |
-| border-top-color | `btc-` `border-t-color-`  |
+| border-top-color | `border-t-color-` `btc-`  |
 | border-top-style | `border-t-style-` `bts-`  |
 | border-top-width | `border-t-width-` `btw-`  |
-| border-width | `bw-` `border-w-`  |
+| border-width | `border-w-` `bw-`  |
 | bottom | `bot-`  |
 | caption-side | `caption-s-` `cs-`  |
 | clear |  |
 | clip |  |
-| color | `hsl-` `black` `rgba-` `lime` `fuchsia` `white` `red` `teal` `yellow` `navy` `gray` `purple` `maroon` `orange` `green` `silver` `aqua` `olive` `c-` `hsla-` `rgb-` `blue`  |
+| color | `teal` `rgb-` `lime` `navy` `hsl-` `aqua` `yellow` `maroon` `red` `fuchsia` `green` `black` `silver` `orange` `rgba-` `olive` `purple` `blue` `white` `c-` `hsla-` `gray`  |
 | content | `con-`  |
-| counter-increment | `counter-i-` `ci-`  |
-| counter-reset | `cr-` `counter-r-`  |
+| counter-increment | `ci-` `counter-i-`  |
+| counter-reset | `counter-r-` `cr-`  |
 | cue |  |
 | cue-after | `cue-a-` `ca-`  |
-| cue-before | `cue-b-` `cb-`  |
+| cue-before | `cb-` `cue-b-`  |
 | cursor | `cur-`  |
 | direction | `dir-`  |
 | display | `dis-`  |
 | elevation | `ele-`  |
-| empty-cells | `empty-c-` `ec-`  |
+| empty-cells | `ec-` `empty-c-`  |
 | float |  |
 | font |  |
 | font-family | `ff-` `font-f-`  |
-| font-size | `f-size-` `fsize-`  |
-| font-style | `italic` `oblique`  |
+| font-size | `fsize-` `f-size-`  |
+| font-style | `oblique` `italic`  |
 | font-variant | `fv-` `font-v-`  |
-| font-weight | `lighter` `bold` `font-w-` `bolder` `f-weight-` `fw-` `fweight-`  |
-| height | `hei-` `h-`  |
+| font-weight | `fw-` `font-w-` `f-weight-` `bolder` `bold` `lighter` `fweight-`  |
+| height | `h-` `hei-`  |
 | left |  |
 | letter-spacing | `letter-s-`  |
 | line-height | `lh-` `line-h-`  |
 | list-style | `list-s-`  |
-| list-style-image | `lsi-` `list-s-image-`  |
-| list-style-position | `lsp-` `list-s-position-`  |
-| list-style-type | `lst-` `list-s-type-`  |
+| list-style-image | `list-s-image-` `lsi-`  |
+| list-style-position | `list-s-position-` `lsp-`  |
+| list-style-type | `list-s-type-` `lst-`  |
 | margin | `m-` `mar-`  |
-| margin-bottom | `margin-b-` `mb-` `m-bot-`  |
+| margin-bottom | `m-bot-` `mb-` `margin-b-`  |
 | margin-left | `margin-l-` `ml-`  |
 | margin-right | `mr-` `margin-r-`  |
-| margin-top | `m-top-` `mt-` `margin-t-`  |
+| margin-top | `margin-t-` `mt-` `m-top-`  |
 | max-height | `max-h-`  |
 | max-width | `max-w-`  |
 | min-height | `min-h-`  |
 | min-width | `min-w-`  |
 | orphans | `orp-`  |
 | outline | `out-`  |
-| outline-color | `oc-` `outline-c-`  |
-| outline-style | `outline-s-` `os-`  |
-| outline-width | `outline-w-` `ow-`  |
+| outline-color | `outline-c-` `oc-`  |
+| outline-style | `os-` `outline-s-`  |
+| outline-width | `ow-` `outline-w-`  |
 | overflow | `ove-`  |
-| padding | `pad-` `p-`  |
+| padding | `p-` `pad-`  |
 | padding-bottom | `padding-b-`  |
 | padding-left | `padding-l-` `pl-`  |
 | padding-right | `padding-r-`  |
-| padding-top | `pt-` `padding-t-` `p-top-`  |
+| padding-top | `padding-t-` `pt-` `p-top-`  |
 | page-break-after | `page-b-after-` `pba-`  |
 | page-break-before | `pbb-` `page-b-before-`  |
 | page-break-inside | `pbi-` `page-b-inside-`  |
 | pause |  |
-| pause-after | `pa-` `pause-a-`  |
+| pause-after | `pause-a-` `pa-`  |
 | pause-before | `pause-b-`  |
 | pitch |  |
 | pitch-range | `pitch-r-`  |
@@ -95,23 +95,23 @@
 | right |  |
 | speak |  |
 | speak-header | `sh-` `speak-h-`  |
-| speak-numeral | `sn-` `speak-n-`  |
+| speak-numeral | `speak-n-` `sn-`  |
 | speak-punctuation | `speak-p-` `sp-`  |
 | speech-rate | `sr-` `speech-r-`  |
 | stress | `str-`  |
-| table-layout | `table-l-` `tl-`  |
-| text-align | `text-a-` `talign-` `t-align-` `ta-`  |
-| text-decoration | `line-through` `blink` `td-` `underline` `overline` `text-d-`  |
+| table-layout | `tl-` `table-l-`  |
+| text-align | `ta-` `talign-` `t-align-` `text-a-`  |
+| text-decoration | `line-through` `blink` `underline` `td-` `overline` `text-d-`  |
 | text-indent | `ti-` `text-i-`  |
-| text-transform | `tt-` `uppercase` `capitalize` `text-t-` `lowercase`  |
+| text-transform | `tt-` `text-t-` `lowercase` `uppercase` `capitalize`  |
 | top |  |
 | unicode-bidi | `ub-` `unicode-b-`  |
 | vertical-align | `valign-` `va-` `v-align-` `vertical-a-`  |
 | visibility | `vis-`  |
-| voice-family | `voice-f-` `vf-`  |
+| voice-family | `vf-` `voice-f-`  |
 | volume | `vol-`  |
 | white-space | `white-s-`  |
 | widows | `wid-`  |
 | width | `w-`  |
 | word-spacing | `word-s-`  |
-| z-index | `z-i-` `zi-`  |
+| z-index | `zi-` `z-i-`  |
