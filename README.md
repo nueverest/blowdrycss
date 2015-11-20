@@ -431,7 +431,7 @@ TODO: Implement this really cool feature.
 TODO: Implement this really cool feature.
 <br>TODO: Document
 
-###### Encoded Class 
+###### Encoded Class
 font-size-25-r
 
 ###### Resulting CSS media query.
