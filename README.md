@@ -254,10 +254,10 @@ p-70-10 | p- | 70px 10px | .p-70-10 { padding: 70px 10px }
 
 `font-weight, border-bottom-color, border-bottom-style, border-bottom-width, border-collapse`
 
+### Dashes are placed at the end of aliases to indicate that it's an alias and not a css property name.
+
 ###### Aliases for property names.
 `f-weight-, bg-c-, bg-color-, t-align-`
-
-### Dashes are placed at the end of aliases to indicate that it's an alias and not a css property name.
 
 ### Property names may be encoded as an alias.
 Consider this dictionary key, value pair found in `datalibrary.py` dictionary 
@@ -268,7 +268,7 @@ Consider this dictionary key, value pair found in `datalibrary.py` dictionary
 It maps the alias set `{'fweight-', 'lighter', 'fw-', 'bolder', 'f-weight-', 'font-w-', 'bold'}` to the property name
 `font-weight`. Meaning that any of the values in the set can be substituted for `font-weight`. 
 
-The full property name can also be used in the encoded class i.e. `font-weight-`.
+The full property name can also be used directly in the encoded class i.e. `font-weight-`.
 
 ### Dashes separate CSS property name/alias from property value
 Encoded Class Format | CSS Rule Output
