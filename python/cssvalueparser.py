@@ -192,3 +192,75 @@ class CSSPropertyValueParser(object):
     # Find all dashed keywords x-large san-serif etc.
     # Replace with uppercase X-LARGE SAN-SERIF
     # Remove all '-' dashes except the ones between uppercase letters.
+
+    # Media Query
+#     @mixin text($font-color, $font-size, $font-family:"Open Sans", $line-height:inherit, $responsive:true) {
+# 	color: $font-color;
+# 	font-size: $font-size;
+# 	font-family: $font-family, $default-font-family;
+# 	line-height: $line-height;
+#
+# 	// Responsive font reduction
+# 	@if $responsive {
+# 		// medium screen font size reduction
+# 		@media only screen and (max-width: $medium-width) {
+# 			font-size: $font-size/$medium-reduction;
+# 			line-height: $line-height/$medium-reduction;
+# 		}
+#
+# 		// small screen font size reduction
+# 		@media only screen and (max-width: $small-width) {
+# 			font-size: $font-size/$small-reduction;
+# 			line-height: $line-height/$small-reduction;
+# 		}
+# 	}
+# }
+#
+# @mixin link($color, $hcolor, $size, $font-family:"Open Sans", $line-height:inherit, $deco1:none, $deco2:none, $responsive:true) {
+# 	a {
+# 		color: $color;
+# 		font-size: $size;
+# 		font-family: $font-family, $default-font-family;
+# 		line-height: $line-height;
+# 		text-decoration: $deco1;
+# 		&:hover {
+# 			color: $hcolor;
+# 			text-decoration: $deco2;
+# 		}
+# 	}
+#
+# 	// Responsive font reduction
+# 	@if $responsive {
+# 		// medium screen font size reduction
+# 		@media only screen and (max-width: $medium-width) {
+# 			a {
+# 				color: $color;
+# 				font-size: $size/$medium-reduction;
+# 				font-family: $font-family, $default-font-family;
+# 				line-height: $line-height/$medium-reduction;
+# 				text-decoration: $deco1;
+#
+# 				&:hover {
+# 					color: $hcolor;
+# 					text-decoration: $deco2;
+# 				}
+# 			}
+# 		}
+#
+# 		// small screen font size reduction
+# 		@media only screen and (max-width: $small-width) {
+# 			a {
+# 				color: $color;
+# 				font-size: $size/$small-reduction;
+# 				font-family: $font-family, $default-font-family;
+# 				line-height: $line-height/$small-reduction;
+# 				text-decoration: $deco1;
+#
+# 				&:hover {
+# 					color: $hcolor;
+# 					text-decoration: $deco2;
+# 				}
+# 			}
+# 		}
+# 	}
+# }
