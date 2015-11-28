@@ -48,10 +48,10 @@ class ClassPropertyParser(object):
 
     # Detect and Remove invalid css classes from class_set
     # Class names must abide by: http://www.w3.org/TR/CSS2/syndata.html#characters
-    # For purposes of this library only a SUBSET of the standard is permissible as follows:
-    # Classes are only allowed to begin with [a-z]
-    # Classes are only allowed to end with [a-z0-9]
-    # Classes are allowed to contain [_a-z0-9-]
+    # For purposes of this project only a SUBSET of the standard is permissible as follows:
+    # Encoded classes are only allowed to begin with [a-z]
+    # Encoded classes are only allowed to end with [a-z0-9]
+    # Encoded classes are allowed to contain [_a-z0-9-]
     # Underscores are only allowed between digits [0-9]
     # Reference: stackoverflow.com/questions/1323364/in-python-how-to-check-if-a-string-only-contains-certain-characters
     def clean_class_set(self):

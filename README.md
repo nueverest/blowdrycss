@@ -39,6 +39,16 @@ the following CSS in `blowdry.css`:
 # Pre-Requisite Knowledge
 * Basic HTML, CSS, and Python skills.
 
+# Dissecting a CSS Statement
+```css
+.margin-10 { margin: 10px !important; }
+```
+
+Format | Property Name | Property Value | Priority
+------ | ------------- | -------------- | --------
+CSS | .margin-10 | margin: 10px | !important
+
+
 # Basic Tutorial
 ## How to Run the '/examplesite' demo
 ### Part 1 - Start the web browser to view the unstyled examplesite.

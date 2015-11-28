@@ -113,6 +113,7 @@ class CSSPropertyValueParser(object):
                         break
         return value
 
+    # Put everything together.
     def decode_property_value(self, property_name='', value=''):
         # Apply to all.
         value = self.replace_dashes(value=value)
