@@ -173,8 +173,8 @@ class ClassPropertyParser(object):
     # Returns a valid css property value or ''.
     @staticmethod
     def get_property_value(property_name='', encoded_property_value=''):
-        property_parser = CSSPropertyValueParser()
-        value = property_parser.decode_property_value(property_name=property_name, value=encoded_property_value)
+        value_parser = CSSPropertyValueParser()
+        value = value_parser.decode_property_value(property_name=property_name, value=encoded_property_value)
         return value
 
     # Property Priority

@@ -15,18 +15,6 @@ class TestCSSPropertyValueParser(TestCase):
         for i, value in enumerate(input_values):
             self.assertEquals(property_parser.replace_dashes(value=value), expected_values[i])
 
-    def test_contains_a_digit_true(self):
-        digits = ['n12px', '1p 7p 1p 7p', '-1_25em', '-1.35%', 'rgba 255 0 0 0.5', 'h0ff48f']
-        property_parser = CSSPropertyValueParser()
-        for value in digits:
-            self.assertTrue(property_parser.contains_a_digit(value=value), msg=value)
-
-    def test_contains_a_digit_false(self):
-        no_digits = ['bold', 'none', 'left']
-        property_parser = CSSPropertyValueParser()
-        for value in no_digits:
-            self.assertFalse(property_parser.contains_a_digit(value=value), msg=value)
-
     def test_replace_underscore_with_decimal(self):
         # '_' becomes '.'   example: '1_32rem' --> '1.32rem'
         test_values = ['1_32rem', '0_0435p', 'none']
@@ -47,86 +35,7 @@ class TestCSSPropertyValueParser(TestCase):
         expected = ['-5cm -6cm', '-12rem', '-0.0435%', '-1p -2p -1p -2p', '-9in', 'none']
         property_parser = CSSPropertyValueParser()
         for i, value in enumerate(test_values):
-            self.assertEquals(property_parser.replace_n_with_minus(value=value), expected[i])    
-
-    def test_property_name_allows_color(self):
-        property_names_true = {
-            'color', 'background-color', 'border-color', 'border-top-color', 'border-right-color', 'border-bottom-color',
-            'border-left-color', 'outline_color',
-            'background', 'border-top', 'border-right', 'border-bottom', 'border-left', 'border', 'outline',
-        }
-        property_names_false = {'font-weight', 'padding', 'height', 'width', 'float'}
-        property_parser = CSSPropertyValueParser()
-        for property_name in property_names_true:
-            self.assertTrue(property_parser.property_name_allows_color(property_name=property_name))
-        for property_name in property_names_false:
-            self.assertFalse(property_parser.property_name_allows_color(property_name=property_name))
-
-    def test_is_valid_hex(self):
-        values_true = ['h0ff48f', 'hfff', 'habc123', 'hfdec78', 'h000']
-        values_false = ['height', 'h1', 'h52', 'hbbb4', 'h00005', 'h0ghyz6', 'h0uk']
-        property_parser = CSSPropertyValueParser()
-        for value in values_true:
-            self.assertTrue(property_parser.is_valid_hex(value))
-        for value in values_false:
-            self.assertFalse(property_parser.is_valid_hex(value))
-
-    def test_replace_h_with_hash_valid_property_name(self):
-        valid_property_name = 'color'
-        input_values = ['h0ff48f', 'hfff', 'habc123', 'hfdec78', 'h000', 'height', 'h1', 'h52', 'h0ghyz6', 'h0uk']
-        expected_values = ['#0ff48f', '#fff', '#abc123', '#fdec78', '#000', 'height', 'h1', 'h52', 'h0ghyz6', 'h0uk']
-        property_parser = CSSPropertyValueParser()
-        for i, value in enumerate(input_values):
-            self.assertEqual(
-                property_parser.replace_h_with_hash(property_name=valid_property_name, value=value),
-                expected_values[i],
-                msg=value
-            )
-
-    def test_replace_h_with_hash_invalid_property_name(self):
-        invalid_property_name = 'width'
-        input_values = ['h0ff48f', 'hfff', 'habc123', 'hfdec78', 'h000', 'height', 'h1', 'h52', 'h0ghyz6', 'h0uk']
-        expected_values = input_values
-        property_parser = CSSPropertyValueParser()
-        for i, value in enumerate(input_values):
-            self.assertEqual(
-                property_parser.replace_h_with_hash(property_name=invalid_property_name, value=value),
-                expected_values[i],
-                msg=value
-            )
-
-    def test_add_color_parenthetical_valid_property_name(self):
-        #  rgb: rgb 0 255 0             -->  rgb(0, 255, 0)
-        # rgba: rgba 255 0 0 0.5        --> rgba(255, 0, 0, 0.5)
-        #  hsl: hsl 120 60% 70%         -->  hsl(120, 60%, 70%)
-        # hsla: hsla 120 60% 70% 0.3    --> hsla(120, 60%, 70%, 0.3)
-        valid_property_name = 'color'
-        input_values = ['rgb 0 255 0', 'rgba 255 0 0 0.5', 'hsl 120 60% 70%', 'hsla 120 60% 70% 0.3', 'blue', '#000']
-        expected_values = ['rgb(0, 255, 0)', 'rgba(255, 0, 0, 0.5)', 'hsl(120, 60%, 70%)', 'hsla(120, 60%, 70%, 0.3)',
-                           'blue', '#000']
-        property_parser = CSSPropertyValueParser()
-        for i, value in enumerate(input_values):
-            self.assertEqual(
-                property_parser.add_color_parenthetical(property_name=valid_property_name, value=value),
-                expected_values[i],
-                msg=value
-            )
-
-    def test_add_color_parenthetical_invalid_property_name(self):
-        #  rgb: rgb 0 255 0             -->  rgb(0, 255, 0)
-        # rgba: rgba 255 0 0 0.5        --> rgba(255, 0, 0, 0.5)
-        #  hsl: hsl 120 60% 70%         -->  hsl(120, 60%, 70%)
-        # hsla: hsla 120 60% 70% 0.3    --> hsla(120, 60%, 70%, 0.3)
-        valid_property_name = 'height'
-        input_values = ['rgb 0 255 0', 'rgba 255 0 0 0.5', 'hsl 120 60% 70%', 'hsla 120 60% 70% 0.3', 'blue', '#000']
-        expected_values = input_values
-        property_parser = CSSPropertyValueParser()
-        for i, value in enumerate(input_values):
-            self.assertEqual(
-                property_parser.add_color_parenthetical(property_name=valid_property_name, value=value),
-                expected_values[i],
-                msg=value
-            )
+            self.assertEquals(property_parser.replace_n_with_minus(value=value), expected[i])
 
     def test_decode_property_value(self):
         valid_property_name = 'color'
@@ -174,28 +83,6 @@ class TestCSSPropertyValueParser(TestCase):
         property_parser = CSSPropertyValueParser()
         for value in invalid_values:
             self.assertFalse(property_parser.property_is_valid(name=property_name, value=value, priority=''))
-
-    def test_add_units_multi_value(self):
-        # Handles cases input like: '12', '35 15', '1 2 1 2'
-        # Outputs: '12px', '35px 15px', '1px 2px 1px 2px'
-        property_name = 'padding'
-        property_values = ['12', '35 15', '1 2 1 2', '20% 20%', '5em 6em 5em 6em']
-        expected_values = ['12px', '35px 15px', '1px 2px 1px 2px', '20% 20%', '5em 6em 5em 6em']
-        property_parser = CSSPropertyValueParser()
-
-        for i, value in enumerate(property_values):
-            new_value = property_parser.add_units(property_name=property_name, property_value=value)
-            self.assertEqual(new_value, expected_values[i], msg=i)
-
-    def test_add_units_margin_top(self):
-        property_name = 'margin-top'
-        property_values = ['1', '20', '15px', '60rem']
-        expected_values = ['1px', '20px', '15px', '60rem']
-        property_parser = CSSPropertyValueParser()
-
-        for i, value in enumerate(property_values):
-            new_value = property_parser.add_units(property_name=property_name, property_value=value)
-            self.assertEqual(new_value, expected_values[i], msg=i)
 
 
 if __name__ == '__main__':

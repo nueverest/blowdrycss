@@ -1,4 +1,4 @@
-import unittest
+from unittest import TestCase, main
 import sys
 from datetime import datetime
 from time import time
@@ -10,7 +10,7 @@ __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-class TestTiming(unittest.TestCase):
+class TestTiming(TestCase):
     def test_seconds_to_string(self):
         allowed = set(digits + '.')
         time_string = timing.seconds_to_string(_time=time())
@@ -57,4 +57,4 @@ class TestTiming(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()

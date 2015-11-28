@@ -1,4 +1,4 @@
-import unittest
+from unittest import TestCase, main
 from os import chdir
 import sys
 from io import StringIO
@@ -8,7 +8,7 @@ __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-class TestMain(unittest.TestCase):
+class TestMain(TestCase):
     def test_main(self):
         substrings = ['Project Directory:', 'File Types:', 'Project Files Found:', 'CSSBuilder Running:']
         saved_stdout = sys.stdout
@@ -27,5 +27,5 @@ class TestMain(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
 
