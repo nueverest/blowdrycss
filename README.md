@@ -291,7 +291,7 @@ Encoded Class Format | CSS Rule Output
 alias-value-i | .alias-value-i { property-name: value !important }
 font-weight-bold-i | .font-weight-bold-i { font-weight: bold !important }
 
-### Shorthand can be used in cases where the alias is unambiguously the value.
+### Shorthand can be used in cases where the alias is unambiguously the css property value.
 Applicable properties include: `color`, `font-weight`, `font-style`, `text-decoration`, and `text-transform`.
 
 Encoded Class Format | CSS Rule Output
@@ -377,7 +377,7 @@ of `classpropertyparser.py`.
 ### Change the CSS File Name and Location:
 TODO: Document how easy it is to edit blowdry.py
 
-# Upcoming Features:
+# Upcoming Plugins:
 ### Make DRYer:
 TODO: Implement this essential feature.
 <br>TODO: Document
@@ -447,6 +447,15 @@ TODO: Integrate Sphinx
 <br>TODO: Put the docs on readthedocs 
 
 <!--- Commented
+##### Pattern Reducer - Find and reduce common patterns in html (skeptical as this reduces
+Assume that the following class pattern appears more than once:
+```css
+class="padding-10 margin-right-5 margin-left-5 text-align-center"
+```
+
+This could be identified and brought to the developers attention.  The developer could manually create a name for the
+replacement class; skip it; or allow class names to be generated automatically, for example, (.bd-1, .bd-2, .blowdry-3).
+
 ##### Implement using Javascript (consider what this would require)
 TODO: Implement this really cool feature.
 <br>TODO: Document
