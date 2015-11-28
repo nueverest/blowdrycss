@@ -16,10 +16,10 @@ from os import path, pardir
 # From the project directory run this command.
 # pandoc --from markdown --to rst README.md -o python/long_description.rst
 
+# Convert README.md to reStructuredText and assign to long_description.
 # Reference: https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules (do not like adding another
 # dependency).
 try:
-    # Get the long_description by converting README.md to reStructuredText.
     from pypandoc import convert
     here = path.abspath(path.dirname(__file__))
     readme_path = path.join(here, pardir, 'README.md')           # Go up one directory.
@@ -121,7 +121,7 @@ setup(
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
     # package_data={
-    #     'sample': ['package_data.dat'],
+    #     'blowdrycss': ['package_data.dat'],
     # },
 
     # Although 'package_data' is the preferred approach, in some case you may
