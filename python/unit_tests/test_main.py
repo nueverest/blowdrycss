@@ -10,8 +10,7 @@ __project__ = 'blow dry css'
 
 class TestMain(unittest.TestCase):
     def test_main(self):
-        substrings = ['Project Directory:', 'cssblowdry.css created', 'cssblowdry.min.css created']
-        complete = '---\n'
+        substrings = ['Project Directory:', 'File Types:', 'Project Files Found:', 'CSSBuilder Running:']
         saved_stdout = sys.stdout
         try:
             out = StringIO()
@@ -23,9 +22,9 @@ class TestMain(unittest.TestCase):
             output = out.getvalue()
             for substring in substrings:
                 self.assertTrue(substring in output, msg=output)
-            self.assertTrue(output.endswith(complete), msg=output)
         finally:
             sys.stdout = saved_stdout
+
 
 if __name__ == '__main__':
     unittest.main()
