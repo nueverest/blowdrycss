@@ -1,5 +1,5 @@
 # blowdrycss
-Rapid styling tool used to quickly auto-generate DRY CSS files from encoded classes found in *.html, *.aspx, *.ascx, or 
+Rapid styling tool used to auto-generate DRY CSS files from encoded classes found in *.html, *.aspx, *.ascx, or 
 *.master files.
 <br>Other file extensions can be add under `filehandler.py: FileFinder.file_types`.
 

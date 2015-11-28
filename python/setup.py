@@ -28,8 +28,7 @@ try:
         long_description = convert(source=markdown, to='rst', format='md')
 except (IOError, ImportError):
     # default description
-    long_description = u'Rapid styling tool used to quickly auto-generate DRY CSS files from encoded classes found in ' \
-                       u'*.html files.'
+    long_description = u'Rapid styling tool used to auto-generate DRY CSS files from encoded class selectors.'
 
 setup(
     name='blowdrycss',
@@ -39,8 +38,7 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version='0.0.1',
 
-    description=u'Rapid styling tool used to quickly auto-generate DRY CSS files from encoded classes found in ' \
-                u'*.html files.',
+    description=u'Rapid styling tool used to auto-generate DRY CSS files from encoded class selectors.',
     long_description=long_description,
 
     # The project's main homepage.
@@ -93,8 +91,7 @@ setup(
     # What does your project relate to?
     keywords='css compiler pre-compiler pre-processor generator dry cascading style sheets html encoded class parser',
 
-    # You can just specify the packages manually here if your project is
-    # simple. Or you can use find_packages().
+    # Packages
     packages=find_packages(),
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
