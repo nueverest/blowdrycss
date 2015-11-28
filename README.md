@@ -1,5 +1,5 @@
 # blowdrycss
-Tool used to quickly auto-generate DRY CSS files from encoded classes found in *.html, *.aspx, *.ascx, or 
+Rapid styling tool used to quickly auto-generate DRY CSS files from encoded classes found in *.html, *.aspx, *.ascx, or 
 *.master files.
 <br>Other file extensions can be add under `filehandler.py: FileFinder.file_types`.
 
@@ -32,12 +32,15 @@ the following CSS in `blowdry.css`:
 # Requirements
 > [Python 3.4+](https://www.python.org/downloads/) (required)
 <br>[cssutils 1.0.1+](https://bitbucket.org/cthedot/cssutils) (required)
-<br>[watchdog 0.8.2+](https://pypi.python.org/pypi/watchdog/0.8.3) (desired)
+
+### Optional
+<br>[watchdog 0.8.2+](https://pypi.python.org/pypi/watchdog/0.8.3) 
 <br>unittest (run unit tests)
 <br>coverage 4.0.2+ (check test coverage)
 
 # Pre-Requisite Knowledge
-* Basic HTML, CSS, and Python skills.
+* Basic HTML and CSS
+* No Python or Programming experience required.
 
 # Dissecting a CSS Statement
 ```css

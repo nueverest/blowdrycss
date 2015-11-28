@@ -17,14 +17,26 @@ def main():
     human_readable = True       # Generate a standard human readable css file
     minify = True               # Generate a minified version of the css file
 
+    # Plugins
+    # ...Not Implemented Yet...
+    # color_parser = False
+    # extra_dry = False
+    # px_to_rem = False
+    # media_queries = False
+    # responsive = False
+    auto_generate = False       # Automatically generates blowdry.css file when a project HTML file is saved.
+    http_server = False         # Runs a simple webserver on localhost.
+    # condense_classes = False    # Edits HTML Files after discovering common patterns (Not DRY).
+
     # Performance timer
     if timing_enabled:
         import timing
 
     # Set project_directory to the one containing the files you want to DRY out.
     # In this case it is set to the "examplesite" by default for demonstration purposes.
+    # Change to whatever you want.
     chdir('..')                                                 # Navigate up one directory relative to this script.
-    project_directory = path.join(getcwd() + '\\examplesite')    # Change to whatever you want.
+    project_directory = path.join(getcwd() + '\\examplesite')
     css_directory = path.join(project_directory + '\\css')
     
     # Generate Markdown documentation files.

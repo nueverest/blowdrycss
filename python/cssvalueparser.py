@@ -123,7 +123,7 @@ class CSSPropertyValueParser(object):
         value = self.replace_p_with_percent(value=value)
         value = self.replace_n_with_minus(value=value)
 
-        # The following two only apply when particular property names are used.
+        # Add plugins here
         value = self.replace_h_with_hash(property_name=property_name, value=value)
         value = self.add_color_parenthetical(property_name=property_name, value=value)  # Must contain digits.
         value = self.add_units(property_name=property_name, property_value=value)       # Add units if necessary.
@@ -166,19 +166,12 @@ class CSSPropertyValueParser(object):
 
     # TODO: Implement media query handling using:
     # allow user to define a dict
-    # 'xsmall': (0, 240),
-    # 'small': (0, 480), etc...
+    # 'xxsmall', 'xxs': (0, 120),
+    # 'xsmall', 'xs': (0, 240),
+    # 'small', 's', 'sm': (0, 480), etc...
     #
     # hide-for-, show-for-
     # -small-only, -small-down, -small-up, hide-for-480px-down, show-for-480px-up, hide-for-480-down, show-for-480-down
-
-    # TODO: Are URIs ridiculous? or should we implement syntax
-    # background-image-url-image.png --> background-image: url("image.png")
-    # background-image-url-_home_images_sample_image.png --> background-image: url("/home/images/sample/image.png")
-    # IN THE LAST CASE images with underscores would not work could use a double underscore to represent final directory
-    # but this is getting ridiculous example double underscore signifies final directory
-    # allowing underscore in file name:
-    # background-image-url-_home_images_sample__image_1.png --> background-image: url("/home/images/sample/image_1.png")
 
     # TODO: Handle font-family names with dashes in them same thing for "voice-family"
     # TODO: Consider using '--' to represent '-' dash could be an escape character
@@ -265,3 +258,11 @@ class CSSPropertyValueParser(object):
 # 		}
 # 	}
 # }
+
+# TODO: Are URIs ridiculous? or should we implement syntax
+# background-image-url-image.png --> background-image: url("image.png")
+# background-image-url-_home_images_sample_image.png --> background-image: url("/home/images/sample/image.png")
+# IN THE LAST CASE images with underscores would not work could use a double underscore to represent final directory
+# but this is getting ridiculous example double underscore signifies final directory
+# allowing underscore in file name:
+# background-image-url-_home_images_sample__image_1.png --> background-image: url("/home/images/sample/image_1.png")
