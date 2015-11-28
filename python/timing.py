@@ -13,10 +13,9 @@ def seconds_to_string(_time):
 
 
 def log(elapsed=None):
-    completed_at = '\nCompleted @' + str(datetime.now())
+    completed_at = '\nCompleted @ ' + str(datetime.now())
     border = "=" * len(completed_at)
-
-    print('\nCompleted @', datetime.now())
+    print(completed_at)
     print(border)
     if elapsed:
         print("It took:", elapsed, "seconds")

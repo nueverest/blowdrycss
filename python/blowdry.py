@@ -5,18 +5,21 @@ from htmlattributeparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
 from datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, property_alias_html
-import timing
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
 def main():
     # Boolean Settings
+    timing_enabled = True       # Run performance timer
     markdown_docs = True        # Generate a markdown files that provide a quick syntax and clashing alias reference.
     html_docs = True            # Generate a html file that provide a quick syntax and clashing alias reference.
     human_readable = True       # Generate a standard human readable css file
     minify = True               # Generate a minified version of the css file
 
+    # Performance timer
+    if timing_enabled:
+        import timing
 
     # Set project_directory to the one containing the files you want to DRY out.
     # In this case it is set to the "examplesite" by default for demonstration purposes.
