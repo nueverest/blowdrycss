@@ -25,7 +25,7 @@ try:
     readme_path = path.join(here, pardir, 'README.md')           # Go up one directory.
     with open(readme_path, encoding='utf-8') as f:
         markdown = f.read()
-        convert(source=markdown, to='rst', format='md')
+        long_description = convert(source=markdown, to='rst', format='md')
 except (IOError, ImportError):
     # default description
     long_description = u'Rapid styling tool used to quickly auto-generate DRY CSS files from encoded classes found in ' \
