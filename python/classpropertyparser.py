@@ -10,8 +10,9 @@ __project__ = 'blow dry css'
 class ClassPropertyParser(object):
     # CSS Unit Reference: http://www.w3schools.com/cssref/css_units.asp
     # CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
-    def __init__(self, class_set=set()):
+    def __init__(self, class_set=set(), px_to_em=True):
         css = u'''/* Generated with blowdrycss. */'''
+        self.px_to_em = px_to_em
         self.sheet = parseString(css)
         self.rules = []
         self.importance_designator = '-i'       # '-i' is used to designate that the priority level is '!important'
@@ -171,9 +172,8 @@ class ClassPropertyParser(object):
 
     # Accepts an encoded_property_value that's been stripped of it's property named and priority
     # Returns a valid css property value or ''.
-    @staticmethod
-    def get_property_value(property_name='', encoded_property_value=''):
-        value_parser = CSSPropertyValueParser()
+    def get_property_value(self, property_name='', encoded_property_value=''):
+        value_parser = CSSPropertyValueParser(px_to_em=self.px_to_em)
         value = value_parser.decode_property_value(property_name=property_name, value=encoded_property_value)
         return value
 

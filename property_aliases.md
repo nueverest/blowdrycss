@@ -3,68 +3,68 @@
 | azimuth | `azi-`  |
 | background | `bac-` `bg-`  |
 | background-attachment | `ba-` `background-a-`  |
-| background-color | `bg-c-` `background-c-` `bg-color-` `bgc-`  |
-| background-image | `background-i-` `bi-`  |
+| background-color | `background-c-` `bg-c-` `bgc-` `bg-color-`  |
+| background-image | `bi-` `background-i-`  |
 | background-position | `bp-` `background-p-`  |
 | background-repeat | `background-r-`  |
 | border | `bor-`  |
-| border-bottom | `bb-` `border-b-`  |
+| border-bottom | `border-b-` `bb-`  |
 | border-bottom-color | `border-b-color-` `bbc-`  |
 | border-bottom-style | `bbs-` `border-b-style-`  |
-| border-bottom-width | `border-b-width-` `bbw-`  |
+| border-bottom-width | `bbw-` `border-b-width-`  |
 | border-collapse |  |
 | border-color |  |
-| border-left | `bl-` `border-l-`  |
+| border-left | `border-l-` `bl-`  |
 | border-left-color | `blc-` `border-l-color-`  |
-| border-left-style | `border-l-style-` `bls-`  |
-| border-left-width | `blw-` `border-l-width-`  |
+| border-left-style | `bls-` `border-l-style-`  |
+| border-left-width | `border-l-width-` `blw-`  |
 | border-right | `border-r-`  |
 | border-right-color | `brc-` `border-r-color-`  |
 | border-right-style | `border-r-style-` `brs-`  |
-| border-right-width | `brw-` `border-r-width-`  |
+| border-right-width | `border-r-width-` `brw-`  |
 | border-spacing |  |
 | border-style |  |
 | border-top | `bt-` `border-t-`  |
-| border-top-color | `btc-` `border-t-color-`  |
-| border-top-style | `bts-` `border-t-style-`  |
+| border-top-color | `border-t-color-` `btc-`  |
+| border-top-style | `border-t-style-` `bts-`  |
 | border-top-width | `border-t-width-` `btw-`  |
-| border-width | `border-w-` `bw-`  |
+| border-width | `bw-` `border-w-`  |
 | bottom | `bot-`  |
 | caption-side | `cs-` `caption-s-`  |
 | clear |  |
 | clip |  |
-| color | `blue` `silver` `c-` `white` `orange` `fuchsia` `gray` `lime` `olive` `teal` `hsla-` `purple` `navy` `black` `maroon` `yellow` `hsl-` `green` `rgba-` `red` `aqua` `rgb-`  |
+| color | `hsla-` `purple` `rgb-` `lime` `fuchsia` `gray` `black` `rgba-` `olive` `c-` `silver` `red` `navy` `hsl-` `maroon` `orange` `blue` `green` `white` `aqua` `yellow` `teal`  |
 | content | `con-`  |
 | counter-increment | `ci-` `counter-i-`  |
-| counter-reset | `cr-` `counter-r-`  |
+| counter-reset | `counter-r-` `cr-`  |
 | cue |  |
-| cue-after | `cue-a-` `ca-`  |
+| cue-after | `ca-` `cue-a-`  |
 | cue-before | `cue-b-` `cb-`  |
 | cursor | `cur-`  |
 | direction | `dir-`  |
 | display | `dis-`  |
 | elevation | `ele-`  |
-| empty-cells | `empty-c-` `ec-`  |
+| empty-cells | `ec-` `empty-c-`  |
 | float |  |
 | font |  |
 | font-family | `ff-` `font-f-`  |
 | font-size | `fsize-` `f-size-`  |
-| font-style | `italic` `oblique`  |
-| font-variant | `fv-` `font-v-`  |
-| font-weight | `bolder` `bold` `font-w-` `fw-` `lighter` `f-weight-` `fweight-`  |
+| font-style | `oblique` `italic`  |
+| font-variant | `font-v-` `fv-`  |
+| font-weight | `fweight-` `f-weight-` `fw-` `bold` `lighter` `bolder` `font-w-`  |
 | height | `h-` `hei-`  |
 | left |  |
 | letter-spacing | `letter-s-`  |
 | line-height | `line-h-` `lh-`  |
 | list-style | `list-s-`  |
-| list-style-image | `list-s-image-` `lsi-`  |
-| list-style-position | `lsp-` `list-s-position-`  |
-| list-style-type | `list-s-type-` `lst-`  |
+| list-style-image | `lsi-` `list-s-image-`  |
+| list-style-position | `list-s-position-` `lsp-`  |
+| list-style-type | `lst-` `list-s-type-`  |
 | margin | `m-` `mar-`  |
-| margin-bottom | `m-bot-` `margin-b-` `mb-`  |
+| margin-bottom | `mb-` `m-bot-` `margin-b-`  |
 | margin-left | `ml-` `margin-l-`  |
 | margin-right | `mr-` `margin-r-`  |
-| margin-top | `margin-t-` `m-top-` `mt-`  |
+| margin-top | `m-top-` `mt-` `margin-t-`  |
 | max-height | `max-h-`  |
 | max-width | `max-w-`  |
 | min-height | `min-h-`  |
@@ -79,12 +79,12 @@
 | padding-bottom | `padding-b-`  |
 | padding-left | `padding-l-` `pl-`  |
 | padding-right | `padding-r-`  |
-| padding-top | `pt-` `padding-t-` `p-top-`  |
+| padding-top | `padding-t-` `p-top-` `pt-`  |
 | page-break-after | `pba-` `page-b-after-`  |
-| page-break-before | `pbb-` `page-b-before-`  |
-| page-break-inside | `page-b-inside-` `pbi-`  |
+| page-break-before | `page-b-before-` `pbb-`  |
+| page-break-inside | `pbi-` `page-b-inside-`  |
 | pause |  |
-| pause-after | `pause-a-` `pa-`  |
+| pause-after | `pa-` `pause-a-`  |
 | pause-before | `pause-b-`  |
 | pitch |  |
 | pitch-range | `pitch-r-`  |
@@ -94,21 +94,21 @@
 | richness | `ric-`  |
 | right |  |
 | speak |  |
-| speak-header | `sh-` `speak-h-`  |
+| speak-header | `speak-h-` `sh-`  |
 | speak-numeral | `sn-` `speak-n-`  |
 | speak-punctuation | `sp-` `speak-p-`  |
 | speech-rate | `sr-` `speech-r-`  |
 | stress | `str-`  |
-| table-layout | `table-l-` `tl-`  |
-| text-align | `ta-` `talign-` `t-align-` `text-a-`  |
-| text-decoration | `text-d-` `td-` `overline` `blink` `line-through` `underline`  |
-| text-indent | `ti-` `text-i-`  |
-| text-transform | `text-t-` `uppercase` `lowercase` `tt-` `capitalize`  |
+| table-layout | `tl-` `table-l-`  |
+| text-align | `talign-` `ta-` `t-align-` `text-a-`  |
+| text-decoration | `line-through` `overline` `text-d-` `underline` `td-` `blink`  |
+| text-indent | `text-i-` `ti-`  |
+| text-transform | `lowercase` `text-t-` `uppercase` `tt-` `capitalize`  |
 | top |  |
 | unicode-bidi | `ub-` `unicode-b-`  |
-| vertical-align | `v-align-` `va-` `vertical-a-` `valign-`  |
+| vertical-align | `vertical-a-` `v-align-` `va-` `valign-`  |
 | visibility | `vis-`  |
-| voice-family | `vf-` `voice-f-`  |
+| voice-family | `voice-f-` `vf-`  |
 | volume | `vol-`  |
 | white-space | `white-s-`  |
 | widows | `wid-`  |

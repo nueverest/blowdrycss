@@ -18,10 +18,11 @@ def main():
     minify = True               # Generate a minified version of the css file
 
     # Plugins
+    px_to_em = True
     # ...Not Implemented Yet...
     # color_parser = False
     # extra_dry = False
-    # px_to_rem = False
+
     # media_queries = False
     # responsive = False
     auto_generate = False       # Automatically generates blowdry.css file when a project HTML file is saved.
@@ -63,7 +64,7 @@ def main():
     class_parser = HTMLClassParser(files=file_finder.files)
 
     # Filter class names only keeping classes that match the defined class encoding.
-    class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
+    class_property_parser = ClassPropertyParser(class_set=class_parser.class_set, px_to_em=px_to_em)
     # print('\nclass_property_parser.class_set:', class_property_parser.class_set)
 
     # Build a set() of valid css properties. Some classes may be removed during cssutils validation.

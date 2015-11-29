@@ -12,9 +12,9 @@ __project__ = 'blow dry css'
 # Accepts a clean encoded_property_value e.g. 'bold', '1-5-1-5', '1_32rem', '1p-10p-3p-1p', 'n12px', 'n5_25cm-n6_1cm'
 # Decodes a css property_value from a clean encoded_property_value.
 class CSSPropertyValueParser(object):
-    def __init__(self):
+    def __init__(self, px_to_em=True):
         self.color_parser = ColorParser()
-        self.unit_parser = UnitParser()
+        self.unit_parser = UnitParser(px_to_em=px_to_em)
     
     # Important: these methods are intended to be called in the order they are declared.
 
