@@ -7,6 +7,9 @@ __project__ = 'blow dry css'
 # DataLibrary is not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
 class DataLibrary(object):
     def __init__(self):
+        # Regexes match the following string patterns:
+        # 'h123', 'h123456', 'h123 bold', 'h123456 underline',
+        # Note: If this dictionary grows write a function that detects regex conflicts.
         self.property_regex_dict = {
             'color': {r"(h[0-9a-f]{3} ?)$", r"(h[0-9a-f]{6} ?)$"},
         }
@@ -298,7 +301,7 @@ class DataLibrary(object):
         return _html
 
 
-# DataLibrary() is not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
+# DataLibrary() is not intended for use outside of this file as each time its' called it rebuilds some dictionaries.
 __data_library = DataLibrary()
 
 ############################################
@@ -306,9 +309,9 @@ __data_library = DataLibrary()
 ############################################
 
 # Dictionaries
+property_regex_dict = __data_library.property_regex_dict
 property_alias_dict = __data_library.property_alias_dict
 ordered_property_dict = __data_library.ordered_property_dict
-property_regex_dict = __data_library.property_regex_dict
 
 # Markdown
 clashing_alias_markdown = __data_library.clashing_alias_markdown

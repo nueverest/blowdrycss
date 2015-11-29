@@ -1,7 +1,8 @@
 # blowdrycss
-Rapid styling tool used to auto-generate DRY CSS files from encoded classes found in *.html, *.aspx, *.ascx, or 
+Rapid styling tool for auto-generating DRY CSS files from encoded class selectors found in *.html, *.aspx, *.ascx, or 
 *.master files.
-<br>Other file extensions can be add under `filehandler.py: FileFinder.file_types`.
+<br>
+>Other file extensions can be added under `filehandler.py: FileFinder.file_types`.
 
 #### Why the name blowdrycss?
 Inspiration for the name came from the blow dryer. A blow dryer rapidly drys and styles hair. :ok_woman: 
