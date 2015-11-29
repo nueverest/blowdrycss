@@ -1,12 +1,14 @@
 from re import findall
 # custom
 from utilities import contains_a_digit
+from datalibrary import property_regex_dict
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
 class ColorParser(object):
     def __init__(self, property_name='', value=''):
+        self.color_regexes = property_regex_dict['color']
         self.property_name = property_name
         self.value = value
 
@@ -25,17 +27,12 @@ class ColorParser(object):
 
     # Expects a value of the form: h0ff48f or hfaf i.e. 'h' + a 3 or 6 digit hexidecimal value 0-f.
     # Returns #0ff48f or #faf
-    # Note: This does not work with shorthand properties border-1px-solid-hddd will not replace the 'h'
-    @staticmethod
-    def is_valid_hex(value=''):
-        is_valid = False
-        _len = len(value)              # _len includes 'h'
-        if value.startswith('h'):
-            if _len >= 7:                               # 'h' + 6 hex digits
-                is_valid = True if len(findall(r"(h[0-9a-f]{6} ?)$", value)) == 1 else False
-            if _len >= 4 and not is_valid:              # 'h' + 3 hex digits - Only runs if first check fails.
-                is_valid = True if len(findall(r"(h[0-9a-f]{3} ?)$", value)) == 1 else False
-        return is_valid
+    # Some shorthand properties are supported: border 1px solid hddd --> border 1px solid #ddd
+    def is_valid_hex(self, value=''):
+        for regex in self.color_regexes:
+            if len(findall(regex, value)) == 1:
+                return True
+        return False
 
     # Declaring hex (prepend 'h'):
     # h0ff24f   --> #0ff24f (6 digit)

@@ -20,7 +20,8 @@ class TestColorParser(TestCase):
             self.assertFalse(color_parser.property_name_allows_color(property_name=property_name))
 
     def test_is_valid_hex(self):
-        values_true = ['h0ff48f', 'hfff', 'habc123', 'hfdec78', 'h000', 'hbcd ']
+        values_true = ['h0ff48f', 'hfff', ' habc123 ', 'hfdec78', 'h000', ' hbcd ', 'border 5px solid hd0d',
+                       'border-5px-solid-hd0d']
         values_false = ['height', 'h1', 'h52', 'hbbb4', 'h00005', 'h0ghyz6', 'h0uk']
         color_parser = ColorParser()
         for value in values_true:

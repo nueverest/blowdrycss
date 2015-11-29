@@ -8,7 +8,7 @@ __project__ = 'blow dry css'
 class DataLibrary(object):
     def __init__(self):
         # Regexes match the following string patterns:
-        # 'h123', 'h123456', 'h123 bold', 'h123456 underline',
+        # 'h123', 'h123456', 'h123 bold', 'h123456 underline', 'underline h123 bold',
         # Note: If this dictionary grows write a function that detects regex conflicts.
         self.property_regex_dict = {
             'color': {r"(h[0-9a-f]{3} ?)$", r"(h[0-9a-f]{6} ?)$"},
