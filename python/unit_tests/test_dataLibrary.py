@@ -221,7 +221,7 @@ class TestDataLibrary(TestCase):
             'page-break-after': {'page-b-after-', 'pba-'}, 'page-break-before': {'pbb-', 'page-b-before-'},
             'pitch-range': {'pitch-r-'}, 'right': set(), 'table-layout': {'tl-', 'table-l-'},
             'font-size': {'fsize-', 'f-size-'}, 'padding-top': {'pt-', 'padding-t-', 'p-top-'},
-            'color': {'c-', 'rgb-', 'rgba-', 'hsl-', 'hsla-', 'aqua', 'black', 'blue', 'fuchsia', 'gray',
+            'color': {'c-', 'rgb', 'rgba', 'hsl', 'hsla', 'aqua', 'black', 'blue', 'fuchsia', 'gray',
             'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white', 'yellow'},
             'counter-reset': {'cr-', 'counter-r-'}, 'border-color': set(),
             'font-style': {'italic', 'oblique'}, 'border': {'bor-'}, 'speak-punctuation': {'speak-p-', 'sp-'},

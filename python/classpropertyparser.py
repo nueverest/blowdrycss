@@ -1,8 +1,9 @@
 from cssutils import parseString
 from string import ascii_lowercase, digits
+from re import findall
 # custom
 from cssvalueparser import CSSPropertyValueParser
-from datalibrary import ordered_property_dict, property_alias_dict
+from datalibrary import ordered_property_dict, property_alias_dict, property_regex_dict
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -100,7 +101,7 @@ class ClassPropertyParser(object):
     @staticmethod
     def get_property_name(css_class=''):
         for property_name, aliases in ordered_property_dict.items():
-            # Try identical key match first. An exact css_class match must also end with a '-' dash to be valid.
+            # Try identical 'key' match first. An exact css_class match must also end with a '-' dash to be valid.
             if css_class.startswith(property_name + '-'):
                 return property_name
 
@@ -112,6 +113,15 @@ class ClassPropertyParser(object):
             for alias in aliases:
                 if css_class.startswith(alias):
                     return property_name
+
+            # Try matching regex pattern.
+            try:
+                regexes = property_regex_dict[property_name]
+                for regex in regexes:
+                    if len(findall(regex, css_class)) == 1:
+                        return property_name
+            except KeyError:
+                pass
 
         # No match found.
         return ''

@@ -14,8 +14,8 @@ class ColorParser(object):
     def property_name_allows_color(property_name=''):
         # Reference: http://www.w3.org/TR/CSS21/propidx.html
         color_property_names = {
-            'color', 'background-color', 'border-color', 'border-top-color', 'border-right-color', 'border-bottom-color',
-            'border-left-color', 'outline_color',
+            'color', 'background-color', 'border', 'border-color', 'border-top-color', 'border-right-color',
+            'border-bottom-color', 'border-left-color', 'outline', 'outline_color',
             'background', 'border-top', 'border-right', 'border-bottom', 'border-left', 'border', 'outline',
         }
         for color_property_name in color_property_names:
@@ -31,10 +31,10 @@ class ColorParser(object):
         is_valid = False
         _len = len(value)              # _len includes 'h'
         if value.startswith('h'):
-            if _len == 4:           # 'h' + 3 hex digits
-                is_valid = True if len(findall(r"([0-9a-f]{3})", value)) == 1 else False
-            if _len == 7:           # 'h' + 6 hex digits
-                is_valid = True if len(findall(r"([0-9a-f]{6})", value)) == 1 else False
+            if _len >= 7:                               # 'h' + 6 hex digits
+                is_valid = True if len(findall(r"(h[0-9a-f]{6} ?)$", value)) == 1 else False
+            if _len >= 4 and not is_valid:              # 'h' + 3 hex digits - Only runs if first check fails.
+                is_valid = True if len(findall(r"(h[0-9a-f]{3} ?)$", value)) == 1 else False
         return is_valid
 
     # Declaring hex (prepend 'h'):

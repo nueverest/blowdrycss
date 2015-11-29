@@ -24,7 +24,7 @@ class UnitParser(object):
             for val in property_value.split():                                      # Double and quadruple values.
                 if set(val) <= self.allowed:
                     val = val.replace('px', '')                                     # Handle pre-defined units casep
-                    if self.px_to_em and default_units == 'px':                     # Convert units.
+                    if self.px_to_em and default_units == 'px':                     # Convert units if required.
                         val = self.convert_px_to_em(pixels=val)
                         new_units = 'em'
                         new_value.append(val + new_units)

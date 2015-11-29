@@ -20,13 +20,13 @@ class TestColorParser(TestCase):
             self.assertFalse(color_parser.property_name_allows_color(property_name=property_name))
 
     def test_is_valid_hex(self):
-        values_true = ['h0ff48f', 'hfff', 'habc123', 'hfdec78', 'h000']
+        values_true = ['h0ff48f', 'hfff', 'habc123', 'hfdec78', 'h000', 'hbcd ']
         values_false = ['height', 'h1', 'h52', 'hbbb4', 'h00005', 'h0ghyz6', 'h0uk']
         color_parser = ColorParser()
         for value in values_true:
-            self.assertTrue(color_parser.is_valid_hex(value))
+            self.assertTrue(color_parser.is_valid_hex(value), msg=value)
         for value in values_false:
-            self.assertFalse(color_parser.is_valid_hex(value))
+            self.assertFalse(color_parser.is_valid_hex(value), msg=value)
 
     def test_replace_h_with_hash_valid_property_name(self):
         valid_property_name = 'color'

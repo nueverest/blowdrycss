@@ -78,9 +78,11 @@ class DataLibrary(object):
             'min-width': 'px',                # single
         }
 
-        # TODO: create functions that validates dictionarien ensuring that no aliases clash.
-        # TODO: move this to a CSV file and autogenerate this dictionary from CSV.
+        self.property_regex_dict = {
+            'color': {r"(h[0-9a-f]{3} ?)$", r"(h[0-9a-f]{6} ?)$"},
+        }
 
+        # TODO: move this to a CSV file and autogenerate this dictionary from CSV.
         # Used to define custom class aliases for a given property_name.
         # Feel free to modify as you would like.
         # Please keep in mind that if you define an alias that clashes with an alias in this dict() or the dict()
@@ -103,7 +105,7 @@ class DataLibrary(object):
         self.custom_property_alias_dict = {
             'background': {'bg-', },
             'background-color': {'bgc-', 'bg-c-', 'bg-color-', },
-            'color': {'c-', 'rgb-', 'rgba-', 'hsl-', 'hsla-', 'aqua', 'black', 'blue', 'fuchsia', 'gray',
+            'color': {'c-', 'rgb', 'rgba', 'hsl', 'hsla', 'aqua', 'black', 'blue', 'fuchsia', 'gray',
                       'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white',
                       'yellow'},
             'font-size': {'fsize-', 'f-size-', },
@@ -378,6 +380,7 @@ __data_library = DataLibrary()
 default_property_units_dict = __data_library.default_property_units_dict
 property_alias_dict = __data_library.property_alias_dict
 ordered_property_dict = __data_library.ordered_property_dict
+property_regex_dict = __data_library.property_regex_dict
 
 # Markdown
 clashing_alias_markdown = __data_library.clashing_alias_markdown
