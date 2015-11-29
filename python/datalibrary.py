@@ -15,6 +15,7 @@ class DataLibrary(object):
             'color': {r"(h[0-9a-f]{3} ?)$", r"(h[0-9a-f]{6} ?)$"},
         }
 
+        # TODO: What about fonts "san-serif", etc.
         # TODO: move this to a CSV file and autogenerate this dictionary from CSV.
         # Used to define custom class aliases for a given property_name.
         # Feel free to modify as you would like.
@@ -36,27 +37,56 @@ class DataLibrary(object):
         #   css property name as 'keys'
         #   list of aliases as 'values' - An alias can be shorthand for the property name.
         self.custom_property_alias_dict = {
+            'azimuth': {'left-side', 'far-left', 'center-left', 'center-right', 'far-right', 'right-side', 'behind',
+                        'leftwards', 'rightwards', },
             'background': {'bg-', },
             'background-color': {'bgc-', 'bg-c-', 'bg-color-', },
+            'background-repeat': {'repeat', 'repeat-x', 'repeat-y', 'no-repeat', },
             'color': {'c-', 'rgb', 'rgba', 'hsl', 'hsla', 'aqua', 'black', 'blue', 'fuchsia', 'gray',
-                      'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver', 'teal', 'white',
-                      'yellow'},
+                      'green', 'lime', 'maroon', 'navy', 'olive', 'orange', 'purple', 'red', 'silver',
+                      'teal', 'white', 'yellow', },
+            'content': {'open-quote', 'close-quote', 'no-open-quote', 'no-close-quote', },
+            'cursor': {'crosshair', 'default', 'pointer', 'move', 'e-resize', 'ne-resize', 'nw-resize', 'n-resize',
+                       'se-resize', 'sw-resize', 's-resize', 'w-resize', 'text', 'wait', 'help', 'progress', },
+            'direction': {'ltr', 'rtl'},
+            'display': {'inline', 'block', 'list-item', 'inline-block', 'table', 'inline-table', 'table-row-group',
+                        'table-header-group', 'table-footer-group', 'table-row', 'table-column-group', 'table-column',
+                        'table-cell', 'table-caption', },
+            'elevation': {'below', 'level', 'above', 'higher', 'lower', },
             'font-size': {'fsize-', 'f-size-', },
+            'font-style': {'italic', 'oblique', },
+            'font-variant': {'small-caps', },
             'font-weight': {'bold', 'bolder', 'lighter', 'fweight-', 'f-weight-', },
-            'font-style': {'italic', 'oblique'},
             'height': {'h-', },
+            'list-style-position': {'inside', 'outside', },
+            'list-style-type': {'disc', 'circle', 'square', 'decimal', 'decimal-leading-zero', 'lower-roman',
+                                'upper-roman', 'lower-greek', 'lower-latin', 'upper-latin', 'armenian',
+                                'georgian', 'lower-alpha', 'upper-alpha', },
             'margin': {'m-', },
             'margin-top': {'m-top-', },
             'margin-bottom': {'m-bot-', },
+            'overflow': {'visible', 'hidden', 'scroll', },
             'padding': {'p-', 'pad-', },
             'padding-top': {'p-top-', },
+            'pitch': {'x-low', 'low', 'high', 'x-high'},
+            'play-during': {'mix', 'repeat', },
+            'position': {'static', 'relative', 'absolute', 'pos-', },
+            'speak-header': {'once', 'always'},
+            'speak-numeral': {'digits', 'continuous', },
+            'speak-punctuation': {'code', },
+            'speak': {'spell-out', },
+            'speech-rate': {'x-slow', 'slow', 'fast', 'x-fast', 'faster', 'slower', },
             'text-align': {'talign-', 't-align-', },
-            'text-decoration': {'underline', 'overline', 'line-through', 'blink'},
-            'text-transform': {'capitalize', 'uppercase', 'lowercase'},
-            'vertical-align': {'valign-', 'v-align-', },
+            'text-decoration': {'underline', 'overline', 'line-through', 'blink', },
+            'text-transform': {'capitalize', 'uppercase', 'lowercase', },
+            'unicode-bidi': {'embed', 'bidi-override', },
+            'vertical-align': {'baseline', 'sub', 'super', 'middle', 'text-top', 'text-bottom', 'valign-', 'v-align-'},
+            'visibility': {'visible', 'hidden', 'collapse', },
+            'volume': {'silent', 'x-soft', 'soft', 'loud', 'x-loud', },
             'width': {'w-', },
         }
 
+        # Source: http://www.w3.org/TR/CSS21/propidx.html
         self.property_names = {
             'azimuth', 'background', 'background-attachment', 'background-color', 'background-image',
             'background-position', 'background-repeat', 'border', 'border-bottom', 'border-bottom-color',
@@ -321,5 +351,4 @@ property_alias_markdown = __data_library.property_alias_markdown
 # HTML
 clashing_alias_html = __data_library.clashing_alias_html
 property_alias_html = __data_library.property_alias_html
-
 
