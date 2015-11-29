@@ -360,7 +360,7 @@ Value Encoding Format | CSS Property Value Output
 
 ### Default Units:
 If units are not provided in the class name, then default units were applicable. The default units
-are defined in `DataLibrary.default_property_units_dict` inside `datalibrary.py`.  This makes it possible to
+are defined in `UnitParser.default_property_units_dict` inside `unitparser.py`.  This makes it possible to
 easily change the default units for a particular property name.
 
 Value Encoding Format | CSS Property Value Output

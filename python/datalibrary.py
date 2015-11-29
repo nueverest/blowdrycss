@@ -7,77 +7,6 @@ __project__ = 'blow dry css'
 # DataLibrary is not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
 class DataLibrary(object):
     def __init__(self):
-        # Reference: http://www.w3.org/TR/CSS21/propidx.html
-        # Extracted all properties containing Values of <angle>, <percentage>, <length>, <time>, <frequency>
-        # IDEA: Build webscraper that auto-extracts these.\
-        self.default_property_units_dict = {       # Possible Occurrences:
-            'azimuth': 'deg',                 # single
-            'background-position': '%',       # single or double
-
-            # 'border': 'px',                 # single   Shorthand Property unit addition Not implemented
-            'border-top': 'px',               # single
-            'border-right': 'px',             # single
-            'border-bottom': 'px',            # single
-            'border-left': 'px',              # single
-            'border-spacing': 'px',           # single
-
-            'border-width': 'px',             # single
-            'border-top-width': 'px',         # single
-            'border-right-width': 'px',       # single
-            'border-bottom-width': 'px',      # single
-            'border-left-width': 'px',        # single
-
-            'elevation': 'deg',               # single
-
-            # 'font': 'px',                   # single    Shorthand Property unit addition Not implemented
-            'font-size': 'px',                # single
-
-            'height': 'px',                   # single
-            'max-height': 'px',               # single
-            'min-height': 'px',               # single
-
-            'letter-spacing': 'px',           # single
-            'word-spacing': 'px',             # single
-
-            'line-height': 'px',              # single
-
-            'top': 'px',                      # single
-            'right': 'px',                    # single
-            'bottom': 'px',                   # single
-            'left': 'px',                     # single
-
-            'margin': 'px',                   # single, double, quadruple
-            'margin-top': 'px',               # single
-            'margin-right': 'px',             # single
-            'margin-bottom': 'px',            # single
-            'margin-left': 'px',              # single
-
-            # 'outline': 'px',                # single    Shorthand Property unit addition Not implemented
-            'outline-width': 'px',            # single
-
-            'padding': 'px',                  # single, double, quadruple
-            'padding-top': 'px',              # single
-            'padding-right': 'px',            # single
-            'padding-bottom': 'px',           # single
-            'padding-left': 'px',             # single
-
-            'pause': 'ms',                    # single, double
-            'pause-after': 'ms',              # single
-            'pause-before': 'ms',             # single
-
-            'pitch': 'Hz',                    # single
-
-            'text-indent': 'px',              # single
-
-            'vertical-align': '%',            # single
-
-            'volume': '%',                    # single
-
-            'width': 'px',                    # single
-            'max-width': 'px',                # single
-            'min-width': 'px',                # single
-        }
-
         self.property_regex_dict = {
             'color': {r"(h[0-9a-f]{3} ?)$", r"(h[0-9a-f]{6} ?)$"},
         }
@@ -377,7 +306,6 @@ __data_library = DataLibrary()
 ############################################
 
 # Dictionaries
-default_property_units_dict = __data_library.default_property_units_dict
 property_alias_dict = __data_library.property_alias_dict
 ordered_property_dict = __data_library.ordered_property_dict
 property_regex_dict = __data_library.property_regex_dict
