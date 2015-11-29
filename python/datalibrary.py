@@ -7,6 +7,7 @@ __project__ = 'blow dry css'
 # DataLibrary is not intended for use outside of this file as each time its' called it rebuilds the dictionaries.
 class DataLibrary(object):
     def __init__(self):
+        # TODO: If no new regexes are added consider moving to colorparser.
         # Regexes match the following string patterns:
         # 'h123', 'h123456', 'h123 bold', 'h123456 underline', 'underline h123 bold',
         # Note: If this dictionary grows write a function that detects regex conflicts.

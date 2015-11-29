@@ -17,16 +17,17 @@ def main():
     human_readable = True       # Generate a standard human readable css file
     minify = True               # Generate a minified version of the css file
 
-    # Plugins
+    # Plugin Defaults
     px_to_em = True
     # ...Not Implemented Yet...
+    # hex_to_rgb = True
     # color_parser = False
     # extra_dry = False
 
     # media_queries = False
     # responsive = False
     auto_generate = False       # Automatically generates blowdry.css file when a project HTML file is saved.
-    http_server = False         # Runs a simple webserver on localhost.
+    http_server = False         # Auto-Start a simple webserver on localhost:8080.
     # condense_classes = False    # Edits HTML Files after discovering common patterns (Not DRY).
 
     # Performance timer

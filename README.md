@@ -325,7 +325,9 @@ keyword | color-silver | .color-silver { color: silver }
  rgb | color-rgb-0-255-0 | .color-rgb-0-255-0 { color: rgb(0, 255, 0) }
 rgba | color-rgba-255-0-0-0_5 | .color-rgba-255-0-0-0_5 { color: rgba(255, 0, 0, 0.5) }
 hex6 | color-h0ff23f (prepend 'h') | .color-h0ff23f { color: &#35;0ff23f }
+hex6 | h0ff23f | .h0ff23f { color: C&#35;0ff23f }
 hex3 | color-h03f    (prepend 'h') | .color-h03f { color: &#35;03f }
+hex3 | hfd4 | .hfd4 { color: C&#35;fd4 }
  hsl | color-hsl-120-60p-70p | .color-hsl-120-60p-70p { color: hsl(120, 60%, 70%) }
 hsla | color-hsla-120-60p-70p-0_3 | .color-hsla-120-60p-70p-0_3 { color: hsl(120, 60%, 70%, 0.3) }
 
@@ -368,6 +370,9 @@ Value Encoding Format | CSS Property Value Output
 --------------------- | -------------------------
 padding-50| padding: 50px
 elevation-20 | elevation: 20deg
+
+### Optional Unit Conversion
+To enable 'px' to 'em' unit conversion open `blowdry.py` and set `px_to_em = True`
 
 ### Explicitly Encoding Units in Class Name
 
@@ -424,18 +429,11 @@ Duplicates the string `{ padding: 10px }`
 .padding-10, .padding-10px { padding: 10px }
 ```
 
-##### Drop requirement for hexadecimal color values to be prefixed with a property name.
+##### Drop requirement for hexadecimal color values to be prefixed with a property name. Implemented: 11/28/2015
 
-###### Allow
+##### Integrate optional px :point_right: em Unit Conversion. Implemented: 11/28/2015
 
-Color Format | Encoded Class Format | CSS Rule Output
------------- | --------------------- | ---------------
-hex6 | h0ff23f | .h0ff23f { color: C&#35;0ff23f }
-hex3 | hfd4 | .hfd4 { color: C&#35;fd4 }
-
-##### Automatic px :point_right: rem Unit Conversion:
-TODO: Implement this really cool feature.
-<br>TODO: Document
+##### Integrate option hexidecimal :point_right: rgb() Unit Conversion.
 
 ##### Create Seamless Media Queries for responsive layouts:
 TODO: Implement this really cool feature.
@@ -502,7 +500,7 @@ CSS Property Value | Encodings Not Implemented
 ------------------ | ------------------------- 
 background-image: url("/home/images/sample/image.png") | '/', '(', and double quote
 
-##### Some Encoded Property Values containing '-' will become invalid.
+##### Some Encoded Property Values containing '-' will become invalid. (Currently Working on this 11/29/2015)
 That said "some cases will work". Note that in the valid examples the units of 'px' are explicitly declared.
 
 Value Encoding Format | CSS Property Value Output | Validity
@@ -522,8 +520,9 @@ font-italic-bold-12px-serif | font: italic bold 12px serif | valid
 The MIT License (MIT)
 
 ### How to Contribute
-* Report Issues
+* Open an Issue first
 * Write Code
+* Write Unit Tests (All tests must pass with greater than 90% coverage)
 * [Flattr this Project](https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss) 
 <br><br>&nbsp;&nbsp;&nbsp;<a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" style="text-align:bottom;" alt="Flattr this" title="Flattr this" border="0"></a>
 
