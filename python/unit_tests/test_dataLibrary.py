@@ -192,7 +192,7 @@ class TestDataLibrary(TestCase):
             'vertical-align': {'baseline', 'sub', 'v-align-', 'text-top', 'middle', 'text-bottom', 'vertical-a-',
                                'valign-', 'va-', 'super'}, 'page-break-after': {'pba-', 'page-b-after-'},
             'elevation': {'higher', 'ele-', 'lower', 'above', 'below', 'level'}, 'line-height': {'lh-', 'line-h-'},
-            'font': set(), 'min-height': {'min-h-'}, 'font-family': {'ff-', 'font-f-'},
+            'font': set(), 'min-height': {'min-h-'},
             'speech-rate': {'sr-', 'speech-r-', 'x-fast', 'fast', 'faster', 'x-slow', 'slow', 'slower'},
             'z-index': {'zi-', 'z-i-'}, 'list-style': {'list-s-'}, 'background-position': {'bp-', 'background-p-'},
             'background-color': {'bg-color-', 'background-c-', 'bgc-', 'bg-c-'}, 'margin-left': {'margin-l-', 'ml-'},
@@ -239,7 +239,13 @@ class TestDataLibrary(TestCase):
             'richness': {'ric-'}, 'float': set(), 'white-space': {'white-s-'}, 'max-height': {'max-h-'},
             'border-left-color': {'border-l-color-', 'blc-'}, 'border-left-width': {'blw-', 'border-l-width-'},
             'background-image': {'background-i-', 'bi-'}, 'border-top-width': {'border-t-width-', 'btw-'},
-            'play-during': {'mix', 'play-d-', 'pd-'}
+            'play-during': {'mix', 'play-d-', 'pd-'},
+            'font-family': {'serif', 'georgia', 'palatino', 'times', 'cambria', 'didot', 'garamond', 'perpetua',
+                            'rockwell', 'baskerville',
+                            'sans-serif', 'arial', 'helvetica', 'gadget', 'cursive', 'impact', 'charcoal', 'tahoma',
+                            'geneva', 'verdana', 'calibri', 'candara', 'futura', 'optima',
+                            'monospace', 'courier', 'monaco', 'consolas',
+                            'copperplate', 'papyrus', 'ff-', 'font-f-'},
         }
         actual = self.data_library.build_property_alias_dict()
         self.assertEqual(actual, expected)

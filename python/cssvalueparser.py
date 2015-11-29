@@ -21,6 +21,7 @@ class CSSPropertyValueParser(object):
     # Delete leading    example: '-bold' --> 'bold'
     # Delete trailing   example: 'white-' --> 'white'
     # Replace internal  example: '1-5-1-5' --> '1 5 1 5'
+    # Do not replace dashes that are built-in to the CSS standard
     @staticmethod
     def replace_dashes(value=''):
         value = value[1:] if value.startswith('-') else value

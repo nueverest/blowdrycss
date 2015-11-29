@@ -15,6 +15,11 @@ class DataLibrary(object):
             'color': {r"(h[0-9a-f]{3} ?)$", r"(h[0-9a-f]{6} ?)$"},
         }
 
+        # Font-Family References:
+        # http://www.cssfontstack.com/
+        # http://www.w3schools.com/cssref/css_websafe_fonts.asp
+        # https://mathiasbynens.be/notes/unquoted-font-family
+
         # TODO: What about fonts "san-serif", etc.
         # TODO: move this to a CSV file and autogenerate this dictionary from CSV.
         # Used to define custom class aliases for a given property_name.
@@ -53,6 +58,15 @@ class DataLibrary(object):
                         'table-header-group', 'table-footer-group', 'table-row', 'table-column-group', 'table-column',
                         'table-cell', 'table-caption', },
             'elevation': {'below', 'level', 'above', 'higher', 'lower', },
+            'font-family': {'serif', 'georgia', 'palatino', 'times', 'cambria', 'didot', 'garamond', 'perpetua',
+                            'rockwell', 'baskerville',
+
+                            'sans-serif', 'arial', 'helvetica', 'gadget', 'cursive', 'impact', 'charcoal', 'tahoma',
+                            'geneva', 'verdana', 'calibri', 'candara', 'futura', 'optima',
+
+                            'monospace', 'courier', 'monaco', 'consolas',
+
+                            'copperplate', 'papyrus', },
             'font-size': {'fsize-', 'f-size-', },
             'font-style': {'italic', 'oblique', },
             'font-variant': {'small-caps', },
