@@ -1,12 +1,12 @@
 | Property Name | Clashing Aliases |
 | --- | --- |
 | background-color | `bc-`  |
-| background-repeat | `br-` `repeat`  |
+| background-repeat | `repeat` `br-`  |
 | border-collapse | `border-c-` `bc-`  |
 | border-color | `border-c-` `bc-`  |
 | border-right | `br-`  |
-| border-spacing | `border-s-` `bs-`  |
-| border-style | `border-s-` `bs-`  |
+| border-spacing | `bs-` `border-s-`  |
+| border-style | `bs-` `border-s-`  |
 | font-size | `font-s-` `fs-`  |
 | font-style | `font-s-` `fs-`  |
 | letter-spacing | `ls-`  |

@@ -186,7 +186,7 @@ Some might say,
 > Why did you write the same property 500 times into your main CSS file? :hear_no_evil: :see_no_evil: :speak_no_evil:
 
 ##### CSS File size does matter. Large style files result in the following:
-* Longer download times increase user bounce rates.
+* Longer download times increase user bounce rates especially on mobile devices.
 * Data pollution on the Internet. 
 * Increase the likelihood of style bugs.
 * Increase the amount of time required to implement new changes and deprecate features.
@@ -211,8 +211,8 @@ Some might say,
 :nine: MIT License
 
 ### What it is not
-This tool is not designed to replace the need to hand-craft complex CSS.  Multi-rule classes, Background images, 
-url() values, and shorthand properties are not fully supported.
+> This tool is not designed to replace the need to hand-craft complex CSS.  
+> Multi-rule classes, Background images, url() values, and shorthand properties are not fully supported.
 
 The following is an example of something this tool in not intended to generate, and something that still needs to
 be written by hand.   
@@ -306,7 +306,8 @@ alias-value-i | .alias-value-i { property-name: value !important }
 font-weight-bold-i | .font-weight-bold-i { font-weight: bold !important }
 
 ### Shorthand can be used in cases where the alias is unambiguously the css property value.
-Applicable properties include: `color`, `font-weight`, `font-style`, `text-decoration`, and `text-transform`.
+Applicable properties include: 
+`color`, `font-weight`, `font-style`, `text-decoration`, and `text-transform`.
 
 Encoded Class Format | CSS Rule Output
 --------------------- | ---------------
@@ -317,6 +318,28 @@ lighter | .lighter { font-weight: lighter }
 underline | .underline { text-decoration: underline }
 italic | .italic { font-style: italic }
 lowercase | .lowercase { text-transform: lowercase }
+
+### Built-in CSS Property Values containing '-' are now valid. (Implemented: 11/29/2015)
+See `custom_property_alias_dict` in `datalibrary.py` for a comprehensive list of usable aliases. 
+<br>Note that not every built-in CSS property value [defined here](http://www.w3.org/TR/CSS21/propidx.html) is 
+ implemented. The reason is that some values like 'right' and 'left' are used for more than one property name. Also,
+ in the case of `font-weight` numbers are defined like '100', '200', and so on.  Encoded CSS classes are not permitted
+ begin with a number and are therefore excluded.
+
+Value Encoding Format | CSS Property Value Output 
+--------------------- | ------------------------- 
+sans-serif | font-family: sans-serif 
+x-large | font-size: x-large 
+
+### CSS Web Safe Font Fallbacks are now Auto-Generated for `font-family` (Implemented: 11/29/2015)
+Per [w3schools.com](http://www.w3schools.com/cssref/css_websafe_fonts.asp) 
+> The font-family property should hold several font names as a "fallback" system, to ensure maximum compatibility 
+between browsers/operating systems. If the browser does not support the first font, it tries the next font.
+
+Font Name as Alias | CSS Rule Output
+------------------ | -------------------------
+arial | .arial { font-family: arial, sans-serif  }
+papyrus | .papyrus { font-family: papyrus, fantasy }
 
 ### Color Declarations
 Color Format | Encoded Class Format | CSS Rule Output
@@ -372,7 +395,7 @@ padding-50| padding: 50px
 elevation-20 | elevation: 20deg
 
 ### Optional Unit Conversion
-To enable 'px' to 'em' unit conversion open `blowdry.py` and set `px_to_em = True`
+To enable 'px' to 'em' unit conversion open `blowdry.py` and set `px_to_em = True` (Implemented: 11/28/2015)
 
 ### Explicitly Encoding Units in Class Name
 
@@ -500,21 +523,11 @@ CSS Property Value | Encodings Not Implemented
 ------------------ | ------------------------- 
 background-image: url("/home/images/sample/image.png") | '/', '(', and double quote
 
-##### Some Encoded Property Values containing '-' will become invalid. (Currently Working on this 11/29/2015)
-That said "some cases will work". Note that in the valid examples the units of 'px' are explicitly declared.
-
-Value Encoding Format | CSS Property Value Output | Validity
---------------------- | ------------------------- | :------:
-font-family-sans-serif | font-family: sans serif | invalid missing dash
-font-size-x-large | font-size: x large | invalid missing dash
-font-30px-arial | font: 30px arial | valid
-font-italic-bold-12px-serif | font: italic bold 12px serif | valid
-
 ### Valuable Reference
 > [W3C Full CSS property table](http://www.w3.org/TR/CSS21/propidx.html)
 <br>[Python 3.4+](https://www.python.org/downloads/) (required)
 <br>[cssutils 1.0.1+](https://bitbucket.org/cthedot/cssutils) (required)
-<br>[watchdog 0.8.2+](https://pypi.python.org/pypi/watchdog/0.8.3) (desired)
+<br>[watchdog 0.8.2+](https://pypi.python.org/pypi/watchdog/0.8.3) (recommended)
 
 ### License
 The MIT License (MIT)
