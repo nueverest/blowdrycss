@@ -245,7 +245,7 @@ class TestDataLibrary(TestCase):
                             'sans-serif', 'arial', 'helvetica', 'gadget', 'cursive', 'impact', 'charcoal', 'tahoma',
                             'geneva', 'verdana', 'calibri', 'candara', 'futura', 'optima',
                             'monospace', 'courier', 'monaco', 'consolas',
-                            'copperplate', 'papyrus', 'ff-', 'font-f-'},
+                            'fantasy', 'copperplate', 'papyrus', 'ff-', 'font-f-'},
         }
         actual = self.data_library.build_property_alias_dict()
         self.assertEqual(actual, expected)

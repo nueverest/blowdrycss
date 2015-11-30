@@ -63,7 +63,7 @@ class DataLibrary(object):
                             'sans-serif', 'arial', 'helvetica', 'gadget', 'cursive', 'impact', 'charcoal', 'tahoma',
                             'geneva', 'verdana', 'calibri', 'candara', 'futura', 'optima',
                             'monospace', 'courier', 'monaco', 'consolas',
-                            'copperplate', 'papyrus', },
+                            'fantasy', 'copperplate', 'papyrus', },
             'font-size': {'fsize-', 'f-size-', },
             'font-style': {'italic', 'oblique', },
             'font-variant': {'small-caps', },
