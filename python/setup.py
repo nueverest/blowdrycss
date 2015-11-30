@@ -14,7 +14,7 @@ from os import path, pardir
 
 # Optional way to manually generate reStructuredText
 # From the project directory run this command.
-# pandoc --from markdown --to rst README.md -o python/long_description.rst
+# pandoc --from markdown --to rst README.md -o docs/long_description.rst
 
 # Convert README.md to reStructuredText and assign to long_description.
 # Reference: https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules (do not like adding another

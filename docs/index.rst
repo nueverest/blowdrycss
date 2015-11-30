@@ -11,6 +11,9 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   quickstart.rst
+   advancedtopics.rst
+   syntax.rst
 
 
 Indices and tables
