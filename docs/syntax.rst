@@ -1,6 +1,8 @@
 Syntax - Encoded Class Formatting Rules
 =======================================
 
+.. index:: single: Syntax - Encoded Class Formatting Rules
+
 Dissecting Encoded CSS Classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

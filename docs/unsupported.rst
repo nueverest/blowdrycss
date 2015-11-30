@@ -1,6 +1,8 @@
 Unsupported Features
 ====================
 
+.. index:: single: Unsupported Features
+
 Shorthand properties
 ''''''''''''''''''''
 

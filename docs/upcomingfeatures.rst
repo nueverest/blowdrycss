@@ -1,6 +1,8 @@
 Upcoming Features
 =================
 
+.. index:: single: Upcoming Features
+
 Make DRYer:
 ~~~~~~~~~~~
 

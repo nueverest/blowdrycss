@@ -1,9 +1,11 @@
 Advanced Topics
 ===============
 
+.. index:: single: Advanced Topics
+
 - Use ```watchdog`` <https://pypi.python.org/pypi/watchdog/0.8.3>`__ to automate CSS compilation.
 - Learn about clashing aliases and property aliases.
-- How to change settings in blowdry.py.
+- How to change settings in ``blowdry.py``.
 - Customizing the alias dictionary.
 - How to build a plugin.
 - pro-tip: Want to share your site with a client, co-worker, or colleague. Use `ngrok <https://ngrok.com/>`__
@@ -12,6 +14,8 @@ Advanced Topics
 
 Automate CSS Compilation with Watchdog
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. index:: single: Watchdog
 
 -  Having to run ``python blowdry.py`` can annoying in a development environment.
 -  What if it were possible to auto-detect that ``index.html`` was saved and automatically

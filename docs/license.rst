@@ -1,6 +1,8 @@
 License
 =======
 
+.. index:: single: License
+
 The MIT License (MIT)
 ~~~~~~~~~~~~~~~~~~~~~
 

@@ -1,6 +1,8 @@
 Quick Start Guide
 =================
 
+.. index:: single: Quick Start Guide
+
 This guide teaches you how to:
 
 - Install :mod:`blowdrycss`
@@ -87,4 +89,4 @@ Part 4 - Experiment with these classes
 -  Apply this to text: ``uppercase``
 
 
-Want to learn more head on over to :doc:`Advanced Topics`.
+Want to learn more head on over to :doc:`advancedtopics`.

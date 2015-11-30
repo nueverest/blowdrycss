@@ -1,6 +1,8 @@
 Read Me
 =======
 
+.. index:: single: Read Me
+
 Rapid styling tool for auto-generating DRY CSS files from encoded class
 selectors found in ``*.html``, ``*.aspx``, ``*.ascx``, or ``*.master`` files. Other
 file extensions can be added under ``blowdry.py``
