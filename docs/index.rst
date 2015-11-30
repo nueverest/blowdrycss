@@ -9,11 +9,15 @@ Welcome to blowdrycss's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
+   readme.rst
    quickstart.rst
    advancedtopics.rst
    syntax.rst
+   upcomingfeatures.rst
+   unsupported.rst
+   license.rst
 
 
 Indices and tables

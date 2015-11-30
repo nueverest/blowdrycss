@@ -56,7 +56,7 @@ def main():
         html_file.write_file(property_alias_html, extension='.html')
 
     # Define File all file types/extensions to search for in project_directory
-    file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
+    file_types = ('*.html', '*.aspx', '*.master', '*.ascx', )
 
     # Get all files associated with defined file_types in project_directory
     file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
