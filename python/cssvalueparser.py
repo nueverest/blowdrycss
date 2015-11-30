@@ -5,6 +5,7 @@ from utilities import contains_a_digit
 from datalibrary import property_alias_dict
 from colorparser import ColorParser
 from unitparser import UnitParser
+from fontparser import FontParser
 #from mediaparser import MediaParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -74,7 +75,7 @@ class CSSPropertyValueParser(object):
 
     # Put everything together.
     def decode_property_value(self, value=''):
-        if not self.is_built_in():
+        if not self.is_built_in(value=value):
             # Apply to all non-built-in values.
             value = self.replace_dashes(value=value)
 
@@ -90,11 +91,8 @@ class CSSPropertyValueParser(object):
         else:
             # Generate web safe font-family fallback strings.
             if self.property_name == 'font-family':
-                # Reference: http://www.w3schools.com/cssref/css_websafe_fonts.asp
-                # TODO: Build font-family Web Safe Font fallback string plugin.
-                # Example: 'arial' becomes 'arial, helvetica, sans-serif'
-                pass
-
+                font_parser = FontParser(font_value=value)
+                value = font_parser.generate_fallback_fonts()
         return value
 
     # Accepts a property name and value

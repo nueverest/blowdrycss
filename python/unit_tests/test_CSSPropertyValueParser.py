@@ -71,6 +71,32 @@ class TestCSSPropertyValueParser(TestCase):
                 msg=value
             )
 
+    def test_decode_property_value_font_family(self):
+        valid_property_name = 'font-family'
+        encoded_property_values = [
+            'serif', 'sans-serif', 'monospace', 'fantasy',
+            'cambria', 'didot', 'garamond',
+            'arial', 'helvetica', 'gadget',
+            'courier', 'monaco', 'consolas',
+            'copperplate', 'papyrus',
+            'invalid', 'wrong',     # These just pass through.
+        ]
+        expected_property_values = [
+            'serif', 'sans-serif', 'monospace', 'fantasy',
+            'cambria, serif', 'didot, serif', 'garamond, serif',
+            'arial, sans-serif', 'helvetica, sans-serif', 'gadget, sans-serif',
+            'courier, monospace', 'monaco, monospace', 'consolas, monospace',
+            'copperplate, fantasy', 'papyrus, fantasy',
+            'invalid', 'wrong',     # These just pass through.
+        ]
+        property_parser = CSSPropertyValueParser(property_name=valid_property_name)
+        for i, value in enumerate(encoded_property_values):
+            self.assertEquals(
+                property_parser.decode_property_value(value=value),
+                expected_property_values[i],
+                msg=value
+            )
+
     # These patterns represent invalid CSS that still gets blindly processed. This is expected behavior as this
     # functions is not responsible for validation.  Validation occurs after the property value is decoded.
     def test_decode_property_value_pass_through_invalid_patterns(self):

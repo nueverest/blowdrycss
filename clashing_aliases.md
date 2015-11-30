@@ -5,22 +5,22 @@
 | border-collapse | `border-c-` `bc-`  |
 | border-color | `border-c-` `bc-`  |
 | border-right | `br-`  |
-| border-spacing | `bs-` `border-s-`  |
-| border-style | `bs-` `border-s-`  |
-| font-size | `fs-` `font-s-`  |
-| font-style | `fs-` `font-s-`  |
+| border-spacing | `border-s-` `bs-`  |
+| border-style | `border-s-` `bs-`  |
+| font-size | `font-s-` `fs-`  |
+| font-style | `font-s-` `fs-`  |
 | letter-spacing | `ls-`  |
 | list-style | `ls-`  |
 | max-height | `mh-`  |
 | max-width | `mw-`  |
 | min-height | `mh-`  |
 | min-width | `mw-`  |
-| overflow | `hidden` `visible`  |
+| overflow | `visible` `hidden`  |
 | padding-bottom | `pb-`  |
 | padding-right | `pr-`  |
 | pause-before | `pb-`  |
 | pitch-range | `pr-`  |
 | play-during | `repeat`  |
-| visibility | `hidden` `visible`  |
+| visibility | `visible` `hidden`  |
 | white-space | `ws-`  |
 | word-spacing | `ws-`  |

@@ -15,11 +15,6 @@ class DataLibrary(object):
             'color': {r"(h[0-9a-f]{3} ?)$", r"(h[0-9a-f]{6} ?)$"},
         }
 
-        # Font-Family References:
-        # http://www.cssfontstack.com/
-        # http://www.w3schools.com/cssref/css_websafe_fonts.asp
-        # https://mathiasbynens.be/notes/unquoted-font-family
-
         # TODO: What about fonts "san-serif", etc.
         # TODO: move this to a CSV file and autogenerate this dictionary from CSV.
         # Used to define custom class aliases for a given property_name.
