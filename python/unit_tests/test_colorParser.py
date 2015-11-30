@@ -15,9 +15,11 @@ class TestColorParser(TestCase):
         property_names_false = {'font-weight', 'padding', 'height', 'width', 'float'}
         color_parser = ColorParser()
         for property_name in property_names_true:
-            self.assertTrue(color_parser.property_name_allows_color(property_name=property_name))
+            color_parser.property_name = property_name
+            self.assertTrue(color_parser.property_name_allows_color())
         for property_name in property_names_false:
-            self.assertFalse(color_parser.property_name_allows_color(property_name=property_name))
+            color_parser.property_name = property_name
+            self.assertFalse(color_parser.property_name_allows_color())
 
     def test_is_valid_hex(self):
         values_true = ['h0ff48f', 'hfff', ' habc123 ', 'hfdec78', 'h000', ' hbcd ', 'border 5px solid hd0d',
@@ -33,10 +35,10 @@ class TestColorParser(TestCase):
         valid_property_name = 'color'
         input_values = ['h0ff48f', 'hfff', 'habc123', 'hfdec78', 'h000', 'height', 'h1', 'h52', 'h0ghyz6', 'h0uk']
         expected_values = ['#0ff48f', '#fff', '#abc123', '#fdec78', '#000', 'height', 'h1', 'h52', 'h0ghyz6', 'h0uk']
-        color_parser = ColorParser()
+        color_parser = ColorParser(property_name=valid_property_name)
         for i, value in enumerate(input_values):
             self.assertEqual(
-                color_parser.replace_h_with_hash(property_name=valid_property_name, value=value),
+                color_parser.replace_h_with_hash(value=value),
                 expected_values[i],
                 msg=value
             )
@@ -45,10 +47,10 @@ class TestColorParser(TestCase):
         invalid_property_name = 'width'
         input_values = ['h0ff48f', 'hfff', 'habc123', 'hfdec78', 'h000', 'height', 'h1', 'h52', 'h0ghyz6', 'h0uk']
         expected_values = input_values
-        color_parser = ColorParser()
+        color_parser = ColorParser(property_name=invalid_property_name)
         for i, value in enumerate(input_values):
             self.assertEqual(
-                color_parser.replace_h_with_hash(property_name=invalid_property_name, value=value),
+                color_parser.replace_h_with_hash(value=value),
                 expected_values[i],
                 msg=value
             )
@@ -62,10 +64,10 @@ class TestColorParser(TestCase):
         input_values = ['rgb 0 255 0', 'rgba 255 0 0 0.5', 'hsl 120 60% 70%', 'hsla 120 60% 70% 0.3', 'blue', '#000']
         expected_values = ['rgb(0, 255, 0)', 'rgba(255, 0, 0, 0.5)', 'hsl(120, 60%, 70%)', 'hsla(120, 60%, 70%, 0.3)',
                            'blue', '#000']
-        color_parser = ColorParser()
+        color_parser = ColorParser(property_name=valid_property_name)
         for i, value in enumerate(input_values):
             self.assertEqual(
-                color_parser.add_color_parenthetical(property_name=valid_property_name, value=value),
+                color_parser.add_color_parenthetical(value=value),
                 expected_values[i],
                 msg=value
             )
@@ -81,7 +83,7 @@ class TestColorParser(TestCase):
         color_parser = ColorParser()
         for i, value in enumerate(input_values):
             self.assertEqual(
-                color_parser.add_color_parenthetical(property_name=valid_property_name, value=value),
+                color_parser.add_color_parenthetical(value=value),
                 expected_values[i],
                 msg=value
             )

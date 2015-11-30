@@ -12,8 +12,7 @@ class ColorParser(object):
         self.property_name = property_name
         self.value = value
 
-    @staticmethod
-    def property_name_allows_color(property_name=''):
+    def property_name_allows_color(self):
         # Reference: http://www.w3.org/TR/CSS21/propidx.html
         color_property_names = {
             'color', 'background-color', 'border', 'border-color', 'border-top-color', 'border-right-color',
@@ -21,7 +20,7 @@ class ColorParser(object):
             'background', 'border-top', 'border-right', 'border-bottom', 'border-left', 'border', 'outline',
         }
         for color_property_name in color_property_names:
-            if property_name == color_property_name:
+            if self.property_name == color_property_name:
                 return True
         return False
 
@@ -37,8 +36,8 @@ class ColorParser(object):
     # Declaring hex (prepend 'h'):
     # h0ff24f   --> #0ff24f (6 digit)
     # hf4f      --> #fff    (3 digit)
-    def replace_h_with_hash(self, property_name='', value=''):
-        if self.property_name_allows_color(property_name=property_name):
+    def replace_h_with_hash(self, value=''):
+        if self.property_name_allows_color():
             if self.is_valid_hex(value=value):
                 value = value.replace('h', '#')
         return value
@@ -48,8 +47,8 @@ class ColorParser(object):
     # rgba: rgba 255 0 0 0.5        --> rgba(255, 0, 0, 0.5)
     #  hsl: hsl 120 60% 70%         -->  hsl(120, 60%, 70%)
     # hsla: hsla 120 60% 70% 0.3    --> hsla(120, 60%, 70%, 0.3)
-    def add_color_parenthetical(self, property_name='', value=''):
-        if self.property_name_allows_color(property_name=property_name):
+    def add_color_parenthetical(self, value=''):
+        if self.property_name_allows_color():
             if contains_a_digit(value=value):
                 keywords = {'rgb ', 'rgba ', 'hsl ', 'hsla '}
                 for key in keywords:

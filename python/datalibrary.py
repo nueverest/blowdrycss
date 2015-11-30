@@ -60,12 +60,9 @@ class DataLibrary(object):
             'elevation': {'below', 'level', 'above', 'higher', 'lower', },
             'font-family': {'serif', 'georgia', 'palatino', 'times', 'cambria', 'didot', 'garamond', 'perpetua',
                             'rockwell', 'baskerville',
-
                             'sans-serif', 'arial', 'helvetica', 'gadget', 'cursive', 'impact', 'charcoal', 'tahoma',
                             'geneva', 'verdana', 'calibri', 'candara', 'futura', 'optima',
-
                             'monospace', 'courier', 'monaco', 'consolas',
-
                             'copperplate', 'papyrus', },
             'font-size': {'fsize-', 'f-size-', },
             'font-style': {'italic', 'oblique', },

@@ -12,10 +12,10 @@ class TestUnitParser(TestCase):
         property_name = 'padding'
         property_values = ['1a2', '-35mx 15mx', '1px 2 m11 2', '22.5px 10 22.5px 10']
         expected_values = ['1a2', '-35mx 15mx', '0.0625em 0.125em m11 0.125em', '1.4062em 0.625em 1.4062em 0.625em']
-        unit_parser = UnitParser(px_to_em=True)
+        unit_parser = UnitParser(property_name=property_name, px_to_em=True)
 
         for i, value in enumerate(property_values):
-            new_value = unit_parser.add_units(property_name=property_name, property_value=value)
+            new_value = unit_parser.add_units(property_value=value)
             self.assertEqual(new_value, expected_values[i], msg=i)
 
     def test_add_units_multi_value_conversion_True(self):
@@ -26,20 +26,20 @@ class TestUnitParser(TestCase):
         expected_values = [
             '0.75em', '-2.1875em 0.9375em', '0.0625em 0.125em 0.0625em 0.125em', '20% 20%', '5em 6em 5em 6em'
         ]
-        unit_parser = UnitParser(px_to_em=True)
+        unit_parser = UnitParser(property_name=property_name, px_to_em=True)
 
         for i, value in enumerate(property_values):
-            new_value = unit_parser.add_units(property_name=property_name, property_value=value)
+            new_value = unit_parser.add_units(property_value=value)
             self.assertEqual(new_value, expected_values[i], msg=i)
 
     def test_add_units_margin_top_conversion_True(self):
         property_name = 'margin-top'
         property_values = ['1', '-20.0', '15px', '60rem']
         expected_values = ['0.0625em', '-1.25em', '0.9375em', '60rem']
-        unit_parser = UnitParser(px_to_em=True)
+        unit_parser = UnitParser(property_name=property_name, px_to_em=True)
 
         for i, value in enumerate(property_values):
-            new_value = unit_parser.add_units(property_name=property_name, property_value=value)
+            new_value = unit_parser.add_units(property_value=value)
             self.assertEqual(new_value, expected_values[i], msg=i)
 
     def test_add_units_multi_value_no_conversion(self):
@@ -48,20 +48,20 @@ class TestUnitParser(TestCase):
         property_name = 'padding'
         property_values = ['12', '-35 15', '1 2 1 2', '20% 20%', '5em 6em 5em 6em']
         expected_values = ['12px', '-35px 15px', '1px 2px 1px 2px', '20% 20%', '5em 6em 5em 6em']
-        unit_parser = UnitParser(px_to_em=False)
+        unit_parser = UnitParser(property_name=property_name, px_to_em=False)
 
         for i, value in enumerate(property_values):
-            new_value = unit_parser.add_units(property_name=property_name, property_value=value)
+            new_value = unit_parser.add_units(property_value=value)
             self.assertEqual(new_value, expected_values[i], msg=i)
 
     def test_add_units_margin_top_no_conversion(self):
         property_name = 'margin-top'
         property_values = ['1', '-20.0', '15px', '60rem']
         expected_values = ['1px', '-20.0px', '15px', '60rem']
-        unit_parser = UnitParser(px_to_em=False)
+        unit_parser = UnitParser(property_name=property_name, px_to_em=False)
 
         for i, value in enumerate(property_values):
-            new_value = unit_parser.add_units(property_name=property_name, property_value=value)
+            new_value = unit_parser.add_units(property_value=value)
             self.assertEqual(new_value, expected_values[i], msg=i)
     
     def test_px_to_em(self):

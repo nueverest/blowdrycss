@@ -5,6 +5,22 @@ __project__ = 'blow dry css'
 
 
 class TestCSSPropertyValueParser(TestCase):
+    def test_is_built_in_valid(self):
+        property_names = ['font-weight', 'color', 'azimuth', 'background-repeat']
+        input_values = ['bold', 'white', 'left-side', 'no-repeat']
+        property_parser = CSSPropertyValueParser()
+        for i, value in enumerate(input_values):
+            property_parser.property_name = property_names[i]
+            self.assertTrue(property_parser.is_built_in(value=value))
+
+    def test_is_built_in_invalid(self):
+        property_names = ['font-weight', 'color', 'padding', 'color', 'inValid2']
+        input_values = ['-bold', 'white-', '1-5-1-5', 'h0ff48f', '24px']
+        property_parser = CSSPropertyValueParser()
+        for i, value in enumerate(input_values):
+            property_parser.property_name = property_names[i]
+            self.assertFalse(property_parser.is_built_in(value=value))
+
     def test_replace_dashes(self):
         # Delete leading    example: '-bold' --> 'bold'
         # Delete trailing   example: 'white-' --> 'white'
@@ -47,10 +63,10 @@ class TestCSSPropertyValueParser(TestCase):
             'bold', '55', '1 5 1 5', '1.32rem', '1% 10% 3% 1%', '-12px', '-5.25in -6.1in', '-0.0435%',
             '#0ff48f', '#fff', 'rgba(255, 0, 0, 0.5)', 'hsla(120, 60%, 70%, 0.3)',
         ]
-        property_parser = CSSPropertyValueParser()
+        property_parser = CSSPropertyValueParser(property_name=valid_property_name)
         for i, value in enumerate(encoded_property_values):
             self.assertEquals(
-                property_parser.decode_property_value(property_name=valid_property_name, value=value),
+                property_parser.decode_property_value(value=value),
                 expected_property_values[i],
                 msg=value
             )
@@ -61,10 +77,10 @@ class TestCSSPropertyValueParser(TestCase):
         valid_property_name = 'color'
         encoded_property_values = ['bold-50', '5u5', 'b1-a5-c1p-e5', '5pxrem', '1ap-10xp-3qp-1mp3', 'p12px']
         expected_property_values = ['bold 50', '5u5', 'b1 a5 c1% e5', '5pxrem', '1a% 10x% 3q% 1mp3', 'p12px']
-        property_parser = CSSPropertyValueParser()
+        property_parser = CSSPropertyValueParser(property_name=valid_property_name)
         for i, value in enumerate(encoded_property_values):
             self.assertEquals(
-                property_parser.decode_property_value(property_name=valid_property_name, value=value),
+                property_parser.decode_property_value(value=value),
                 expected_property_values[i],
                 msg=value
             )

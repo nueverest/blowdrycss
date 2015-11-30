@@ -4,7 +4,8 @@ __project__ = 'blow dry css'
 
 
 class UnitParser(object):
-    def __init__(self, base=16, px_to_em=True):
+    def __init__(self, property_name='', base=16, px_to_em=True):
+        self.property_name = property_name
         self.base = float(base)        # 16px = 1em
         self.px_to_em = px_to_em
         self.allowed = set(digits + '-.px')
@@ -86,10 +87,10 @@ class UnitParser(object):
     # 'em' Converted Outputs: '0.75em', '0.0625em 0.125em 0.0625em 0.125em', '0.3125em 0.0625em 0.125em 0.8125em'
     # 'px' is converted to 'em' if px_to_em is True.
     # Invalid input like '12a', '55zp', '42u3' are passed through and ignored.
-    def add_units(self, property_name='', property_value=''):
+    def add_units(self, property_value=''):
         new_value = []
         try:
-            default_units = self.default_property_units_dict[property_name]         # See if property_name has units.
+            default_units = self.default_property_units_dict[self.property_name]    # See if property_name has units.
             for val in property_value.split():                                      # single, double and quadruple
                 if set(val) <= self.allowed:
                     val = val.replace('px', '')                                     # Handle pre-defined units casep
