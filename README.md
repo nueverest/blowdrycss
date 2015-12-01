@@ -2,7 +2,7 @@
 Rapid styling tool that auto-generates DRY CSS from encoded class selectors in your web project files.
 
 ### Quick Start Guide
-[Go Here](http://blowdrycss.readthedocs.org/en/latest/quickstart.html)
+[Go here](http://blowdrycss.readthedocs.org/en/latest/quickstart.html) to get started now.
 
 #### Why the name blowdrycss?
 Inspiration for the name came from the blow dryer. A blow dryer rapidly drys and styles hair. :ok_woman: 
