@@ -3,15 +3,20 @@ Advanced Topics
 
 .. index:: single: Advanced Topics
 
+
+.. note::
+
+    This document is currently a work in progress.
+
 - Use ```watchdog`` <https://pypi.python.org/pypi/watchdog/0.8.3>`__ to automate CSS compilation.
 - Learn about clashing aliases and property aliases.
 - How to change settings in ``blowdry.py``.
 - Customizing the alias dictionary.
 - Where are the semicolons?
-- How to build a plugin.
+- How to build a plugin. (missing)
 - pro-tip: Want to share your site with a client, co-worker, or colleague. Use `ngrok <https://ngrok.com/>`__
 - DRYness
-- Syntax
+- Syntax Guide
 
 Automate CSS Compilation with Watchdog
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -124,7 +129,7 @@ can decode the class
 that doesn't mean it is intended to be used in this manner.
 
 My CSS is DRY, but my HTML is not.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+''''''''''''''''''''''''''''''''''
 
 Copying and pasting something like
 
@@ -133,3 +138,8 @@ Copying and pasting something like
     p-10-20-11-22 h-50 w-50 talign-center orange font-size-16 margin-top-30
 
 twenty times in an HTML file is not that DRY from an HTML perspective. If this is happening, then it might be valuable to pause and hand-craft a CSS class for this repeating class selector pattern.
+
+Syntax Guide
+~~~~~~~~~~~~
+
+Continue to :doc:`syntax`.
