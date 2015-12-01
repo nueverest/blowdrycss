@@ -1,6 +1,9 @@
 # blowdrycss
 Rapid styling tool that auto-generates DRY CSS from encoded class selectors in your web project files.
 
+### Quick Start Guide
+[Go Here](http://blowdrycss.readthedocs.org/en/latest/quickstart.html)
+
 #### Why the name blowdrycss?
 Inspiration for the name came from the blow dryer. A blow dryer rapidly drys and styles hair. :ok_woman: 
 
@@ -101,23 +104,16 @@ Some might say,
 * Increase the amount of time required to implement new changes and deprecate features.
 
 ### Advantages of blowdrycss
-:one: Rapid Development: Less time spent writing CSS, and cleaning up unused properties.
-
-:two: DRY (Don't Repeat Yourself): Reduces the size of CSS file by only defining properties once.
-
-:three: Greater confidence that your CSS is not filled with unused or over-replicated class definitions.
-
-:four: Built for the real world in which deadlines and division of labor is not always taken into account.
-
-:five: Integrated minification.
-
-:six: Parameter customization.
-
-:seven: PEP8 Compliant
-
-:eight: Full UnitTest Coverage
-
-:nine: MIT License
+1. Rapid Development: Less time spent writing CSS, and cleaning up unused properties.
+2. DRY (Don't Repeat Yourself): Reduces the size of CSS file by only defining properties once. Increases confidence that your CSS is not filled with unused or over-replicated class definitions.
+3. Symbiotic: Can be integrated with the current ecosystem of CSS complier and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
+4. Documented: [Hands-on Documentation](http://blowdrycss.readthedocs.org/en/latest/quickstart.html) to get you up and running fast.
+5. Solid: Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all environments from prototype to production.
+6. Customizable: Features can be turned on and off inside of `blowdry.py`. Examples include: minification, unit conversion, color parser, font parser, unit parser.
+7. Extensible: Build your own plugins.
+8. Standardized: PEP8 Compliant
+9. Tested: UnitTest Coverage
+10. Permissive: MIT License
 
 ### What it is not
 > This tool is not designed to replace the need to hand-craft complex CSS.  
@@ -141,6 +137,12 @@ be written by hand.
     text-shadow: -2px 2px 4px rgba(0,0,0,0.5);
 }
 ```
+
+### Quick Start Guide
+[Go Here](http://blowdrycss.readthedocs.org/en/latest/quickstart.html)
+
+### Full Documentation
+[blowdrycss.readthedocs.org](http://blowdrycss.readthedocs.org)
 
 ### Valuable Reference
 > [W3C Full CSS property table](http://www.w3.org/TR/CSS21/propidx.html)

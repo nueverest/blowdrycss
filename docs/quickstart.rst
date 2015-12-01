@@ -45,6 +45,28 @@ Notes about the auto-generated ``*.css`` files
 Part 3 - Apply new styles in ``index.html``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Usage of Encoded Classes in HTML Tags
+'''''''''''''''''''''''''''''''''''''
+
+.. code:: html
+
+    <div class="text-align-center margin-top-30">
+        <p class="font-size-25">
+            The font-size is 25px. <span class="green">Green Text</span>
+        </p>
+    </div>
+
+:mod:`blowdrycss` decodes the class names ``text-align-center``,
+``margin-top-30``, ``font-size-25``, and ``green``; and generates the
+following CSS in ``blowdry.css``:
+
+.. code:: css
+
+    .text-align-center { text-align: center }
+    .margin-top-30 { margin-top: 30px }
+    .font-size-25 { font-size: 25px }
+    .green { color: green }
+
 Lets actually change something.
 '''''''''''''''''''''''''''''''
 
@@ -68,7 +90,9 @@ Lets actually change something.
 -  Now refresh the web page running on
    `localhost:8080 <http://localhost:8080>`__.
 -  The title at the top of the page should be large and green.
--  Let's make some more changes.
+
+Let's make some more changes.
+'''''''''''''''''''''''''''''
 -  Center the image below the title with the class ``t-align-center`` in
    the ``<div>`` containing the image.
 -  Find the ``+`` images and add the class ``padding-bottom-4p``
@@ -87,6 +111,7 @@ Part 4 - Experiment with these classes
    ``p-20-30-20-30`` ``w-50``
 -  Apply this to a div: ``display-none``
 -  Apply this to text: ``uppercase``
+-  Run ``python blowdry.py``
 
 
 Want to learn more head on over to :doc:`advancedtopics`.

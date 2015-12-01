@@ -89,7 +89,8 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords='css compiler pre-compiler pre-processor generator dry cascading style sheets html encoded class parser',
+    keywords='blowdrycss css compiler pre-compiler pre-processor generator dry cascading style sheets html ' +
+             'encoded class parser',
 
     # Packages
     packages=find_packages(),
