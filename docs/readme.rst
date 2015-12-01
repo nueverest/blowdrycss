@@ -3,7 +3,7 @@ Read Me
 
 .. index:: single: Read Me
 
-Rapid styling tool that auto-generates DRY CSS from encoded class selectors in your web project files.
+Rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
 
 **Why the name blowdrycss?**
 

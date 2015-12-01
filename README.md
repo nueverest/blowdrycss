@@ -1,5 +1,5 @@
 # blowdrycss
-Rapid styling tool that auto-generates DRY CSS from encoded class selectors in your web project files.
+Rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
 
 ### Quick Start Guide
 [Go here](http://blowdrycss.readthedocs.org/en/latest/quickstart.html) to get started now.
