@@ -15,7 +15,7 @@ Decomposition
 ~~~~~~~~~~~~~
 
 -  **Blow** means to expel a current of air causing it to be in a state of motion. Resembles the dynamic nature of the development process.
--  **DRY** stands for Don't Repeat Yourself.
+-  **DRY** stands for `Don't Repeat Yourself <https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>`__.
 -  **CSS** stands for Cascading Style Sheets.
 
 Example Usage in HTML Tags:
@@ -190,6 +190,8 @@ Valuable References
 
     `W3C Full CSS property table <http://www.w3.org/TR/CSS21/propidx.html>`__
 
+    `Don't Repeat Yourself <https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>`__
+
     `Python 3.4+ <https://www.python.org/downloads/>`__
 
     `cssutils 1.0.1+ <https://bitbucket.org/cthedot/cssutils>`__
@@ -199,7 +201,7 @@ Valuable References
 License
 ~~~~~~~
 
-The MIT :doc:`license` (MIT)
+    The MIT :doc:`license` (MIT)
 
 How to Contribute
 ~~~~~~~~~~~~~~~~~

@@ -11,7 +11,7 @@ Similarly, `blowdrycss` is used to rapidly style HTML and generate DRY CSS files
 
 ##### Decomposition
 > **Blow** means to expel a current of air causing it to be in a state of motion. Resembles the development process.<br>
-  **DRY** stands for Don't Repeat Yourself.<br>
+  **DRY** stands for [Don't Repeat Yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).<br>
   **CSS** stands for Cascading Style Sheets.
 
 ### Example Usage in HTML Tags:
@@ -146,6 +146,7 @@ be written by hand.
 
 ### Valuable Reference
 > [W3C Full CSS property table](http://www.w3.org/TR/CSS21/propidx.html)
+<br>[Don't Repeat Yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
 <br>[Python 3.4+](https://www.python.org/downloads/) 
 <br>[cssutils 1.0.1+](https://bitbucket.org/cthedot/cssutils) 
 <br>[watchdog 0.8.2+](https://pypi.python.org/pypi/watchdog/0.8.3) 
