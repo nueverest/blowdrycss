@@ -30,6 +30,18 @@ the following CSS in `blowdry.css`:
 .green { color: green }
 ```
 
+### Advantages of blowdrycss
+1. **Rapid Development:** Less time spent writing CSS, and cleaning up unused properties.
+2. **DRY (Don't Repeat Yourself):** Reduces the size of CSS file by only defining properties once. Increases confidence that your CSS is not filled with unused or over-replicated class definitions.
+3. **Symbiotic:** Can be integrated with the current ecosystem of CSS complier and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
+4. **Documented:** [Hands-on Documentation](http://blowdrycss.readthedocs.org/en/latest/quickstart.html) to get you up and running fast.
+5. **Solid:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all environments from prototype to production.
+6. **Customizable:** Features can be turned on and off inside of `blowdry.py`. Examples include: minification, unit conversion, color parser, font parser, unit parser.
+7. **Extensible:** Build your own plugins.
+8. **Standardized:** PEP8 Compliant
+9. **Tested:** UnitTest Coverage
+10. **Permissive:** MIT License
+
 # Requirements
 > [Python 3.4+](https://www.python.org/downloads/) (required)
 <br>[cssutils 1.0.1+](https://bitbucket.org/cthedot/cssutils) (required)
@@ -102,18 +114,6 @@ Some might say,
 * Data pollution on the Internet. 
 * Increase the likelihood of style bugs.
 * Increase the amount of time required to implement new changes and deprecate features.
-
-### Advantages of blowdrycss
-1. Rapid Development: Less time spent writing CSS, and cleaning up unused properties.
-2. DRY (Don't Repeat Yourself): Reduces the size of CSS file by only defining properties once. Increases confidence that your CSS is not filled with unused or over-replicated class definitions.
-3. Symbiotic: Can be integrated with the current ecosystem of CSS complier and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
-4. Documented: [Hands-on Documentation](http://blowdrycss.readthedocs.org/en/latest/quickstart.html) to get you up and running fast.
-5. Solid: Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all environments from prototype to production.
-6. Customizable: Features can be turned on and off inside of `blowdry.py`. Examples include: minification, unit conversion, color parser, font parser, unit parser.
-7. Extensible: Build your own plugins.
-8. Standardized: PEP8 Compliant
-9. Tested: UnitTest Coverage
-10. Permissive: MIT License
 
 ### What it is not
 > This tool is not designed to replace the need to hand-craft complex CSS.  

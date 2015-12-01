@@ -14,7 +14,7 @@ Similarly, :mod:`blowdrycss` is used to rapidly style HTML and generate DRY CSS 
 Decomposition
 ~~~~~~~~~~~~~
 
--  **Blow** means to expel a current of air causing it to be in a state of motion. Resembles the development process.
+-  **Blow** means to expel a current of air causing it to be in a state of motion. Resembles the dynamic nature of the development process.
 -  **DRY** stands for Don't Repeat Yourself.
 -  **CSS** stands for Cascading Style Sheets.
 
@@ -40,21 +40,32 @@ following CSS in ``blowdry.css``:
     .font-size-25 { font-size: 25px }
     .green { color: green }
 
+Advantages of blowdrycss
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. **Rapid Development:** Less time spent writing CSS, and cleaning up unused properties.
+#. **DRY (Don't Repeat Yourself):** Reduces the size of CSS file by only defining properties once. Increases confidence that your CSS is not filled with unused or over-replicated class definitions.
+#. **Symbiotic:** Can be integrated with the current ecosystem of CSS complier and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
+#. **Documented:** Hands-on Documentation to get you up and running fast.
+#. **Solid:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all environments from prototype to production.
+#. **Customizable:** Features can be turned on and off inside of ``blowdry.py``. Examples include: minification, unit conversion, color parser, font parser, unit parser.
+#. **Extensible:** Build your own plugins.
+#. **Standardized:** PEP8 Compliant
+#. **Tested:** UnitTest Coverage
+#. **Permissive:** MIT :doc:`license`
+
 Requirements
 ~~~~~~~~~~~~
 
-    `Python 3.4+ <https://www.python.org/downloads/>`__ (required)
-
-    `cssutils 1.0.1+ <https://bitbucket.org/cthedot/cssutils>`__ (required)
+- `Python 3.4+ <https://www.python.org/downloads/>`__ (required)
+- `cssutils 1.0.1+ <https://bitbucket.org/cthedot/cssutils>`__ (required)
 
 Optional
 ''''''''
 
-`watchdog 0.8.2+ <https://pypi.python.org/pypi/watchdog/0.8.3>`__ (recommended)
-
-unittest (run unit tests)
-
-coverage 4.0.2+ (check test coverage)
+- `watchdog 0.8.2+ <https://pypi.python.org/pypi/watchdog/0.8.3>`__ (recommended)
+- unittest (run unit tests)
+- coverage 4.0.2+ (check test coverage)
 
 Pre-Requisite Knowledge
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -147,20 +158,6 @@ CSS File size does matter. Large style files result in the following:
 -  Increase the likelihood of style bugs.
 -  Increase the amount of time required to implement new changes and
    deprecate features.
-
-Advantages of blowdrycss
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Rapid Development: Less time spent writing CSS, and cleaning up unused properties.
-#. DRY (Don't Repeat Yourself): Reduces the size of CSS file by only defining properties once. Increases confidence that your CSS is not filled with unused or over-replicated class definitions.
-#. Symbiotic: Can be integrated with the current ecosystem of CSS complier and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
-#. Documented: Hands-on Documentation to get you up and running fast.
-#. Solid: Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all environments from prototype to production.
-#. Customizable: Features can be turned on and off inside of ``blowdry.py``. Examples include: minification, unit conversion, color parser, font parser, unit parser.
-#. Extensible: Build your own plugins.
-#. Standardized: PEP8 Compliant
-#. Tested: UnitTest Coverage
-#. Permissive: MIT :doc:`license`
 
 What it is not
 ~~~~~~~~~~~~~~
