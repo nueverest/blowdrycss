@@ -1,12 +1,25 @@
 {% extends '!layout.html' %}
 
+{#
+    Preferred way
+    {% block sidebarflattr %}
+    <a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+    {% endblock %}
 
+    {% block flattr %}
+    <a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+    {% endblock %}
+#}
+
+{# Way necessary for the docs to run on readthedocs.org #}
+
+{# Override theme basic/layout.html #}
 {% block sidebarsearch %}
     {{ super() }}
     <a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
 {% endblock %}
 
-
+{# Override theme alabaster/layout.html #}
 {% block footer %}
     <div class="footer" style="text-align: center;">
         <a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
