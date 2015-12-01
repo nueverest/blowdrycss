@@ -3,6 +3,19 @@ Syntax - Encoded Class Formatting Rules
 
 .. index:: single: Syntax - Encoded Class Formatting Rules
 
+Dissecting a CSS Statement
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: css
+
+    .margin-10 { margin: 10px !important; }
+
++----------+-----------------+------------------+--------------+
+| Format   | Property Name   | Property Value   | Priority     |
++==========+=================+==================+==============+
+| CSS      | .margin-10      | margin: 10px     | !important   |
++----------+-----------------+------------------+--------------+
+
 Dissecting Encoded CSS Classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

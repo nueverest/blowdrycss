@@ -3,24 +3,18 @@ Read Me
 
 .. index:: single: Read Me
 
-Rapid styling tool for auto-generating DRY CSS files from encoded class
-selectors found in ``*.html``, ``*.aspx``, ``*.ascx``, or ``*.master`` files. Other
-file extensions can be added under ``blowdry.py``
-
-``file_types = ('*.html', '*.aspx', '*.master', '*.ascx', '*.custom_ext', )``
+Rapid styling tool that auto-generates DRY CSS from encoded class selectors in your web project files.
 
 **Why the name blowdrycss?**
 
-Inspiration for the name came from the blow dryer. A blow dryer rapidly
-drys and styles hair.
+Inspiration for the name came from the blow dryer. A blow dryer rapidly drys and styles hair.
 
-Similarly, :mod:`blowdrycss` is used to rapidly style HTML and generate DRY
-CSS files using encoded class names.
+Similarly, :mod:`blowdrycss` is used to rapidly style HTML and generate DRY CSS files using encoded class names.
 
 Decomposition
 ~~~~~~~~~~~~~
 
--  **Blow** means to expel a current of air causing it to be in a state of motion.
+-  **Blow** means to expel a current of air causing it to be in a state of motion. Resembles the development process.
 -  **DRY** stands for Don't Repeat Yourself.
 -  **CSS** stands for Cascading Style Sheets.
 
@@ -51,13 +45,12 @@ Requirements
 
     `Python 3.4+ <https://www.python.org/downloads/>`__ (required)
 
-    `cssutils 1.0.1+ <https://bitbucket.org/cthedot/cssutils>`__
-    (required)
+    `cssutils 1.0.1+ <https://bitbucket.org/cthedot/cssutils>`__ (required)
 
 Optional
 ''''''''
 
-`watchdog 0.8.2+ <https://pypi.python.org/pypi/watchdog/0.8.3>`__ (desired)
+`watchdog 0.8.2+ <https://pypi.python.org/pypi/watchdog/0.8.3>`__ (recommended)
 
 unittest (run unit tests)
 
@@ -67,26 +60,12 @@ Pre-Requisite Knowledge
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 -  Basic HTML and CSS
--  No Python or Programming experience required.
-
-Dissecting a CSS Statement
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code:: css
-
-    .margin-10 { margin: 10px !important; }
-
-+----------+-----------------+------------------+--------------+
-| Format   | Property Name   | Property Value   | Priority     |
-+==========+=================+==================+==============+
-| CSS      | .margin-10      | margin: 10px     | !important   |
-+----------+-----------------+------------------+--------------+
+-  Zero programming experience required.
 
 Motivation
 ~~~~~~~~~~
 
-This tool was created after seeing how many companies manage their CSS
-files. The following are a couple of scenarios.
+This tool was created after seeing how many companies manage their CSS files. The following are a couple scenarios.
 
 Scenario 1 - Inside a CSS file you find the following:
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -230,10 +209,9 @@ How to Contribute
 
 -  Open an Issue first
 -  Write Code
--  Write Unit Tests (All tests must pass with greater than 90% coverage)
--  `Flattr this
-   Project <https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss>`__
+-  Write Unit Tests (All tests must pass. 100% coverage preferred.)
+-  `Flattr this Project <https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss>`__ |flattr|
 
-.. raw:: html
+.. |flattr| raw:: html
 
-    <a href="https://flattr.com/submit/auto?user\_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="\_blank">
+    <br><br>&nbsp;&nbsp;&nbsp;<a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" style="text-align:bottom;" alt="Flattr this" title="Flattr this" border="0"></a>
