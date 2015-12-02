@@ -4,7 +4,8 @@ from filehandler import FileFinder, CSSFile, GenericFile
 from htmlattributeparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
-from datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, property_alias_html
+from datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, property_alias_html, \
+    clashing_alias_rst, property_alias_rst
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -14,6 +15,7 @@ def main():
     timing_enabled = True       # Run performance timer
     markdown_docs = True        # Generate a markdown files that provide a quick syntax and clashing alias reference.
     html_docs = True            # Generate a html file that provide a quick syntax and clashing alias reference.
+    rst_docs = True             # Generate a sphinx rst file that provide a quick syntax and clashing alias reference.
     human_readable = True       # Generate a standard human readable css file
     minify = True               # Generate a minified version of the css file
 
@@ -54,6 +56,15 @@ def main():
         html_file.write_file(clashing_alias_html, extension='.html')
         html_file.file_name = 'property_aliases'                            # Change file name.
         html_file.write_file(property_alias_html, extension='.html')
+
+    # Generate reStructuredText documentation files.
+    if rst_docs:
+        docs_directory = path.join(getcwd() + '\\docs')
+        print(docs_directory)
+        rst_file = GenericFile(file_directory=docs_directory, file_name='clashing_aliases')
+        rst_file.write_file(clashing_alias_rst, extension='.rst')
+        rst_file.file_name = 'property_aliases'                        # Changes file name.
+        rst_file.write_file(property_alias_rst, extension='.rst')
 
     # Define File all file types/extensions to search for in project_directory
     file_types = ('*.html', '*.aspx', '*.master', '*.ascx', )

@@ -15,6 +15,8 @@ Contents:
    quickstart.rst
    advancedtopics.rst
    syntax.rst
+   clashing_aliases.rst
+   property_aliases.rst
    upcomingfeatures.rst
    unsupported.rst
    license.rst

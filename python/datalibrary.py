@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from copy import deepcopy
+from pypandoc import convert
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -123,19 +124,37 @@ class DataLibrary(object):
 
         # Generate Markdown Files
         self.clashing_alias_markdown = self.dict_to_markdown(
-            key_title=u'Property Name', value_title=u'Clashing Aliases', _dict=self.alphabetical_clashing_dict
+            h1_text=u'Clashing Aliases',
+            key_title=u'Property Name',
+            value_title=u'Invalid Clashing Aliases',
+            _dict=self.alphabetical_clashing_dict
         )
         self.property_alias_markdown = self.dict_to_markdown(
-            key_title=u'Property Name', value_title=u'Valid Aliases', _dict=self.alphabetical_property_dict
+            h1_text=u'Valid Property Aliases',
+            key_title=u'Property Name',
+            value_title=u'Valid Aliases',
+            _dict=self.alphabetical_property_dict
         )
 
         # Generate HTML Files
         self.clashing_alias_html = self.dict_to_html(
-            key_title=u'Property Name', value_title=u'Clashing Aliases', _dict=self.alphabetical_clashing_dict
+            h1_text=u'Invalid Clashing Aliases',
+            key_title=u'Property Name',
+            value_title=u'Clashing Aliases',
+            _dict=self.alphabetical_clashing_dict
         )
         self.property_alias_html = self.dict_to_html(
-            key_title=u'Property Name', value_title=u'Valid Aliases', _dict=self.alphabetical_property_dict
+            h1_text=u'Valid Property Aliases',
+            key_title=u'Property Name',
+            value_title=u'Valid Aliases',
+            _dict=self.alphabetical_property_dict
         )
+
+        # Generate reStructuredText
+        clashing_html = self.clashing_alias_html.replace('&emsp;', '   ')                   # Remove 'tab'
+        property_html = self.property_alias_html.replace('&emsp;', '   ')                   # Remove 'tab'
+        self.clashing_alias_rst = convert(source=clashing_html, to='rst', format='html')
+        self.property_alias_rst = convert(source=property_html, to='rst', format='html')
 
         # Debug
         # print('property_alias_dict', self.property_alias_dict)
@@ -253,14 +272,18 @@ class DataLibrary(object):
         return _dict
 
     # Convert a dictionary into a markdown formatted 2-column table.
+    # h1_text
+    #
     # key_title | value_title
     # --- | ---
     # key[0] | value
     # key[1] | value
     # TODO: Experiment with ```css\n key | value \n```
     @staticmethod
-    def dict_to_markdown(key_title='', value_title='', _dict=None):
-        _markdown = u'| ' + key_title + u' | ' + value_title + u' |\n| --- | --- |\n'   # Header plus second row.
+    def dict_to_markdown(h1_text='', key_title='', value_title='', _dict=None):
+        # H1 plus table header.
+        _markdown = u'# ' + h1_text + '\n\n' \
+                    '| ' + key_title + u' | ' + value_title + u' |\n| --- | --- |\n'
         for key, value in _dict.items():
             value_str = ''
             if isinstance(value, set):
@@ -293,7 +316,7 @@ class DataLibrary(object):
     #   </body>
     # </html>
     @staticmethod
-    def dict_to_html(key_title='', value_title='', _dict=None):
+    def dict_to_html(h1_text= '', key_title='', value_title='', _dict=None):
         common_classes = u' padding-5 border-1px-solid-gray display-inline '
         alternating_bg = u' bgc-hf8f8f8 '
         _html = str(
@@ -305,6 +328,7 @@ class DataLibrary(object):
             '\t\t<link rel="stylesheet" type="text/css" href="/css/blowdry.min.css" />\n' +
             '\t</head>\n\n' +
             '\t<body>\n' +
+            '\t\t<h1>' + h1_text + '</h1>\n' +
             '\t\t<table>\n' +
             '\t\t\t<tbody>\n'
             '\t\t\t\t<tr>\n' +
@@ -358,3 +382,6 @@ property_alias_markdown = __data_library.property_alias_markdown
 clashing_alias_html = __data_library.clashing_alias_html
 property_alias_html = __data_library.property_alias_html
 
+# reStructuredTest
+clashing_alias_rst = __data_library.clashing_alias_rst
+property_alias_rst = __data_library.property_alias_rst

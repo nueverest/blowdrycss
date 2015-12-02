@@ -1,9 +1,11 @@
-| Property Name | Clashing Aliases |
+# Clashing Aliases
+
+| Property Name | Invalid Clashing Aliases |
 | --- | --- |
 | background-color | `bc-`  |
-| background-repeat | `repeat` `br-`  |
-| border-collapse | `border-c-` `bc-`  |
-| border-color | `border-c-` `bc-`  |
+| background-repeat | `br-` `repeat`  |
+| border-collapse | `bc-` `border-c-`  |
+| border-color | `bc-` `border-c-`  |
 | border-right | `br-`  |
 | border-spacing | `bs-` `border-s-`  |
 | border-style | `bs-` `border-s-`  |

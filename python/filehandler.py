@@ -120,7 +120,8 @@ class GenericFile(object):
             )
 
     # Output a human readable version of the file in utf-8 format.
+    # Converts string to bytearray so that no new lines are added to the file.
     # Note: Overwrites any pre-existing files with the same name.
     def write_file(self, text='', extension=''):
-        with open(self.file_path(extension=extension), 'w') as _file:
-            _file.write(text)
+        with open(self.file_path(extension=extension), 'wb') as _file:
+            _file.write(bytearray(text, 'utf-8'))
