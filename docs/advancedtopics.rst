@@ -9,7 +9,7 @@ Advanced Topics
     This document is currently a work in progress.
 
 - Use ```watchdog`` <https://pypi.python.org/pypi/watchdog/0.8.3>`__ to automate CSS compilation.
-- Learn about clashing aliases and property aliases.
+- Learn about :doc:`clashing_aliases` and :doc:`property_aliases`.
 - How to change settings in ``blowdry.py``.
 - Customizing the alias dictionary.
 - Where are the semicolons?
