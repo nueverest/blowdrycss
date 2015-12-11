@@ -57,7 +57,7 @@ div.body {
 }
 
 div.flattr {
-    text-align: center;
+    text-align: center !important;
     margin-top: 48px;
     margin-bottom: 48px;
 }

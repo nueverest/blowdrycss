@@ -1,7 +1,9 @@
 {% extends '!layout.html' %}
 
+{# See: http://stackoverflow.com/questions/34020699/how-do-i-override-a-template-on-readthedocs/34224798#34224798 #}
+
 {#
-    Preferred way
+    Preferred way works locally but not on readthedocs.org
     {% block sidebarflattr %}
     <a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
     {% endblock %}
@@ -11,7 +13,7 @@
     {% endblock %}
 #}
 
-{# Way necessary for the docs to run on readthedocs.org #}
+{# The following works locally but not on readthedocs.org #}
 
 {# Override theme basic/layout.html #}
 {% block sidebarsearch %}
@@ -19,7 +21,7 @@
     <a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
 {% endblock %}
 
-{# Override theme alabaster/layout.html #}
+{# Override theme alabaster/layout.html Note: Works local
 {% block footer %}
     <div class="footer" style="text-align: center;">
         <a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
@@ -27,3 +29,4 @@
 
     {{ super() }}
 {% endblock %}
+#}
