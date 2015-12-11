@@ -40,7 +40,7 @@ extensions = [
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates', 'custom_templates', ]
+templates_path = ['custom_templates', ]     # ['_templates', ]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -116,7 +116,7 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'alabaster'
+html_theme = 'alabaster_custom'         # 'alabaster'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -124,14 +124,14 @@ html_theme = 'alabaster'
 #html_theme_options = {}
 
 # Add any paths that contain custom themes here, relative to this directory.
-#html_theme_path = ['_themes', ]
+html_theme_path = ['custom_themes', ]   # ['_themes', ]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
 #html_title = None
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
-#html_short_title = None
+html_short_title = 'blowdrycss docs'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
@@ -227,11 +227,9 @@ latex_elements = {
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title,
-#  author, documentclass [howto, manual, or own class]).
+# (source start file, target name, title, author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'blowdrycss.tex', 'blowdrycss Documentation',
-   'Chad Nelson', 'manual'),
+  (master_doc, 'blowdrycss.tex', 'blowdrycss Documentation', 'Chad Nelson', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -260,8 +258,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'blowdrycss', 'blowdrycss Documentation',
-     [author], 1)
+    (master_doc, 'blowdrycss', 'blowdrycss Documentation', [author], 1)
 ]
 
 # If true, show URL addresses after external links.

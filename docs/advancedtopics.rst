@@ -27,7 +27,7 @@ Automate CSS Compilation with Watchdog
 -  What if it were possible to auto-detect that ``index.html`` was saved and automatically
    run ``python blowdry.py``?
 
-   -  This is possible with
+   -  This is made possible with
       ```watchdog`` <https://pypi.python.org/pypi/watchdog/0.8.3>`__.
 
 -  To setup watchdog run ``pip install watchdog``
