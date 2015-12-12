@@ -20,7 +20,16 @@ import shlex
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('../python/'))    # sys.path.insert(0, os.path.abspath('.'))
+
+# Required to get readthedocs.org to work.
+# 'cd' to root folder.
+# Create a file named rtd_requirements.txt that contains only the bare minimum dependencies.
+# Go to Advanced Settings: https://readthedocs.org/dashboard/blowdrycss/advanced/
+# Check "Install your project inside a virtualenv.
+# In the requirement file field type: rtd_requirements.txt
+# Set Python Interpreter to: CPython 3.x
+# Click Submit.
+sys.path.insert(0, os.path.abspath('../python/'))       # Required to get '.. automodule::' working on readthedocs.org.
 
 # -- General configuration ------------------------------------------------
 
@@ -145,7 +154,7 @@ html_favicon = 'favicon.ico'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
