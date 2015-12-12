@@ -6,22 +6,22 @@
 blowdrycss documentation
 ========================
 
-About:
-~~~~~~
+About
+~~~~~
 
 `blowdrycss` is a rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
 
 
-Quickstart:
-~~~~~~~~~~~
+Quickstart
+~~~~~~~~~~
 
 .. toctree::
     :maxdepth: 1
 
     quickstart.rst
 
-Contents:
-~~~~~~~~~
+Contents
+~~~~~~~~
 
 .. toctree::
     :maxdepth: 1

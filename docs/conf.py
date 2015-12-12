@@ -22,7 +22,7 @@ import shlex
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 
 # Required to get readthedocs.org to work.
-# 'cd' to root folder.
+# 'cd' to root folder e.g. /blowdrycss/.
 # Create a file named rtd_requirements.txt that contains only the bare minimum dependencies.
 # Go to Advanced Settings: https://readthedocs.org/dashboard/blowdrycss/advanced/
 # Check "Install your project inside a virtualenv.
