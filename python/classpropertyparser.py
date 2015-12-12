@@ -69,6 +69,7 @@ class ClassPropertyParser(object):
     def class_set_to_lowercase(self):
         """
         Converts member variable self.class_set to lowercase.
+
         :return: None
         """
         self.class_set = {css_class.lower() for css_class in self.class_set}
@@ -80,19 +81,60 @@ class ClassPropertyParser(object):
         In general, underscores are only allowed to designate a decimal point between two numbers.
 
         Rules:
-            - Underscores are only valid between digits e.g. [0-9]_[0-9].
-
-        Valid: `6_3`
-        Invalid: `_b`, `b_`, `padding-_2`, `2_rem`, `m_px`, and `__`
+            - Strip all whitespace in front and back.
+            - Underscores are only valid between digits
+                - ``[0-9]_[0-9]`` allowed
+                - ``_35`` not allowed
+                - ``42_`` not allowed
+                - ``bold_px`` not allowed
+            - If found in the middle of a string it may begin and/or end with ``-``
+                - ``1_2-5_75-1_2-5_75`` allowed
+            - String may start with ``n`` to designate negative numbers.
+                - ``n5_25cm`` allowed.
+            - String may not start with ``-``
+                - ``-7_2`` not allowed.
+            - String may not end with ``-``
+                - ``5_4-`` not allowed
 
         :type css_class: str
 
         :param css_class: Accepts a single CSS class extracted from HTML class attribute.
         :return: boolean
+
+            **True cases:**
+                >>> ClassPropertyParser.underscores_valid('6_3')
+                True
+                >>> ClassPropertyParser.underscores_valid('2_456em')
+                True
+                >>> ClassPropertyParser.underscores_valid('1_2-5_75-1_2-5_75')
+                True
+                >>> ClassPropertyParser.underscores_valid('n5_25cm-n6_1cm')
+                True
+
+            **False cases:**
+                >>> ClassPropertyParser.underscores_valid('-7_2')
+                False
+                >>> ClassPropertyParser.underscores_valid('5_4-')
+                False
+                >>> ClassPropertyParser.underscores_valid('_b')
+                False
+                >>> ClassPropertyParser.underscores_valid('b_')
+                False
+                >>> ClassPropertyParser.underscores_valid('padding--_2')
+                False
+                >>> ClassPropertyParser.underscores_valid('2_rem')
+                False
+                >>> ClassPropertyParser.underscores_valid('m_px')
+                False
+                >>> ClassPropertyParser.underscores_valid('__')
+                False
         """
         # TODO: Replace with regex.
-        # underscore is not allowed to be the first or last character of css_class
-        if css_class[0] == '_' or css_class[-1] == '_':
+        # The underscore and dash is not allowed to be the first or last character of css_class.
+        css_class = css_class.strip()                                   # Remove any surrounding whitespace.
+
+        if (css_class[0] == '_' or css_class[-1] == '_' or
+            css_class[0] == '-' or css_class[-1] == '-'):
             return False
 
         # Check character before and after underscore index.
