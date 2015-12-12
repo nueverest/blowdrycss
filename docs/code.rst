@@ -1,6 +1,6 @@
 
-Code Reference
-==============
+Source Code Reference
+=====================
 
 The "classpropertyparser" module
 --------------------------------
