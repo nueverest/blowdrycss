@@ -5,11 +5,11 @@ Code Reference
 The "classpropertyparser" module
 --------------------------------
 
-.. automodule:: python.classpropertyparser
+.. automodule:: classpropertyparser
 
 
 The "utilities" module
 ----------------------
 
-.. automodule:: python.utilities
+.. automodule:: utilities
 
