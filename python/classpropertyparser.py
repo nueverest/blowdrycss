@@ -1,3 +1,39 @@
+
+# TODO: Wrap in docstrings and make this relevant.
+# You instantiate a ``Triangle``
+# by providing exactly three lengths ``a``, ``b``, and ``c``.
+# They can either be intergers or floating-point numbers,
+# and should be listed clockwise around the triangle.
+# If the three lengths *cannot* make a valid triangle,
+# then ``ValueError`` will be raised instead.
+#
+# TODO: Show example usage.
+#
+# >>> from classpropertyparser import ClassPropertyParser
+# >>> t = Triangle(3, 4, 5)
+# >>> print t.is_equilateral()
+# False
+# >>> print t.area()
+# 6.0
+#
+# Triangles support the following attributes, operators, and methods.
+#
+# .. attribute::  a
+#                 b
+#                 c
+#
+# .. index:: pair: equality; triangle
+# .. method:: triangle1 == triangle2
+#
+#     Returns true if the two triangles have sides of the same lengths,
+#     in the same order.
+#     Note that it is okay if the two triangles
+#     happen to start their list of sides at a different corner;
+#     ``3,4,5`` is the same triangle as ``4,5,3``
+#     but neither of these are the same triangle
+#     as their mirror image ``5,4,3``.
+
+
 from cssutils import parseString
 from string import ascii_lowercase, digits
 from re import findall
@@ -17,7 +53,7 @@ class ClassPropertyParser(object):
         CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
 
         :param class_set (set()): set() of potential css properties.
-        :param px_to_em (boolean): Flag for unit conversion. True means convert `px` to `em`. False means do nothing.
+        :param px_to_em (boolean): Flag for unit conversion. True means convert ``px` to ``em``. False means do nothing.
         :return: Object of Type ClassPropertyParser
         """
         css = u'''/* Generated with blowdrycss. */'''
@@ -46,8 +82,8 @@ class ClassPropertyParser(object):
         Rules:
             - Underscores are only valid between digits e.g. [0-9]_[0-9].
 
-        Valid: '6_3'
-        Invalid: '_b', 'b_', 'padding-_2", '2_rem', 'm_px', and '__'
+        Valid: `6_3`
+        Invalid: `_b`, `b_`, `padding-_2`, `2_rem`, `m_px`, and `__`
 
         :type css_class: str
 
@@ -135,6 +171,7 @@ class ClassPropertyParser(object):
         """
         Class returns the property_name OR if unrecognized returns ''.
         Classes that use identical property names must set a property value
+
         Valid:
         - `font-weight-700` is valid because `700` is a valid property value.
         - `fw-700` is valid because it `fw-` is a valid alias for `font-weight`
@@ -146,8 +183,7 @@ class ClassPropertyParser(object):
 
         :type css_class: str
 
-        :param css_class: A class name containing a property name and value pair, or just a property value
-        from which the property name may be inferred.
+        :param css_class: A class name containing a property name and value pair, or just a property value from which the property name may be inferred.
         :return: str
         """
         for property_name, aliases in ordered_property_dict.items():

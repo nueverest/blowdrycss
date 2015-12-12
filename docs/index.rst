@@ -3,27 +3,47 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to blowdrycss's documentation!
-======================================
+blowdrycss documentation
+========================
 
-Contents:
+About:
+~~~~~~
+
+`blowdrycss` is a rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
+
+
+Quickstart:
+~~~~~~~~~~~
 
 .. toctree::
-   :maxdepth: 1
+    :maxdepth: 1
 
-   readme.rst
-   quickstart.rst
-   advancedtopics.rst
-   syntax.rst
-   clashing_aliases.rst
-   property_aliases.rst
-   upcomingfeatures.rst
-   unsupported.rst
-   license.rst
+    quickstart.rst
+
+Contents:
+~~~~~~~~~
+
+.. toctree::
+    :maxdepth: 1
+
+    readme.rst
+    advancedtopics.rst
+    syntax.rst
+    clashing_aliases.rst
+    property_aliases.rst
+    upcomingfeatures.rst
+    unsupported.rst
+    license.rst
+
+
+.. toctree::
+    :maxdepth: 2
+
+    code.rst
 
 
 Indices and tables
-==================
+~~~~~~~~~~~~~~~~~~
 
 * :ref:`genindex`
 * :ref:`modindex`

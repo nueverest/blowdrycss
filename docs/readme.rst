@@ -3,7 +3,7 @@ Read Me
 
 .. index:: single: Read Me
 
-Rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
+`blowdrycss` is a rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
 
 **Why the name blowdrycss?**
 
@@ -209,8 +209,3 @@ How to Contribute
 -  Open an Issue first
 -  Write Code
 -  Write Unit Tests (All tests must pass. 100% coverage preferred.)
-.. -  `Flattr this Project <https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss>`__ |flattr|
-
-.. |flattr| raw:: html
-
-..    <br><br>&nbsp;&nbsp;&nbsp;<a href="https://flattr.com/submit/auto?user_id=nueverest&url=https%3A%2F%2Fgithub.com%2Fnueverest%2Fblowdrycss" target="_blank"><img src="http://button.flattr.com/flattr-badge-large.png" style="text-align:bottom;" alt="Flattr this" title="Flattr this" border="0"></a>

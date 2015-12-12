@@ -357,3 +357,9 @@ epub_exclude_files = ['search.html']
 
 # If false, no index is generated.
 #epub_use_index = True
+
+# Autodoc config values.
+# Reference: http://sphinx-doc.org/ext/autodoc.html?highlight=autodoc_default_flags#confval-autodoc_default_flags
+autodoc_member_order = 'bysource'
+
+autodoc_default_flags = ['members', 'undoc-members']
