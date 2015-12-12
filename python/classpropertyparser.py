@@ -251,22 +251,47 @@ class ClassPropertyParser(object):
 
     # Property Value
     #
-    # Strip property name or abbreviation prefix and property priority designator
-    # Examples:
-    # 'fw-bold-i' --> 'bold'                [abbreviated font-weight property_name]
-    # 'padding-1-10-10-5-i' --> '1-10-10-5' [standard property_name]
-    # 'height-7_25rem-i' --> '7_25rem'      [contains underscores]
-    # The term encoded_property_value means a property value that may or may not contain dashes and underscores.
     def get_encoded_property_value(self, property_name='', css_class=''):
+        """
+        Strip property name or alias abbreviation prefix from front, and property priority designator from end.
+
+        Examples
+            'fw-bold-i' --> 'bold'                [abbreviated font-weight property_name]
+            'padding-1-10-10-5-i' --> '1-10-10-5' [standard property_name]
+            'height-7_25rem-i' --> '7_25rem'      [contains underscores]
+
+        The term encoded_property_value means a property value that may or may not contain dashes and underscores.
+
+        :type property_name: str
+        :type css_class: str
+
+        :param property_name: Name of CSS property that matches a key in property_alias_dict.
+        :param css_class: An encoded class that may contain property name, value, and priority designator.
+        :return: str
+        """
         encoded_property_value = css_class
         encoded_property_value = self.strip_property_name(property_name, encoded_property_value)
         encoded_property_value = self.strip_property_abbreviation(property_name, encoded_property_value)
         encoded_property_value = self.strip_priority_designator(encoded_property_value)
         return encoded_property_value
 
-    # Accepts an encoded_property_value that's been stripped of it's property named and priority
-    # Returns a valid css property value or ''.
     def get_property_value(self, property_name='', encoded_property_value=''):
+        """
+        Accepts an encoded_property_value that's been stripped of it's property named and priority
+        Uses CSSPropertyValueParser, and returns a valid css property value or ''.
+
+        encoded_property_value examples
+            'bold'      [special case where alias == property value]
+            '1-10-10-5' [contains dashes]
+            '7_25rem'   [contains underscores]
+
+        :type property_name: str
+        :type encoded_property_value: str
+
+        :param property_name: Name of CSS property that matches a key in property_alias_dict.
+        :param encoded_property_value: A property value that may or may not contain dashes and underscores.
+        :return: str
+        """
         value_parser = CSSPropertyValueParser(property_name=property_name, px_to_em=self.px_to_em)
         value = value_parser.decode_property_value(value=encoded_property_value)
         return value
@@ -274,14 +299,40 @@ class ClassPropertyParser(object):
     # Property Priority
     #
     def is_important(self, css_class=''):
+        """
+        Tests whether the css_class ends with the importance_designator.
+
+        Returns True if the css_class ends with the importance_designator. Otherwise, it returns False.
+
+        :type css_class: str
+
+        :param css_class: An encoded class that may contain property name, value, and priority designator.
+        :return: bool
+        """
         return css_class.endswith(self.importance_designator)
 
-    # Strip priority designator from the end of encoded_property_value.
     def strip_priority_designator(self, encoded_property_value=''):
+        """
+        Strip priority designator from the end of encoded_property_value and returns the string.  If the
+        importance_designator is not found it returns the unchanged encoded_proprety_value.
+
+        :type encoded_property_value: str
+
+        :param encoded_property_value: A property value that may or may not contain a priority designator.
+        :return: str
+        """
         if self.is_important(css_class=encoded_property_value):
             return encoded_property_value[:-len(self.importance_designator)]
         else:
             return encoded_property_value
 
     def get_property_priority(self, css_class=''):
+        """
+        Returns the keyword 'IMPORTANT' if the property priority is set to important. Otherwise, it returns ''.
+
+        :type css_class: str
+
+        :param css_class: An encoded class that may contain property name, value, and priority designator.
+        :return: str
+        """
         return 'IMPORTANT' if self.is_important(css_class=css_class) else ''
