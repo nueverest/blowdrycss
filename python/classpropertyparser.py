@@ -4,6 +4,7 @@ from re import findall
 # custom
 from cssvalueparser import CSSPropertyValueParser
 from datalibrary import ordered_property_dict, property_alias_dict, property_regex_dict
+from utilities import deny_empty_or_whitespace
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -189,13 +190,10 @@ class ClassPropertyParser(object):
         :param encoded_property_value: Initially this value may or may not contain the property_name.
         :return: str
         """
-        if not encoded_property_value.strip():
-            raise ValueError('strip_property_name(): encoded_property_value cannot be empty')
+        deny_empty_or_whitespace(string=encoded_property_value, variable_name='encoded_property_value')
+        deny_empty_or_whitespace(string=property_name, variable_name='property_name')
 
-        if not property_name.strip():                               # Deny empty string.
-            raise ValueError('strip_property_name(): property_name cannot be empty.')
-        else:                                                       # Append '-' to property to match the class format.
-            property_name += '-'
+        property_name += '-'                                        # Append '-' to property to match the class format.
 
         if encoded_property_value.startswith(property_name):        # Strip property name
             return encoded_property_value[len(property_name):]
@@ -241,10 +239,8 @@ class ClassPropertyParser(object):
         :param encoded_property_value: Initially this value may or may not contain the property_name.
         :return: str
         """
-        if not encoded_property_value.strip():                                                  # Deny empty string.
-            raise ValueError('strip_property_abbreviation(): encoded_property_value cannot be empty')
-        if not property_name.strip():
-            raise ValueError('strip_property_abbreviation(): property_name cannot be empty.')
+        deny_empty_or_whitespace(string=encoded_property_value, variable_name='encoded_property_value')
+        deny_empty_or_whitespace(string=property_name, variable_name='property_name')
 
         property_abbreviations = self.get_property_abbreviations(property_name=property_name)
 

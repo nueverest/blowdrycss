@@ -16,7 +16,7 @@ def contains_a_digit(string=''):
     return True if search(r"[0-9]", string) else False
 
 
-def raise_error_if_empty_or_whitespace(string='', variable_name=''):
+def deny_empty_or_whitespace(string='', variable_name=''):
     """
     Raises a ValueError if the string or the variable_name is empty or only contains whitespace.
 

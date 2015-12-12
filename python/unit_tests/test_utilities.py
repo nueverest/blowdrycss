@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 # custom
-from utilities import contains_a_digit, raise_error_if_empty_or_whitespace
+from utilities import contains_a_digit, deny_empty_or_whitespace
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -16,18 +16,18 @@ class Test_utilities(TestCase):
         for value in no_digits:
             self.assertFalse(contains_a_digit(string=value), msg=value)
 
-    def test_raise_value_error_if_empty_valid(self):
-        self.assertIsNone(raise_error_if_empty_or_whitespace(string='valid_string', variable_name='valid_variable'))
+    def test_deny_empty_or_whitespace_valid(self):
+        self.assertIsNone(deny_empty_or_whitespace(string='valid_string', variable_name='valid_variable'))
 
-    def test_raise_value_error_if_empty_invalid_string(self):
+    def test_deny_empty_or_whitespace_invalid_string(self):
         invalid = ['', None, '          ']
         for string in invalid:
-            self.assertRaises(ValueError, raise_error_if_empty_or_whitespace, string, 'valid_variable')
+            self.assertRaises(ValueError, deny_empty_or_whitespace, string, 'valid_variable')
 
-    def test_raise_value_error_if_empty_invalid_variable_name(self):
+    def test_deny_empty_or_whitespace_invalid_variable_name(self):
         invalid = ['', None, '          ']
         for variable_name in invalid:
-            self.assertRaises(ValueError, raise_error_if_empty_or_whitespace, 'valid_string', variable_name)
+            self.assertRaises(ValueError, deny_empty_or_whitespace, 'valid_string', variable_name)
 
 
 if __name__ == '__main__':
