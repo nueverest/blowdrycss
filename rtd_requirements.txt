@@ -1,0 +1,12 @@
+# Unit Tests
+# unittest
+# coverage>=4.0.2
+
+# CSS Creation
+cssutils>=1.0.1
+
+# Markdown to reStructuredText Conversion
+pypandoc>=1.1.2
+
+# Automatic CSS generation on save
+# watchdog>=0.8.3
