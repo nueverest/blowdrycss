@@ -31,10 +31,12 @@ class TestClassPropertyParser(TestCase):
             'padding-7_3-8_5-9_7-10_2',
         }
         invalid_classes = {
-            '*b', 'bg-color__blue', 'height-m_px', 'lighter-1$', 'margin-2_rem', 'padding-@1px-2px-1px-2px', 'width-_2',
-            'bold-', 'green_', 'font-color-#000'
+            '', '   ', '*b', 'bg-color__blue', 'height-m_px', 'lighter-1$', 'margin-2_rem',
+            'padding-@1px-2px-1px-2px', 'width-_2', 'bold-', 'green_', 'font-color-#000',
         }
         expected_removed = {
+            ' (May not be None or "".)',
+            '    (Only a-z allowed for first character of class.)',
             '*b (Only a-z allowed for first character of class.)',            
             'bg-color__blue (Invalid underscore usage in class.)',                        
             'height-m_px (Invalid underscore usage in class.)',                        

@@ -9,9 +9,16 @@ __project__ = 'blow dry css'
 
 
 class ClassPropertyParser(object):
-    # CSS Unit Reference: http://www.w3schools.com/cssref/css_units.asp
-    # CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
     def __init__(self, class_set=set(), px_to_em=True):
+        """Parser for extracting CSS properties from an HTML Class Attribute.
+
+        CSS Unit Reference: http://www.w3schools.com/cssref/css_units.asp
+        CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
+
+        :param class_set (set()): set() of potential css properties.
+        :param px_to_em (boolean): Flag for unit conversion. True means convert `px` to `em`. False means do nothing.
+        :return: Object of Type ClassPropertyParser
+        """
         css = u'''/* Generated with blowdrycss. */'''
         self.px_to_em = px_to_em
         self.sheet = parseString(css)
@@ -22,16 +29,31 @@ class ClassPropertyParser(object):
         self.clean_class_set()
         # print('clean ran')
 
-    # Take list, tuple, or set of strings an convert to lowercase.
     def class_set_to_lowercase(self):
+        """
+        Converts member variable self.class_set to lowercase.
+        :return: None
+        """
         self.class_set = {css_class.lower() for css_class in self.class_set}
 
-    # Validate underscore usage in a single css_class.
-    # Underscores are only allowed to designate a decimal point between numbers.
-    #   Valid: '6_3'
-    # Invalid: '_b', 'b_', 'padding-_2", '2_rem', 'm_px', and '__'
     @staticmethod
     def underscores_valid(css_class=''):
+        """
+        Validate underscore usage in a single css_class.
+        In general, underscores are only allowed to designate a decimal point between two numbers.
+
+        Rules:
+            - Underscores are only valid between digits e.g. [0-9]_[0-9].
+
+        Valid: '6_3'
+        Invalid: '_b', 'b_', 'padding-_2", '2_rem', 'm_px', and '__'
+
+        :type css_class: str
+
+        :param css_class: Accepts a single CSS class extracted from HTML class attribute.
+        :return: boolean
+        """
+        # TODO: Replace with regex.
         # underscore is not allowed to be the first or last character of css_class
         if css_class[0] == '_' or css_class[-1] == '_':
             return False
@@ -48,16 +70,24 @@ class ClassPropertyParser(object):
 
         return valid
 
-    # Detect and Remove invalid css classes from class_set
-    # Class names must abide by: http://www.w3.org/TR/CSS2/syndata.html#characters
-    # For purposes of this project only a SUBSET of the standard is permissible as follows:
-    # Encoded classes are only allowed to begin with [a-z]
-    # Encoded classes are only allowed to end with [a-z0-9]
-    # Encoded classes are allowed to contain [_a-z0-9-]
-    # Underscores are only allowed between digits [0-9]
-    # Reference: stackoverflow.com/questions/1323364/in-python-how-to-check-if-a-string-only-contains-certain-characters
     def clean_class_set(self):
-        # Set all strings to lowercase first.
+        """
+        Detect and Remove invalid css classes from class_set
+        Class names must abide by: http://www.w3.org/TR/CSS2/syndata.html#characters
+
+        For purposes of this project only a SUBSET of the standard is permissible as follows:
+        - Encoded classes shall not be None or ''
+        - Encoded shall not contain whitespace (whitespace is handled implicitly by subsequent rules.)
+        - Encoded classes are only allowed to begin with [a-z]
+        - Encoded classes are only allowed to end with [a-z0-9]
+        - Encoded classes are allowed to contain [_a-z0-9-] between the first and last characters.
+        - Underscores are only valid between digits [0-9]_[0-9]
+
+        Reference:
+        stackoverflow.com/questions/1323364/in-python-how-to-check-if-a-string-only-contains-certain-characters
+        :return: None
+        """
+        # Normalize class data by setting all strings to lowercase first.
         self.class_set_to_lowercase()
 
         # Validate against character sets.
@@ -71,6 +101,10 @@ class ClassPropertyParser(object):
 
         # 'continue' is used to prevent the same css_class from being added to the invalid_css_classes multiple times.
         for css_class in self.class_set:
+            if not css_class:                                       # None or ''
+                invalid_css_classes.append(css_class)
+                reasons.append(' (May not be None or "".)')
+                continue
             if not set(css_class[0]) <= allowed_first:              # First character
                 invalid_css_classes.append(css_class)
                 reasons.append(' (Only a-z allowed for first character of class.)')
@@ -93,13 +127,28 @@ class ClassPropertyParser(object):
             self.class_set.remove(invalid_css_class)
             self.removed_class_set.add(invalid_css_class + reasons[i])
 
-    # Property Name
+    # Property Name Section
     #
-    # Class returns the property_name or removes/cleans the unrecognized class and returns ''.
-    # Classes that use identical property names must set a property value
-    # i.e. 'font-weight' is invalid because no value is included AND 'font-weight-700' is valid because 700 is a value.
     @staticmethod
     def get_property_name(css_class=''):
+        """
+        Class returns the property_name OR if unrecognized returns ''.
+        Classes that use identical property names must set a property value
+        Valid:
+        - `font-weight-700` is valid because `700` is a valid property value.
+        - `fw-700` is valid because it `fw-` is a valid alias for `font-weight`
+        - `bold` is valid because `bold` implies a property name of `font-weight`
+
+        Invalid:
+        - `font-weight` by itself is a property name, but does not include a property value.
+        - `700` does imply `font-weight`, but is not a valid CSS selector as it may not begin with a number.
+
+        :type css_class: str
+
+        :param css_class: A class name containing a property name and value pair, or just a property value
+        from which the property name may be inferred.
+        :return: str
+        """
         for property_name, aliases in ordered_property_dict.items():
             # Try identical 'key' match first. An exact css_class match must also end with a '-' dash to be valid.
             if css_class.startswith(property_name + '-'):
@@ -114,7 +163,7 @@ class ClassPropertyParser(object):
                 if css_class.startswith(alias):
                     return property_name
 
-            # Try matching regex pattern.
+            # Try matching a regex pattern.
             try:
                 regexes = property_regex_dict[property_name]
                 for regex in regexes:
@@ -126,26 +175,41 @@ class ClassPropertyParser(object):
         # No match found.
         return ''
 
-    # Strip property name from encoded_property_value if applicable and return encoded_property_value.
     @staticmethod
     def strip_property_name(property_name='', encoded_property_value=''):
-        # Deny empty string. If it doesn't have a property name ignore it.
-        if property_name == '':
-            raise ValueError('CSS property_name cannot be empty.')
-        # Append '-' to property to match the class format.
-        else:
+        """
+        Strip property name from encoded_property_value if applicable and return encoded_property_value.
+
+        Both property_name and encoded_property_value must be empty or only contain whitespace values.
+
+        :param property_name: (string) Presumed to match a key or value in the property_alias_dict
+        :param encoded_property_value: (string) Initially this value may or may not contain the property_name.
+        :return: (str) encode_property_value with the property name stripped.
+        """
+        if not encoded_property_value.strip():
+            raise ValueError('strip_property_name(): encoded_property_value cannot be empty')
+
+        if not property_name.strip():                               # Deny empty string.
+            raise ValueError('strip_property_name(): property_name cannot be empty.')
+        else:                                                       # Append '-' to property to match the class format.
             property_name += '-'
 
-        # Strip property name
-        if encoded_property_value.startswith(property_name):
+        if encoded_property_value.startswith(property_name):        # Strip property name
             return encoded_property_value[len(property_name):]
-        else:
+        else:                                                       # If it doesn't have a property name ignore it.
             return encoded_property_value
 
-    # Some alias could be abbreviations e.g. 'fw-' stands for 'font-weight-'
-    # In these cases a dash is added in the dictionary to indicate an abbreviation.
     @staticmethod
     def alias_is_abbreviation(alias=''):
+        """
+        Some alias could be abbreviations e.g. 'fw-' stands for 'font-weight-'
+        In these cases a dash is added in the dictionary to indicate an abbreviation.
+
+        :type alias: str
+
+        :param alias:
+        :return:
+        """
         return alias.endswith('-')
 
     # Returns a list of all property abbreviations appearing in property_alias_dict
