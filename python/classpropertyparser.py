@@ -76,8 +76,8 @@ class ClassPropertyParser(object):
         Class names must abide by: http://www.w3.org/TR/CSS2/syndata.html#characters
 
         For purposes of this project only a SUBSET of the standard is permissible as follows:
-        - Encoded classes shall not be None or ''
-        - Encoded shall not contain whitespace (whitespace is handled implicitly by subsequent rules.)
+        - Encoded classes shall not be None or ''.
+        - Encoded shall not contain whitespace (handled implicitly by subsequent rules).
         - Encoded classes are only allowed to begin with [a-z]
         - Encoded classes are only allowed to end with [a-z0-9]
         - Encoded classes are allowed to contain [_a-z0-9-] between the first and last characters.
@@ -180,11 +180,14 @@ class ClassPropertyParser(object):
         """
         Strip property name from encoded_property_value if applicable and return encoded_property_value.
 
-        Both property_name and encoded_property_value must be empty or only contain whitespace values.
+        Both property_name and encoded_property_value must not be empty or only contain whitespace values.
 
-        :param property_name: (string) Presumed to match a key or value in the property_alias_dict
-        :param encoded_property_value: (string) Initially this value may or may not contain the property_name.
-        :return: (str) encode_property_value with the property name stripped.
+        :type property_name: str
+        :type encoded_property_value: str
+
+        :param property_name: Presumed to match a key or value in the property_alias_dict
+        :param encoded_property_value: Initially this value may or may not contain the property_name.
+        :return: str
         """
         if not encoded_property_value.strip():
             raise ValueError('strip_property_name(): encoded_property_value cannot be empty')
@@ -200,28 +203,49 @@ class ClassPropertyParser(object):
             return encoded_property_value
 
     @staticmethod
-    def alias_is_abbreviation(alias=''):
+    def alias_is_abbreviation(possible_alias=''):
         """
-        Some alias could be abbreviations e.g. 'fw-' stands for 'font-weight-'
-        In these cases a dash is added in the dictionary to indicate an abbreviation.
+        Returns True if possible_alias ends with a '-' e.g. 'fw-' stands for 'font-weight-'.
+        Abbreviated aliases are found in datalibrary.property_alias_dict.
 
-        :type alias: str
+        :type possible_alias: str
 
-        :param alias:
+        :param possible_alias: A value that might be an alias.
+        :return: bool
+        """
+        return possible_alias.endswith('-')
+
+    def get_property_abbreviations(self, property_name=''):
+        """
+        Returns a list of all property abbreviations appearing in property_alias_dict
+
+        :param property_name:
         :return:
         """
-        return alias.endswith('-')
-
-    # Returns a list of all property abbreviations appearing in property_alias_dict
-    def get_property_abbreviations(self, property_name=''):
         property_abbreviations = list()
         for alias in property_alias_dict[property_name]:
-            if self.alias_is_abbreviation(alias=alias):
+            if self.alias_is_abbreviation(possible_alias=alias):
                 property_abbreviations.append(alias)
         return property_abbreviations
 
-    # Strip property abbreviation from encoded_property_value if applicable and return encoded_property_value.
     def strip_property_abbreviation(self, property_name='', encoded_property_value=''):
+        """
+        Strip property abbreviation from encoded_property_value if applicable and return encoded_property_value.
+
+        Both property_name and encoded_property_value must not be empty or only contain whitespace values.
+
+        :type property_name: str
+        :type encoded_property_value: str
+
+        :param property_name: Presumed to match a key or value in the property_alias_dict
+        :param encoded_property_value: Initially this value may or may not contain the property_name.
+        :return: str
+        """
+        if not encoded_property_value.strip():                                                  # Deny empty string.
+            raise ValueError('strip_property_abbreviation(): encoded_property_value cannot be empty')
+        if not property_name.strip():
+            raise ValueError('strip_property_abbreviation(): property_name cannot be empty.')
+
         property_abbreviations = self.get_property_abbreviations(property_name=property_name)
 
         for property_abbreviation in property_abbreviations:

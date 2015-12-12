@@ -46,7 +46,7 @@ class CSSPropertyValueParser(object):
     # Use underscores to indicate Decimal point '_' --> '.'
     # '_' becomes '.'   example: '1_32rem' --> '1.32rem'
     def replace_underscore_with_decimal(self, value=''):
-        if contains_a_digit(value=value):
+        if contains_a_digit(string=value):
             value = value.replace('_', '.')
         return value
 
@@ -54,7 +54,7 @@ class CSSPropertyValueParser(object):
     # mind the space
     # 'p ' becomes '% ' example: '1p 10p 3p 1p' --> '1% 10% 3% 1%' AND ' 1p' --> ' 1%'
     def replace_p_with_percent(self, value=''):
-        if contains_a_digit(value=value):
+        if contains_a_digit(string=value):
             value = value.replace('p ', '% ')
             if value.endswith('p'):
                 value = value[:-1] + '%'    # chop last character and add percentage sign
@@ -67,7 +67,7 @@ class CSSPropertyValueParser(object):
     # 'n5cm n6cm' --> '-5cm -6cm'
     # 'n9in' --> '-9in' (note that the 'n' at the end is not touched)
     def replace_n_with_minus(self, value=''):
-        if contains_a_digit(value=value):
+        if contains_a_digit(string=value):
             value = value.replace(' n', ' -')
             if value.startswith('n'):
                 value = '-' + value[1:]     # add minus sign and chop first character

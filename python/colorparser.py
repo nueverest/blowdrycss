@@ -49,7 +49,7 @@ class ColorParser(object):
     # hsla: hsla 120 60% 70% 0.3    --> hsla(120, 60%, 70%, 0.3)
     def add_color_parenthetical(self, value=''):
         if self.property_name_allows_color():
-            if contains_a_digit(value=value):
+            if contains_a_digit(string=value):
                 keywords = {'rgb ', 'rgba ', 'hsl ', 'hsla '}
                 for key in keywords:
                     if value.startswith(key):

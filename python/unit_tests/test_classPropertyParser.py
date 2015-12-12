@@ -124,6 +124,12 @@ class TestClassPropertyParser(TestCase):
         class_parser = ClassPropertyParser(class_set=set())
         self.assertRaises(ValueError, class_parser.strip_property_name, empty_property_name, encoded_property_value)
 
+    def test_strip_encoded_property_value_empty(self):
+        empty_property_name = 'font-weight'
+        encoded_property_value = ''
+        class_parser = ClassPropertyParser(class_set=set())
+        self.assertRaises(ValueError, class_parser.strip_property_name, empty_property_name, encoded_property_value)
+
     def test_alias_is_abbreviation(self):
         expected_true = ['fw-', 'p-', 'h-', 'w-']
         expected_false = ['fw', 'p', 'height', 'width']
