@@ -473,32 +473,58 @@ class ClassPropertyParser(object):
         """
         Tests whether the css_class ends with the importance_designator.
 
-        :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
+        :raises ValueError: If the css_class is empty or only contain whitespace values.
 
         :type css_class: str
 
         :param css_class: An encoded class that may contain property name, value, and priority designator.
         :return: (bool) -- Returns True if the css_class ends with the importance_designator. Otherwise, returns False.
-        
+
+        **Examples:**
+
+        >>> property_parser = ClassPropertyParser()
+        >>> property_parser.is_important('line-through-i')
+        True
+        >>> property_parser.is_important('line-through')
+        False
+        >>> property_parser.is_important('')
+        ValueError
+        >>> property_parser.is_important('  ')
+        ValueError
+
         """
         deny_empty_or_whitespace(string=css_class, variable_name='css_class')
         return css_class.endswith(self.importance_designator)
 
-    def strip_priority_designator(self, encoded_property_value=''):
+    def strip_priority_designator(self, css_class=''):
         """
-        Strip priority designator from the end of encoded_property_value and returns the string.  If the
-        importance_designator is not found it returns the unchanged encoded_property_value.
+        Removes the priority designator, if necessary.
 
-        :type encoded_property_value: str
+        :raises ValueError: If the css_class is empty or only contain whitespace values.
 
-        :param encoded_property_value: A property value that may or may not contain a priority designator.
-        :return: (str) --
-        
+        :type css_class: str
+
+        :param css_class: A css_class that may or may not contain a priority designator.
+        :return: (str) -- If necessary, strip priority designator from the end of css_class and return the string.
+            If the importance_designator is not found, then it returns the unchanged css_class.
+
+        >>> property_parser = ClassPropertyParser()
+        >>> property_parser.strip_priority_designator('blink-i')
+        'blink'
+        >>> property_parser.strip_priority_designator('blink')
+        'blink'
+        >>> property_parser.strip_priority_designator('')
+        ValueError
+        >>> property_parser.strip_priority_designator('     ')
+        ValueError
+
         """
-        if self.is_important(css_class=encoded_property_value):
-            return encoded_property_value[:-len(self.importance_designator)]
+        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
+
+        if self.is_important(css_class=css_class):
+            return css_class[:-len(self.importance_designator)]
         else:
-            return encoded_property_value
+            return css_class
 
     def get_property_priority(self, css_class=''):
         """

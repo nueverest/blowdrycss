@@ -257,10 +257,16 @@ class TestClassPropertyParser(TestCase):
         not_important = 'p-10'
         expected_value = 'p-10'
         class_parser = ClassPropertyParser(class_set=set())
-        value = class_parser.strip_priority_designator(encoded_property_value=important)    # important
+        value = class_parser.strip_priority_designator(css_class=important)    # important
         self.assertEquals(value, expected_value)
-        value = class_parser.strip_priority_designator(encoded_property_value=not_important)    # not important
+        value = class_parser.strip_priority_designator(css_class=not_important)    # not important
         self.assertEquals(value, expected_value)
+
+    def test_strip_priority_designator_raise_value_error(self):
+        invalid_inputs = ['', '      ']
+        class_parser = ClassPropertyParser(class_set=set())
+        for invalid in invalid_inputs:
+            self.assertRaises(ValueError, class_parser.strip_priority_designator, invalid)
 
     def test_get_property_priority_important(self):
         expected_property_priority = 'IMPORTANT'
