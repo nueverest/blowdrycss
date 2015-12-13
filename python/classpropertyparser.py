@@ -53,7 +53,7 @@ class ClassPropertyParser(object):
         CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
 
         :param class_set (set()): set() of potential css properties.
-        :param px_to_em (boolean): Flag for unit conversion. True means convert ``px` to ``em``. False means do nothing.
+        :param px_to_em (bool): Flag for unit conversion. True means convert ``px` to ``em``. False means do nothing.
         :return: Object of Type ClassPropertyParser
         """
         css = u'''/* Generated with blowdrycss. */'''
@@ -80,7 +80,7 @@ class ClassPropertyParser(object):
         Validate underscore usage in a single css_class.
         In general, underscores are only allowed to designate a decimal point between two numbers.
 
-        Rules:
+        **Rules:**
             - Strip all whitespace in front and back.
             - Underscores are only valid between digits
                 - ``[0-9]_[0-9]`` allowed
@@ -154,16 +154,17 @@ class ClassPropertyParser(object):
         Detect and Remove invalid css classes from class_set
         Class names must abide by: http://www.w3.org/TR/CSS2/syndata.html#characters
 
-        For purposes of this project only a SUBSET of the standard is permissible as follows:
-        - Encoded classes shall not be None or ''.
-        - Encoded shall not contain whitespace (handled implicitly by subsequent rules).
-        - Encoded classes are only allowed to begin with [a-z]
-        - Encoded classes are only allowed to end with [a-z0-9]
-        - Encoded classes are allowed to contain [_a-z0-9-] between the first and last characters.
-        - Underscores are only valid between digits [0-9]_[0-9]
+        For purposes of this project only a SUBSET of the CSS standard is permissible as follows:
+            - Encoded classes shall not be ``None`` or ``''``.
+            - Encoded shall not contain whitespace (handled implicitly by subsequent rules).
+            - Encoded classes are only allowed to begin with ``[a-z]``
+            - Encoded classes are only allowed to end with ``[a-z0-9]``
+            - Encoded classes are allowed to contain ``[_a-z0-9-]`` between the first and last characters.
+            - Underscores are only valid between digits ``[0-9]_[0-9]``
 
-        Reference:
-        stackoverflow.com/questions/1323364/in-python-how-to-check-if-a-string-only-contains-certain-characters
+        **Reference:**
+            http://stackoverflow.com/questions/1323364/in-python-how-to-check-if-a-string-only-contains-certain-characters
+
         :return: None
         """
         # Normalize class data by setting all strings to lowercase first.
@@ -211,25 +212,31 @@ class ClassPropertyParser(object):
     @staticmethod
     def get_property_name(css_class=''):
         """
-        Class returns the property_name OR if unrecognized returns ''.
-        Classes that use identical property names must set a property value
+        Extract a property name from a given class.
 
-        Valid:
-        - `font-weight-700` is valid because `700` is a valid property value.
-        - `fw-700` is valid because it `fw-` is a valid alias for `font-weight`
-        - `bold` is valid because `bold` implies a property name of `font-weight`
+        **Rules:**
+            - Classes that use css property names or aliases must set a property value.
 
-        Invalid:
-        - `font-weight` by itself is a property name, but does not include a property value.
-        - `700` does imply `font-weight`, but is not a valid CSS selector as it may not begin with a number.
+        **Valid:**
+            - ``font-weight-700`` is valid because ``700`` is a valid property value.
+            - ``fw-700`` is valid because it ``fw-`` is a valid alias for ``font-weight``
+            - ``bold`` is valid because the ``bold`` alias implies a property name of ``font-weight``
+
+        **Invalid:**
+            - ``font-weight`` by itself is a property name, but does not include a property value.
+            - ``fw-`` by itself is a property alias, but does not include a property value.
+            - ``700`` does imply ``font-weight``, but is not a valid CSS selector as it may not begin with a number.
 
         :type css_class: str
 
         :param css_class: A class name containing a property name and value pair, or just a property value from which the property name may be inferred.
-        :return: str
+        :return: (str) -- Class returns the property_name OR if unrecognized returns ``''``.
         """
         for property_name, aliases in ordered_property_dict.items():
             # Try identical 'key' match first. An exact css_class match must also end with a '-' dash to be valid.
+            if css_class == property_name or css_class == (property_name + '-'):    # No property value included.
+                return ''
+
             if css_class.startswith(property_name + '-'):
                 return property_name
 
@@ -239,6 +246,8 @@ class ClassPropertyParser(object):
 
             # Try matching with alias. An alias is not required to end with a dash, but could if it is an abbreviation.
             for alias in aliases:
+                if css_class == alias and alias.endswith('-'):                      # No property value included.
+                    return ''
                 if css_class.startswith(alias):
                     return property_name
 
@@ -255,48 +264,79 @@ class ClassPropertyParser(object):
         return ''
 
     @staticmethod
-    def strip_property_name(property_name='', encoded_property_value=''):
+    def strip_property_name(property_name='', css_class=''):
         """
-        Strip property name from encoded_property_value if applicable and return encoded_property_value.
+        Strip property name from css_class if applicable and return the css_class.
 
-        Both property_name and encoded_property_value must not be empty or only contain whitespace values.
+        :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
 
         :type property_name: str
-        :type encoded_property_value: str
+        :type css_class: str
 
-        :param property_name: Presumed to match a key or value in the property_alias_dict
-        :param encoded_property_value: Initially this value may or may not contain the property_name.
-        :return: str
+        :param property_name: Presumed to match a key or value in the ``property_alias_dict``.
+        :param css_class: This value may or may not be identical to the property_value.
+        :return: (str) css_class which is the encoded property value.
+
+        **Examples:**
+
+        >>> ClassPropertyParser.strip_property_name('padding', 'padding-1-2-1-2')
+        '1-2-1-2'
+        >>> ClassPropertyParser.strip_property_name('font-weight', 'bold')
+        'bold'
+        >>> ClassPropertyParser.strip_property_name('', 'padding-1-2-1-2')
+        ValueError
+        >>> ClassPropertyParser.strip_property_name('font-weight', '    ')
+        ValueError
         """
-        deny_empty_or_whitespace(string=encoded_property_value, variable_name='encoded_property_value')
+        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
         deny_empty_or_whitespace(string=property_name, variable_name='property_name')
 
         property_name += '-'                                        # Append '-' to property to match the class format.
 
-        if encoded_property_value.startswith(property_name):        # Strip property name
-            return encoded_property_value[len(property_name):]
+        if css_class.startswith(property_name):                     # Strip property name
+            return css_class[len(property_name):]
         else:                                                       # If it doesn't have a property name ignore it.
-            return encoded_property_value
+            return css_class
 
     @staticmethod
     def alias_is_abbreviation(possible_alias=''):
         """
-        Returns True if possible_alias ends with a '-' e.g. 'fw-' stands for 'font-weight-'.
-        Abbreviated aliases are found in datalibrary.property_alias_dict.
+        Detects if the alias is an abbreviation e.g. ``fw-`` stands for ``font-weight-``.
+        Abbreviated aliases are found in ``datalibrary.property_alias_dict``.
 
         :type possible_alias: str
 
         :param possible_alias: A value that might be an alias.
-        :return: bool
+        :return: (bool) -- True if possible_alias ends with a dash ``-``.
+
+        **Examples:**
+
+        >>> ClassPropertyParser.alias_is_abbreviation('fw-')
+        True
+        >>> ClassPropertyParser.alias_is_abbreviation('bold')
+        False
         """
         return possible_alias.endswith('-')
 
     def get_property_abbreviations(self, property_name=''):
         """
-        Returns a list of all property abbreviations appearing in property_alias_dict
+        Returns a list of all property abbreviations appearing in ``property_alias_dict``.
+
+        :raises KeyError: If ``property_name`` is not found in ``property_alias_dict``.
 
         :param property_name:
-        :return:
+        :return: (list) -- A list of all property abbreviations appearing in ``property_alias_dict``.
+
+        **Example:**
+
+        Assume the following key, value pair occurs in ``property_alias_dict``:
+
+            ``'background-color': {'bgc-', 'bg-c-', 'bg-color-', },``
+
+        >>> ClassPropertyParser.get_property_abbreviations('background-color')
+        ['bgc-', 'bg-c-', 'bg-color-']
+        >>> ClassPropertyParser.get_property_abbreviations('invalid_property_name')
+        KeyError
         """
         property_abbreviations = list()
         for alias in property_alias_dict[property_name]:
@@ -313,7 +353,7 @@ class ClassPropertyParser(object):
         :type property_name: str
         :type encoded_property_value: str
 
-        :param property_name: Presumed to match a key or value in the property_alias_dict
+        :param property_name: Presumed to match a key or value in the ``property_alias_dict``
         :param encoded_property_value: Initially this value may or may not contain the property_name.
         :return: str
         """
@@ -343,7 +383,7 @@ class ClassPropertyParser(object):
         :type property_name: str
         :type css_class: str
 
-        :param property_name: Name of CSS property that matches a key in property_alias_dict.
+        :param property_name: Name of CSS property that matches a key in ``property_alias_dict``.
         :param css_class: An encoded class that may contain property name, value, and priority designator.
         :return: str
         """
@@ -366,7 +406,7 @@ class ClassPropertyParser(object):
         :type property_name: str
         :type encoded_property_value: str
 
-        :param property_name: Name of CSS property that matches a key in property_alias_dict.
+        :param property_name: Name of CSS property that matches a key in ``property_alias_dict``.
         :param encoded_property_value: A property value that may or may not contain dashes and underscores.
         :return: str
         """
