@@ -1,37 +1,51 @@
+""" Parser for extracting CSS property names, values, and priorities from set of CSS Class Selectors. These class
+selectors are gathered externally by the ``HTMLClassParser()``.
 
-# TODO: Wrap in docstrings and make this relevant.
-# You instantiate a ``Triangle``
-# by providing exactly three lengths ``a``, ``b``, and ``c``.
-# They can either be intergers or floating-point numbers,
-# and should be listed clockwise around the triangle.
-# If the three lengths *cannot* make a valid triangle,
-# then ``ValueError`` will be raised instead.
-#
-# TODO: Show example usage.
-#
-# >>> from classpropertyparser import ClassPropertyParser
-# >>> t = Triangle(3, 4, 5)
-# >>> print t.is_equilateral()
-# False
-# >>> print t.area()
-# 6.0
-#
-# Triangles support the following attributes, operators, and methods.
-#
-# .. attribute::  a
-#                 b
-#                 c
-#
-# .. index:: pair: equality; triangle
-# .. method:: triangle1 == triangle2
-#
-#     Returns true if the two triangles have sides of the same lengths,
-#     in the same order.
-#     Note that it is okay if the two triangles
-#     happen to start their list of sides at a different corner;
-#     ``3,4,5`` is the same triangle as ``4,5,3``
-#     but neither of these are the same triangle
-#     as their mirror image ``5,4,3``.
+CSS Unit Reference: http://www.w3schools.com/cssref/css_units.asp
+CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
+
+**Parameters:**
+    | class_set (*set*) -- A set() of potential css properties.
+    | px_to_em (*bool*) -- Flag for unit conversion. True means convert ``px` to ``em``. False means do nothing.
+
+**Returns:** Object of Type ClassPropertyParser
+
+**Examples:**
+
+Give this HTML: ``<div class="super-5 h-16-i padding-2 margin-10">Hello</div>``
+The HTMLClassParser() would extract the following ``class_set``.
+
+>>> class_set = {'super-5', 'h-16-i', 'PADDING-2', 'margin-10', }
+>>> property_parser = ClassPropertyParser(class_set, px_to_em=True)
+>>> # Note that 'super-5' was removed.
+>>> print(property_parser.class_set)
+{'h-16-i', 'padding-2', 'margin-10'}
+>>> css_class = list(property_parser.class_set)[0]
+>>> print(css_class)
+h-16-i
+>>> name = property_parser.get_property_name(css_class=css_class)
+>>> # Decodes 'h-' to 'height'
+>>> print(name)
+height
+>>> # Could throw a ValueError.
+>>> # See cssbuilder.py for an example of how to handle it.
+>>> encoded_property_value = property_parser.get_encoded_property_value(
+>>>     property_name=name,
+>>>     css_class=css_class
+>>> )
+>>> print(encoded_property_value)
+16
+>>> priority = property_parser.get_property_priority(css_class=css_class)
+>>> print(priority)
+IMPORTANT
+>>> value = property_parser.get_property_value(
+>>>     property_name=name,
+>>>     encoded_property_value=encoded_property_value
+>>> )
+>>> print(value)    # Note the unit conversion from px_to_em.
+1em
+
+"""
 
 from cssutils import parseString
 from string import ascii_lowercase, digits
@@ -46,16 +60,6 @@ __project__ = 'blow dry css'
 
 class ClassPropertyParser(object):
     def __init__(self, class_set=set(), px_to_em=True):
-        """Parser for extracting CSS properties from an HTML Class Attribute.
-
-        CSS Unit Reference: http://www.w3schools.com/cssref/css_units.asp
-        CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
-
-        :param class_set (set()): set() of potential css properties.
-        :param px_to_em (bool): Flag for unit conversion. True means convert ``px` to ``em``. False means do nothing.
-        :return: Object of Type ClassPropertyParser
-        
-        """
         css = u'''/* Generated with blowdrycss. */'''
         self.px_to_em = px_to_em
         self.sheet = parseString(css)
@@ -67,8 +71,7 @@ class ClassPropertyParser(object):
         # print('clean ran')
 
     def class_set_to_lowercase(self):
-        """
-        Converts member variable self.class_set to lowercase.
+        """ Converts member variable self.class_set to lowercase.
 
         :return: None
         
