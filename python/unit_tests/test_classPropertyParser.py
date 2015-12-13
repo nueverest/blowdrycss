@@ -129,9 +129,9 @@ class TestClassPropertyParser(TestCase):
         self.assertRaises(ValueError, class_parser.strip_property_name, empty_property_name, css_class)
 
     def test_strip_encoded_property_name_valueerror(self):
-        invalid_names = ['', '      ']
+        invalid_inputs = ['', '      ']
         class_parser = ClassPropertyParser(class_set=set())
-        for invalid in invalid_names:
+        for invalid in invalid_inputs:
             self.assertRaises(ValueError, class_parser.strip_property_name, invalid, 'c-lime')
             self.assertRaises(ValueError, class_parser.strip_property_name, 'color', invalid)
 
@@ -181,9 +181,9 @@ class TestClassPropertyParser(TestCase):
         self.assertEquals(css_class, expected_encoded_property_value)
 
     def test_strip_property_abbreviation_raises_value_error(self):
-        invalid_names = ['', '      ']
+        invalid_inputs = ['', '      ']
         class_parser = ClassPropertyParser(class_set=set())
-        for invalid in invalid_names:
+        for invalid in invalid_inputs:
             self.assertRaises(ValueError, class_parser.strip_property_abbreviation, invalid, 'c-lime')
             self.assertRaises(ValueError, class_parser.strip_property_abbreviation, 'color', invalid)
 
@@ -204,9 +204,9 @@ class TestClassPropertyParser(TestCase):
             self.assertEquals(encoded_property_value, expected_encoded_property_values[i], msg=property_names)
 
     def test_get_encoded_property_value_invalid_raise_value_error(self):
-        invalid_names = ['', '      ']
+        invalid_inputs = ['', '      ']
         class_parser = ClassPropertyParser(class_set=set())
-        for invalid in invalid_names:
+        for invalid in invalid_inputs:
             self.assertRaises(ValueError, class_parser.get_encoded_property_value, invalid, 'c-lime')
             self.assertRaises(ValueError, class_parser.get_encoded_property_value, 'color', invalid)
 
@@ -233,9 +233,9 @@ class TestClassPropertyParser(TestCase):
             self.assertEquals(property_value, expected_values[i])
 
     def test_get_property_value_invalid_raise_value_error(self):
-        invalid_names = ['', '      ']
+        invalid_inputs = ['', '      ']
         class_parser = ClassPropertyParser(class_set=set())
-        for invalid in invalid_names:
+        for invalid in invalid_inputs:
             self.assertRaises(ValueError, class_parser.get_property_value, invalid, 'c-lime')
             self.assertRaises(ValueError, class_parser.get_property_value, 'color', invalid)
 
@@ -245,6 +245,12 @@ class TestClassPropertyParser(TestCase):
         class_parser = ClassPropertyParser(class_set=set())
         self.assertTrue(class_parser.is_important(css_class=expected_true))
         self.assertFalse(class_parser.is_important(css_class=expected_false))
+    
+    def test_is_important_raise_value_error(self):
+        invalid_inputs = ['', '      ']
+        class_parser = ClassPropertyParser(class_set=set())
+        for invalid in invalid_inputs:
+            self.assertRaises(ValueError, class_parser.is_important, invalid)
 
     def test_strip_priority_designator(self):
         important = 'p-10-i'

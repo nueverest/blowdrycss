@@ -441,7 +441,7 @@ class ClassPropertyParser(object):
 
         :param property_name: Name of CSS property that matches a key in ``property_alias_dict``.
         :param encoded_property_value: A property value that may or may not contain dashes and underscores.
-        :return: (str) --
+        :return: (str) -- An unvalidated / potential CSS property value.
 
         **Examples:**
 
@@ -473,20 +473,21 @@ class ClassPropertyParser(object):
         """
         Tests whether the css_class ends with the importance_designator.
 
-        Returns True if the css_class ends with the importance_designator. Otherwise, it returns False.
+        :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
 
         :type css_class: str
 
         :param css_class: An encoded class that may contain property name, value, and priority designator.
-        :return: (bool) --
+        :return: (bool) -- Returns True if the css_class ends with the importance_designator. Otherwise, returns False.
         
         """
+        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
         return css_class.endswith(self.importance_designator)
 
     def strip_priority_designator(self, encoded_property_value=''):
         """
         Strip priority designator from the end of encoded_property_value and returns the string.  If the
-        importance_designator is not found it returns the unchanged encoded_proprety_value.
+        importance_designator is not found it returns the unchanged encoded_property_value.
 
         :type encoded_property_value: str
 
