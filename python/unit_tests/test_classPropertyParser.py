@@ -128,7 +128,7 @@ class TestClassPropertyParser(TestCase):
         class_parser = ClassPropertyParser(class_set=set())
         self.assertRaises(ValueError, class_parser.strip_property_name, empty_property_name, css_class)
 
-    def test_strip_encoded_property_value_error(self):
+    def test_strip_encoded_property_name_valueerror(self):
         invalid_names = ['', '      ']
         class_parser = ClassPropertyParser(class_set=set())
         for invalid in invalid_names:
@@ -202,6 +202,13 @@ class TestClassPropertyParser(TestCase):
                 css_class=css_class
             )
             self.assertEquals(encoded_property_value, expected_encoded_property_values[i], msg=property_names)
+
+    def test_get_encoded_property_value_invalid_raise_value_error(self):
+        invalid_names = ['', '      ']
+        class_parser = ClassPropertyParser(class_set=set())
+        for invalid in invalid_names:
+            self.assertRaises(ValueError, class_parser.get_encoded_property_value, invalid, 'c-lime')
+            self.assertRaises(ValueError, class_parser.get_encoded_property_value, 'color', invalid)
 
     def test_get_property_value_valid_patterns(self):
         property_name = 'color'

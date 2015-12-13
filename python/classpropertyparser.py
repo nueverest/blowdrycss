@@ -391,26 +391,40 @@ class ClassPropertyParser(object):
     def get_encoded_property_value(self, property_name='', css_class=''):
         """
         Strip property name or alias abbreviation prefix from front, and property priority designator from end.
+        Returns the encoded_property_value.
 
-        Examples
-            'fw-bold-i' --> 'bold'                [abbreviated font-weight property_name]
-            'padding-1-10-10-5-i' --> '1-10-10-5' [standard property_name]
-            'height-7_25rem-i' --> '7_25rem'      [contains underscores]
+        The term encoded_property_value means a property value that represents a css property value,
+        and may or may not contain dashes and underscores.
 
-        The term encoded_property_value means a property value that may or may not contain dashes and underscores.
+        :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
 
         :type property_name: str
         :type css_class: str
 
         :param property_name: Name of CSS property that matches a key in ``property_alias_dict``.
         :param css_class: An encoded class that may contain property name, value, and priority designator.
-        :return: (str) --
-        
+        :return: (str) -- Returns only the encoded_property_value after the name and priority designator are stripped.
+
+        **Examples:**
+
+        >>> property_parser = ClassPropertyParser()
+        >>> property_parser.get_encoded_property_value('font-weight', 'fw-bold-i')          # abbreviated property_name
+        'bold'
+        >>> property_parser.get_encoded_property_value('padding', 'padding-1-10-10-5-i')    # standard property_name
+        '1-10-10-5'
+        >>> property_parser.get_encoded_property_value('height', 'height-7_25rem-i')        # contains underscores
+        '7_25rem'
+        >>> property_parser.get_encoded_property_value('font-style', 'font-style-oblique')  # no priority desginator
+        'oblique'
+        >>> property_parser.get_encoded_property_value('', 'c-lime')
+        ValueError
+        >>> property_parser.get_encoded_property_value('color', '  ')
+        ValueError
+
         """
-        encoded_property_value = css_class
-        encoded_property_value = self.strip_property_name(property_name, encoded_property_value)
-        encoded_property_value = self.strip_property_abbreviation(property_name, encoded_property_value)
-        encoded_property_value = self.strip_priority_designator(encoded_property_value)
+        css_class = self.strip_property_name(property_name, css_class)
+        css_class = self.strip_property_abbreviation(property_name, css_class)
+        encoded_property_value = self.strip_priority_designator(css_class)
         return encoded_property_value
 
     def get_property_value(self, property_name='', encoded_property_value=''):
