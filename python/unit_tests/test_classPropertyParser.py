@@ -232,6 +232,13 @@ class TestClassPropertyParser(TestCase):
             property_value = class_parser.get_property_value(property_name=property_name, encoded_property_value=value)
             self.assertEquals(property_value, expected_values[i])
 
+    def test_get_property_value_invalid_raise_value_error(self):
+        invalid_names = ['', '      ']
+        class_parser = ClassPropertyParser(class_set=set())
+        for invalid in invalid_names:
+            self.assertRaises(ValueError, class_parser.get_property_value, invalid, 'c-lime')
+            self.assertRaises(ValueError, class_parser.get_property_value, 'color', invalid)
+
     def test_is_important(self):
         expected_true = 'p-10-i'
         expected_false = 'height-50'

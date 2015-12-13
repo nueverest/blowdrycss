@@ -432,10 +432,9 @@ class ClassPropertyParser(object):
         Accepts an encoded_property_value that's been stripped of it's property named and priority
         Uses CSSPropertyValueParser, and returns a valid css property value or ''.
 
-        encoded_property_value examples
-            'bold'      [special case where alias == property value]
-            '1-10-10-5' [contains dashes]
-            '7_25rem'   [contains underscores]
+        Usage Note: Invalid CSS values can be returned by this method.  CSS validation occurs at a later step.
+
+        :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
 
         :type property_name: str
         :type encoded_property_value: str
@@ -443,8 +442,27 @@ class ClassPropertyParser(object):
         :param property_name: Name of CSS property that matches a key in ``property_alias_dict``.
         :param encoded_property_value: A property value that may or may not contain dashes and underscores.
         :return: (str) --
-        
+
+        **Examples:**
+
+        >>> property_parser = ClassPropertyParser(set(), False)                 # Turn OFF unit conversion.
+        >>> property_parser.get_property_value('font-weight', 'bold')           # Special case: alias == property value
+        'bold'
+        >>> property_parser.get_property_value('padding', '1-10-10-5')          # Multi-value encoding contains dashes.
+        '1px 10px 10px 5px'
+        >>> property_parser.get_property_value('width', '7_25rem')              # Single value contains underscores.
+        '7.25rem'
+        >>> property_parser.get_property_value('margin', '1ap-10xp-3qp-1mp3')   # Invalid CSS returned.
+        '1a% 10x% 3q% 1mp3'
+        >>> property_parser.get_property_value('', 'c-lime')
+        ValueError
+        >>> property_parser.get_property_value('color', '  ')
+        ValueError
+
         """
+        deny_empty_or_whitespace(string=property_name, variable_name='property_name')
+        deny_empty_or_whitespace(string=encoded_property_value, variable_name='encoded_property_value')
+
         value_parser = CSSPropertyValueParser(property_name=property_name, px_to_em=self.px_to_em)
         value = value_parser.decode_property_value(value=encoded_property_value)
         return value
