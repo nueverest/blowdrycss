@@ -6,12 +6,24 @@ __project__ = 'blow dry css'
 
 def contains_a_digit(string=''):
     """
-    Check if string contains a digit `[0-9]`.
+    Check if string contains a digit ``[0-9]``.
 
     :type string: str
 
     :param string: The string to test.
     :return: (bool) -- Returns True if string contains at least 1 digit. Otherwise, returns False.
+
+    **Examples:**
+    >>> contains_a_digit('abc1')
+    True
+    >>> contains_a_digit('876')
+    True
+    >>> contains_a_digit('cat')
+    False
+    >>> contains_a_digit('')
+    False
+    >>> contains_a_digit('   ')
+    False
 
     """
     return True if search(r"[0-9]", string) else False
@@ -19,9 +31,10 @@ def contains_a_digit(string=''):
 
 def deny_empty_or_whitespace(string='', variable_name=''):
     """
-    Raises a ValueError if the string or the variable_name is empty or only contains whitespace.
+    Prevent ``string`` or ``variable_name`` from being empty or only containing whitespace.
 
-    The ValueError contains the name of the calling function and the variable name used in the calling function.
+    :raises ValueError: Raises a ValueError if the string or the variable_name is empty or only contains whitespace.
+        The ValueError contains the name of the calling function and the variable name used in the calling function.
 
     :type string: str
     :type variable_name: str
