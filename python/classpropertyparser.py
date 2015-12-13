@@ -279,7 +279,7 @@ class ClassPropertyParser(object):
 
         :param property_name: Presumed to match a key or value in the ``property_alias_dict``.
         :param css_class: This value may or may not be identical to the property_value.
-        :return: (str) css_class which is the encoded property value.
+        :return: (str) -- Returns the encoded property value portion of the css_class.
 
         **Examples:**
 
@@ -339,9 +339,10 @@ class ClassPropertyParser(object):
 
             ``'background-color': {'bgc-', 'bg-c-', 'bg-color-', },``
 
-        >>> ClassPropertyParser.get_property_abbreviations('background-color')
+        >>> property_parser = ClassPropertyParser()
+        >>> property_parser.get_property_abbreviations('background-color')
         ['bgc-', 'bg-c-', 'bg-color-']
-        >>> ClassPropertyParser.get_property_abbreviations('invalid_property_name')
+        >>> property_parser.get_property_abbreviations('invalid_property_name')
         KeyError
         
         """
@@ -351,29 +352,39 @@ class ClassPropertyParser(object):
                 property_abbreviations.append(alias)
         return property_abbreviations
 
-    def strip_property_abbreviation(self, property_name='', encoded_property_value=''):
+    def strip_property_abbreviation(self, property_name='', css_class=''):
         """
-        Strip property abbreviation from encoded_property_value if applicable and return encoded_property_value.
+        Strip property abbreviation from css_class if applicable and return the result.
 
-        Both property_name and encoded_property_value must not be empty or only contain whitespace values.
+        :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
 
         :type property_name: str
-        :type encoded_property_value: str
+        :type css_class: str
 
         :param property_name: Presumed to match a key or value in the ``property_alias_dict``
-        :param encoded_property_value: Initially this value may or may not contain the property_name.
-        :return: (str) --
-        
+        :param css_class: Initially this value may or may not contain the property_name.
+        :return: (str) -- Returns the encoded property value portion of the css_class.
+
+        **Examples:**
+
+        >>> property_parser = ClassPropertyParser()
+        >>> property_parser.strip_property_abbreviation('color', 'c-lime')
+        'lime'
+        >>> property_parser.strip_property_abbreviation('', 'c-lime')
+        ValueError
+        >>> property_parser.strip_property_abbreviation('color', '  ')
+        ValueError
+
         """
-        deny_empty_or_whitespace(string=encoded_property_value, variable_name='encoded_property_value')
+        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
         deny_empty_or_whitespace(string=property_name, variable_name='property_name')
 
         property_abbreviations = self.get_property_abbreviations(property_name=property_name)
 
         for property_abbreviation in property_abbreviations:
-            if encoded_property_value.startswith(property_abbreviation):
-                return encoded_property_value[len(property_abbreviation):]
-        return encoded_property_value
+            if css_class.startswith(property_abbreviation):
+                return css_class[len(property_abbreviation):]
+        return css_class
 
     # Property Value
     #
@@ -417,7 +428,7 @@ class ClassPropertyParser(object):
 
         :param property_name: Name of CSS property that matches a key in ``property_alias_dict``.
         :param encoded_property_value: A property value that may or may not contain dashes and underscores.
-        :return: str
+        :return: (str) --
         
         """
         value_parser = CSSPropertyValueParser(property_name=property_name, px_to_em=self.px_to_em)

@@ -114,25 +114,26 @@ class TestClassPropertyParser(TestCase):
     def test_strip_property_name_not_matching(self):
         property_name = 'font-weight'
         encoded_property_value = 'bold'
-        expected_encoded_property_value = 'bold'
+        css_class = 'bold'
         class_parser = ClassPropertyParser(class_set=set())
         encoded_property_value = class_parser.strip_property_name(
             property_name=property_name,
             css_class=encoded_property_value
         )
-        self.assertEquals(encoded_property_value, expected_encoded_property_value)
+        self.assertEquals(encoded_property_value, css_class)
 
     def test_strip_property_name_empty(self):
         empty_property_name = ''
-        encoded_property_value = 'bold'
+        css_class = 'bold'
         class_parser = ClassPropertyParser(class_set=set())
-        self.assertRaises(ValueError, class_parser.strip_property_name, empty_property_name, encoded_property_value)
+        self.assertRaises(ValueError, class_parser.strip_property_name, empty_property_name, css_class)
 
-    def test_strip_encoded_property_value_empty(self):
-        empty_property_name = 'font-weight'
-        encoded_property_value = ''
+    def test_strip_encoded_property_value_error(self):
+        invalid_names = ['', '      ']
         class_parser = ClassPropertyParser(class_set=set())
-        self.assertRaises(ValueError, class_parser.strip_property_name, empty_property_name, encoded_property_value)
+        for invalid in invalid_names:
+            self.assertRaises(ValueError, class_parser.strip_property_name, invalid, 'c-lime')
+            self.assertRaises(ValueError, class_parser.strip_property_name, 'color', invalid)
 
     def test_alias_is_abbreviation(self):
         expected_true = ['fw-', 'p-', 'h-', 'w-']
@@ -159,25 +160,32 @@ class TestClassPropertyParser(TestCase):
 
     def test_strip_property_abbreviation_matching(self):
         property_name = 'font-weight'
-        encoded_property_value = 'fw-400'
+        css_class = 'fw-400'
         expected_encoded_property_value = '400'
         class_parser = ClassPropertyParser(class_set=set())
-        encoded_property_value = class_parser.strip_property_abbreviation(
+        css_class = class_parser.strip_property_abbreviation(
             property_name=property_name,
-            encoded_property_value=encoded_property_value
+            css_class=css_class
         )
-        self.assertEquals(encoded_property_value, expected_encoded_property_value)
+        self.assertEquals(css_class, expected_encoded_property_value)
 
     def test_strip_property_abbreviation_not_matching(self):
         property_name = 'font-weight'
-        encoded_property_value = 'bold'
+        css_class = 'bold'
         expected_encoded_property_value = 'bold'
         class_parser = ClassPropertyParser(class_set=set())
-        encoded_property_value = class_parser.strip_property_abbreviation(
+        css_class = class_parser.strip_property_abbreviation(
             property_name=property_name,
-            encoded_property_value=encoded_property_value
+            css_class=css_class
         )
-        self.assertEquals(encoded_property_value, expected_encoded_property_value)
+        self.assertEquals(css_class, expected_encoded_property_value)
+
+    def test_strip_property_abbreviation_raises_value_error(self):
+        invalid_names = ['', '      ']
+        class_parser = ClassPropertyParser(class_set=set())
+        for invalid in invalid_names:
+            self.assertRaises(ValueError, class_parser.strip_property_abbreviation, invalid, 'c-lime')
+            self.assertRaises(ValueError, class_parser.strip_property_abbreviation, 'color', invalid)
 
     def test_get_encoded_property_value(self):
         # 'fw-bold-i' --> 'bold'                [abbreviated font-weight property_name]
