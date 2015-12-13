@@ -33,7 +33,6 @@
 #     but neither of these are the same triangle
 #     as their mirror image ``5,4,3``.
 
-
 from cssutils import parseString
 from string import ascii_lowercase, digits
 from re import findall
@@ -55,6 +54,7 @@ class ClassPropertyParser(object):
         :param class_set (set()): set() of potential css properties.
         :param px_to_em (bool): Flag for unit conversion. True means convert ``px` to ``em``. False means do nothing.
         :return: Object of Type ClassPropertyParser
+        
         """
         css = u'''/* Generated with blowdrycss. */'''
         self.px_to_em = px_to_em
@@ -71,6 +71,7 @@ class ClassPropertyParser(object):
         Converts member variable self.class_set to lowercase.
 
         :return: None
+        
         """
         self.class_set = {css_class.lower() for css_class in self.class_set}
 
@@ -128,6 +129,7 @@ class ClassPropertyParser(object):
                 False
                 >>> ClassPropertyParser.underscores_valid('__')
                 False
+                
         """
         # TODO: Replace with regex.
         # The underscore and dash is not allowed to be the first or last character of css_class.
@@ -166,6 +168,7 @@ class ClassPropertyParser(object):
             http://stackoverflow.com/questions/1323364/in-python-how-to-check-if-a-string-only-contains-certain-characters
 
         :return: None
+        
         """
         # Normalize class data by setting all strings to lowercase first.
         self.class_set_to_lowercase()
@@ -231,6 +234,7 @@ class ClassPropertyParser(object):
 
         :param css_class: A class name containing a property name and value pair, or just a property value from which the property name may be inferred.
         :return: (str) -- Class returns the property_name OR if unrecognized returns ``''``.
+        
         """
         for property_name, aliases in ordered_property_dict.items():
             # Try identical 'key' match first. An exact css_class match must also end with a '-' dash to be valid.
@@ -287,6 +291,7 @@ class ClassPropertyParser(object):
         ValueError
         >>> ClassPropertyParser.strip_property_name('font-weight', '    ')
         ValueError
+        
         """
         deny_empty_or_whitespace(string=css_class, variable_name='css_class')
         deny_empty_or_whitespace(string=property_name, variable_name='property_name')
@@ -315,6 +320,7 @@ class ClassPropertyParser(object):
         True
         >>> ClassPropertyParser.alias_is_abbreviation('bold')
         False
+        
         """
         return possible_alias.endswith('-')
 
@@ -337,6 +343,7 @@ class ClassPropertyParser(object):
         ['bgc-', 'bg-c-', 'bg-color-']
         >>> ClassPropertyParser.get_property_abbreviations('invalid_property_name')
         KeyError
+        
         """
         property_abbreviations = list()
         for alias in property_alias_dict[property_name]:
@@ -355,7 +362,8 @@ class ClassPropertyParser(object):
 
         :param property_name: Presumed to match a key or value in the ``property_alias_dict``
         :param encoded_property_value: Initially this value may or may not contain the property_name.
-        :return: str
+        :return: (str) --
+        
         """
         deny_empty_or_whitespace(string=encoded_property_value, variable_name='encoded_property_value')
         deny_empty_or_whitespace(string=property_name, variable_name='property_name')
@@ -385,7 +393,8 @@ class ClassPropertyParser(object):
 
         :param property_name: Name of CSS property that matches a key in ``property_alias_dict``.
         :param css_class: An encoded class that may contain property name, value, and priority designator.
-        :return: str
+        :return: (str) --
+        
         """
         encoded_property_value = css_class
         encoded_property_value = self.strip_property_name(property_name, encoded_property_value)
@@ -409,6 +418,7 @@ class ClassPropertyParser(object):
         :param property_name: Name of CSS property that matches a key in ``property_alias_dict``.
         :param encoded_property_value: A property value that may or may not contain dashes and underscores.
         :return: str
+        
         """
         value_parser = CSSPropertyValueParser(property_name=property_name, px_to_em=self.px_to_em)
         value = value_parser.decode_property_value(value=encoded_property_value)
@@ -425,7 +435,8 @@ class ClassPropertyParser(object):
         :type css_class: str
 
         :param css_class: An encoded class that may contain property name, value, and priority designator.
-        :return: bool
+        :return: (bool) --
+        
         """
         return css_class.endswith(self.importance_designator)
 
@@ -437,7 +448,8 @@ class ClassPropertyParser(object):
         :type encoded_property_value: str
 
         :param encoded_property_value: A property value that may or may not contain a priority designator.
-        :return: str
+        :return: (str) --
+        
         """
         if self.is_important(css_class=encoded_property_value):
             return encoded_property_value[:-len(self.importance_designator)]
@@ -451,6 +463,7 @@ class ClassPropertyParser(object):
         :type css_class: str
 
         :param css_class: An encoded class that may contain property name, value, and priority designator.
-        :return: str
+        :return: (str) --
+        
         """
         return 'IMPORTANT' if self.is_important(css_class=css_class) else ''

@@ -6,12 +6,13 @@ __project__ = 'blow dry css'
 
 def contains_a_digit(string=''):
     """
-    Returns True if string contains at least 1 digit. Otherwise, returns False.
+    Check if string contains a digit `[0-9]`.
 
     :type string: str
 
     :param string: The string to test.
-    :return: bool
+    :return: (bool) -- Returns True if string contains at least 1 digit. Otherwise, returns False.
+
     """
     return True if search(r"[0-9]", string) else False
 
@@ -28,6 +29,7 @@ def deny_empty_or_whitespace(string='', variable_name=''):
     :param string: The string to test.
     :param variable_name: The name of the variable used in the calling function.
     :return: None
+
     """
     if not variable_name:                                                                       # '' and None cases
         calling_function = currentframe().f_back.f_code.co_name
