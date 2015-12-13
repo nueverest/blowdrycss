@@ -14,6 +14,7 @@ def contains_a_digit(string=''):
     :return: (bool) -- Returns True if string contains at least 1 digit. Otherwise, returns False.
 
     **Examples:**
+
     >>> contains_a_digit('abc1')
     True
     >>> contains_a_digit('876')

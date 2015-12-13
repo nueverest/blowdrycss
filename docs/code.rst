@@ -13,3 +13,9 @@ The "utilities" module
 
 .. automodule:: utilities
 
+
+The "version" module
+--------------------
+
+.. automodule:: version
+
