@@ -1,8 +1,8 @@
 """ Parser for extracting CSS property names, values, and priorities from set of CSS Class Selectors. These class
 selectors are gathered externally by the ``HTMLClassParser()``.
 
-CSS Unit Reference: http://www.w3schools.com/cssref/css_units.asp
-CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
+| CSS Unit Reference: http://www.w3schools.com/cssref/css_units.asp
+| CSS Value Reference: http://www.w3.org/TR/CSS21/propidx.html
 
 **Parameters:**
     | class_set (*set*) -- A set() of potential css properties.
