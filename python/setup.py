@@ -30,13 +30,18 @@ except (IOError, ImportError):
     # default description
     long_description = u'Rapid styling tool used to auto-generate DRY CSS files from encoded class selectors.'
 
+# Get current version number.
+version = {}
+with open('version.py') as file:
+    exec(file.read(), version)
+
 setup(
     name='blowdrycss',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.0.3',
+    version=version['__version__'],
 
     description=u'Rapid styling tool used to auto-generate DRY CSS files from encoded class selectors.',
     long_description=long_description,
@@ -103,14 +108,13 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['cssutils>=1.0.1'],
+    install_requires=['cssutils>=1.0.1', 'pypandoc>=1.1.2'],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
     # for example:
-    # $ pip install blowdrycss -e .[describe, auto_save, test]
+    # $ pip install blowdrycss -e .[auto_save, test]
     extras_require={
-        'describe': ['pypandoc>=1.1.2'],
         'auto_save': ['watchdog>=0.8.3'],
         'test': ['unittest', 'coverage>=4.0.2'],
     },
