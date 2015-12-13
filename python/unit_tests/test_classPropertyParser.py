@@ -284,6 +284,12 @@ class TestClassPropertyParser(TestCase):
             property_priority = class_parser.get_property_priority(css_class=css_class)
             self.assertEquals(property_priority, expected_property_priority)
 
+    def test_get_property_priority_raise_value_error(self):
+        invalid_inputs = ['', '      ']
+        class_parser = ClassPropertyParser(class_set=set())
+        for invalid in invalid_inputs:
+            self.assertRaises(ValueError, class_parser.get_property_priority, invalid)
+
 
 if __name__ == '__main__':
     main()

@@ -402,7 +402,7 @@ class ClassPropertyParser(object):
         :type css_class: str
 
         :param property_name: Name of CSS property that matches a key in ``property_alias_dict``.
-        :param css_class: An encoded class that may contain property name, value, and priority designator.
+        :param css_class: An encoded css class selector that may contain property name, value, and priority designator.
         :return: (str) -- Returns only the encoded_property_value after the name and priority designator are stripped.
 
         **Examples:**
@@ -477,7 +477,7 @@ class ClassPropertyParser(object):
 
         :type css_class: str
 
-        :param css_class: An encoded class that may contain property name, value, and priority designator.
+        :param css_class: An encoded css class selector that may contain property name, value, and priority designator.
         :return: (bool) -- Returns True if the css_class ends with the importance_designator. Otherwise, returns False.
 
         **Examples:**
@@ -528,12 +528,26 @@ class ClassPropertyParser(object):
 
     def get_property_priority(self, css_class=''):
         """
-        Returns the keyword 'IMPORTANT' if the property priority is set to important. Otherwise, it returns ''.
+        Returns the keyword 'IMPORTANT' or ''. These are in the form that ``cssutils`` understands.
+
+        :raises ValueError: If the css_class is empty or only contain whitespace values.
 
         :type css_class: str
 
-        :param css_class: An encoded class that may contain property name, value, and priority designator.
-        :return: (str) --
-        
+        :param css_class: An encoded css class selector that may contain property name, value, and priority designator.
+        :return: (str) -- Returns the keyword 'IMPORTANT' if the property priority is set to important.
+            Otherwise, it returns ''.
+
+        >>> property_parser = ClassPropertyParser()
+        >>> property_parser.get_property_priority('text-align-center-i')
+        'IMPORTANT'
+        >>> property_parser.get_property_priority('text-align-center')
+        ''
+        >>> property_parser.get_property_priority('')
+        ValueError
+        >>> property_parser.get_property_priority('     ')
+        ValueError
+
         """
+        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
         return 'IMPORTANT' if self.is_important(css_class=css_class) else ''
