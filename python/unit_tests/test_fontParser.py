@@ -35,10 +35,10 @@ class TestFontParser(TestCase):
             fallback_fonts = font_parser.generate_fallback_fonts()
             self.assertEqual(fallback_fonts, expected[i])
 
-    # font_value 'invalid' returns 'arial, sans-serif'
+    # font_value 'invalid' returns ''
     def test_generate_fallback_fonts_invalid(self):
         input_fonts = ['invalid', 'border', 'padding', 'oasnuth', 'oe2nth', '234']
-        expected = 'serif'
+        expected = ''
         font_parser = FontParser()
         for font in input_fonts:
             font_parser.font_value = font

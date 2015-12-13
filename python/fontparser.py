@@ -1,13 +1,33 @@
+""" **Features:**
+
+- Parses unquoted font families.
+
+  Unquoted Font-Family References:
+    | http://www.cssfontstack.com/
+    | https://mathiasbynens.be/notes/unquoted-font-family
+
+- Holds a basic ``font_families_dict`` (could be extended as desired):
+    | Keys: ``font-family`` category names
+    | Values: ``font-family`` member names
+
+- Can generate web safe fallback fonts.
+
+Assumes that the property_name is ``font-family``. It does not handle the shorthand property_name ``font``
+
+**Examples:**
+
+>>> font_parser = FontParser('papyrus')
+>>> font_parser.generate_fallback_fonts()
+'papyrus, fantasy'
+
+"""
+
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-# Assumes that the property_name is 'font-family'
 # TODO: Consider what it would take to handle shorthand property 'font'.
 class FontParser(object):
-    # Font-Family References:
-    # http://www.cssfontstack.com/
-    # https://mathiasbynens.be/notes/unquoted-font-family
     def __init__(self, font_value=''):
         self.font_value = font_value
         self.font_families_dict = {
@@ -18,17 +38,29 @@ class FontParser(object):
                 'arial', 'helvetica', 'gadget', 'cursive', 'impact', 'charcoal', 'tahoma', 'geneva', 'verdana',
                 'calibri', 'candara', 'futura', 'optima',
             },
-            'monospace': { 'courier', 'monaco', 'consolas', },
+            'monospace': {'courier', 'monaco', 'consolas', },
             'fantasy': {'copperplate', 'papyrus', },
         }
 
-    # Generates web safe fallback fonts
-    # Reference: http://www.w3schools.com/cssref/css_websafe_fonts.asp
-    # font_value 'arial' returns 'arial, sans-serif'
-    # font_value 'monospace' returns 'monospace'
-    # font_value 'invalid' returns 'serif'  i.e. fail gracefully.
     def generate_fallback_fonts(self):
-        fallback = 'serif'                                          # set default font
+        """ Generates web safe fallback fonts
+
+        Reference: http://www.w3schools.com/cssref/css_websafe_fonts.asp
+
+        :return: (str) -- Returns a web safe fallback font string.
+
+        **Examples:**
+
+        >>> font_parser = FontParser('arial')
+        >>> font_parser.generate_fallback_fonts()
+        'arial, sans-serif'
+        >>> font_parser.font_value = 'monospace'
+        'monospace'
+        >>> font_parser.font_value = 'invalid'
+        ''
+
+        """
+        fallback = ''                                               # set default font to empty string
         if self.font_value in self.font_families_dict:
             fallback = self.font_value                              # font_value 'monospace' returns 'monospace'
         else:
@@ -38,5 +70,8 @@ class FontParser(object):
         return fallback
 
     # TODO: Consider the handling of multi-word double quoted fonts i.e. "Palatino Linotype", "Book Antiqua", etc.
-    # could use 'qq', 'q--q' or 'dq' to indicate double-quotes e.g. 'qqPalatino-Linotypeqq'
-    # 'q-Palatino-Linotype-q'
+    # Seems complicated.
+    # could use 'qq', 'q--q' or 'dq' to indicate double-quotes e.g.
+    # 'qqPalatino-Linotypeqq' - confusing 'Linotype' looks like 'Linotypeg'. The letter 'q' looks like a 'g' at the end.
+    # 'q-Palatino-Linotype-q' - might work
+    # 'dqPalatino-Linotypedq' - confusing 'Linotype' becomes 'Linotyped'. The letter 'd' commonly ends words.

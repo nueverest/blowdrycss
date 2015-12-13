@@ -9,8 +9,8 @@
 | border-right | `br-`  |
 | border-spacing | `bs-` `border-s-`  |
 | border-style | `bs-` `border-s-`  |
-| font-size | `fs-` `font-s-`  |
-| font-style | `fs-` `font-s-`  |
+| font-size | `font-s-` `fs-`  |
+| font-style | `font-s-` `fs-`  |
 | letter-spacing | `ls-`  |
 | list-style | `ls-`  |
 | max-height | `mh-`  |
