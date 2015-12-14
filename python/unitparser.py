@@ -1,9 +1,16 @@
 """
 **Used in these cases:**
 
-- No units are provided and default units need to be added to make it valid css. ``add_units()``
+- No units are provided and default units need to be added to make it valid css.
 - The user wants their pixel (px) based units to be converted to em or root em (rem)
-  so that their page scales / zooms properly. ``convert_px_to_em()``
+  so that their page scales / zooms properly.
+
+**Assumption:** The value provided already has negative signs and decimal points. There are no dashes or
+underscores present in the value e.g. -1.25 can be processed, but n1_25 cannot be processed.
+
+**Contains a ``default_property_units_dict``** which maps property names to their default units.
+
+**Note:** Shorthand properties are not supported.
 
 **Why do I want to use em (named after the sound for the letter 'M') or root em (rem)?:**
 
@@ -120,23 +127,38 @@ class UnitParser(object):
             'min-width': 'px',                # single
         }
 
-    # For property_name's that require units apply the default units defined in default_property_units_dict.
-    # Handles cases input like: '12', '1 2 1 2', '5px 1 2px 13'
-    # Unconverted Outputs: '12px', '1px 2px 1px 2px', '5px 1px 2px 13px'
-    # 'em' Converted Outputs: '0.75em', '0.0625em 0.125em 0.0625em 0.125em', '0.3125em 0.0625em 0.125em 0.8125em'
-    # 'px' is converted to 'em' if px_to_em is True.
-    # Invalid input like '12a', '55zp', '42u3' are passed through and ignored.
     def add_units(self, property_value=''):
+        """
+        If the property_name requires units, then apply the default units defined in default_property_units_dict.
+
+        **Rules:**
+
+        - If px_to_em is False apply the default units for the property name by looking it up in
+        default_property_units_dict.
+        - If ``property_value`` has multiple property values, then split it apart.
+        - If the value already has units, then pass it through unchanged.
+        - The value provided shall possess negative signs and decimal points.
+        - Values shall only contain [] e.g. -1.25 can be processed, but n1_25 cannot be processed.
+
+        :type property_value: str
+
+        :param property_value: A string containing one or more space delimited numeric values.
+        :return: (str) - Returns the property value with the default or converted units added.
+
+        Handles cases input like: '12', '1 2 1 2', '5px 1 2px 13'
+        Unconverted Outputs: '12px', '1px 2px 1px 2px', '5px 1px 2px 13px'
+        'em' Converted Outputs: '0.75em', '0.0625em 0.125em 0.0625em 0.125em', '0.3125em 0.0625em 0.125em 0.8125em'
+        'px' is converted to 'em' if px_to_em is True.
+        Invalid input like '12a', '55zp', '42u3' are passed through and ignored.
+        """
         new_value = []
         try:
             default_units = self.default_property_units_dict[self.property_name]    # See if property_name has units.
             for val in property_value.split():                                      # single, double and quadruple
                 if set(val) <= self.allowed:
-                    val = val.replace('px', '')                                     # Handle pre-defined units casep
+                    val = val.replace('px', '')                                     # Handle 'px' units case.
                     if self.px_to_em and default_units == 'px':                     # Convert units if required.
-                        val = self.convert_px_to_em(pixels=val)
-                        new_units = 'em'
-                        new_value.append(val + new_units)
+                        new_value.append(self.convert_px_to_em(pixels=val))
                     else:
                         new_value.append(val + default_units)                       # Use default units.
                 else:                                                               
@@ -146,10 +168,25 @@ class UnitParser(object):
             pass                                                                    # Property is unitless.        
         return property_value
 
-    # Convert value from px to em using self.base.
-    # Round float to 4 decimal places.
     def convert_px_to_em(self, pixels):
-        em = float(pixels) / float(self.base)
-        em = round(em, 4)
-        return str(em)
+        """
+        Convert value from px to em using self.base.
+
+        **Rule:**
+        - ``pixels`` shall only contain [0-9.-].
+        - Inputs that contain any other value are simply passed through.
+
+        Round float to a maximum of 4 decimal places.
+
+        :type pixels: str, int, or float
+
+        :param pixels: A numeric value with the units stripped.
+        :return: (str)
+        """
+        if set(str(pixels)) <= set(digits + '-.'):
+            em = float(pixels) / float(self.base)
+            em = round(em, 4)
+            em = str(em) + 'em'                                                         # Add 'em'.
+            return em
+        return pixels
 
