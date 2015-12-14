@@ -144,8 +144,8 @@ class UnitParser(object):
 
         :type property_value: str
 
-        :param property_value: A string containing one or more space delimited numeric values.
-        :return: (str) - Returns the property value with the default or converted units added.
+        :param property_value: A string containing one or more space delimited alphanumeric characters.
+        :return: (str) -- Returns the property value with the default or converted units added.
 
         >>> # Convert 'px' to 'em'
         >>> unit_parser = UnitParser(property_name='padding', px_to_em=True)
@@ -156,12 +156,19 @@ class UnitParser(object):
         >>> unit_parser.add_units('1 2 1 2')
         1px 2px 1px 2px
         >>> # Values already have units or are not parsable pass through
-        >>> unit_parser.px_to_em = False        # True produces the same output.
+        >>> # True produces the same output.
+        >>> unit_parser.px_to_em = False
         >>> unit_parser.add_units('55zp')
         55zp
         >>> unit_parser.add_units('17rem')
         17rem
-        >>> # Mixed units cases - Not a Recommended Practice, but represent valid CSS. Be careful.
+        >>> # Unitless ``property_name``
+        >>> # causes ``property_value`` to pass through.
+        >>> unit_parser.property_name = 'font-weight'
+        >>> unit_parser.add_units('200')
+        200
+        >>> # Mixed units cases - Not a Recommended Practice,
+        >>> # but represent valid CSS. Be careful.
         >>> unit_parser.px_to_em = False
         >>> unit_parser.add_units('5em 6 5em 6')
         5em 6px 5em 6px
@@ -191,16 +198,33 @@ class UnitParser(object):
         """
         Convert value from px to em using self.base.
 
-        **Rule:**
+        **Rules:**
+
         - ``pixels`` shall only contain [0-9.-].
         - Inputs that contain any other value are simply passed through.
 
-        Round float to a maximum of 4 decimal places.
+        **Note:** Does not check the ``property_name`` or ``px_to_em`` values.  Rather, it blindly converts
+        whatever input is provided.
 
-        :type pixels: str, int, or float
+        Rounds float to a maximum of 4 decimal places.
+
+        :type pixels: str, int, float
 
         :param pixels: A numeric value with the units stripped.
         :return: (str)
+
+            - If the input is convertible return the converted number as a string with the units ``em``
+              appended to the end.
+            - If the input is not convertible return the unprocessed input.
+
+        >>> unit_parser = UnitParser('margin', px_to_em=True)
+        >>> unit_parser.px_to_em('-16.0')
+        -1em
+        >>> unit_parser.px_to_em('42px')
+        42px
+        >>> unit_parser.px_to_em('invalid')
+        invalid
+
         """
         if set(str(pixels)) <= set(digits + '-.'):
             em = float(pixels) / float(self.base)

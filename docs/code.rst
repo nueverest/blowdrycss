@@ -20,16 +20,16 @@ The "fontparser" module
 .. automodule:: fontparser
 
 
-The "utilities" module
-----------------------
-
-.. automodule:: utilities
-
-
 The "unitparser" module
 -----------------------
 
 .. automodule:: unitparser
+
+
+The "utilities" module
+----------------------
+
+.. automodule:: utilities
 
 
 The "version" module

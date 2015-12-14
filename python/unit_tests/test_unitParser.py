@@ -129,7 +129,27 @@ class TestUnitParser(TestCase):
         for value in property_values:
             new_value = unit_parser.add_units(property_value=value)
             self.assertEqual(new_value, value, msg=value)
-    
+
+    def test_add_units_UnitLess_Property_conversion_True(self):
+        property_name = 'font-weight'
+        property_values = ['bold', '200', '800', 'lighter']
+        expected_values = ['bold', '200', '800', 'lighter']
+        unit_parser = UnitParser(property_name=property_name, px_to_em=True)
+
+        for i, value in enumerate(property_values):
+            new_value = unit_parser.add_units(property_value=value)
+            self.assertEqual(new_value, expected_values[i], msg=i)
+
+    def test_add_units_UnitLess_Property_conversion_False(self):
+        property_name = 'font-weight'
+        property_values = ['bold', '200', '800', 'lighter']
+        expected_values = ['bold', '200', '800', 'lighter']
+        unit_parser = UnitParser(property_name=property_name, px_to_em=False)
+
+        for i, value in enumerate(property_values):
+            new_value = unit_parser.add_units(property_value=value)
+            self.assertEqual(new_value, expected_values[i], msg=i)
+
     def test_px_to_em_typecast_string_input(self):
         unit_parser = UnitParser(base=16)
         for pixels in range(-1000, 1001):
@@ -160,7 +180,7 @@ class TestUnitParser(TestCase):
     def test_px_to_em_invalid_input(self):
         # Expect the value to pass through unchanged.
         unit_parser = UnitParser(base=16)
-        invalid_inputs = ['cat', '11px', ' 234.8', 'n2_4p', '25deg', '16kHz', ]
+        invalid_inputs = ['1 2', '5 6 5 6', 'cat', '11px', ' 234.8', 'n2_4p', '25deg', '16kHz', ]
         for invalid in invalid_inputs:
             expected = invalid
             actual = unit_parser.convert_px_to_em(pixels=invalid)
