@@ -134,7 +134,7 @@ class UnitParser(object):
         **Rules:**
 
         - If px_to_em is False apply the default units for the property name by looking it up in
-        default_property_units_dict.
+          default_property_units_dict.
         - If ``property_value`` has multiple property values, then split it apart.
         - If the value already has units, then pass it through unchanged.
         - The value provided shall possess negative signs and decimal points.
