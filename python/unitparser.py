@@ -135,9 +135,11 @@ class UnitParser(object):
 
         - If px_to_em is False apply the default units for the property name by looking it up in
           default_property_units_dict.
+        - Unit that have default units of ``px`` are converted to ``em`` if px_to_em is True.
         - If ``property_value`` has multiple property values, then split it apart.
         - If the value already has units, then pass it through unchanged.
         - The value provided shall possess negative signs and decimal points.
+        - Mixed units are allowed, but **not recommended**.
         - Values shall only contain [] e.g. -1.25 can be processed, but n1_25 cannot be processed.
 
         :type property_value: str
@@ -145,11 +147,28 @@ class UnitParser(object):
         :param property_value: A string containing one or more space delimited numeric values.
         :return: (str) - Returns the property value with the default or converted units added.
 
-        Handles cases input like: '12', '1 2 1 2', '5px 1 2px 13'
-        Unconverted Outputs: '12px', '1px 2px 1px 2px', '5px 1px 2px 13px'
-        'em' Converted Outputs: '0.75em', '0.0625em 0.125em 0.0625em 0.125em', '0.3125em 0.0625em 0.125em 0.8125em'
-        'px' is converted to 'em' if px_to_em is True.
-        Invalid input like '12a', '55zp', '42u3' are passed through and ignored.
+        >>> # Convert 'px' to 'em'
+        >>> unit_parser = UnitParser(property_name='padding', px_to_em=True)
+        >>> unit_parser.add_units('1 2 1 2')
+        0.0625em 0.125em 0.0625em 0.125em
+        >>> # Use default units
+        >>> unit_parser.px_to_em = False
+        >>> unit_parser.add_units('1 2 1 2')
+        1px 2px 1px 2px
+        >>> # Values already have units or are not parsable pass through
+        >>> unit_parser.px_to_em = False        # True produces the same output.
+        >>> unit_parser.add_units('55zp')
+        55zp
+        >>> unit_parser.add_units('17rem')
+        17rem
+        >>> # Mixed units cases - Not a Recommended Practice, but represent valid CSS. Be careful.
+        >>> unit_parser.px_to_em = False
+        >>> unit_parser.add_units('5em 6 5em 6')
+        5em 6px 5em 6px
+        >>> unit_parser.px_to_em = True
+        >>> unit_parser.add_units('1em 100 4cm 9rem')
+        1em 6.25em 4cm 9rem
+
         """
         new_value = []
         try:
