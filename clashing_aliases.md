@@ -7,8 +7,8 @@
 | border-collapse | `bc-` `border-c-`  |
 | border-color | `bc-` `border-c-`  |
 | border-right | `br-`  |
-| border-spacing | `bs-` `border-s-`  |
-| border-style | `bs-` `border-s-`  |
+| border-spacing | `border-s-` `bs-`  |
+| border-style | `border-s-` `bs-`  |
 | font-size | `fs-` `font-s-`  |
 | font-style | `fs-` `font-s-`  |
 | letter-spacing | `ls-`  |

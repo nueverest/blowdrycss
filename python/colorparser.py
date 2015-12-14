@@ -38,7 +38,7 @@ class ColorParser(object):
     def property_name_allows_color(self):
         """ Detects if the ``property_name`` allows a color property value.
 
-        Reference: http://www.w3.org/TR/CSS21/propidx.html
+        **Reference:** http://www.w3.org/TR/CSS21/propidx.html
 
         :return: (bool) -- Returns True if the ``property_name`` is allow to contain colors. Otherwise, it returns
             False.
@@ -66,8 +66,7 @@ class ColorParser(object):
     def find_h_index(self, value=''):
         """ Detects if the ``value`` is a valid hexidecimal encoding.
 
-        | **Some shorthand properties are supported:**
-        | ``border 1px solid hddd`` --> ``border 1px solid #ddd``
+        **Note:** Supports shorthand properties.
 
         :type value: str
 
@@ -97,7 +96,10 @@ class ColorParser(object):
         | Includes an internal check to ensure that the value is a valid hexidecimal encoding.
         | Only replaces the ``h`` that matches the regex as other ``h`` characters may be present.
 
-        :param value:
+        | **Shorthand properties are supported:**
+        | **border case:** ``1px solid hddd`` becomes ``1px solid #ddd``
+
+        :param value: Encoded hexidecimal value of the form ``hf1f`` or ``hc2c2c2``.
         :return: (str) -- Returns actually #0ff48f and #faf in the valid case. Returns the input ``value`` unchanged
             for the invalid case.
 
@@ -123,12 +125,36 @@ class ColorParser(object):
                 value = value[0:h_index] + value[h_index].replace('h', '#') + value[h_index + 1:]
         return value
 
-    # Convert parenthetical color values:
-    #  rgb: rgb 0 255 0             -->  rgb(0, 255, 0)
-    # rgba: rgba 255 0 0 0.5        --> rgba(255, 0, 0, 0.5)
-    #  hsl: hsl 120 60% 70%         -->  hsl(120, 60%, 70%)
-    # hsla: hsla 120 60% 70% 0.3    --> hsla(120, 60%, 70%, 0.3)
     def add_color_parenthetical(self, value=''):
+        """ Convert parenthetical color values: rbg, rbga, hsl, hsla to valid css format
+
+        Assumes that color conversion happens after dashes, decimal point, negative signs, and percentage signs
+        are converted.
+
+        **Note:** Currently not compatible with shorthand properties.
+
+        :type value: str
+
+        :param value: Space delimited rbg, rbga, hsl, hsla values.
+        :return: (str) -- Returns the valid css color parenthetical. Returns the input ``value`` unchanged
+            for the non-matching case.
+
+        **Examples:**
+
+        >>> color_parser = ColorParser('color', '')
+        >>> color_parser.add_color_parenthetical('rgb 0 255 0')
+        rgb(0, 255, 0)
+        >>> color_parser.add_color_parenthetical('rgba 255 0 0 0.5')
+        rgba(255, 0, 0, 0.5)
+        >>> color_parser.add_color_parenthetical('hsl 120 60% 70%')
+        hsl(120, 60%, 70%)
+        >>> color_parser.add_color_parenthetical('hsla 120 60% 70% 0.3')
+        hsla(120, 60%, 70%, 0.3)
+        >>> # Pass-through case as no conversion is possible.
+        >>> color_parser.add_color_parenthetical('hsla')
+        hsla
+
+        """
         if self.property_name_allows_color():
             if contains_a_digit(string=value):
                 keywords = {'rgb ', 'rgba ', 'hsl ', 'hsla '}
@@ -136,6 +162,6 @@ class ColorParser(object):
                     if value.startswith(key):
                         value = value.replace(key, key.strip() + '(')   # Remove key whitespace and add opening '('
                         value += ')'                                    # Add closing ')'
-                        value = value.replace(' ', ', ')                # Add commas
+                        value = value.replace(' ', ', ')                # Add commas ', '
                         break
         return value
