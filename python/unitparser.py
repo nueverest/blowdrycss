@@ -1,3 +1,41 @@
+"""
+**Used in these cases:**
+
+- No units are provided and default units need to be added to make it valid css. ``add_units()``
+- The user wants their pixel (px) based units to be converted to em or root em (rem)
+  so that their page scales / zooms properly. ``convert_px_to_em()``
+
+**Why do I want to use em (named after the sound for the letter 'M') or root em (rem)?:**
+
+    *Because your webpage will scale with browser and device size.*
+
+|
+
+.. http://snook.ca/archives/html_and_css/font-size-with-rem
+   https://css-tricks.com/rems-ems/
+
+**What does (em) actually stand for?:**
+    **Source:** W3C -- http://www.w3.org/WAI/GL/css2em.htm
+
+    The foremost tool for writing scalable style sheets is the "em" unit, and it therefore goes on top of the list of
+    guidelines that we will compile throughout this chapter: use ems to make scalable style sheets. Named after the
+    letter "M", the em unit has a long-standing tradition in typography where it has been used to measure
+    horizontal widths.
+    ...
+    In CSS, the em unit is a general unit for measuring lenghts, for example page margins and padding around elements.
+    You can use it both horizontally and vertically, and this shocks traditional typographers who always have used
+    em exclusively for horizontal measurements. By extending the em unit to also work vertically, it has become
+    a very powerful unit - so powerful that you seldom have to use other length units.
+
+------------
+
+    **Source:** Wikipedia -- https://en.wikipedia.org/wiki/Em_%28typography%29
+
+    An em is a unit in the field of typography, equal to the currently specified point size. For example, one em in a
+    16-point typeface is 16 points. Therefore, this unit is the same for all typefaces at a given point size.
+
+"""
+
 from string import digits
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -6,14 +44,15 @@ __project__ = 'blow dry css'
 class UnitParser(object):
     def __init__(self, property_name='', base=16, px_to_em=True):
         self.property_name = property_name
-        self.base = float(base)        # 16px = 1em
+        self.base = float(base)               # Default: 16px = 1rem
         self.px_to_em = px_to_em
         self.allowed = set(digits + '-.px')
 
         # Reference: http://www.w3.org/TR/CSS21/propidx.html
         # Extracted all properties containing Values of <angle>, <percentage>, <length>, <time>, <frequency>
-        # IDEA: Build webscraper that auto-extracts these.\
-        self.default_property_units_dict = {       # Possible Occurrences:
+        # IDEA: Build webscraper that auto-extracts these. May not be deterministic enough.  Would need to build a
+        # Page based on the standard that includes all property name/value combos.
+        self.default_property_units_dict = {  # Number of possible values:
             'azimuth': 'deg',                 # single
             'background-position': '%',       # single or double
 

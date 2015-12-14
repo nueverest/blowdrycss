@@ -26,6 +26,12 @@ The "utilities" module
 .. automodule:: utilities
 
 
+The "unitparser" module
+-----------------------
+
+.. automodule:: unitparser
+
+
 The "version" module
 --------------------
 
