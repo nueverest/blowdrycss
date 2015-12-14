@@ -8,6 +8,12 @@ The "classpropertyparser" module
 .. automodule:: classpropertyparser
 
 
+The "colorparser" module
+------------------------
+
+.. automodule:: colorparser
+
+
 The "fontparser" module
 -----------------------
 

@@ -1,6 +1,29 @@
+"""
+**Features:**
+
+- Validates whether the property_name allows a color property to be set.
+
+- Decodes the following color formats: hexidecimal, rgb, rgba, hsl, hsla.
+
+  Exception: English color names are handled separately
+    | **Either** in the property_alias_dict under the key ``color``,
+    | **Or** they are passed through to cssutils because they are valid CSS and do not require further processing.
+
+**Note:** The shorthand properties ``background``, ``border``,  and ``outline`` are supported (as of November 2015).
+
+**Assumption:** It is assumed that all dashes are removed from the input ``value`` prior to using this parser.
+
+**Example:**
+
+>>> color_parser = ColorParser('border-color', 'h0df48a')
+>>> color_parser.property_name_allows_color()
+True
+
+"""
+
 from re import findall
 # custom
-from utilities import contains_a_digit
+from utilities import contains_a_digit, deny_empty_or_whitespace
 from datalibrary import property_regex_dict
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -13,33 +36,91 @@ class ColorParser(object):
         self.value = value
 
     def property_name_allows_color(self):
-        # Reference: http://www.w3.org/TR/CSS21/propidx.html
+        """ Detects if the ``property_name`` allows a color property value.
+
+        Reference: http://www.w3.org/TR/CSS21/propidx.html
+
+        :return: (bool) -- Returns True if the ``property_name`` is allow to contain colors. Otherwise, it returns
+            False.
+
+        **Examples:**
+
+        >>> color_parser = ColorParser('border-color', 'h0df48a')
+        >>> color_parser.property_name_allows_color()
+        True
+        >>> color_parser.property_name = 'invalid'
+        >>> color_parser.property_name_allows_color()
+        False
+
+        """
         color_property_names = {
             'color', 'background-color', 'border', 'border-color', 'border-top-color', 'border-right-color',
             'border-bottom-color', 'border-left-color', 'outline', 'outline_color',
-            'background', 'border-top', 'border-right', 'border-bottom', 'border-left', 'border', 'outline',
+            'background', 'border-top', 'border-right', 'border-bottom', 'border-left',
         }
         for color_property_name in color_property_names:
             if self.property_name == color_property_name:
                 return True
         return False
 
-    # Expects a value of the form: h0ff48f or hfaf i.e. 'h' + a 3 or 6 digit hexidecimal value 0-f.
-    # Returns #0ff48f or #faf
-    # Some shorthand properties are supported: border 1px solid hddd --> border 1px solid #ddd
-    def is_valid_hex(self, value=''):
-        for regex in self.color_regexes:
-            if len(findall(regex, value)) == 1:
-                return True
-        return False
+    def find_h_index(self, value=''):
+        """ Detects if the ``value`` is a valid hexidecimal encoding.
 
-    # Declaring hex (prepend 'h'):
-    # h0ff24f   --> #0ff24f (6 digit)
-    # hf4f      --> #fff    (3 digit)
+        | **Some shorthand properties are supported:**
+        | ``border 1px solid hddd`` --> ``border 1px solid #ddd``
+
+        :type value: str
+
+        :param value: Expects a ``value`` of the form: h0ff48f or hfaf i.e. 'h' + a 3 or 6 digit hexidecimal value 0-f.
+        :return: (int or NoneType) -- Returns the index of the ``h`` to be replaced in the ``value`` if it matches
+            the hex regex. Otherwise it returns None.
+
+        **Examples:**
+
+        >>> color_parser = ColorParser()
+        >>> color_parser.find_h_index(value='h0df48a')
+        0
+        >>> color_parser.find_h_index(value='h1invalid')
+        None
+
+        """
+        for regex in self.color_regexes:
+            matches = findall(regex, value)
+            if len(matches) == 1:
+                h_index = value.index(matches[0])
+                return h_index
+        return None
+
     def replace_h_with_hash(self, value=''):
+        """ Replaces the prepended ``h`` prefix with a hash sign ``#`` or octothorpe if you prefer long words.
+
+        | Includes an internal check to ensure that the value is a valid hexidecimal encoding.
+        | Only replaces the ``h`` that matches the regex as other ``h`` characters may be present.
+
+        :param value:
+        :return: (str) -- Returns actually #0ff48f and #faf in the valid case. Returns the input ``value`` unchanged
+            for the invalid case.
+
+        >>> color_parser = ColorParser()
+        >>> # Valid Cases
+        >>> color_parser.replace_h_with_hash('h0ff24f')
+        #0ff24f
+        >>> color_parser.replace_h_with_hash('hf4f')
+        #f4f
+        >>> # Valid multiple 'h' case.
+        >>> color_parser.replace_h_with_hash('13px dashed hd0d')
+        13px dashed #d0d
+        >>> # Invalid Cases
+        >>> color_parser.replace_h_with_hash('bold')
+        bold
+        >>> color_parser.replace_h_with_hash('he2z')
+        he2z
+
+        """
         if self.property_name_allows_color():
-            if self.is_valid_hex(value=value):
-                value = value.replace('h', '#')
+            h_index = self.find_h_index(value=value)        # Only this 'h' will be replaced.
+            if h_index is not None:
+                value = value[0:h_index] + value[h_index].replace('h', '#') + value[h_index + 1:]
         return value
 
     # Convert parenthetical color values:
