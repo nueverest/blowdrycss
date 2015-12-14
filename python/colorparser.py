@@ -122,7 +122,7 @@ class ColorParser(object):
         if self.property_name_allows_color():
             h_index = self.find_h_index(value=value)        # Only this 'h' will be replaced.
             if h_index is not None:
-                value = value[0:h_index] + value[h_index].replace('h', '#') + value[h_index + 1:]
+                value = value[0:h_index] + '#' + value[h_index + 1:]
         return value
 
     def add_color_parenthetical(self, value=''):

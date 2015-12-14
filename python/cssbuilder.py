@@ -1,3 +1,7 @@
+"""
+
+"""
+
 from cssutils.css import Property, CSSStyleRule, CSSStyleSheet
 from xml.dom import SyntaxErr
 # custom
