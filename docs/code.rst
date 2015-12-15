@@ -2,6 +2,12 @@
 Source Code Reference
 =====================
 
+The "blowdry" module
+--------------------
+
+.. automodule:: blowdry
+
+
 The "classpropertyparser" module
 --------------------------------
 

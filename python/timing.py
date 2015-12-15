@@ -1,5 +1,5 @@
 """
-Simple timing system that allows for the execution time to be recorded
+Simple code performance timer that allows for the execution time to be recorded
 
 **Credit:**
 

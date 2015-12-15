@@ -11,6 +11,54 @@ __project__ = 'blow dry css'
 
 
 def main():
+    """ This is the main script.
+
+    **Order of Operations:**
+
+    - Initialize settings.
+    - Start performance timer.
+    - Generate Markdown documentation files.
+    - Generate HTML documentation files. (This location is important since it allows encoded css to be included
+      in the documentation files.)
+    - Generate reStructuredText documentation files.
+    - Define File all file types/extensions to search for in project_directory
+    - Get all files associated with defined file_types in project_directory
+    - Get set of all defined classes
+    - Filter class names only keeping classes that match the defined class encoding.
+    - Build a set() of valid css properties. Some classes may be removed during cssutils validation.
+    - Output the DRY CSS file. (user command option)
+    - Output the Minified DRY CSS file. (user command option)
+
+    **Depending on the settings this script generates the following:**
+
+    - DRY CSS files
+        - blowdry.css |sp| |sp| |sp| |sp| |sp| **human readable**
+        - blowdry.min.css |sp| **minified**
+
+    - Clashing Alias files (Encoded class selector aliases that are invalid and cannot be used because they clash.)
+        - Markdown |sp| |sp| |sp| |sp| |sp| |sp| **Github**
+        - HTML |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| **Browser**
+        - reStructuredText |sp| **Sphinx**
+
+    - Property Alias File (Encoded class selector aliases that are valid and can be used to construct class selectors.)
+        - Markdown |sp| |sp| |sp| |sp| |sp| |sp| **Github**
+        - HTML |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| **Browser**
+        - reStructuredText |sp| **Sphinx**
+
+    - Temporal Statistics
+
+    **Note:** The default locations of these files can be overridden to suit your needs.
+
+    **Settings**
+    ``project_directory`` -- Allows ``blowdrycss`` to know where the HTML project is located. It will only search the files
+    in the directory specified here.
+
+.. |sp| raw:: html
+
+    &nbsp;
+
+    """
+
     # Boolean Settings
     timing_enabled = True       # Run performance timer
     markdown_docs = True        # Generate a markdown files that provide a quick syntax and clashing alias reference.
@@ -28,8 +76,10 @@ def main():
 
     # media_queries = False
     # responsive = False
-    auto_generate = False       # Automatically generates blowdry.css file when a project HTML file is saved.
-    http_server = False         # Auto-Start a simple webserver on localhost:8080.
+
+    # TODO: Implement these in a fashion similar to the performance timer.
+    # auto_generate = False       # Automatically generates blowdry.css file when a project HTML file is saved.
+    # http_server = False         # Auto-Start a simple webserver on localhost:8080.
     # condense_classes = False    # Edits HTML Files after discovering common patterns (Not DRY).
 
     # Performance timer
@@ -50,7 +100,8 @@ def main():
         markdown_file.file_name = 'property_aliases'                        # Changes file name.
         markdown_file.write_file(property_alias_markdown, extension='.md')
 
-    # Generate HTML documentation files. (This location is important since it allows encoded css to be included.)
+    # Generate HTML documentation files. (This location is important since it allows encoded css to be included
+    # in the documentation files.)
     if html_docs:
         html_file = GenericFile(file_directory=project_directory, file_name='clashing_aliases')
         html_file.write_file(clashing_alias_html, extension='.html')
