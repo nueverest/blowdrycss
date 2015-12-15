@@ -1,4 +1,18 @@
-"""
+""" Builds CSS text with the ``cssutils.css`` module.
+
+    **Note:** Removes invalid classes. A class is invalid for one of the following reasons:
+
+    - It is not valid CSS.
+    - It does not contain a valid ``blowdrycss`` encoding.
+
+    **Object initialization process:**
+
+    - Build CSS property rules
+    - Add to css_rules, OR remove invalid css_class from class_set.
+    - Build a CSS stylesheet based on the CSS ``css_rules`` set.
+
+    **property_parser**: (*ClassPropertyParser()*) -- Contains a class property parser with a populated class_set.
+    **Returns:** None
 
 """
 
@@ -63,9 +77,16 @@ class CSSBuilder(object):
         self.build_stylesheet()
 
     def build_stylesheet(self):
+        """ Builds the stylesheet by adding CSS rules to the CSS StyleSheet.
+
+        :return: None
+        """
         for css_rule in self.css_rules:
             self.css_stylesheet.add(rule=css_rule)
 
     def get_css_text(self):
+        """
+        :return: str -- Returns CSS text.
+        """
         return self.css_stylesheet.cssText
 
