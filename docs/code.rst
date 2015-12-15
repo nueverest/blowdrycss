@@ -26,6 +26,12 @@ The "unitparser" module
 .. automodule:: unitparser
 
 
+The "timing" module
+-------------------
+
+.. automodule:: timing
+
+
 The "utilities" module
 ----------------------
 

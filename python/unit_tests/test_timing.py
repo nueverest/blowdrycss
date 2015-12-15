@@ -13,12 +13,12 @@ __project__ = 'blow dry css'
 class TestTiming(TestCase):
     def test_seconds_to_string(self):
         allowed = set(digits + '.')
-        time_string = timing.seconds_to_string(_time=time())
+        time_string = timing.seconds_to_string(elapsed=time())
         self.assertTrue(set(time_string) <= allowed)
 
     def test_log(self):
         # Checks variable date components and constant string output.
-        time_string = timing.seconds_to_string(_time=time())
+        time_string = timing.seconds_to_string(elapsed=time())
         substrings = [
             'Completed @', 'It took:', 'seconds', '=====', '.', str(datetime.now().year), str(datetime.now().month),
             str(datetime.now().day)

@@ -201,10 +201,10 @@ class UnitParser(object):
         **Rules:**
 
         - ``pixels`` shall only contain [0-9.-].
-        - Inputs that contain any other value are simply passed through.
+        - Inputs that contain any other value are simply passed through unchanged.
 
         **Note:** Does not check the ``property_name`` or ``px_to_em`` values.  Rather, it blindly converts
-        whatever input is provided.
+        whatever input is provided.  The calling method is expected to know what it is doing.
 
         Rounds float to a maximum of 4 decimal places.
 
