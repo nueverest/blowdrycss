@@ -11,8 +11,9 @@
     - Add to css_rules, OR remove invalid css_class from class_set.
     - Build a CSS stylesheet based on the CSS ``css_rules`` set.
 
-    **property_parser**: (*ClassPropertyParser()*) -- Contains a class property parser with a populated class_set.
-    **Returns:** None
+    | **Parameters: property_parser** (*ClassPropertyParser object*) -- Contains a class property parser with a
+      populated class_set.
+    | **Returns:** None
 
 """
 
@@ -77,7 +78,7 @@ class CSSBuilder(object):
         self.build_stylesheet()
 
     def build_stylesheet(self):
-        """ Builds the stylesheet by adding CSS rules to the CSS StyleSheet.
+        """ Builds the stylesheet by adding CSS rules to the CSS stylesheet.
 
         :return: None
         """
