@@ -5,16 +5,28 @@
 .. automodule:: blowdry
 
 
-``cssbuilder``
+``datalibrary``
+---------------
+
+.. automodule:: datalibrary
+
+
+``htmlparser``
 --------------
 
-.. automodule:: cssbuilder
+.. automodule:: htmlparser
 
 
 ``classpropertyparser``
 -----------------------
 
 .. automodule:: classpropertyparser
+
+
+``cssbuilder``
+--------------
+
+.. automodule:: cssbuilder
 
 
 ``colorparser``

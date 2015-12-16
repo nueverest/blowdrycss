@@ -3,9 +3,9 @@
 | Property Name | Invalid Clashing Aliases |
 | --- | --- |
 | background-color | `bc-`  |
-| background-repeat | `repeat` `br-`  |
-| border-collapse | `border-c-` `bc-`  |
-| border-color | `border-c-` `bc-`  |
+| background-repeat | `br-` `repeat`  |
+| border-collapse | `bc-` `border-c-`  |
+| border-color | `bc-` `border-c-`  |
 | border-right | `br-`  |
 | border-spacing | `bs-` `border-s-`  |
 | border-style | `bs-` `border-s-`  |
@@ -17,12 +17,12 @@
 | max-width | `mw-`  |
 | min-height | `mh-`  |
 | min-width | `mw-`  |
-| overflow | `visible` `hidden`  |
+| overflow | `hidden` `visible`  |
 | padding-bottom | `pb-`  |
 | padding-right | `pr-`  |
 | pause-before | `pb-`  |
 | pitch-range | `pr-`  |
 | play-during | `repeat`  |
-| visibility | `visible` `hidden`  |
+| visibility | `hidden` `visible`  |
 | white-space | `ws-`  |
 | word-spacing | `ws-`  |

@@ -2,7 +2,7 @@ from unittest import TestCase, main
 from os import path, getcwd
 # custom
 from filehandler import FileConverter
-from htmlattributeparser import HTMLAttributeParser
+from htmlparser import HTMLAttributeParser
 
 
 class TestHTMLAttributeParser(TestCase):

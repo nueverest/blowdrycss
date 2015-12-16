@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 from os import path, getcwd
 # custom
-from htmlattributeparser import HTMLClassParser
+from htmlparser import HTMLClassParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 

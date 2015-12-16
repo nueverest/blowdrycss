@@ -1,7 +1,7 @@
 from os import chdir, getcwd, path
 # custom classes
 from filehandler import FileFinder, CSSFile, GenericFile
-from htmlattributeparser import HTMLClassParser
+from htmlparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
 from datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, property_alias_html, \
