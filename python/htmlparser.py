@@ -18,6 +18,15 @@ class HTMLAttributeParser(HTMLParser):
     | **Parameters:**
     | **attribute_name** (*str*) -- A valid html attribute can be set to ``id``, ``class``, ``alt``, etc.
       It is also possible to define a custom attribute.
+
+    **Example:**
+
+    >>> file_string = '/path/to/file.html'
+    >>> class_parser = HTMLAttributeParser(attribute_name='class')
+    >>> class_parser.feed(file_string)
+    >>> # Get attribute value list for html ``class`` attributes.
+    >>> attribute_value_list = class_parser.attribute_value_list
+
     """
     def __init__(self, attribute_name=''):
         super().__init__()
@@ -100,6 +109,36 @@ class HTMLClassParser(object):
 
     Converts the list of space-delimited strings returned into a minimum ``set()`` of space-split strings, and assigns
     the value to ``self.class_set``.
+
+    | **Parameters:**
+    | **files** (*str*) -- A collection of strings containing the full path to each HTML file in the project.
+
+    **Example:**
+
+    >>> from os import getcwd
+    >>> # Intended to be used in conjunction with the FileFinder
+    >>> from filehandler import FileFinder
+    >>> #
+    >>> # Set project_directory to the one containing the files you
+    >>> # want to DRY out.
+    >>> project_directory = getcwd()
+    >>> #
+    >>> # Define File all file types/extensions to search for
+    >>> # in project_directory
+    >>> file_types = ('*.html')
+    >>> #
+    >>> # Get all files associated with defined file_types
+    >>> # in project_directory
+    >>> file_finder = FileFinder(
+    >>>     project_directory=project_directory, file_types=file_types
+    >>> )
+    >>> #
+    >>> # Create set of all defined css class selectors.
+    >>> class_parser = HTMLClassParser(files=file_finder.files)
+    >>> #
+    >>> # Get set of all defined css class selectors.
+    >>> class_set = class_parser.class_set
+
     """
     def __init__(self, files):
         self.class_set = set()
@@ -115,12 +154,14 @@ class HTMLClassParser(object):
             class_parser.feed(file_string)
 
             # Convert list of class strings to set
-            self.set_class_set(class_parser.attribute_value_list)
+            self.__set_class_set(class_parser.attribute_value_list)
             # print("Class List:\t", class_parser.attribute_value_list)
             # print(" Class Set:\t", self.class_set)
 
-    def set_class_set(self, attribute_value_list):
-        """ Sets the value of ``self.class_set`` via the following steps:
+    def __set_class_set(self, attribute_value_list):
+        """ Private Method
+
+        Sets the value of ``self.class_set`` via the following steps:
 
         - Split space delimited string into set().
         - Unite the new set with class_set.
@@ -128,8 +169,8 @@ class HTMLClassParser(object):
 
         Using a ``set()`` allows for duplicate class names to be discarded.
 
-        :param attribute_value_list: A ``list()`` of all string values in a HTML file with a ``name`` that
-            matches ``class``.
+        :param attribute_value_list: A ``list()`` of all string values in a HTML file with an attribute name
+            of ``class``.
         :return: None
 
         """

@@ -123,7 +123,7 @@ def main():
     # Get all files associated with defined file_types in project_directory
     file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
 
-    # Get set of all defined classes
+    # Create set of all defined classes
     class_parser = HTMLClassParser(files=file_finder.files)
 
     # Filter class names only keeping classes that match the defined class encoding.

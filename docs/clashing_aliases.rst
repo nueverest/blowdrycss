@@ -6,17 +6,17 @@ Invalid Clashing Aliases
 +---------------------+--------------------------+
 | background-color    | ``bc-``                  |
 +---------------------+--------------------------+
-| background-repeat   | ``br-`` ``repeat``       |
+| background-repeat   | ``repeat`` ``br-``       |
 +---------------------+--------------------------+
-| border-collapse     | ``bc-`` ``border-c-``    |
+| border-collapse     | ``border-c-`` ``bc-``    |
 +---------------------+--------------------------+
-| border-color        | ``bc-`` ``border-c-``    |
+| border-color        | ``border-c-`` ``bc-``    |
 +---------------------+--------------------------+
 | border-right        | ``br-``                  |
 +---------------------+--------------------------+
-| border-spacing      | ``bs-`` ``border-s-``    |
+| border-spacing      | ``border-s-`` ``bs-``    |
 +---------------------+--------------------------+
-| border-style        | ``bs-`` ``border-s-``    |
+| border-style        | ``border-s-`` ``bs-``    |
 +---------------------+--------------------------+
 | font-size           | ``font-s-`` ``fs-``      |
 +---------------------+--------------------------+
