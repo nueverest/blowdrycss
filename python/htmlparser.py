@@ -6,7 +6,7 @@ __project__ = 'blow dry css'
 
 
 class HTMLAttributeParser(HTMLParser):
-    """ Inherits from HTMLParser
+    """ Inherits from HTMLParser. Overrides ``handle_starttag`` and ``handle_startendtag``.
 
     Parses attributes with the ``attribute_name`` provided.
 
