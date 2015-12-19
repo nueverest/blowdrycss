@@ -1,5 +1,4 @@
 from html.parser import HTMLParser
-
 # custom Classes
 from filehandler import FileConverter
 __author__ = 'chad nelson'
