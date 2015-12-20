@@ -32,7 +32,7 @@ class FileFinder(object):
     """
     file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
 
-    def __init__(self, project_directory=getcwd(), file_types=file_types):
+    def __init__(self, project_directory='', file_types=file_types):
         if path.isdir(project_directory):
             self.project_directory = project_directory
             self.file_types = file_types
@@ -46,16 +46,30 @@ class FileFinder(object):
         else:
             raise NotADirectoryError(project_directory + ' is not a directory.')
 
-    # Takes a list or tuple as input and prints each item.
     @staticmethod
     def print_collection(collection):
+        """
+        Takes a list or tuple as input and prints each item.
+
+        :type collection: list
+
+        :param collection: A list of strings to be printed.
+        :return: None
+        """
         for item in collection:
             print(item)
 
-    # Get all files associated with defined file_types in project directory
-    # Reference:
-    # stackoverflow.com/questions/954504/how-to-get-files-in-a-directory-including-all-subdirectories#answer-954948
     def set_files(self):
+        """
+        Get all files associated with defined ``file_types`` in ``project_directory``. For each ``file_type`` find
+        the full path to each file in the project directory of the current ``file_type``.  Add the full path of each
+        file found to the list ``self.files``.
+
+        Reference:
+        stackoverflow.com/questions/954504/how-to-get-files-in-a-directory-including-all-subdirectories#answer-954948
+
+        :return: None
+        """
         for directory, _, _ in walk(self.project_directory):
             for file_type in self.file_types:
                 self.files.extend(glob(path.join(directory, file_type)))
