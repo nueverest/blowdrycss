@@ -7,6 +7,29 @@ __project__ = 'blow dry css'
 
 
 class FileFinder(object):
+    """
+    Designed to find all ``files_types`` specified within a particular ``project_directory``. All folders within the
+    ``project_directory`` are searched.
+
+    | **Parameters:**
+
+        | **project_directory** (*str*) -- Full path to the project directory containing parsable files e.g.
+          ``/home/usr/web_project``.
+
+        | **file_types** (*str tuple*) -- A tuple containing file extensions of project files to be parsed. Extensions
+          are in the wildcard form ``'*.<ext>'``.  Replace ``<ext>`` with the desired file extension.
+
+    **Example:**
+
+    >>> project_directory = '/home/usr/web_project'
+    >>> file_types = ('*.html', )
+    >>> file_finder = FileFinder(
+    >>>     project_directory=project_directory,
+    >>>     file_types=file_types
+    >>> )
+    >>> files = file_finder.files
+
+    """
     file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
 
     def __init__(self, project_directory=getcwd(), file_types=file_types):

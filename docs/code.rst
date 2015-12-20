@@ -11,6 +11,12 @@
 .. automodule:: datalibrary
 
 
+``filehandler``
+---------------
+
+.. automodule:: filehandler
+
+
 ``htmlparser``
 --------------
 
