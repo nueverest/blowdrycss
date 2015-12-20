@@ -21,7 +21,11 @@ class FileFinder(object):
 
     **Example:**
 
-    >>> project_directory = '/home/usr/web_project'
+    >>> from os import getcwd, chdir, path
+    >>> current_dir = getcwd()
+    >>> chdir('..')
+    >>> project_directory = path.join(current_dir + '\\examplesite')
+    >>> chdir(current_dir)    # Change it back.
     >>> file_types = ('*.html', )
     >>> file_finder = FileFinder(
     >>>     project_directory=project_directory,

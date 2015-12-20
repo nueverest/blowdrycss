@@ -21,7 +21,11 @@ class HTMLAttributeParser(HTMLParser):
 
     **Example:**
 
-    >>> file_string = '/path/to/file.html'
+    >>> from os import getcwd, chdir, path
+    >>> current_dir = getcwd()
+    >>> chdir('..')
+    >>> file_string = path.join(current_dir + '\\examplesite\\index.html')
+    >>> chdir(current_dir)    # Change it back.
     >>> class_parser = HTMLAttributeParser(attribute_name='class')
     >>> class_parser.feed(file_string)
     >>> # Get attribute value list for html ``class`` attributes.
@@ -125,7 +129,7 @@ class HTMLClassParser(object):
     >>> #
     >>> # Define File all file types/extensions to search for
     >>> # in project_directory
-    >>> file_types = ('*.html')
+    >>> file_types = ('*.html', )
     >>> #
     >>> # Get all files associated with defined file_types
     >>> # in project_directory
