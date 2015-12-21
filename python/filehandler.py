@@ -254,9 +254,32 @@ class CSSFile(object):
 
 
 class GenericFile(object):
-    # File name does not include extension.
-    # Reference: stackoverflow.com
-    # /questions/273192/in-python-check-if-a-directory-exists-and-create-it-if-necessary#answer-14364249
+    """ A tool for writing extension-independent files.
+
+    **Reference:**
+    stackoverflow.com/questions/273192/in-python-check-if-a-directory-exists-and-create-it-if-necessary#answer-14364249
+
+    | **Parameters:**
+
+    | **file_directory** (*str*) -- File directory where the output files are saved / overwritten.
+
+    | **file_name** (*str*) -- The name of the output file. Default is 'blowdry'. The output file
+      is named blowdry + extension.
+
+    | *Note:* ``file_name`` does not include extension because ``write_file()`` appends the extension.
+
+    **Example:**
+
+    >>> from os import getcwd, chdir, path
+    >>> file_directory = path.join(getcwd())
+    >>> css_text = '.margin-top-50px { margin-top: 3.125em }'
+    >>> markdown_file = GenericFile(
+    >>>     file_directory=file_directory, file_name='blowdry'
+    >>> )
+    >>> text = '# blowdrycss'
+    >>> markdown_file.write_file(text=text, extension='.md')
+
+    """
     def __init__(self, file_directory=getcwd(), file_name=''):
         self.file_directory = file_directory
         self.file_name = file_name
@@ -266,9 +289,20 @@ class GenericFile(object):
             if not path.isdir(file_directory):      # Verify directory existences
                 raise OSError(file_directory + ' is not a directory, and could not be created.')
 
-    # Transform extension to lowercase.
-    # Only allow '.', '0-9', and 'a-z' characters.
+    # TODO: Move to utilities.py and split into two parts "extension_is_valid()" and "join_file_path()".
+    # have "join_file_path" set an internal class member "full_file_path".
     def file_path(self, extension=''):
+        """ Joins the ``file_directory``, ``file_name``, and ``extension``. Returns the full ``file_path``.
+
+        - Transform extension to lowercase.
+        - Only allow '.', '0-9', and 'a-z' characters.
+
+        :type extension: str
+
+        :param extension: A file extension including the ``.``, for example, ``.md``, ``.html``, and ``.rst``
+        :return: (*str*) -- Returns the full ``file_path``.
+
+        """
         extension = extension.lower()
         if len(findall(r"([.0-9a-z])", extension)) == len(extension):
             return path.join(self.file_directory, self.file_name + extension)
@@ -277,9 +311,20 @@ class GenericFile(object):
                 'Extension: ' + extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.'
             )
 
-    # Output a human readable version of the file in utf-8 format.
-    # Converts string to bytearray so that no new lines are added to the file.
-    # Note: Overwrites any pre-existing files with the same name.
+    # TODO: Consider using the extension as an input to __init__().
     def write_file(self, text='', extension=''):
+        """ Output a human readable version of the file in utf-8 format.
+
+        Converts string to bytearray so that no new lines are added to the file.
+        Note: Overwrites any pre-existing files with the same name.
+
+        :type text: str
+        :type extension: str
+
+        :param text: The text to be written to the file.
+        :param extension: The extension of the file.
+        :return: None
+
+        """
         with open(self.file_path(extension=extension), 'wb') as _file:
             _file.write(bytearray(text, 'utf-8'))
