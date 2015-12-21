@@ -2,6 +2,8 @@ from os import path, walk, getcwd, makedirs
 from glob import glob
 from re import findall
 from cssutils import parseString, ser
+# custom
+from utilities import get_file_path
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -155,40 +157,21 @@ class CSSFile(object):
     >>> css_file = CSSFile(
     >>>     file_directory=css_directory, file_name='blowdry'
     >>> )
-    >>> css_file.write_css(css_text=css_text)
+    >>> css_file.write(css_text=css_text)
     >>> css_file.minify(css_text=css_text)
 
     """
     def __init__(self, file_directory=getcwd(), file_name='blowdry'):
         self.file_directory = file_directory
         self.file_name = file_name
+
         try:                                        # Python 2.7 Compliant
             makedirs(file_directory)                # Make 'css' directory
         except OSError:
             if not path.isdir(file_directory):      # Verify directory existences
                 raise OSError(file_directory + ' is not a directory, and could not be created.')
 
-    def file_path(self, extension=''):
-        """ Joins the ``file_directory``, ``file_name``, and ``extension``. Returns the full ``file_path``.
-
-        - Transform extension to lowercase.
-        - Only allow '.', '0-9', and 'a-z' characters.
-
-        :type extension: str
-
-        :param extension: A file extension including the ``.``, for example, ``.css`` or ``.min.css``
-        :return: (*str*) -- Returns the full ``file_path``.
-
-        """
-        extension = extension.lower()
-        if len(findall(r"([.0-9a-z])", extension)) == len(extension):
-            return path.join(self.file_directory, self.file_name + extension)
-        else:
-            raise ValueError(
-                'Extension: ' + extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.'
-            )
-
-    def write_css(self, css_text=''):
+    def write(self, css_text=''):
         """ Output a human readable version of the css file in utf-8 format.
 
         **Notes:**
@@ -205,12 +188,13 @@ class CSSFile(object):
 
         >>> css_text = '.margin-top-50px { margin-top: 3.125em }'
         >>> css_file = CSSFile()
-        >>> css_file.write_css(css_text=css_text)
+        >>> css_file.write(css_text=css_text)
 
         """
         parse_string = parseString(css_text)
         ser.prefs.useDefaults()                # Enables Default / Verbose Mode
-        with open(self.file_path(extension='.css'), 'w') as css_file:
+        file_path = get_file_path(file_directory=self.file_directory, file_name=self.file_name, extension='.css')
+        with open(file_path, 'w') as css_file:
             css_file.write(parse_string.cssText.decode('utf-8'))
 
     def minify(self, css_text=''):
@@ -249,7 +233,8 @@ class CSSFile(object):
         """
         parse_string = parseString(css_text)
         ser.prefs.useMinified()                 # Enables Minification
-        with open(self.file_path(extension='.min.css'), 'w') as css_file:
+        file_path = get_file_path(file_directory=self.file_directory, file_name=self.file_name, extension='.min.css')
+        with open(file_path, 'w') as css_file:
             css_file.write(parse_string.cssText.decode('utf-8'))
 
 
@@ -277,7 +262,7 @@ class GenericFile(object):
     >>>     file_directory=file_directory, file_name='blowdry'
     >>> )
     >>> text = '# blowdrycss'
-    >>> markdown_file.write_file(text=text, extension='.md')
+    >>> markdown_file.write(text=text, extension='.md')
 
     """
     def __init__(self, file_directory=getcwd(), file_name=''):
@@ -289,30 +274,7 @@ class GenericFile(object):
             if not path.isdir(file_directory):      # Verify directory existences
                 raise OSError(file_directory + ' is not a directory, and could not be created.')
 
-    # TODO: Move to utilities.py and split into two parts "extension_is_valid()" and "join_file_path()".
-    # have "join_file_path" set an internal class member "full_file_path".
-    def file_path(self, extension=''):
-        """ Joins the ``file_directory``, ``file_name``, and ``extension``. Returns the full ``file_path``.
-
-        - Transform extension to lowercase.
-        - Only allow '.', '0-9', and 'a-z' characters.
-
-        :type extension: str
-
-        :param extension: A file extension including the ``.``, for example, ``.md``, ``.html``, and ``.rst``
-        :return: (*str*) -- Returns the full ``file_path``.
-
-        """
-        extension = extension.lower()
-        if len(findall(r"([.0-9a-z])", extension)) == len(extension):
-            return path.join(self.file_directory, self.file_name + extension)
-        else:
-            raise ValueError(
-                'Extension: ' + extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.'
-            )
-
-    # TODO: Consider using the extension as an input to __init__().
-    def write_file(self, text='', extension=''):
+    def write(self, text='', extension=''):
         """ Output a human readable version of the file in utf-8 format.
 
         Converts string to bytearray so that no new lines are added to the file.
@@ -326,5 +288,6 @@ class GenericFile(object):
         :return: None
 
         """
-        with open(self.file_path(extension=extension), 'wb') as _file:
+        file_path = get_file_path(file_directory=self.file_directory, file_name=self.file_name, extension=extension)
+        with open(file_path, 'wb') as _file:
             _file.write(bytearray(text, 'utf-8'))

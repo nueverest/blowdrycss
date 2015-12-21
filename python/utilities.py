@@ -1,5 +1,6 @@
-from re import search
+from re import search, findall
 from inspect import currentframe
+from os import path
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -58,3 +59,43 @@ def deny_empty_or_whitespace(string='', variable_name=''):
     if not string.strip():                                                                      # whitespace case
         calling_function = currentframe().f_back.f_code.co_name
         raise ValueError(calling_function + ':', variable_name, 'cannot only contain whitespace.')
+
+
+def get_file_path(file_directory='', file_name='blowdry', extension=''):
+        """ Joins the ``file_directory``, ``file_name``, and ``extension``. Returns the joined file path.
+
+        **Rules:**
+
+        - Do not allow ``''`` empty input for ``file_directory``, ``file_name``, or ``extension``.
+        - Transform extension to lowercase.
+        - Extensions must match this regex r"(^[.][.0-9a-z]*[0-9a-z]$)".
+
+        **Findall ``regex`` Decoded:**
+
+        - ``r"(^[.][.0-9a-z]*[0-9a-z]$)"``
+        - ``^[.]`` -- ``extension`` must begin with a ``.`` dot.
+        - ``[.0-9a-z]*`` -- ``extension`` may contain any of the character inside the brackets.
+        - ``[0-9a-z]$`` -- ``extension`` may only end with the characters inside the brackets.
+
+        :type file_directory: str
+        :type file_name: str
+        :type extension: str
+
+        :param file_directory: Directory in which to place the file.
+        :param file_name: Name of the file (excluding extension)
+        :param extension: A file extension including the ``.``, for example, ``.css``, ``.min.css``, ``.md``,
+            ``.html``, and ``.rst``
+        :return: (*str*) -- Returns the joined file path.
+
+        """
+        deny_empty_or_whitespace(string=file_directory, variable_name='file_directory')
+        deny_empty_or_whitespace(string=file_name, variable_name='file_name')
+
+        extension = extension.lower()
+        regex = r"(^[.][.0-9a-z]*[0-9a-z]$)"
+        if len(findall(regex, extension)) == 1:
+            return path.join(file_directory, file_name + extension)
+        else:
+            raise ValueError(
+                'Extension: ' + extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.'
+            )

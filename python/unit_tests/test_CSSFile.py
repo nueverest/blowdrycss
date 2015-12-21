@@ -12,22 +12,6 @@ class TestCSSFile(TestCase):
         file_name = 'some_file'
         self.assertRaises(OSError, CSSFile, not_a_directory, file_name)
 
-    def test_file_path(self):
-        extensions = ['.css', '.min.css', '.txt', '.mp3', '.anything']
-        css_file = CSSFile()
-
-        for extension in extensions:
-            expected_file_path = path.join(getcwd(), 'blowdry' + extension)
-            file_path = css_file.file_path(extension=extension)
-            self.assertEqual(file_path, expected_file_path)
-
-    def test_file_path_invalid(self):
-        extensions = ['.c$@$0f00ss', '.min.!@#css', '.tx^*()&)/\t', '.a@\nything']
-        css_file = CSSFile()
-
-        for extension in extensions:
-            self.assertRaises(ValueError, css_file.file_path, extension)
-
     def test_write_created(self):
         css_directory = path.join(getcwd(), 'test_css')
         file_name = 'blowdry'
@@ -37,7 +21,7 @@ class TestCSSFile(TestCase):
         if path.isfile(file_path):      # Ensure that file is deleted before testing.
             remove(file_path)
 
-        css_file.write_css()
+        css_file.write()
         self.assertTrue(path.isfile(file_path))
 
     def test_write_verify_css_text(self):
@@ -55,7 +39,7 @@ class TestCSSFile(TestCase):
                    b'.valign-middle {\n    vertical-align: middle\n    }\n.height-150px {\n    height: 150px\n    }\n' \
                    b'.text-align-center {\n    text-align: center\n    }'
         expected_string = css_text.decode('utf-8')
-        css_file.write_css(css_text=css_text)
+        css_file.write(css_text=css_text)
         with open(file_path, 'r') as css_file:
             file_string = css_file.read()
         self.assertEqual(file_string, expected_string)
