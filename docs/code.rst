@@ -17,6 +17,12 @@
 .. automodule:: filehandler
 
 
+``cssbuilder``
+--------------
+
+.. automodule:: cssbuilder
+
+
 ``htmlparser``
 --------------
 
@@ -29,10 +35,10 @@
 .. automodule:: classpropertyparser
 
 
-``cssbuilder``
---------------
+``cssvalueparser``
+------------------
 
-.. automodule:: cssbuilder
+.. automodule:: cssvalueparser
 
 
 ``colorparser``

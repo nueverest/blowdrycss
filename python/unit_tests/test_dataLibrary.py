@@ -19,38 +19,38 @@ class TestDataLibrary(TestCase):
     #             'padding' --> {'pad-'}
     #          'margin-top' --> {'margin-t-', 'mt-'}
     # 'border-bottom-width' --> {'border-b-width', 'bbw-'}
-    def test_get_abbreviated_property_names_short_word(self):
+    def test_get_property_aliases_short_word(self):
         property_names = ['top', 'color', 'cue', ]
         expected_abbreviation = set()
         for property_name in property_names:
-            abbreviations = self.data_library.get_abbreviated_property_names(property_name=property_name)
+            abbreviations = self.data_library.get_property_aliases(property_name=property_name)
             self.assertEqual(abbreviations,expected_abbreviation, msg=abbreviations)
 
-    def test_get_abbreviated_property_names_single_word(self):
+    def test_get_property_aliases_single_word(self):
         property_names = ['padding', 'margin', 'background', ]
         expected_abbreviations = [{'pad-'}, {'mar-'}, {'bac-'}, ]
         for i, property_name in enumerate(property_names):
-            abbreviations = self.data_library.get_abbreviated_property_names(property_name=property_name)
+            abbreviations = self.data_library.get_property_aliases(property_name=property_name)
             self.assertEqual(abbreviations, expected_abbreviations[i], msg=abbreviations)
 
-    def test_get_abbreviated_property_names_double_word(self):
+    def test_get_property_aliases_double_word(self):
         property_names = ['padding-top', 'margin-bottom', 'background-color', ]
         expected_abbreviations = [{'padding-t-', 'pt-'}, {'margin-b-', 'mb-'}, {'background-c-', 'bc-'}, ]
         for i, property_name in enumerate(property_names):
-            abbreviations = self.data_library.get_abbreviated_property_names(property_name=property_name)
+            abbreviations = self.data_library.get_property_aliases(property_name=property_name)
             self.assertEqual(abbreviations, expected_abbreviations[i], msg=abbreviations)
 
-    def test_get_abbreviated_property_names_triple_word(self):
+    def test_get_property_aliases_triple_word(self):
         property_names = ['border-bottom-width', 'page-break-inside', 'border-top-color', 'border-right-color', ]
         expected_abbreviations = [
             {'border-b-width-', 'bbw-'}, {'page-b-inside-', 'pbi-'}, {'border-t-color-', 'btc-'},
             {'border-r-color-', 'brc-'},
         ]
         for i, property_name in enumerate(property_names):
-            abbreviations = self.data_library.get_abbreviated_property_names(property_name=property_name)
+            abbreviations = self.data_library.get_property_aliases(property_name=property_name)
             self.assertEqual(abbreviations, expected_abbreviations[i], msg=abbreviations)
 
-    def test_initialize_property_alias_dict(self):
+    def test_autogen_property_alias_dict(self):
         expected_dict = {
             'outline': {'out-'}, 'border-left-width': {'blw-', 'border-l-width-'},
             'counter-reset': {'cr-', 'counter-r-'}, 'counter-increment': {'counter-i-', 'ci-'},
@@ -97,10 +97,10 @@ class TestDataLibrary(TestCase):
             'border-right-style': {'brs-', 'border-r-style-'}, 'padding': {'pad-'},
             'background-repeat': {'br-', 'background-r-'}, 'margin-left': {'margin-l-', 'ml-'}, 'orphans': {'orp-'}
         }
-        initial_dict = self.data_library.initialize_property_alias_dict(property_names=self.data_library.property_names)
-        self.assertEqual(initial_dict, expected_dict)
+        self.data_library.autogen_property_alias_dict()
+        self.assertEqual(self.data_library.property_alias_dict, expected_dict)
 
-    def test_merge_dicts(self):
+    def test_merge_dictionaries(self):
         dict1 = {
             'background': {'bg-', },
             'color': {'c-', },
@@ -121,20 +121,26 @@ class TestDataLibrary(TestCase):
             'height': {'h-', },
             'margin': {'m-', 'mar-', },
         }
-        merged_dict = self.data_library.merge_dicts(dict1, dict2)
-        self.assertEqual(merged_dict, expected_dict)
+        self.data_library.property_alias_dict = dict1
+        self.data_library.custom_property_alias_dict = dict2
+        self.data_library.merge_dictionaries()
+        self.assertEqual(self.data_library.property_alias_dict, expected_dict)
 
-    def test_merge_dicts_invalid_key(self):
+    def test_merge_dictionaries_invalid_key(self):
         dict1 = {'font-size': {'fsize-', 'f-size-', }, }
         dict2 = {'invalid_key': {'col-', }, }
-        self.assertRaises(KeyError, self.data_library.merge_dicts, dict1, dict2)
+        self.data_library.property_alias_dict = dict1
+        self.data_library.custom_property_alias_dict = dict2
+        self.assertRaises(KeyError, self.data_library.merge_dictionaries)
 
     # Expects that dict1 will pass straight through since there is nothing to merge with it.
-    def test_merge_dicts_empty_custom_dict(self):
+    def test_merge_dictionaries_empty_custom_dict(self):
         dict1 = {'font-size': {'fsize-', 'f-size-', }, }
         custom_dict = None
-        merged_dict = self.data_library.merge_dicts(dict1, custom_dict)
-        self.assertEqual(dict1, merged_dict)
+        self.data_library.property_alias_dict = dict1
+        self.data_library.custom_property_alias_dict = custom_dict
+        self.data_library.merge_dictionaries()
+        self.assertEqual(self.data_library.property_alias_dict, dict1)
 
     def test_set_clashing_aliases(self):
         expected_clashes = {
@@ -146,8 +152,8 @@ class TestDataLibrary(TestCase):
             'border-color': {'border-c-', 'bc-'}, 'pause-before': {'pb-'}, 'min-height': {'mh-'}, 'list-style': {'ls-'},
             'font-size': {'font-s-', 'fs-'}
         }
-        initial_dict = self.data_library.initialize_property_alias_dict(property_names=self.data_library.property_names)
-        self.data_library.set_clashing_aliases(property_dict=initial_dict)
+        initial_dict = self.data_library.autogen_property_alias_dict()
+        self.data_library.set_clashing_aliases()
         actual_clashes = self.data_library.clashing_alias_dict
         self.assertEqual(actual_clashes, expected_clashes)
 
@@ -167,13 +173,14 @@ class TestDataLibrary(TestCase):
             'white-space': {'clash2-'},
             'cursor': {'clash1-'}
         }
-        self.data_library.set_clashing_aliases(property_dict=initial_dict)
+        self.data_library.property_alias_dict = initial_dict
+        self.data_library.set_clashing_aliases()
         clash_dict = self.data_library.clashing_alias_dict
         self.assertEqual(clash_dict, expected_clashes, msg=clash_dict)  # Sanity check
-        clean_dict = self.data_library.remove_clashing_aliases(initial_dict, clash_dict)
-        self.assertEqual(clean_dict, expected_clean_dict)
+        self.data_library.remove_clashing_aliases()
+        self.assertEqual(self.data_library.property_alias_dict, expected_clean_dict)
 
-    def test_build_property_alias_dict(self):
+    def test_default_property_alias_dict(self):
         self.maxDiff = None
         expected = {
             'min-width': {'min-w-'}, 'speak': {'spell-out'}, 'width': {'w-'},
@@ -247,7 +254,8 @@ class TestDataLibrary(TestCase):
                             'monospace', 'courier', 'monaco', 'consolas',
                             'fantasy', 'copperplate', 'papyrus', 'ff-', 'font-f-'},
         }
-        actual = self.data_library.build_property_alias_dict()
+        data_library = DataLibrary()
+        actual = data_library.property_alias_dict
         self.assertEqual(actual, expected)
 
 
