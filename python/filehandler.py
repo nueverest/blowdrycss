@@ -248,46 +248,54 @@ class GenericFile(object):
 
     | **file_directory** (*str*) -- File directory where the output files are saved / overwritten.
 
-    | **file_name** (*str*) -- The name of the output file. Default is 'blowdry'. The output file
-      is named blowdry + extension.
+    | **file_name** (*str*) -- The name of the output file. Default is 'blowdry'.
 
-    | *Note:* ``file_name`` does not include extension because ``write_file()`` appends the extension.
+    | **extension** (*str*) -- A file extension that begins with a ``.`` and only contains ``.``, ``0-9`` or ``a-z``.
+
+    | *Notes:*
+
+    - ``file_name`` does not include extension because ``write_file()`` normalizes and appends the extension.
+    - ``extension`` is converted to lowercase.
 
     **Example:**
 
-    >>> from os import getcwd, chdir, path
+    >>> from os import getcwd, path
     >>> file_directory = path.join(getcwd())
     >>> css_text = '.margin-top-50px { margin-top: 3.125em }'
     >>> markdown_file = GenericFile(
-    >>>     file_directory=file_directory, file_name='blowdry'
+    >>>     file_directory=file_directory,
+    >>>     file_name='blowdry',
+    >>>     extension='.md'
     >>> )
     >>> text = '# blowdrycss'
-    >>> markdown_file.write(text=text, extension='.md')
+    >>> markdown_file.write(text=text)
 
     """
-    def __init__(self, file_directory=getcwd(), file_name=''):
+    def __init__(self, file_directory=getcwd(), file_name='', extension=''):
         self.file_directory = file_directory
         self.file_name = file_name
+        self.file_path = get_file_path(file_directory=self.file_directory, file_name=self.file_name, extension=extension)
         try:                                        # Python 2.7 Compliant
             makedirs(file_directory)                # Make 'html' directory
         except OSError:
             if not path.isdir(file_directory):      # Verify directory existences
                 raise OSError(file_directory + ' is not a directory, and could not be created.')
 
-    def write(self, text='', extension=''):
+    def write(self, text=''):
         """ Output a human readable version of the file in utf-8 format.
 
         Converts string to bytearray so that no new lines are added to the file.
         Note: Overwrites any pre-existing files with the same name.
 
-        :type text: str
-        :type extension: str
+        :raises TypeError: Raise a TypeError if ``text`` input is not of type ``str``.
 
+        :type text: str
         :param text: The text to be written to the file.
-        :param extension: The extension of the file.
         :return: None
 
         """
-        file_path = get_file_path(file_directory=self.file_directory, file_name=self.file_name, extension=extension)
-        with open(file_path, 'wb') as _file:
-            _file.write(bytearray(text, 'utf-8'))
+        if type(text) is str:
+            with open(self.file_path, 'wb') as generic_file:
+                generic_file.write(bytearray(text, 'utf-8'))
+        else:
+            raise TypeError('In GenericFile.write() ' + text + ' must be a string type.')

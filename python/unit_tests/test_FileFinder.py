@@ -44,14 +44,15 @@ class TestFileFinder(TestCase):
             sys.stdout = saved_stdout
 
     def test_set_files(self):
-        expected_files = [
+        expected_files = {
             path.join(getcwd() + '\\test_html\\index.html'),
-            path.join(getcwd() + '\\test_html\\test.html')
-        ]
+            path.join(getcwd() + '\\test_html\\test.html'),
+            path.join(getcwd() + '\\test_generic\\blowdry.html'),
+        }
         project_directory = getcwd()
-        file_types = ('*.html', '*.aspx', '*.master', '*.ascx')
+        file_types = ('*.html', )
         file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
-        self.assertEquals(file_finder.files, expected_files)
+        self.assertEquals(set(file_finder.files), expected_files)
 
     def test_fileconverter_wrongpath(self):
         wrong_file_path = '/this/is/wrong/file/path'

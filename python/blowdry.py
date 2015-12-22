@@ -95,30 +95,30 @@ def main():
     
     # Generate Markdown documentation files.
     if markdown_docs:
-        markdown_file = GenericFile(file_directory=getcwd(), file_name='clashing_aliases')
-        markdown_file.write(clashing_alias_markdown, extension='.md')
+        markdown_file = GenericFile(file_directory=getcwd(), file_name='clashing_aliases', extension='.md')
+        markdown_file.write(clashing_alias_markdown)
         markdown_file.file_name = 'property_aliases'                        # Changes file name.
-        markdown_file.write(property_alias_markdown, extension='.md')
+        markdown_file.write(property_alias_markdown)
 
     # Generate HTML documentation files. (This location is important since it allows encoded css to be included
     # in the documentation files.)
     if html_docs:
-        html_file = GenericFile(file_directory=project_directory, file_name='clashing_aliases')
-        html_file.write(clashing_alias_html, extension='.html')
+        html_file = GenericFile(file_directory=project_directory, file_name='clashing_aliases', extension='.html')
+        html_file.write(clashing_alias_html)
         html_file.file_name = 'property_aliases'                            # Change file name.
-        html_file.write(property_alias_html, extension='.html')
+        html_file.write(property_alias_html)
 
     # Generate reStructuredText documentation files.
     if rst_docs:
         docs_directory = path.join(getcwd() + '\\docs')
         print(docs_directory)
-        rst_file = GenericFile(file_directory=docs_directory, file_name='clashing_aliases')
-        rst_file.write(clashing_alias_rst, extension='.rst')
+        rst_file = GenericFile(file_directory=docs_directory, file_name='clashing_aliases', extension='.rst')
+        rst_file.write(clashing_alias_rst)
         rst_file.file_name = 'property_aliases'                        # Changes file name.
-        rst_file.write(property_alias_rst, extension='.rst')
+        rst_file.write(property_alias_rst)
 
     # Define File all file types/extensions to search for in project_directory
-    file_types = ('*.html', '*.aspx', '*.master', '*.ascx', )
+    file_types = ('*.html', )
 
     # Get all files associated with defined file_types in project_directory
     file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
