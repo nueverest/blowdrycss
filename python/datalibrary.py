@@ -387,16 +387,32 @@ class DataLibrary(object):
         # print('clashing aliases removed', clean_dict)
         self.property_alias_dict = deepcopy(clean_dict)
 
-    # Convert a dictionary into a markdown formatted 2-column table.
-    # h1_text
-    #
-    # key_title | value_title
-    # --- | ---
-    # key[0] | value
-    # key[1] | value
-    # TODO: Experiment with ```css\n key | value \n```
     @staticmethod
     def dict_to_markdown(h1_text='', key_title='', value_title='', _dict=None):
+        """ Convert a dictionary into a markdown formatted 2-column table.
+
+        *Markdown Table Format:*
+
+        | ``# h1_text``
+
+        | ``key_title | value_title``
+        | ``--- | ---``
+        | ``key[0] | value``
+        | ``key[1] | value``
+
+        :type h1_text: str
+        :type key_title: str
+        :type value_title: str
+        :type _dict: dict
+
+        :param h1_text: Title for the table.
+        :param key_title: Key name.
+        :param value_title: Value stored at Key.
+        :param _dict: A generic dictionary.
+        :return: (str) -- Returns a markdown formatted 2-column table based on the key/value pairs in ``_dict``.
+
+        """
+
         # H1 plus table header.
         _markdown = u'# ' + h1_text + '\n\n' \
                     '| ' + key_title + u' | ' + value_title + u' |\n| --- | --- |\n'
@@ -408,38 +424,56 @@ class DataLibrary(object):
             _markdown += u'| ' + key + u' | ' + str(value_str) + u' |\n'                # Key | Value row(s).
         return _markdown
 
-    # Convert a dictionary into an HTML formatted 2-column table.
-    # Format:
-    # <html>
-    #   <head><link rel="stylesheet" type="text/css" href="/css/blowdry.min.css" /></head>
-    #
-    #   <body>
-    #       <table>
-    #           <thead>
-    #               <tr>
-    #                   <th>key_title</th>
-    #                   <th>value_title</th>
-    #               </tr>
-    #           </thead>
-    #
-    #           <tbody>
-    #               <tr>
-    #                   <td>key[0]</td>
-    #                   <td>value</td>
-    #               </tr>
-    #           </tbody>
-    #       </table>
-    #   </body>
-    # </html>
     @staticmethod
     def dict_to_html(h1_text= '', key_title='', value_title='', _dict=None):
+        """ Convert a dictionary into an HTML formatted 2-column table.
+
+        *HTML Table Format:*
+
+        | ``<html>``
+        |  ``<head>``
+        |     ``<meta charset="UTF-8">``
+        |     ``<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />``
+        |     ``<title>value_title - blowdrycss</title>``
+        |     ``<link rel="stylesheet" type="text/css" href="/css/blowdry.min.css"/>``
+        |  ``</head>``
+        |  ``<body>``
+        |      ``<table>``
+        |          ``<thead>``
+        |              ``<tr>``
+        |                  ``<th>key_title</th>``
+        |                  ``<th>value_title</th>``
+        |              ``</tr>``
+        |          ``</thead>``
+        |          ``<tbody>``
+        |              ``<tr>``
+        |                  ``<td>key[0]</td>``
+        |                  ``<td>value</td>``
+        |              ``</tr>``
+        |          ``</tbody>``
+        |      ``</table>``
+        |  ``</body>``
+        | ``</html>``
+
+        :type h1_text: str
+        :type key_title: str
+        :type value_title: str
+        :type _dict: dict
+
+        :param h1_text: Title for the table.
+        :param key_title: Key name.
+        :param value_title: Value stored at Key.
+        :param _dict: A generic dictionary.
+        :return: (str) -- Returns a HTML formatted 2-column table based on the key/value pairs in ``_dict``.
+
+        """
         common_classes = u' padding-5 border-1px-solid-gray display-inline '
         alternating_bg = u' bgc-hf8f8f8 '
         _html = str(
             '<html>\n' +
             '\t<head>\n' +
             '\t\t<meta charset="UTF-8">\n' +
-            '\t\t<link rel="icon" type="image/x-icon" href="/images/favicon.ico">\n' +
+            '\t\t<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />\n' +
             '\t\t<title>' + value_title + ' - blowdrycss</title>\n' +
             '\t\t<link rel="stylesheet" type="text/css" href="/css/blowdry.min.css" />\n' +
             '\t</head>\n\n' +
