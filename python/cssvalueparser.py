@@ -11,9 +11,22 @@ __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-# Accepts a clean encoded_property_value e.g. 'bold', '1-5-1-5', '1_32rem', '1p-10p-3p-1p', 'n12px', 'n5_25cm-n6_1cm'
-# Decodes a css property_value from a clean encoded_property_value.
 class CSSPropertyValueParser(object):
+    """
+    Accepts a ``property_name`` and ``px_to_em`` unit conversion flag.
+
+    Contains multiple parsers and methods that decodes the CSS property_value.
+
+    :type property_name: str
+    :type px_to_em: bool
+
+    :param property_name: A CSS property name.
+    :param px_to_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion.
+        False disables unit conversions.
+    :return: None
+
+    """
+
     def __init__(self, property_name='', px_to_em=True):
         self.property_name = property_name
         self.color_parser = ColorParser(property_name=property_name)
@@ -75,6 +88,27 @@ class CSSPropertyValueParser(object):
 
     # Put everything together.
     def decode_property_value(self, value=''):
+        """
+        Decode the encoded property ``value`` input e.g. 'bold', '1-5-1-5', '1_32rem', '1p-10p-3p-1p', 'n12px',
+        'n5_25cm-n6_1cm'. Returns parsed, but non-validated CSS property value.
+
+        :type value: str
+
+        :param value: An encoded CSS property value.
+        :return: (*str*) -- Returns parsed, but non-validated CSS property value.
+
+        **Examples:**
+
+        >>> value_parser = CSSPropertyValueParser(
+        >>>     property_name='padding', px_to_em=True
+        >>> )
+        >>> value_parser.decode_property_value(value='1-5-1-5')
+        '0.0625em 0.3125em 0.0625em 0.3125em'
+        >>> value_parser.unit_parser.px_to_em = False
+        >>> value_parser.decode_property_value(value='1-5-1-5')
+        '1px 5px 1px 5px'
+
+        """
         if not self.is_built_in(value=value):
             # Apply to all non-built-in values.
             value = self.replace_dashes(value=value)

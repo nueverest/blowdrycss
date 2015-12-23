@@ -71,6 +71,23 @@ class TestCSSPropertyValueParser(TestCase):
                 msg=value
             )
 
+    def test_decode_property_value_px_to_em(self):
+        valid_property_name = 'padding'
+        encoded_property_values = [
+            '55', '1-5-1-5', '1_32rem', '1p-10p-3p-1p', 'n12px', 'n5_25in-n6_1in', 'n0_0435p',
+        ]
+        expected_property_values = [
+            '3.4375em', '0.0625em 0.3125em 0.0625em 0.3125em', '1.32rem', '1% 10% 3% 1%', '-0.75em',
+            '-5.25in -6.1in', '-0.0435%',
+        ]
+        property_parser = CSSPropertyValueParser(property_name=valid_property_name, px_to_em=True)
+        for i, value in enumerate(encoded_property_values):
+            self.assertEquals(
+                property_parser.decode_property_value(value=value),
+                expected_property_values[i],
+                msg=value
+            )
+
     def test_decode_property_value_font_family(self):
         valid_property_name = 'font-family'
         encoded_property_values = [

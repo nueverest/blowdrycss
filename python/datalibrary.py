@@ -301,7 +301,7 @@ class DataLibrary(object):
         | 'border-bottom-width' --> {'border-b-width', 'bbw-'}
 
         :type property_name: str
-        :param property_name: CSS property name.
+        :param property_name: A CSS property name.
         :return: Return a set() of abbreviation patterns according to the rules defined above.
 
         """
