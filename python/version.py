@@ -45,11 +45,20 @@
     - When Y increments beyond 9 X is incremented by 1 and both Y and Z is reset to 0.
     - When X increments both Y and Z is reset to 0.
 
+    **Version Changelog:**
+
+    | 0.0.1 -- Initial Release with basic functions working.
+    | 0.0.2 -- Extended functionality to allow for a subset of shorthand properties to be decoded correctly
+    | 0.0.3 -- Modularized the color, font, and unit parsers.
+    | 0.0.4 -- Sphinx integration started.
+    | 0.0.5 -- All docstrings added. Many modules refactored and improved during the documentation process. New
+      unit tests added.
+
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blow dry css'
 
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 
 __release__ = __version__ + 'a'
