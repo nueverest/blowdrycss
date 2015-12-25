@@ -59,10 +59,10 @@
 .. automodule:: unitparser
 
 
-``mediaparser``
----------------
+``responsiveparser``
+--------------------
 
-.. automodule:: mediaparser
+.. automodule:: responsiveparser
 
 
 ``timing``

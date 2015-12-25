@@ -2,26 +2,67 @@ __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-class MediaParser(object):
+class ResponsiveParser(object):
     """ Enables powerful responsive @media query generation via screen size suffixes.
 
-    Both of these are outside of the scope of the media parser. They belong in the ``datalibrary`` module.
-    TODO: Consider the word ``show`` as shorthand for ``display-inline``.
-    TODO: Consider the word ``hide`` as shorthand for ``display-none``.
+    **Generic Screen Size Triggers:**
 
-    **General Usage:**
-
-    - ``'display-small-only'`` -- Only displays the HTML element inline for screen sizes less than or equal to the
+    - ``'inline-small-only'`` -- Only displays the HTML element inline for screen sizes less than or equal to the
       upper limit for ``small`` screen sizes.
     - ``'green-medium-up'`` -- Set ``color`` to green for screen sizes greater than or equal to the lower limit
       for ``medium`` size screens.
 
     **Custom Usage: Set a specific pixel limit.**
 
-    - ``'display-480px-down'`` -- Only displays the HTML element inline for screen sizes less than or equal to 480px.
+    - ``'block-480px-down'`` -- Only displays the HTML element as a block for screen sizes less than or equal to 480px.
     - ``'bold-624-up'`` -- Set the ``font-weight`` to ``bold`` for screen sizes greater than or equal to 624px.
 
         - **Note:** If unit conversion is enabled i.e. ``px_to_em`` is ``True``, then 624px would be converted to 39em.
+
+    **Responsive Flag:**
+
+    Append ``'-r'`` to the end of an encoded property values to scale the value up and down based on screen size.
+
+    Note: This only works on property values containing distance--based units (pixels, em, etc).
+
+    - General format: ``<name>-<value>-r``
+
+    - Specific case: ``font-size-24-r``
+
+    - Priority ``!important`` case: ``font-size-24-r-i``
+
+        - (``'-i'`` *is always last*)
+
+    **Responsive Scaling Ratios:**
+
+    - Assuming ``font-size-24-r`` is the encoded css class, the font-size will respond to the screen size according
+      to the following table:
+
+        +-------------+---------------+----------------+------+-------+
+        | Screen Size | Trigger Range | Scaling Factor |  px  | em    |
+        +-------------+---------------+----------------+------+-------+
+        | Large       |    > 720px    |        1       |  24  | 1.5   |
+        +-------------+---------------+----------------+------+-------+
+        | Medium      |    < 720px    |      1.125     | 21.3 | 1.333 |
+        +-------------+---------------+----------------+------+-------+
+        | Small       |    < 480px    |      1.25      | 19.2 | 1.2   |
+        +-------------+---------------+----------------+------+-------+
+
+    - Generated CSS for ``font-size-24-r``::
+
+        .font-size-24-r {
+            font-size: 24px;
+
+            // medium screen font size reduction
+            @media only screen and (max-width: 720px) {
+                font-size: 21.3px;
+            }
+
+            // small screen font size reduction
+            @media only screen and (max-width: 480px) {
+                font-size: 19.2px;
+            }
+        }
 
     :type css_class: str
     :type px_to_em: bool
@@ -40,7 +81,8 @@ class MediaParser(object):
     def __init__(self, css_class='', px_to_em=True):
         # Default Screen Width Settings
         # Tuple Format (Lower Limit, Upper Limit) in pixels.
-        # Note: If unit conversion is enabled i.e. ``px_to_em`` is ``True``, then all values are converted to 'em'.
+        # Note: These values do not change even if unit conversion is enabled i.e. ``px_to_em`` is ``True``.
+        # Common Screen Resolutions: https://en.wikipedia.org/wiki/List_of_common_resolutions
         self.xxsmall = (0, 120)
         self.xsmall = (121, 240)
         self.small = (241, 480)
@@ -63,28 +105,9 @@ class MediaParser(object):
             'xgiant': self.xgiant,
         }
 
-        self.direction_set = {
-            '-only', '-down', '-up'
-        }
+        self.direction_set = {'-only', '-down', '-up', }
 
-
-
-    # TODO: Implement media query handling using:
-
-
-    # TODO: Handle font-family names with dashes in them same thing for "voice-family"
-    # TODO: Consider using '--' to represent '-' dash could be an escape character
-    # e.g. font: 15px sans-serif OR font: sans-serif 15px OR font-family: sans-serif
-    # ERROR font-15px-sans-serif --> font: 15px sans serif
-    # Might require a font name dictionary.
-    # What about commas?
-    # Could just use font-family name explicity e.g. sans-serif, arial, source-sans-pro
-    # x--large --> x*d*large --> x-large
-    # OR
-    # Setting everything to lowercase.
-    # Find all dashed keywords x-large san-serif etc.
-    # Replace with uppercase X-LARGE SAN-SERIF
-    # Remove all '-' dashes except the ones between uppercase letters.
+        self.responsive = '-r'
 
     # Media Query
 #     @mixin text($font-color, $font-size, $font-family:"Open Sans", $line-height:inherit, $responsive:true) {

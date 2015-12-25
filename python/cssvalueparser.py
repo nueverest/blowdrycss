@@ -6,7 +6,7 @@ from datalibrary import property_alias_dict
 from colorparser import ColorParser
 from unitparser import UnitParser
 from fontparser import FontParser
-#from mediaparser import MediaParser
+#from mediaparser import ResponsiveParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
