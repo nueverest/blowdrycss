@@ -3,17 +3,72 @@ __project__ = 'blow dry css'
 
 
 class MediaParser(object):
-    def __init__(self):
-        pass
+    """ Enables powerful responsive @media query generation via screen size suffixes.
+
+    Both of these are outside of the scope of the media parser. They belong in the ``datalibrary`` module.
+    TODO: Consider the word ``show`` as shorthand for ``display-inline``.
+    TODO: Consider the word ``hide`` as shorthand for ``display-none``.
+
+    **General Usage:**
+
+    - ``'display-small-only'`` -- Only displays the HTML element inline for screen sizes less than or equal to the
+      upper limit for ``small`` screen sizes.
+    - ``'green-medium-up'`` -- Set ``color`` to green for screen sizes greater than or equal to the lower limit
+      for ``medium`` size screens.
+
+    **Custom Usage: Set a specific pixel limit.**
+    - ``'display-480px-down'`` -- Only displays the HTML element inline for screen sizes less than or equal to 480px.
+    - ``'bold-624-up'`` -- Set the ``font-weight`` to ``bold`` for screen sizes greater than or equal to 624px.
+      Note: If unit conversion is enabled i.e. ``px_to_em`` is ``True``, then 624px would be converted to 39em.
+
+    :type css_class: str
+    :type px_to_em: bool
+
+    :param css_class: Potentially encoded css class that may or may not be parsable.
+    :param px_to_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion.
+        False disables unit conversions meaning any pixel value remains unchanged.
+    :return: None
+
+    **Examples:**
+
+    >>>
+
+    """
+
+    def __init__(self, css_class='', px_to_em=True):
+        # Default Screen Width Settings
+        # Tuple Format (Lower Limit, Upper Limit) in pixels.
+        # Note: If unit conversion is enabled i.e. ``px_to_em`` is ``True``, then all values are converted to 'em'.
+        self.xxsmall = (0, 120)
+        self.xsmall = (121, 240)
+        self.small = (241, 480)
+        self.medium = (481, 720)            # Typical mobile device crossover point @ 720px.
+        self.large = (721, 1024)
+        self.xlarge = (1025, 1366)
+        self.xxlarge = (1367, 1920)
+        self.giant = (1921, 2560)
+        self.xgiant = (2561, 10**100)
+
+        self.size_ranges_dict = {
+            'xxsmall': self.xxsmall,
+            'xsmall': self.xxsmall,
+            'small': self.small,
+            'medium': self.medium,
+            'large': self.large,
+            'xlarge': self.xlarge,
+            'xxlarge': self.xxlarge,
+            'giant': self.giant,
+            'xgiant': self.xgiant,
+        }
+
+        self.direction_set = {
+            '-only', '-down', '-up'
+        }
+
+
 
     # TODO: Implement media query handling using:
-    # allow user to define a dict
-    # 'xxsmall', 'xxs': (0, 120),
-    # 'xsmall', 'xs': (0, 240),
-    # 'small', 's', 'sm': (0, 480), etc...
-    #
-    # hide-for-, show-for-
-    # -small-only, -small-down, -small-up, hide-for-480px-down, show-for-480px-up, hide-for-480-down, show-for-480-down
+
 
     # TODO: Handle font-family names with dashes in them same thing for "voice-family"
     # TODO: Consider using '--' to represent '-' dash could be an escape character

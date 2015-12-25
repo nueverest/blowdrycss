@@ -22,7 +22,7 @@ class CSSPropertyValueParser(object):
 
     :param property_name: A CSS property name.
     :param px_to_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion.
-        False disables unit conversions.
+        False disables unit conversions meaning any pixel value remains unchanged.
     :return: None
 
     **Attributes:**
