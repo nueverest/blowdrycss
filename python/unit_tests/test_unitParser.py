@@ -6,6 +6,17 @@ __project__ = 'blow dry css'
 
 
 class TestUnitParser(TestCase):
+    def test_default_units(self):
+        property_names = [
+            'font-size', 'padding', 'margin', 'pitch', 'text-indent', 'volume', 'width', 'font-weight', 'color',
+            'invalid', '', 'none',
+        ]
+        expected_units = ['px', 'px', 'px', 'Hz', 'px', '%', 'px', '', '', '', '', '']
+
+        for i, property_name in enumerate(property_names):
+            unit_parser = UnitParser(property_name=property_name, px_to_em=True)
+            self.assertEqual(unit_parser.default_units(), expected_units[i])
+
     def test_add_units_multi_value_conversion_True_invalid_pass_through(self):
         # Handles cases input like: '1a2', '-35mx 15mx', '1px 2 m11 2', '22.5px 10 22.5px 10'
         # Outputs: '1a2', '-35mx 15mx', '0.0625em 0.125em m11 0.125em', '22.5px 0.625em 22.5px 0.625em'

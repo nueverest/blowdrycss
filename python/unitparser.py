@@ -127,9 +127,20 @@ class UnitParser(object):
             'min-width': 'px',                # single
         }
 
-    def add_units(self, property_value=''):
+    def default_units(self):
+        """ Returns the default units "if any" for the assigned ``self.property_name``.
+
+        :return: (*str*) -- Returns default units for the assigned ``self.property_name`` if they exist. Otherwise,
+            return an empty string ``''``.
+
         """
-        If the property_name requires units, then apply the default units defined in default_property_units_dict.
+        if self.property_name in self.default_property_units_dict:
+            return self.default_property_units_dict[self.property_name]
+        else:
+            return ''
+
+    def add_units(self, property_value=''):
+        """ If the property_name requires units, then apply the default units defined in default_property_units_dict.
 
         **Rules:**
 
