@@ -1,8 +1,11 @@
+# custom
+from utilities import deny_empty_or_whitespace
+from unitparser import UnitParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
-class ResponsiveParser(object):
+class MediaQueryParser(object):
     """ Enables powerful responsive @media query generation via screen size suffixes.
 
     **Generic Screen Size Triggers:**
@@ -64,11 +67,20 @@ class ResponsiveParser(object):
             }
         }
 
+    **Important Note about cssutils**
+
+    Currently, ``cssutils`` does not support parsing media queries. Therefore, media queries need to be built, minified,
+    and appended separately.
+
     :type css_class: str
+    :type name: str
+    :type value: str
     :type px_to_em: bool
 
-    :param css_class: Potentially encoded css class that may or may not be parsable.
-    :param px_to_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion.
+    :param css_class: Potentially encoded css class that may or may not be parsable. May not be empty or None.
+    :param name: Valid CSS property name. May not be empty or None.
+    :param value: Valid CSS property name. May not be empty or None.
+    :param px_to_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion (default).
         False disables unit conversions meaning any pixel value remains unchanged.
     :return: None
 
@@ -77,23 +89,31 @@ class ResponsiveParser(object):
     >>> 'WARNING: NOT IMPLEMENTED YET'
 
     """
+    def __init__(self, css_class='', name='', value='', px_to_em=True):
+        deny_empty_or_whitespace(css_class, variable_name='css_class')
+        deny_empty_or_whitespace(name, variable_name='name')
+        deny_empty_or_whitespace(value, variable_name='value')
 
-    def __init__(self, css_class='', px_to_em=True):
-        # Default Screen Width Settings
+        self.css_class = css_class
+        self.name = name
+        self.value = value
+        self.px_to_em = px_to_em
+
+        # Default Screen Breakpoints / Transition Triggers
         # Tuple Format (Lower Limit, Upper Limit) in pixels.
         # Note: These values do not change even if unit conversion is enabled i.e. ``px_to_em`` is ``True``.
         # Common Screen Resolutions: https://en.wikipedia.org/wiki/List_of_common_resolutions
         self.xxsmall = (0, 120)
         self.xsmall = (121, 240)
         self.small = (241, 480)
-        self.medium = (481, 720)            # Typical mobile device crossover point @ 720px.
+        self.medium = (481, 720)            # Typical mobile device break point @ 720px.
         self.large = (721, 1024)
         self.xlarge = (1025, 1366)
         self.xxlarge = (1367, 1920)
         self.giant = (1921, 2560)
-        self.xgiant = (2561, 10**100)
+        self.xgiant = (2561, 10**10)
 
-        self.size_ranges_dict = {
+        self.breakpoint_dict = {
             'xxsmall': self.xxsmall,
             'xsmall': self.xxsmall,
             'small': self.small,
@@ -107,76 +127,52 @@ class ResponsiveParser(object):
 
         self.direction_set = {'-only', '-down', '-up', }
 
-        self.responsive = '-r'
+        self.breakpoint = ()
+        self.direction = ''
 
-    # Media Query
-#     @mixin text($font-color, $font-size, $font-family:"Open Sans", $line-height:inherit, $responsive:true) {
-# 	color: $font-color;
-# 	font-size: $font-size;
-# 	font-family: $font-family, $default-font-family;
-# 	line-height: $line-height;
-#
-# 	// Responsive font reduction
-# 	@if $responsive {
-# 		// medium screen font size reduction
-# 		@media only screen and (max-width: $medium-width) {
-# 			font-size: $font-size/$medium-reduction;
-# 			line-height: $line-height/$medium-reduction;
-# 		}
-#
-# 		// small screen font size reduction
-# 		@media only screen and (max-width: $small-width) {
-# 			font-size: $font-size/$small-reduction;
-# 			line-height: $line-height/$small-reduction;
-# 		}
-# 	}
-# }
-#
-# @mixin link($color, $hcolor, $size, $font-family:"Open Sans", $line-height:inherit, $deco1:none, $deco2:none, $responsive:true) {
-# 	a {
-# 		color: $color;
-# 		font-size: $size;
-# 		font-family: $font-family, $default-font-family;
-# 		line-height: $line-height;
-# 		text-decoration: $deco1;
-# 		&:hover {
-# 			color: $hcolor;
-# 			text-decoration: $deco2;
-# 		}
-# 	}
-#
-# 	// Responsive font reduction
-# 	@if $responsive {
-# 		// medium screen font size reduction
-# 		@media only screen and (max-width: $medium-width) {
-# 			a {
-# 				color: $color;
-# 				font-size: $size/$medium-reduction;
-# 				font-family: $font-family, $default-font-family;
-# 				line-height: $line-height/$medium-reduction;
-# 				text-decoration: $deco1;
-#
-# 				&:hover {
-# 					color: $hcolor;
-# 					text-decoration: $deco2;
-# 				}
-# 			}
-# 		}
-#
-# 		// small screen font size reduction
-# 		@media only screen and (max-width: $small-width) {
-# 			a {
-# 				color: $color;
-# 				font-size: $size/$small-reduction;
-# 				font-family: $font-family, $default-font-family;
-# 				line-height: $line-height/$small-reduction;
-# 				text-decoration: $deco1;
-#
-# 				&:hover {
-# 					color: $hcolor;
-# 					text-decoration: $deco2;
-# 				}
-# 			}
-# 		}
-# 	}
-# }
+    def set_breakpoint(self):
+        pass
+
+    def set_direction(self):
+        pass
+
+    def generate_css_with_breakpoint(self):
+        pass
+
+    def is_responsive(self):
+        """ Return False if ``self.property_name`` does not have default units of ``'px'``.
+        Test if ``self.css_class`` contains the responsive flag ``-r``. Returns True if ``-r`` is found and
+        False otherwise.
+
+        **Rules:**
+
+        - The ``self.property_name`` must possess units of pixels ``'px'``.
+        - If no property priority is set the encoded ``css_class`` must end with ``-r``.
+        - If priority is set the encoded ``css_class`` must end with ``-r-i``.
+
+        :return: (*bool*) -- Returns True if ``-r`` is found and False otherwise.
+
+        **Examples**
+
+        >>> responsive_parser = MediaQueryParser(css_class='font-weight-24-r')
+        >>> responsive_parser.is_responsive()
+        True
+        >>> responsive_parser.css_class = 'font-weight-24-r-i'
+        >>> responsive_parser.is_responsive()
+        True
+        >>> responsive_parser.css_class = 'font-weight-24'
+        >>> responsive_parser.is_responsive()
+        False
+
+        """
+        unit_parser = UnitParser(property_name=self.name, px_to_em=self.px_to_em)
+        if unit_parser.default_units() != 'px':
+            return False
+        else:
+            return self.css_class.endswith('-r') or self.css_class.endswith('-r-i')
+
+    def generate_responsive_css(self):
+        _max = 1
+        small_max = self.small[_max]
+        medium_max = self.medium[_max]
+        pass
