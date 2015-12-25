@@ -17,9 +17,11 @@ class MediaParser(object):
       for ``medium`` size screens.
 
     **Custom Usage: Set a specific pixel limit.**
+
     - ``'display-480px-down'`` -- Only displays the HTML element inline for screen sizes less than or equal to 480px.
     - ``'bold-624-up'`` -- Set the ``font-weight`` to ``bold`` for screen sizes greater than or equal to 624px.
-      Note: If unit conversion is enabled i.e. ``px_to_em`` is ``True``, then 624px would be converted to 39em.
+
+        - **Note:** If unit conversion is enabled i.e. ``px_to_em`` is ``True``, then 624px would be converted to 39em.
 
     :type css_class: str
     :type px_to_em: bool
@@ -31,7 +33,7 @@ class MediaParser(object):
 
     **Examples:**
 
-    >>>
+    >>> 'WARNING: NOT IMPLEMENTED YET'
 
     """
 
