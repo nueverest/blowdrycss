@@ -8,8 +8,9 @@ __project__ = 'blow dry css'
 class MediaQueryParser(object):
     """ Enables powerful responsive @media query generation via screen size suffixes.
 
-    **Generic Screen Size Triggers:**
+    **Generic Screen Breakpoints xxsmall through xgiant:**
 
+    - ``'name--breakpoint--limit'`` -- General Format
     - ``'inline-small-only'`` -- Only displays the HTML element inline for screen sizes less than or equal to the
       upper limit for ``small`` screen sizes.
     - ``'green-medium-up'`` -- Set ``color`` to green for screen sizes greater than or equal to the lower limit
@@ -22,23 +23,23 @@ class MediaQueryParser(object):
 
         - **Note:** If unit conversion is enabled i.e. ``px_to_em`` is ``True``, then 624px would be converted to 39em.
 
-    **Responsive Flag:**
+    **Scaling Flag:**
 
-    Append ``'-r'`` to the end of an encoded property values to scale the value up and down based on screen size.
+    Append ``'-s'`` to the end of an encoded property values to scale the value up and down based on screen size.
 
     Note: This only works on property values containing distance--based units (pixels, em, etc).
 
-    - General format: ``<name>-<value>-r``
+    - General format: ``<name>-<value>-s``
 
-    - Specific case: ``font-size-24-r``
+    - Specific case: ``font-size-24-s``
 
-    - Priority ``!important`` case: ``font-size-24-r-i``
+    - Priority ``!important`` case: ``font-size-24-s-i``
 
         - (``'-i'`` *is always last*)
 
     **Responsive Scaling Ratios:**
 
-    - Assuming ``font-size-24-r`` is the encoded css class, the font-size will respond to the screen size according
+    - Assuming ``font-size-24-s`` is the encoded css class, the font-size will respond to the screen size according
       to the following table:
 
         +-------------+---------------+----------------+------+-------+
@@ -51,9 +52,9 @@ class MediaQueryParser(object):
         | Small       |    < 480px    |      1.25      | 19.2 | 1.2   |
         +-------------+---------------+----------------+------+-------+
 
-    - Generated CSS for ``font-size-24-r``::
+    - Generated CSS for ``font-size-24-s``::
 
-        .font-size-24-r {
+        .font-size-24-s {
             font-size: 24px;
 
             // medium screen font size reduction
@@ -125,43 +126,86 @@ class MediaQueryParser(object):
             'xgiant': self.xgiant,
         }
 
-        self.direction_set = {'-only', '-down', '-up', }
+        self.limit_set = {'-only', '-down', '-up', }
 
         self.breakpoint = ()
-        self.direction = ''
+        self.limit = ''
 
     def set_breakpoint(self):
-        pass
+        """ If ``self.css_class`` contains one of the keys in ``self.breakpoint_dict``, then
+        set ``self.breakpoint`` to a breakpoint tuple for the matching key. Otherwise, raise a ValueError.
 
-    def set_direction(self):
-        pass
+        **Rules:**
+
+        - Before a comparison is made each key is wrapped in dashes i.e. ``-key-`` since the key must appear in the
+          middle of a ``self.css_class``.
+
+            - This also prevents false positives since searching for ``small`` could match ``xxsmall``, ``xsmall``,
+              and ``small``.
+
+        - The length of ``self.css_class`` must be greater than the length of the key + 2.  This prevents a
+          ``css_class`` like ``'-xsmall-'`` or ``'-xxlarge-up'`` from being accepted as valid by themselves.
+
+        - These rules do not catch all cases, and prior validation of the css_class is assumed.
+
+        :raises ValueError: Raises a ValueError if none of the keys in ``self.breakpoint_dict`` are found in
+            ``self.css_class``.
+
+        :return: None
+
+        """
+        for key, value in self.breakpoint_dict.items():
+            key = '-' + key + '-'
+            if key in self.css_class and len(self.css_class) > len(key) + 2:
+                self.breakpoint = value
+                return
+        raise ValueError(
+                'The MediaQueryParser.css_class ' + self.css_class + ' does not match a breakpoint in breakpoint_dict.'
+        )
+
+    def set_limit(self):
+        """ If one of the values in ``self.limit_set`` is contained in ``self.css_class``, then
+        Set ``self.limit`` to the value of the string found. Otherwise, raise a ValueError.
+
+        :raises ValueError: Raises a ValueError if none of the members of ``self.limit_set`` are found in
+            ``self.css_class``.
+
+        :return: None
+
+        """
+        for limit in self.limit_set:
+            if limit in self.css_class:
+                self.limit = limit
+        raise ValueError(
+                'The MediaQueryParser.css_class ' + self.css_class + ' does not match a limit in limit_set.'
+        )
 
     def generate_css_with_breakpoint(self):
         pass
 
-    def is_responsive(self):
+    def is_scaling(self):
         """ Return False if ``self.property_name`` does not have default units of ``'px'``.
-        Test if ``self.css_class`` contains the responsive flag ``-r``. Returns True if ``-r`` is found and
+        Test if ``self.css_class`` contains the scaling flag ``-s``. Returns True if ``-s`` is found and
         False otherwise.
 
         **Rules:**
 
         - The ``self.property_name`` must possess units of pixels ``'px'``.
-        - If no property priority is set the encoded ``css_class`` must end with ``-r``.
-        - If priority is set the encoded ``css_class`` must end with ``-r-i``.
+        - If no property priority is set the encoded ``css_class`` must end with ``-s``.
+        - If priority is set the encoded ``css_class`` must end with ``-s-i``.
 
-        :return: (*bool*) -- Returns True if ``-r`` is found and False otherwise.
+        :return: (*bool*) -- Returns True if ``-s`` is found and False otherwise.
 
         **Examples**
 
-        >>> responsive_parser = MediaQueryParser(css_class='font-weight-24-r')
-        >>> responsive_parser.is_responsive()
+        >>> scaling_parser = MediaQueryParser(css_class='font-weight-24-s')
+        >>> scaling_parser.is_scaling()
         True
-        >>> responsive_parser.css_class = 'font-weight-24-r-i'
-        >>> responsive_parser.is_responsive()
+        >>> scaling_parser.css_class = 'font-weight-24-s-i'
+        >>> scaling_parser.is_scaling()
         True
-        >>> responsive_parser.css_class = 'font-weight-24'
-        >>> responsive_parser.is_responsive()
+        >>> scaling_parser.css_class = 'font-weight-24'
+        >>> scaling_parser.is_scaling()
         False
 
         """
@@ -169,9 +213,9 @@ class MediaQueryParser(object):
         if unit_parser.default_units() != 'px':
             return False
         else:
-            return self.css_class.endswith('-r') or self.css_class.endswith('-r-i')
+            return self.css_class.endswith('-s') or self.css_class.endswith('-s-i')
 
-    def generate_responsive_css(self):
+    def generate_scaling_css(self):
         _max = 1
         small_max = self.small[_max]
         medium_max = self.medium[_max]
