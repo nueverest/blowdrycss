@@ -535,3 +535,18 @@ property_alias_html = __data_library.property_alias_html
 # reStructuredTest
 clashing_alias_rst = __data_library.clashing_alias_rst
 property_alias_rst = __data_library.property_alias_rst
+
+# Default Screen Breakpoints / Transition Triggers
+# Tuple Format (Lower Limit, Upper Limit) in pixels.
+# Note: These values do not change even if unit conversion is enabled i.e. ``px_to_em`` is ``True``.
+# Common Screen Resolutions: https://en.wikipedia.org/wiki/List_of_common_resolutions
+xxsmall = (0, 120)
+xsmall = (121, 240)
+small = (241, 480)
+medium = (481, 720)                 # Typical mobile device break point @ 720px.
+large = (721, 1024)
+xlarge = (1025, 1366)
+xxlarge = (1367, 1920)
+giant = (1921, 2560)
+xgiant = (2561, 2800)
+xxgiant = (2801, float("inf"))      # Python 2.x Compatible representation of Infinity.

@@ -59,10 +59,16 @@
 .. automodule:: unitparser
 
 
-``mediaqueryparser``
+``breakpointparser``
 --------------------
 
-.. automodule:: mediaqueryparser
+.. automodule:: breakpointparser
+
+
+``scalingparser``
+-----------------
+
+.. automodule:: scalingparser
 
 
 ``timing``
