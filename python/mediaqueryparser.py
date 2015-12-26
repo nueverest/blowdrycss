@@ -10,13 +10,13 @@ class MediaQueryParser(object):
 
     **Generic Screen Breakpoints xxsmall through xgiant:**
 
-    - ``'name--breakpoint--limit'`` -- General Format
+    - ``'name--breakpoint_value--limits'`` -- General Format
     - ``'inline-small-only'`` -- Only displays the HTML element inline for screen sizes less than or equal to the
-      upper limit for ``small`` screen sizes.
-    - ``'green-medium-up'`` -- Set ``color`` to green for screen sizes greater than or equal to the lower limit
+      upper limits for ``small`` screen sizes.
+    - ``'green-medium-up'`` -- Set ``color`` to green for screen sizes greater than or equal to the lower limits
       for ``medium`` size screens.
 
-    **Custom Usage: Set a specific pixel limit.**
+    **Custom Usage: Set a specific pixel limits.**
 
     - ``'block-480px-down'`` -- Only displays the HTML element as a block for screen sizes less than or equal to 480px.
     - ``'bold-624-up'`` -- Set the ``font-weight`` to ``bold`` for screen sizes greater than or equal to 624px.
@@ -128,12 +128,13 @@ class MediaQueryParser(object):
 
         self.limit_set = {'-only', '-down', '-up', }
 
-        self.breakpoint = ()
-        self.limit = ''
+        self.breakpoint_key = ''
+        self.breakpoint_value = ()
+        self.limits = ''
 
     def set_breakpoint(self):
         """ If ``self.css_class`` contains one of the keys in ``self.breakpoint_dict``, then
-        set ``self.breakpoint`` to a breakpoint tuple for the matching key. Otherwise, raise a ValueError.
+        set ``self.breakpoint_value`` to a breakpoint_value tuple for the matching key. Otherwise, raise a ValueError.
 
         **Rules:**
 
@@ -155,17 +156,30 @@ class MediaQueryParser(object):
 
         """
         for key, value in self.breakpoint_dict.items():
-            key = '-' + key + '-'
-            if key in self.css_class and len(self.css_class) > len(key) + 2:
-                self.breakpoint = value
+            _key = '-' + key + '-'
+            if _key in self.css_class and len(self.css_class) > len(_key) + 2:
+                self.breakpoint_key = key
+                self.breakpoint_value = value
                 return
         raise ValueError(
-                'The MediaQueryParser.css_class ' + self.css_class + ' does not match a breakpoint in breakpoint_dict.'
+                'The MediaQueryParser.css_class ' + self.css_class +
+                ' does not match a breakpoint_value in breakpoint_dict.'
         )
 
-    def set_limit(self):
+    def set_limits(self):
         """ If one of the values in ``self.limit_set`` is contained in ``self.css_class``, then
-        Set ``self.limit`` to the value of the string found. Otherwise, raise a ValueError.
+        Set ``self.limits`` to the value of the string found. Otherwise, raise a ValueError.
+
+        **Rules:**
+
+        - The ``limits`` may appear in the middle of ``self.css_class`` e.g. ``'padding-10-small-up-s-i'``.
+
+        - The ``limits`` may appear at the end of ``self.css_class`` e.g. ``'margin-20-giant-down'``.
+
+        - The length of ``self.css_class`` must be greater than the length of the limits + 2.  This prevents a
+          ``css_class`` like ``'-up-'`` or ``'-only-'`` from being accepted as valid by themselves.
+
+        - These rules do not catch all cases, and prior validation of the css_class is assumed.
 
         :raises ValueError: Raises a ValueError if none of the members of ``self.limit_set`` are found in
             ``self.css_class``.
@@ -173,12 +187,21 @@ class MediaQueryParser(object):
         :return: None
 
         """
-        for limit in self.limit_set:
-            if limit in self.css_class:
-                self.limit = limit
+        for limits in self.limit_set:
+            in_middle = (limits + '-') in self.css_class and len(self.css_class) > len(limits + '-') + 2
+            at_end = self.css_class.endswith(limits)
+            if in_middle or at_end:
+                self.limits = limits
+                return
         raise ValueError(
-                'The MediaQueryParser.css_class ' + self.css_class + ' does not match a limit in limit_set.'
+                'The MediaQueryParser.css_class ' + self.css_class + ' does not match a limits in limit_set.'
         )
+
+    def breakpoint_limit_pair_is_valid(self):
+        pair = self.breakpoint_key + self.limits
+        in_middle = pair in self.css_class and len(self.css_class) > len('-' + pair + '-') + 2
+        at_end = self.css_class.endswith(pair)
+        return in_middle or at_end
 
     def generate_css_with_breakpoint(self):
         pass
