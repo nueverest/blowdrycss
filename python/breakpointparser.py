@@ -1,7 +1,6 @@
 # custom
-import settings
+from settings import use_em, xxsmall, xsmall, small, medium, large, xlarge, xxlarge, giant, xgiant, xxgiant
 from utilities import deny_empty_or_whitespace
-from datalibrary import xxsmall, xsmall, small, medium, large, xlarge, xxlarge, giant, xgiant, xxgiant
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -52,7 +51,7 @@ class BreakpointParser(object):
         self.css_class = css_class
         self.name = name
         self.value = value
-        self.units = 'em' if settings.use_em else 'px'
+        self.units = 'em' if use_em else 'px'
 
         # Dictionary of Breakpoint Dictionaries {'-only': (), '-down': [1], '-up': [0], }
         # '-only': ('min-width', 'max-width'),    # Lower and Upper Limits of the size.

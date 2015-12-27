@@ -1,7 +1,6 @@
 from collections import OrderedDict
 from copy import deepcopy
 from pypandoc import convert
-from utilities import px_to_em
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -537,17 +536,3 @@ property_alias_html = __data_library.property_alias_html
 clashing_alias_rst = __data_library.clashing_alias_rst
 property_alias_rst = __data_library.property_alias_rst
 
-# Default Screen Breakpoints / Transition Triggers
-# Tuple Format (Lower Limit, Upper Limit) in pixels.
-# Note: These values change if unit conversion is enabled i.e. ``use_em`` is ``True``.
-# Common Screen Resolutions: https://en.wikipedia.org/wiki/List_of_common_resolutions
-xxsmall = (px_to_em(0), px_to_em(120))
-xsmall = (px_to_em(121), px_to_em(240))
-small = (px_to_em(241), px_to_em(480))
-medium = (px_to_em(481), px_to_em(720))         # Typical mobile device break point @ 720px.
-large = (px_to_em(721), px_to_em(1024))
-xlarge = (px_to_em(1025), px_to_em(1366))
-xxlarge = (px_to_em(1367), px_to_em(1920))
-giant = (px_to_em(1921), px_to_em(2560))
-xgiant = (px_to_em(2561), px_to_em(2800))
-xxgiant = (px_to_em(2801), px_to_em(10**6))    # float("inf")) # Python 2.x Compatible representation of Infinity.

@@ -1,7 +1,7 @@
 # custom
 from utilities import deny_empty_or_whitespace
 from unitparser import UnitParser
-from datalibrary import small, medium
+from settings import small, medium
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
