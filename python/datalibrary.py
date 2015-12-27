@@ -538,7 +538,7 @@ property_alias_rst = __data_library.property_alias_rst
 
 # Default Screen Breakpoints / Transition Triggers
 # Tuple Format (Lower Limit, Upper Limit) in pixels.
-# Note: These values do not change even if unit conversion is enabled i.e. ``px_to_em`` is ``True``.
+# Note: These values change if unit conversion is enabled i.e. ``use_em`` is ``True``.
 # Common Screen Resolutions: https://en.wikipedia.org/wiki/List_of_common_resolutions
 xxsmall = (0, 120)
 xsmall = (121, 240)

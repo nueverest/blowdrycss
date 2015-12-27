@@ -1,6 +1,7 @@
 from re import search, findall
 from inspect import currentframe
 from os import path
+from string import digits
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -99,3 +100,45 @@ def get_file_path(file_directory='', file_name='blowdry', extension=''):
             raise ValueError(
                 'Extension: ' + extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.'
             )
+
+
+# TODO: Set the default 'base' in settings.py
+def convert_px_to_em(pixels, base=16):
+    """ Convert value from px to em using self.base.
+
+    **Rules:**
+
+    - ``pixels`` shall only contain [0-9.-].
+    - Inputs that contain any other value are simply passed through unchanged.
+    - Default ``base`` is 16 meaning ``16px = 1rem``
+
+    **Note:** Does not check the ``property_name`` or ``use_em`` values.  Rather, it blindly converts
+    whatever input is provided.  The calling method is expected to know what it is doing.
+
+    Rounds float to a maximum of 4 decimal places.
+
+    :type pixels: str, int, float
+    :type base: str, int, float
+
+    :param pixels: A numeric value with the units stripped.
+    :param base: A numeric conversion factor which is the basis for converting pixels to em units. Default 16px = 1rem
+    :return: (str)
+
+        - If the input is convertible return the converted number as a string with the units ``em``
+          appended to the end.
+        - If the input is not convertible return the unprocessed input.
+
+    >>> convert_px_to_em('-16.0')
+    -1em
+    >>> convert_px_to_em('42px')
+    42px
+    >>> convert_px_to_em('invalid')
+    invalid
+
+    """
+    if set(str(pixels)) <= set(digits + '-.'):
+        em = float(pixels) / float(base)
+        em = round(em, 4)
+        em = str(em) + 'em'                                                         # Add 'em'.
+        return em
+    return pixels

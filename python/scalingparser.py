@@ -112,7 +112,7 @@ class ScalingParser(object):
         False
 
         """
-        unit_parser = UnitParser(property_name=self.name, px_to_em=self.px_to_em)
+        unit_parser = UnitParser(property_name=self.name, use_em=self.px_to_em)
         if unit_parser.default_units() != 'px':
             return False
         else:

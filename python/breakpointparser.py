@@ -1,6 +1,7 @@
 # custom
 from utilities import deny_empty_or_whitespace
 from datalibrary import xxsmall, xsmall, small, medium, large, xlarge, xxlarge, giant, xgiant, xxgiant
+from unitparser import UnitParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -10,18 +11,18 @@ class BreakpointParser(object):
 
     **Generic Screen Breakpoints xxsmall through xgiant:**
 
-    - ``'name--breakpoint_values--limit'`` -- General Format
+    - ``'name--breakpoint_values--limit_key'`` -- General Format
     - ``'inline-small-only'`` -- Only displays the HTML element inline for screen sizes less than or equal to the
-      upper limit for ``small`` screen sizes.
-    - ``'green-medium-up'`` -- Set ``color`` to green for screen sizes greater than or equal to the lower limit
+      upper limit_key for ``small`` screen sizes.
+    - ``'green-medium-up'`` -- Set ``color`` to green for screen sizes greater than or equal to the lower limit_key
       for ``medium`` size screens.
 
-    **Custom Usage: Set a specific pixel limit.**
+    **Custom Usage: Set a specific pixel limit_key.**
 
     - ``'block-480px-down'`` -- Only displays the HTML element as a block for screen sizes less than or equal to 480px.
     - ``'bold-624-up'`` -- Set the ``font-weight`` to ``bold`` for screen sizes greater than or equal to 624px.
 
-        - **Note:** If unit conversion is enabled i.e. ``px_to_em`` is ``True``, then 624px would be converted to 39em.
+        - **Note:** If unit conversion is enabled i.e. ``use_em`` is ``True``, then 624px would be converted to 39em.
 
     **Important Note about cssutils**
 
@@ -54,31 +55,31 @@ class BreakpointParser(object):
         self.name = name
         self.value = value
         self.px_to_em = px_to_em
+        self.units = 'em' if self.px_to_em else 'px'
 
+        # Dictionary of Breakpoint Dictionaries {'-only': (), '-down': [1], '-up': [0], }
+        # '-only': ('min-width', 'max-width'),    # Lower and Upper Limits of the size.
+        # '-down': ('max-width'),                 # Upper limit_key of size.
+        # '-up': ('min-width'),                   # Lower Limit of size.
         self.breakpoint_dict = {
-            'xxsmall': xxsmall,
-            'xsmall': xsmall,
-            'small': small,
-            'medium': medium,
-            'large': large,
-            'xlarge': xlarge,
-            'xxlarge': xxlarge,
-            'giant': giant,
-            'xgiant': xgiant,
-            'xxgiant': xxgiant,
+            '-xxsmall': {'-only': xxsmall, '-down': xxsmall[1], '-up': xxsmall[0], },
+            '-xsmall': {'-only': xsmall, '-down': xsmall[1], '-up': xsmall[0], },
+            '-small': {'-only': small, '-down': small[1], '-up': small[0], },
+            '-medium': {'-only': medium, '-down': medium[1], '-up': medium[0], },
+            '-large': {'-only': large, '-down': large[1], '-up': large[0], },
+            '-xlarge': {'-only': xlarge, '-down': xlarge[1], '-up': xlarge[0], },
+            '-xxlarge': {'-only': xxlarge, '-down': xxlarge[1], '-up': xxlarge[0], },
+            '-giant': {'-only': giant, '-down': giant[1], '-up': giant[0], },
+            '-xgiant': {'-only': xgiant, '-down': xgiant[1], '-up': xgiant[0], },
+            '-xxgiant': {'-only': xxgiant, '-down': xxgiant[1], '-up': xxgiant[0], },
         }
 
-        self.limit_dict = {
-            '-only': (),
-            '-down': (),
-            '-up': (),
-        }
+        self.limit_key_set = {'-only', '-down', '-up', }
 
         self.breakpoint_key = ''
-        self.breakpoint_values = ()
-        self.limit = ''
+        self.limit_key = ''
 
-    def set_breakpoint(self):
+    def set_breakpoint_key(self):
         """ If ``self.css_class`` contains one of the keys in ``self.breakpoint_dict``, then
         set ``self.breakpoint_values`` to a breakpoint_values tuple for the matching key. Otherwise, raise a ValueError.
 
@@ -102,27 +103,26 @@ class BreakpointParser(object):
 
         """
         for key, value in self.breakpoint_dict.items():
-            _key = '-' + key + '-'
+            _key = key + '-'
             if _key in self.css_class and len(self.css_class) > len(_key) + 2:
                 self.breakpoint_key = key
-                self.breakpoint_values = value
                 return
         raise ValueError(
-                'The BreakpointParser.css_class ' + self.css_class +
-                ' does not match a breakpoint_values in breakpoint_dict.'
+            'The BreakpointParser.css_class ' + self.css_class +
+            ' does not match a breakpoint_values in breakpoint_dict.'
         )
 
-    def set_limit(self):
+    def set_limit_key(self):
         """ If one of the values in ``self.limit_set`` is contained in ``self.css_class``, then
-        Set ``self.limit`` to the value of the string found. Otherwise, raise a ValueError.
+        Set ``self.limit_key`` to the value of the string found. Otherwise, raise a ValueError.
 
         **Rules:**
 
-        - The ``limit`` may appear in the middle of ``self.css_class`` e.g. ``'padding-10-small-up-s-i'``.
+        - The ``limit_key`` may appear in the middle of ``self.css_class`` e.g. ``'padding-10-small-up-s-i'``.
 
-        - The ``limit`` may appear at the end of ``self.css_class`` e.g. ``'margin-20-giant-down'``.
+        - The ``limit_key`` may appear at the end of ``self.css_class`` e.g. ``'margin-20-giant-down'``.
 
-        - The length of ``self.css_class`` must be greater than the length of the limit + 2.  This prevents a
+        - The length of ``self.css_class`` must be greater than the length of the limit_key + 2.  This prevents a
           ``css_class`` like ``'-up-'`` or ``'-only-'`` from being accepted as valid by themselves.
 
         - These rules do not catch all cases, and prior validation of the css_class is assumed.
@@ -133,35 +133,92 @@ class BreakpointParser(object):
         :return: None
 
         """
-        for limit in self.limit_dict:
-            in_middle = (limit + '-') in self.css_class and len(self.css_class) > len(limit + '-') + 2
-            at_end = self.css_class.endswith(limit)
+        for limit_key in self.limit_key_set:
+            in_middle = (limit_key + '-') in self.css_class and len(self.css_class) > len(limit_key + '-') + 2
+            at_end = self.css_class.endswith(limit_key)
             if in_middle or at_end:
-                self.limit = limit
+                self.limit_key = limit_key
                 return
         raise ValueError(
-                'The BreakpointParser.css_class ' + self.css_class + ' does not match a limit in limit_set.'
+            'The BreakpointParser.css_class ' + self.css_class + ' does not match a limit_key in limit_set.'
         )
 
-    def breakpoint_limit_pair_is_valid(self):
-        """ Tests whether the breakpoint_key and limit pair is correct together.
+    def css_for_only(self):
+        """ Generates css
 
-        **Rules:**
 
-        - The ``breakpoint_key`` and ``limit`` must appear together in the form: ``breakpoint_key + limit``.
-            - ``breakpoint_key + 'some string' + limit`` is invalid.
-        - The pair may appear in the middle of the string if it is at least
-          two characters longer than ``self.css_class``.
-        - The pair may appear at the end of the string.
+        **Handle Cases:**
 
-        :return: Returns True if the breakpoint_key and limit pair conforms to the rules above.
-            Otherwise, it returns False.
+        - Special Usage with ``display``
+            - The css_class ``display-large-only`` is a special case. The CSS property name ``display``
+              without a value is used to show/hide content. For ``display`` reverse logic is used.
+              The reason for this special handling of ``display`` is that we do not
+              know what the current ``display`` setting is if any. This implies that the only safe way to handle it
+              is by setting ``display`` to ``none`` for everything outside of the desired breakpoint limit.
+            - *Note:* ``display + value + pair`` is handled under the General Usage case.
+              For example, ``display-inline-large-only`` contains a value for ``display`` and only used to alter
+              the way an element is displayed.
+        - General Usage
+            - The css_class ``padding-100-large-down`` applies ``padding: 100px`` for screen sizes less than
+              the lower limit of ``large``.
+
+        **CSS Media Queries**
+
+        - *Special Case:* Generated CSS for ``display-large-only``::
+
+        @media only screen and (max-width: 721px) {
+            .display-large-only {
+                display: none;
+            }
+        }
+
+        @media only screen and (min-width: 1024px) {
+            .display-large-only {
+                display: none;
+            }
+        }
+
+        -------------------------
+
+        @media only screen and (min-width: 721px) and (max-width: 1024px) {
+            .padding-100-large-only {
+                padding: 100px;
+            }
+        }
+
+        :return: None
 
         """
-        pair = self.breakpoint_key + self.limit
-        in_middle = pair in self.css_class and len(self.css_class) > len('-' + pair + '-') + 2
-        at_end = self.css_class.endswith(pair)
-        return in_middle or at_end
+        if self.limit_key is '-only':
+            pair = self.breakpoint_key + self.limit_key
 
-    def generate_css_with_breakpoint(self):
+            if 'display' + pair is self.css_class:          # Special 'display' usage case min/max reverse logic
+                min_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][1]) + self.units
+                max_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][0]) + self.units
+
+                css = (
+                    '@media only screen and (max-width: ' + max_width + ') {\n' +
+                    '\t.' + self.css_class + ' {\n' +
+                    '\t\tdisplay: none;\n' +
+                    '\t}\n' +
+                    '}\n\n' +
+                    '@media only screen and (min-width: 1024px) {\n' +
+                    '\t.display-large-only {\n' +
+                    '\t\tdisplay: none;\n' +
+                    '\t}\n' +
+                    '}\n\n'
+                )
+                return css
+            else:                                           # General usage case
+                pass
+        else:
+            return ''
+
+    def css_for_down(self):
+        pass
+
+    def css_for_up(self):
+        pass
+
+    def build_media_query(self):
         pass

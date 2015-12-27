@@ -44,15 +44,17 @@ underscores present in the value e.g. -1.25 can be processed, but n1_25 cannot b
 """
 
 from string import digits
+# custom
+from utilities import convert_px_to_em
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
 class UnitParser(object):
-    def __init__(self, property_name='', base=16, px_to_em=True):
+    def __init__(self, property_name='', base=16, use_em=True):
         self.property_name = property_name
-        self.base = float(base)               # Default: 16px = 1rem
-        self.px_to_em = px_to_em
+        self.base = base
+        self.use_em = use_em
         self.allowed = set(digits + '-.px')
 
         # Reference: http://www.w3.org/TR/CSS21/propidx.html
@@ -144,9 +146,9 @@ class UnitParser(object):
 
         **Rules:**
 
-        - If px_to_em is False apply the default units for the property name by looking it up in
+        - If use_em is False apply the default units for the property name by looking it up in
           default_property_units_dict.
-        - Unit that have default units of ``px`` are converted to ``em`` if px_to_em is True.
+        - Unit that have default units of ``px`` are converted to ``em`` if use_em is True.
         - If ``property_value`` has multiple property values, then split it apart.
         - If the value already has units, then pass it through unchanged.
         - The value provided shall possess negative signs and decimal points.
@@ -159,16 +161,16 @@ class UnitParser(object):
         :return: (str) -- Returns the property value with the default or converted units added.
 
         >>> # Convert 'px' to 'em'
-        >>> unit_parser = UnitParser(property_name='padding', px_to_em=True)
+        >>> unit_parser = UnitParser(property_name='padding', use_em=True)
         >>> unit_parser.add_units('1 2 1 2')
         0.0625em 0.125em 0.0625em 0.125em
         >>> # Use default units
-        >>> unit_parser.px_to_em = False
+        >>> unit_parser.use_em = False
         >>> unit_parser.add_units('1 2 1 2')
         1px 2px 1px 2px
         >>> # Values already have units or are not parsable pass through
         >>> # True produces the same output.
-        >>> unit_parser.px_to_em = False
+        >>> unit_parser.use_em = False
         >>> unit_parser.add_units('55zp')
         55zp
         >>> unit_parser.add_units('17rem')
@@ -180,10 +182,10 @@ class UnitParser(object):
         200
         >>> # Mixed units cases - Not a Recommended Practice,
         >>> # but represent valid CSS. Be careful.
-        >>> unit_parser.px_to_em = False
+        >>> unit_parser.use_em = False
         >>> unit_parser.add_units('5em 6 5em 6')
         5em 6px 5em 6px
-        >>> unit_parser.px_to_em = True
+        >>> unit_parser.use_em = True
         >>> unit_parser.add_units('1em 100 4cm 9rem')
         1em 6.25em 4cm 9rem
 
@@ -194,8 +196,8 @@ class UnitParser(object):
             for val in property_value.split():                                      # single, double and quadruple
                 if set(val) <= self.allowed:
                     val = val.replace('px', '')                                     # Handle 'px' units case.
-                    if self.px_to_em and default_units == 'px':                     # Convert units if required.
-                        new_value.append(self.convert_px_to_em(pixels=val))
+                    if self.use_em and default_units == 'px':                     # Convert units if required.
+                        new_value.append(convert_px_to_em(pixels=val, base=self.base))
                     else:
                         new_value.append(val + default_units)                       # Use default units.
                 else:                                                               
@@ -204,43 +206,3 @@ class UnitParser(object):
         except KeyError:
             pass                                                                    # Property is unitless.        
         return property_value
-
-    def convert_px_to_em(self, pixels):
-        """
-        Convert value from px to em using self.base.
-
-        **Rules:**
-
-        - ``pixels`` shall only contain [0-9.-].
-        - Inputs that contain any other value are simply passed through unchanged.
-
-        **Note:** Does not check the ``property_name`` or ``px_to_em`` values.  Rather, it blindly converts
-        whatever input is provided.  The calling method is expected to know what it is doing.
-
-        Rounds float to a maximum of 4 decimal places.
-
-        :type pixels: str, int, float
-
-        :param pixels: A numeric value with the units stripped.
-        :return: (str)
-
-            - If the input is convertible return the converted number as a string with the units ``em``
-              appended to the end.
-            - If the input is not convertible return the unprocessed input.
-
-        >>> unit_parser = UnitParser('margin', px_to_em=True)
-        >>> unit_parser.px_to_em('-16.0')
-        -1em
-        >>> unit_parser.px_to_em('42px')
-        42px
-        >>> unit_parser.px_to_em('invalid')
-        invalid
-
-        """
-        if set(str(pixels)) <= set(digits + '-.'):
-            em = float(pixels) / float(self.base)
-            em = round(em, 4)
-            em = str(em) + 'em'                                                         # Add 'em'.
-            return em
-        return pixels
-

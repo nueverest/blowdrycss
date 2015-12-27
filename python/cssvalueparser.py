@@ -13,7 +13,7 @@ __project__ = 'blow dry css'
 
 class CSSPropertyValueParser(object):
     """
-    Accepts a ``property_name`` and ``px_to_em`` unit conversion flag.
+    Accepts a ``property_name`` and ``use_em`` unit conversion flag.
 
     Contains multiple parsers and methods that decodes the CSS property_value.
 
@@ -42,7 +42,7 @@ class CSSPropertyValueParser(object):
     def __init__(self, property_name='', px_to_em=True):
         self.property_name = property_name
         self.color_parser = ColorParser(property_name=property_name)
-        self.unit_parser = UnitParser(property_name=property_name, px_to_em=px_to_em)
+        self.unit_parser = UnitParser(property_name=property_name, use_em=px_to_em)
 
     def is_built_in(self, value=''):
         """ Checks if the encoded ``value`` identically matches a value built-in to the CSS standard.
@@ -63,17 +63,17 @@ class CSSPropertyValueParser(object):
         **Examples:**
 
         >>> value_parser = CSSPropertyValueParser(
-        >>>     property_name='font-weight', px_to_em=True
+        >>>     property_name='font-weight', use_em=True
         >>> )
         >>> value_parser.is_built_in('bold')
         True
         >>> value_parser = CSSPropertyValueParser(
-        >>>     property_name='padding', px_to_em=True
+        >>>     property_name='padding', use_em=True
         >>> )
         >>> value_parser.is_built_in('7-4-7-4')
         False
         >>> value_parser = CSSPropertyValueParser(
-        >>>     property_name='InvalidCSSPropertyName', px_to_em=True
+        >>>     property_name='InvalidCSSPropertyName', use_em=True
         >>> )
         >>> value_parser.is_built_in('italic')
         False
@@ -100,21 +100,21 @@ class CSSPropertyValueParser(object):
 
         >>> # Delete leading dash '-bold' --> 'bold'
         >>> value_parser = CSSPropertyValueParser(
-        >>>     property_name='font-weight', px_to_em=True
+        >>>     property_name='font-weight', use_em=True
         >>> )
         >>> value_parser.replace_dashes('-bold')
         'bold'
         >>> #
         >>> # Delete trailing 'white-' --> 'white'
         >>> value_parser = CSSPropertyValueParser(
-        >>>     property_name='color', px_to_em=True
+        >>>     property_name='color', use_em=True
         >>> )
         >>> value_parser.replace_dashes('white-')
         'white'
         >>> #
         >>> # Replace internal '1-5-1-5' --> '1 5 1 5'
         >>> value_parser = CSSPropertyValueParser(
-        >>>     property_name='padding', px_to_em=True
+        >>>     property_name='padding', use_em=True
         >>> )
         >>> value_parser.replace_dashes('1-5-1-5')
         '1 5 1 5'
@@ -138,7 +138,7 @@ class CSSPropertyValueParser(object):
         **Example**
 
         >>> value_parser = CSSPropertyValueParser(
-        >>>     property_name='padding', px_to_em=True
+        >>>     property_name='padding', use_em=True
         >>> )
         >>> value_parser.replace_underscore_with_decimal('1_32rem')
         '1.32rem'
@@ -165,14 +165,14 @@ class CSSPropertyValueParser(object):
 
         >>> # Multi-value: '1p 10p 3p 1p' --> '1% 10% 3% 1%'
         >>> value_parser = CSSPropertyValueParser(
-        >>>     property_name='padding', px_to_em=True
+        >>>     property_name='padding', use_em=True
         >>> )
         >>> value_parser.replace_p_with_percent(value='1p 10p 3p 1p')
         '1% 10% 3% 1%'
         >>> #
         >>> # Single value ' 1p' --> ' 1%'
         >>> value_parser = CSSPropertyValueParser(
-        >>>     property_name='padding', px_to_em=True
+        >>>     property_name='padding', use_em=True
         >>> )
         >>> value_parser.replace_p_with_percent(value=' 1p')
         ' 1%'
@@ -202,7 +202,7 @@ class CSSPropertyValueParser(object):
 
         >>> # Multi-value: 'n5cm n6cm' --> '-5cm -6cm'
         >>> value_parser = CSSPropertyValueParser(
-        >>>     property_name='padding', px_to_em=True
+        >>>     property_name='padding', use_em=True
         >>> )
         >>> value_parser.replace_n_with_minus('n5cm n6cm')
         '-5cm -6cm'
@@ -232,11 +232,11 @@ class CSSPropertyValueParser(object):
         **Examples:**
 
         >>> value_parser = CSSPropertyValueParser(
-        >>>     property_name='padding', px_to_em=True
+        >>>     property_name='padding', use_em=True
         >>> )
         >>> value_parser.decode_property_value(value='1-5-1-5')
         '0.0625em 0.3125em 0.0625em 0.3125em'
-        >>> value_parser.unit_parser.px_to_em = False
+        >>> value_parser.unit_parser.use_em = False
         >>> value_parser.decode_property_value(value='1-5-1-5')
         '1px 5px 1px 5px'
 

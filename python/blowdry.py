@@ -68,7 +68,7 @@ def main():
     minify = True               # Generate a minified version of the css file
 
     # Plugin Defaults
-    px_to_em = True
+    use_em = True
     # ...Not Implemented Yet...
     # hex_to_rgb = True
     # color_parser = False
@@ -127,7 +127,7 @@ def main():
     class_parser = HTMLClassParser(files=file_finder.files)
 
     # Filter class names only keeping classes that match the defined class encoding.
-    class_property_parser = ClassPropertyParser(class_set=class_parser.class_set, px_to_em=px_to_em)
+    class_property_parser = ClassPropertyParser(class_set=class_parser.class_set, px_to_em=use_em)
     # print('\nclass_property_parser.class_set:', class_property_parser.class_set)
 
     # Build a set() of valid css properties. Some classes may be removed during cssutils validation.
