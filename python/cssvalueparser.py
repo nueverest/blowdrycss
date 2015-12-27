@@ -18,11 +18,8 @@ class CSSPropertyValueParser(object):
     Contains multiple parsers and methods that decodes the CSS property_value.
 
     :type property_name: str
-    :type px_to_em: bool
 
     :param property_name: A CSS property name.
-    :param px_to_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion.
-        False disables unit conversions meaning any pixel value remains unchanged.
     :return: None
 
     **Attributes:**
@@ -39,10 +36,10 @@ class CSSPropertyValueParser(object):
 
     """
 
-    def __init__(self, property_name='', px_to_em=True):
+    def __init__(self, property_name=''):
         self.property_name = property_name
         self.color_parser = ColorParser(property_name=property_name)
-        self.unit_parser = UnitParser(property_name=property_name, use_em=px_to_em)
+        self.unit_parser = UnitParser(property_name=property_name)
 
     def is_built_in(self, value=''):
         """ Checks if the encoded ``value`` identically matches a value built-in to the CSS standard.

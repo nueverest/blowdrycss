@@ -80,7 +80,7 @@ class TestCSSPropertyValueParser(TestCase):
             '3.4375em', '0.0625em 0.3125em 0.0625em 0.3125em', '1.32rem', '1% 10% 3% 1%', '-0.75em',
             '-5.25in -6.1in', '-0.0435%',
         ]
-        property_parser = CSSPropertyValueParser(property_name=valid_property_name, px_to_em=True)
+        property_parser = CSSPropertyValueParser(property_name=valid_property_name)
         for i, value in enumerate(encoded_property_values):
             self.assertEquals(
                 property_parser.decode_property_value(value=value),

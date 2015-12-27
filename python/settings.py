@@ -1,5 +1,12 @@
 """ Settings
+
+:type use_em: bool
+
+:param use_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion.
+    False disables unit conversions meaning any pixel value remains unchanged.
 """
+
+# TODO: Consider converting these to properties, so that, they cannot be modified anywhere but here.
 
 # Boolean Settings
 timing_enabled = True       # Run performance timer
@@ -11,6 +18,7 @@ minify = True               # Generate a minified version of the css file
 
 # Plugin Defaults
 use_em = True
+base = 16
 # ...Not Implemented Yet...
 # hex_to_rgb = True
 # color_parser = False

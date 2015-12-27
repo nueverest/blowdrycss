@@ -45,16 +45,15 @@ underscores present in the value e.g. -1.25 can be processed, but n1_25 cannot b
 
 from string import digits
 # custom
-from utilities import convert_px_to_em
+import settings
+from utilities import px_to_em
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
 class UnitParser(object):
-    def __init__(self, property_name='', base=16, use_em=True):
+    def __init__(self, property_name=''):
         self.property_name = property_name
-        self.base = base
-        self.use_em = use_em
         self.allowed = set(digits + '-.px')
 
         # Reference: http://www.w3.org/TR/CSS21/propidx.html
@@ -196,8 +195,8 @@ class UnitParser(object):
             for val in property_value.split():                                      # single, double and quadruple
                 if set(val) <= self.allowed:
                     val = val.replace('px', '')                                     # Handle 'px' units case.
-                    if self.use_em and default_units == 'px':                     # Convert units if required.
-                        new_value.append(convert_px_to_em(pixels=val, base=self.base))
+                    if settings.use_em and default_units == 'px':                     # Convert units if required.
+                        new_value.append(px_to_em(pixels=val))
                     else:
                         new_value.append(val + default_units)                       # Use default units.
                 else:                                                               

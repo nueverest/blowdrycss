@@ -1,5 +1,6 @@
 from unittest import TestCase, main
 # custom
+import settings
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
 __author__ = 'chad nelson'
@@ -44,7 +45,7 @@ class TestCSSStyleBuilder(TestCase):
             'background-color: #000', 'vertical-align: middle', 'color: blue', 'margin-top: 3.125em',
             'text-align: center', 'height: 3.125em', 'height: 9.375em', 'font-weight: bold', 'color: #fff'
         ]
-        property_parser = ClassPropertyParser(class_set=class_set, px_to_em=True)
+        property_parser = ClassPropertyParser(class_set=class_set)
         css_builder = CSSBuilder(property_parser=property_parser)
         css_text = css_builder.get_css_text().decode('utf-8')
 
@@ -63,7 +64,8 @@ class TestCSSStyleBuilder(TestCase):
             'background-color: #000', 'vertical-align: middle', 'color: blue', 'margin-top: 50px',
             'text-align: center', 'height: 50px', 'height: 150px', 'font-weight: bold', 'color: #fff'
         ]
-        property_parser = ClassPropertyParser(class_set=class_set, px_to_em=False)
+        settings.use_em = False
+        property_parser = ClassPropertyParser(class_set=class_set)
         css_builder = CSSBuilder(property_parser=property_parser)
         css_text = css_builder.get_css_text().decode('utf-8')
 
@@ -71,6 +73,8 @@ class TestCSSStyleBuilder(TestCase):
             self.assertTrue(expected in css_text, msg=expected + ' and ' + css_text)
             if expected in css_text:
                 css_text = css_text.replace(expected, '')
+
+        settings.use_em = True
 
 if __name__ == '__main__':
     main()

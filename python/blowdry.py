@@ -105,7 +105,7 @@ def main():
     class_parser = HTMLClassParser(files=file_finder.files)
 
     # Filter class names only keeping classes that match the defined class encoding.
-    class_property_parser = ClassPropertyParser(class_set=class_parser.class_set, px_to_em=settings.use_em)
+    class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
     # print('\nclass_property_parser.class_set:', class_property_parser.class_set)
 
     # Build a set() of valid css properties. Some classes may be removed during cssutils validation.

@@ -6,7 +6,6 @@ selectors are gathered externally by the ``HTMLClassParser()``.
 
 **Parameters:**
     | class_set (*set*) -- A set() of potential css properties.
-    | px_to_em (*bool*) -- Flag for unit conversion. True means convert ``px` to ``em``. False means do nothing.
 
 **Returns:** Object of Type ClassPropertyParser
 
@@ -16,7 +15,7 @@ Give this HTML: ``<div class="super-5 h-16-i padding-2 margin-10">Hello</div>``
 The HTMLClassParser() would extract the following ``class_set``.
 
 >>> class_set = {'super-5', 'h-16-i', 'PADDING-2', 'margin-10', }
->>> property_parser = ClassPropertyParser(class_set, px_to_em=True)
+>>> property_parser = ClassPropertyParser(class_set)
 >>> # Note that 'super-5' was removed.
 >>> print(property_parser.class_set)
 {'h-16-i', 'padding-2', 'margin-10'}
@@ -59,9 +58,8 @@ __project__ = 'blow dry css'
 
 
 class ClassPropertyParser(object):
-    def __init__(self, class_set=set(), px_to_em=True):
+    def __init__(self, class_set=set()):
         css = u'''/* Generated with blowdrycss. */'''
-        self.px_to_em = px_to_em
         self.sheet = parseString(css)
         self.rules = []
         self.importance_designator = '-i'       # '-i' is used to designate that the priority level is '!important'
@@ -466,7 +464,7 @@ class ClassPropertyParser(object):
         deny_empty_or_whitespace(string=property_name, variable_name='property_name')
         deny_empty_or_whitespace(string=encoded_property_value, variable_name='encoded_property_value')
 
-        value_parser = CSSPropertyValueParser(property_name=property_name, px_to_em=self.px_to_em)
+        value_parser = CSSPropertyValueParser(property_name=property_name)
         value = value_parser.decode_property_value(value=encoded_property_value)
         return value
 

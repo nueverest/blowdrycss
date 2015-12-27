@@ -51,7 +51,7 @@ class TestClassPropertyParser(TestCase):
             'font-color-#000 (Only a-z, 0-9, "_", and "-" are allowed in class name.)',
         }
         
-        class_parser = ClassPropertyParser(class_set=set())             # Prevents the implicit call in __init__()
+        class_parser = ClassPropertyParser(class_set=set())  # Prevents the implicit call in __init__()
         class_parser.class_set = valid_classes.union(invalid_classes)   # Mix valid and invalid classes
         class_parser.clean_class_set()
         self.assertEqual(class_parser.class_set, valid_classes)         # Only valid classes should remain.

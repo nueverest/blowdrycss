@@ -298,7 +298,7 @@ Optional Unit Conversion
 - Implemented: 11/28/2015 as of version: 0.0.2
 
 To enable 'px' to 'em' unit conversion open ``blowdry.py`` and set
-``px_to_em = True``
+``use_em = True``
 
 Explicitly Encoding Units in Class Name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

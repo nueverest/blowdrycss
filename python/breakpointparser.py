@@ -143,7 +143,6 @@ class BreakpointParser(object):
     def css_for_only(self):
         """ Generates css
 
-
         **Handle Cases:**
 
         - Special Usage with ``display``
@@ -155,7 +154,9 @@ class BreakpointParser(object):
             - *Note:* ``display + value + pair`` is handled under the General Usage case.
               For example, ``display-inline-large-only`` contains a value for ``display`` and only used to alter
               the way an element is displayed.
+
         - General Usage
+
             - The css_class ``padding-100-large-down`` applies ``padding: 100px`` for screen sizes less than
               the lower limit of ``large``.
 
@@ -163,25 +164,25 @@ class BreakpointParser(object):
 
         - *Special Case:* Generated CSS for ``display-large-only``::
 
-        @media only screen and (max-width: 721px) {
-            .display-large-only {
-                display: none;
+            @media only screen and (max-width: 721px) {
+                .display-large-only {
+                    display: none;
+                }
             }
-        }
 
-        @media only screen and (min-width: 1024px) {
-            .display-large-only {
-                display: none;
+            @media only screen and (min-width: 1024px) {
+                .display-large-only {
+                    display: none;
+                }
             }
-        }
 
-        -------------------------
+        - *General Usage Case:* Generated CSS for ``padding-100-large-only``::
 
-        @media only screen and (min-width: 721px) and (max-width: 1024px) {
-            .padding-100-large-only {
-                padding: 100px;
+            @media only screen and (min-width: 721px) and (max-width: 1024px) {
+                .padding-100-large-only {
+                    padding: 100px;
+                }
             }
-        }
 
         :return: None
 

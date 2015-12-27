@@ -5,6 +5,12 @@
 .. automodule:: blowdry
 
 
+``settings``
+------------
+
+.. automodule:: settings
+
+
 ``datalibrary``
 ---------------
 
