@@ -69,7 +69,7 @@ class ScalingParser(object):
     :param css_class: Potentially encoded css class that may or may not be parsable. May not be empty or None.
     :param name: Valid CSS property name. May not be empty or None.
     :param value: Valid CSS property name. May not be empty or None.
-    :param px_to_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion (default).
+    :param use_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion (default).
         False disables unit conversions meaning any pixel value remains unchanged.
     :return: None
 
@@ -78,13 +78,13 @@ class ScalingParser(object):
     >>> 'WARNING: NOT IMPLEMENTED YET'
 
     """
-    def __init__(self, css_class='', name='', px_to_em=True):
+    def __init__(self, css_class='', name='', use_em=True):
         deny_empty_or_whitespace(css_class, variable_name='css_class')
         deny_empty_or_whitespace(name, variable_name='name')
 
         self.css_class = css_class
         self.name = name
-        self.px_to_em = px_to_em
+        self.use_em = use_em
 
     def is_scaling(self):
         """ Return False if ``self.property_name`` does not have default units of ``'px'``.
@@ -112,7 +112,7 @@ class ScalingParser(object):
         False
 
         """
-        unit_parser = UnitParser(property_name=self.name, use_em=self.px_to_em)
+        unit_parser = UnitParser(property_name=self.name, use_em=self.use_em)
         if unit_parser.default_units() != 'px':
             return False
         else:

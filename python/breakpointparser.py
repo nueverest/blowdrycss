@@ -1,7 +1,7 @@
 # custom
+import settings
 from utilities import deny_empty_or_whitespace
 from datalibrary import xxsmall, xsmall, small, medium, large, xlarge, xxlarge, giant, xgiant, xxgiant
-from unitparser import UnitParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -32,13 +32,11 @@ class BreakpointParser(object):
     :type css_class: str
     :type name: str
     :type value: str
-    :type px_to_em: bool
 
     :param css_class: Potentially encoded css class that may or may not be parsable. May not be empty or None.
     :param name: Valid CSS property name. May not be empty or None.
     :param value: Valid CSS property name. May not be empty or None.
-    :param px_to_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion (default).
-        False disables unit conversions meaning any pixel value remains unchanged.
+
     :return: None
 
     **Examples:**
@@ -46,7 +44,7 @@ class BreakpointParser(object):
     >>> 'WARNING: NOT IMPLEMENTED YET'
 
     """
-    def __init__(self, css_class='', name='', value='', px_to_em=True):
+    def __init__(self, css_class='', name='', value=''):
         deny_empty_or_whitespace(css_class, variable_name='css_class')
         deny_empty_or_whitespace(name, variable_name='name')
         deny_empty_or_whitespace(value, variable_name='value')
@@ -54,8 +52,7 @@ class BreakpointParser(object):
         self.css_class = css_class
         self.name = name
         self.value = value
-        self.px_to_em = px_to_em
-        self.units = 'em' if self.px_to_em else 'px'
+        self.units = 'em' if settings.use_em else 'px'
 
         # Dictionary of Breakpoint Dictionaries {'-only': (), '-down': [1], '-up': [0], }
         # '-only': ('min-width', 'max-width'),    # Lower and Upper Limits of the size.
@@ -202,7 +199,7 @@ class BreakpointParser(object):
                     '\t\tdisplay: none;\n' +
                     '\t}\n' +
                     '}\n\n' +
-                    '@media only screen and (min-width: 1024px) {\n' +
+                    '@media only screen and (min-width: ' + min_width + ') {\n' +
                     '\t.display-large-only {\n' +
                     '\t\tdisplay: none;\n' +
                     '\t}\n' +
