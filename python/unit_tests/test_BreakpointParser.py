@@ -1,6 +1,7 @@
 from unittest import TestCase, main
 # custom
 from breakpointparser import BreakpointParser
+from utilities import px_to_em
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -45,6 +46,41 @@ class TestBreakpointParser(TestCase):
         for i, css_class in enumerate(valid_css_classes):
             breakpoint_parser = BreakpointParser(css_class=css_class, name=names[i], value=values[i])
             self.assertRaises(ValueError, breakpoint_parser.set_limit_key)
+
+    def test_css_for_only_display(self):
+        css_class = 'display-large-only'
+        name = 'display'
+        value = 'none'
+        expected = (
+            '@media only screen and (max-width: 45.0625em) {\n' +
+            '\t.display-large-only {\n' +
+            '\t\tdisplay: none;\n' +
+            '\t}\n' +
+            '}\n\n' +
+            '@media only screen and (min-width: 64.0em) {\n' +
+            '\t.display-large-only {\n' +
+            '\t\tdisplay: none;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css = breakpoint_parser.css_for_only()
+        self.assertEqual(css, expected)
+
+    def test_css_for_only_general_usage(self):
+        css_class = 'padding-100-large-only'
+        name = 'padding'
+        value = px_to_em('100')
+        expected = (
+            '@media only screen and (min-width: 45.0625em) and (max-width: 64.0em) {\n' +
+            '\t.padding-100-large-only {\n' +
+            '\t\tpadding: 6.25em;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css = breakpoint_parser.css_for_only()
+        self.assertEqual(css, expected)
 
     def test_build_media_query(self):
         pass

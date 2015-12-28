@@ -75,6 +75,9 @@ class BreakpointParser(object):
         self.breakpoint_key = ''
         self.limit_key = ''
 
+        self.set_breakpoint_key()
+        self.set_limit_key()
+
     def set_breakpoint_key(self):
         """ If ``self.css_class`` contains one of the keys in ``self.breakpoint_dict``, then
         set ``self.breakpoint_values`` to a breakpoint_values tuple for the matching key. Otherwise, raise a ValueError.
@@ -159,6 +162,9 @@ class BreakpointParser(object):
             - The css_class ``padding-100-large-down`` applies ``padding: 100px`` for screen sizes less than
               the lower limit of ``large``.
 
+        **Note:** Unit conversions for pixel-based ``self.value`` input should be converted **before** the
+        BreakpointParser is instantiated.
+
         **CSS Media Queries**
 
         - *Special Case:* Generated CSS for ``display-large-only``::
@@ -186,12 +192,12 @@ class BreakpointParser(object):
         :return: None
 
         """
-        if self.limit_key is '-only':
+        if self.limit_key == '-only':
             pair = self.breakpoint_key + self.limit_key
 
-            if 'display' + pair is self.css_class:          # Special 'display' usage case min/max reverse logic
-                min_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][1]) + self.units
-                max_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][0]) + self.units
+            if 'display' + pair == self.css_class:          # Special 'display' usage case min/max reverse logic
+                min_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][1])
+                max_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][0])
 
                 css = (
                     '@media only screen and (max-width: ' + max_width + ') {\n' +
@@ -200,16 +206,25 @@ class BreakpointParser(object):
                     '\t}\n' +
                     '}\n\n' +
                     '@media only screen and (min-width: ' + min_width + ') {\n' +
-                    '\t.display-large-only {\n' +
+                    '\t.' + self.css_class + ' {\n' +
                     '\t\tdisplay: none;\n' +
                     '\t}\n' +
                     '}\n\n'
                 )
-                return css
             else:                                           # General usage case
-                pass
+                min_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][0])
+                max_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][1])
+                css = (
+                    '@media only screen and (min-width: ' + min_width + ') and (max-width: ' + max_width + ') {\n' +
+                    '\t.' + self.css_class + ' {\n' +
+                    '\t\t' + self.name + ': ' + self.value + ';\n' +
+                    '\t}\n' +
+                    '}\n\n'
+                )
         else:
-            return ''
+            css = ''
+
+        return css
 
     def css_for_down(self):
         pass

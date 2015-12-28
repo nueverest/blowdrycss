@@ -103,7 +103,6 @@ def get_file_path(file_directory='', file_name='blowdry', extension=''):
             )
 
 
-# TODO: Set the default 'base' in settings.py
 def px_to_em(pixels):
     """ Convert a numeric value from px to em using ``settings.base`` as the unit conversion factor.
 
