@@ -138,7 +138,6 @@ class ScalingParser(object):
 
         if 'em' in value:                                                       # Get units
             units = 'em'
-
         elif 'px' in value:
             units = 'px'
         else:
@@ -148,9 +147,9 @@ class ScalingParser(object):
         small_max = small[_max]
         medium_max = medium[_max]
 
-        medium_value = round(float_value / self.scale_dict['medium'], 4)
+        medium_value = round(float_value / self.scale_dict['medium'], 4)        # Scale to medium screen
         medium_value = str(medium_value) + units                                # Re-apply units
-        small_value = round(float_value / self.scale_dict['small'], 4)
+        small_value = round(float_value / self.scale_dict['small'], 4)          # Scale to small screen
         small_value = str(small_value) + units                                  # Re-apply units
 
         return (
