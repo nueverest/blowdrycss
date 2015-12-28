@@ -78,6 +78,12 @@ class BreakpointParser(object):
         self.set_breakpoint_key()
         self.set_limit_key()
 
+        self.limit_key_methods = {
+            '-only': self.css_for_only,
+            '-down': self.css_for_down,
+            '-up': self.css_for_up,
+        }
+
     def set_breakpoint_key(self):
         """ If ``self.css_class`` contains one of the keys in ``self.breakpoint_dict``, then
         set ``self.breakpoint_values`` to a breakpoint_values tuple for the matching key. Otherwise, raise a ValueError.
@@ -364,4 +370,12 @@ class BreakpointParser(object):
         return css
 
     def build_media_query(self):
-        pass
+        """ Pick the css generation method based on the ``limit_key`` found in ``css_class``.
+
+        :return: Return CSS media queries.
+
+        """
+        if self.limit_key in self.limit_key_methods:
+            return self.limit_key_methods[self.limit_key]()     # Calls the method in dict.
+
+        return ''

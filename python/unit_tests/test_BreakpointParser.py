@@ -140,8 +140,101 @@ class TestBreakpointParser(TestCase):
         css = breakpoint_parser.css_for_up()
         self.assertEqual(css, expected)
 
-    def test_build_media_query(self):
-        pass
+    # build_media_query
+    def test_build_media_query_only_display(self):
+        css_class = 'display-large-only'
+        name = 'display'
+        value = 'none'
+        expected = (
+            '@media only screen and (max-width: 45.0625em) {\n' +
+            '\t.display-large-only {\n' +
+            '\t\tdisplay: none;\n' +
+            '\t}\n' +
+            '}\n\n' +
+            '@media only screen and (min-width: 64.0em) {\n' +
+            '\t.display-large-only {\n' +
+            '\t\tdisplay: none;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css = breakpoint_parser.build_media_query()
+        self.assertEqual(css, expected)
+
+    def test_build_media_query_only_general_usage(self):
+        css_class = 'padding-100-large-only'
+        name = 'padding'
+        value = px_to_em('100')
+        expected = (
+            '@media only screen and (min-width: 45.0625em) and (max-width: 64.0em) {\n' +
+            '\t.padding-100-large-only {\n' +
+            '\t\tpadding: 6.25em;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css = breakpoint_parser.build_media_query()
+        self.assertEqual(css, expected)
+
+    def test_build_media_query_down_display(self):
+        css_class = 'display-medium-down'
+        name = 'display'
+        value = 'none'
+        expected = (
+            '@media only screen and (min-width: 45.0em) {\n' +
+            '\t.display-medium-down {\n' +
+            '\t\tdisplay: none;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css = breakpoint_parser.build_media_query()
+        self.assertEqual(css, expected)
+
+    def test_build_media_query_down_general_usage(self):
+        css_class = 'padding-100-medium-down'
+        name = 'padding'
+        value = px_to_em('100')
+        expected = (
+            '@media only screen and (max-width: 45.0em) {\n' +
+            '\t.padding-100-medium-down {\n' +
+            '\t\tpadding: 6.25em;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css = breakpoint_parser.build_media_query()
+        self.assertEqual(css, expected)
+
+    def test_build_media_query_up_display(self):
+        css_class = 'display-small-up'
+        name = 'display'
+        value = 'none'
+        expected = (
+            '@media only screen and (max-width: 15.0625em) {\n' +
+            '\t.display-small-up {\n' +
+            '\t\tdisplay: none;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css = breakpoint_parser.build_media_query()
+        self.assertEqual(css, expected)
+
+    def test_build_media_query_up_general_usage(self):
+        css_class = 'padding-100-small-up'
+        name = 'padding'
+        value = px_to_em('100')
+        expected = (
+            '@media only screen and (min-width: 15.0625em) {\n' +
+            '\t.padding-100-small-up {\n' +
+            '\t\tpadding: 6.25em;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css = breakpoint_parser.build_media_query()
+        self.assertEqual(css, expected)
 
 
 if __name__ == '__main__':
