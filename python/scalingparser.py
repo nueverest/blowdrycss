@@ -40,22 +40,6 @@ class ScalingParser(object):
         | Small       |    < 480px    |      1.25      | 19.2 | 1.2   |
         +-------------+---------------+----------------+------+-------+
 
-    - Generated CSS for ``font-size-24-s``::
-
-        .font-size-24-s {
-            font-size: 24px;
-
-            // medium screen font size reduction
-            @media only screen and (max-width: 720px) {
-                font-size: 21.3px;
-            }
-
-            // small screen font size reduction
-            @media only screen and (max-width: 480px) {
-                font-size: 19.2px;
-            }
-        }
-
     **Important Note about cssutils**
 
     Currently, ``cssutils`` does not support parsing media queries. Therefore, media queries need to be built, minified,
@@ -85,6 +69,10 @@ class ScalingParser(object):
         self.css_class = css_class
         self.name = name
         self.use_em = use_em
+        self.scale_dict = {
+            'medium': 1.125,
+            'small': 1.25,
+        }
 
     def is_scaling(self):
         """ Return False if ``self.property_name`` does not have default units of ``'px'``.
@@ -118,10 +106,61 @@ class ScalingParser(object):
         else:
             return self.css_class.endswith('-s') or self.css_class.endswith('-s-i')
 
-    def generate_scaling_css(self, value):
-        deny_empty_or_whitespace(value, variable_name='value')
+    def generate_scaling_css(self, value=''):
+        """ Returns CSS media queries that scales pixel / em values in response to screen size changes.
+
+        **Generated CSS for ``font-size-24-s`` minus the inline comments**::
+
+            .font-size-24-s {
+                // Default size above medium
+                font-size: 24px;
+
+                // medium screen font size reduction
+                @media only screen and (max-width: 720px) {
+                    font-size: 21.3px;
+                }
+
+                // small screen font size reduction
+                @media only screen and (max-width: 480px) {
+                    font-size: 19.2px;
+                }
+            }
+
+        :type value: str
+
+        :param value: A string that consists of digits and units of either ``px`` or ``em``
+            e.g. ``'17px'`` or ``'15.0625em'``.
+        :return: (*str*) -- Returns CSS media queries that scales pixel / em values in response to screen size changes.
+
+        """
+        deny_empty_or_whitespace(str(value), variable_name='value')
+        float_value = float(value.replace('em', '').replace('px', ''))          # Remove units
+
+        if 'em' in value:                                                       # Get units
+            units = 'em'
+
+        elif 'px' in value:
+            units = 'px'
+        else:
+            units = ''
 
         _max = 1
         small_max = small[_max]
         medium_max = medium[_max]
-        pass
+
+        medium_value = round(float_value / self.scale_dict['medium'], 4)
+        medium_value = str(medium_value) + units                                # Re-apply units
+        small_value = round(float_value / self.scale_dict['small'], 4)
+        small_value = str(small_value) + units                                  # Re-apply units
+
+        return (
+            '.' + self.css_class + ' {\n' +
+            '\tfont-size: ' + value + ';\n\n' +
+            '\t@media only screen and (max-width: ' + medium_max + ') {\n' +
+            '\t\t' + self.name + ': ' + medium_value + ';\n' +
+            '}\n\n' +
+            '\t@media only screen and (max-width: ' + small_max + ') {\n' +
+            '\t\t' + self.name + ': ' + small_value + ';\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
