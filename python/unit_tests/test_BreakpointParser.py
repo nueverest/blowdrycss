@@ -8,10 +8,13 @@ __project__ = 'blow dry css'
 
 class TestBreakpointParser(TestCase):
     def test_set_breakpoint_key(self):
-        valid_css_classes = ['inline-small-up', 'inline-giant-down', 'green-xxsmall-only', 'padding-10-large-up', ]
-        names = ['display', 'display', 'color', 'padding', ]
-        values = ['inline', 'inline', 'green', '10', ]
-        expected = ['-small', '-giant', '-xxsmall', '-large']
+        valid_css_classes = [
+            'inline-small-up', 'inline-giant-down', 'green-xxsmall-only', 'padding-10-large-up', 'xsmall-down',
+            'medium-only', 'giant-up',
+        ]
+        names = ['display', 'display', 'color', 'padding', 'display', 'display', 'display', ]
+        values = ['inherit', 'inherit', 'green', '10', 'inherit', 'inherit', 'inherit', ]
+        expected = ['-small', '-giant', '-xxsmall', '-large', '-xsmall', '-medium', '-giant', ]
 
         for i, css_class in enumerate(valid_css_classes):
             breakpoint_parser = BreakpointParser(css_class=css_class, name=names[i], value=values[i])
@@ -19,9 +22,9 @@ class TestBreakpointParser(TestCase):
             self.assertEqual(breakpoint_parser.breakpoint_key, expected[i])
 
     def test_set_breakpoint_key_ValueError(self):
-        valid_css_classes = ['inline-small', 'inline-down', 'xgiant-only', 'custom-class', '-xsmall-', '-xxlarge-up']
-        names = ['display', 'display', 'color', 'padding', 'invalid', 'invalid', ]
-        values = ['inline', 'inline', 'green', '10', 'invalid', 'invalid', ]
+        valid_css_classes = ['inline-small', 'inline-down', 'custom-class', '-xsmall-', '-xxlarge-up']
+        names = ['display', 'display', 'padding', 'invalid', 'invalid', ]
+        values = ['inherit', 'inherit', '10', 'invalid', 'invalid', ]
 
         for i, css_class in enumerate(valid_css_classes):
             self.assertRaises(ValueError, BreakpointParser, css_class=css_class, name=names[i], value=values[i])
@@ -65,6 +68,26 @@ class TestBreakpointParser(TestCase):
         css = breakpoint_parser.css_for_only()
         self.assertEqual(css, expected)
 
+    def test_css_for_only_display_shorthand(self):
+        css_class = 'large-only'
+        name = 'display'
+        value = 'none'
+        expected = (
+            '@media only screen and (max-width: 45.0625em) {\n' +
+            '\t.large-only {\n' +
+            '\t\tdisplay: none;\n' +
+            '\t}\n' +
+            '}\n\n' +
+            '@media only screen and (min-width: 64.0em) {\n' +
+            '\t.large-only {\n' +
+            '\t\tdisplay: none;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css = breakpoint_parser.css_for_only()
+        self.assertEqual(css, expected)
+
     def test_css_for_only_general_usage(self):
         css_class = 'padding-100-large-only'
         name = 'padding'
@@ -95,6 +118,21 @@ class TestBreakpointParser(TestCase):
         css = breakpoint_parser.css_for_down()
         self.assertEqual(css, expected)
 
+    def test_css_for_down_display_shorthand(self):
+        css_class = 'medium-down'
+        name = 'display'
+        value = 'none'
+        expected = (
+            '@media only screen and (min-width: 45.0em) {\n' +
+            '\t.medium-down {\n' +
+            '\t\tdisplay: none;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css = breakpoint_parser.css_for_down()
+        self.assertEqual(css, expected)
+
     def test_css_for_down_general_usage(self):
         css_class = 'padding-100-medium-down'
         name = 'padding'
@@ -117,6 +155,21 @@ class TestBreakpointParser(TestCase):
         expected = (
             '@media only screen and (max-width: 15.0625em) {\n' +
             '\t.display-small-up {\n' +
+            '\t\tdisplay: none;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css = breakpoint_parser.css_for_up()
+        self.assertEqual(css, expected)
+
+    def test_css_for_up_display_shorthand(self):
+        css_class = 'small-up'
+        name = 'display'
+        value = 'none'
+        expected = (
+            '@media only screen and (max-width: 15.0625em) {\n' +
+            '\t.small-up {\n' +
             '\t\tdisplay: none;\n' +
             '\t}\n' +
             '}\n\n'

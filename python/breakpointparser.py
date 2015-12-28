@@ -8,7 +8,7 @@ __project__ = 'blow dry css'
 class BreakpointParser(object):
     """ Enables powerful responsive @media query generation via screen size suffixes.
 
-    **Generic Screen Breakpoints xxsmall through xgiant:**
+    **Standard screen breakpoints xxsmall through xgiant:**
 
     - ``'name--breakpoint_values--limit_key'`` -- General Format
     - ``'inline-small-only'`` -- Only displays the HTML element inline for screen sizes less than or equal to the
@@ -16,14 +16,14 @@ class BreakpointParser(object):
     - ``'green-medium-up'`` -- Set ``color`` to green for screen sizes greater than or equal to the lower limit_key
       for ``medium`` size screens.
 
-    **Custom Usage: Set a specific pixel limit_key.**
+    **Custom user defined breakpoint limit_key.**
 
     - ``'block-480px-down'`` -- Only displays the HTML element as a block for screen sizes less than or equal to 480px.
     - ``'bold-624-up'`` -- Set the ``font-weight`` to ``bold`` for screen sizes greater than or equal to 624px.
 
         - **Note:** If unit conversion is enabled i.e. ``use_em`` is ``True``, then 624px would be converted to 39em.
 
-    **Important Note about cssutils**
+    **Important Note about cssutils and media queries**
 
     Currently, ``cssutils`` does not support parsing media queries. Therefore, media queries need to be built, minified,
     and appended separately.
@@ -99,6 +99,10 @@ class BreakpointParser(object):
         - The length of ``self.css_class`` must be greater than the length of the key + 2.  This prevents a
           ``css_class`` like ``'-xsmall-'`` or ``'-xxlarge-up'`` from being accepted as valid by themselves.
 
+        - The ``key`` minus the preceeding dash is allowed if it the key is the first word in the string. This allows
+          the shorthand cases, for example: ``small-only``, ``medium-up``, ``giant-down``.  These cases imply that
+          the CSS property name is ``display``.
+
         - These rules do not catch all cases, and prior validation of the css_class is assumed.
 
         :raises ValueError: Raises a ValueError if none of the keys in ``self.breakpoint_dict`` are found in
@@ -109,7 +113,7 @@ class BreakpointParser(object):
         """
         for key, value in self.breakpoint_dict.items():
             _key = key + '-'
-            if _key in self.css_class and len(self.css_class) > len(_key) + 2:
+            if (_key in self.css_class and len(self.css_class) > len(_key) + 2) or self.css_class.startswith(_key[1:]):
                 self.breakpoint_key = key
                 return
         raise ValueError(
@@ -159,6 +163,9 @@ class BreakpointParser(object):
               The reason for this special handling of ``display`` is that we do not
               know what the current ``display`` setting is if any. This implies that the only safe way to handle it
               is by setting ``display`` to ``none`` for everything outside of the desired breakpoint limit.
+            - Shorthand cases, for example: ``small-only``, ``medium-up``, ``giant-down`` are allowed.
+              These cases imply that the CSS property name is ``display``.
+              This is handled in the ``if-statement`` via ``pair[1:] == self.css_class``.
             - *Note:* ``display + value + pair`` is handled under the General Usage case.
               For example, ``display-inline-large-only`` contains a value for ``display`` and only used to alter
               the way an element is displayed.
@@ -173,7 +180,7 @@ class BreakpointParser(object):
 
         **CSS Media Queries**
 
-        - *Special Case:* Generated CSS for ``display-large-only``::
+        - *Special Case:* Generated CSS for ``display-large-only`` or ``large-only``::
 
             @media only screen and (max-width: 721px) {
                 .display-large-only {
@@ -203,7 +210,8 @@ class BreakpointParser(object):
             lower_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][0])
             upper_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][1])
 
-            if 'display' + pair == self.css_class:          # Special 'display' usage case min/max reverse logic
+            # Special 'display' usage case min/max reverse logic
+            if 'display' + pair == self.css_class or pair[1:] == self.css_class:
                 css = (
                     '@media only screen and (max-width: ' + lower_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
@@ -216,7 +224,8 @@ class BreakpointParser(object):
                     '\t}\n' +
                     '}\n\n'
                 )
-            else:                                           # General usage case
+            # General usage case
+            else:
                 css = (
                     '@media only screen and (min-width: ' + lower_limit + ') and (max-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
@@ -241,6 +250,9 @@ class BreakpointParser(object):
               The reason for this special handling of ``display`` is that we do not
               know what the current ``display`` setting is if any. This implies that the only safe way to handle it
               is by setting ``display`` to ``none`` for everything outside of the desired breakpoint limit.
+            - Shorthand cases, for example: ``small-only``, ``medium-up``, ``giant-down`` are allowed.
+              These cases imply that the CSS property name is ``display``.
+              This is handled in the ``if-statement`` via ``pair[1:] == self.css_class``.
             - *Note:* ``display + value + breakpoint + limit`` is handled under the General Usage case.
               For example, ``display-inline-medium-down`` contains a value for ``display`` and only used to alter
               the way an element is displayed.
@@ -278,7 +290,8 @@ class BreakpointParser(object):
             pair = self.breakpoint_key + self.limit_key
             upper_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key])
 
-            if 'display' + pair == self.css_class:          # Special 'display' usage case min/max reverse logic
+            # Special 'display' usage case min/max reverse logic
+            if 'display' + pair == self.css_class or pair[1:] == self.css_class:
                 css = (
                     '@media only screen and (min-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
@@ -286,7 +299,8 @@ class BreakpointParser(object):
                     '\t}\n' +
                     '}\n\n'
                 )
-            else:                                           # General usage case
+            # General usage case
+            else:
                 css = (
                     '@media only screen and (max-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
@@ -311,6 +325,9 @@ class BreakpointParser(object):
               The reason for this special handling of ``display`` is that we do not
               know what the current ``display`` setting is if any. This implies that the only safe way to handle it
               is by setting ``display`` to ``none`` for everything outside of the desired breakpoint limit.
+            - Shorthand cases, for example: ``small-only``, ``medium-up``, ``giant-down`` are allowed.
+              These cases imply that the CSS property name is ``display``.
+              This is handled in the ``if-statement`` via ``pair[1:] == self.css_class``.
             - *Note:* ``display + value + breakpoint + limit`` is handled under the General Usage case.
               For example, ``display-inline-small-up`` contains a value for ``display`` and only used to alter
               the way an element is displayed.
@@ -348,7 +365,8 @@ class BreakpointParser(object):
             pair = self.breakpoint_key + self.limit_key
             lower_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key])
 
-            if 'display' + pair == self.css_class:          # Special 'display' usage case min/max reverse logic
+            # Special 'display' usage case min/max reverse logic
+            if 'display' + pair == self.css_class or pair[1:] == self.css_class:
                 css = (
                     '@media only screen and (max-width: ' + lower_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
@@ -356,7 +374,8 @@ class BreakpointParser(object):
                     '\t}\n' +
                     '}\n\n'
                 )
-            else:                                           # General usage case
+            # General usage case
+            else:
                 css = (
                     '@media only screen and (min-width: ' + lower_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
