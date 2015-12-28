@@ -162,7 +162,7 @@ class BreakpointParser(object):
             - The css_class ``padding-100-large-down`` applies ``padding: 100px`` for screen sizes less than
               the lower limit of ``large``.
 
-        **Note:** Unit conversions for pixel-based ``self.value`` input should be converted **before** the
+        **Note:** Unit conversions for pixel-based ``self.value`` is required **before** the
         BreakpointParser is instantiated.
 
         **CSS Media Queries**
@@ -194,28 +194,25 @@ class BreakpointParser(object):
         """
         if self.limit_key == '-only':
             pair = self.breakpoint_key + self.limit_key
+            lower_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][0])
+            upper_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][1])
 
             if 'display' + pair == self.css_class:          # Special 'display' usage case min/max reverse logic
-                min_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][1])
-                max_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][0])
-
                 css = (
-                    '@media only screen and (max-width: ' + max_width + ') {\n' +
+                    '@media only screen and (max-width: ' + lower_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
                     '\t\tdisplay: none;\n' +
                     '\t}\n' +
                     '}\n\n' +
-                    '@media only screen and (min-width: ' + min_width + ') {\n' +
+                    '@media only screen and (min-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
                     '\t\tdisplay: none;\n' +
                     '\t}\n' +
                     '}\n\n'
                 )
             else:                                           # General usage case
-                min_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][0])
-                max_width = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][1])
                 css = (
-                    '@media only screen and (min-width: ' + min_width + ') and (max-width: ' + max_width + ') {\n' +
+                    '@media only screen and (min-width: ' + lower_limit + ') and (max-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
                     '\t\t' + self.name + ': ' + self.value + ';\n' +
                     '\t}\n' +
@@ -227,10 +224,144 @@ class BreakpointParser(object):
         return css
 
     def css_for_down(self):
-        pass
+        """ Only display the element, or apply a property rule ``below`` a given screen breakpoint.
+        Returns the generated css.
+
+        **Handle Cases:**
+
+        - Special Usage with ``display``
+            - The css_class ``display-medium-down`` is a special case. The CSS property name ``display``
+              without a value is used to show/hide content. For ``display`` reverse logic is used.
+              The reason for this special handling of ``display`` is that we do not
+              know what the current ``display`` setting is if any. This implies that the only safe way to handle it
+              is by setting ``display`` to ``none`` for everything outside of the desired breakpoint limit.
+            - *Note:* ``display + value + breakpoint + limit`` is handled under the General Usage case.
+              For example, ``display-inline-medium-down`` contains a value for ``display`` and only used to alter
+              the way an element is displayed.
+
+        - General Usage
+
+            - The css_class ``padding-100-medium-down`` applies ``padding: 100px`` for screen sizes less than
+              the lower limit of ``medium``.
+
+        **Note:** Unit conversions for pixel-based ``self.value`` is required **before** the
+        BreakpointParser is instantiated.
+
+        **CSS Media Queries**
+
+        - *Special Case:* Generated CSS for ``display-medium-down``::
+
+            @media only screen and (min-width: 720px) {
+                .display-medium-down {
+                    display: none;
+                }
+            }
+
+        - *General Usage Case:* Generated CSS for ``padding-100-medium-down``::
+
+            @media only screen and (max-width: 720px) {
+                .padding-100-medium-down {
+                    padding: 100px;
+                }
+            }
+
+        :return: None
+
+        """
+        if self.limit_key == '-down':
+            pair = self.breakpoint_key + self.limit_key
+            upper_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key])
+
+            if 'display' + pair == self.css_class:          # Special 'display' usage case min/max reverse logic
+                css = (
+                    '@media only screen and (min-width: ' + upper_limit + ') {\n' +
+                    '\t.' + self.css_class + ' {\n' +
+                    '\t\tdisplay: none;\n' +
+                    '\t}\n' +
+                    '}\n\n'
+                )
+            else:                                           # General usage case
+                css = (
+                    '@media only screen and (max-width: ' + upper_limit + ') {\n' +
+                    '\t.' + self.css_class + ' {\n' +
+                    '\t\t' + self.name + ': ' + self.value + ';\n' +
+                    '\t}\n' +
+                    '}\n\n'
+                )
+        else:
+            css = ''
+
+        return css
 
     def css_for_up(self):
-        pass
+        """ Only display the element, or apply a property rule ``above`` a given screen breakpoint.
+        Returns the generated css.
+
+        **Handle Cases:**
+
+        - Special Usage with ``display``
+            - The css_class ``display-small-up`` is a special case. The CSS property name ``display``
+              without a value is used to show/hide content. For ``display`` reverse logic is used.
+              The reason for this special handling of ``display`` is that we do not
+              know what the current ``display`` setting is if any. This implies that the only safe way to handle it
+              is by setting ``display`` to ``none`` for everything outside of the desired breakpoint limit.
+            - *Note:* ``display + value + breakpoint + limit`` is handled under the General Usage case.
+              For example, ``display-inline-small-up`` contains a value for ``display`` and only used to alter
+              the way an element is displayed.
+
+        - General Usage
+
+            - The css_class ``padding-100-small-up`` applies ``padding: 100px`` for screen sizes less than
+              the lower limit of ``small``.
+
+        **Note:** Unit conversions for pixel-based ``self.value`` is required **before** the
+        BreakpointParser is instantiated.
+
+        **CSS Media Queries**
+
+        - *Special Case:* Generated CSS for ``display-small-up``::
+
+            @media only screen and (max-width: 241px) {
+                .display-small-up {
+                    display: none;
+                }
+            }
+
+        - *General Usage Case:* Generated CSS for ``padding-100-small-up``::
+
+            @media only screen and (min-width: 241px) {
+                .padding-100-small-up {
+                    padding: 100px;
+                }
+            }
+
+        :return: None
+
+        """
+        if self.limit_key == '-up':
+            pair = self.breakpoint_key + self.limit_key
+            lower_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key])
+
+            if 'display' + pair == self.css_class:          # Special 'display' usage case min/max reverse logic
+                css = (
+                    '@media only screen and (max-width: ' + lower_limit + ') {\n' +
+                    '\t.' + self.css_class + ' {\n' +
+                    '\t\tdisplay: none;\n' +
+                    '\t}\n' +
+                    '}\n\n'
+                )
+            else:                                           # General usage case
+                css = (
+                    '@media only screen and (min-width: ' + lower_limit + ') {\n' +
+                    '\t.' + self.css_class + ' {\n' +
+                    '\t\t' + self.name + ': ' + self.value + ';\n' +
+                    '\t}\n' +
+                    '}\n\n'
+                )
+        else:
+            css = ''
+
+        return css
 
     def build_media_query(self):
         pass
