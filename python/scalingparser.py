@@ -62,13 +62,12 @@ class ScalingParser(object):
     >>> 'WARNING: NOT IMPLEMENTED YET'
 
     """
-    def __init__(self, css_class='', name='', use_em=True):
+    def __init__(self, css_class='', name=''):
         deny_empty_or_whitespace(css_class, variable_name='css_class')
         deny_empty_or_whitespace(name, variable_name='name')
 
         self.css_class = css_class
         self.name = name
-        self.use_em = use_em
         self.scale_dict = {
             'medium': 1.125,
             'small': 1.25,
