@@ -23,6 +23,20 @@ class TestBreakpointParser(TestCase):
             scaling_parser = ScalingParser(css_class=css_class, name=names[i])
             self.assertFalse(scaling_parser.is_scaling())
 
+    def test_strip_scaling_flag(self):
+        valid_css_classes = [
+            'font-size-34-s', 'font-size-24-s-i', 'padding-12-s', 'margin-31-s-i', 'font-size-15', 'font-size-52'
+        ]
+        names = ['font-size', 'font-size', 'padding', 'margin', 'font-size', 'font-size']
+        expected = [
+            'font-size-34', 'font-size-24-i', 'padding-12', 'margin-31-i', 'font-size-15', 'font-size-52'
+        ]
+
+        for i, css_class in enumerate(valid_css_classes):
+            scaling_parser = ScalingParser(css_class=css_class, name=names[i])
+            clean_css_class = scaling_parser.strip_scaling_flag()
+            self.assertEqual(clean_css_class, expected[i])
+
     def test_generate_scaling_css_pixels(self):
         css_class = 'font-size-24-s'
         name = 'font-size'

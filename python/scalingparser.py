@@ -72,6 +72,7 @@ class ScalingParser(object):
             'medium': 1.125,
             'small': 1.25,
         }
+        self.scaling_flag = '-s'
 
     def is_scaling(self):
         """ Return False if ``self.property_name`` does not have default units of ``'px'``.
@@ -103,7 +104,39 @@ class ScalingParser(object):
         if unit_parser.default_units() != 'px':
             return False
         else:
-            return self.css_class.endswith('-s') or self.css_class.endswith('-s-i')
+            return self.css_class.endswith(self.scaling_flag) or self.css_class.endswith(self.scaling_flag + '-i')
+
+    def strip_scaling_flag(self):
+        """ Remove the ``scaling_flag`` from ``css_class`` if possible and return the clean css class. Otherwise,
+        return the ``css_class`` unchanged.
+
+        **Rules**
+
+        - Remove ``-s`` if found at end of a string
+        - Remove ``-s`` if ``-s-i`` is found at the end of the string.
+
+        :return: (*str*) -- If the ``css_class`` is scaling remove the ``scaling_flag`` and return the clean css class. Otherwise,
+        return the ``css_class`` unchanged.
+
+        **Examples:**
+
+        >>> scaling_parser = ScalingParser(css_class='font-size-32-s', name='font-size')
+        >>> scaling_parser.strip_scaling_flag()
+        font-size-32
+        >>> scaling_parser.css_class = 'font-size-56-s-i'
+        >>> scaling_parser.strip_scaling_flag()
+        font-size-56-i
+        >>> scaling_parser.css_class = 'font-size-14'
+        >>> scaling_parser.strip_scaling_flag()
+        font-size-14
+
+        """
+        if self.css_class.endswith(self.scaling_flag):
+            return self.css_class[:-2]
+        if self.css_class.endswith(self.scaling_flag + '-i'):
+            return self.css_class[:-4] + '-i'
+
+        return self.css_class
 
     def generate_scaling_css(self, value=''):
         """ Returns CSS media queries that scales pixel / em values in response to screen size changes.
