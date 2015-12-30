@@ -152,6 +152,34 @@ class BreakpointParser(object):
             'The BreakpointParser.css_class ' + self.css_class + ' does not match a limit_key in limit_set.'
         )
 
+    def strip_breakpoint_limit(self):
+        """ Removes breakpoint and limit keywords from ``css_class``.
+
+        **Rules:**
+
+        - Return ``''`` if breakpoint limit key pair == ``css_class``.
+            - ``'xlarge-only'`` becomes ``''``.
+
+        - Return ``property_name + property_value - breakpoint_key - limit_key``.
+            - ``'bold-large-up'`` becomes ``'bold'``.
+
+        :return: (*str*) -- Returns a modified version ``css_class`` with breakpoint and limit key syntax removed.
+
+        **Examples:**
+
+        >>> breakpoint_parser = BreakpointParser(css_class='xlarge-only', name='display', value='none')
+        >>> breakpoint_parser.strip_breakpoint_limit()
+        ''
+        >>> breakpoint_parser = BreakpointParser(css_class='bold-large-up', name='font-weight', value='none')
+        >>> breakpoint_parser.strip_breakpoint_limit()
+        'bold'
+
+        """
+        if self.css_class.startswith(self.breakpoint_key[1:]):
+            return self.css_class.replace(self.breakpoint_key[1:], '').replace(self.limit_key, '')
+        else:
+            return self.css_class.replace(self.breakpoint_key, '').replace(self.limit_key, '')
+
     def css_for_only(self):
         """ Generates css
 

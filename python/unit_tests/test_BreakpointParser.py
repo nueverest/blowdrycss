@@ -48,6 +48,20 @@ class TestBreakpointParser(TestCase):
         for i, css_class in enumerate(valid_css_classes):
             self.assertRaises(ValueError, BreakpointParser, css_class=css_class, name=names[i], value=values[i])
 
+    def test_strip_breakpoint_limit(self):
+        valid_css_classes = [
+            'inline-small-up', 'inline-giant-down', 'green-xxsmall-only', 'padding-10-large-up',
+            'xlarge-only', 'large-down', 'xsmall-up',
+        ]
+        names = ['display', 'display', 'color', 'padding', 'display', 'display', 'display', ]
+        values = ['inline', 'inline', 'green', '10', 'none', 'none', 'none', ]
+        expected = ['inline', 'inline', 'green', 'padding-10', '', '', '', ]
+
+        for i, css_class in enumerate(valid_css_classes):
+            breakpoint_parser = BreakpointParser(css_class=css_class, name=names[i], value=values[i])
+            clean_css_class = breakpoint_parser.strip_breakpoint_limit()
+            self.assertEqual(clean_css_class, expected[i])
+
     def test_css_for_only_display(self):
         css_class = 'display-large-only'
         name = 'display'
