@@ -36,17 +36,18 @@ class MediaQueryBuilder(object):
                 reasons.append(' (breakpoint and scaling media query class syntax cannot be combined.)')
                 continue
 
-            # In case 'small-down'
-            # 'name' can return an empty string '' if css_class does not match any patterns in the property_alias_dict.
-            try:
-                encoded_property_value = self.property_parser.get_encoded_property_value(
-                    property_name=name,
-                    css_class=css_class
-                )
-            except ValueError:
-                invalid_css_classes.append(css_class)
-                reasons.append(' (property_name not found in property_alias_dict.)')
-                continue
+            # Handle case where css_class equals 'small-down', 'large-only', 'medium-up', etc.
+            if css_class:
+                # Can return an empty string '' if css_class does not match any patterns in the property_alias_dict.
+                try:
+                    encoded_property_value = self.property_parser.get_encoded_property_value(
+                        property_name=name,
+                        css_class=css_class
+                    )
+                except ValueError:
+                    invalid_css_classes.append(css_class)
+                    reasons.append(' (property_name not found in property_alias_dict.)')
+                    continue
 
             priority = self.property_parser.get_property_priority(css_class=css_class)
             value = self.property_parser.get_property_value(

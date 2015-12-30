@@ -158,6 +158,23 @@ class ScalingParser(object):
                 }
             }
 
+        **Priority !important -- Generated CSS for ``font-size-24-s-i`` minus the inline comments**::
+
+            .font-size-24-s-i {
+                // Default size above medium
+                font-size: 24px !important;
+
+                // medium screen font size reduction
+                @media only screen and (max-width: 720px) {
+                    font-size: 21.3px !important;
+                }
+
+                // small screen font size reduction
+                @media only screen and (max-width: 480px) {
+                    font-size: 19.2px !important;
+                }
+            }
+
         :type value: str
 
         :param value: A string that consists of digits and units of either ``px`` or ``em``
@@ -188,10 +205,10 @@ class ScalingParser(object):
             '.' + self.css_class + ' {\n' +
             '\tfont-size: ' + value + ';\n\n' +
             '\t@media only screen and (max-width: ' + medium_max + ') {\n' +
-            '\t\t' + self.name + ': ' + medium_value + ';\n' +
+            '\t\t' + self.name + ': ' + medium_value + ';\n' +  # TODO: Replace with the pre-built property rule.
             '}\n\n' +
             '\t@media only screen and (max-width: ' + small_max + ') {\n' +
-            '\t\t' + self.name + ': ' + small_value + ';\n' +
+            '\t\t' + self.name + ': ' + small_value + ';\n' +   # TODO: Replace with the pre-built property rule.
             '\t}\n' +
             '}\n\n'
         )

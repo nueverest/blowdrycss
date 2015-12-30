@@ -230,6 +230,20 @@ class BreakpointParser(object):
                 }
             }
 
+        - *Priority !important Case:* Generated CSS for ``large-only-i``::
+
+            @media only screen and (max-width: 721px) {
+                .display-large-only {
+                    display: none !important;
+                }
+            }
+
+            @media only screen and (min-width: 1024px) {
+                .display-large-only {
+                    display: none !important;
+                }
+            }
+
         :return: None
 
         """
@@ -243,12 +257,12 @@ class BreakpointParser(object):
                 css = (
                     '@media only screen and (max-width: ' + lower_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
-                    '\t\tdisplay: none;\n' +
+                    '\t\tdisplay: none;\n' +        # TODO: Replace with the pre-built property rule.
                     '\t}\n' +
                     '}\n\n' +
                     '@media only screen and (min-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
-                    '\t\tdisplay: none;\n' +
+                    '\t\tdisplay: none;\n' +        # TODO: Replace with the pre-built property rule.
                     '\t}\n' +
                     '}\n\n'
                 )
@@ -257,7 +271,7 @@ class BreakpointParser(object):
                 css = (
                     '@media only screen and (min-width: ' + lower_limit + ') and (max-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
-                    '\t\t' + self.name + ': ' + self.value + ';\n' +
+                    '\t\t' + self.name + ': ' + self.value + ';\n' +   # TODO: Replace with the pre-built property rule.
                     '\t}\n' +
                     '}\n\n'
                 )

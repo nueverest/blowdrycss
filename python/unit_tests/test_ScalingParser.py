@@ -75,5 +75,24 @@ class TestBreakpointParser(TestCase):
         css = scaling_parser.generate_scaling_css(value=value)
         self.assertEqual(css, expected)
 
+    def test_generate_scaling_css_em_important(self):
+        css_class = 'font-size-24-s-i'
+        name = 'font-size'
+        value = '1.5em'
+        expected = (
+            '.font-size-24-s {\n' +
+            '\tfont-size: ' + value + ';\n\n' +
+            '\t@media only screen and (max-width: 45.0em) {\n' +
+            '\t\tfont-size: 1.3333em !important;\n' +
+            '}\n\n' +
+            '\t@media only screen and (max-width: 30.0em) {\n' +
+            '\t\tfont-size: 1.2em !important;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        scaling_parser = ScalingParser(css_class=css_class, name=name)
+        css = scaling_parser.generate_scaling_css(value=value)
+        self.assertEqual(css, expected)
+
 if __name__ == '__main__':
     main()
