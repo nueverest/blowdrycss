@@ -1,3 +1,6 @@
+from cssutils.css import Property, CSSStyleRule
+from xml.dom import SyntaxErr
+# custom
 from classpropertyparser import ClassPropertyParser
 from breakpointparser import BreakpointParser
 from scalingparser import ScalingParser
@@ -21,7 +24,7 @@ class MediaQueryBuilder(object):
             name = self.property_parser.get_property_name(css_class=css_class)
 
             try:
-                breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value='none')
+                breakpoint_parser = BreakpointParser(css_class=css_class)
                 is_breakpoint = True
                 css_class = breakpoint_parser.strip_breakpoint_limit()
             except ValueError:
@@ -44,23 +47,34 @@ class MediaQueryBuilder(object):
                         property_name=name,
                         css_class=css_class
                     )
+                    value = self.property_parser.get_property_value(
+                        property_name=name,
+                        encoded_property_value=encoded_property_value
+                    )
                 except ValueError:
                     invalid_css_classes.append(css_class)
                     reasons.append(' (property_name not found in property_alias_dict.)')
                     continue
+            else:
+                value = 'none'     # Breakpoint Parser -> display: none;
 
             priority = self.property_parser.get_property_priority(css_class=css_class)
-            value = self.property_parser.get_property_value(
-                property_name=name,
-                encoded_property_value=encoded_property_value
-            )
+
             # Build CSS Property AND Add to css_rules OR Remove invalid css_class from class_set.
             try:
                 css_property = Property(name=name, value=value, priority=priority)
+
                 if css_property.valid:
-                    css_class = '.' + css_class                         # prepend dot selector to class name.
-                    css_rule = CSSStyleRule(selectorText=css_class, style=css_property.cssText)
-                    self.css_rules.add(css_rule)
+                    if is_breakpoint and breakpoint_parser:
+                        media_query = breakpoint_parser.build_media_query()
+                        self.css_media_queries.add(media_query)
+                    if is_scaling:
+                        media_query = scaling_parser.build_media_query(value=value, css_text=css_property.cssText)
+                        self.css_media_queries.add(media_query)
+                    # If it is not breakpoint or scaling it is invalid at this point.
+                    invalid_css_classes.append(css_class)
+                    reasons.append(' (cssutils invalid property value: ' + value + ')')
+                    continue
                 else:
                     invalid_css_classes.append(css_class)
                     reasons.append(' (cssutils invalid property value: ' + value + ')')
@@ -102,13 +116,13 @@ class MediaQueryBuilder(object):
         # Scaling but not Breakpoint case.
         if scaling_parser.is_scaling():
             try:
-                BreakpointParser(css_class=css_class, name=name, value='none')
+                BreakpointParser(css_class=css_class)
             except ValueError:
                 return True
 
         # Breakpoint but not Scaling
         try:
-            BreakpointParser(css_class=css_class, name=name, value='none')
+            BreakpointParser(css_class=css_class)
             return not scaling_parser.is_scaling()
         except ValueError:
             return False

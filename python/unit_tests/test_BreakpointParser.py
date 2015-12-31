@@ -1,4 +1,5 @@
 from unittest import TestCase, main
+from cssutils.css import Property
 # custom
 from breakpointparser import BreakpointParser
 from utilities import px_to_em
@@ -14,10 +15,12 @@ class TestBreakpointParser(TestCase):
         ]
         names = ['display', 'display', 'color', 'padding', 'display', 'display', 'display', ]
         values = ['inherit', 'inherit', 'green', '10', 'inherit', 'inherit', 'inherit', ]
+        priorities = ['', 'important', '', '', '', '', '', ]
         expected = ['-small', '-giant', '-xxsmall', '-large', '-xsmall', '-medium', '-giant', ]
 
         for i, css_class in enumerate(valid_css_classes):
-            breakpoint_parser = BreakpointParser(css_class=css_class, name=names[i], value=values[i])
+            css_property = Property(name=names[i], value=values[i], priority=priorities[i])
+            breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
             breakpoint_parser.set_breakpoint_key()
             self.assertEqual(breakpoint_parser.breakpoint_key, expected[i])
 
@@ -27,16 +30,19 @@ class TestBreakpointParser(TestCase):
         values = ['inherit', 'inherit', '10', 'invalid', 'invalid', ]
 
         for i, css_class in enumerate(valid_css_classes):
-            self.assertRaises(ValueError, BreakpointParser, css_class=css_class, name=names[i], value=values[i])
+            css_property = Property(name=names[i], value=values[i], priority='')
+            self.assertRaises(ValueError, BreakpointParser, css_class=css_class, css_property=css_property)
 
     def test_set_limit_key(self):
         valid_css_classes = ['inline-small-up', 'inline-giant-down-i', 'green-xxsmall-only', 'padding-10-large-up', ]
         names = ['display', 'display', 'color', 'padding', ]
         values = ['inline', 'inline', 'green', '10', ]
+        priorities = ['', 'important', '', '', ]
         expected = ['-up', '-down', '-only', '-up', ]
 
         for i, css_class in enumerate(valid_css_classes):
-            breakpoint_parser = BreakpointParser(css_class=css_class, name=names[i], value=values[i])
+            css_property = Property(name=names[i], value=values[i], priority=priorities[i])
+            breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
             breakpoint_parser.set_limit_key()
             self.assertEqual(breakpoint_parser.limit_key, expected[i])
 
@@ -46,7 +52,8 @@ class TestBreakpointParser(TestCase):
         values = ['inline', 'inline', 'green', '10', 'invalid', ]
 
         for i, css_class in enumerate(valid_css_classes):
-            self.assertRaises(ValueError, BreakpointParser, css_class=css_class, name=names[i], value=values[i])
+            css_property = Property(name=names[i], value=values[i], priority='')
+            self.assertRaises(ValueError, BreakpointParser, css_class=css_class, css_property=css_property)
 
     def test_strip_breakpoint_limit(self):
         valid_css_classes = [
@@ -58,7 +65,8 @@ class TestBreakpointParser(TestCase):
         expected = ['inline', 'inline', 'green', 'padding-10', '', '', '', ]
 
         for i, css_class in enumerate(valid_css_classes):
-            breakpoint_parser = BreakpointParser(css_class=css_class, name=names[i], value=values[i])
+            css_property = Property(name=names[i], value=values[i], priority='')
+            breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
             clean_css_class = breakpoint_parser.strip_breakpoint_limit()
             self.assertEqual(clean_css_class, expected[i])
 
@@ -78,7 +86,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.css_for_only()
         self.assertEqual(css, expected)
 
@@ -98,7 +107,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.css_for_only()
         self.assertEqual(css, expected)
 
@@ -106,21 +116,23 @@ class TestBreakpointParser(TestCase):
         css_class = 'large-only-i'
         name = 'display'
         value = 'none'
+        priority = 'important'
         expected = (
             '@media only screen and (max-width: 45.0625em) {\n' +
-            '\t.large-only {\n' +
+            '\t.large-only-i {\n' +
             '\t\tdisplay: none !important;\n' +
             '\t}\n' +
             '}\n\n' +
             '@media only screen and (min-width: 64.0em) {\n' +
-            '\t.large-only {\n' +
+            '\t.large-only-i {\n' +
             '\t\tdisplay: none !important;\n' +
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority=priority)
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.css_for_only()
-        self.assertEqual(css, expected)
+        self.assertEqual(css, expected, msg=css)
 
     def test_css_for_only_general_usage(self):
         css_class = 'padding-100-large-only'
@@ -133,7 +145,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.css_for_only()
         self.assertEqual(css, expected)
 
@@ -141,14 +154,16 @@ class TestBreakpointParser(TestCase):
         css_class = 'padding-100-large-only-i'
         name = 'padding'
         value = px_to_em('100')
+        priority = 'important'
         expected = (
             '@media only screen and (min-width: 45.0625em) and (max-width: 64.0em) {\n' +
-            '\t.padding-100-large-only {\n' +
+            '\t.padding-100-large-only-i {\n' +
             '\t\tpadding: 6.25em !important;\n' +
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority=priority)
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.css_for_only()
         self.assertEqual(css, expected)
 
@@ -163,7 +178,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.css_for_down()
         self.assertEqual(css, expected)
 
@@ -178,7 +194,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.css_for_down()
         self.assertEqual(css, expected)
 
@@ -193,7 +210,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.css_for_down()
         self.assertEqual(css, expected)
 
@@ -208,7 +226,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.css_for_up()
         self.assertEqual(css, expected)
 
@@ -223,7 +242,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.css_for_up()
         self.assertEqual(css, expected)
 
@@ -238,7 +258,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.css_for_up()
         self.assertEqual(css, expected)
 
@@ -259,7 +280,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.build_media_query()
         self.assertEqual(css, expected)
 
@@ -274,7 +296,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.build_media_query()
         self.assertEqual(css, expected)
 
@@ -289,7 +312,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.build_media_query()
         self.assertEqual(css, expected)
 
@@ -304,7 +328,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.build_media_query()
         self.assertEqual(css, expected)
 
@@ -319,7 +344,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.build_media_query()
         self.assertEqual(css, expected)
 
@@ -334,7 +360,8 @@ class TestBreakpointParser(TestCase):
             '\t}\n' +
             '}\n\n'
         )
-        breakpoint_parser = BreakpointParser(css_class=css_class, name=name, value=value)
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
         css = breakpoint_parser.build_media_query()
         self.assertEqual(css, expected)
 

@@ -1,3 +1,4 @@
+from cssutils.css import Property, CSSRule
 # custom
 from settings import use_em, xxsmall, xsmall, small, medium, large, xlarge, xxlarge, giant, xgiant, xxgiant
 from utilities import deny_empty_or_whitespace
@@ -43,14 +44,12 @@ class BreakpointParser(object):
     >>> 'WARNING: NOT IMPLEMENTED YET'
 
     """
-    def __init__(self, css_class='', name='', value=''):
+    def __init__(self, css_class='', css_property=Property()):
         deny_empty_or_whitespace(css_class, variable_name='css_class')
-        deny_empty_or_whitespace(name, variable_name='name')
-        deny_empty_or_whitespace(value, variable_name='value')
+        deny_empty_or_whitespace(css_property.cssText, variable_name='name')
 
         self.css_class = css_class
-        self.name = name
-        self.value = value
+        self.css_property = css_property
         self.units = 'em' if use_em else 'px'
 
         # Dictionary of Breakpoint Dictionaries {'-only': (), '-down': [1], '-up': [0], }
@@ -180,6 +179,19 @@ class BreakpointParser(object):
         else:
             return self.css_class.replace(self.breakpoint_key, '').replace(self.limit_key, '')
 
+    def is_display(self):
+        """ Tests if ``css_class`` contains character patterns that match the special case when the property name is
+        ``display``.
+
+        :return: (*bool*) -- Returns true if one of the cases is ``true``. Otherwise it returns ``false``.
+        """
+        pair = self.breakpoint_key + self.limit_key
+        case1 = 'display' + pair == self.css_class
+        case2 = pair[1:] == self.css_class
+        case3 = pair[1:] + '-i' == self.css_class
+
+        return case1 or case2 or case3
+
     def css_for_only(self):
         """ Generates css
 
@@ -248,21 +260,20 @@ class BreakpointParser(object):
 
         """
         if self.limit_key == '-only':
-            pair = self.breakpoint_key + self.limit_key
             lower_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][0])
             upper_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key][1])
 
             # Special 'display' usage case min/max reverse logic
-            if 'display' + pair == self.css_class or pair[1:] == self.css_class:
+            if self.is_display():
                 css = (
                     '@media only screen and (max-width: ' + lower_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
-                    '\t\tdisplay: none;\n' +        # TODO: Replace with the pre-built property rule.
+                    '\t\t' + self.css_property.cssText + ';\n' +
                     '\t}\n' +
                     '}\n\n' +
                     '@media only screen and (min-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
-                    '\t\tdisplay: none;\n' +        # TODO: Replace with the pre-built property rule.
+                    '\t\t' + self.css_property.cssText + ';\n' +
                     '\t}\n' +
                     '}\n\n'
                 )
@@ -271,7 +282,7 @@ class BreakpointParser(object):
                 css = (
                     '@media only screen and (min-width: ' + lower_limit + ') and (max-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
-                    '\t\t' + self.name + ': ' + self.value + ';\n' +   # TODO: Replace with the pre-built property rule.
+                    '\t\t' + self.css_property.cssText + ';\n' +
                     '\t}\n' +
                     '}\n\n'
                 )
@@ -329,15 +340,14 @@ class BreakpointParser(object):
 
         """
         if self.limit_key == '-down':
-            pair = self.breakpoint_key + self.limit_key
             upper_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key])
 
             # Special 'display' usage case min/max reverse logic
-            if 'display' + pair == self.css_class or pair[1:] == self.css_class:
+            if self.is_display():
                 css = (
                     '@media only screen and (min-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
-                    '\t\tdisplay: none;\n' +
+                    '\t\t' + self.css_property.cssText + ';\n' +
                     '\t}\n' +
                     '}\n\n'
                 )
@@ -346,7 +356,7 @@ class BreakpointParser(object):
                 css = (
                     '@media only screen and (max-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
-                    '\t\t' + self.name + ': ' + self.value + ';\n' +
+                    '\t\t' + self.css_property.cssText + ';\n' +
                     '\t}\n' +
                     '}\n\n'
                 )
@@ -404,15 +414,14 @@ class BreakpointParser(object):
 
         """
         if self.limit_key == '-up':
-            pair = self.breakpoint_key + self.limit_key
             lower_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key])
 
             # Special 'display' usage case min/max reverse logic
-            if 'display' + pair == self.css_class or pair[1:] == self.css_class:
+            if self.is_display():
                 css = (
                     '@media only screen and (max-width: ' + lower_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
-                    '\t\tdisplay: none;\n' +
+                    '\t\t' + self.css_property.cssText + ';\n' +
                     '\t}\n' +
                     '}\n\n'
                 )
@@ -421,7 +430,7 @@ class BreakpointParser(object):
                 css = (
                     '@media only screen and (min-width: ' + lower_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
-                    '\t\t' + self.name + ': ' + self.value + ';\n' +
+                    '\t\t' + self.css_property.cssText + ';\n' +
                     '\t}\n' +
                     '}\n\n'
                 )
@@ -433,7 +442,7 @@ class BreakpointParser(object):
     def build_media_query(self):
         """ Pick the css generation method based on the ``limit_key`` found in ``css_class``.
 
-        :return: Return CSS media queries.
+        :return: Return CSS media queries as CSS Text.
 
         """
         if self.limit_key in self.limit_key_methods:

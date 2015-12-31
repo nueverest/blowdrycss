@@ -138,7 +138,7 @@ class ScalingParser(object):
 
         return self.css_class
 
-    def generate_scaling_css(self, value=''):
+    def build_media_query(self, value='', css_text=''):
         """ Returns CSS media queries that scales pixel / em values in response to screen size changes.
 
         **Generated CSS for ``font-size-24-s`` minus the inline comments**::
@@ -175,6 +175,7 @@ class ScalingParser(object):
                 }
             }
 
+        :param css_text:
         :type value: str
 
         :param value: A string that consists of digits and units of either ``px`` or ``em``
@@ -203,12 +204,12 @@ class ScalingParser(object):
 
         return (
             '.' + self.css_class + ' {\n' +
-            '\tfont-size: ' + value + ';\n\n' +
+            '\t' + css_text + '\n\n' +
             '\t@media only screen and (max-width: ' + medium_max + ') {\n' +
-            '\t\t' + self.name + ': ' + medium_value + ';\n' +  # TODO: Replace with the pre-built property rule.
+            '\t\t' + self.name + ': ' + medium_value + ';\n' +
             '}\n\n' +
             '\t@media only screen and (max-width: ' + small_max + ') {\n' +
-            '\t\t' + self.name + ': ' + small_value + ';\n' +   # TODO: Replace with the pre-built property rule.
+            '\t\t' + self.name + ': ' + small_value + ';\n' +
             '\t}\n' +
             '}\n\n'
         )

@@ -53,7 +53,7 @@ class TestBreakpointParser(TestCase):
             '}\n\n'
         )
         scaling_parser = ScalingParser(css_class=css_class, name=name)
-        css = scaling_parser.generate_scaling_css(value=value)
+        css = scaling_parser.build_media_query(value=value)
         self.assertEqual(css, expected)
 
     def test_generate_scaling_css_em(self):
@@ -72,7 +72,7 @@ class TestBreakpointParser(TestCase):
             '}\n\n'
         )
         scaling_parser = ScalingParser(css_class=css_class, name=name)
-        css = scaling_parser.generate_scaling_css(value=value)
+        css = scaling_parser.build_media_query(value=value)
         self.assertEqual(css, expected)
 
     def test_generate_scaling_css_em_important(self):
@@ -80,7 +80,7 @@ class TestBreakpointParser(TestCase):
         name = 'font-size'
         value = '1.5em'
         expected = (
-            '.font-size-24-s {\n' +
+            '.font-size-24-s-i {\n' +
             '\tfont-size: ' + value + ';\n\n' +
             '\t@media only screen and (max-width: 45.0em) {\n' +
             '\t\tfont-size: 1.3333em !important;\n' +
@@ -91,7 +91,7 @@ class TestBreakpointParser(TestCase):
             '}\n\n'
         )
         scaling_parser = ScalingParser(css_class=css_class, name=name)
-        css = scaling_parser.generate_scaling_css(value=value)
+        css = scaling_parser.build_media_query(value=value)
         self.assertEqual(css, expected)
 
 if __name__ == '__main__':
