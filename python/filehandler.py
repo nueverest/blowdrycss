@@ -221,7 +221,8 @@ class CSSFile(object):
         **Important:**
 
         - ``ser.prefs.useMinified()`` is a global setting. It must be reset to ``ser.prefs.useDefaults()``. Otherwise,
-          minification will continue to occur.
+          minification will continue to occur. This can result in strange behavior especially during unit testing or
+          in code called after this method is called.
 
         :type css_text: str
 
@@ -240,7 +241,7 @@ class CSSFile(object):
         file_path = get_file_path(file_directory=self.file_directory, file_name=self.file_name, extension='.min.css')
         with open(file_path, 'w') as css_file:
             css_file.write(parse_string.cssText.decode('utf-8'))
-        ser.prefs.useDefaults()                 # Disable minification. It can impact unit tests and external code.
+        ser.prefs.useDefaults()                 # Disable minification.
 
 
 class GenericFile(object):
