@@ -30,7 +30,7 @@ class MediaQueryBuilder(object):
             except ValueError:
                 is_breakpoint = False
 
-            scaling_parser = ScalingParser(css_class=css_class, name=name)
+            scaling_parser = ScalingParser(css_class=css_class, css_property=name)
             is_scaling = scaling_parser.is_scaling()
             css_class = scaling_parser.strip_scaling_flag()
 
@@ -69,7 +69,7 @@ class MediaQueryBuilder(object):
                         media_query = breakpoint_parser.build_media_query()
                         self.css_media_queries.add(media_query)
                     if is_scaling:
-                        media_query = scaling_parser.build_media_query(value=value, css_text=css_property.cssText)
+                        media_query = scaling_parser.build_media_query()
                         self.css_media_queries.add(media_query)
                     # If it is not breakpoint or scaling it is invalid at this point.
                     invalid_css_classes.append(css_class)
@@ -111,7 +111,7 @@ class MediaQueryBuilder(object):
         :return: (*str*) -- Returns True if breakpoint and scaling syntax are not combined.  Otherwise returns False.
 
         """
-        scaling_parser = ScalingParser(css_class=css_class, name=name)
+        scaling_parser = ScalingParser(css_class=css_class, css_property=name)
 
         # Scaling but not Breakpoint case.
         if scaling_parser.is_scaling():

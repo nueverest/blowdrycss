@@ -4,25 +4,26 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | Property Name                        | Valid Aliases                        |
 +--------------------------------------+--------------------------------------+
-| azimuth                              | ``far-left`` ``far-right``           |
-|                                      | ``center-right`` ``center-left``     |
-|                                      | ``right-side``                       |
-|                                      | ``rightwards`` ``behind``            |
-|                                      | ``leftwards`` ``azi-`` ``left-side`` |
+| azimuth                              | ``leftwards`` ``azi-``               |
+|                                      | ``right-side`` ``left-side``         |
+|                                      | ``center-left``                      |
+|                                      | ``far-right`` ``center-right``       |
+|                                      | ``far-left`` ``rightwards``          |
+|                                      | ``behind``                           |
 +--------------------------------------+--------------------------------------+
-| background                           | ``bg-`` ``bac-``                     |
+| background                           | ``bac-`` ``bg-``                     |
 +--------------------------------------+--------------------------------------+
 | background-attachment                | ``background-a-`` ``ba-``            |
 +--------------------------------------+--------------------------------------+
-| background-color                     | ``bg-color-`` ``bgc-`` ``bg-c-``     |
+| background-color                     | ``bg-color-`` ``bg-c-`` ``bgc-``     |
 |                                      | ``background-c-``                    |
 +--------------------------------------+--------------------------------------+
 | background-image                     | ``bi-`` ``background-i-``            |
 +--------------------------------------+--------------------------------------+
-| background-position                  | ``bp-`` ``background-p-``            |
+| background-position                  | ``background-p-`` ``bp-``            |
 +--------------------------------------+--------------------------------------+
-| background-repeat                    | ``repeat-x`` ``no-repeat``           |
-|                                      | ``background-r-`` ``repeat-y``       |
+| background-repeat                    | ``background-r-`` ``no-repeat``      |
+|                                      | ``repeat-y`` ``repeat-x``            |
 +--------------------------------------+--------------------------------------+
 | border                               | ``bor-``                             |
 +--------------------------------------+--------------------------------------+
@@ -30,9 +31,9 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | border-bottom-color                  | ``border-b-color-`` ``bbc-``         |
 +--------------------------------------+--------------------------------------+
-| border-bottom-style                  | ``border-b-style-`` ``bbs-``         |
+| border-bottom-style                  | ``bbs-`` ``border-b-style-``         |
 +--------------------------------------+--------------------------------------+
-| border-bottom-width                  | ``bbw-`` ``border-b-width-``         |
+| border-bottom-width                  | ``border-b-width-`` ``bbw-``         |
 +--------------------------------------+--------------------------------------+
 | border-collapse                      |                                      |
 +--------------------------------------+--------------------------------------+
@@ -50,7 +51,7 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | border-right-color                   | ``border-r-color-`` ``brc-``         |
 +--------------------------------------+--------------------------------------+
-| border-right-style                   | ``border-r-style-`` ``brs-``         |
+| border-right-style                   | ``brs-`` ``border-r-style-``         |
 +--------------------------------------+--------------------------------------+
 | border-right-width                   | ``brw-`` ``border-r-width-``         |
 +--------------------------------------+--------------------------------------+
@@ -58,13 +59,13 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | border-style                         |                                      |
 +--------------------------------------+--------------------------------------+
-| border-top                           | ``bt-`` ``border-t-``                |
+| border-top                           | ``border-t-`` ``bt-``                |
 +--------------------------------------+--------------------------------------+
-| border-top-color                     | ``border-t-color-`` ``btc-``         |
+| border-top-color                     | ``btc-`` ``border-t-color-``         |
 +--------------------------------------+--------------------------------------+
 | border-top-style                     | ``bts-`` ``border-t-style-``         |
 +--------------------------------------+--------------------------------------+
-| border-top-width                     | ``border-t-width-`` ``btw-``         |
+| border-top-width                     | ``btw-`` ``border-t-width-``         |
 +--------------------------------------+--------------------------------------+
 | border-width                         | ``bw-`` ``border-w-``                |
 +--------------------------------------+--------------------------------------+
@@ -76,19 +77,19 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | clip                                 |                                      |
 +--------------------------------------+--------------------------------------+
-| color                                | ``c-`` ``lime`` ``purple`` ``rgba``  |
-|                                      | ``white``                            |
-|                                      | ``olive`` ``green`` ``silver``       |
-|                                      | ``hsla`` ``rgb``                     |
-|                                      | ``red`` ``fuchsia`` ``hsl``          |
-|                                      | ``orange`` ``black``                 |
-|                                      | ``blue`` ``gray`` ``maroon``         |
-|                                      | ``teal`` ``navy``                    |
-|                                      | ``aqua`` ``yellow``                  |
+| color                                | ``teal`` ``white`` ``purple``        |
+|                                      | ``rgba`` ``blue``                    |
+|                                      | ``green`` ``yellow`` ``fuchsia``     |
+|                                      | ``hsl`` ``olive``                    |
+|                                      | ``orange`` ``gray`` ``aqua``         |
+|                                      | ``maroon`` ``black``                 |
+|                                      | ``red`` ``lime`` ``c-`` ``rgb``      |
+|                                      | ``hsla``                             |
+|                                      | ``navy`` ``silver``                  |
 +--------------------------------------+--------------------------------------+
-| content                              | ``no-close-quote`` ``close-quote``   |
-|                                      | ``con-`` ``open-quote``              |
-|                                      | ``no-open-quote``                    |
+| content                              | ``open-quote`` ``no-open-quote``     |
+|                                      | ``con-`` ``no-close-quote``          |
+|                                      | ``close-quote``                      |
 +--------------------------------------+--------------------------------------+
 | counter-increment                    | ``counter-i-`` ``ci-``               |
 +--------------------------------------+--------------------------------------+
@@ -98,69 +99,68 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | cue-after                            | ``ca-`` ``cue-a-``                   |
 +--------------------------------------+--------------------------------------+
-| cue-before                           | ``cue-b-`` ``cb-``                   |
+| cue-before                           | ``cb-`` ``cue-b-``                   |
 +--------------------------------------+--------------------------------------+
-| cursor                               | ``wait`` ``text`` ``move``           |
-|                                      | ``ne-resize`` ``s-resize``           |
-|                                      | ``help`` ``sw-resize`` ``cur-``      |
-|                                      | ``crosshair`` ``se-resize``          |
-|                                      | ``n-resize`` ``default`` ``pointer`` |
+| cursor                               | ``se-resize`` ``help`` ``progress``  |
+|                                      | ``crosshair`` ``nw-resize``          |
+|                                      | ``cur-`` ``n-resize`` ``s-resize``   |
+|                                      | ``ne-resize`` ``move``               |
+|                                      | ``pointer`` ``sw-resize`` ``wait``   |
+|                                      | ``text`` ``default``                 |
 |                                      | ``w-resize`` ``e-resize``            |
-|                                      | ``progress`` ``nw-resize``           |
 +--------------------------------------+--------------------------------------+
-| direction                            | ``dir-`` ``ltr`` ``rtl``             |
+| direction                            | ``rtl`` ``dir-`` ``ltr``             |
 +--------------------------------------+--------------------------------------+
 | display                              | ``table-footer-group``               |
-|                                      | ``inline-table`` ``xxgiant``         |
-|                                      | ``block`` ``giant``                  |
-|                                      | ``list-item`` ``large``              |
-|                                      | ``table-row-group`` ``dis-``         |
-|                                      | ``xxlarge``                          |
-|                                      | ``xgiant`` ``xsmall``                |
-|                                      | ``table-column-group`` ``table-row`` |
-|                                      | ``small``                            |
-|                                      | ``table-caption`` ``xlarge``         |
-|                                      | ``medium`` ``table-column``          |
-|                                      | ``xxsmall``                          |
-|                                      | ``table-header-group``               |
-|                                      | ``table-cell`` ``table``             |
-|                                      | ``inline-block`` ``inline``          |
+|                                      | ``table-header-group`` ``xxsmall``   |
+|                                      | ``large`` ``dis-``                   |
+|                                      | ``xgiant`` ``table-column-group``    |
+|                                      | ``xsmall`` ``inline`` ``block``      |
+|                                      | ``table-row-group`` ``xlarge``       |
+|                                      | ``xxlarge`` ``table-column``         |
+|                                      | ``table-caption``                    |
+|                                      | ``list-item`` ``table-cell``         |
+|                                      | ``xxgiant`` ``inline-table``         |
+|                                      | ``giant``                            |
+|                                      | ``small`` ``medium``                 |
+|                                      | ``inline-block`` ``table-row``       |
+|                                      | ``table``                            |
 +--------------------------------------+--------------------------------------+
-| elevation                            | ``ele-`` ``lower`` ``above``         |
-|                                      | ``below`` ``higher``                 |
-|                                      | ``level``                            |
+| elevation                            | ``level`` ``ele-`` ``lower``         |
+|                                      | ``higher`` ``above``                 |
+|                                      | ``below``                            |
 +--------------------------------------+--------------------------------------+
-| empty-cells                          | ``ec-`` ``empty-c-``                 |
+| empty-cells                          | ``empty-c-`` ``ec-``                 |
 +--------------------------------------+--------------------------------------+
 | float                                |                                      |
 +--------------------------------------+--------------------------------------+
 | font                                 |                                      |
 +--------------------------------------+--------------------------------------+
-| font-family                          | ``candara`` ``monaco`` ``courier``   |
-|                                      | ``fantasy`` ``arial``                |
-|                                      | ``optima`` ``futura`` ``calibri``    |
-|                                      | ``verdana`` ``impact``               |
-|                                      | ``didot`` ``rockwell`` ``ff-``       |
-|                                      | ``geneva`` ``consolas``              |
-|                                      | ``cursive`` ``gadget`` ``perpetua``  |
-|                                      | ``serif`` ``baskerville``            |
-|                                      | ``georgia`` ``monospace``            |
-|                                      | ``garamond`` ``helvetica``           |
-|                                      | ``palatino``                         |
-|                                      | ``font-f-`` ``copperplate``          |
-|                                      | ``tahoma`` ``cambria`` ``papyrus``   |
-|                                      | ``sans-serif`` ``charcoal``          |
-|                                      | ``times``                            |
+| font-family                          | ``cambria`` ``fantasy`` ``optima``   |
+|                                      | ``monaco`` ``palatino``              |
+|                                      | ``baskerville`` ``didot``            |
+|                                      | ``copperplate`` ``ff-`` ``times``    |
+|                                      | ``tahoma`` ``helvetica``             |
+|                                      | ``rockwell`` ``font-f-`` ``geneva``  |
+|                                      | ``georgia`` ``arial`` ``impact``     |
+|                                      | ``calibri`` ``candara``              |
+|                                      | ``charcoal`` ``verdana``             |
+|                                      | ``garamond`` ``futura``              |
+|                                      | ``monospace``                        |
+|                                      | ``courier`` ``gadget`` ``papyrus``   |
+|                                      | ``consolas`` ``serif``               |
+|                                      | ``sans-serif`` ``perpetua``          |
+|                                      | ``cursive``                          |
 +--------------------------------------+--------------------------------------+
-| font-size                            | ``fsize-`` ``f-size-``               |
+| font-size                            | ``f-size-`` ``fsize-``               |
 +--------------------------------------+--------------------------------------+
-| font-style                           | ``oblique`` ``italic``               |
+| font-style                           | ``italic`` ``oblique``               |
 +--------------------------------------+--------------------------------------+
 | font-variant                         | ``font-v-`` ``fv-`` ``small-caps``   |
 +--------------------------------------+--------------------------------------+
-| font-weight                          | ``f-weight-`` ``fw-`` ``fweight-``   |
-|                                      | ``lighter`` ``bolder``               |
-|                                      | ``bold`` ``font-w-``                 |
+| font-weight                          | ``font-w-`` ``lighter`` ``bolder``   |
+|                                      | ``fweight-`` ``f-weight-``           |
+|                                      | ``fw-`` ``bold``                     |
 +--------------------------------------+--------------------------------------+
 | height                               | ``h-`` ``hei-``                      |
 +--------------------------------------+--------------------------------------+
@@ -172,31 +172,32 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | list-style                           | ``list-s-``                          |
 +--------------------------------------+--------------------------------------+
-| list-style-image                     | ``lsi-`` ``list-s-image-``           |
+| list-style-image                     | ``list-s-image-`` ``lsi-``           |
 +--------------------------------------+--------------------------------------+
 | list-style-position                  | ``lsp-`` ``list-s-position-``        |
-|                                      | ``outside`` ``inside``               |
+|                                      | ``inside`` ``outside``               |
 +--------------------------------------+--------------------------------------+
-| list-style-type                      | ``georgian`` ``upper-alpha``         |
-|                                      | ``lower-greek`` ``armenian``         |
-|                                      | ``lower-alpha``                      |
-|                                      | ``lower-roman`` ``square``           |
-|                                      | ``lower-latin`` ``disc``             |
+| list-style-type                      | ``upper-roman`` ``upper-latin``      |
+|                                      | ``list-s-type-`` ``decimal``         |
+|                                      | ``square``                           |
+|                                      | ``lst-`` ``lower-greek``             |
+|                                      | ``lower-latin`` ``circle``           |
+|                                      | ``armenian``                         |
+|                                      | ``georgian``                         |
 |                                      | ``decimal-leading-zero``             |
-|                                      | ``decimal`` ``circle``               |
-|                                      | ``upper-latin`` ``lst-``             |
-|                                      | ``list-s-type-``                     |
-|                                      | ``upper-roman``                      |
+|                                      | ``upper-alpha`` ``lower-roman``      |
+|                                      | ``lower-alpha``                      |
+|                                      | ``disc``                             |
 +--------------------------------------+--------------------------------------+
 | margin                               | ``mar-`` ``m-``                      |
 +--------------------------------------+--------------------------------------+
-| margin-bottom                        | ``mb-`` ``margin-b-`` ``m-bot-``     |
+| margin-bottom                        | ``margin-b-`` ``mb-`` ``m-bot-``     |
 +--------------------------------------+--------------------------------------+
 | margin-left                          | ``margin-l-`` ``ml-``                |
 +--------------------------------------+--------------------------------------+
-| margin-right                         | ``margin-r-`` ``mr-``                |
+| margin-right                         | ``mr-`` ``margin-r-``                |
 +--------------------------------------+--------------------------------------+
-| margin-top                           | ``mt-`` ``m-top-`` ``margin-t-``     |
+| margin-top                           | ``m-top-`` ``mt-`` ``margin-t-``     |
 +--------------------------------------+--------------------------------------+
 | max-height                           | ``max-h-``                           |
 +--------------------------------------+--------------------------------------+
@@ -210,7 +211,7 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | outline                              | ``out-``                             |
 +--------------------------------------+--------------------------------------+
-| outline-color                        | ``outline-c-`` ``oc-``               |
+| outline-color                        | ``oc-`` ``outline-c-``               |
 +--------------------------------------+--------------------------------------+
 | outline-style                        | ``os-`` ``outline-s-``               |
 +--------------------------------------+--------------------------------------+
@@ -228,27 +229,27 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | padding-top                          | ``padding-t-`` ``pt-`` ``p-top-``    |
 +--------------------------------------+--------------------------------------+
-| page-break-after                     | ``page-b-after-`` ``pba-``           |
+| page-break-after                     | ``pba-`` ``page-b-after-``           |
 +--------------------------------------+--------------------------------------+
-| page-break-before                    | ``page-b-before-`` ``pbb-``          |
+| page-break-before                    | ``pbb-`` ``page-b-before-``          |
 +--------------------------------------+--------------------------------------+
 | page-break-inside                    | ``pbi-`` ``page-b-inside-``          |
 +--------------------------------------+--------------------------------------+
 | pause                                |                                      |
 +--------------------------------------+--------------------------------------+
-| pause-after                          | ``pa-`` ``pause-a-``                 |
+| pause-after                          | ``pause-a-`` ``pa-``                 |
 +--------------------------------------+--------------------------------------+
 | pause-before                         | ``pause-b-``                         |
 +--------------------------------------+--------------------------------------+
-| pitch                                | ``x-low`` ``low`` ``x-high``         |
-|                                      | ``high``                             |
+| pitch                                | ``low`` ``high`` ``x-high``          |
+|                                      | ``x-low``                            |
 +--------------------------------------+--------------------------------------+
 | pitch-range                          | ``pitch-r-``                         |
 +--------------------------------------+--------------------------------------+
-| play-during                          | ``mix`` ``play-d-`` ``pd-``          |
+| play-during                          | ``pd-`` ``mix`` ``play-d-``          |
 +--------------------------------------+--------------------------------------+
-| position                             | ``relative`` ``absolute`` ``static`` |
-|                                      | ``pos-``                             |
+| position                             | ``pos-`` ``absolute`` ``static``     |
+|                                      | ``relative``                         |
 +--------------------------------------+--------------------------------------+
 | quotes                               | ``quo-``                             |
 +--------------------------------------+--------------------------------------+
@@ -258,51 +259,52 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | speak                                | ``spell-out``                        |
 +--------------------------------------+--------------------------------------+
-| speak-header                         | ``sh-`` ``always`` ``speak-h-``      |
+| speak-header                         | ``speak-h-`` ``sh-`` ``always``      |
 |                                      | ``once``                             |
 +--------------------------------------+--------------------------------------+
-| speak-numeral                        | ``speak-n-`` ``digits`` ``sn-``      |
-|                                      | ``continuous``                       |
+| speak-numeral                        | ``digits`` ``sn-`` ``continuous``    |
+|                                      | ``speak-n-``                         |
 +--------------------------------------+--------------------------------------+
-| speak-punctuation                    | ``sp-`` ``code`` ``speak-p-``        |
+| speak-punctuation                    | ``sp-`` ``speak-p-`` ``code``        |
 +--------------------------------------+--------------------------------------+
-| speech-rate                          | ``x-fast`` ``speech-r-`` ``sr-``     |
-|                                      | ``x-slow`` ``slow``                  |
-|                                      | ``slower`` ``faster`` ``fast``       |
+| speech-rate                          | ``sr-`` ``faster`` ``speech-r-``     |
+|                                      | ``x-slow`` ``slower``                |
+|                                      | ``x-fast`` ``fast`` ``slow``         |
 +--------------------------------------+--------------------------------------+
 | stress                               | ``str-``                             |
 +--------------------------------------+--------------------------------------+
 | table-layout                         | ``tl-`` ``table-l-``                 |
 +--------------------------------------+--------------------------------------+
-| text-align                           | ``text-a-`` ``ta-`` ``t-align-``     |
-|                                      | ``talign-``                          |
+| text-align                           | ``ta-`` ``text-a-`` ``talign-``      |
+|                                      | ``t-align-``                         |
 +--------------------------------------+--------------------------------------+
-| text-decoration                      | ``text-d-`` ``line-through``         |
-|                                      | ``underline`` ``overline`` ``blink`` |
+| text-decoration                      | ``line-through`` ``blink``           |
+|                                      | ``text-d-`` ``overline``             |
+|                                      | ``underline``                        |
 |                                      | ``td-``                              |
 +--------------------------------------+--------------------------------------+
 | text-indent                          | ``ti-`` ``text-i-``                  |
 +--------------------------------------+--------------------------------------+
-| text-transform                       | ``tt-`` ``text-t-`` ``capitalize``   |
-|                                      | ``uppercase`` ``lowercase``          |
+| text-transform                       | ``uppercase`` ``capitalize`` ``tt-`` |
+|                                      | ``text-t-`` ``lowercase``            |
 +--------------------------------------+--------------------------------------+
 | top                                  |                                      |
 +--------------------------------------+--------------------------------------+
-| unicode-bidi                         | ``bidi-override`` ``embed`` ``ub-``  |
-|                                      | ``unicode-b-``                       |
+| unicode-bidi                         | ``bidi-override`` ``embed``          |
+|                                      | ``unicode-b-`` ``ub-``               |
 +--------------------------------------+--------------------------------------+
-| vertical-align                       | ``middle`` ``v-align-`` ``text-top`` |
-|                                      | ``super`` ``sub``                    |
-|                                      | ``valign-`` ``vertical-a-``          |
-|                                      | ``text-bottom`` ``baseline`` ``va-`` |
+| vertical-align                       | ``va-`` ``valign-`` ``sub``          |
+|                                      | ``middle`` ``text-top``              |
+|                                      | ``super`` ``v-align-`` ``baseline``  |
+|                                      | ``text-bottom`` ``vertical-a-``      |
 +--------------------------------------+--------------------------------------+
-| visibility                           | ``collapse`` ``vis-``                |
+| visibility                           | ``vis-`` ``collapse``                |
 +--------------------------------------+--------------------------------------+
 | voice-family                         | ``voice-f-`` ``vf-``                 |
 +--------------------------------------+--------------------------------------+
-| volume                               | ``loud`` ``soft`` ``silent``         |
-|                                      | ``x-loud`` ``vol-``                  |
-|                                      | ``x-soft``                           |
+| volume                               | ``loud`` ``x-loud`` ``x-soft``       |
+|                                      | ``soft`` ``vol-``                    |
+|                                      | ``silent``                           |
 +--------------------------------------+--------------------------------------+
 | white-space                          | ``white-s-``                         |
 +--------------------------------------+--------------------------------------+
@@ -312,5 +314,5 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | word-spacing                         | ``word-s-``                          |
 +--------------------------------------+--------------------------------------+
-| z-index                              | ``zi-`` ``z-i-``                     |
+| z-index                              | ``z-i-`` ``zi-``                     |
 +--------------------------------------+--------------------------------------+

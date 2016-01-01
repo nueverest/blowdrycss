@@ -1,4 +1,6 @@
+from cssutils.css import Property
 # custom
+import settings     # Even though this is it gray it is required for utilities to work
 from utilities import deny_empty_or_whitespace
 from unitparser import UnitParser
 from settings import small, medium
@@ -46,28 +48,23 @@ class ScalingParser(object):
     and appended separately.
 
     :type css_class: str
-    :type name: str
-    :type value: str
-    :type px_to_em: bool
+    :type css_property: Property()
 
     :param css_class: Potentially encoded css class that may or may not be parsable. May not be empty or None.
-    :param name: Valid CSS property name. May not be empty or None.
-    :param value: Valid CSS property name. May not be empty or None.
-    :param use_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion (default).
-        False disables unit conversions meaning any pixel value remains unchanged.
+    :param css_property: Valid CSS Property as defined by ``cssutils.css.Property``.
     :return: None
 
     **Examples:**
 
-    >>> 'WARNING: NOT IMPLEMENTED YET'
+    >>> scaling_parser = ScalingParser(css_class='font-weight-24-s')
 
     """
-    def __init__(self, css_class='', name=''):
+    def __init__(self, css_class='', css_property=Property()):
         deny_empty_or_whitespace(css_class, variable_name='css_class')
-        deny_empty_or_whitespace(name, variable_name='name')
+        deny_empty_or_whitespace(css_property.cssText, variable_name='css_property')
 
         self.css_class = css_class
-        self.name = name
+        self.css_property = css_property
         self.scale_dict = {
             'medium': 1.125,
             'small': 1.25,
@@ -100,7 +97,7 @@ class ScalingParser(object):
         False
 
         """
-        unit_parser = UnitParser(property_name=self.name)
+        unit_parser = UnitParser(property_name=self.css_property.name)
         if unit_parser.default_units() != 'px':
             return False
         else:
@@ -138,7 +135,7 @@ class ScalingParser(object):
 
         return self.css_class
 
-    def build_media_query(self, value='', css_text=''):
+    def build_media_query(self):
         """ Returns CSS media queries that scales pixel / em values in response to screen size changes.
 
         **Generated CSS for ``font-size-24-s`` minus the inline comments**::
@@ -175,20 +172,18 @@ class ScalingParser(object):
                 }
             }
 
-        :param css_text:
-        :type value: str
-
-        :param value: A string that consists of digits and units of either ``px`` or ``em``
-            e.g. ``'17px'`` or ``'15.0625em'``.
         :return: (*str*) -- Returns CSS media queries that scales pixel / em values in response to screen size changes.
 
         """
+        name = self.css_property.name
+        value = self.css_property.value
+        priority = self.css_property.priority
         deny_empty_or_whitespace(str(value), variable_name='value')
         float_value = float(value.replace('em', '').replace('px', ''))          # Remove units
 
-        if 'em' in value:                                                       # Get units
+        if value.endswith('em'):                                                # Get units
             units = 'em'
-        elif 'px' in value:
+        elif value.endswith('px'):
             units = 'px'
         else:
             units = ''
@@ -197,19 +192,25 @@ class ScalingParser(object):
         small_max = small[_max]
         medium_max = medium[_max]
 
+        medium_property = Property(name=name, value=value, priority=priority)
+        small_property = Property(name=name, value=value, priority=priority)
+
         medium_value = round(float_value / self.scale_dict['medium'], 4)        # Scale to medium screen
-        medium_value = str(medium_value) + units                                # Re-apply units
+        medium_value = str(medium_value) + units                                # Add units
         small_value = round(float_value / self.scale_dict['small'], 4)          # Scale to small screen
-        small_value = str(small_value) + units                                  # Re-apply units
+        small_value = str(small_value) + units                                  # Add units
+
+        medium_property.value = medium_value
+        small_property.value = small_value
 
         return (
             '.' + self.css_class + ' {\n' +
-            '\t' + css_text + '\n\n' +
+            '\t' + self.css_property.cssText + ';\n\n' +
             '\t@media only screen and (max-width: ' + medium_max + ') {\n' +
-            '\t\t' + self.name + ': ' + medium_value + ';\n' +
+            '\t\t' + medium_property.cssText + ';\n' +
             '}\n\n' +
             '\t@media only screen and (max-width: ' + small_max + ') {\n' +
-            '\t\t' + self.name + ': ' + small_value + ';\n' +
+            '\t\t' + small_property.cssText + ';\n' +
             '\t}\n' +
             '}\n\n'
         )

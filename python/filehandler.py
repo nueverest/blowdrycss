@@ -1,6 +1,5 @@
 from os import path, walk, getcwd, makedirs
 from glob import glob
-from re import findall
 from cssutils import parseString, ser
 # custom
 from utilities import get_file_path
@@ -232,10 +231,11 @@ class CSSFile(object):
 
         """
         parse_string = parseString(css_text)
-        ser.prefs.useMinified()                 # Enables Minification
+        ser.prefs.useMinified()                 # Enable minification.
         file_path = get_file_path(file_directory=self.file_directory, file_name=self.file_name, extension='.min.css')
         with open(file_path, 'w') as css_file:
             css_file.write(parse_string.cssText.decode('utf-8'))
+        ser.prefs.useDefaults()                 # Disable minification. It can impact unit tests and external code.
 
 
 class GenericFile(object):

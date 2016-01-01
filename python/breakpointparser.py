@@ -30,12 +30,10 @@ class BreakpointParser(object):
     and appended separately.
 
     :type css_class: str
-    :type name: str
-    :type value: str
+    :type css_property: Property
 
     :param css_class: Potentially encoded css class that may or may not be parsable. May not be empty or None.
-    :param name: Valid CSS property name. May not be empty or None.
-    :param value: Valid CSS property name. May not be empty or None.
+    :param css_property: Valid CSS Property as defined by ``cssutils.css.Property``.
 
     :return: None
 
