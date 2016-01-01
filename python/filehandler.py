@@ -218,6 +218,11 @@ class CSSFile(object):
         - Pre-existing files with the same name are overwritten.
         - Uses the cssutils minification tool.
 
+        **Important:**
+
+        - ``ser.prefs.useMinified()`` is a global setting. It must be reset to ``ser.prefs.useDefaults()``. Otherwise,
+          minification will continue to occur.
+
         :type css_text: str
 
         :param css_text: Text containing the CSS to be written to the file.
