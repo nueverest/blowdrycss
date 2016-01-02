@@ -156,24 +156,45 @@ class TestMediaQueryBuilder(TestCase):
         pass
 
     def test_get_css_text(self):
-        class_set = {'giant-only-i', }
-        expected_media_query = (
-            '@media only screen and (max-width: 120.0625em) {\n' +
-            '\t.giant-only-i {\n' +
-            '\t\tdisplay: none !important;\n' +
-            '\t}\n' +
-            '}\n\n' +
-            '@media only screen and (min-width: 160.0em) {\n' +
-            '\t.giant-only-i {\n' +
-            '\t\tdisplay: none !important;\n' +
-            '\t}\n' +
-            '}\n\n'
-        )
+        class_set = {'giant-only-i', 'color-hfff-xsmall-only', 'font-size-13-s-i', }
+        expected_media_query = {
+            (
+                '@media only screen and (max-width: 120.0625em) {\n' +
+                '\t.giant-only-i {\n' +
+                '\t\tdisplay: none !important;\n' +
+                '\t}\n' +
+                '}\n\n' +
+                '@media only screen and (min-width: 160.0em) {\n' +
+                '\t.giant-only-i {\n' +
+                '\t\tdisplay: none !important;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+            (
+                '@media only screen and (min-width: 7.5625em) and (max-width: 15.0em) {\n' +
+                '\t.color-hfff-xsmall-only {\n' +
+                '\t\tcolor: #fff;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+            (
+                '.font-size-13-s-i {\n' +
+                '\tfont-size: 0.8125em !important;\n\n' +
+                '\t@media only screen and (max-width: 45.0em) {\n' +
+                '\t\tfont-size: 0.7222em !important;\n' +
+                '}\n\n' +
+                '\t@media only screen and (max-width: 30.0em) {\n' +
+                '\t\tfont-size: 0.65em !important;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+        }
         property_parser = ClassPropertyParser(class_set=class_set)
         media_query_builder = MediaQueryBuilder(property_parser=property_parser)
+        css = media_query_builder.get_css_text()
 
-        self.assertTrue(media_query_builder.get_css_text() == expected_media_query,
-                        msg=media_query_builder.get_css_text())
+        for media_query in expected_media_query:
+            self.assertTrue(media_query in css, msg=css)
 
 
 if __name__ == '__main__':
