@@ -31,7 +31,8 @@ class TestBreakpointParser(TestCase):
 
         for i, css_class in enumerate(valid_css_classes):
             css_property = Property(name=names[i], value=values[i], priority='')
-            self.assertRaises(ValueError, BreakpointParser, css_class=css_class, css_property=css_property)
+            breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
+            self.assertFalse(breakpoint_parser.is_breakpoint)
 
     def test_set_limit_key(self):
         valid_css_classes = ['inline-small-up', 'inline-giant-down-i', 'green-xxsmall-only', 'padding-10-large-up', ]
@@ -53,7 +54,8 @@ class TestBreakpointParser(TestCase):
 
         for i, css_class in enumerate(valid_css_classes):
             css_property = Property(name=names[i], value=values[i], priority='')
-            self.assertRaises(ValueError, BreakpointParser, css_class=css_class, css_property=css_property)
+            breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
+            self.assertFalse(breakpoint_parser.is_breakpoint)
 
     def test_strip_breakpoint_limit(self):
         valid_css_classes = [

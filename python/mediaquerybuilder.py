@@ -22,22 +22,28 @@ class MediaQueryBuilder(object):
         for css_class in self.property_parser.class_set:
             name = self.property_parser.get_property_name(css_class=css_class)
 
-            try:
-                breakpoint_parser = BreakpointParser(css_class=css_class)
-                is_breakpoint = True
-                css_class = breakpoint_parser.strip_breakpoint_limit()
-            except ValueError:
-                is_breakpoint = False
+            if name:
+                fake_property = Property(name=name, value='inherit', priority='')                # fake 'inherit' value
 
-            scaling_parser = ScalingParser(css_class=css_class, css_property=name)
-            is_scaling = scaling_parser.is_scaling()
-            css_class = scaling_parser.strip_scaling_flag()
+                try:
+                    breakpoint_parser = BreakpointParser(css_class=css_class, css_property=fake_property)
+                    is_breakpoint = True
+                    css_class = breakpoint_parser.strip_breakpoint_limit()
+                except ValueError:
+                    is_breakpoint = False
 
-            if is_breakpoint and is_scaling:                                                        # Mixed syntax
-                not_media_classes[css_class] = ' (breakpoint and scaling media query class syntax cannot be combined.)'
-                continue
+                scaling_parser = ScalingParser(css_class=css_class, css_property=fake_property)
+                is_scaling = scaling_parser.is_scaling
+                css_class = scaling_parser.strip_scaling_flag()
 
-            if not is_breakpoint and not is_scaling:                                                # Missing syntax
+                if is_breakpoint and is_scaling:                                                    # Mixed syntax
+                    not_media_classes[css_class] = ' (breakpoint and scaling media query syntax cannot be combined.)'
+                    continue
+
+                if not is_breakpoint and not is_scaling:                                            # Missing syntax
+                    not_media_classes[css_class] = ' (not a media query css_class selector: ' + css_class + ')'
+                    continue
+            else:
                 not_media_classes[css_class] = ' (not a media query css_class selector: ' + css_class + ')'
                 continue
 
@@ -109,7 +115,7 @@ class MediaQueryBuilder(object):
         scaling_parser = ScalingParser(css_class=css_class, css_property=name)
 
         # Scaling but not Breakpoint case.
-        if scaling_parser.is_scaling():
+        if scaling_parser.__is_scaling():
             try:
                 BreakpointParser(css_class=css_class)
             except ValueError:
@@ -118,7 +124,7 @@ class MediaQueryBuilder(object):
         # Breakpoint but not Scaling
         try:
             BreakpointParser(css_class=css_class)
-            return not scaling_parser.is_scaling()
+            return not scaling_parser.__is_scaling()
         except ValueError:
             return False
 

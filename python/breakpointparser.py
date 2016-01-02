@@ -72,6 +72,7 @@ class BreakpointParser(object):
         self.breakpoint_key = ''
         self.limit_key = ''
 
+        self.is_breakpoint = True       # Naively assume True. set_breakpoint_key and set_limit_key can change to False.
         self.set_breakpoint_key()
         self.set_limit_key()
 
@@ -83,7 +84,8 @@ class BreakpointParser(object):
 
     def set_breakpoint_key(self):
         """ If ``self.css_class`` contains one of the keys in ``self.breakpoint_dict``, then
-        set ``self.breakpoint_values`` to a breakpoint_values tuple for the matching key. Otherwise, raise a ValueError.
+        set ``self.breakpoint_values`` to a breakpoint_values tuple for the matching key. Otherwise,
+        set ``is_breakpoint = False``.
 
         **Rules:**
 
@@ -102,7 +104,7 @@ class BreakpointParser(object):
 
         - These rules do not catch all cases, and prior validation of the css_class is assumed.
 
-        :raises ValueError: Raises a ValueError if none of the keys in ``self.breakpoint_dict`` are found in
+        - Set ``is_breakpoint = False`` if none of the keys in ``self.breakpoint_dict`` are found in
             ``self.css_class``.
 
         :return: None
@@ -113,14 +115,11 @@ class BreakpointParser(object):
             if (_key in self.css_class and len(self.css_class) > len(_key) + 2) or self.css_class.startswith(_key[1:]):
                 self.breakpoint_key = key
                 return
-        raise ValueError(
-            'The BreakpointParser.css_class ' + self.css_class +
-            ' does not match a breakpoint_values in breakpoint_dict.'
-        )
+        self.is_breakpoint = False
 
     def set_limit_key(self):
         """ If one of the values in ``self.limit_set`` is contained in ``self.css_class``, then
-        Set ``self.limit_key`` to the value of the string found. Otherwise, raise a ValueError.
+        Set ``self.limit_key`` to the value of the string found. Otherwise, set ``is_breakpoint = False``.
 
         **Rules:**
 
@@ -133,7 +132,7 @@ class BreakpointParser(object):
 
         - These rules do not catch all cases, and prior validation of the css_class is assumed.
 
-        :raises ValueError: Raises a ValueError if none of the members of ``self.limit_set`` are found in
+        - Set ``is_breakpoint = False`` if none of the members of ``self.limit_set`` are found in
             ``self.css_class``.
 
         :return: None
@@ -145,9 +144,7 @@ class BreakpointParser(object):
             if in_middle or at_end:
                 self.limit_key = limit_key
                 return
-        raise ValueError(
-            'The BreakpointParser.css_class ' + self.css_class + ' does not match a limit_key in limit_set.'
-        )
+        self.is_breakpoint = False
 
     def strip_breakpoint_limit(self):
         """ Removes breakpoint and limit keywords from ``css_class``.
