@@ -132,16 +132,6 @@ class MediaQueryBuilder(object):
         except ValueError:
             return False
 
-    def minify(self):
-        """ Minifies the css in ``css_media_queries``.
-
-        **Reference:**
-        http://stackoverflow.com/questions/493819/python-join-why-is-it-string-joinlist-instead-of-list-joinstring
-
-        :return: None
-        """
-        pass
-
     def get_css_text(self):
         """ Joins ``css_media_queries`` together with an empty separator string ``''``.
 

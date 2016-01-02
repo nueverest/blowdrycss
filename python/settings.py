@@ -21,16 +21,18 @@ minify = True               # Generate a minified version of the css file
 # Plugin Defaults
 use_em = True
 base = 16
+
 media_queries_enabled = True
 # ...Not Implemented Yet...
-# hex_to_rgb = True
-# color_parser = False
-# extra_dry = False
+# use_rgb = True
+# unit_parser_enabled = True
+# color_parser_enabled = True
+# extra_dry = False         # Combine identical CSS discovered under different class selector names.
 
 # TODO: Implement these in a fashion similar to the performance timer.
 # auto_generate = False       # Automatically generates blowdry.css file when a project HTML file is saved.
 # http_server = False         # Auto-Start a simple webserver on localhost:8080.
-# condense_classes = False    # Edits HTML Files after discovering common patterns (Not DRY).
+# condense_classes = False    # Edits HTML Files after discovering common patterns (Not DRY do not implement).
 
 # Default Screen Breakpoints / Transition Triggers
 # Tuple Format (Lower Limit, Upper Limit) in pixels.

@@ -146,9 +146,6 @@ class TestMediaQueryBuilder(TestCase):
     def test_class_is_parsable(self):
         pass
 
-    def test_minify(self):
-        pass
-
     def test_get_css_text(self):
         class_set = {'giant-only-i', 'color-hfff-xsmall-only', 'font-size-13-s-i', }
         expected_media_query = {
