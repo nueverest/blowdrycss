@@ -5,6 +5,7 @@ from filehandler import FileFinder, CSSFile, GenericFile
 from htmlparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
+from mediaquerybuilder import MediaQueryBuilder
 from datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, property_alias_html, \
     clashing_alias_rst, property_alias_rst
 __author__ = 'chad nelson'
@@ -107,10 +108,21 @@ def main():
     # Filter class names only keeping classes that match the defined class encoding.
     class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
     # print('\nclass_property_parser.class_set:', class_property_parser.class_set)
+    class_set = class_property_parser.class_set.copy()
 
     # Build a set() of valid css properties. Some classes may be removed during cssutils validation.
     css_builder = CSSBuilder(property_parser=class_property_parser)
     css_text = css_builder.get_css_text()
+
+    # Build Media Queries
+    unassigned_class_set = class_set.difference(css_builder.property_parser.class_set)
+    css_builder.property_parser.class_set = unassigned_class_set                        # Only use unassigned classes
+    css_builder.property_parser.removed_class_set = set()                               # Clear set
+    # print(css_builder.property_parser.class_set)
+    # print(css_builder.property_parser.removed_class_set)
+    media_query_builder = MediaQueryBuilder(property_parser=class_property_parser)
+    # print(media_query_builder.property_parser.class_set)
+    css_text += bytes(media_query_builder.get_css_text(), 'utf-8')
     # print('CSS Text:')
     # print(css_text)
 
@@ -118,13 +130,13 @@ def main():
     if settings.human_readable:
         css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
         css_file.write(css_text=css_text)
-        print(css_directory + css_file.file_name + '.css', "created.")
+        print(css_directory + css_file.file_name + '.css created.')
 
     # Output the Minified DRY CSS file. (user command option)
     if settings.minify:
         css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
         css_file.minify(css_text=css_text)
-        print(css_directory + css_file.file_name + '.min.css', "created.")
+        print(css_directory + css_file.file_name + '.min.css created.')
 
 
 if __name__ == '__main__':

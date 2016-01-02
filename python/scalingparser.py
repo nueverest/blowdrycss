@@ -158,19 +158,15 @@ class ScalingParser(object):
 
         **Priority !important -- Generated CSS for ``font-size-24-s-i`` minus the inline comments**::
 
-            .font-size-24-s-i {
-                // Default size above medium
-                font-size: 24px !important;
-
-                // medium screen font size reduction
-                @media only screen and (max-width: 720px) {
-                    font-size: 21.3px !important;
-                }
-
-                // small screen font size reduction
-                @media only screen and (max-width: 480px) {
-                    font-size: 19.2px !important;
-                }
+            // Default size above the maximum 'medium' width breakpoint.
+            .font-size-24-s-i { font-size: 24px !important; }
+            // Apply 'medium' screen font size reduction.
+            @media only screen and (max-width: 720px) {
+                .font-size-24-s-i { font-size: 21.3px !important; }
+            }
+            // Apply 'small' screen font size reduction.
+            @media only screen and (max-width: 480px) {
+                .font-size-24-s-i { font-size: 19.2px !important; }
             }
 
         :return: (*str*) -- Returns CSS media queries that scales pixel / em values in response to screen size changes.
@@ -205,13 +201,11 @@ class ScalingParser(object):
         small_property.value = small_value
 
         return (
-            '.' + self.css_class + ' {\n' +
-            '\t' + self.css_property.cssText + ';\n\n' +
-            '\t@media only screen and (max-width: ' + medium_max + ') {\n' +
-            '\t\t' + medium_property.cssText + ';\n' +
+            '.' + self.css_class + ' { ' + self.css_property.cssText + '; }\n\n' +
+            '@media only screen and (max-width: ' + medium_max + ') {\n' +
+            '\t.' + self.css_class + ' { ' + medium_property.cssText + '; }\n' +
             '}\n\n' +
-            '\t@media only screen and (max-width: ' + small_max + ') {\n' +
-            '\t\t' + small_property.cssText + ';\n' +
-            '\t}\n' +
+            '@media only screen and (max-width: ' + small_max + ') {\n' +
+            '\t.' + self.css_class + ' { ' + small_property.cssText + '; }\n' +
             '}\n\n'
         )

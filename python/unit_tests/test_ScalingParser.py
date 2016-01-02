@@ -53,14 +53,12 @@ class TestBreakpointParser(TestCase):
         priority = ''
         css_property = Property(name=name, value=value, priority=priority)
         expected = (
-            '.font-size-24-s {\n' +
-            '\tfont-size: ' + value + ';\n\n' +
-            '\t@media only screen and (max-width: 45.0em) {\n' +
-            '\t\tfont-size: 21.3333px;\n' +
+            '.font-size-24-s { font-size: ' + value + '; }\n\n' +
+            '@media only screen and (max-width: 45.0em) {\n' +
+            '\t.font-size-24-s { font-size: 21.3333px; }\n' +
             '}\n\n' +
-            '\t@media only screen and (max-width: 30.0em) {\n' +
-            '\t\tfont-size: 19.2px;\n' +
-            '\t}\n' +
+            '@media only screen and (max-width: 30.0em) {\n' +
+            '\t.font-size-24-s { font-size: 19.2px; }\n' +
             '}\n\n'
         )
         scaling_parser = ScalingParser(css_class=css_class, css_property=css_property)
@@ -74,14 +72,12 @@ class TestBreakpointParser(TestCase):
         priority = ''
         css_property = Property(name=name, value=value, priority=priority)
         expected = (
-            '.font-size-24-s {\n' +
-            '\tfont-size: ' + value + ';\n\n' +
-            '\t@media only screen and (max-width: 45.0em) {\n' +
-            '\t\tfont-size: 1.3333em;\n' +
+            '.font-size-24-s { font-size: ' + value + '; }\n\n' +
+            '@media only screen and (max-width: 45.0em) {\n' +
+            '\t.font-size-24-s { font-size: 1.3333em; }\n' +
             '}\n\n' +
-            '\t@media only screen and (max-width: 30.0em) {\n' +
-            '\t\tfont-size: 1.2em;\n' +
-            '\t}\n' +
+            '@media only screen and (max-width: 30.0em) {\n' +
+            '\t.font-size-24-s { font-size: 1.2em; }\n' +
             '}\n\n'
         )
         scaling_parser = ScalingParser(css_class=css_class, css_property=css_property)
@@ -95,14 +91,12 @@ class TestBreakpointParser(TestCase):
         priority = 'important'
         css_property = Property(name=name, value=value, priority=priority)
         expected = (
-            '.font-size-24-s-i {\n' +
-            '\tfont-size: ' + value + ' !important;\n\n' +
-            '\t@media only screen and (max-width: 45.0em) {\n' +
-            '\t\tfont-size: 1.3333em !important;\n' +
+            '.font-size-24-s-i { font-size: ' + value + ' !important; }\n\n' +
+            '@media only screen and (max-width: 45.0em) {\n' +
+            '\t.font-size-24-s-i { font-size: 1.3333em !important; }\n' +
             '}\n\n' +
-            '\t@media only screen and (max-width: 30.0em) {\n' +
-            '\t\tfont-size: 1.2em !important;\n' +
-            '\t}\n' +
+            '@media only screen and (max-width: 30.0em) {\n' +
+            '\t.font-size-24-s-i { font-size: 1.2em !important; }\n' +
             '}\n\n'
         )
         scaling_parser = ScalingParser(css_class=css_class, css_property=css_property)
