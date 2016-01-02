@@ -16,7 +16,7 @@ class TestBreakpointParser(TestCase):
         for i, css_class in enumerate(valid_css_classes):
             css_property = Property(name=names[i], value=values[i], priority=priorities[i])
             scaling_parser = ScalingParser(css_class=css_class, css_property=css_property)
-            self.assertTrue(scaling_parser.is_scaling())
+            self.assertTrue(scaling_parser.is_scaling)
 
     def test_is_scaling_False(self):
         valid_css_classes = ['font-size-24', 'font-size-24-i', 'padding-10', 'margin-30-i', 'bold-s', 'green-s-i', ]
@@ -27,17 +27,17 @@ class TestBreakpointParser(TestCase):
         for i, css_class in enumerate(valid_css_classes):
             css_property = Property(name=names[i], value=values[i], priority=priorities[i])
             scaling_parser = ScalingParser(css_class=css_class, css_property=css_property)
-            self.assertFalse(scaling_parser.is_scaling())
+            self.assertFalse(scaling_parser.is_scaling)
 
     def test_strip_scaling_flag(self):
         valid_css_classes = [
-            'font-size-34-s', 'font-size-24-s-i', 'padding-12-s', 'margin-31-s-i', 'font-size-15', 'font-size-52'
+            'font-size-34-s', 'font-size-24-s-i', 'padding-12-s', 'margin-31-s-i',
         ]
-        names = ['font-size', 'font-size', 'padding', 'margin', 'font-size', 'font-size']
+        names = ['font-size', 'font-size', 'padding', 'margin', ]
         values = ['34px', '24px', '12px', '31px', '15px', '52px', ]
         priorities = ['', 'important', '', 'important', '', '', ]
         expected = [
-            'font-size-34', 'font-size-24-i', 'padding-12', 'margin-31-i', 'font-size-15', 'font-size-52'
+            'font-size-34', 'font-size-24-i', 'padding-12', 'margin-31-i', 
         ]
 
         for i, css_class in enumerate(valid_css_classes):

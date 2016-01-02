@@ -70,8 +70,9 @@ class ScalingParser(object):
             'small': 1.25,
         }
         self.scaling_flag = '-s'
+        self.is_scaling = self._is_scaling()
 
-    def is_scaling(self):
+    def _is_scaling(self):
         """ Return False if ``self.property_name`` does not have default units of ``'px'``.
         Test if ``self.css_class`` contains the scaling flag ``-s``. Returns True if ``-s`` is found and
         False otherwise.
@@ -87,13 +88,13 @@ class ScalingParser(object):
         **Examples**
 
         >>> scaling_parser = ScalingParser(css_class='font-weight-24-s')
-        >>> scaling_parser.is_scaling()
+        >>> scaling_parser._is_scaling()
         True
         >>> scaling_parser.css_class = 'font-weight-24-s-i'
-        >>> scaling_parser.is_scaling()
+        >>> scaling_parser._is_scaling()
         True
         >>> scaling_parser.css_class = 'font-weight-24'
-        >>> scaling_parser.is_scaling()
+        >>> scaling_parser._is_scaling()
         False
 
         """
