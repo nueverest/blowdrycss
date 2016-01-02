@@ -20,9 +20,6 @@ class MediaQueryBuilder(object):
 
         not_media_classes = dict()
         for css_class in self.property_parser.class_set:
-            if css_class == 'display-large-down':
-                x = 'testinsg'
-
             name = self.property_parser.get_property_name(css_class=css_class)
             priority = self.property_parser.get_property_priority(css_class=css_class)
             clean_css_class = ''    # Prevents css_class from being modified.
