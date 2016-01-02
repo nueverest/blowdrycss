@@ -15,7 +15,7 @@ Advanced Topics
 - Where are the semicolons?
 - How to build a plugin. (missing)
 - Why do I want to minify my css?
-- pro-tip: Want to share your site with a client, co-worker, or colleague. Use `ngrok <https://ngrok.com/>`__
+- Pro-tip: Want to share your site with a client, co-worker, or colleague. Use `ngrok <https://ngrok.com/>`__
 - DRYness
 - Syntax Guide
 

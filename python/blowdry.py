@@ -120,8 +120,10 @@ def main():
     css_builder.property_parser.removed_class_set = set()                               # Clear set
     # print(css_builder.property_parser.class_set)
     # print(css_builder.property_parser.removed_class_set)
+
     media_query_builder = MediaQueryBuilder(property_parser=class_property_parser)
     # print(media_query_builder.property_parser.class_set)
+
     css_text += bytes(media_query_builder.get_css_text(), 'utf-8')
     # print('CSS Text:')
     # print(css_text)

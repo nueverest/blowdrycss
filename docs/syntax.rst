@@ -295,7 +295,7 @@ particular property name.
 Optional Unit Conversion
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Implemented: 11/28/2015 as of version: 0.0.2
+- Implemented: 11/28/2015 in version: 0.0.2
 
 To enable 'px' to 'em' unit conversion open ``blowdry.py`` and set
 ``use_em = True``
@@ -310,3 +310,131 @@ Explicitly Encoding Units in Class Name
 +-------------------------+-----------------------------+
 | width-120vmin           | width: 120vmin              |
 +-------------------------+-----------------------------+
+
+Media Queries using Breakpoints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Implemented: 1/2/2016 in version: 0.0.6
+
+- Valid Formats ::
+
+    # General case
+    'property name/alias' + 'breakpoint_key' + 'limit_key'
+
+    # Special case -- Implied property_name is 'display'.
+    # Allows elements to be visible or hidden.
+    'breakpoint_key' + 'limit_key'
+
+- Breakpoint keys -- See ``settings.py`` if you want to customize these. ::
+
+    'xxsmall-', 'xsmall-', 'small-', 'medium-', 'large-',
+    'xlarge-', 'xxlarge-', 'giant-', 'xgiant-', 'xxgiant-'
+
+- Limit keys ::
+
+   'only', 'down', 'up'
+
+- Breakpoints and limits combined. CSS property name defaults to ``display``. ::
+
+    'xxsmall-up'
+    'medium-only'
+    'xxlarge-down'
+
+- Custom CSS Property with breakpoint and limit suffix. ::
+
+    'bold-small-only'
+    'color-hfff-giant-down'
+    'text-align-center-large-up'
+
+----------------------
+
+**Value Encoding Format**
+
+``display-medium-up``
+
+**CSS Media Query Output** ::
+
+    @media only screen and (max-width: 30.0625em) {
+        .display-medium-up { display: none }
+    }
+
+----------------------
+
+**Value Encoding Format**
+
+``large-up`` -- Property name ``'display-'`` is optional.
+
+**CSS Media Query Output** ::
+
+    @media only screen and (max-width: 45.0625em) {
+        .large-up { display: none }
+    }
+
+----------------------
+
+**Value Encoding Format**
+
+``giant-down`` -- Property name ``'display-'`` is optional.
+
+**CSS Media Query Output** ::
+
+    @media only screen and (min-width: 160.0em) {
+        .giant-down { display: none }
+    }
+
+----------------------
+
+**Value Encoding Format**
+
+``padding-100-large-only``
+
+**CSS Media Query Output** ::
+
+    @media only screen and (min-width: 45.0625em) and (max-width: 64em) {
+        .padding-100-large-only { padding: 6.25em }
+    }
+
+----------------------
+
+Media Queries using Scaling Flag
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Implemented: 1/2/2016 in version: 0.0.6
+
+- Allows scaling of ``'font-size'`` or other pixel--based CSS property as the screen width is reduced.
+
+- Just add ``'-s'`` or ``'-s-i'`` to the end of your encoded class selector.
+
+----------------------
+
+**Value Encoding Format**
+
+``font-size-48-s``
+
+**CSS Media Query Output** ::
+
+    .font-size-48-s { font-size: 3em }
+
+    @media only screen and (max-width: 45em) {
+        .font-size-48-s { font-size: 2.6667em }
+    }
+    @media only screen and (max-width: 30em) {
+        .font-size-48-s { font-size: 2.4em }
+    }
+
+----------------------
+
+**Value Encoding Format**
+
+``font-size-16-s-i`` -- !important global override case
+
+**CSS Media Query Output** ::
+
+    .font-size-16-s-i { font-size: 1em !important }
+
+    @media only screen and (max-width: 45em) {
+        .font-size-16-s-i { font-size: 0.8889em !important }
+    }
+    @media only screen and (max-width: 30em) {
+        .font-size-16-s-i { font-size: 0.8em !important }
+    }

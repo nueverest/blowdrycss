@@ -54,7 +54,7 @@
     | 0.0.5 -- All docstrings added. Many modules refactored and improved during the documentation process. New
       unit tests added.
     | 0.0.6 -- Advanced media query syntax added. Modules ``breakpointparser` and ``scalingparser`` added to
-      allow for the dynamic creation of media queries.
+      allow for the dynamic creation of media queries. (1/2/2016)
 
 """
 __author__ = 'chad nelson'
