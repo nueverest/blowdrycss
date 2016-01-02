@@ -21,13 +21,11 @@ minify = True               # Generate a minified version of the css file
 # Plugin Defaults
 use_em = True
 base = 16
+media_queries_enabled = True
 # ...Not Implemented Yet...
 # hex_to_rgb = True
 # color_parser = False
 # extra_dry = False
-
-# breakpoints = False
-# scaling = False
 
 # TODO: Implement these in a fashion similar to the performance timer.
 # auto_generate = False       # Automatically generates blowdry.css file when a project HTML file is saved.

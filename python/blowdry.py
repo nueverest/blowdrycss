@@ -115,16 +115,18 @@ def main():
     css_text = css_builder.get_css_text()
 
     # Build Media Queries
-    unassigned_class_set = class_set.difference(css_builder.property_parser.class_set)
-    css_builder.property_parser.class_set = unassigned_class_set                        # Only use unassigned classes
-    css_builder.property_parser.removed_class_set = set()                               # Clear set
-    # print(css_builder.property_parser.class_set)
-    # print(css_builder.property_parser.removed_class_set)
+    if settings.media_queries_enabled:
+        unassigned_class_set = class_set.difference(css_builder.property_parser.class_set)
+        css_builder.property_parser.class_set = unassigned_class_set                        # Only use unassigned classes
+        css_builder.property_parser.removed_class_set = set()                               # Clear set
+        # print(css_builder.property_parser.class_set)
+        # print(css_builder.property_parser.removed_class_set)
 
-    media_query_builder = MediaQueryBuilder(property_parser=class_property_parser)
-    # print(media_query_builder.property_parser.class_set)
+        media_query_builder = MediaQueryBuilder(property_parser=class_property_parser)
+        # print(media_query_builder.property_parser.class_set)
 
-    css_text += bytes(media_query_builder.get_css_text(), 'utf-8')
+        css_text += bytes(media_query_builder.get_css_text(), 'utf-8')
+
     # print('CSS Text:')
     # print(css_text)
 
