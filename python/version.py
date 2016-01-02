@@ -53,12 +53,14 @@
     | 0.0.4 -- Sphinx integration started.
     | 0.0.5 -- All docstrings added. Many modules refactored and improved during the documentation process. New
       unit tests added.
+    | 0.0.6 -- Advanced media query syntax added. Modules ``breakpointparser` and ``scalingparser`` added to
+      allow for the dynamic creation of media queries.
 
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blow dry css'
 
-__version__ = '0.0.5'
+__version__ = '0.0.6'
 
 __release__ = __version__ + 'a'
