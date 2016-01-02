@@ -13,7 +13,7 @@ class MediaQueryBuilder(object):
         # Takes a set of classes that contain media query flags
         # Invalidates classes that contain mixed syntax ``small-down-s`` or ``font-size-28-medium-only-s``
         # i.e. mixing breakpoint and scaling syntax is not allowed.
-        print('\nMediaQueryBuilder Running:')
+        print('\nMediaQueryBuilder Running...')
         self.property_parser = property_parser
         self.css_media_queries = set()
         self.media_query_text = ''
@@ -119,7 +119,7 @@ class MediaQueryBuilder(object):
         scaling_parser = ScalingParser(css_class=css_class, css_property=name)
 
         # Scaling but not Breakpoint case.
-        if scaling_parser.__is_scaling():
+        if scaling_parser.is_scaling:
             try:
                 BreakpointParser(css_class=css_class)
             except ValueError:
@@ -128,7 +128,7 @@ class MediaQueryBuilder(object):
         # Breakpoint but not Scaling
         try:
             BreakpointParser(css_class=css_class)
-            return not scaling_parser.__is_scaling()
+            return not scaling_parser.is_scaling
         except ValueError:
             return False
 
@@ -148,5 +148,5 @@ class MediaQueryBuilder(object):
         :return: str -- Returns all media queries as CSS text.
 
         """
-        return str.join('', iterable=self.css_media_queries)
+        return str.join('', self.css_media_queries)
 

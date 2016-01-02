@@ -18,7 +18,7 @@ class TestMediaQueryBuilder(TestCase):
         }
         expected_clean_set = {
             'margin-top-50px-xlarge-down', 'small-up', 'giant-only-i', 'display-large-down',
-            'text-align-center-medium-down',  'bold-small-only', 'color-hfff-xsmall-only',
+            'text-align-center-medium-down', 'bold-small-only', 'color-hfff-xsmall-only',
             'font-size-13-s-i', 'font-size-48em-s',
         }
         expected_removed_set = {
@@ -38,6 +38,117 @@ class TestMediaQueryBuilder(TestCase):
         self.assertTrue(media_query_builder.property_parser.removed_class_set == expected_removed_set,
                         msg=media_query_builder.property_parser.removed_class_set)
 
+    def test_init_css_media_queries(self):
+        class_set = {
+            'margin-top-50px-xlarge-down',
+            'small-up',
+            'giant-only-i',
+            'display-large-down',
+            'text-align-center-medium-down',
+            'bold-small-only',
+            'color-hfff-xsmall-only',
+
+            'font-size-13-s-i',
+            'font-size-48em-s',
+            'padding-16-s-i',
+
+            'height-150px', 'valign-middle', 'font-size-48',
+            'b', 'cue-x5_0p', 'hide', 'padding-b1 a5 c1% e5', 'margin-1a% 10x% 3q% 1mp3',
+        }
+        expected_css_media_queries = {
+            (
+                '@media only screen and (max-width: 85.375em) {\n' +
+                '\t.margin-top-50px-xlarge-down {\n' +
+                '\t\tmargin-top: 3.125em;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+            (
+                '@media only screen and (max-width: 15.0625em) {\n' +
+                '\t.small-up {\n' +
+                '\t\tdisplay: none;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+            (
+                '@media only screen and (max-width: 120.0625em) {\n' +
+                '\t.giant-only-i {\n' +
+                '\t\tdisplay: none !important;\n' +
+                '\t}\n' +
+                '}\n\n' +
+                '@media only screen and (min-width: 160.0em) {\n' +
+                '\t.giant-only-i {\n' +
+                '\t\tdisplay: none !important;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+            (
+                '@media only screen and (min-width: 64.0em) {\n' +
+                '\t.display-large-down {\n' +
+                '\t\tdisplay: none;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+            (
+                '@media only screen and (max-width: 45.0em) {\n' +
+                '\t.text-align-center-medium-down {\n' +
+                '\t\ttext-align: center;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+            (
+                '@media only screen and (min-width: 15.0625em) and (max-width: 30.0em) {\n' +
+                '\t.bold-small-only {\n' +
+                '\t\tfont-weight: bold;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+            (
+                '@media only screen and (min-width: 7.5625em) and (max-width: 15.0em) {\n' +
+                '\t.color-hfff-xsmall-only {\n' +
+                '\t\tcolor: #fff;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+            (
+                '.font-size-13-s-i {\n' +
+                '\tfont-size: 0.8125em !important;\n\n' +
+                '\t@media only screen and (max-width: 45.0em) {\n' +
+                '\t\tfont-size: 0.7222em !important;\n' +
+                '}\n\n' +
+                '\t@media only screen and (max-width: 30.0em) {\n' +
+                '\t\tfont-size: 0.65em !important;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+            (
+                '.font-size-48em-s {\n' +
+                '\tfont-size: 48em;\n\n' +
+                '\t@media only screen and (max-width: 45.0em) {\n' +
+                '\t\tfont-size: 42.6667em;\n' +
+                '}\n\n' +
+                '\t@media only screen and (max-width: 30.0em) {\n' +
+                '\t\tfont-size: 38.4em;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+            (
+                '.padding-16-s-i {\n' +
+                '\tpadding: 1em !important;\n\n' +
+                '\t@media only screen and (max-width: 45.0em) {\n' +
+                '\t\tpadding: 0.8889em !important;\n' +
+                '}\n\n' +
+                '\t@media only screen and (max-width: 30.0em) {\n' +
+                '\t\tpadding: 0.8em !important;\n' +
+                '\t}\n' +
+                '}\n\n'
+            ),
+        }
+        property_parser = ClassPropertyParser(class_set=class_set)
+        media_query_builder = MediaQueryBuilder(property_parser=property_parser)
+        self.assertTrue(media_query_builder.css_media_queries == expected_css_media_queries,
+                        msg=media_query_builder.css_media_queries)
+
     def test_class_is_parsable(self):
         pass
 
@@ -45,7 +156,24 @@ class TestMediaQueryBuilder(TestCase):
         pass
 
     def test_get_css_text(self):
-        pass
+        class_set = {'giant-only-i', }
+        expected_media_query = (
+            '@media only screen and (max-width: 120.0625em) {\n' +
+            '\t.giant-only-i {\n' +
+            '\t\tdisplay: none !important;\n' +
+            '\t}\n' +
+            '}\n\n' +
+            '@media only screen and (min-width: 160.0em) {\n' +
+            '\t.giant-only-i {\n' +
+            '\t\tdisplay: none !important;\n' +
+            '\t}\n' +
+            '}\n\n'
+        )
+        property_parser = ClassPropertyParser(class_set=class_set)
+        media_query_builder = MediaQueryBuilder(property_parser=property_parser)
+
+        self.assertTrue(media_query_builder.get_css_text() == expected_media_query,
+                        msg=media_query_builder.get_css_text())
 
 
 if __name__ == '__main__':
