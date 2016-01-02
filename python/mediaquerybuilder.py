@@ -1,4 +1,4 @@
-from cssutils.css import Property, CSSStyleRule
+from cssutils.css import Property
 from xml.dom import SyntaxErr
 # custom
 from classpropertyparser import ClassPropertyParser
@@ -18,8 +18,7 @@ class MediaQueryBuilder(object):
         self.css_media_queries = set()
         self.media_query_text = ''
 
-        invalid_css_classes = []
-        reasons = []
+        not_media_classes = dict()
         for css_class in self.property_parser.class_set:
             name = self.property_parser.get_property_name(css_class=css_class)
 
@@ -34,9 +33,12 @@ class MediaQueryBuilder(object):
             is_scaling = scaling_parser.is_scaling()
             css_class = scaling_parser.strip_scaling_flag()
 
-            if is_breakpoint and is_scaling:
-                invalid_css_classes.append(css_class)
-                reasons.append(' (breakpoint and scaling media query class syntax cannot be combined.)')
+            if is_breakpoint and is_scaling:                                                        # Mixed syntax
+                not_media_classes[css_class] = ' (breakpoint and scaling media query class syntax cannot be combined.)'
+                continue
+
+            if not is_breakpoint and not is_scaling:                                                # Missing syntax
+                not_media_classes[css_class] = ' (not a media query css_class selector: ' + css_class + ')'
                 continue
 
             # Handle case where css_class equals 'small-down', 'large-only', 'medium-up', etc.
@@ -52,45 +54,38 @@ class MediaQueryBuilder(object):
                         encoded_property_value=encoded_property_value
                     )
                 except ValueError:
-                    invalid_css_classes.append(css_class)
-                    reasons.append(' (property_name not found in property_alias_dict.)')
+                    not_media_classes[css_class] = ' (property_name not found in property_alias_dict.)'
                     continue
             else:
                 value = 'none'     # Breakpoint Parser -> display: none;
 
             priority = self.property_parser.get_property_priority(css_class=css_class)
 
-            # Build CSS Property AND Add to css_rules OR Remove invalid css_class from class_set.
+            # Build CSS Property AND Add to css_media_queries OR Remove invalid css_class from class_set.
             try:
                 css_property = Property(name=name, value=value, priority=priority)
 
                 if css_property.valid:
                     if is_breakpoint and breakpoint_parser:
+                        breakpoint_parser.css_property = css_property
                         media_query = breakpoint_parser.build_media_query()
                         self.css_media_queries.add(media_query)
                     if is_scaling:
+                        scaling_parser.css_property = css_property
                         media_query = scaling_parser.build_media_query()
                         self.css_media_queries.add(media_query)
-                    # If it is not breakpoint or scaling it is invalid at this point.
-                    invalid_css_classes.append(css_class)
-                    reasons.append(' (cssutils invalid property value: ' + value + ')')
-                    continue
                 else:
-                    invalid_css_classes.append(css_class)
-                    reasons.append(' (cssutils invalid property value: ' + value + ')')
+                    not_media_classes[css_class] = ' (cssutils invalid property value: ' + value + ')'
                     continue
             # This exception can't be tested as clean_class_set() and get_property_value() prevent it.(Triple Redundant)
             except SyntaxErr:   # Special Case - Not Tested
-                invalid_css_classes.append(css_class)
-                reasons.append(' (cssutils SyntaxErr invalid property value: ' + value + ')')
+                not_media_classes[css_class] = ' (cssutils SyntaxErr invalid property value: ' + value + ')'
                 continue
 
         # Clean out invalid CSS Classes.
-        for i, invalid_css_class in enumerate(invalid_css_classes):
+        for invalid_css_class, reason in not_media_classes.items():
             self.property_parser.class_set.remove(invalid_css_class)
-            self.property_parser.removed_class_set.add(invalid_css_class + reasons[i])
-
-        self.build_stylesheet()
+            self.property_parser.removed_class_set.add(invalid_css_class + reason)
 
     @staticmethod
     def class_is_parsable(css_class, name):
@@ -127,17 +122,21 @@ class MediaQueryBuilder(object):
         except ValueError:
             return False
 
-    def build_stylesheet(self):
-        """ Builds the stylesheet by adding CSS rules to the CSS stylesheet.
+    def minify(self):
+        """ Minifies the css in ``css_media_queries``.
+
+        **Reference:**
+        http://stackoverflow.com/questions/493819/python-join-why-is-it-string-joinlist-instead-of-list-joinstring
 
         :return: None
         """
-        for css_rule in self.css_rules:
-            self.css_stylesheet.add(rule=css_rule)
+        pass
 
     def get_css_text(self):
+        """ Joins ``css_media_queries`` together with an empty separator string ``''``.
+
+        :return: str -- Returns all media queries as CSS text.
+
         """
-        :return: str -- Returns CSS text.
-        """
-        return self.css_stylesheet.cssText
+        return str.join('', iterable=self.css_media_queries)
 
