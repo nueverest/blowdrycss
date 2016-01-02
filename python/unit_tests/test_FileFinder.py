@@ -47,6 +47,7 @@ class TestFileFinder(TestCase):
         expected_files = {
             path.join(getcwd() + '\\test_html\\index.html'),
             path.join(getcwd() + '\\test_html\\test.html'),
+            path.join(getcwd() + '\\test_html\\media_query.html'),
             path.join(getcwd() + '\\test_generic\\blowdry.html'),
         }
         project_directory = getcwd()

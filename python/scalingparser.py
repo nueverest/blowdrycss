@@ -114,7 +114,7 @@ class ScalingParser(object):
         - Remove ``-s`` if ``-s-i`` is found at the end of the string.
 
         :return: (*str*) -- If the ``css_class`` is scaling remove the ``scaling_flag`` and return the clean css class. Otherwise,
-        return the ``css_class`` unchanged.
+            return the ``css_class`` unchanged.
 
         **Examples:**
 
