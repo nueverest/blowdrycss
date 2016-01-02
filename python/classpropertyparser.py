@@ -529,19 +529,19 @@ class ClassPropertyParser(object):
 
     def get_property_priority(self, css_class=''):
         """
-        Returns the keyword 'IMPORTANT' or ''. These are in the form that ``cssutils`` understands.
+        Returns the keyword ``'important'`` or ``''``. These are in the form that ``cssutils`` understands.
 
         :raises ValueError: If the css_class is empty or only contain whitespace values.
 
         :type css_class: str
 
         :param css_class: An encoded css class selector that may contain property name, value, and priority designator.
-        :return: (str) -- Returns the keyword 'IMPORTANT' if the property priority is set to important.
+        :return: (str) -- Returns the keyword ``important`` if the property priority is set to important.
             Otherwise, it returns ''.
 
         >>> property_parser = ClassPropertyParser()
         >>> property_parser.get_property_priority('text-align-center-i')
-        'IMPORTANT'
+        'important'
         >>> property_parser.get_property_priority('text-align-center')
         ''
         >>> property_parser.get_property_priority('')
@@ -551,4 +551,4 @@ class ClassPropertyParser(object):
 
         """
         deny_empty_or_whitespace(string=css_class, variable_name='css_class')
-        return 'IMPORTANT' if self.is_important(css_class=css_class) else ''
+        return 'important' if self.is_important(css_class=css_class) else ''

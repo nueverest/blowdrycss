@@ -269,7 +269,7 @@ class TestClassPropertyParser(TestCase):
             self.assertRaises(ValueError, class_parser.strip_priority_designator, invalid)
 
     def test_get_property_priority_important(self):
-        expected_property_priority = 'IMPORTANT'
+        expected_property_priority = 'important'
         class_set = {'font-weight-bold-i', 'font-weight-700-i', 'bold-i', 'normal-i'}
         class_parser = ClassPropertyParser(class_set=class_set)
         for css_class in class_parser.class_set:
