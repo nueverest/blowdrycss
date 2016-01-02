@@ -38,13 +38,13 @@ base = 16
 # Tuple Format (Lower Limit, Upper Limit) in pixels.
 # Note: These values change if unit conversion is enabled i.e. ``use_em`` is ``True``.
 # Common Screen Resolutions: https://en.wikipedia.org/wiki/List_of_common_resolutions
-xxsmall = (px_to_em(0), px_to_em(120))
-xsmall = (px_to_em(121), px_to_em(240))
-small = (px_to_em(241), px_to_em(480))
-medium = (px_to_em(481), px_to_em(720))         # Typical mobile device break point @ 720px.
-large = (px_to_em(721), px_to_em(1024))
-xlarge = (px_to_em(1025), px_to_em(1366))
-xxlarge = (px_to_em(1367), px_to_em(1920))
-giant = (px_to_em(1921), px_to_em(2560))
-xgiant = (px_to_em(2561), px_to_em(2800))
-xxgiant = (px_to_em(2801), px_to_em(10**6))     # float("inf")) # Python 2.x Compatible representation of Infinity.
+xxsmall = (px_to_em(0), px_to_em(120))          # 0.0 - 7.5em
+xsmall = (px_to_em(121), px_to_em(240))         # 7.5625 - 15.0em
+small = (px_to_em(241), px_to_em(480))          # 15.0625 - 30.0em
+medium = (px_to_em(481), px_to_em(720))         # 30.0625 - 45.0em: Typical mobile device break point @ 720px.
+large = (px_to_em(721), px_to_em(1024))         # 45.0625 - 64.0em
+xlarge = (px_to_em(1025), px_to_em(1366))       # 64.0625 - 85.375em
+xxlarge = (px_to_em(1367), px_to_em(1920))      # 85.4375 - 120.0em
+giant = (px_to_em(1921), px_to_em(2560))        # 120.0625 - 160.0em
+xgiant = (px_to_em(2561), px_to_em(2800))       # 160.0625 - 175.0em
+xxgiant = (px_to_em(2801), px_to_em(10**6))     # 175.0625 - float("inf")) # Python 2.x representation of Infinity.
