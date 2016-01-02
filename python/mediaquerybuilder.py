@@ -20,40 +20,49 @@ class MediaQueryBuilder(object):
 
         not_media_classes = dict()
         for css_class in self.property_parser.class_set:
+            if css_class == 'display-large-down':
+                x = 'testinsg'
+
             name = self.property_parser.get_property_name(css_class=css_class)
+            priority = self.property_parser.get_property_priority(css_class=css_class)
+            clean_css_class = ''    # Prevents css_class from being modified.
 
             if name:
-                fake_property = Property(name=name, value='inherit', priority='')                # fake 'inherit' value
-
-                try:
-                    breakpoint_parser = BreakpointParser(css_class=css_class, css_property=fake_property)
-                    is_breakpoint = True
-                    css_class = breakpoint_parser.strip_breakpoint_limit()
-                except ValueError:
-                    is_breakpoint = False
+                fake_property = Property(name=name, value='inherit', priority=priority)  # Fake value='inherit'.
 
                 scaling_parser = ScalingParser(css_class=css_class, css_property=fake_property)
                 is_scaling = scaling_parser.is_scaling
-                css_class = scaling_parser.strip_scaling_flag()
+                if is_scaling:
+                    clean_css_class = scaling_parser.strip_scaling_flag()
+
+                breakpoint_parser = BreakpointParser(css_class=css_class, css_property=fake_property)
+                is_breakpoint = breakpoint_parser.is_breakpoint
+                if is_breakpoint:
+                    clean_css_class = breakpoint_parser.strip_breakpoint_limit()
 
                 if is_breakpoint and is_scaling:                                                    # Mixed syntax
                     not_media_classes[css_class] = ' (breakpoint and scaling media query syntax cannot be combined.)'
                     continue
 
                 if not is_breakpoint and not is_scaling:                                            # Missing syntax
-                    not_media_classes[css_class] = ' (not a media query css_class selector: ' + css_class + ')'
+                    not_media_classes[css_class] = ' is not a media query css_class selector.'
                     continue
             else:
-                not_media_classes[css_class] = ' (not a media query css_class selector: ' + css_class + ')'
+                not_media_classes[css_class] = ' is not a media query css_class selector.'
                 continue
 
-            # Handle case where css_class equals 'small-down', 'large-only', 'medium-up', etc.
-            if css_class:
+            if clean_css_class and property_parser.is_important(css_class=clean_css_class):
+                clean_css_class = property_parser.strip_priority_designator(css_class=clean_css_class)
+
+            # Set property value.
+            # Handles case where css_class equals 'small-down', 'large-only', 'medium-up', etc.
+            # Specifically handle the 'display' case.
+            if clean_css_class and clean_css_class != 'display':
                 # Can return an empty string '' if css_class does not match any patterns in the property_alias_dict.
                 try:
                     encoded_property_value = self.property_parser.get_encoded_property_value(
                         property_name=name,
-                        css_class=css_class
+                        css_class=clean_css_class
                     )
                     value = self.property_parser.get_property_value(
                         property_name=name,
@@ -64,8 +73,6 @@ class MediaQueryBuilder(object):
                     continue
             else:
                 value = 'none'     # Breakpoint Parser -> display: none;
-
-            priority = self.property_parser.get_property_priority(css_class=css_class)
 
             # Build CSS Property AND Add to css_media_queries OR Remove invalid css_class from class_set.
             try:

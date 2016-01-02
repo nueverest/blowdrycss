@@ -11,12 +11,12 @@ class TestBreakpointParser(TestCase):
     def test_set_breakpoint_key(self):
         valid_css_classes = [
             'inline-small-up', 'inline-giant-down-i', 'green-xxsmall-only', 'padding-10-large-up', 'xsmall-down',
-            'medium-only', 'giant-up',
+            'medium-only', 'giant-up', 'giant-only-i', 'display-large-down',
         ]
-        names = ['display', 'display', 'color', 'padding', 'display', 'display', 'display', ]
-        values = ['inherit', 'inherit', 'green', '10', 'inherit', 'inherit', 'inherit', ]
-        priorities = ['', 'important', '', '', '', '', '', ]
-        expected = ['-small', '-giant', '-xxsmall', '-large', '-xsmall', '-medium', '-giant', ]
+        names = ['display', 'display', 'color', 'padding', 'display', 'display', 'display', 'display', 'display', ]
+        values = ['inherit', 'inherit', 'green', '10', 'inherit', 'inherit', 'inherit', 'inherit', 'inherit', ]
+        priorities = ['', 'important', '', '', '', '', '', 'important', '']
+        expected = ['-small', '-giant', '-xxsmall', '-large', '-xsmall', '-medium', '-giant', '-giant', '-large', ]
 
         for i, css_class in enumerate(valid_css_classes):
             css_property = Property(name=names[i], value=values[i], priority=priorities[i])

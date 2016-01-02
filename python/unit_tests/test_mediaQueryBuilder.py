@@ -22,14 +22,14 @@ class TestMediaQueryBuilder(TestCase):
             'font-size-13-s-i', 'font-size-48em-s',
         }
         expected_removed_set = {
-            'cue-x5_0p (cssutils invalid property value: x5.0%)',
-            'hide (property_name not found in property_alias_dict.)',
+            'cue-x5_0p is not a media query css_class selector.',
+            'hide is not a media query css_class selector.',
             'padding-b1 a5 c1% e5 (Only a-z, 0-9, "_", and "-" are allowed in class name.)',
-            'b (property_name not found in property_alias_dict.)',
-            'margin-1a% 10x% 3q% 1mp3 (Only a-z, 0-9, "_", and "-" are allowed in class name.)'
-            'height-150px ()',
-            'valign-middle ()',
-            'font-size-48 ()',
+            'b is not a media query css_class selector.',
+            'margin-1a% 10x% 3q% 1mp3 (Only a-z, 0-9, "_", and "-" are allowed in class name.)',
+            'height-150px is not a media query css_class selector.',
+            'valign-middle is not a media query css_class selector.',
+            'font-size-48 is not a media query css_class selector.',
         }
         property_parser = ClassPropertyParser(class_set=class_set)
         media_query_builder = MediaQueryBuilder(property_parser=property_parser)
