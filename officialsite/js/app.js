@@ -3,7 +3,7 @@ $(document).foundation();
 // Background Video
 // Reference: https://codepen.io/dudleystorey/pen/knqyK
 var vid = document.getElementById("bgvid");
-var pauseButton = document.querySelector("#blowdry button");
+var pauseButton = document.querySelector(".blowdry button");
 
 function vidFade() {
     vid.classList.add("stopfade");
