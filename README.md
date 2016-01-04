@@ -43,8 +43,9 @@ the following CSS in `blowdry.css`:
 10. **Permissive:** MIT License
 
 # Requirements
-> [Python 3.4+](https://www.python.org/downloads/) (required)
+> [Python 2.7.9+](https://www.python.org/downloads/) (required)
 <br>[cssutils 1.0.1+](https://bitbucket.org/cthedot/cssutils) (required)
+<br>[future 0.15.2](https://pypi.python.org/pypi/future) (required - allows backward compatibility)
 
 ### Optional
 <br>[watchdog 0.8.2+](https://pypi.python.org/pypi/watchdog/0.8.3) (recommended)
@@ -147,7 +148,7 @@ be written by hand.
 ### Valuable Reference
 > [W3C Full CSS property table](http://www.w3.org/TR/CSS21/propidx.html)
 <br>[Don't Repeat Yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
-<br>[Python 3.4+](https://www.python.org/downloads/) 
+<br>[Python](https://www.python.org/downloads/) 
 <br>[cssutils 1.0.1+](https://bitbucket.org/cthedot/cssutils) 
 <br>[watchdog 0.8.2+](https://pypi.python.org/pypi/watchdog/0.8.3) 
 

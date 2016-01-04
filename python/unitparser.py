@@ -44,8 +44,6 @@ class UnitParser(object):
         em exclusively for horizontal measurements. By extending the em unit to also work vertically, it has become
         a very powerful unit - so powerful that you seldom have to use other length units.
 
-    ------------
-
         **Source:** Wikipedia -- https://en.wikipedia.org/wiki/Em_%28typography%29
 
         An em is a unit in the field of typography, equal to the currently specified point size. For example, one em in a
