@@ -435,6 +435,7 @@ class DataLibrary(object):
         | ``<html>``
         |  ``<head>``
         |     ``<meta charset="UTF-8">``
+        |     ``<meta name="viewport" content="width=device-width, initial-scale=1.0">``
         |     ``<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />``
         |     ``<title>value_title - blowdrycss</title>``
         |     ``<link rel="stylesheet" type="text/css" href="/css/blowdry.min.css"/>``
@@ -475,6 +476,7 @@ class DataLibrary(object):
             '<html>\n' +
             '\t<head>\n' +
             '\t\t<meta charset="UTF-8">\n' +
+            '\t\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
             '\t\t<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />\n' +
             '\t\t<title>' + value_title + ' - blowdrycss</title>\n' +
             '\t\t<link rel="stylesheet" type="text/css" href="/css/blowdry.min.css" />\n' +
