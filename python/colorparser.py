@@ -57,6 +57,7 @@ class ColorParser(object):
             'color', 'background-color', 'border', 'border-color', 'border-top-color', 'border-right-color',
             'border-bottom-color', 'border-left-color', 'outline', 'outline_color',
             'background', 'border-top', 'border-right', 'border-bottom', 'border-left',
+            'text-shadow',
         }
         for color_property_name in color_property_names:
             if self.property_name == color_property_name:

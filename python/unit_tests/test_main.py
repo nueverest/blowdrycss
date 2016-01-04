@@ -10,7 +10,10 @@ __project__ = 'blow dry css'
 
 class TestMain(TestCase):
     def test_main(self):
-        substrings = ['Project Directory:', 'File Types:', 'Project Files Found:', 'CSSBuilder Running:']
+        substrings = [
+            'Project Directory:', 'File Types:', 'Project Files Found:', 'CSSBuilder Running...',
+            '.css created.',
+        ]
         saved_stdout = sys.stdout
         try:
             out = StringIO()

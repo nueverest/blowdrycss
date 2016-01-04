@@ -117,6 +117,7 @@ class UnitParser(object):
             'pitch': 'Hz',                    # single
 
             'text-indent': 'px',              # single
+            'text-shadow': 'px',              # single, double, triple
 
             'vertical-align': '%',            # single
 

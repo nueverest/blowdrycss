@@ -94,6 +94,7 @@ class TestDataLibrary(TestCase):
             'page-break-after': {'page-b-after-', 'pba-'}, 'border': {'bor-'}, 'z-index': {'z-i-', 'zi-'},
             'background-position': {'background-p-', 'bp-'}, 'font-weight': {'font-w-', 'fw-'},
             'voice-family': {'vf-', 'voice-f-'}, 'max-width': {'mw-', 'max-w-'}, 'letter-spacing': {'ls-', 'letter-s-'},
+            'text-shadow': {'ts-', 'text-s-', },
             'speak-header': {'speak-h-', 'sh-'}, 'pitch-range': {'pr-', 'pitch-r-'},
             'border-right-style': {'brs-', 'border-r-style-'}, 'padding': {'pad-'},
             'background-repeat': {'br-', 'background-r-'}, 'margin-left': {'margin-l-', 'ml-'}, 'orphans': {'orp-'}
@@ -242,6 +243,7 @@ class TestDataLibrary(TestCase):
             'empty-cells': {'empty-c-', 'ec-', }, 'margin-top': {'margin-t-', 'm-top-', 'mt-'},
             'border-color': set(),
             'text-decoration': {'overline', 'text-d-', 'underline', 'td-', 'blink', 'line-through'}, 'quotes': {'quo-'},
+            'text-shadow': {'ts-', 'text-s-'},
             'opacity': {'opa-'},
             'outline-style': {'outline-s-', 'os-'}, 'border-style': set(), 'counter-reset': {'counter-r-', 'cr-'},
             'margin-bottom': {'margin-b-', 'm-bot-', 'mb-'}, 'orphans': {'orp-'},
