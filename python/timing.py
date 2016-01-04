@@ -18,8 +18,10 @@ It took: 0.17296 seconds
 =======================================
 
 """
-
-# python 3
+# python 2
+from __future__ import print_function, division, unicode_literals
+from builtins import str
+# general
 import atexit
 from time import time
 from datetime import timedelta, datetime
@@ -54,12 +56,12 @@ def log(elapsed=None):
 
     """
     completed_at = '\nCompleted @ ' + str(datetime.now())
-    border = "=" * len(completed_at)
-    print(completed_at)
-    print(border)
+    border = '=' * len(completed_at)
+    print(str(completed_at))
+    print(str(border))
     if elapsed:
-        print("It took:", elapsed, "seconds")
-    print(border)
+        print('It took: ' + str(elapsed) + 'seconds')
+    print(str(border))
 
 
 def end_log():

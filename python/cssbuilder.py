@@ -16,7 +16,9 @@
     | **Returns:** None
 
 """
-
+# python 2
+from __future__ import print_function
+# general
 from cssutils.css import Property, CSSStyleRule, CSSStyleSheet
 from xml.dom import SyntaxErr
 # custom
@@ -27,7 +29,7 @@ __project__ = 'blow dry css'
 
 class CSSBuilder(object):
     def __init__(self, property_parser=ClassPropertyParser()):
-        print('\nCSSBuilder Running:')
+        print(u'\nCSSBuilder Running...\n')
         self.property_parser = property_parser
         self.css_rules = set()
         self.css_stylesheet = CSSStyleSheet()

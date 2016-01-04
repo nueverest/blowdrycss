@@ -9,7 +9,7 @@ __project__ = 'blow dry css'
 class TestFileConverter(TestCase):
     def test_file_converter_wrong_path(self):
         wrong_file_path = 'C:\\this\\is\\wrong\\file\\path'
-        self.assertRaises(FileNotFoundError, FileConverter, wrong_file_path)
+        self.assertRaises(OSError, FileConverter, wrong_file_path)
 
     def test_get_file_as_string(self):
         test_file_path = path.join(getcwd() + '\\test_html\\test.html')

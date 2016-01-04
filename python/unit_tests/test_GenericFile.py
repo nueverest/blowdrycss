@@ -1,3 +1,6 @@
+# python 2
+from builtins import str
+# general
 from unittest import TestCase
 from os import path, getcwd, remove
 # custom
@@ -20,7 +23,7 @@ class TestGenericFile(TestCase):
             if path.isfile(generic_file.file_path):      # Ensure that file is deleted before testing.
                 remove(generic_file.file_path)
 
-            generic_file.write(text=sample_markdown)
+            generic_file.write(text=str(sample_markdown))
 
             with open(generic_file.file_path, 'r') as generic_file:
                 file_string = generic_file.read()

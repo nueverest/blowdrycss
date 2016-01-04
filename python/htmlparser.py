@@ -33,7 +33,7 @@ class HTMLAttributeParser(HTMLParser):
 
     """
     def __init__(self, attribute_name=''):
-        super().__init__()
+        HTMLParser.__init__(self)               # Python 2 and 3 compatible: http://amyboyle.ninja/Python-Inheritance/
         self.attribute_name = attribute_name
         self.attribute_value_list = []
 
@@ -54,7 +54,7 @@ class HTMLAttributeParser(HTMLParser):
         :type attrs: list
 
         :param tag: The name of the HTML tag converted to lower case.
-        :param attrs: List of tuple (name, value) pairs containing the attributes found inside the tag’s ``<>``
+        :param attrs: List of tuple (name, value) pairs containing the attributes found inside the tag's ``<>``
             brackets.
         :return: None
 
@@ -78,7 +78,7 @@ class HTMLAttributeParser(HTMLParser):
         :type attrs: list
 
         :param tag: The name of the HTML tag converted to lower case.
-        :param attrs: List of tuple (name, value) pairs containing the attributes found inside the tag’s ``<>``
+        :param attrs: List of tuple (name, value) pairs containing the attributes found inside the tag's ``<>``
             brackets.
         :return: None
 
@@ -90,7 +90,7 @@ class HTMLAttributeParser(HTMLParser):
         """
         Creates a ``list()`` of all string values in a HTML file with a ``name`` that matches ``self.attribute_name``.
 
-        :param attrs: List of tuple (name, value) pairs containing the attributes found inside the tag’s ``<>``
+        :param attrs: List of tuple (name, value) pairs containing the attributes found inside the tag's ``<>``
             brackets.
         :return: None
 

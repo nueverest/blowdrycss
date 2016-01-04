@@ -1,3 +1,7 @@
+# python 2 compatibility
+from __future__ import print_function, unicode_literals
+from builtins import str
+# general
 from os import path, walk, getcwd, makedirs
 from glob import glob
 from cssutils import parseString, ser
@@ -42,14 +46,15 @@ class FileFinder(object):
             self.project_directory = project_directory
             self.file_types = file_types
             self.files = []
-            print('Project Directory:', project_directory)
-            print('\nFile Types:', self.file_types)
+            print(u'Project Directory:', str(project_directory))
+            print(u'\nFile Types:', ', '.join(self.file_types))
 
             self.set_files()
-            print('\nProject Files Found:')
+            print(u'\nProject Files Found:')
             self.print_collection(self.files)
         else:
-            raise NotADirectoryError(project_directory + ' is not a directory.')
+            raise OSError(project_directory + ' is not a directory.')
+            # raise NotADirectoryError(project_directory + ' is not a directory.') # python 3 only
 
     @staticmethod
     def print_collection(collection):
@@ -58,12 +63,12 @@ class FileFinder(object):
 
         :type collection: list
 
-        :param collection: A list of strings to be printed.
+        :param collection: A list of unicode strings to be printed.
         :return: None
 
         """
         for item in collection:
-            print(item)
+            print(str(item))        # Python 2 requires str().
 
     def set_files(self):
         """
@@ -107,7 +112,8 @@ class FileConverter(object):
         if path.isfile(file_path):
             self.file_path = file_path
         else:
-            raise FileNotFoundError('file_path ' + file_path + ' does not exist.')
+            raise OSError('file_path ' + file_path + ' does not exist.')
+            # raise FileNotFoundError('file_path ' + file_path + ' does not exist.')       # python 3 only
 
     def get_file_as_string(self):
         """ Convert the file to a string and return it.
@@ -278,9 +284,13 @@ class GenericFile(object):
 
     """
     def __init__(self, file_directory=getcwd(), file_name='', extension=''):
-        self.file_directory = file_directory
-        self.file_name = file_name
-        self.file_path = get_file_path(file_directory=self.file_directory, file_name=self.file_name, extension=extension)
+        self.file_directory = str(file_directory)
+        self.file_name = str(file_name)
+        self.file_path = get_file_path(
+                file_directory=self.file_directory,
+                file_name=self.file_name,
+                extension=str(extension)
+        )
         try:                                        # Python 2.7 Compliant
             makedirs(file_directory)                # Make 'html' directory
         except OSError:
@@ -295,7 +305,7 @@ class GenericFile(object):
 
         :raises TypeError: Raise a TypeError if ``text`` input is not of type ``str``.
 
-        :type text: str
+        :type text: unicode or str
         :param text: The text to be written to the file.
         :return: None
 
@@ -304,4 +314,4 @@ class GenericFile(object):
             with open(self.file_path, 'wb') as generic_file:
                 generic_file.write(bytearray(text, 'utf-8'))
         else:
-            raise TypeError('In GenericFile.write() ' + text + ' must be a string type.')
+            raise TypeError('In GenericFile.write() "' + text + '" input must be a str type.')

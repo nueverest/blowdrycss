@@ -1,48 +1,4 @@
-"""
-**Used in these cases:**
-
-- No units are provided and default units need to be added to make it valid css.
-- The user wants their pixel (px) based units to be converted to em or root em (rem)
-  so that their page scales / zooms properly.
-
-**Assumption:** The value provided already has negative signs and decimal points. There are no dashes or
-underscores present in the value e.g. -1.25 can be processed, but n1_25 cannot be processed.
-
-**Contains a ``default_property_units_dict``** which maps property names to their default units.
-
-**Note:** Shorthand properties are not supported.
-
-**Why do I want to use em (named after the sound for the letter 'M') or root em (rem)?:**
-
-    *Because your webpage will scale with browser and device size.*
-
-|
-
-.. http://snook.ca/archives/html_and_css/font-size-with-rem
-   https://css-tricks.com/rems-ems/
-
-**What does (em) actually stand for?:**
-    **Source:** W3C -- http://www.w3.org/WAI/GL/css2em.htm
-
-    The foremost tool for writing scalable style sheets is the "em" unit, and it therefore goes on top of the list of
-    guidelines that we will compile throughout this chapter: use ems to make scalable style sheets. Named after the
-    letter "M", the em unit has a long-standing tradition in typography where it has been used to measure
-    horizontal widths.
-    ...
-    In CSS, the em unit is a general unit for measuring lenghts, for example page margins and padding around elements.
-    You can use it both horizontally and vertically, and this shocks traditional typographers who always have used
-    em exclusively for horizontal measurements. By extending the em unit to also work vertically, it has become
-    a very powerful unit - so powerful that you seldom have to use other length units.
-
-------------
-
-    **Source:** Wikipedia -- https://en.wikipedia.org/wiki/Em_%28typography%29
-
-    An em is a unit in the field of typography, equal to the currently specified point size. For example, one em in a
-    16-point typeface is 16 points. Therefore, this unit is the same for all typefaces at a given point size.
-
-"""
-
+# general
 from string import digits
 # custom
 import settings
@@ -52,6 +8,51 @@ __project__ = 'blow dry css'
 
 
 class UnitParser(object):
+    """
+    **Used in these cases:**
+
+    - No units are provided and default units need to be added to make it valid css.
+    - The user wants their pixel (px) based units to be converted to em or root em (rem)
+      so that their page scales / zooms properly.
+
+    **Assumption:** The value provided already has negative signs and decimal points. There are no dashes or
+    underscores present in the value e.g. -1.25 can be processed, but n1_25 cannot be processed.
+
+    **Contains a ``default_property_units_dict``** which maps property names to their default units.
+
+    **Note:** Shorthand properties are not supported.
+
+    **Why do I want to use em (named after the sound for the letter 'M') or root em (rem)?:**
+
+        *Because your webpage will scale with browser and device size.*
+
+    |
+
+    .. http://snook.ca/archives/html_and_css/font-size-with-rem
+       https://css-tricks.com/rems-ems/
+
+    **What does (em) actually stand for?:**
+        **Source:** W3C -- http://www.w3.org/WAI/GL/css2em.htm
+
+        The foremost tool for writing scalable style sheets is the "em" unit, and it therefore goes on top of the list of
+        guidelines that we will compile throughout this chapter: use ems to make scalable style sheets. Named after the
+        letter "M", the em unit has a long-standing tradition in typography where it has been used to measure
+        horizontal widths.
+        ...
+        In CSS, the em unit is a general unit for measuring lenghts, for example page margins and padding around elements.
+        You can use it both horizontally and vertically, and this shocks traditional typographers who always have used
+        em exclusively for horizontal measurements. By extending the em unit to also work vertically, it has become
+        a very powerful unit - so powerful that you seldom have to use other length units.
+
+    ------------
+
+        **Source:** Wikipedia -- https://en.wikipedia.org/wiki/Em_%28typography%29
+
+        An em is a unit in the field of typography, equal to the currently specified point size. For example, one em in a
+        16-point typeface is 16 points. Therefore, this unit is the same for all typefaces at a given point size.
+
+    """
+
     def __init__(self, property_name=''):
         self.property_name = property_name
         self.allowed = set(digits + '-.px')

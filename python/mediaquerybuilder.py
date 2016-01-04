@@ -1,3 +1,6 @@
+# python 2
+from __future__ import print_function
+# general
 from cssutils.css import Property
 from xml.dom import SyntaxErr
 # custom
@@ -13,7 +16,7 @@ class MediaQueryBuilder(object):
         # Takes a set of classes that contain media query flags
         # Invalidates classes that contain mixed syntax ``small-down-s`` or ``font-size-28-medium-only-s``
         # i.e. mixing breakpoint and scaling syntax is not allowed.
-        print('\nMediaQueryBuilder Running...')
+        print(u'\nMediaQueryBuilder Running...\n')
         self.property_parser = property_parser
         self.css_media_queries = set()
         self.media_query_text = ''

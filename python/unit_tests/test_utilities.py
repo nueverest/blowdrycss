@@ -1,3 +1,7 @@
+# python 2
+from __future__ import division
+from builtins import round
+# general
 import settings
 from unittest import TestCase, main
 from os import getcwd, path
@@ -100,7 +104,7 @@ class Test_utilities(TestCase):
             expected = round(pixels / base, 4)
             expected = str(expected) + 'em'
             actual = px_to_em(pixels=pixels)
-            self.assertEqual(actual, str(expected), msg=pixels)
+            self.assertEqual(actual, str(expected), msg=actual + u' vs ' + expected)
 
     def test_px_to_em_string_base(self):
         base = 16

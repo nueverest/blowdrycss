@@ -1,3 +1,6 @@
+# python 2
+from __future__ import division
+# general
 from unittest import TestCase, main
 # custom 
 import settings
@@ -28,7 +31,7 @@ class TestUnitParser(TestCase):
 
         for i, value in enumerate(property_values):
             new_value = unit_parser.add_units(property_value=value)
-            self.assertEqual(new_value, expected_values[i], msg=i)
+            self.assertEqual(new_value, expected_values[i], msg=new_value + u' vs ' + expected_values[i])
 
     def test_add_units_multi_value_conversion_True(self):
         # Handles cases input like: '12.5', '-35 15', '1 2 1 2', '20% 20%', '5em 6em 5em 6em'
@@ -42,7 +45,7 @@ class TestUnitParser(TestCase):
 
         for i, value in enumerate(property_values):
             new_value = unit_parser.add_units(property_value=value)
-            self.assertEqual(new_value, expected_values[i], msg=i)
+            self.assertEqual(new_value, expected_values[i], msg=new_value)
 
     def test_add_units_margin_top_conversion_True(self):
         property_name = 'margin-top'

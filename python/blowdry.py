@@ -1,3 +1,7 @@
+# python 2
+from __future__ import print_function
+from builtins import bytes, str
+# general
 from os import chdir, getcwd, path
 # custom classes
 import settings
@@ -75,26 +79,26 @@ def main():
     # Generate Markdown documentation files.
     if settings.markdown_docs:
         markdown_file = GenericFile(file_directory=getcwd(), file_name='clashing_aliases', extension='.md')
-        markdown_file.write(clashing_alias_markdown)
+        markdown_file.write(str(clashing_alias_markdown))
         markdown_file.file_name = 'property_aliases'                        # Changes file name.
-        markdown_file.write(property_alias_markdown)
+        markdown_file.write(str(property_alias_markdown))
 
     # Generate HTML documentation files. (This location is important since it allows encoded css to be included
     # in the documentation files.)
     if settings.html_docs:
         html_file = GenericFile(file_directory=project_directory, file_name='clashing_aliases', extension='.html')
-        html_file.write(clashing_alias_html)
+        html_file.write(str(clashing_alias_html))
         html_file.file_name = 'property_aliases'                            # Change file name.
-        html_file.write(property_alias_html)
+        html_file.write(str(property_alias_html))
 
     # Generate reStructuredText documentation files.
     if settings.rst_docs:
         docs_directory = path.join(getcwd() + '\\docs')
-        print(docs_directory)
+        print(str(docs_directory))                                              # Python 2 requires str().
         rst_file = GenericFile(file_directory=docs_directory, file_name='clashing_aliases', extension='.rst')
-        rst_file.write(clashing_alias_rst)
-        rst_file.file_name = 'property_aliases'                        # Changes file name.
-        rst_file.write(property_alias_rst)
+        rst_file.write(str(clashing_alias_rst))
+        rst_file.file_name = 'property_aliases'                                 # Changes file name.
+        rst_file.write(str(property_alias_rst))
 
     # Define File all file types/extensions to search for in project_directory
     file_types = ('*.html', )
@@ -117,8 +121,8 @@ def main():
     # Build Media Queries
     if settings.media_queries_enabled:
         unassigned_class_set = class_set.difference(css_builder.property_parser.class_set)
-        css_builder.property_parser.class_set = unassigned_class_set                        # Only use unassigned classes
-        css_builder.property_parser.removed_class_set = set()                               # Clear set
+        css_builder.property_parser.class_set = unassigned_class_set                # Only use unassigned classes
+        css_builder.property_parser.removed_class_set = set()                       # Clear set
         # print(css_builder.property_parser.class_set)
         # print(css_builder.property_parser.removed_class_set)
 
@@ -134,13 +138,13 @@ def main():
     if settings.human_readable:
         css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
         css_file.write(css_text=css_text)
-        print(css_directory + css_file.file_name + '.css created.')
+        print(str(css_directory + css_file.file_name) + u'.css created.')
 
     # Output the Minified DRY CSS file. (user command option)
     if settings.minify:
         css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
         css_file.minify(css_text=css_text)
-        print(css_directory + css_file.file_name + '.min.css created.')
+        print(str(css_directory + css_file.file_name) + u'.min.css created.')
 
 
 if __name__ == '__main__':
