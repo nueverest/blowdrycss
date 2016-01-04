@@ -61,7 +61,7 @@ This tool was created after seeing how many companies manage their CSS files. Th
 
 #### Scenario 1 - Inside a CSS file you find the following:
 ```css
-.header-1 { font-weight: bold; font-size: 12px; font-color: red; }
+.header-1 { font-weight: bold; font-size: 12px; font-color: red; } 
 .header-2 { font-weight: bold; font-size: 16px; font-color: blue; }
 .header-3 { font-weight: bold; font-size: 12px; font-color: green; }
 ```
