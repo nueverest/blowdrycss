@@ -22,11 +22,10 @@
             <br class="xlarge-up" />
             <br class="large-up" />
             <button><a class="text-shadow-0-1-4-h000" href="http://blowdrycss.readthedocs.org/en/latest/quickstart.html">Quick Start Guide</a></button>
-            <br class="xlarge-up" />
-            <br class="xlarge-up" />
-            <br class="xlarge-up" />
-            <br class="xlarge-up" />
-            <br class="xlarge-up" />
+            <br class="large-up" />
+            <br class="large-up" />
+            <br class="large-up" />
+            <br class="large-up" />
             <br class="xlarge-up" />
             <br class="xlarge-up" />
             <br class="xlarge-up" />
@@ -42,17 +41,30 @@
             <br class="xxlarge-up" />
             <br class="xxlarge-up" />
             <br class="xxlarge-up" />
-            <br class="xxlarge-up" />
+
             <!--<button>Pause</button>-->
-            <video class="banner-video"  poster="images/blow.jpg" id="bgvid">
+            <!--poster="images/blow.jpg"-->
+            <video class="banner-video" autoplay  id="bgvid">
                 <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
                 <!--<source src="//demosthenes.info/assets/videos/polina.webm" type="video/webm">-->
                 <source src="videos/dandelionwind.mp4" type="video/mp4">
             </video>
         </div>
 
-        <div class="row">
-            <div class="small-12 columns">
+        <div class="row margin-top-30">
+            <div class="small-12 large-6 columns">
+                <h2>What is it?</h2>
+
+                <p>A rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.</p>
+            </div>
+
+            <div class="small-12 large-6 columns text-align-center bgc-rgba-153-204-255-0_23 padding-top-50 padding-bottom-50 border-radius-10 ">
+                <button><a class="text-shadow-0-1-4-h000" href="/nueverest/blowdrycss/archive/master.zip">Download blowdrycss</a></button>
+            </div>
+        </div>
+
+        <div class="row margin-top-30">
+            <div class="small-12 large-6 columns">
                 <h2>What can I do with it?</h2>
 
                 <p>
@@ -69,10 +81,15 @@
                     This page is built using blowdrycss, custom CSS, custom JS, jquery, what-input,
                     and the browser compatibility CSS/JS portion of Foundation 6.1.
                 </p>
+            </div>
+            <div class="small-12 large-6 columns">
+                <img class="border-radius-10" width="100%" src="images/why-blow-dry.jpg" title="woman blow dry" />
+            </div>
+        </div>
 
-                <img width="100%" src="images/why-blow-dry.jpg" title="woman blow dry" />
-
-                <h3>Given this HTML</h3>
+        <div class="row">
+            <div class="small-12 columns">
+                <h2>Given this HTML</h2>
 
                 <div class="bgc-rgba-153-204-255-0_23">
                     <pre class="text-align-left padding-top-10 padding-bottom-10">
@@ -85,7 +102,7 @@
     &lt;/div&gt;</pre>
                 </div>
 
-                <h3>blowdrycss decodes the CSS class selectors and generates the following CSS:</h3>
+                <h2>blowdrycss decodes the CSS class selectors and generates the following CSS:</h2>
 
                 <div class="bgc-rgba-153-204-255-0_23">
                     <pre class="text-align-left padding-top-10 padding-bottom-10">
@@ -95,7 +112,7 @@
     .green { color: green }</pre>
                 </div>
 
-                <h3>Here is what it looks like in the web browser. (minus the border)</h3>
+                <h2>Here is what it looks like in the web browser. (minus the border)</h2>
 
                 <div class="text-align-left padding-top-10 padding-bottom-10, border-1px-solid-gray">
                     <div class="text-align-center margin-top-30">

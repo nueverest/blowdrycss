@@ -198,6 +198,8 @@ class DataLibrary(object):
             'border-bottom-style', 'border-bottom-width', 'border-collapse', 'border-color', 'border-left',
             'border-left-color', 'border-left-style', 'border-left-width', 'border-right', 'border-right-color',
             'border-right-style', 'border-right-width', 'border-spacing', 'border-style', 'border-top',
+            'border-radius', 'border-top-left-radius', 'border-top-right-radius', 'border-bottom-right-radius',
+            'border-bottom-left-radius',
             'border-top-color', 'border-top-style', 'border-top-width', 'border-width', 'bottom',
             'caption-side', 'clear', 'clip', 'color', 'content', 'counter-increment', 'counter-reset', 'cue',
             'cue-after', 'cue-before', 'cursor', 'direction', 'display', 'elevation', 'empty-cells', 'float',

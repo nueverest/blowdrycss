@@ -59,73 +59,78 @@ class UnitParser(object):
         # Extracted all properties containing Values of <angle>, <percentage>, <length>, <time>, <frequency>
         # IDEA: Build webscraper that auto-extracts these. May not be deterministic enough.  Would need to build a
         # Page based on the standard that includes all property name/value combos.
-        self.default_property_units_dict = {  # Number of possible values:
-            'azimuth': 'deg',                 # single
-            'background-position': '%',       # single or double
+        self.default_property_units_dict = {     # Number of possible values:
+            'azimuth': 'deg',                    # single
+            'background-position': '%',          # single or double
 
-            # 'border': 'px',                 # single   Shorthand Property unit addition Not implemented
-            'border-top': 'px',               # single
-            'border-right': 'px',             # single
-            'border-bottom': 'px',            # single
-            'border-left': 'px',              # single
-            'border-spacing': 'px',           # single
+            # 'border': 'px',                    # single   Shorthand Property unit addition Not implemented
+            'border-top': 'px',                  # single
+            'border-right': 'px',                # single
+            'border-bottom': 'px',               # single
+            'border-left': 'px',                 # single
+            'border-spacing': 'px',              # single
 
-            'border-width': 'px',             # single
-            'border-top-width': 'px',         # single
-            'border-right-width': 'px',       # single
-            'border-bottom-width': 'px',      # single
-            'border-left-width': 'px',        # single
+            'border-width': 'px',                # single
+            'border-top-width': 'px',            # single
+            'border-right-width': 'px',          # single
+            'border-bottom-width': 'px',         # single
+            'border-left-width': 'px',           # single
+            'border-radius': 'px',               # single
+            'border-top-left-radius': 'px',      # single
+            'border-top-right-radius': 'px',     # single
+            'border-bottom-right-radius': 'px',  # single
+            'border-bottom-left-radius': 'px',
 
-            'elevation': 'deg',               # single
+            'elevation': 'deg',                  # single
 
-            # 'font': 'px',                   # single    Shorthand Property unit addition Not implemented
-            'font-size': 'px',                # single
+            # 'font': 'px',                      # single    Shorthand Property unit addition Not implemented
+            'font-size': 'px',                   # single
 
-            'height': 'px',                   # single
-            'max-height': 'px',               # single
-            'min-height': 'px',               # single
+            'height': 'px',                      # single
+            'max-height': 'px',                  # single
+            'min-height': 'px',                  # single
 
-            'letter-spacing': 'px',           # single
-            'word-spacing': 'px',             # single
+            'letter-spacing': 'px',              # single
+            'word-spacing': 'px',                # single
 
-            'line-height': 'px',              # single
+            'line-height': 'px',                 # single
 
-            'top': 'px',                      # single
-            'right': 'px',                    # single
-            'bottom': 'px',                   # single
-            'left': 'px',                     # single
+            'top': 'px',                         # single
+            'right': 'px',                       # single
+            'bottom': 'px',                      # single
+            'left': 'px',                        # single
 
-            'margin': 'px',                   # single, double, quadruple
-            'margin-top': 'px',               # single
-            'margin-right': 'px',             # single
-            'margin-bottom': 'px',            # single
-            'margin-left': 'px',              # single
+            'margin': 'px',                      # single, double, quadruple
+            'margin-top': 'px',                  # single
+            'margin-right': 'px',                # single
+            'margin-bottom': 'px',               # single
+            'margin-left': 'px',                 # single
 
-            # 'outline': 'px',                # single    Shorthand Property unit addition Not implemented
-            'outline-width': 'px',            # single
+            # 'outline': 'px',                   # single    Shorthand Property unit addition Not implemented
+            'outline-width': 'px',               # single
 
-            'padding': 'px',                  # single, double, quadruple
-            'padding-top': 'px',              # single
-            'padding-right': 'px',            # single
-            'padding-bottom': 'px',           # single
-            'padding-left': 'px',             # single
+            'padding': 'px',                     # single, double, quadruple
+            'padding-top': 'px',                 # single
+            'padding-right': 'px',               # single
+            'padding-bottom': 'px',              # single
+            'padding-left': 'px',                # single
 
-            'pause': 'ms',                    # single, double
-            'pause-after': 'ms',              # single
-            'pause-before': 'ms',             # single
+            'pause': 'ms',                       # single, double
+            'pause-after': 'ms',                 # single
+            'pause-before': 'ms',                # single
 
-            'pitch': 'Hz',                    # single
+            'pitch': 'Hz',                       # single
 
-            'text-indent': 'px',              # single
-            'text-shadow': 'px',              # single, double, triple
+            'text-indent': 'px',                 # single
+            'text-shadow': 'px',                 # single, double, triple
 
-            'vertical-align': '%',            # single
+            'vertical-align': '%',               # single
 
-            'volume': '%',                    # single
+            'volume': '%',                       # single
 
-            'width': 'px',                    # single
-            'max-width': 'px',                # single
-            'min-width': 'px',                # single
+            'width': 'px',                       # single
+            'max-width': 'px',                   # single
+            'min-width': 'px',                   # single
         }
 
     def default_units(self):
