@@ -50,7 +50,7 @@ Advantages of blowdrycss
 #. **Solid:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all phases of a products lifecycle from prototype to production.
 #. **Customizable:** Features can be turned on and off inside of ``blowdry.py``. Examples include: minification, unit conversion, color parser, font parser, unit parser.
 #. **Extensible:** Build your own plugins.
-#. **Standardized:** PEP8 Compliant
+#. **Standardized:** HTML5 compatible, All `W3C CSS <http://www.w3.org/Style/CSS/Overview.en.html>`__ Level 2.1 and some Level 3 properties implemented, PEP8 Compliant
 #. **Tested:** UnitTest Coverage
 #. **Permissive:** MIT :doc:`license`
 

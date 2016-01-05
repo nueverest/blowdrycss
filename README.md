@@ -38,7 +38,7 @@ the following CSS in `blowdry.css`:
 5. **Solid:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all phases of a products lifecycle from prototype to production.
 6. **Customizable:** Features can be turned on and off inside of `blowdry.py`. Examples include: minification, unit conversion, color parser, font parser, unit parser.
 7. **Extensible:** Build your own plugins.
-8. **Standardized:** PEP8 Compliant
+8. **Standardized:** HTML5 compatible, All [W3C CSS](http://www.w3.org/Style/CSS/Overview.en.html) Level 2.1 and some Level 3 properties implemented, PEP8 Compliant
 9. **Tested:** UnitTest Coverage
 10. **Permissive:** MIT License
 
