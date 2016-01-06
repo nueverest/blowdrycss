@@ -73,7 +73,7 @@ def main():
     # In this case it is set to the "examplesite" by default for demonstration purposes.
     # Change to whatever you want.
     chdir('..')                                                 # Navigate up one directory relative to this script.
-    project_directory = path.join(getcwd() + '\\officialsite')
+    project_directory = path.join(getcwd() + '\\examplesite')
     css_directory = path.join(project_directory + '\\css')
     
     # Generate Markdown documentation files.
