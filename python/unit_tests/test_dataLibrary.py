@@ -81,7 +81,7 @@ class TestDataLibrary(TestCase):
             'speak': set(), 'overflow': {'ove-'}, 'list-style': {'ls-', 'list-s-'},
             'opacity': {'opa-'},
             'margin-bottom': {'mb-', 'margin-b-'}, 'border-collapse': {'bc-', 'border-c-'},
-            'border-left-color': {'border-l-color-', 'blc-'}, 'display': {'dis-'}, 'border-right': {'br-', 'border-r-'},
+            'border-left-color': {'border-l-color-', 'blc-'}, 'display': {'dis-'},
             'outline-width': {'ow-', 'outline-w-'}, 'border-color': {'bc-', 'border-c-'}, 'pitch': set(),
             'direction': {'dir-'}, 'border-bottom-width': {'bbw-', 'border-b-width-'}, 'clear': set(),
             'list-style-position': {'lsp-', 'list-s-position-'}, 'font-style': {'fs-', 'font-s-'},
@@ -97,10 +97,20 @@ class TestDataLibrary(TestCase):
             'text-shadow': {'ts-', 'text-s-', },
             'speak-header': {'speak-h-', 'sh-'}, 'pitch-range': {'pr-', 'pitch-r-'},
             'border-right-style': {'brs-', 'border-r-style-'}, 'padding': {'pad-'},
-            'background-repeat': {'br-', 'background-r-'}, 'margin-left': {'margin-l-', 'ml-'}, 'orphans': {'orp-'}
+            'background-repeat': {'br-', 'background-r-'}, 'margin-left': {'margin-l-', 'ml-'}, 'orphans': {'orp-'},
+            'border-right': {'border-r-', 'br-'},
+            'border-radius': {'border-r-', 'br-'},
+            'border-top-left-radius': {'btl-', 'border-t-left-radius-'},
+            'border-top-right-radius': {'btr-', 'border-t-right-radius-'},
+            'border-bottom-left-radius': {'bbl-', 'border-b-left-radius-'},
+            'border-bottom-right-radius': {'bbr-', 'border-b-right-radius-'},
         }
         self.data_library.autogen_property_alias_dict()
-        self.assertEqual(self.data_library.property_alias_dict, expected_dict)
+        self.assertEqual(
+                self.data_library.property_alias_dict,
+                expected_dict,
+                msg=expected_dict
+        )
 
     def test_merge_dictionaries(self):
         dict1 = {
@@ -148,7 +158,10 @@ class TestDataLibrary(TestCase):
         expected_clashes = {
             'border-collapse': {'border-c-', 'bc-'}, 'border-style': {'bs-', 'border-s-'},
             'font-style': {'font-s-', 'fs-'}, 'background-repeat': {'br-'}, 'pitch-range': {'pr-'},
-            'padding-bottom': {'pb-'}, 'min-width': {'mw-'}, 'border-right': {'br-'}, 'letter-spacing': {'ls-'},
+            'padding-bottom': {'pb-'}, 'min-width': {'mw-'},
+            'border-right': {'br-', 'border-r-'},
+            'border-radius': {'br-', 'border-r-'},
+            'letter-spacing': {'ls-'},
             'border-spacing': {'bs-', 'border-s-'}, 'white-space': {'ws-'}, 'word-spacing': {'ws-'},
             'max-width': {'mw-'}, 'padding-right': {'pr-'}, 'background-color': {'bc-'}, 'max-height': {'mh-'},
             'border-color': {'border-c-', 'bc-'}, 'pause-before': {'pb-'}, 'min-height': {'mh-'}, 'list-style': {'ls-'},
@@ -197,7 +210,7 @@ class TestDataLibrary(TestCase):
             'text-align': {'ta-', 'talign-', 'text-a-', 't-align-'}, 'padding': {'pad-', 'p-'},
             'outline-width': {'outline-w-', 'ow-'}, 'speak-punctuation': {'code', 'sp-', 'speak-p-'},
             'font-size': {'fsize-', 'f-size-'}, 'visibility': {'collapse', 'vis-'},
-            'counter-increment': {'counter-i-', 'ci-'}, 'border-right': {'border-r-'}, 'cue': set(),
+            'counter-increment': {'counter-i-', 'ci-'}, 'border-right': set(), 'cue': set(),
             'vertical-align': {'baseline', 'sub', 'v-align-', 'text-top', 'middle', 'text-bottom', 'vertical-a-',
                                'valign-', 'va-', 'super'}, 'page-break-after': {'pba-', 'page-b-after-'},
             'elevation': {'higher', 'ele-', 'lower', 'above', 'below', 'level'}, 'line-height': {'lh-', 'line-h-'},
@@ -221,9 +234,38 @@ class TestDataLibrary(TestCase):
             'border-left-style': {'border-l-style-', 'bls-'}, 'margin': {'mar-', 'm-'}, 'widows': {'wid-'},
             'pause-before': {'pause-b-'}, 'text-indent': {'ti-', 'text-i-'},
             'border-top-style': {'border-t-style-', 'bts-'}, 'overflow': {'ove-', 'scroll'},
-            'color': {'gray', 'white', 'purple', 'yellow', 'green', 'olive', 'hsl', 'navy', 'hsla', 'rgba',
-                      'c-', 'blue', 'silver', 'maroon', 'fuchsia', 'aqua', 'red', 'rgb', 'black', 'teal',
-                      'orange', 'lime'}, 'top': set(), 'bottom': {'bot-'}, 'pause-after': {'pause-a-', 'pa-'},
+            'color': {'c-', 'rgb', 'rgba', 'hsl', 'hsla',
+                # SVG 1.1 Color Keyword Reference: http://www.w3.org/TR/SVG/types.html#ColorKeywords
+                'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure',
+                'beige', 'bisque', 'black', 'blanchedalmond', 'blue', 'blueviolet', 'brown', 'burlywood',
+                'cadetblue', 'chartreuse', 'chocolate', 'coral', 'cornflowerblue', 'cornsilk', 'crimson', 'cyan',
+                'darkblue', 'darkcyan', 'darkgoldenrod', 'darkgray', 'darkgreen', 'darkgrey', 'darkkhaki',
+                'darkmagenta', 'darkolivegreen', 'darkorange', 'darkorchid', 'darkred', 'darksalmon',
+                'darkseagreen', 'darkslateblue', 'darkslategray', 'darkslategrey', 'darkturquoise',
+                'darkviolet', 'deeppink', 'deepskyblue', 'dimgray', 'dimgrey', 'dodgerblue',
+                'firebrick', 'floralwhite', 'forestgreen', 'fuchsia',
+                'gainsboro', 'ghostwhite', 'gold', 'goldenrod', 'gray', 'grey', 'green', 'greenyellow',
+                'honeydew', 'hotpink',
+                'indianred', 'indigo', 'ivory',
+                'khaki',
+                'lavender', 'lavenderblush', 'lawngreen', 'lemonchiffon', 'lightblue', 'lightcoral',
+                'lightcyan', 'lightgoldenrodyellow', 'lightgray', 'lightgreen', 'lightgrey', 'lightpink',
+                'lightsalmon', 'lightseagreen', 'lightskyblue', 'lightslategray', 'lightslategrey',
+                'lightsteelblue', 'lightyellow', 'lime', 'limegreen', 'linen',
+                'magenta', 'maroon', 'mediumaquamarine', 'mediumblue', 'mediumorchid', 'mediumpurple',
+                'mediumseagreen', 'mediumslateblue', 'mediumspringgreen', 'mediumturquoise',
+                'mediumvioletred', 'midnightblue', 'mintcream', 'mistyrose', 'moccasin',
+                'navajowhite', 'navy',
+                'oldlace', 'olive', 'olivedrab', 'orange', 'orangered', 'orchid',
+                'palegoldenrod', 'palegreen', 'paleturquoise', 'palevioletred', 'papayawhip', 'peachpuff',
+                'peru', 'pink', 'plum', 'powderblue', 'purple',
+                'red', 'rosybrown', 'royalblue',
+                'saddlebrown', 'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna', 'silver', 'skyblue',
+                'slateblue', 'slategray', 'slategrey', 'snow', 'springgreen', 'steelblue',
+                'tan', 'teal', 'thistle', 'tomato', 'turquoise',
+                'violet',
+                'wheat', 'white', 'whitesmoke',
+                'yellow', 'yellowgreen',}, 'top': set(), 'bottom': {'bot-'}, 'pause-after': {'pause-a-', 'pa-'},
             'voice-family': {'voice-f-', 'vf-'}, 'border-bottom-color': {'border-b-color-', 'bbc-'},
             'border-right-color': {'border-r-color-', 'brc-'}, 'caption-side': {'cs-', 'caption-s-'},
             'outline-color': {'oc-', 'outline-c-'}, 'position': {'pos-', 'relative', 'absolute', 'static'},
@@ -238,6 +280,11 @@ class TestDataLibrary(TestCase):
                         'xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge',
                         'giant', 'xgiant', 'xxgiant',},
             'border-top-color': {'btc-', 'border-t-color-'}, 'letter-spacing': {'letter-s-'},
+            'border-radius': set(),
+            'border-top-left-radius': {'btl-', 'border-t-left-radius-'},
+            'border-top-right-radius': {'btr-', 'border-t-right-radius-'},
+            'border-bottom-left-radius': {'bbl-', 'border-b-left-radius-'},
+            'border-bottom-right-radius': {'bbr-', 'border-b-right-radius-'},
             'font-weight': {'font-w-', 'f-weight-', 'fweight-', 'lighter', 'bold', 'fw-', 'bolder'},
             'border-spacing': set(), 'padding-left': {'pl-', 'padding-l-'}, 'font-style': {'oblique', 'italic'},
             'empty-cells': {'empty-c-', 'ec-', }, 'margin-top': {'margin-t-', 'm-top-', 'mt-'},
@@ -262,7 +309,7 @@ class TestDataLibrary(TestCase):
         }
         data_library = DataLibrary()
         actual = data_library.property_alias_dict
-        self.assertEqual(actual, expected)
+        self.assertEqual(actual, expected, msg=expected)
 
 
 if __name__ == '__main__':
