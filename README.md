@@ -43,7 +43,7 @@ the following CSS in `blowdry.css`:
 10. **Permissive:** MIT License
 
 # Requirements
-> [Python 2.7.9+](https://www.python.org/downloads/) (required)
+> [Python 2.7.x or 3.x](https://www.python.org/downloads/) (required)
 <br>[cssutils 1.0.1+](https://bitbucket.org/cthedot/cssutils) (required)
 <br>[future 0.15.2](https://pypi.python.org/pypi/future) (required - allows backward compatibility)
 

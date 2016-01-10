@@ -57,7 +57,7 @@ Advantages of blowdrycss
 Requirements
 ~~~~~~~~~~~~
 
-- `Python 3.4+ <https://www.python.org/downloads/>`__ (required)
+- `Python 2.7.x or 3.x <https://www.python.org/downloads/>`__ (required)
 - `cssutils 1.0.1+ <https://bitbucket.org/cthedot/cssutils>`__ (required)
 - `future 0.15.2+ <https://pypi.python.org/pypi/future>`__ (required - allows backward compatibility)
 

@@ -5,7 +5,7 @@ Quick Start Guide
 
 This guide teaches you how to:
 
-- Install :mod:`blowdrycss`
+- Install :mod:`blowdrycss` the `github repo <https://github.com/nueverest/blowdrycss>`_.
 - Run the '/examplesite' demo.
 - Auto-generate DRY CSS.
 - Rapidly style your html with encoded classes.
@@ -13,7 +13,7 @@ This guide teaches you how to:
 Part 1 - Start the web browser to view the unstyled examplesite.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Download the :mod:`blowdrycss` `zip-file here <https://github.com/nueverest/blowdrycss/archive/master.zip>`_.
+-  Download :mod:`blowdrycss` from the `github repo <https://github.com/nueverest/blowdrycss>`_.
 -  Navigate to ``../blowdrycss/examplesite``
 -  Run ``python -m http.server 8080`` (Python 3.x) or
    ``python -m SimpleHTTPServer 8080`` (Python 2.x)
