@@ -46,7 +46,7 @@ Advantages of blowdrycss
 #. **Rapid Development:** Less time spent writing CSS, and cleaning up unused properties.
 #. **DRY (Don't Repeat Yourself):** Reduces the size of CSS file by only defining properties once. Increases confidence that your CSS is not filled with unused or over-replicated class definitions.
 #. **Symbiotic:** Can be integrated with the current ecosystem of CSS complier and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
-#. **Documented:** Hands-on sphinx documentation to get you up and running fast.
+#. **Documented:** Hands-on tutorial and sphinx documentation to get you up and running fast.
 #. **Solid:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all phases of a products lifecycle from prototype to production.
 #. **Customizable:** Features can be turned on and off inside of ``blowdry.py``. Examples include: minification, unit conversion, color parser, font parser, unit parser.
 #. **Extensible:** Build your own plugins.

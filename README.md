@@ -34,7 +34,7 @@ the following CSS in `blowdry.css`:
 1. **Rapid Development:** Less time spent writing CSS, and cleaning up unused properties.
 2. **DRY (Don't Repeat Yourself):** Reduces the size of CSS file by only defining properties once. Increases confidence that your CSS is not filled with unused or over-replicated class definitions.
 3. **Symbiotic:** Can be integrated with the current ecosystem of CSS complier and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
-4. **Documented:** [Hands-on sphinx documentation](http://blowdrycss.readthedocs.org/en/latest/quickstart.html) to get you up and running fast.
+4. **Documented:** [Hands-on tutorial and sphinx documentation](http://blowdrycss.readthedocs.org/en/latest/quickstart.html) to get you up and running fast.
 5. **Solid:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all phases of a products lifecycle from prototype to production.
 6. **Customizable:** Features can be turned on and off inside of `blowdry.py`. Examples include: minification, unit conversion, color parser, font parser, unit parser.
 7. **Extensible:** Build your own plugins.
