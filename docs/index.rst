@@ -14,7 +14,7 @@ About
 
     readme.rst
 
-Download: `blowdrycss <https://github.com/nueverest/blowdrycss>`__
+- `Download <https://github.com/nueverest/blowdrycss>`__
 
 Quickstart
 ~~~~~~~~~~
@@ -39,6 +39,8 @@ Contents
 
 Code
 ~~~~
+
+`Repository <https://github.com/nueverest/blowdrycss>`__
 
 .. toctree::
     :maxdepth: 2
