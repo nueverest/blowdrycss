@@ -13,13 +13,13 @@ class TestCSSStyleBuilder(TestCase):
             'cue-x5_0p', 'margin-top-10', 'bgc-h000', 'hide', 'margin-20', 'padding-top-10', 'height-200', 'padding-10',
             'valign-middle', 'b', 'width-150', 'width-50', 'font-size-48', 'c-blue', 'margin-top-50px',
             'text-align-center', 'height-50px', 'height-150px', 'bold', 'color-hfff', 'padding-b1 a5 c1% e5',
-            'margin-1a% 10x% 3q% 1mp3',
+            'margin-1a% 10x% 3q% 1mp3', 'font-size-1_23rem'
         }
         expected_clean_set = {
             'margin-top-10', 'margin-20', 'padding-top-10', 'height-200', 'padding-10', 'width-150', 'width-50',
             'font-size-48',
             'c-blue', 'height-150px', 'bgc-h000', 'bold', 'color-hfff', 'height-50px', 'text-align-center',
-            'margin-top-50px', 'valign-middle',
+            'margin-top-50px', 'valign-middle', 'font-size-1.23rem'
         }
         expected_removed_set = {
             'cue-x5_0p (cssutils invalid property value: x5.0%)',
@@ -58,11 +58,11 @@ class TestCSSStyleBuilder(TestCase):
         class_set = {
             'margin-top-10', 'bgc-h000', 'hide', 'margin-20', 'padding-top-10', 'height-200', 'padding-10',
             'valign-middle', 'b', 'width-150', 'width-50', 'font-size-48', 'c-blue', 'margin-top-50px',
-            'text-align-center', 'height-50px', 'height-150px', 'bold', 'color-hfff'
+            'text-align-center', 'height-50px', 'height-150px', 'bold', 'color-hfff',
         }
         expected_properties = [
             'background-color: #000', 'vertical-align: middle', 'color: blue', 'margin-top: 50px',
-            'text-align: center', 'height: 50px', 'height: 150px', 'font-weight: bold', 'color: #fff'
+            'text-align: center', 'height: 50px', 'height: 150px', 'font-weight: bold', 'color: #fff',
         ]
         settings.use_em = False
         property_parser = ClassPropertyParser(class_set=class_set)
