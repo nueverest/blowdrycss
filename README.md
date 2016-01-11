@@ -36,9 +36,9 @@ the following CSS in `blowdry.css`:
 3. **Symbiotic:** Can be integrated with the current ecosystem of CSS compliers and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
 4. **Documented:** [Hands-on tutorial and sphinx documentation](http://blowdrycss.readthedocs.org/en/latest/quickstart.html) to get you up and running fast.
 5. **Robust:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all phases of a products lifecycle from prototype to production.
-6. **Customizable:** Features can be turned on and off inside of `blowdry.py`. Examples include: minification, unit conversion, color parser, font parser, unit parser.
-7. **Extensible:** Build your own plugins.
-8. **Standardized:** HTML5 compatible, All [W3C CSS](http://www.w3.org/Style/CSS/Overview.en.html) Level 2.1 and some Level 3 properties implemented, PEP8 Compliant
+6. **Customizable:** Features can be turned on and off inside of `settings.py`. Examples include: unit parsing, color parsing, font parsing, minification, and media query parsing.
+7. **Extensible:** Want to extract class selectors from javascript files? Build a plugin.
+8. **Standardized:** HTML5 compatible. All [W3C CSS](http://www.w3.org/Style/CSS/Overview.en.html) Level 2.1, and some Level 3 properties implemented. PEP8 Compliant
 9. **Tested:** UnitTest Coverage
 10. **Permissive:** MIT License
 

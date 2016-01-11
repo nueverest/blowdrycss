@@ -1,38 +1,73 @@
-from utilities import px_to_em
-
-""" Settings
-
+""" 
+:type timing_enabled: bool
+:type markdown_docs: bool
+:type html_docs: bool
+:type rst_docs: bool
+:type human_readable: bool
+:type minify: bool
+:type media_queries_enabled: bool
 :type use_em: bool
+:type base: int
+:type xxsmall: tuple
+:type xsmall: tuple
+:type small: tuple
+:type medium: tuple
+:type large: tuple
+:type xlarge: tuple
+:type xxlarge: tuple
+:type giant: tuple
+:type xgiant: tuple
+:type xxgiant: tuple
 
+:param timing_enabled: Run performance timer
+:param markdown_docs: Generate a markdown files that provides a quick syntax and clashing alias reference.
+:param html_docs: Generate a html file that provides a quick syntax and clashing alias reference.
+:param rst_docs: Generate a sphinx rst file that provides a quick syntax and clashing alias reference.
+:param human_readable: Generate a standard human readable css file.
+:param minify: Generate a minified version of the css file.
+:param media_queries_enabled: Generate breakpoint and scaling media queries.
 :param use_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion.
     False disables unit conversions meaning any pixel value remains unchanged.
+:param base: Base used for unit conversion (typically set to 16). The pixel value will be divided by ``base`` during
+    unit conversion.
+:param xxsmall: (0, upper limit in pixels)
+:param xsmall: (xxsmall upper limit + 1px, upperlimit in pixels)
+:param small: (xsmall upper limit + 1px, upperlimit in pixels)
+:param medium: (small upper limit + 1px, upperlimit in pixels)
+:param large: (medium upper limit + 1px, upperlimit in pixels)
+:param xlarge: (large upper limit + 1px, upperlimit in pixels)
+:param xxlarge: (xlarge upper limit + 1px, upperlimit in pixels)
+:param giant: (xxlarge upper limit + 1px, upperlimit in pixels)
+:param xgiant: (giant upper limit + 1px, upperlimit in pixels)
+:param xxgiant: (xgiant upper limit + 1px, 1E+6) [Technically the upper limit is infinity, but CSS does not permit it.]
 """
+
+from utilities import px_to_em
+
+
 
 # TODO: Consider converting these to properties, so that, they cannot be modified anywhere but here.
 
-# Boolean Settings
-timing_enabled = True       # Run performance timer
-markdown_docs = True        # Generate a markdown files that provide a quick syntax and clashing alias reference.
-html_docs = True            # Generate a html file that provide a quick syntax and clashing alias reference.
-rst_docs = True             # Generate a sphinx rst file that provide a quick syntax and clashing alias reference.
-human_readable = True       # Generate a standard human readable css file
-minify = True               # Generate a minified version of the css file
-
-# Plugin Defaults
-use_em = True
-base = 16
-
-media_queries_enabled = True
+# Boolean Flags
+timing_enabled = True           # Run performance timer
+markdown_docs = True            # Generate a markdown files that provides a quick syntax and clashing alias reference.
+html_docs = True                # Generate a html file that provides a quick syntax and clashing alias reference.
+rst_docs = True                 # Generate a sphinx rst file that provides a quick syntax and clashing alias reference.
+human_readable = True           # Generate a standard human readable css file.
+minify = True                   # Generate a minified version of the css file.
+media_queries_enabled = True    # Generate breakpoint and scaling media queries.
 # ...Not Implemented Yet...
 # use_rgb = True
-# unit_parser_enabled = True
-# color_parser_enabled = True
-# extra_dry = False         # Combine identical CSS discovered under different class selector names.
+# extra_dry = False             # Combine identical CSS discovered under different class selector names.
 
 # TODO: Implement these in a fashion similar to the performance timer.
-# auto_generate = False       # Automatically generates blowdry.css file when a project HTML file is saved.
-# http_server = False         # Auto-Start a simple webserver on localhost:8080.
-# condense_classes = False    # Edits HTML Files after discovering common patterns (Not DRY do not implement).
+# auto_generate = False         # Automatically generates blowdry.css file when a project HTML file is saved.
+# http_server = False           # Auto-Start a simple webserver on localhost:8080.
+# condense_classes = False      # Edits HTML Files after discovering common patterns (Not DRY do not implement).
+
+# Unit Conversion Defaults
+use_em = True
+base = 16
 
 # Default Screen Breakpoints / Transition Triggers
 # Tuple Format (Lower Limit, Upper Limit) in pixels.

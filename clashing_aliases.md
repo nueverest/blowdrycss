@@ -2,71 +2,71 @@
 
 | Property Name | Valid Aliases |
 | --- | --- |
-| azimuth | `rightwards` `far-left` `leftwards` `far-right` `azi-` `center-left` `left-side` `behind` `center-right` `right-side`  |
+| azimuth | `leftwards` `azi-` `far-right` `far-left` `left-side` `rightwards` `right-side` `behind` `center-right` `center-left`  |
 | background | `bg-` `bac-`  |
 | background-attachment | `ba-` `background-a-`  |
-| background-color | `bg-c-` `bg-color-` `bgc-` `background-c-`  |
-| background-image | `background-i-` `bi-`  |
-| background-position | `background-p-` `bp-`  |
-| background-repeat | `no-repeat` `background-r-` `repeat-y` `repeat-x`  |
+| background-color | `bg-c-` `bg-color-` `background-c-` `bgc-`  |
+| background-image | `bi-` `background-i-`  |
+| background-position | `bp-` `background-p-`  |
+| background-repeat | `repeat-x` `background-r-` `repeat-y` `no-repeat`  |
 | border | `bor-`  |
-| border-bottom | `bb-` `border-b-`  |
+| border-bottom | `border-b-` `bb-`  |
 | border-bottom-color | `border-b-color-` `bbc-`  |
-| border-bottom-left-radius | `border-b-left-radius-` `bbl-`  |
-| border-bottom-right-radius | `bbr-` `border-b-right-radius-`  |
-| border-bottom-style | `border-b-style-` `bbs-`  |
+| border-bottom-left-radius | `bbl-` `border-b-left-radius-`  |
+| border-bottom-right-radius | `border-b-right-radius-` `bbr-`  |
+| border-bottom-style | `bbs-` `border-b-style-`  |
 | border-bottom-width | `border-b-width-` `bbw-`  |
 | border-collapse |  |
 | border-color |  |
 | border-left | `border-l-` `bl-`  |
 | border-left-color | `blc-` `border-l-color-`  |
-| border-left-style | `bls-` `border-l-style-`  |
+| border-left-style | `border-l-style-` `bls-`  |
 | border-left-width | `blw-` `border-l-width-`  |
 | border-radius |  |
 | border-right |  |
-| border-right-color | `border-r-color-` `brc-`  |
+| border-right-color | `brc-` `border-r-color-`  |
 | border-right-style | `brs-` `border-r-style-`  |
-| border-right-width | `brw-` `border-r-width-`  |
+| border-right-width | `border-r-width-` `brw-`  |
 | border-spacing |  |
 | border-style |  |
-| border-top | `border-t-` `bt-`  |
-| border-top-color | `btc-` `border-t-color-`  |
-| border-top-left-radius | `border-t-left-radius-` `btl-`  |
+| border-top | `bt-` `border-t-`  |
+| border-top-color | `border-t-color-` `btc-`  |
+| border-top-left-radius | `btl-` `border-t-left-radius-`  |
 | border-top-right-radius | `btr-` `border-t-right-radius-`  |
-| border-top-style | `border-t-style-` `bts-`  |
+| border-top-style | `bts-` `border-t-style-`  |
 | border-top-width | `border-t-width-` `btw-`  |
-| border-width | `border-w-` `bw-`  |
+| border-width | `bw-` `border-w-`  |
 | bottom | `bot-`  |
-| caption-side | `caption-s-` `cs-`  |
+| caption-side | `cs-` `caption-s-`  |
 | clear |  |
 | clip |  |
-| color | `lightskyblue` `lightblue` `cadetblue` `snow` `sienna` `midnightblue` `silver` `hotpink` `lightseagreen` `lavender` `rgba` `violet` `deepskyblue` `lemonchiffon` `saddlebrown` `indigo` `antiquewhite` `oldlace` `navajowhite` `darkolivegreen` `firebrick` `fuchsia` `grey` `gold` `deeppink` `orangered` `limegreen` `chocolate` `mistyrose` `bisque` `purple` `palegreen` `indianred` `aliceblue` `crimson` `lightslategray` `cyan` `orchid` `blue` `slategray` `mediumorchid` `blueviolet` `salmon` `orange` `powderblue` `paleturquoise` `blanchedalmond` `darkslategray` `seagreen` `lightgoldenrodyellow` `yellow` `darkviolet` `darkgrey` `lightcyan` `palevioletred` `seashell` `peru` `aquamarine` `white` `honeydew` `lightslategrey` `greenyellow` `azure` `darkseagreen` `papayawhip` `darkgoldenrod` `mediumaquamarine` `ghostwhite` `red` `mediumspringgreen` `forestgreen` `moccasin` `turquoise` `darkmagenta` `linen` `teal` `mediumpurple` `darkred` `aqua` `beige` `gray` `thistle` `tomato` `royalblue` `rosybrown` `darkorchid` `dodgerblue` `lightsalmon` `hsl` `peachpuff` `darkblue` `palegoldenrod` `mediumslateblue` `lightyellow` `darkslategrey` `mediumturquoise` `steelblue` `darkcyan` `maroon` `black` `goldenrod` `cornsilk` `mediumvioletred` `lime` `darkgreen` `lightcoral` `slateblue` `rgb` `lightgray` `skyblue` `lightgreen` `coral` `darkgray` `hsla` `lawngreen` `yellowgreen` `dimgray` `whitesmoke` `lightgrey` `mintcream` `darkorange` `wheat` `springgreen` `lightsteelblue` `olive` `chartreuse` `mediumseagreen` `magenta` `ivory` `lavenderblush` `darkkhaki` `dimgrey` `darkslateblue` `navy` `tan` `khaki` `gainsboro` `darkturquoise` `c-` `pink` `lightpink` `plum` `green` `sandybrown` `cornflowerblue` `darksalmon` `brown` `mediumblue` `floralwhite` `slategrey` `burlywood` `olivedrab`  |
-| content | `close-quote` `con-` `open-quote` `no-close-quote` `no-open-quote`  |
-| counter-increment | `counter-i-` `ci-`  |
+| color | `mediumturquoise` `mistyrose` `lightgrey` `gray` `snow` `tan` `magenta` `darkgreen` `whitesmoke` `lightseagreen` `floralwhite` `lightgoldenrodyellow` `dimgray` `mediumblue` `firebrick` `aqua` `peru` `wheat` `teal` `royalblue` `darkorchid` `gold` `violet` `orange` `purple` `skyblue` `slategrey` `hsla` `green` `oldlace` `salmon` `sienna` `olivedrab` `aliceblue` `darkslategray` `blanchedalmond` `rosybrown` `mediumvioletred` `peachpuff` `palegoldenrod` `linen` `palevioletred` `mediumpurple` `pink` `lightgreen` `white` `turquoise` `ghostwhite` `orchid` `slateblue` `goldenrod` `forestgreen` `antiquewhite` `lightcyan` `honeydew` `darkolivegreen` `rgb` `cadetblue` `deeppink` `navajowhite` `silver` `bisque` `beige` `mediumslateblue` `darkviolet` `darkmagenta` `darkkhaki` `seashell` `springgreen` `yellow` `lavenderblush` `lavender` `darkturquoise` `aquamarine` `rgba` `darkred` `black` `ivory` `khaki` `lime` `lightyellow` `mintcream` `plum` `lightpink` `mediumseagreen` `brown` `gainsboro` `lightcoral` `darkgrey` `darkblue` `lightslategray` `lawngreen` `dimgrey` `azure` `mediumspringgreen` `sandybrown` `slategray` `darkseagreen` `lightsalmon` `lightblue` `olive` `indigo` `chocolate` `lightsteelblue` `moccasin` `c-` `orangered` `crimson` `thistle` `darkslategrey` `powderblue` `steelblue` `dodgerblue` `cornflowerblue` `hotpink` `blueviolet` `yellowgreen` `darksalmon` `mediumaquamarine` `tomato` `limegreen` `mediumorchid` `darkgoldenrod` `papayawhip` `chartreuse` `maroon` `lemonchiffon` `midnightblue` `deepskyblue` `burlywood` `saddlebrown` `darkorange` `lightslategrey` `paleturquoise` `coral` `cyan` `blue` `lightgray` `greenyellow` `cornsilk` `palegreen` `darkgray` `hsl` `navy` `fuchsia` `indianred` `darkslateblue` `seagreen` `lightskyblue` `red` `darkcyan` `grey`  |
+| content | `con-` `no-close-quote` `close-quote` `open-quote` `no-open-quote`  |
+| counter-increment | `ci-` `counter-i-`  |
 | counter-reset | `cr-` `counter-r-`  |
 | cue |  |
-| cue-after | `cue-a-` `ca-`  |
-| cue-before | `cue-b-` `cb-`  |
-| cursor | `nw-resize` `w-resize` `crosshair` `help` `progress` `text` `s-resize` `move` `default` `cur-` `ne-resize` `pointer` `se-resize` `sw-resize` `e-resize` `n-resize` `wait`  |
+| cue-after | `ca-` `cue-a-`  |
+| cue-before | `cb-` `cue-b-`  |
+| cursor | `se-resize` `n-resize` `nw-resize` `crosshair` `e-resize` `move` `text` `default` `ne-resize` `s-resize` `cur-` `wait` `pointer` `w-resize` `progress` `sw-resize` `help`  |
 | direction | `rtl` `dir-` `ltr`  |
-| display | `table-row-group` `inline-table` `xxgiant` `block` `small` `table-column-group` `xlarge` `xgiant` `giant` `table` `inline-block` `xxsmall` `table-row` `table-column` `list-item` `medium` `table-cell` `large` `table-footer-group` `xsmall` `xxlarge` `table-caption` `inline` `table-header-group` `dis-`  |
-| elevation | `lower` `level` `above` `ele-` `below` `higher`  |
-| empty-cells | `ec-` `empty-c-`  |
+| display | `table-footer-group` `inline-table` `xxgiant` `large` `table-column-group` `xgiant` `xsmall` `table-column` `medium` `table-header-group` `small` `table-row` `table-caption` `xxlarge` `giant` `table-row-group` `dis-` `block` `table` `inline-block` `table-cell` `xlarge` `list-item` `inline` `xxsmall`  |
+| elevation | `level` `ele-` `below` `higher` `lower` `above`  |
+| empty-cells | `empty-c-` `ec-`  |
 | float |  |
 | font |  |
-| font-family | `charcoal` `sans-serif` `futura` `consolas` `ff-` `papyrus` `perpetua` `copperplate` `garamond` `rockwell` `georgia` `candara` `calibri` `palatino` `fantasy` `impact` `gadget` `arial` `monaco` `geneva` `serif` `cursive` `cambria` `font-f-` `courier` `optima` `didot` `monospace` `helvetica` `times` `tahoma` `verdana` `baskerville`  |
+| font-family | `baskerville` `cambria` `perpetua` `copperplate` `geneva` `gadget` `monospace` `ff-` `charcoal` `impact` `consolas` `monaco` `helvetica` `papyrus` `sans-serif` `rockwell` `times` `serif` `calibri` `garamond` `arial` `optima` `futura` `fantasy` `didot` `courier` `candara` `palatino` `font-f-` `cursive` `georgia` `verdana` `tahoma`  |
 | font-size | `f-size-` `fsize-`  |
-| font-style | `oblique` `italic`  |
-| font-variant | `font-v-` `fv-` `small-caps`  |
-| font-weight | `bolder` `bold` `lighter` `fweight-` `fw-` `font-w-` `f-weight-`  |
-| height | `h-` `hei-`  |
+| font-style | `italic` `oblique`  |
+| font-variant | `font-v-` `small-caps` `fv-`  |
+| font-weight | `bold` `fweight-` `font-w-` `fw-` `f-weight-` `lighter` `bolder`  |
+| height | `hei-` `h-`  |
 | left |  |
 | letter-spacing | `letter-s-`  |
 | line-height | `lh-` `line-h-`  |
 | list-style | `list-s-`  |
-| list-style-image | `lsi-` `list-s-image-`  |
-| list-style-position | `lsp-` `outside` `list-s-position-` `inside`  |
-| list-style-type | `upper-latin` `upper-roman` `upper-alpha` `square` `decimal-leading-zero` `armenian` `lower-greek` `lst-` `lower-roman` `decimal` `georgian` `circle` `lower-alpha` `lower-latin` `list-s-type-` `disc`  |
+| list-style-image | `list-s-image-` `lsi-`  |
+| list-style-position | `list-s-position-` `lsp-` `inside` `outside`  |
+| list-style-type | `lst-` `upper-roman` `decimal-leading-zero` `decimal` `circle` `lower-roman` `upper-latin` `upper-alpha` `lower-alpha` `square` `georgian` `lower-latin` `armenian` `lower-greek` `disc` `list-s-type-`  |
 | margin | `m-` `mar-`  |
 | margin-bottom | `mb-` `margin-b-` `m-bot-`  |
 | margin-left | `ml-` `margin-l-`  |
@@ -81,46 +81,46 @@
 | outline | `out-`  |
 | outline-color | `outline-c-` `oc-`  |
 | outline-style | `os-` `outline-s-`  |
-| outline-width | `outline-w-` `ow-`  |
-| overflow | `scroll` `ove-`  |
-| padding | `pad-` `p-`  |
+| outline-width | `ow-` `outline-w-`  |
+| overflow | `ove-` `scroll`  |
+| padding | `p-` `pad-`  |
 | padding-bottom | `padding-b-`  |
-| padding-left | `pl-` `padding-l-`  |
+| padding-left | `padding-l-` `pl-`  |
 | padding-right | `padding-r-`  |
-| padding-top | `p-top-` `padding-t-` `pt-`  |
+| padding-top | `p-top-` `pt-` `padding-t-`  |
 | page-break-after | `pba-` `page-b-after-`  |
 | page-break-before | `page-b-before-` `pbb-`  |
 | page-break-inside | `page-b-inside-` `pbi-`  |
 | pause |  |
-| pause-after | `pa-` `pause-a-`  |
+| pause-after | `pause-a-` `pa-`  |
 | pause-before | `pause-b-`  |
-| pitch | `high` `low` `x-high` `x-low`  |
+| pitch | `low` `high` `x-high` `x-low`  |
 | pitch-range | `pitch-r-`  |
-| play-during | `pd-` `play-d-` `mix`  |
-| position | `relative` `pos-` `absolute` `static`  |
+| play-during | `pd-` `mix` `play-d-`  |
+| position | `absolute` `relative` `static` `pos-`  |
 | quotes | `quo-`  |
 | richness | `ric-`  |
 | right |  |
 | speak | `spell-out`  |
-| speak-header | `once` `sh-` `speak-h-` `always`  |
-| speak-numeral | `speak-n-` `digits` `sn-` `continuous`  |
-| speak-punctuation | `sp-` `speak-p-` `code`  |
-| speech-rate | `fast` `speech-r-` `slower` `x-slow` `faster` `slow` `sr-` `x-fast`  |
+| speak-header | `sh-` `once` `speak-h-` `always`  |
+| speak-numeral | `sn-` `speak-n-` `continuous` `digits`  |
+| speak-punctuation | `speak-p-` `code` `sp-`  |
+| speech-rate | `speech-r-` `x-slow` `slow` `sr-` `fast` `slower` `faster` `x-fast`  |
 | stress | `str-`  |
 | table-layout | `table-l-` `tl-`  |
-| text-align | `text-a-` `talign-` `ta-` `t-align-`  |
-| text-decoration | `td-` `text-d-` `underline` `overline` `line-through` `blink`  |
-| text-indent | `text-i-` `ti-`  |
-| text-shadow | `text-s-` `ts-`  |
-| text-transform | `tt-` `capitalize` `lowercase` `uppercase` `text-t-`  |
+| text-align | `text-a-` `talign-` `t-align-` `ta-`  |
+| text-decoration | `underline` `line-through` `text-d-` `blink` `overline` `td-`  |
+| text-indent | `ti-` `text-i-`  |
+| text-shadow | `ts-` `text-s-`  |
+| text-transform | `uppercase` `tt-` `capitalize` `text-t-` `lowercase`  |
 | top |  |
-| unicode-bidi | `bidi-override` `ub-` `unicode-b-` `embed`  |
-| vertical-align | `va-` `baseline` `super` `sub` `vertical-a-` `valign-` `v-align-` `text-bottom` `text-top` `middle`  |
+| unicode-bidi | `ub-` `embed` `bidi-override` `unicode-b-`  |
+| vertical-align | `text-top` `valign-` `baseline` `v-align-` `super` `text-bottom` `middle` `va-` `sub` `vertical-a-`  |
 | visibility | `vis-` `collapse`  |
 | voice-family | `vf-` `voice-f-`  |
-| volume | `x-soft` `silent` `soft` `x-loud` `vol-` `loud`  |
+| volume | `vol-` `silent` `x-soft` `loud` `x-loud` `soft`  |
 | white-space | `white-s-`  |
 | widows | `wid-`  |
 | width | `w-`  |
 | word-spacing | `word-s-`  |
-| z-index | `zi-` `z-i-`  |
+| z-index | `z-i-` `zi-`  |
