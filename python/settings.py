@@ -1,27 +1,46 @@
 """
 **Parameters:**
+
 | timing_enabled (*bool*) -- Run performance timer
+
 | markdown_docs (*bool*) -- Generate a markdown files that provides a quick syntax and clashing alias reference.
+
 | html_docs (*bool*) -- Generate a html file that provides a quick syntax and clashing alias reference.
+
 | rst_docs (*bool*) -- Generate a sphinx rst file that provides a quick syntax and clashing alias reference.
+
 | human_readable (*bool*) -- Generate a standard human readable css file.
+
 | minify (*bool*) -- Generate a minified version of the css file.
+
 | media_queries_enabled (*bool*) -- Generate breakpoint and scaling media queries.
+
 | use_em (*bool*) -- A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion.
-False disables unit conversions meaning any pixel value remains unchanged.
+  False disables unit conversions meaning any pixel value remains unchanged.
+
 | base (*int*) -- Base used for unit conversion (typically set to 16). The pixel value will be divided by ``base`` during
-unit conversion.
+  unit conversion.
+
 | xxsmall (*tuple*) -- (0, upper limit in pixels)
+
 | xsmall (*tuple*) -- (xxsmall upper limit + 1px, upper limit in pixels)
+
 | small (*tuple*) -- (xsmall upper limit + 1px, upper limit in pixels)
+
 | medium (*tuple*) -- (small upper limit + 1px, upper limit in pixels)
+
 | large (*tuple*) -- (medium upper limit + 1px, upper limit in pixels)
+
 | xlarge (*tuple*) -- (large upper limit + 1px, upper limit in pixels)
+
 | xxlarge (*tuple*) -- (xlarge upper limit + 1px, upper limit in pixels)
+
 | giant (*tuple*) -- (xxlarge upper limit + 1px, upper limit in pixels)
+
 | xgiant (*tuple*) -- (giant upper limit + 1px, upper limit in pixels)
+
 | xxgiant (*tuple*) -- (xgiant upper limit + 1px, 1E+6) [Technically the upper limit is infinity, but CSS does not
-permit it.]
+  permit it.]
 
 """
 
