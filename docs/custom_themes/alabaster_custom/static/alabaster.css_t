@@ -213,6 +213,10 @@ div.body h4 { font-size: 130%; }
 div.body h5 { font-size: 100%; }
 div.body h6 { font-size: 100%; }
 
+a {
+    text-decoration: none;
+}
+
 a.headerlink {
     color: {{ theme_anchor }};
     padding: 0 4px;
@@ -414,11 +418,11 @@ tt.xref, code.xref, a tt {
 
 a.reference {
     text-decoration: none;
-    border-bottom: 1px dotted {{ theme_link }};
+    /*border-bottom: 1px dotted {{ theme_link }};*/
 }
 
 a.reference:hover {
-    border-bottom: 1px solid {{ theme_link_hover }};
+    /*border-bottom: 1px solid {{ theme_link_hover }};*/
 }
 
 a.footnote-reference {

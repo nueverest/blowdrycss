@@ -11,25 +11,25 @@ class Alabaster(Style):
     styles = {
         # No corresponding class for the following:
         #Text:                     "", # class:  ''
-        Whitespace:                "underline #f8f8f8",      # class: 'w'
-        Error:                     "#a40000 border:#ef2929", # class: 'err'
-        Other:                     "#000000",                # class 'x'
+        Whitespace:                "underline #f8f8f8",         # class: 'w'
+        Error:                     "#a40000 border:#ef2929",    # class: 'err'
+        Other:                     "#000000",                   # class 'x'
 
-        Comment:                   "italic #8f5902", # class: 'c'
-        Comment.Preproc:           "noitalic",       # class: 'cp'
+        Comment:                   "italic #8f5902",            # class: 'c'
+        Comment.Preproc:           "noitalic",                  # class: 'cp'
 
-        Keyword:                   "bold #004461",   # class: 'k'
-        Keyword.Constant:          "bold #004461",   # class: 'kc'
-        Keyword.Declaration:       "bold #004461",   # class: 'kd'
-        Keyword.Namespace:         "bold #004461",   # class: 'kn'
-        Keyword.Pseudo:            "bold #004461",   # class: 'kp'
-        Keyword.Reserved:          "bold #004461",   # class: 'kr'
-        Keyword.Type:              "bold #004461",   # class: 'kt'
+        Keyword:                   "bold #004461",              # class: 'k'
+        Keyword.Constant:          "bold #004461",              # class: 'kc'
+        Keyword.Declaration:       "bold #004461",              # class: 'kd'
+        Keyword.Namespace:         "bold #004461",              # class: 'kn'
+        Keyword.Pseudo:            "bold #004461",              # class: 'kp'
+        Keyword.Reserved:          "bold #004461",              # class: 'kr'
+        Keyword.Type:              "bold #004461",              # class: 'kt'
 
-        Operator:                  "#582800",   # class: 'o'
-        Operator.Word:             "bold #004461",   # class: 'ow' - like keywords
+        Operator:                  "#582800",                   # class: 'o'
+        Operator.Word:             "bold #004461",              # class: 'ow' - like keywords
 
-        Punctuation:               "bold #000000",   # class: 'p'
+        Punctuation:               "bold #000000",              # class: 'p'
 
         # because special names such as Name.Class, Name.Function, etc.
         # are not recognized as such later in the parsing, we choose them
