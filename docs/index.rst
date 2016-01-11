@@ -14,6 +14,8 @@ About
 
     readme.rst
 
+Download: `blowdrycss <https://github.com/nueverest/blowdrycss>`__
+
 Quickstart
 ~~~~~~~~~~
 
