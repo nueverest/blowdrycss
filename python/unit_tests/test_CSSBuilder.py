@@ -9,6 +9,9 @@ __project__ = 'blow dry css'
 
 class TestCSSStyleBuilder(TestCase):
     def test_get_css_text_sets(self):
+        # TODO: Check back at bitbucket cssutils to see if a resolution is available.
+        # 'rem' units are raise an error in cssutils.css.CSSStyleRule.
+        # https://bitbucket.org/cthedot/cssutils/issues/60/using-units-of-rem-produces-an-invalid
         class_set = {
             'cue-x5_0p', 'margin-top-10', 'bgc-h000', 'hide', 'margin-20', 'padding-top-10', 'height-200', 'padding-10',
             'valign-middle', 'b', 'width-150', 'width-50', 'font-size-48', 'c-blue', 'margin-top-50px',
