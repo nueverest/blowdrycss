@@ -1,8 +1,8 @@
 .. blowdrycss documentation master file, created by
    sphinx-quickstart on Mon Nov 30 11:48:40 2015.
 
-blowdrycss documentation
-========================
+Documentation
+=============
 
 About
 ~~~~~

@@ -27,10 +27,10 @@ body {
     margin: 0;
     padding: 0;
 }
-
+div
 div.document {
     width: {{ theme_page_width }};
-    margin: 30px auto 0 auto;
+    margin: 0 auto 0 auto;
 }
 
 div.documentwrapper {
@@ -40,6 +40,27 @@ div.documentwrapper {
 
 div.bodywrapper {
     margin: 0 0 0 {{ theme_sidebar_width }};
+}
+
+.head-wrapper {
+    text-align: center;
+    color: rgba(255,255,255,1);
+    background-color: rgba(111,0,222,1);
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    margin: 0;
+}
+
+.head-title {
+    font-size: 3rem;
+}
+
+.head-subtitle {
+    font-size: 1rem;
+}
+
+div.section h1:first-of-type {
+    margin-top: 1rem !important;
 }
 
 div.sphinxsidebar {
@@ -93,6 +114,7 @@ div.sphinxsidebar a:hover {
 div.sphinxsidebar {
     font-size: 14px;
     line-height: 1.5;
+    background-color: rgba(248, 248, 248, 1);
 }
 
 div.sphinxsidebarwrapper {
@@ -186,7 +208,7 @@ div.sphinxsidebar hr {
 
 a {
     color: {{ theme_link }};
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 a:hover {

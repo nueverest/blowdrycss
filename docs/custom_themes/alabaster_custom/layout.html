@@ -1,11 +1,17 @@
 {%- extends "basic/layout.html" %}
 
 {%- block extrahead %}
-  {{ super() }}
-  {% if theme_touch_icon %}
+    <div class="head-wrapper">
+        <span class="head-title">blowdrycss</span>
+        <br>
+        <span class="head-subtitle">The revolutionary CSS compiler.</span>
+    </div>
+
+    {{ super() }}
+    {% if theme_touch_icon %}
     <link rel="apple-touch-icon" href="{{ pathto('_static/' ~ theme_touch_icon, 1) }}" />
-  {% endif %}
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 {% endblock %}
 
 {# Disable base theme's top+bottom related navs; we have our own in sidebar #}
