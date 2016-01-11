@@ -53,7 +53,7 @@
     | 0.0.4 -- Sphinx integration started.
     | 0.0.5 -- All docstrings added. Many modules refactored and improved during the documentation process. New
       unit tests added.
-    | 0.0.6 -- Advanced media query syntax added. Modules ``breakpointparser` and ``scalingparser`` added to
+    | 0.0.6 -- Advanced media query syntax added. Modules ``breakpointparser`` and ``scalingparser`` added to
       allow for the dynamic creation of media queries. (1/2/2016)
     | 0.0.7 -- Implemented backward with Python version 2.7.9.
 

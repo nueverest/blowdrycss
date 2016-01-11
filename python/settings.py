@@ -1,50 +1,31 @@
-""" 
-:type timing_enabled: bool
-:type markdown_docs: bool
-:type html_docs: bool
-:type rst_docs: bool
-:type human_readable: bool
-:type minify: bool
-:type media_queries_enabled: bool
-:type use_em: bool
-:type base: int
-:type xxsmall: tuple
-:type xsmall: tuple
-:type small: tuple
-:type medium: tuple
-:type large: tuple
-:type xlarge: tuple
-:type xxlarge: tuple
-:type giant: tuple
-:type xgiant: tuple
-:type xxgiant: tuple
+"""
+**Parameters:**
+| timing_enabled (*bool*) -- Run performance timer
+| markdown_docs (*bool*) -- Generate a markdown files that provides a quick syntax and clashing alias reference.
+| html_docs (*bool*) -- Generate a html file that provides a quick syntax and clashing alias reference.
+| rst_docs (*bool*) -- Generate a sphinx rst file that provides a quick syntax and clashing alias reference.
+| human_readable (*bool*) -- Generate a standard human readable css file.
+| minify (*bool*) -- Generate a minified version of the css file.
+| media_queries_enabled (*bool*) -- Generate breakpoint and scaling media queries.
+| use_em (*bool*) -- A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion.
+False disables unit conversions meaning any pixel value remains unchanged.
+| base (*int*) -- Base used for unit conversion (typically set to 16). The pixel value will be divided by ``base`` during
+unit conversion.
+| xxsmall (*tuple*) -- (0, upper limit in pixels)
+| xsmall (*tuple*) -- (xxsmall upper limit + 1px, upper limit in pixels)
+| small (*tuple*) -- (xsmall upper limit + 1px, upper limit in pixels)
+| medium (*tuple*) -- (small upper limit + 1px, upper limit in pixels)
+| large (*tuple*) -- (medium upper limit + 1px, upper limit in pixels)
+| xlarge (*tuple*) -- (large upper limit + 1px, upper limit in pixels)
+| xxlarge (*tuple*) -- (xlarge upper limit + 1px, upper limit in pixels)
+| giant (*tuple*) -- (xxlarge upper limit + 1px, upper limit in pixels)
+| xgiant (*tuple*) -- (giant upper limit + 1px, upper limit in pixels)
+| xxgiant (*tuple*) -- (xgiant upper limit + 1px, 1E+6) [Technically the upper limit is infinity, but CSS does not
+permit it.]
 
-:param timing_enabled: Run performance timer
-:param markdown_docs: Generate a markdown files that provides a quick syntax and clashing alias reference.
-:param html_docs: Generate a html file that provides a quick syntax and clashing alias reference.
-:param rst_docs: Generate a sphinx rst file that provides a quick syntax and clashing alias reference.
-:param human_readable: Generate a standard human readable css file.
-:param minify: Generate a minified version of the css file.
-:param media_queries_enabled: Generate breakpoint and scaling media queries.
-:param use_em: A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion.
-    False disables unit conversions meaning any pixel value remains unchanged.
-:param base: Base used for unit conversion (typically set to 16). The pixel value will be divided by ``base`` during
-    unit conversion.
-:param xxsmall: (0, upper limit in pixels)
-:param xsmall: (xxsmall upper limit + 1px, upperlimit in pixels)
-:param small: (xsmall upper limit + 1px, upperlimit in pixels)
-:param medium: (small upper limit + 1px, upperlimit in pixels)
-:param large: (medium upper limit + 1px, upperlimit in pixels)
-:param xlarge: (large upper limit + 1px, upperlimit in pixels)
-:param xxlarge: (xlarge upper limit + 1px, upperlimit in pixels)
-:param giant: (xxlarge upper limit + 1px, upperlimit in pixels)
-:param xgiant: (giant upper limit + 1px, upperlimit in pixels)
-:param xxgiant: (xgiant upper limit + 1px, 1E+6) [Technically the upper limit is infinity, but CSS does not permit it.]
 """
 
 from utilities import px_to_em
-
-
 
 # TODO: Consider converting these to properties, so that, they cannot be modified anywhere but here.
 
