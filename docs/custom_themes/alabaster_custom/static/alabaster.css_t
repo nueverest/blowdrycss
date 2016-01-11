@@ -522,7 +522,13 @@ a:hover tt, a:hover code {
 
     body {
         margin: 0;
-        padding: 20px 30px;
+        padding-bottom: 2rem;
+    }
+
+    div.document {
+        max-width: 91%;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 
     div.documentwrapper {
