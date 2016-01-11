@@ -31,11 +31,11 @@ the following CSS in `blowdry.css`:
 ```
 
 ### Advantages of blowdrycss
-1. **Rapid Development:** Less time spent writing CSS, and cleaning up unused properties.
-2. **DRY (Don't Repeat Yourself):** Reduces the size of CSS file by only defining properties once. Increases confidence that your CSS is not filled with unused or over-replicated class definitions.
-3. **Symbiotic:** Can be integrated with the current ecosystem of CSS complier and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
+1. **Rapid Development:** Less time spent writing CSS, and cleaning up unused style rules.
+2. **DRY (Don't Repeat Yourself):** Reduces CSS file size by only defining properties once.
+3. **Symbiotic:** Can be integrated with the current ecosystem of CSS compliers and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
 4. **Documented:** [Hands-on tutorial and sphinx documentation](http://blowdrycss.readthedocs.org/en/latest/quickstart.html) to get you up and running fast.
-5. **Solid:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all phases of a products lifecycle from prototype to production.
+5. **Robust:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all phases of a products lifecycle from prototype to production.
 6. **Customizable:** Features can be turned on and off inside of `blowdry.py`. Examples include: minification, unit conversion, color parser, font parser, unit parser.
 7. **Extensible:** Build your own plugins.
 8. **Standardized:** HTML5 compatible, All [W3C CSS](http://www.w3.org/Style/CSS/Overview.en.html) Level 2.1 and some Level 3 properties implemented, PEP8 Compliant
