@@ -21,25 +21,25 @@
 | base (*int*) -- Base used for unit conversion (typically set to 16). The pixel value will be divided by ``base`` during
   unit conversion.
 
-| xxsmall (*tuple*) -- (0, upper limit in pixels)
+| xxsmall (*tuple of floats*) -- (0px, upper limit in pixels)
 
-| xsmall (*tuple*) -- (xxsmall upper limit + 1px, upper limit in pixels)
+| xsmall (*tuple of floats*) -- (xxsmall upper limit + 1px, upper limit in pixels)
 
-| small (*tuple*) -- (xsmall upper limit + 1px, upper limit in pixels)
+| small (*tuple of floats*) -- (xsmall upper limit + 1px, upper limit in pixels)
 
-| medium (*tuple*) -- (small upper limit + 1px, upper limit in pixels)
+| medium (*tuple of floats*) -- (small upper limit + 1px, upper limit in pixels)
 
-| large (*tuple*) -- (medium upper limit + 1px, upper limit in pixels)
+| large (*tuple of floats*) -- (medium upper limit + 1px, upper limit in pixels)
 
-| xlarge (*tuple*) -- (large upper limit + 1px, upper limit in pixels)
+| xlarge (*tuple of floats*) -- (large upper limit + 1px, upper limit in pixels)
 
-| xxlarge (*tuple*) -- (xlarge upper limit + 1px, upper limit in pixels)
+| xxlarge (*tuple of floats*) -- (xlarge upper limit + 1px, upper limit in pixels)
 
-| giant (*tuple*) -- (xxlarge upper limit + 1px, upper limit in pixels)
+| giant (*tuple of floats*) -- (xxlarge upper limit + 1px, upper limit in pixels)
 
-| xgiant (*tuple*) -- (giant upper limit + 1px, upper limit in pixels)
+| xgiant (*tuple of floats*) -- (giant upper limit + 1px, upper limit in pixels)
 
-| xxgiant (*tuple*) -- (xgiant upper limit + 1px, 1E+6) [Technically the upper limit is infinity, but CSS does not
+| xxgiant (*tuple of floats*) -- (xgiant upper limit + 1px, 1E+6) [Technically the upper limit is infinity, but CSS does not
   permit it.]
 
 """
