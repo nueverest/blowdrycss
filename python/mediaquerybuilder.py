@@ -12,10 +12,39 @@ __project__ = 'blow dry css'
 
 
 class MediaQueryBuilder(object):
+    """ Builds a set of CSS media queries from valid classes found in ``ClassPropertyParser.class_set``.
+
+    | Takes a set of classes that may or may not contain media query flags.
+    | Mixing breakpoint and scaling syntax is not allowed. Classes that contain mixed syntax like the following:
+    | ``small-down-s`` or ``font-size-28-medium-only-s`` are invalidated.
+
+    :type property_parser: ClassPropertyParser
+
+    :param property_parser: ClassPropertyParser object containing ``class_set``.
+    :return: None
+
+    **Example Usage:**
+
+    >>> import settings
+    >>> from classpropertyparser import ClassPropertyParser
+    >>> class_set = {'bold', 'large-down', 'font-size-25-s'}
+    >>> # Filter class names. Only keep classes matching the defined class encoding.
+    >>> property_parser = ClassPropertyParser(class_set=class_set)
+    >>> class_set = property_parser.class_set.copy()
+    >>> # Build Media Queries
+    >>> if settings.media_queries_enabled:
+    >>>     unassigned_class_set = class_set.difference(property_parser.class_set)
+    >>>     # Only use unassigned classes
+    >>>     property_parser.class_set = unassigned_class_set
+    >>>     property_parser.removed_class_set = set()
+    >>>     media_query_builder = MediaQueryBuilder(property_parser=property_parser)
+    >>>     css_text = bytes(media_query_builder.get_css_text(), 'utf-8')
+    >>>     print(media_query_builder.property_parser.class_set)
+    {'large-down', 'font-size-25-s'}
+
+    """
+
     def __init__(self, property_parser=ClassPropertyParser()):
-        # Takes a set of classes that contain media query flags
-        # Invalidates classes that contain mixed syntax ``small-down-s`` or ``font-size-28-medium-only-s``
-        # i.e. mixing breakpoint and scaling syntax is not allowed.
         print(u'\nMediaQueryBuilder Running...\n')
         self.property_parser = property_parser
         self.css_media_queries = set()
@@ -102,7 +131,7 @@ class MediaQueryBuilder(object):
             self.property_parser.removed_class_set.add(invalid_css_class + reason)
 
     @staticmethod
-    def class_is_parsable(css_class, name):
+    def class_is_parsable(css_class, property_name):
         """ Returns True if breakpoint and scaling syntax are not combined.  Otherwise returns False.
 
         **Rule:**
@@ -113,14 +142,37 @@ class MediaQueryBuilder(object):
         | Not Allowed: ``display-medium-down-s``, ``large-up-s``, and ``font-size-24-small-only-s``
 
         :type css_class: str
-        :type name: str
+        :type property_name: str
 
         :param css_class: An encoded css class.
-        :param name: A CSS property name.
+        :param property_name: A CSS property property_name.
         :return: (*str*) -- Returns True if breakpoint and scaling syntax are not combined.  Otherwise returns False.
 
+        **Example**
+
+        >>> from classpropertyparser import ClassPropertyParser
+        >>> class_set = {'bold', 'large-down', 'font-size-25-s'}
+        >>> # Filter class names. Only keep classes matching the defined class encoding.
+        >>> property_parser = ClassPropertyParser(class_set=class_set)
+        >>> # Build Media Queries
+        >>> media_query_builder = MediaQueryBuilder(property_parser=property_parser)
+        >>> print(
+                media_query_builder.class_is_parsable(
+                    css_class='bold',
+                    property_name='font-weight'
+                )
+            )
+        False
+        >>> print(
+                media_query_builder.class_is_parsable(
+                    css_class='large-down',
+                    property_name='display'
+                )
+            )
+        True
+
         """
-        scaling_parser = ScalingParser(css_class=css_class, css_property=name)
+        scaling_parser = ScalingParser(css_class=css_class, css_property=property_name)
 
         # Scaling but not Breakpoint case.
         if scaling_parser.is_scaling:
@@ -140,6 +192,29 @@ class MediaQueryBuilder(object):
         """ Joins ``css_media_queries`` together with an empty separator string ``''``.
 
         :return: str -- Returns all media queries as CSS text.
+
+        **Example**
+
+        >>> from classpropertyparser import ClassPropertyParser
+        >>> class_set = {'bold', 'large-down', 'font-size-24-s'}
+        >>> # Filter class names. Only keep classes matching the defined class encoding.
+        >>> property_parser = ClassPropertyParser(class_set=class_set)
+        >>> media_query_builder = MediaQueryBuilder(property_parser=property_parser)
+        >>> print(media_query_builder.get_css_text())
+        @media only screen and (min-width: 64.0em) {
+            .large-down {
+                display: none;
+            }
+        }
+        .font-size-24-s {
+            font-size: 24px;
+            @media only screen and (max-width: 45.0em) {
+                font-size: 21.3px;
+            }
+            @media only screen and (max-width: 30.0em) {
+                font-size: 19.2px;
+            }
+        }
 
         """
         return str.join('', self.css_media_queries)

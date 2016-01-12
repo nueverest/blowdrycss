@@ -32,15 +32,15 @@ class ScalingParser(object):
     - Assuming ``font-size-24-s`` is the encoded css class, the font-size will respond to the screen size according
       to the following table:
 
-        +-------------+---------------+----------------+------+-------+
-        | Screen Size | Trigger Range | Scaling Factor |  px  | em    |
-        +-------------+---------------+----------------+------+-------+
-        | Large       |    > 720px    |        1       |  24  | 1.5   |
-        +-------------+---------------+----------------+------+-------+
-        | Medium      |    < 720px    |      1.125     | 21.3 | 1.333 |
-        +-------------+---------------+----------------+------+-------+
-        | Small       |    < 480px    |      1.25      | 19.2 | 1.2   |
-        +-------------+---------------+----------------+------+-------+
+        +-------------+-------------------+----------------+------+-------+
+        | Screen Size |   Trigger Range   | Scaling Factor |  px  | em    |
+        +-------------+-------------------+----------------+------+-------+
+        | Large       | > 720px or 45.0em |        1       |  24  | 1.5   |
+        +-------------+-------------------+----------------+------+-------+
+        | Medium      | < 720px or 45.0em |      1.125     | 21.3 | 1.333 |
+        +-------------+-------------------+----------------+------+-------+
+        | Small       | < 480px or 30.0em |      1.25      | 19.2 | 1.2   |
+        +-------------+-------------------+----------------+------+-------+
 
     **Important Note about cssutils**
 
@@ -146,12 +146,12 @@ class ScalingParser(object):
                 font-size: 24px;
 
                 // medium screen font size reduction
-                @media only screen and (max-width: 720px) {
+                @media only screen and (max-width: 45.0em) {
                     font-size: 21.3px;
                 }
 
                 // small screen font size reduction
-                @media only screen and (max-width: 480px) {
+                @media only screen and (max-width: 30.0em) {
                     font-size: 19.2px;
                 }
             }
@@ -161,11 +161,11 @@ class ScalingParser(object):
             // Default size above the maximum 'medium' width breakpoint.
             .font-size-24-s-i { font-size: 24px !important; }
             // Apply 'medium' screen font size reduction.
-            @media only screen and (max-width: 720px) {
+            @media only screen and (max-width: 45.0em) {
                 .font-size-24-s-i { font-size: 21.3px !important; }
             }
             // Apply 'small' screen font size reduction.
-            @media only screen and (max-width: 480px) {
+            @media only screen and (max-width: 30.0em) {
                 .font-size-24-s-i { font-size: 19.2px !important; }
             }
 

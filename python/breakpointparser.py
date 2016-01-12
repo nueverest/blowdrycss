@@ -316,13 +316,13 @@ class BreakpointParser(object):
 
         - *Special Case:* Generated CSS for ``display-large-only`` or ``large-only``::
 
-            @media only screen and (max-width: 721px) {
+            @media only screen and (max-width: 45.0625em) {
                 .display-large-only {
                     display: none;
                 }
             }
 
-            @media only screen and (min-width: 1024px) {
+            @media only screen and (min-width: 64.0em) {
                 .display-large-only {
                     display: none;
                 }
@@ -330,7 +330,7 @@ class BreakpointParser(object):
 
         - *General Usage Case:* Generated CSS for ``padding-100-large-only``::
 
-            @media only screen and (min-width: 721px) and (max-width: 1024px) {
+            @media only screen and (min-width: 45.0625em) and (max-width: 64.0em) {
                 .padding-100-large-only {
                     padding: 100px;
                 }
@@ -338,13 +338,13 @@ class BreakpointParser(object):
 
         - *Priority !important Case:* Generated CSS for ``large-only-i``::
 
-            @media only screen and (max-width: 721px) {
+            @media only screen and (max-width: 45.0625em) {
                 .display-large-only {
                     display: none !important;
                 }
             }
 
-            @media only screen and (min-width: 1024px) {
+            @media only screen and (min-width: 64.0em) {
                 .display-large-only {
                     display: none !important;
                 }
@@ -416,7 +416,7 @@ class BreakpointParser(object):
 
         - *Special Case:* Generated CSS for ``display-medium-down``::
 
-            @media only screen and (min-width: 720px) {
+            @media only screen and (min-width: 45.0em) {
                 .display-medium-down {
                     display: none;
                 }
@@ -424,7 +424,7 @@ class BreakpointParser(object):
 
         - *General Usage Case:* Generated CSS for ``padding-100-medium-down``::
 
-            @media only screen and (max-width: 720px) {
+            @media only screen and (max-width: 45.0em) {
                 .padding-100-medium-down {
                     padding: 100px;
                 }
@@ -490,7 +490,7 @@ class BreakpointParser(object):
 
         - *Special Case:* Generated CSS for ``display-small-up``::
 
-            @media only screen and (max-width: 241px) {
+            @media only screen and (max-width: 15.0625em) {
                 .display-small-up {
                     display: none;
                 }
@@ -498,7 +498,7 @@ class BreakpointParser(object):
 
         - *General Usage Case:* Generated CSS for ``padding-100-small-up``::
 
-            @media only screen and (min-width: 241px) {
+            @media only screen and (min-width: 15.0625em) {
                 .padding-100-small-up {
                     padding: 100px;
                 }

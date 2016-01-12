@@ -109,7 +109,7 @@ def main():
     # Create set of all defined classes
     class_parser = HTMLClassParser(files=file_finder.files)
 
-    # Filter class names only keeping classes that match the defined class encoding.
+    # Filter class names. Only keep classes matching the defined class encoding.
     class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
     # print('\nclass_property_parser.class_set:', class_property_parser.class_set)
     class_set = class_property_parser.class_set.copy()
@@ -123,12 +123,8 @@ def main():
         unassigned_class_set = class_set.difference(css_builder.property_parser.class_set)
         css_builder.property_parser.class_set = unassigned_class_set                # Only use unassigned classes
         css_builder.property_parser.removed_class_set = set()                       # Clear set
-        # print(css_builder.property_parser.class_set)
-        # print(css_builder.property_parser.removed_class_set)
-
         media_query_builder = MediaQueryBuilder(property_parser=class_property_parser)
         # print(media_query_builder.property_parser.class_set)
-
         css_text += bytes(media_query_builder.get_css_text(), 'utf-8')
 
     # print('CSS Text:')
