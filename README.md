@@ -102,7 +102,7 @@ More often than not the front-end developer will remove the CSS class from the H
 
 Now 326 bytes worth of stale CSS data lurks in the style files.
 
-#### Scenario 2 - CSS Pre-compiler:
+#### Scenario 3 - Modern CSS Pre-compilers:
 CSS compilation with SASS/SCSS, PostCSS, or LESS is awesome, and makes writing lots of CSS rules easy. 
 Tools like these allow auto-generation of hundreds of header rules like the ones above. If care is not taken 
 this leverage can rapidly grow the CSS file. 

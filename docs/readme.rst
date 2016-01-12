@@ -132,8 +132,8 @@ Reasons include:
 
 Now 326 bytes worth of stale CSS data lurks in the style files.
 
-Scenario 3 - CSS Pre-compiler:
-''''''''''''''''''''''''''''''
+Scenario 3 - Modern CSS Pre-compiler:
+'''''''''''''''''''''''''''''''''''''
 
 CSS compilation with SASS/SCSS, PostCSS, or LESS is awesome, and makes
 writing lots of CSS rules easy. Tools like these allow auto-generation
