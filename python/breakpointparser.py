@@ -158,6 +158,7 @@ class BreakpointParser(object):
                 css_class='padding-1em-giant-down',
                 css_property=inherit_property
             )
+        >>> # BreakpointParser() sets breakpoint_key.
         >>> print(breakpoint_parser.breakpoint_key)
         giant
 
@@ -201,6 +202,7 @@ class BreakpointParser(object):
                 css_class='padding-1em-giant-down',
                 css_property=inherit_property
             )
+        >>> # BreakpointParser() sets limit_key.
         >>> print(breakpoint_parser.limit_key)
         -down
 
@@ -257,7 +259,24 @@ class BreakpointParser(object):
 
         :return: (*bool*) -- Returns true if one of the cases is ``true``. Otherwise it returns ``false``.
 
+        **Examples:**
 
+        >>> from cssutils.css import Property
+        >>> # value='inherit' since we do not know if the class is valid yet.
+        >>> name = 'display'
+        >>> value = 'inherit'
+        >>> priority = ''
+        >>> inherit_property = Property(name=name, value=value, priority=priority)
+        >>> breakpoint_parser = BreakpointParser(
+                css_class='xlarge-only',
+                css_property=inherit_property
+            )
+        >>> breakpoint_parser.strip_breakpoint_limit()
+        ''
+        >>> inherit_property = Property(name='font-weight', value=value, priority=priority)
+        >>> breakpoint_parser.css_class='bold-large-up'
+        >>> breakpoint_parser.strip_breakpoint_limit()
+        'bold'
 
         """
         pair = self.breakpoint_key + self.limit_key
@@ -293,7 +312,7 @@ class BreakpointParser(object):
         **Note:** Unit conversions for pixel-based ``self.value`` is required **before** the
         BreakpointParser is instantiated.
 
-        **CSS Media Queries**
+        **Media Query Examples**
 
         - *Special Case:* Generated CSS for ``display-large-only`` or ``large-only``::
 
@@ -393,7 +412,7 @@ class BreakpointParser(object):
         **Note:** Unit conversions for pixel-based ``self.value`` is required **before** the
         BreakpointParser is instantiated.
 
-        **CSS Media Queries**
+        **Media Query Examples**
 
         - *Special Case:* Generated CSS for ``display-medium-down``::
 
@@ -467,7 +486,7 @@ class BreakpointParser(object):
         **Note:** Unit conversions for pixel-based ``self.value`` is required **before** the
         BreakpointParser is instantiated.
 
-        **CSS Media Queries**
+        **Media Query Examples**
 
         - *Special Case:* Generated CSS for ``display-small-up``::
 
