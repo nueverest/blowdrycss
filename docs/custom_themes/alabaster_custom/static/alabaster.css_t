@@ -417,6 +417,10 @@ pre {
     line-height: 1.3em;
 }
 
+h1 code span.pre {
+    line-height: 6rem;
+}
+
 dl pre, blockquote pre, li pre {
     margin-left: 0;
     padding-left: 30px;
