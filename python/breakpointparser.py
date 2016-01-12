@@ -39,7 +39,44 @@ class BreakpointParser(object):
 
     **Examples:**
 
-    >>> 'WARNING: NOT IMPLEMENTED YET'
+    >>> from cssutils.css import Property
+    >>> from xml.dom import SyntaxErr
+    >>> # value='inherit' since we do not know if the class is valid yet.
+    >>> name = 'display'
+    >>> value = 'inherit'
+    >>> priority = ''
+    >>> inherit_property = Property(name=name, value=value, priority=priority)
+    >>> breakpoint_parser = BreakpointParser(
+            css_class='large-up',
+            css_property=inherit_property
+        )
+    >>> print(breakpoint_parser.breakpoint_key)
+    large
+    >>> print(breakpoint_parser.limit_key)
+    -up
+    >>> # Validate encoded syntax.
+    >>> is_breakpoint = breakpoint_parser.is_breakpoint
+    >>> if is_breakpoint:
+    >>>     clean_css_class = breakpoint_parser.strip_breakpoint_limit()
+    >>>     # Change value to 'none' as display media queries use reverse logic.
+    >>>     value = 'none'
+    >>> # Build CSS Property
+    >>> try:
+    >>>     css_property = Property(name=name, value=value, priority=priority)
+    >>>     if css_property.valid:
+    >>>         if is_breakpoint and breakpoint_parser:
+    >>>             breakpoint_parser.css_property = css_property
+    >>>             media_query = breakpoint_parser.build_media_query()
+    >>>     else:
+    >>>         print(' (cssutils invalid property value: ' + value + ')')
+    >>> except SyntaxErr:
+    >>>     print('(cssutils SyntaxErr invalid property value: ' + value + ')')
+    >>> print(media_query)
+    @media only screen and (max-width: 45.0625em) {
+        .large-up {
+            display: none;
+        }
+    }
 
     """
     def __init__(self, css_class='', css_property=Property()):
@@ -109,6 +146,21 @@ class BreakpointParser(object):
 
         :return: None
 
+        **Examples:**
+
+        >>> from cssutils.css import Property
+        >>> # value='inherit' since we do not know if the class is valid yet.
+        >>> name = 'display'
+        >>> value = 'inherit'
+        >>> priority = ''
+        >>> inherit_property = Property(name=name, value=value, priority=priority)
+        >>> breakpoint_parser = BreakpointParser(
+                css_class='padding-1em-giant-down',
+                css_property=inherit_property
+            )
+        >>> print(breakpoint_parser.breakpoint_key)
+        giant
+
         """
         for key, value in self.breakpoint_dict.items():
             _key = key + '-'
@@ -137,6 +189,21 @@ class BreakpointParser(object):
 
         :return: None
 
+        **Examples:**
+
+        >>> from cssutils.css import Property
+        >>> # value='inherit' since we do not know if the class is valid yet.
+        >>> name = 'display'
+        >>> value = 'inherit'
+        >>> priority = ''
+        >>> inherit_property = Property(name=name, value=value, priority=priority)
+        >>> breakpoint_parser = BreakpointParser(
+                css_class='padding-1em-giant-down',
+                css_property=inherit_property
+            )
+        >>> print(breakpoint_parser.limit_key)
+        -down
+
         """
         for limit_key in self.limit_key_set:
             in_middle = (limit_key + '-') in self.css_class and len(self.css_class) > len(limit_key + '-') + 2
@@ -161,10 +228,20 @@ class BreakpointParser(object):
 
         **Examples:**
 
-        >>> breakpoint_parser = BreakpointParser(css_class='xlarge-only', name='display', value='none')
+        >>> from cssutils.css import Property
+        >>> # value='inherit' since we do not know if the class is valid yet.
+        >>> name = 'display'
+        >>> value = 'inherit'
+        >>> priority = ''
+        >>> inherit_property = Property(name=name, value=value, priority=priority)
+        >>> breakpoint_parser = BreakpointParser(
+                css_class='xlarge-only',
+                css_property=inherit_property
+            )
         >>> breakpoint_parser.strip_breakpoint_limit()
         ''
-        >>> breakpoint_parser = BreakpointParser(css_class='bold-large-up', name='font-weight', value='none')
+        >>> inherit_property = Property(name='font-weight', value=value, priority=priority)
+        >>> breakpoint_parser.css_class='bold-large-up'
         >>> breakpoint_parser.strip_breakpoint_limit()
         'bold'
 
@@ -179,6 +256,9 @@ class BreakpointParser(object):
         ``display``.
 
         :return: (*bool*) -- Returns true if one of the cases is ``true``. Otherwise it returns ``false``.
+
+
+
         """
         pair = self.breakpoint_key + self.limit_key
         case1 = 'display' + pair == self.css_class
@@ -438,6 +518,29 @@ class BreakpointParser(object):
         """ Pick the css generation method based on the ``limit_key`` found in ``css_class``.
 
         :return: Return CSS media queries as CSS Text.
+
+        **Examples:**
+
+        >>> from cssutils.css import Property
+        >>> # value='inherit' since we do not know if the class is valid yet.
+        >>> name = 'display'
+        >>> value = 'inherit'
+        >>> priority = ''
+        >>> inherit_property = Property(name=name, value=value, priority=priority)
+        >>> breakpoint_parser = BreakpointParser(
+                css_class='padding-1em-giant-down',
+                css_property=inherit_property
+            )
+        >>> css_property = Property(name='padding', value='1em', priority='')
+        >>> if breakpoint_parser.is_breakpoint and css_property.valid:
+        >>>     breakpoint_parser.css_property = css_property
+        >>>     media_query = breakpoint_parser.build_media_query()
+        >>> print(media_query)
+        @media only screen and (max-width: 160.0em) {
+            .padding-1em-giant-down {
+                padding: 1em;
+            }
+        }
 
         """
         if self.limit_key in self.limit_key_methods:

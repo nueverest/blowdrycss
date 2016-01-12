@@ -28,14 +28,15 @@ class MediaQueryBuilder(object):
             clean_css_class = ''    # Prevents css_class from being modified.
 
             if name:
-                fake_property = Property(name=name, value='inherit', priority=priority)  # Fake value='inherit'.
+                # value='inherit' since we do not know if the class is valid yet.
+                inherit_property = Property(name=name, value='inherit', priority=priority)
 
-                scaling_parser = ScalingParser(css_class=css_class, css_property=fake_property)
+                scaling_parser = ScalingParser(css_class=css_class, css_property=inherit_property)
                 is_scaling = scaling_parser.is_scaling
                 if is_scaling:
                     clean_css_class = scaling_parser.strip_scaling_flag()
 
-                breakpoint_parser = BreakpointParser(css_class=css_class, css_property=fake_property)
+                breakpoint_parser = BreakpointParser(css_class=css_class, css_property=inherit_property)
                 is_breakpoint = breakpoint_parser.is_breakpoint
                 if is_breakpoint:
                     clean_css_class = breakpoint_parser.strip_breakpoint_limit()
