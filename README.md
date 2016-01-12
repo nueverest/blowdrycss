@@ -72,7 +72,7 @@ Inside a CSS file you find the following:
 The property `font-weight: bold;` appears three times, and `font-size: 12px;` appears twice. This is not 
 DRY (Don't Repeat Yourself).
 
-#### Scenario 2 - Stale CSS 
+#### Scenario 2 - Stale or Unused CSS 
 
 Inside a CSS file you write the following:
 
@@ -95,7 +95,7 @@ Inside a CSS file you write the following:
 Six months from now the person who wrote this CSS is then asked to remove the banner video from the homepage.
 More often than not the front-end developer will remove the CSS class from the HTML file, but not from the CSS file.
 
-##### Some reasons for this include:
+##### Reasons include:
 * Forgetting to delete the rule from the CSS file.
 * Fear that the class is used somewhere else and that it might break the site.
 * Being too busy to search all of the files in their project for other potential use cases.

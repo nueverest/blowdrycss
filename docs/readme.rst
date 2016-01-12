@@ -94,8 +94,8 @@ The property ``font-weight: bold;`` appears three times, and
 ``font-size: 12px;`` appears twice. This is not DRY (Don't Repeat
 Yourself).
 
-Scenario 2 - Stale CSS
-''''''''''''''''''''''
+Scenario 2 - Stale or Unused CSS
+''''''''''''''''''''''''''''''''
 
 Inside a CSS file you find the following:
 
@@ -121,8 +121,8 @@ header-2 and header-3 from the homepage. More often than not the
 front-end developer will remove the CSS class from the HTML file, but
 not from the CSS file.
 
-Some reasons for this include:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Reasons include:
+^^^^^^^^^^^^^^^^
 
 -  Forgetting to delete the rule from the CSS file.
 -  Fear that the class is used somewhere else and that it might break
