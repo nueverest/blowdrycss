@@ -57,7 +57,7 @@ the following CSS in `blowdry.css`:
 * No Python or Programming experience required.
 
 # Motivation
-This tool was created after seeing how many companies manage their CSS files. The following are a couple scenarios.
+This tool was created after seeing how many companies manage their CSS files. The following are some scenarios:
 
 #### Scenario 1 - WET (Write Everything Twice) CSS 
 
