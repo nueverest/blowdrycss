@@ -79,8 +79,10 @@ Motivation
 
 This tool was created after seeing how many companies manage their CSS files. The following are a couple scenarios.
 
-Scenario 1 - Inside a CSS file you find the following:
-''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Scenario 1 - WET (Write Everything Twice) CSS
+'''''''''''''''''''''''''''''''''''''''''''''
+
+Inside a CSS file you find the following:
 
 .. code:: css
 
@@ -91,6 +93,28 @@ Scenario 1 - Inside a CSS file you find the following:
 The property ``font-weight: bold;`` appears three times, and
 ``font-size: 12px;`` appears twice. This is not DRY (Don't Repeat
 Yourself).
+
+Scenario 2 - Stale CSS
+''''''''''''''''''''''
+
+Inside a CSS file you find the following:
+
+.. code:: css
+
+    .banner-video {
+        position: absolute;
+        top: 48%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        /*width: auto;*/
+        /*max-height: 30.5em;*/
+        z-index: -100;
+        transform: translateX(-50%) translateY(-50%);
+        background-color: rgba(0,0,0,1);
+        background-size: contain;
+        transition: 1s opacity;
+    }
 
 Six months later the person who wrote this CSS is then asked to remove
 header-2 and header-3 from the homepage. More often than not the
@@ -106,10 +130,9 @@ Some reasons for this include:
 -  Being too busy to search all of the files in their project for other
    potential use cases.
 
-The result is that multiple kilobytes worth of unused, dead CSS data
-remain.
+Now 326 bytes worth of stale CSS data lurks in the style files.
 
-Scenario 2 - CSS Pre-compiler:
+Scenario 3 - CSS Pre-compiler:
 ''''''''''''''''''''''''''''''
 
 CSS compilation with SASS/SCSS, PostCSS, or LESS is awesome, and makes

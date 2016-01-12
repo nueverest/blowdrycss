@@ -59,7 +59,10 @@ the following CSS in `blowdry.css`:
 # Motivation
 This tool was created after seeing how many companies manage their CSS files. The following are a couple scenarios.
 
-#### Scenario 1 - Inside a CSS file you find the following:
+#### Scenario 1 - WET (Write Everything Twice) CSS 
+
+Inside a CSS file you find the following:
+
 ```css
 .header-1 { font-weight: bold; font-size: 12px; font-color: red; } 
 .header-2 { font-weight: bold; font-size: 16px; font-color: blue; }
@@ -69,7 +72,27 @@ This tool was created after seeing how many companies manage their CSS files. Th
 The property `font-weight: bold;` appears three times, and `font-size: 12px;` appears twice. This is not 
 DRY (Don't Repeat Yourself).
 
-Six months later the person who wrote this CSS is then asked to remove header-2 and header-3 from the homepage.
+#### Scenario 2 - Stale CSS 
+
+Inside a CSS file you write the following:
+
+```css
+.banner-video {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    /*width: auto;*/
+    /*max-height: 30.5em;*/
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: rgba(0,0,0,1);
+    background-size: contain;
+    transition: 1s opacity;
+}
+```
+Six months from now the person who wrote this CSS is then asked to remove the banner video from the homepage.
 More often than not the front-end developer will remove the CSS class from the HTML file, but not from the CSS file.
 
 ##### Some reasons for this include:
@@ -77,7 +100,7 @@ More often than not the front-end developer will remove the CSS class from the H
 * Fear that the class is used somewhere else and that it might break the site.
 * Being too busy to search all of the files in their project for other potential use cases.
 
-The result is that multiple kilobytes worth of unused, dead CSS data remain.
+Now 326 bytes worth of stale CSS data lurks in the style files.
 
 #### Scenario 2 - CSS Pre-compiler:
 CSS compilation with SASS/SCSS, PostCSS, or LESS is awesome, and makes writing lots of CSS rules easy. 
