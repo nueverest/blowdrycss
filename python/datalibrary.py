@@ -49,15 +49,29 @@ class DataLibrary(object):
 
         **Aliases already known to clash are:**
 
-        | 'list-style': {'ls-'}, 'border-right': {'br-'}, 'font-style': {'fs-', 'font-s-'},
-        | 'border-spacing': {'border-s-', 'bs-'}, 'max-width': {'mw-'},
-        | 'border-color': {'bc-', 'border-c-'}, 'pitch-range': {'pr-'}, 'min-width': {'mw-'}
-        | 'word-spacing': {'ws-'}, 'pause-before': {'pb-'}, 'border-style': {'border-s-', 'bs-'},
-        | 'background-repeat': {'br-'}, 'padding-bottom': {'pb-'},
-        | 'max-height': {'mh-'}, 'min-height': {'mh-'}, 'padding-right': {'pr-'},
-        | 'background-color': {'bc-'}, 'font-size': {'fs-', 'font-s-'},
-        | 'white-space': {'ws-'}, 'border-collapse': {'bc-', 'border-c-'},
-        | 'letter-spacing': {'ls-'},
+        ::
+
+            'list-style': {'ls-'},
+            'border-right': {'br-'},
+            'font-style': {'fs-', 'font-s-'},
+            'padding-right': {'pr-'},
+            'border-spacing': {'border-s-', 'bs-'},
+            'max-width': {'mw-'},
+            'border-color': {'bc-', 'border-c-'},
+            'pitch-range': {'pr-'},
+            'min-width': {'mw-'},
+            'border-style': {'border-s-', 'bs-'},
+            'word-spacing': {'ws-'},
+            'pause-before': {'pb-'},
+            'background-repeat': {'br-'},
+            'padding-bottom': {'pb-'},
+            'max-height': {'mh-'},
+            'min-height': {'mh-'},
+            'background-color': {'bc-'},
+            'font-size': {'fs-', 'font-s-'},
+            'white-space': {'ws-'},
+            'border-collapse': {'bc-', 'border-c-'},
+            'letter-spacing': {'ls-'},
 
     | **property_names** (*set*)
 
@@ -326,15 +340,17 @@ class DataLibrary(object):
 
         **Examples:**
 
-        | 'property_name' --> {...}
+        ::
 
-        | 'color' --> set()
+            property_name --> {...}
 
-        | 'padding' --> {'pad-'}
+            color --> set()
 
-        | 'margin-top' --> {'margin-t-', 'mt-'}
+            padding --> {'pad-'}
 
-        | 'border-bottom-width' --> {'border-b-width', 'bbw-'}
+            margin-top --> {'margin-t-', 'mt-'}
+
+            border-bottom-width --> {'border-b-width', 'bbw-'}
 
         :type property_name: str
         :param property_name: A CSS property name.
@@ -466,31 +482,33 @@ class DataLibrary(object):
 
         *HTML Table Format:*
 
-        | ``<html>``
-        |  ``<head>``
-        |     ``<meta charset="UTF-8">``
-        |     ``<meta name="viewport" content="width=device-width, initial-scale=1.0">``
-        |     ``<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />``
-        |     ``<title>value_title - blowdrycss</title>``
-        |     ``<link rel="stylesheet" type="text/css" href="/css/blowdry.min.css"/>``
-        |  ``</head>``
-        |  ``<body>``
-        |      ``<table>``
-        |          ``<thead>``
-        |              ``<tr>``
-        |                  ``<th>key_title</th>``
-        |                  ``<th>value_title</th>``
-        |              ``</tr>``
-        |          ``</thead>``
-        |          ``<tbody>``
-        |              ``<tr>``
-        |                  ``<td>key[0]</td>``
-        |                  ``<td>value</td>``
-        |              ``</tr>``
-        |          ``</tbody>``
-        |      ``</table>``
-        |  ``</body>``
-        | ``</html>``
+        ::
+
+            <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+                    <title>value_title - blowdrycss</title>
+                    <link rel="stylesheet" type="text/css" href="/css/blowdry.min.css"/>
+                </head>
+                <body>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>key_title</th>
+                                <th>value_title</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>key[0]</td>
+                                <td>value</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </body>
+            </html>
 
         :type h1_text: str
         :type key_title: str
