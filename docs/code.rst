@@ -34,6 +34,14 @@ ____
 
 ____
 
+``mediaquerybuilder``
+---------------------
+
+.. automodule:: mediaquerybuilder
+
+____
+
+
 ``htmlparser``
 --------------
 
