@@ -179,8 +179,8 @@ CSS File size does matter. Large style files result in the following:
 -  Longer download times increase user bounce rates especially on mobile
    devices.
 -  Data pollution on the Internet.
--  Increase the likelihood of style bugs.
--  Increase the amount of time required to implement new changes and
+-  Increased likelihood of style bugs.
+-  Increased time required to implement new changes and
    deprecate features.
 
 What it is not
