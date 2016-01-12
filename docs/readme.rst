@@ -188,7 +188,7 @@ What it is not
 
 This tool is not designed to replace the need to hand-craft complex CSS property or rule declarations.
 
-* Multi-rule classes, Background images, url() values, multi-word fonts, and shorthand properties are not fully supported.
+* Custom CSS would need to be written for Multi-rule classes, Background images, url() values, multi-word fonts, and some shorthand properties.
 
 The following is an example of something this tool in not intended to
 generate, and something that still needs to be written by hand.
