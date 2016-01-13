@@ -1,3 +1,4 @@
+# plugins
 from cssutils.css import Property
 # custom
 import settings     # Even though this is it gray it is required for utilities to work
@@ -172,18 +173,15 @@ class ScalingParser(object):
         :return: (*str*) -- Returns CSS media queries that scales pixel / em values in response to screen size changes.
 
         """
+        if not self.is_scaling:
+            return ''
+
         name = self.css_property.name
         value = self.css_property.value
+        units = ''.join(filter(lambda x: x.isalpha(), value))                   # Only keep letters.
         priority = self.css_property.priority
         deny_empty_or_whitespace(str(value), variable_name='value')
-        float_value = float(value.replace('em', '').replace('px', ''))          # Remove units
-
-        if value.endswith('em'):                                                # Get units
-            units = 'em'
-        elif value.endswith('px'):
-            units = 'px'
-        else:
-            units = ''
+        float_value = float(value.replace(units, ''))                           # Remove units.
 
         _max = 1
         small_max = small[_max]

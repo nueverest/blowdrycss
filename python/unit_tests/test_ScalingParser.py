@@ -32,12 +32,14 @@ class TestBreakpointParser(TestCase):
     def test_strip_scaling_flag(self):
         valid_css_classes = [
             'font-size-34-s', 'font-size-24-s-i', 'padding-12-s', 'margin-31-s-i',
+            'font-size-10', 'font-size-13-i',
         ]
-        names = ['font-size', 'font-size', 'padding', 'margin', ]
-        values = ['34px', '24px', '12px', '31px', '15px', '52px', ]
-        priorities = ['', 'important', '', 'important', '', '', ]
+        names = ['font-size', 'font-size', 'padding', 'margin', 'font-size', 'font-size', ]
+        values = ['34px', '24px', '12px', '31px', '15px', '52px', '10px', '13px', ]
+        priorities = ['', 'important', '', 'important', '', '', '', '', ]
         expected = [
-            'font-size-34', 'font-size-24-i', 'padding-12', 'margin-31-i', 
+            'font-size-34', 'font-size-24-i', 'padding-12', 'margin-31-i',
+            'font-size-10', 'font-size-13-i',
         ]
 
         for i, css_class in enumerate(valid_css_classes):
@@ -97,6 +99,56 @@ class TestBreakpointParser(TestCase):
             '}\n\n' +
             '@media only screen and (max-width: 30.0em) {\n' +
             '\t.font-size-24-s-i { font-size: 1.2em !important; }\n' +
+            '}\n\n'
+        )
+        scaling_parser = ScalingParser(css_class=css_class, css_property=css_property)
+        css = scaling_parser.build_media_query()
+        self.assertEqual(css, expected, msg=css)
+
+    def test_generate_scaling_css_invalid_property_name_is_not_scaling(self):
+        css_class = 'white-space-nowrap-s'
+        name = 'white-space'
+        value = 'nowrap'
+        priority = ''
+        css_property = Property(name=name, value=value, priority=priority)
+        expected = ''
+        scaling_parser = ScalingParser(css_class=css_class, css_property=css_property)
+        css = scaling_parser.build_media_query()
+        self.assertEqual(css, expected, msg=css)
+
+    def test_generate_scaling_css_rem_important(self):
+        css_class = 'font-size-24rem-s-i'
+        name = 'font-size'
+        value = '24rem'
+        priority = 'important'
+        css_property = Property(name=name, value=value, priority=priority)
+        expected = (
+            '.font-size-24rem-s-i { font-size: ' + value + ' !important; }\n\n' +
+            '@media only screen and (max-width: 45.0em) {\n' +
+            '\t.font-size-24rem-s-i { font-size: 21.3333rem !important; }\n' +
+            '}\n\n' +
+            '@media only screen and (max-width: 30.0em) {\n' +
+            '\t.font-size-24rem-s-i { font-size: 19.2rem !important; }\n' +
+            '}\n\n'
+        )
+        scaling_parser = ScalingParser(css_class=css_class, css_property=css_property)
+        css = scaling_parser.build_media_query()
+        self.assertEqual(css, expected, msg=css)
+
+    def test_generate_scaling_css_invalid_units(self):
+        # TODO: Decide whether to create unit validator or to continue relying on cssutils for validation.
+        css_class = 'font-size-24parsecs-s-i'
+        name = 'font-size'
+        value = '24parsecs'
+        priority = 'important'
+        css_property = Property(name=name, value=value, priority=priority)
+        expected = (
+            '.font-size-24parsecs-s-i { font-size: ' + value + ' !important; }\n\n' +
+            '@media only screen and (max-width: 45.0em) {\n' +
+            '\t.font-size-24parsecs-s-i { font-size: 21.3333parsecs !important; }\n' +
+            '}\n\n' +
+            '@media only screen and (max-width: 30.0em) {\n' +
+            '\t.font-size-24parsecs-s-i { font-size: 19.2parsecs !important; }\n' +
             '}\n\n'
         )
         scaling_parser = ScalingParser(css_class=css_class, css_property=css_property)
