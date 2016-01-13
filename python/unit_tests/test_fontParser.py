@@ -6,6 +6,21 @@ __project__ = 'blow dry css'
 
 
 class TestFontParser(TestCase):
+    def test_font_families_dict(self):
+        font_parser = FontParser()
+        expected = {
+            'serif': {
+                'georgia', 'palatino', 'times', 'cambria', 'didot', 'garamond', 'perpetua', 'rockwell', 'baskerville',
+            },
+            'sans-serif': {
+                'arial', 'helvetica', 'gadget', 'cursive', 'impact', 'charcoal', 'tahoma', 'geneva', 'verdana',
+                'calibri', 'candara', 'futura', 'optima',
+            },
+            'monospace': {'courier', 'monaco', 'consolas', },
+            'fantasy': {'copperplate', 'papyrus', },
+        }
+        self.assertEqual(font_parser.font_families_dict, expected)
+
     # font_value 'monospace' returns 'monospace'
     def test_generate_fallback_fonts_family_key(self):
         font_families = {'serif', 'sans-serif', 'monospace', 'fantasy'}
