@@ -6,3 +6,4 @@
 exclude_lines =
     if __name__ == .__main__.:
     except SyntaxErr:   # Special Case - Not Tested
+    except ValueError:  # Impossible to get here if get_property_name() is working properly.

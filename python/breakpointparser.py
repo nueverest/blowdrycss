@@ -564,5 +564,4 @@ class BreakpointParser(object):
         """
         if self.limit_key in self.limit_key_methods:
             return self.limit_key_methods[self.limit_key]()     # Calls the method in dict.
-
         return ''

@@ -10,9 +10,14 @@ __project__ = 'blow dry css'
 class TestMediaQueryBuilder(TestCase):
     def test_init_classes(self):
         class_set = {
+            # Valid
             'margin-top-50px-xlarge-down', 'small-up', 'giant-only-i', 'display-large-down',
             'text-align-center-medium-down',  'bold-small-only', 'color-hfff-xsmall-only',
             'font-size-13-s-i', 'font-size-48em-s',
+            # Invalid - The following should be removed.
+            'width-100-xxlarge-down-s', 'padding-50-xxsmall-only-s',                        # mixed
+            'squirrel-medium-only',                                                         # invalid css property name
+            'font-size-AA-s',                                                               # invalid property value
             'height-150px', 'valign-middle', 'font-size-48',
             'b', 'cue-x5_0p', 'hide', 'padding-b1 a5 c1% e5', 'margin-1a% 10x% 3q% 1mp3',
         }
@@ -22,6 +27,10 @@ class TestMediaQueryBuilder(TestCase):
             'font-size-13-s-i', 'font-size-48em-s',
         }
         expected_removed_set = {
+            'width-100-xxlarge-down-s (Breakpoint and scaling media query syntax cannot be combined.)',
+            'padding-50-xxsmall-only-s (Breakpoint and scaling media query syntax cannot be combined.)',
+            'squirrel-medium-only is not a media query css_class selector.',
+            'font-size-aa-s (cssutils invalid property value: aa)',
             'cue-x5_0p is not a media query css_class selector.',
             'hide is not a media query css_class selector.',
             'padding-b1 a5 c1% e5 (Only a-z, 0-9, "_", and "-" are allowed in class name.)',
@@ -143,8 +152,8 @@ class TestMediaQueryBuilder(TestCase):
         self.assertTrue(media_query_builder.css_media_queries == expected_css_media_queries,
                         msg=media_query_builder.css_media_queries)
 
-    def test_class_is_parsable(self):
-        pass
+    # def test_class_is_parsable(self):
+    #     pass
 
     def test_get_css_text(self):
         class_set = {'giant-only-i', 'color-hfff-xsmall-only', 'font-size-13-s-i', }

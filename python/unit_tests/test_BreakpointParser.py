@@ -169,6 +169,17 @@ class TestBreakpointParser(TestCase):
         css = breakpoint_parser.css_for_only()
         self.assertEqual(css, expected)
 
+    def test_css_for_only_wrong_limit_key(self):
+        css_class = 'padding-100-large-only'
+        name = 'padding'
+        value = px_to_em('100')
+        expected = ''
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
+        breakpoint_parser.limit_key = '-up'     # Change to WRONG LIMIT KEY
+        css = breakpoint_parser.css_for_only()
+        self.assertEqual(css, expected)
+
     def test_css_for_down_display(self):
         css_class = 'display-medium-down'
         name = 'display'
@@ -217,6 +228,17 @@ class TestBreakpointParser(TestCase):
         css = breakpoint_parser.css_for_down()
         self.assertEqual(css, expected)
 
+    def test_css_for_down_wrong_limit_key(self):
+        css_class = 'padding-100-medium-down'
+        name = 'padding'
+        value = px_to_em('100')
+        expected = ''
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
+        breakpoint_parser.limit_key = '-only'   # Change to WRONG LIMIT KEY.
+        css = breakpoint_parser.css_for_down()
+        self.assertEqual(css, expected)
+
     def test_css_for_up_display(self):
         css_class = 'display-small-up'
         name = 'display'
@@ -262,6 +284,17 @@ class TestBreakpointParser(TestCase):
         )
         css_property = Property(name=name, value=value, priority='')
         breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
+        css = breakpoint_parser.css_for_up()
+        self.assertEqual(css, expected)
+
+    def test_css_for_up_wrong_limit_key(self):
+        css_class = 'padding-100-small-up'
+        name = 'padding'
+        value = px_to_em('100')
+        expected = ''
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
+        breakpoint_parser.limit_key = '-only'   # Change to WRONG LIMIT KEY
         css = breakpoint_parser.css_for_up()
         self.assertEqual(css, expected)
 
@@ -364,6 +397,17 @@ class TestBreakpointParser(TestCase):
         )
         css_property = Property(name=name, value=value, priority='')
         breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
+        css = breakpoint_parser.build_media_query()
+        self.assertEqual(css, expected)
+
+    def test_build_media_query_invalid_limit_key(self):
+        css_class = 'padding-100-small-up'
+        name = 'padding'
+        value = px_to_em('100')
+        expected = ''
+        css_property = Property(name=name, value=value, priority='')
+        breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
+        breakpoint_parser.limit_key = 'invalid_key'
         css = breakpoint_parser.build_media_query()
         self.assertEqual(css, expected)
 
