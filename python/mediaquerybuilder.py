@@ -1,6 +1,6 @@
 # python 2
 from __future__ import print_function
-# general
+# plugins
 from cssutils.css import Property
 from xml.dom import SyntaxErr
 # custom

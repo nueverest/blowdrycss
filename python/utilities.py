@@ -1,12 +1,13 @@
 # python 2
 from __future__ import division
 from builtins import round
-# general
+# builtins
 import settings
 from re import search, findall
 from inspect import currentframe
 from os import path
 from string import digits
+
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 

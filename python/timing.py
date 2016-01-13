@@ -21,10 +21,11 @@ It took: 0.17296 seconds
 # python 2
 from __future__ import print_function, division, unicode_literals
 from builtins import str
-# general
+# builtins
 import atexit
 from time import time
 from datetime import timedelta, datetime
+
 __author__ = 'paul, nicojo, chad nelson'
 __project__ = 'blow dry css'
 

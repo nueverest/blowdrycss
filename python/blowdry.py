@@ -1,9 +1,9 @@
 # python 2
 from __future__ import print_function
 from builtins import bytes, str
-# general
+# builtins
 from os import chdir, getcwd, path
-# custom classes
+# custom
 import settings
 from filehandler import FileFinder, CSSFile, GenericFile
 from htmlparser import HTMLClassParser
@@ -12,6 +12,7 @@ from cssbuilder import CSSBuilder
 from mediaquerybuilder import MediaQueryBuilder
 from datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, property_alias_html, \
     clashing_alias_rst, property_alias_rst
+
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 

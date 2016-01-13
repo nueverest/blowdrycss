@@ -46,9 +46,11 @@ IMPORTANT
 
 """
 
-from cssutils import parseString
+# builtins
 from string import ascii_lowercase, digits
 from re import findall
+# plugins
+from cssutils import parseString
 # custom
 from cssvalueparser import CSSPropertyValueParser
 from datalibrary import ordered_property_dict, property_alias_dict, property_regex_dict

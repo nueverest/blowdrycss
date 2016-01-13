@@ -44,7 +44,11 @@
 
 """
 
+# custom
 from utilities import px_to_em
+
+__author__ = 'chad nelson'
+__project__ = 'blow dry css'
 
 # TODO: Consider converting these to properties, so that, they cannot be modified anywhere but here.
 

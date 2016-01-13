@@ -1,33 +1,32 @@
-""" **Features:**
-
-- Parses unquoted font families.
-
-  Unquoted Font-Family References:
-    | http://www.cssfontstack.com/
-    | https://mathiasbynens.be/notes/unquoted-font-family
-
-- Holds a basic ``font_families_dict`` (could be extended as desired):
-    | Keys: ``font-family`` category names
-    | Values: ``font-family`` member names
-
-- Can generate web safe fallback fonts.
-
-Assumes that the property_name is ``font-family``. It does not handle the shorthand property_name ``font``
-
-**Examples:**
-
->>> font_parser = FontParser('papyrus')
->>> font_parser.generate_fallback_fonts()
-'papyrus, fantasy'
-
-"""
-
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
 
 # TODO: Consider what it would take to handle shorthand property 'font'.
 class FontParser(object):
+    """ **Features:**
+
+    - Parses unquoted font families.
+
+      Unquoted Font-Family References:
+        | http://www.cssfontstack.com/
+        | https://mathiasbynens.be/notes/unquoted-font-family
+
+    - Holds a basic ``font_families_dict`` (could be extended as desired):
+        | Keys: ``font-family`` category names
+        | Values: ``font-family`` member names
+
+    - Can generate web safe fallback fonts.
+
+    Assumes that the property_name is ``font-family``. It does not handle the shorthand property_name ``font``
+
+    **Examples:**
+
+    >>> font_parser = FontParser('papyrus')
+    >>> font_parser.generate_fallback_fonts()
+    'papyrus, fantasy'
+
+    """
     def __init__(self, font_value=''):
         self.font_value = font_value
         self.font_families_dict = {

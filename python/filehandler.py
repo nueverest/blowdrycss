@@ -1,12 +1,14 @@
 # python 2 compatibility
 from __future__ import print_function, unicode_literals
 from builtins import str
-# general
+# builtins
 from os import path, walk, getcwd, makedirs
 from glob import glob
+# plugins
 from cssutils import parseString, ser
 # custom
 from utilities import get_file_path
+
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 

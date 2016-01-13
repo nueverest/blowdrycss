@@ -18,11 +18,12 @@
 """
 # python 2
 from __future__ import print_function
-# general
+# plugins
 from cssutils.css import Property, CSSStyleRule, CSSStyleSheet
 from xml.dom import SyntaxErr
 # custom
 from classpropertyparser import ClassPropertyParser
+
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 

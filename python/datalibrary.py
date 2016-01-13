@@ -1,6 +1,9 @@
+# builtins
 from collections import OrderedDict
 from copy import deepcopy
+# plugins
 from pypandoc import convert
+
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 

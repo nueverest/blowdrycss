@@ -5,12 +5,12 @@ See:
 https://github.com/nueverest/blowdrycss
 """
 
-# Always prefer setuptools over distutils
-from setuptools import setup, find_packages
-# To use a consistent encoding
-# from codecs import open
-from os import path, pardir
+# builtins
+from setuptools import setup, find_packages     # Always prefer setuptools over distutils
+from os import path, pardir                     # To use a consistent encoding from codecs import open
 
+__author__ = 'chad nelson'
+__project__ = 'blow dry css'
 
 # Optional way to manually generate reStructuredText
 # From the project directory run this command.

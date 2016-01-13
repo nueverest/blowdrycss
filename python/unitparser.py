@@ -1,4 +1,4 @@
-# general
+# builtins
 from string import digits
 # custom
 import settings
