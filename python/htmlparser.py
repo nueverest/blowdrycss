@@ -148,9 +148,9 @@ class HTMLClassParser(object):
     def __init__(self, files):
         self.class_set = set()
 
-        for file in files:
+        for _file in files:
             # Convert file to string.
-            file_converter = FileConverter(file_path=file)
+            file_converter = FileConverter(file_path=_file)
             file_string = file_converter.get_file_as_string()
             # print(file_string)
 
