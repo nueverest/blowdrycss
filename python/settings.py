@@ -39,8 +39,8 @@
 
 | xgiant (*tuple of floats*) -- (giant upper limit + 1px, upper limit in pixels)
 
-| xxgiant (*tuple of floats*) -- (xgiant upper limit + 1px, 1E+6) [Technically the upper limit is infinity, but CSS does not
-  permit it.]
+| xxgiant (*tuple of floats*) -- (xgiant upper limit + 1px, 1E+6) [Technically the upper limit is infinity,
+  but CSS does not permit it.]
 
 **cssutils Patch:**
 
