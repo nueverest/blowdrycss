@@ -22,7 +22,7 @@ class TestCSSStyleBuilder(TestCase):
             'margin-top-10', 'margin-20', 'padding-top-10', 'height-200', 'padding-10', 'width-150', 'width-50',
             'font-size-48',
             'c-blue', 'height-150px', 'bgc-h000', 'bold', 'color-hfff', 'height-50px', 'text-align-center',
-            'margin-top-50px', 'valign-middle', 'font-size-1.23rem'
+            'margin-top-50px', 'valign-middle', 'font-size-1_23rem'
         }
         expected_removed_set = {
             'cue-x5_0p (cssutils invalid property value: x5.0%)',
