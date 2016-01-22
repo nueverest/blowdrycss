@@ -55,7 +55,7 @@
       unit tests added.
     | 0.0.6 -- Advanced media query syntax added. Modules ``breakpointparser`` and ``scalingparser`` added to
       allow for the dynamic creation of media queries. (1/2/2016)
-    | 0.0.7 -- Implemented backward with Python version 2.7.x.
+    | 0.0.7 -- Implemented backward compatibility with Python version 2.7.x.
 
 """
 __author__ = 'chad nelson'

@@ -12,20 +12,10 @@ from os import path, pardir                     # To use a consistent encoding f
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
-# Optional way to manually generate reStructuredText
-# From the project directory run this command.
-# pandoc --from markdown --to rst README.md -o docs/long_description.rst
-
-# Convert README.md to reStructuredText and assign to long_description.
-# Reference: https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules (do not like adding another
-# dependency).
+# Get readme.rst from sphinx docs.
 try:
-    from pypandoc import convert
-    here = path.abspath(path.dirname(__file__))
-    readme_path = path.join(here, pardir, 'README.md')           # Go up one directory.
-    with open(readme_path, encoding='utf-8') as f:
-        markdown = f.read()
-        long_description = convert(source=markdown, to='rst', format='md')
+    with open('docs/readme.rst', encoding='utf-8') as f:
+        long_description = f.read()
 except (IOError, ImportError):
     # default description
     long_description = u'Rapid styling tool used to auto-generate DRY CSS files from encoded class selectors.'
@@ -43,7 +33,7 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version=version['__version__'],
 
-    description=u'Rapid styling tool used to auto-generate DRY CSS files from encoded class selectors.',
+    description=u'A rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files',
     long_description=long_description,
 
     # The project's main homepage.
@@ -53,10 +43,10 @@ setup(
     author='chad nelson',
     author_email='nu.everest@gmail.com',
 
-    # Choose your license
+    # License
     license='MIT',
 
-    # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
+    # Classifier Reference: https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Development Status :: 3 - Alpha',                  # 3 - Alpha, 4 - Beta, 5 - Production/Stable
         'Intended Audience :: Developers',

@@ -64,12 +64,12 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'blowdrycss'
-copyright = '2015, Chad Nelson'
+copyright = '2015-Present, Chad Nelson'
 author = 'Chad Nelson'
 
 # Get current version number.
 current_version = {}
-with open('../python/version.py') as file:
+with open('../version.py') as file:
     exec(file.read(), current_version)
 
 # The version info for the project you're documenting, acts as replacement for
