@@ -1,8 +1,12 @@
 """
 blowdrycss setup module.
 
-See:
-https://github.com/nueverest/blowdrycss
+Repository: https://github.com/nueverest/blowdrycss
+Docs: http://blowdrycss.readthedocs.org/en/latest/index.html
+
+setup.py references:
+https://python-packaging-user-guide.readthedocs.org/en/latest/distributing/
+https://www.jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/
 """
 
 # builtins

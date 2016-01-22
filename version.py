@@ -21,11 +21,11 @@
     **__release__ formats:**
 
     +------------+-------------------+
-    | ``0.0.Za`` | Alpha release     |
+    | ``0.0.Za1`` | Alpha release     |
     +------------+-------------------+
-    | ``0.Y.Zb`` | Beta release      |
+    | ``0.Y.Zb1`` | Beta release      |
     +------------+-------------------+
-    | ``X.Y.Zrc``| Release Candidate |
+    | ``X.Y.Zrc1``| Release Candidate |
     +------------+-------------------+
     | ``X.Y.Z``  | Final release     |
     +------------+-------------------+
@@ -41,9 +41,9 @@
     - Y may not be greater than 9
     - X may grow into infinity.
 
-    - When Z increments beyond 9 Y is incremented by 1 and Z is reset to 0.
-    - When Y increments beyond 9 X is incremented by 1 and both Y and Z is reset to 0.
-    - When X increments both Y and Z is reset to 0.
+    - When Z increments beyond 9 Y is incremented by 1. Z is reset to 0.
+    - When Y increments beyond 9 X is incremented by 1. Both Y and Z are reset to 0.
+    - When X increments both Y and Z are reset to 0.
 
     **Version Changelog:**
 
@@ -64,4 +64,4 @@ __project__ = 'blow dry css'
 
 __version__ = '0.0.7'
 
-__release__ = __version__ + 'a'
+__release__ = __version__ + 'a1'
