@@ -29,7 +29,7 @@ import shlex
 # In the requirement file field type: rtd_requirements.txt
 # Set Python Interpreter to: CPython 3.x
 # Click Submit.
-sys.path.insert(0, os.path.abspath('../python/'))       # Required to get '.. automodule::' working on readthedocs.org.
+sys.path.insert(0, os.path.abspath('../blowdrycss/'))       # Required to get '.. automodule::' working on readthedocs.org.
 
 # -- General configuration ------------------------------------------------
 

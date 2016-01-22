@@ -3,7 +3,7 @@ from os import chdir
 import sys
 from io import StringIO
 # custom
-import blowdry
+import blowdrycss
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -20,7 +20,7 @@ class TestMain(TestCase):
             sys.stdout = out
 
             chdir('..')
-            blowdry.main()
+            blowdrycss.main()
 
             output = out.getvalue()
             for substring in substrings:

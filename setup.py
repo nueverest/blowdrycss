@@ -103,7 +103,7 @@ setup(
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
     # for example:
-    # $ pip install blowdrycss -e .[auto_save, test]
+    # $ pip install blowdrycss -e .[auto_save, docs, test]
     extras_require={
         'auto_save': ['watchdog>=0.8.3'],
         'docs': ['sphinx>=1.3.3'],
