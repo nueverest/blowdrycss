@@ -4,40 +4,39 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | Property Name                        | Valid Aliases                        |
 +--------------------------------------+--------------------------------------+
-| azimuth                              | ``rightwards`` ``far-left``          |
-|                                      | ``behind`` ``right-side``            |
-|                                      | ``far-right``                        |
-|                                      | ``azi-`` ``center-right``            |
-|                                      | ``center-left`` ``leftwards``        |
-|                                      | ``left-side``                        |
+| azimuth                              | ``leftwards`` ``left-side``          |
+|                                      | ``far-left`` ``azi-`` ``far-right``  |
+|                                      | ``center-right`` ``right-side``      |
+|                                      | ``center-left`` ``rightwards``       |
+|                                      | ``behind``                           |
 +--------------------------------------+--------------------------------------+
 | background                           | ``bg-`` ``bac-``                     |
 +--------------------------------------+--------------------------------------+
 | background-attachment                | ``background-a-`` ``ba-``            |
 +--------------------------------------+--------------------------------------+
-| background-color                     | ``bg-color-`` ``bg-c-`` ``bgc-``     |
-|                                      | ``background-c-``                    |
+| background-color                     | ``bg-color-`` ``bg-c-``              |
+|                                      | ``background-c-`` ``bgc-``           |
 +--------------------------------------+--------------------------------------+
 | background-image                     | ``background-i-`` ``bi-``            |
 +--------------------------------------+--------------------------------------+
-| background-position                  | ``bp-`` ``background-p-``            |
+| background-position                  | ``background-p-`` ``bp-``            |
 +--------------------------------------+--------------------------------------+
-| background-repeat                    | ``background-r-`` ``repeat-y``       |
-|                                      | ``no-repeat`` ``repeat-x``           |
+| background-repeat                    | ``repeat-y`` ``repeat-x``            |
+|                                      | ``background-r-`` ``no-repeat``      |
 +--------------------------------------+--------------------------------------+
 | border                               | ``bor-``                             |
 +--------------------------------------+--------------------------------------+
 | border-bottom                        | ``border-b-`` ``bb-``                |
 +--------------------------------------+--------------------------------------+
-| border-bottom-color                  | ``border-b-color-`` ``bbc-``         |
+| border-bottom-color                  | ``bbc-`` ``border-b-color-``         |
 +--------------------------------------+--------------------------------------+
-| border-bottom-left-radius            | ``border-b-left-radius-`` ``bbl-``   |
+| border-bottom-left-radius            | ``bbl-`` ``border-b-left-radius-``   |
 +--------------------------------------+--------------------------------------+
 | border-bottom-right-radius           | ``border-b-right-radius-`` ``bbr-``  |
 +--------------------------------------+--------------------------------------+
-| border-bottom-style                  | ``border-b-style-`` ``bbs-``         |
+| border-bottom-style                  | ``bbs-`` ``border-b-style-``         |
 +--------------------------------------+--------------------------------------+
-| border-bottom-width                  | ``border-b-width-`` ``bbw-``         |
+| border-bottom-width                  | ``bbw-`` ``border-b-width-``         |
 +--------------------------------------+--------------------------------------+
 | border-collapse                      |                                      |
 +--------------------------------------+--------------------------------------+
@@ -57,27 +56,27 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | border-right-color                   | ``border-r-color-`` ``brc-``         |
 +--------------------------------------+--------------------------------------+
-| border-right-style                   | ``border-r-style-`` ``brs-``         |
+| border-right-style                   | ``brs-`` ``border-r-style-``         |
 +--------------------------------------+--------------------------------------+
-| border-right-width                   | ``brw-`` ``border-r-width-``         |
+| border-right-width                   | ``border-r-width-`` ``brw-``         |
 +--------------------------------------+--------------------------------------+
 | border-spacing                       |                                      |
 +--------------------------------------+--------------------------------------+
 | border-style                         |                                      |
 +--------------------------------------+--------------------------------------+
-| border-top                           | ``bt-`` ``border-t-``                |
+| border-top                           | ``border-t-`` ``bt-``                |
 +--------------------------------------+--------------------------------------+
-| border-top-color                     | ``btc-`` ``border-t-color-``         |
+| border-top-color                     | ``border-t-color-`` ``btc-``         |
 +--------------------------------------+--------------------------------------+
-| border-top-left-radius               | ``border-t-left-radius-`` ``btl-``   |
+| border-top-left-radius               | ``btl-`` ``border-t-left-radius-``   |
 +--------------------------------------+--------------------------------------+
-| border-top-right-radius              | ``border-t-right-radius-`` ``btr-``  |
+| border-top-right-radius              | ``btr-`` ``border-t-right-radius-``  |
 +--------------------------------------+--------------------------------------+
 | border-top-style                     | ``bts-`` ``border-t-style-``         |
 +--------------------------------------+--------------------------------------+
 | border-top-width                     | ``btw-`` ``border-t-width-``         |
 +--------------------------------------+--------------------------------------+
-| border-width                         | ``bw-`` ``border-w-``                |
+| border-width                         | ``border-w-`` ``bw-``                |
 +--------------------------------------+--------------------------------------+
 | bottom                               | ``bot-``                             |
 +--------------------------------------+--------------------------------------+
@@ -87,91 +86,87 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | clip                                 |                                      |
 +--------------------------------------+--------------------------------------+
-| color                                | ``steelblue`` ``gold``               |
-|                                      | ``whitesmoke`` ``green`` ``coral``   |
-|                                      | ``darkviolet`` ``orangered``         |
-|                                      | ``chartreuse`` ``mediumslateblue``   |
-|                                      | ``teal``                             |
-|                                      | ``pink`` ``navy`` ``darkslategray``  |
-|                                      | ``brown`` ``peachpuff``              |
-|                                      | ``darkred`` ``dodgerblue``           |
-|                                      | ``darkgray`` ``lightgreen``          |
-|                                      | ``gainsboro``                        |
-|                                      | ``skyblue`` ``mediumturquoise``      |
-|                                      | ``darkslategrey`` ``darkkhaki``      |
-|                                      | ``lightgray``                        |
-|                                      | ``palegoldenrod`` ``honeydew``       |
-|                                      | ``mediumvioletred`` ``bisque``       |
-|                                      | ``maroon``                           |
-|                                      | ``crimson`` ``mistyrose``            |
-|                                      | ``blueviolet`` ``mediumblue``        |
-|                                      | ``peru``                             |
-|                                      | ``lightslategray`` ``springgreen``   |
-|                                      | ``dimgray`` ``sandybrown``           |
-|                                      | ``turquoise``                        |
-|                                      | ``tomato`` ``yellow`` ``darkgrey``   |
-|                                      | ``rgb`` ``lime``                     |
-|                                      | ``powderblue`` ``darkmagenta``       |
-|                                      | ``darkorchid`` ``antiquewhite``      |
-|                                      | ``seashell``                         |
-|                                      | ``gray`` ``darkslateblue``           |
-|                                      | ``deepskyblue`` ``seagreen``         |
-|                                      | ``royalblue``                        |
-|                                      | ``tan`` ``saddlebrown``              |
-|                                      | ``rosybrown`` ``burlywood``          |
-|                                      | ``slateblue``                        |
-|                                      | ``mediumspringgreen`` ``fuchsia``    |
-|                                      | ``lightskyblue`` ``mintcream``       |
-|                                      | ``violet``                           |
-|                                      | ``lightseagreen`` ``lightcyan``      |
-|                                      | ``firebrick`` ``paleturquoise``      |
-|                                      | ``lightblue``                        |
-|                                      | ``dimgrey`` ``palegreen``            |
-|                                      | ``mediumpurple`` ``lightsteelblue``  |
-|                                      | ``navajowhite``                      |
-|                                      | ``rgba`` ``grey`` ``lightsalmon``    |
-|                                      | ``lightgoldenrodyellow``             |
+| color                                | ``midnightblue`` ``khaki``           |
+|                                      | ``darkkhaki`` ``cyan``               |
+|                                      | ``lemonchiffon``                     |
+|                                      | ``olivedrab`` ``orange``             |
+|                                      | ``royalblue`` ``blanchedalmond``     |
+|                                      | ``lightskyblue``                     |
+|                                      | ``hsl`` ``mediumvioletred``          |
+|                                      | ``darkblue`` ``pink`` ``hotpink``    |
+|                                      | ``cornflowerblue`` ``aliceblue``     |
+|                                      | ``cadetblue`` ``limegreen``          |
+|                                      | ``mediumspringgreen``                |
+|                                      | ``snow`` ``sienna`` ``darkgreen``    |
+|                                      | ``paleturquoise`` ``skyblue``        |
+|                                      | ``aquamarine`` ``lightcyan``         |
+|                                      | ``tomato`` ``aqua`` ``lawngreen``    |
+|                                      | ``fuchsia`` ``slategrey``            |
+|                                      | ``orangered`` ``steelblue``          |
+|                                      | ``mintcream``                        |
+|                                      | ``wheat`` ``thistle`` ``rosybrown``  |
+|                                      | ``lightcoral`` ``saddlebrown``       |
+|                                      | ``lightsalmon`` ``lightblue``        |
+|                                      | ``lavender`` ``antiquewhite``        |
+|                                      | ``indigo``                           |
+|                                      | ``dimgray`` ``mistyrose`` ``gold``   |
+|                                      | ``olive`` ``mediumseagreen``         |
+|                                      | ``darkcyan`` ``red`` ``brown``       |
+|                                      | ``lightsteelblue`` ``darkgrey``      |
+|                                      | ``crimson`` ``mediumaquamarine``     |
+|                                      | ``c-`` ``palegoldenrod`` ``lime``    |
+|                                      | ``maroon`` ``lightslategrey``        |
+|                                      | ``ivory`` ``forestgreen``            |
 |                                      | ``papayawhip``                       |
-|                                      | ``darkcyan`` ``floralwhite``         |
-|                                      | ``blue`` ``aliceblue`` ``olivedrab`` |
-|                                      | ``black`` ``linen`` ``forestgreen``  |
-|                                      | ``aquamarine`` ``yellowgreen``       |
-|                                      | ``cyan`` ``indianred``               |
-|                                      | ``lightslategrey`` ``darkblue``      |
-|                                      | ``mediumaquamarine``                 |
-|                                      | ``limegreen`` ``snow`` ``c-``        |
-|                                      | ``orange`` ``hsla``                  |
-|                                      | ``hsl`` ``ghostwhite`` ``moccasin``  |
-|                                      | ``cornflowerblue`` ``lightyellow``   |
-|                                      | ``oldlace`` ``hotpink``              |
-|                                      | ``mediumseagreen`` ``goldenrod``     |
-|                                      | ``lightgrey``                        |
-|                                      | ``palevioletred`` ``greenyellow``    |
-|                                      | ``beige`` ``purple`` ``sienna``      |
-|                                      | ``mediumorchid`` ``wheat``           |
-|                                      | ``lavender`` ``aqua`` ``magenta``    |
-|                                      | ``ivory`` ``lightpink``              |
-|                                      | ``slategrey`` ``darkolivegreen``     |
-|                                      | ``olive``                            |
-|                                      | ``azure`` ``darkgoldenrod``          |
-|                                      | ``lemonchiffon`` ``salmon`` ``red``  |
-|                                      | ``darkseagreen`` ``darksalmon``      |
-|                                      | ``silver`` ``midnightblue``          |
-|                                      | ``lightcoral``                       |
-|                                      | ``khaki`` ``darkturquoise``          |
-|                                      | ``cornsilk`` ``cadetblue``           |
-|                                      | ``thistle``                          |
-|                                      | ``indigo`` ``blanchedalmond``        |
-|                                      | ``lavenderblush`` ``darkorange``     |
-|                                      | ``orchid``                           |
-|                                      | ``deeppink`` ``lawngreen``           |
-|                                      | ``slategray`` ``darkgreen``          |
-|                                      | ``chocolate``                        |
-|                                      | ``plum`` ``white``                   |
+|                                      | ``teal`` ``azure`` ``orchid``        |
+|                                      | ``green`` ``ghostwhite``             |
+|                                      | ``slateblue`` ``darkturquoise``      |
+|                                      | ``floralwhite`` ``grey`` ``hsla``    |
+|                                      | ``slategray`` ``powderblue``         |
+|                                      | ``palegreen`` ``lightpink``          |
+|                                      | ``cornsilk``                         |
+|                                      | ``goldenrod`` ``darkslateblue``      |
+|                                      | ``darkgoldenrod`` ``darkslategrey``  |
+|                                      | ``plum``                             |
+|                                      | ``firebrick`` ``mediumblue``         |
+|                                      | ``rgba`` ``moccasin`` ``chartreuse`` |
+|                                      | ``yellowgreen`` ``violet``           |
+|                                      | ``sandybrown`` ``dimgrey``           |
+|                                      | ``mediumslateblue``                  |
+|                                      | ``palevioletred`` ``coral``          |
+|                                      | ``darkgray`` ``beige`` ``burlywood`` |
+|                                      | ``lightgreen`` ``mediumpurple``      |
+|                                      | ``chocolate`` ``darkolivegreen``     |
+|                                      | ``rgb``                              |
+|                                      | ``oldlace`` ``darksalmon``           |
+|                                      | ``honeydew`` ``seagreen``            |
+|                                      | ``whitesmoke``                       |
+|                                      | ``lightseagreen`` ``salmon``         |
+|                                      | ``mediumturquoise`` ``deeppink``     |
+|                                      | ``darkseagreen``                     |
+|                                      | ``black`` ``gainsboro``              |
+|                                      | ``springgreen`` ``lightslategray``   |
+|                                      | ``mediumorchid``                     |
+|                                      | ``bisque`` ``darkviolet`` ``linen``  |
+|                                      | ``darkslategray`` ``darkred``        |
+|                                      | ``silver`` ``blueviolet`` ``peru``   |
+|                                      | ``navajowhite`` ``gray``             |
+|                                      | ``dodgerblue`` ``greenyellow``       |
+|                                      | ``lavenderblush`` ``deepskyblue``    |
+|                                      | ``darkorange``                       |
+|                                      | ``seashell`` ``white`` ``lightgray`` |
+|                                      | ``navy`` ``tan``                     |
+|                                      | ``lightyellow`` ``peachpuff``        |
+|                                      | ``darkorchid`` ``lightgrey``         |
+|                                      | ``yellow``                           |
+|                                      | ``indianred`` ``blue`` ``magenta``   |
+|                                      | ``darkmagenta``                      |
+|                                      | ``lightgoldenrodyellow``             |
+|                                      | ``turquoise`` ``purple``             |
 +--------------------------------------+--------------------------------------+
-| content                              | ``open-quote`` ``no-close-quote``    |
-|                                      | ``con-`` ``no-open-quote``           |
-|                                      | ``close-quote``                      |
+| content                              | ``no-open-quote`` ``con-``           |
+|                                      | ``open-quote`` ``close-quote``       |
+|                                      | ``no-close-quote``                   |
 +--------------------------------------+--------------------------------------+
 | counter-increment                    | ``counter-i-`` ``ci-``               |
 +--------------------------------------+--------------------------------------+
@@ -183,33 +178,32 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | cue-before                           | ``cb-`` ``cue-b-``                   |
 +--------------------------------------+--------------------------------------+
-| cursor                               | ``s-resize`` ``se-resize``           |
-|                                      | ``crosshair`` ``n-resize``           |
-|                                      | ``e-resize``                         |
-|                                      | ``wait`` ``move`` ``help``           |
-|                                      | ``nw-resize`` ``sw-resize``          |
-|                                      | ``default`` ``progress``             |
-|                                      | ``w-resize`` ``ne-resize`` ``text``  |
-|                                      | ``cur-`` ``pointer``                 |
+| cursor                               | ``move`` ``default`` ``sw-resize``   |
+|                                      | ``crosshair`` ``se-resize``          |
+|                                      | ``e-resize`` ``wait`` ``help``       |
+|                                      | ``progress`` ``text``                |
+|                                      | ``w-resize`` ``ne-resize``           |
+|                                      | ``nw-resize`` ``s-resize`` ``cur-``  |
+|                                      | ``n-resize`` ``pointer``             |
 +--------------------------------------+--------------------------------------+
 | direction                            | ``rtl`` ``ltr`` ``dir-``             |
 +--------------------------------------+--------------------------------------+
-| display                              | ``xsmall`` ``dis-`` ``xxgiant``      |
-|                                      | ``inline`` ``xgiant``                |
-|                                      | ``table-header-group``               |
-|                                      | ``table-row-group`` ``medium``       |
-|                                      | ``table-caption`` ``table-cell``     |
-|                                      | ``xxlarge`` ``table``                |
-|                                      | ``table-column-group`` ``list-item`` |
-|                                      | ``block``                            |
-|                                      | ``small`` ``xxsmall``                |
-|                                      | ``inline-block`` ``inline-table``    |
-|                                      | ``table-row``                        |
-|                                      | ``large`` ``table-column`` ``giant`` |
-|                                      | ``table-footer-group`` ``xlarge``    |
+| display                              | ``xsmall`` ``xlarge`` ``dis-``       |
+|                                      | ``table`` ``xxgiant``                |
+|                                      | ``list-item`` ``table-row``          |
+|                                      | ``table-footer-group``               |
+|                                      | ``table-column-group`` ``inline``    |
+|                                      | ``xxsmall`` ``table-column``         |
+|                                      | ``table-caption`` ``inline-table``   |
+|                                      | ``inline-block``                     |
+|                                      | ``large`` ``xxlarge`` ``giant``      |
+|                                      | ``block`` ``xgiant``                 |
+|                                      | ``medium`` ``table-header-group``    |
+|                                      | ``small`` ``table-row-group``        |
+|                                      | ``table-cell``                       |
 +--------------------------------------+--------------------------------------+
-| elevation                            | ``ele-`` ``below`` ``lower``         |
-|                                      | ``above`` ``higher``                 |
+| elevation                            | ``above`` ``lower`` ``below``        |
+|                                      | ``ele-`` ``higher``                  |
 |                                      | ``level``                            |
 +--------------------------------------+--------------------------------------+
 | empty-cells                          | ``ec-`` ``empty-c-``                 |
@@ -218,29 +212,30 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | font                                 |                                      |
 +--------------------------------------+--------------------------------------+
-| font-family                          | ``calibri`` ``serif`` ``georgia``    |
-|                                      | ``baskerville`` ``ff-``              |
-|                                      | ``palatino`` ``font-f-``             |
-|                                      | ``helvetica`` ``papyrus`` ``tahoma`` |
-|                                      | ``cursive`` ``arial`` ``cambria``    |
-|                                      | ``garamond`` ``monaco``              |
-|                                      | ``optima`` ``candara`` ``courier``   |
-|                                      | ``copperplate`` ``times``            |
-|                                      | ``fantasy`` ``verdana`` ``perpetua`` |
-|                                      | ``rockwell`` ``sans-serif``          |
-|                                      | ``charcoal`` ``impact`` ``didot``    |
-|                                      | ``consolas`` ``monospace``           |
-|                                      | ``geneva`` ``gadget`` ``futura``     |
+| font-family                          | ``monospace`` ``calibri``            |
+|                                      | ``rockwell`` ``didot`` ``cursive``   |
+|                                      | ``ff-`` ``cambria`` ``papyrus``      |
+|                                      | ``charcoal`` ``gadget``              |
+|                                      | ``times`` ``helvetica``              |
+|                                      | ``copperplate`` ``font-f-``          |
+|                                      | ``courier``                          |
+|                                      | ``garamond`` ``serif`` ``tahoma``    |
+|                                      | ``futura`` ``optima``                |
+|                                      | ``arial`` ``impact`` ``geneva``      |
+|                                      | ``fantasy`` ``baskerville``          |
+|                                      | ``palatino`` ``sans-serif``          |
+|                                      | ``monaco`` ``consolas`` ``verdana``  |
+|                                      | ``georgia`` ``perpetua`` ``candara`` |
 +--------------------------------------+--------------------------------------+
 | font-size                            | ``fsize-`` ``f-size-``               |
 +--------------------------------------+--------------------------------------+
 | font-style                           | ``italic`` ``oblique``               |
 +--------------------------------------+--------------------------------------+
-| font-variant                         | ``fv-`` ``font-v-`` ``small-caps``   |
+| font-variant                         | ``font-v-`` ``small-caps`` ``fv-``   |
 +--------------------------------------+--------------------------------------+
-| font-weight                          | ``lighter`` ``fw-`` ``font-w-``      |
-|                                      | ``fweight-`` ``f-weight-``           |
-|                                      | ``bold`` ``bolder``                  |
+| font-weight                          | ``font-w-`` ``bold`` ``f-weight-``   |
+|                                      | ``bolder`` ``fweight-``              |
+|                                      | ``fw-`` ``lighter``                  |
 +--------------------------------------+--------------------------------------+
 | height                               | ``h-`` ``hei-``                      |
 +--------------------------------------+--------------------------------------+
@@ -248,34 +243,34 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | letter-spacing                       | ``letter-s-``                        |
 +--------------------------------------+--------------------------------------+
-| line-height                          | ``line-h-`` ``lh-``                  |
+| line-height                          | ``lh-`` ``line-h-``                  |
 +--------------------------------------+--------------------------------------+
 | list-style                           | ``list-s-``                          |
 +--------------------------------------+--------------------------------------+
-| list-style-image                     | ``list-s-image-`` ``lsi-``           |
+| list-style-image                     | ``lsi-`` ``list-s-image-``           |
 +--------------------------------------+--------------------------------------+
-| list-style-position                  | ``lsp-`` ``inside``                  |
+| list-style-position                  | ``inside`` ``lsp-``                  |
 |                                      | ``list-s-position-`` ``outside``     |
 +--------------------------------------+--------------------------------------+
-| list-style-type                      | ``lower-roman`` ``decimal``          |
-|                                      | ``list-s-type-`` ``lower-latin``     |
+| list-style-type                      | ``lower-alpha`` ``circle``           |
 |                                      | ``decimal-leading-zero``             |
-|                                      | ``upper-latin`` ``lower-greek``      |
-|                                      | ``lst-`` ``georgian``                |
-|                                      | ``lower-alpha``                      |
-|                                      | ``armenian`` ``circle`` ``disc``     |
-|                                      | ``upper-alpha`` ``square``           |
-|                                      | ``upper-roman``                      |
+|                                      | ``upper-alpha`` ``upper-roman``      |
+|                                      | ``lst-`` ``disc`` ``lower-latin``    |
+|                                      | ``georgian`` ``upper-latin``         |
+|                                      | ``lower-greek`` ``armenian``         |
+|                                      | ``lower-roman`` ``square``           |
+|                                      | ``list-s-type-``                     |
+|                                      | ``decimal``                          |
 +--------------------------------------+--------------------------------------+
 | margin                               | ``m-`` ``mar-``                      |
 +--------------------------------------+--------------------------------------+
-| margin-bottom                        | ``mb-`` ``margin-b-`` ``m-bot-``     |
+| margin-bottom                        | ``margin-b-`` ``m-bot-`` ``mb-``     |
 +--------------------------------------+--------------------------------------+
-| margin-left                          | ``ml-`` ``margin-l-``                |
+| margin-left                          | ``margin-l-`` ``ml-``                |
 +--------------------------------------+--------------------------------------+
 | margin-right                         | ``margin-r-`` ``mr-``                |
 +--------------------------------------+--------------------------------------+
-| margin-top                           | ``m-top-`` ``mt-`` ``margin-t-``     |
+| margin-top                           | ``margin-t-`` ``mt-`` ``m-top-``     |
 +--------------------------------------+--------------------------------------+
 | max-height                           | ``max-h-``                           |
 +--------------------------------------+--------------------------------------+
@@ -307,13 +302,13 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | padding-right                        | ``padding-r-``                       |
 +--------------------------------------+--------------------------------------+
-| padding-top                          | ``padding-t-`` ``pt-`` ``p-top-``    |
+| padding-top                          | ``pt-`` ``padding-t-`` ``p-top-``    |
 +--------------------------------------+--------------------------------------+
 | page-break-after                     | ``page-b-after-`` ``pba-``           |
 +--------------------------------------+--------------------------------------+
-| page-break-before                    | ``page-b-before-`` ``pbb-``          |
+| page-break-before                    | ``pbb-`` ``page-b-before-``          |
 +--------------------------------------+--------------------------------------+
-| page-break-inside                    | ``page-b-inside-`` ``pbi-``          |
+| page-break-inside                    | ``pbi-`` ``page-b-inside-``          |
 +--------------------------------------+--------------------------------------+
 | pause                                |                                      |
 +--------------------------------------+--------------------------------------+
@@ -326,10 +321,10 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | pitch-range                          | ``pitch-r-``                         |
 +--------------------------------------+--------------------------------------+
-| play-during                          | ``mix`` ``play-d-`` ``pd-``          |
+| play-during                          | ``play-d-`` ``pd-`` ``mix``          |
 +--------------------------------------+--------------------------------------+
-| position                             | ``pos-`` ``absolute`` ``relative``   |
-|                                      | ``static``                           |
+| position                             | ``absolute`` ``static`` ``pos-``     |
+|                                      | ``relative``                         |
 +--------------------------------------+--------------------------------------+
 | quotes                               | ``quo-``                             |
 +--------------------------------------+--------------------------------------+
@@ -339,54 +334,54 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | speak                                | ``spell-out``                        |
 +--------------------------------------+--------------------------------------+
-| speak-header                         | ``speak-h-`` ``sh-`` ``always``      |
-|                                      | ``once``                             |
+| speak-header                         | ``always`` ``once`` ``sh-``          |
+|                                      | ``speak-h-``                         |
 +--------------------------------------+--------------------------------------+
-| speak-numeral                        | ``sn-`` ``digits`` ``speak-n-``      |
-|                                      | ``continuous``                       |
+| speak-numeral                        | ``continuous`` ``sn-`` ``speak-n-``  |
+|                                      | ``digits``                           |
 +--------------------------------------+--------------------------------------+
-| speak-punctuation                    | ``speak-p-`` ``sp-`` ``code``        |
+| speak-punctuation                    | ``speak-p-`` ``code`` ``sp-``        |
 +--------------------------------------+--------------------------------------+
-| speech-rate                          | ``x-slow`` ``slower`` ``sr-``        |
-|                                      | ``faster`` ``fast``                  |
-|                                      | ``slow`` ``speech-r-`` ``x-fast``    |
+| speech-rate                          | ``sr-`` ``speech-r-`` ``slower``     |
+|                                      | ``slow`` ``x-fast``                  |
+|                                      | ``x-slow`` ``faster`` ``fast``       |
 +--------------------------------------+--------------------------------------+
 | stress                               | ``str-``                             |
 +--------------------------------------+--------------------------------------+
 | table-layout                         | ``table-l-`` ``tl-``                 |
 +--------------------------------------+--------------------------------------+
-| text-align                           | ``text-a-`` ``talign-`` ``ta-``      |
-|                                      | ``t-align-``                         |
+| text-align                           | ``t-align-`` ``talign-`` ``ta-``     |
+|                                      | ``text-a-``                          |
 +--------------------------------------+--------------------------------------+
-| text-decoration                      | ``line-through`` ``blink``           |
-|                                      | ``overline`` ``text-d-``             |
-|                                      | ``underline``                        |
-|                                      | ``td-``                              |
+| text-decoration                      | ``overline`` ``td-`` ``text-d-``     |
+|                                      | ``underline`` ``blink``              |
+|                                      | ``line-through``                     |
 +--------------------------------------+--------------------------------------+
-| text-indent                          | ``ti-`` ``text-i-``                  |
+| text-indent                          | ``text-i-`` ``ti-``                  |
 +--------------------------------------+--------------------------------------+
-| text-shadow                          | ``ts-`` ``text-s-``                  |
+| text-shadow                          | ``text-s-`` ``ts-``                  |
 +--------------------------------------+--------------------------------------+
-| text-transform                       | ``tt-`` ``text-t-`` ``lowercase``    |
-|                                      | ``uppercase`` ``capitalize``         |
+| text-transform                       | ``lowercase`` ``tt-`` ``uppercase``  |
+|                                      | ``capitalize`` ``text-t-``           |
 +--------------------------------------+--------------------------------------+
 | top                                  |                                      |
 +--------------------------------------+--------------------------------------+
-| unicode-bidi                         | ``ub-`` ``unicode-b-`` ``embed``     |
-|                                      | ``bidi-override``                    |
+| unicode-bidi                         | ``bidi-override`` ``ub-``            |
+|                                      | ``unicode-b-`` ``embed``             |
 +--------------------------------------+--------------------------------------+
-| vertical-align                       | ``v-align-`` ``text-bottom`` ``va-`` |
-|                                      | ``text-top`` ``sub``                 |
-|                                      | ``valign-`` ``middle`` ``super``     |
-|                                      | ``baseline`` ``vertical-a-``         |
+| vertical-align                       | ``valign-`` ``sub`` ``v-align-``     |
+|                                      | ``text-top`` ``middle``              |
+|                                      | ``va-`` ``vertical-a-``              |
+|                                      | ``text-bottom`` ``baseline``         |
+|                                      | ``super``                            |
 +--------------------------------------+--------------------------------------+
 | visibility                           | ``vis-`` ``collapse``                |
 +--------------------------------------+--------------------------------------+
-| voice-family                         | ``voice-f-`` ``vf-``                 |
+| voice-family                         | ``vf-`` ``voice-f-``                 |
 +--------------------------------------+--------------------------------------+
-| volume                               | ``x-loud`` ``x-soft`` ``soft``       |
-|                                      | ``loud`` ``silent``                  |
-|                                      | ``vol-``                             |
+| volume                               | ``x-loud`` ``x-soft`` ``silent``     |
+|                                      | ``loud`` ``vol-``                    |
+|                                      | ``soft``                             |
 +--------------------------------------+--------------------------------------+
 | white-space                          | ``white-s-``                         |
 +--------------------------------------+--------------------------------------+
@@ -396,5 +391,5 @@ Valid Property Aliases
 +--------------------------------------+--------------------------------------+
 | word-spacing                         | ``word-s-``                          |
 +--------------------------------------+--------------------------------------+
-| z-index                              | ``z-i-`` ``zi-``                     |
+| z-index                              | ``zi-`` ``z-i-``                     |
 +--------------------------------------+--------------------------------------+

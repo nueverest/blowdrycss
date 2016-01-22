@@ -42,8 +42,15 @@
 | xxgiant (*tuple of floats*) -- (xgiant upper limit + 1px, 1E+6) [Technically the upper limit is infinity, but CSS does not
   permit it.]
 
+**cssutils Patch:**
+
+``cssutils`` does not currently support CSS 3 Units.  The patch in this file allows length units of
+``q``, ``ch``, ``rem``, ``vw``, ``vh``, ``vmin``, and ``vmax``. It also allows angle units of ``turn``.
+
 """
 
+# plugins
+from cssutils import profile
 # custom
 from utilities import px_to_em
 
@@ -87,3 +94,9 @@ xxlarge = (px_to_em(1367), px_to_em(1920))      # 85.4375 - 120.0em
 giant = (px_to_em(1921), px_to_em(2560))        # 120.0625 - 160.0em
 xgiant = (px_to_em(2561), px_to_em(2800))       # 160.0625 - 175.0em
 xxgiant = (px_to_em(2801), px_to_em(10**6))     # 175.0625 - float("inf")) # Python 2.x representation of Infinity.
+
+# Patches cssutils
+profile._MACROS['length'] = r'0|{num}(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)'
+profile._MACROS['positivelength'] = r'0|{positivenum}(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)'
+profile._MACROS['angle'] = r'0|{num}(deg|grad|rad|turn)'
+profile._resetProperties()
