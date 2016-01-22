@@ -41,6 +41,7 @@ setup(
 
     # The project's main homepage.
     url='https://github.com/nueverest/blowdrycss',
+    download_url='https://github.com/nueverest/blowdrycss/archive/master.zip',
 
     # Author details
     author=version['__author__'],
