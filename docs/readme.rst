@@ -116,10 +116,8 @@ Inside a CSS file you find the following:
         transition: 1s opacity;
     }
 
-Six months later the person who wrote this CSS is then asked to remove
-header-2 and header-3 from the homepage. More often than not the
-front-end developer will remove the CSS class from the HTML file, but
-not from the CSS file.
+Six months from now the person who wrote this CSS is then asked to remove the ``banner-video`` from the homepage.
+More often than not the front-end developer will remove the CSS class from the HTML file, but not from the CSS file.
 
 Reasons include:
 ^^^^^^^^^^^^^^^^
