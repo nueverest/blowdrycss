@@ -7,7 +7,6 @@ https://github.com/nueverest/blowdrycss
 
 # builtins
 from setuptools import setup, find_packages     # Always prefer setuptools over distutils
-from os import path, pardir                     # To use a consistent encoding from codecs import open
 
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -40,7 +39,7 @@ setup(
     url='https://github.com/nueverest/blowdrycss',
 
     # Author details
-    author='chad nelson',
+    author=version['__author__'],
     author_email='nu.everest@gmail.com',
 
     # License
