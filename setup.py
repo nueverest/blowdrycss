@@ -6,7 +6,27 @@ Docs: http://blowdrycss.readthedocs.org/en/latest/index.html
 
 setup.py references:
 https://python-packaging-user-guide.readthedocs.org/en/latest/distributing/
+http://peterdowns.com/posts/first-time-with-pypi.html
 https://www.jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/
+
+If the reStructuredText for the long_description does not turn out correctly, then test it here:
+http://rst.ninjs.org
+
+Setup Guide: https://python-packaging-user-guide.readthedocs.org/en/latest/distributing/#register-your-project
+
+Steps:
+pip install wheel
+pip install twine
+python setup.py sdist
+python setup.py bdist_wheel --universal
+
+Go here: https://pypi.python.org/pypi?%3Aaction=submit_form
+Choose Option 2: Upload PKG-INFO
+Click "Add Package Info"
+
+Back to the command line run:
+twine upload dist/*
+
 """
 
 # builtins
@@ -91,8 +111,8 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords='blowdry blowdrycss css compiler pre-compiler pre-processor generator dry cascading style sheets html ' +
-             'encoded class selector parser',
+    keywords=('blowdry blowdrycss css compiler pre-compiler pre-processor generator dry cascading style sheets html ' +
+             'encoded class selector parser'),
 
     # Packages
     packages=find_packages(),
