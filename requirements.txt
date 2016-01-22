@@ -11,5 +11,8 @@ pypandoc>=1.1.2
 # Python 2.7 Support
 future>=0.15.2
 
+# Development
+# wheel>=0.26.0
+
 # Automatic CSS generation on save
 # watchdog>=0.8.3

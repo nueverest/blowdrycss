@@ -111,9 +111,10 @@ setup(
     # for example:
     # $ pip install blowdrycss -e .[auto_save, docs, testing]
     extras_require={
-        'auto_save': ['watchdog>=0.8.3'],
-        'docs': ['sphinx>=1.3.3'],
-        'testing': ['unittest', 'coverage>=4.0.2'],
+        'auto_save': ['watchdog>=0.8.3', ],
+        'docs': ['sphinx>=1.3.3', ],
+        'testing': ['unittest', 'coverage>=4.0.2', ],
+        'development': ['wheel>=0.26.0', ],
     },
 
     # If there are data files included in your packages that need to be
