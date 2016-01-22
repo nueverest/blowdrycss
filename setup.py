@@ -56,6 +56,9 @@ setup(
         # Topics
         'Topic :: Artistic Software',
         'Topic :: Internet',
+        'Topic :: Internet :: WWW/HTTP',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'Topic :: Internet :: WWW/HTTP :: Site Management',
         'Topic :: Software Development',
         'Topic :: Software Development :: Build Tools',
         'Topic :: Software Development :: Code Generators',
@@ -102,11 +105,11 @@ setup(
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
     # for example:
-    # $ pip install blowdrycss -e .[auto_save, docs, test]
+    # $ pip install blowdrycss -e .[auto_save, docs, testing]
     extras_require={
         'auto_save': ['watchdog>=0.8.3'],
         'docs': ['sphinx>=1.3.3'],
-        'test': ['unittest', 'coverage>=4.0.2'],
+        'testing': ['unittest', 'coverage>=4.0.2'],
     },
 
     # If there are data files included in your packages that need to be
