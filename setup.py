@@ -82,10 +82,9 @@ setup(
         # License
         'License :: OSI Approved :: MIT License',
 
-        # Specify the Python versions you support here. In particular, ensure
-        # that you indicate whether you support Python 2, Python 3 or both.
-        # 'Programming Language :: Python :: 2.6',  # Not compatible with cssutils, pypandoc, or sphinx
+        # Python version support.
         'Programming Language :: Python :: 2',
+        # 'Programming Language :: Python :: 2.6',  # Not compatible with cssutils, pypandoc, or sphinx
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
@@ -95,8 +94,8 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords='blowdrycss css compiler pre-compiler pre-processor generator dry cascading style sheets html ' +
-             'encoded class parser',
+    keywords='blowdry blowdrycss css compiler pre-compiler pre-processor generator dry cascading style sheets html ' +
+             'encoded class selector parser',
 
     # Packages
     packages=find_packages(),
@@ -109,7 +108,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['cssutils>=1.0.1', 'pypandoc>=1.1.2'],
+    install_requires=['cssutils>=1.0.1', 'pypandoc>=1.1.2', 'future>=0.15.2'],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
@@ -117,6 +116,7 @@ setup(
     # $ pip install blowdrycss -e .[auto_save, test]
     extras_require={
         'auto_save': ['watchdog>=0.8.3'],
+        'docs': ['sphinx>=1.3.3'],
         'test': ['unittest', 'coverage>=4.0.2'],
     },
 
