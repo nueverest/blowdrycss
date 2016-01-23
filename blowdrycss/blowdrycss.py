@@ -2,7 +2,7 @@
 from __future__ import print_function
 from builtins import bytes, str
 # builtins
-from os import chdir, getcwd, path
+from os import getcwd
 # custom
 import settings
 from filehandler import FileFinder, CSSFile, GenericFile
@@ -70,16 +70,9 @@ def main():
     if settings.timing_enabled:
         import timing
 
-    # Set project_directory to the one containing the files you want to DRY out.
-    # In this case it is set to the "examplesite" by default for demonstration purposes.
-    # Change to whatever you want.
-    chdir('..')                                                 # Navigate up one directory relative to this script.
-    project_directory = path.join(getcwd() + '\\examplesite')
-    css_directory = path.join(project_directory + '\\css')
-    
     # Generate Markdown documentation files.
     if settings.markdown_docs:
-        markdown_file = GenericFile(file_directory=getcwd(), file_name='clashing_aliases', extension='.md')
+        markdown_file = GenericFile(file_directory=settings.markdown_directory, file_name='clashing_aliases', extension='.md')
         markdown_file.write(str(clashing_alias_markdown))
         markdown_file.file_name = 'property_aliases'                        # Changes file name.
         markdown_file.write(str(property_alias_markdown))
@@ -87,25 +80,21 @@ def main():
     # Generate HTML documentation files. (This location is important since it allows encoded css to be included
     # in the documentation files.)
     if settings.html_docs:
-        html_file = GenericFile(file_directory=project_directory, file_name='clashing_aliases', extension='.html')
+        html_file = GenericFile(file_directory=settings.project_directory, file_name='clashing_aliases', extension='.html')
         html_file.write(str(clashing_alias_html))
         html_file.file_name = 'property_aliases'                            # Change file name.
         html_file.write(str(property_alias_html))
 
     # Generate reStructuredText documentation files.
     if settings.rst_docs:
-        docs_directory = path.join(getcwd() + '\\docs')
-        print(str(docs_directory))                                              # Python 2 requires str().
-        rst_file = GenericFile(file_directory=docs_directory, file_name='clashing_aliases', extension='.rst')
+        print(str(settings.docs_directory))                                              # Python 2 requires str().
+        rst_file = GenericFile(file_directory=settings.docs_directory, file_name='clashing_aliases', extension='.rst')
         rst_file.write(str(clashing_alias_rst))
         rst_file.file_name = 'property_aliases'                                 # Changes file name.
         rst_file.write(str(property_alias_rst))
 
-    # Define File all file types/extensions to search for in project_directory
-    file_types = ('*.html', )
-
     # Get all files associated with defined file_types in project_directory
-    file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
+    file_finder = FileFinder(project_directory=settings.project_directory, file_types=settings.file_types)
 
     # Create set of all defined classes
     class_parser = HTMLClassParser(files=file_finder.files)
@@ -133,15 +122,15 @@ def main():
 
     # Output the DRY CSS file. (user command option)
     if settings.human_readable:
-        css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
+        css_file = CSSFile(file_directory=settings.css_directory, file_name='blowdry')
         css_file.write(css_text=css_text)
-        print(str(css_directory + css_file.file_name) + u'.css created.')
+        print(str(settings.css_directory + css_file.file_name) + u'.css created.')
 
     # Output the Minified DRY CSS file. (user command option)
     if settings.minify:
-        css_file = CSSFile(file_directory=css_directory, file_name='blowdry')
+        css_file = CSSFile(file_directory=settings.css_directory, file_name='blowdry')
         css_file.minify(css_text=css_text)
-        print(str(css_directory + css_file.file_name) + u'.min.css created.')
+        print(str(settings.css_directory + css_file.file_name) + u'.min.css created.')
 
 
 if __name__ == '__main__':

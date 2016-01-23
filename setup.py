@@ -17,7 +17,7 @@ Setup Guide: https://python-packaging-user-guide.readthedocs.org/en/latest/distr
 Steps:
 pip install wheel
 pip install twine
-python setup.py sdist
+python setup.py sdist bdist
 python setup.py bdist_wheel --universal
 
 Go here: https://pypi.python.org/pypi?%3Aaction=submit_form
@@ -115,7 +115,7 @@ setup(
              'encoded class selector parser'),
 
     # Packages
-    packages=find_packages(),
+    packages=find_packages(exclude=['settings.py', ]),
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:

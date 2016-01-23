@@ -49,6 +49,8 @@
 
 """
 
+# builtins
+from os import chdir, getcwd, path
 # plugins
 from cssutils import profile
 # custom
@@ -57,7 +59,19 @@ from utilities import px_to_em
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
-# TODO: Consider converting these to properties, so that, they cannot be modified anywhere but here.
+# Set project_directory to the one containing the files you want to DRY out.
+# In this case it is set to the "examplesite" by default for demonstration purposes.
+# Change to whatever you want.
+original_directory = getcwd()
+chdir('..')                                                 # Navigate up one directory relative to this script.
+markdown_directory = getcwd()
+project_directory = path.join(getcwd(), 'examplesite')
+css_directory = path.join(project_directory, 'css')
+docs_directory = path.join(getcwd(), 'docs')
+chdir(original_directory)                                   # Reset current working directory.
+
+# Define File all file types/extensions to search for in project_directory
+file_types = ('*.html', )
 
 # Boolean Flags
 timing_enabled = True           # Run performance timer
@@ -74,6 +88,7 @@ media_queries_enabled = True    # Generate breakpoint and scaling media queries.
 # TODO: Implement these in a fashion similar to the performance timer.
 # auto_generate = False         # Automatically generates blowdry.css file when a project HTML file is saved.
 # http_server = False           # Auto-Start a simple webserver on localhost:8080.
+# public_url = False            # Uses ngrok to generate a temporary public url for testings and demo purposes.
 # condense_classes = False      # Edits HTML Files after discovering common patterns (Not DRY do not implement).
 
 # Unit Conversion Defaults
