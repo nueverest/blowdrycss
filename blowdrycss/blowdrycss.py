@@ -86,13 +86,17 @@ def main():
     # Generate HTML documentation files. (This location is important since it allows encoded css to be included
     # in the documentation files.)
     if settings.html_docs:
-        html_file = GenericFile(
+        html_file = GenericFile(                                            # Document forbidden clashing aliases.
                 file_directory=settings.project_directory,
                 file_name='clashing_aliases',
                 extension='.html'
         )
         html_file.write(str(clashing_alias_html))
-        html_file.file_name = 'property_aliases'                            # Change file name.
+        html_file = GenericFile(                                            # Document allowed property aliases.
+                file_directory=settings.project_directory,
+                file_name='property_aliases',
+                extension='.html'
+        )
         html_file.write(str(property_alias_html))
 
     # Generate reStructuredText documentation files.
@@ -100,7 +104,7 @@ def main():
         print(str(settings.docs_directory))                                              # Python 2 requires str().
         rst_file = GenericFile(file_directory=settings.docs_directory, file_name='clashing_aliases', extension='.rst')
         rst_file.write(str(clashing_alias_rst))
-        rst_file.file_name = 'property_aliases'                                 # Changes file name.
+        rst_file = GenericFile(file_directory=settings.docs_directory, file_name='property_aliases', extension='.rst')
         rst_file.write(str(property_alias_rst))
 
     # Get all files associated with defined file_types in project_directory

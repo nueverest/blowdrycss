@@ -44,14 +44,16 @@ class TestFileFinder(TestCase):
             sys.stdout = saved_stdout
 
     def test_set_files(self):
+        cwd = getcwd()
         expected_files = {
-            path.join(getcwd(), 'test_examplesite', 'clashing_aliases.html'),
-            path.join(getcwd(), 'test_generic', 'blowdry.html'),
-            path.join(getcwd(), 'test_html', 'index.html'),
-            path.join(getcwd(), 'test_html', 'test.html'),
-            path.join(getcwd(), 'test_html', 'media_query.html'),
+            path.join(cwd, 'test_examplesite', 'clashing_aliases.html'),
+            path.join(cwd, 'test_examplesite', 'property_aliases.html'),
+            path.join(cwd, 'test_generic', 'blowdry.html'),
+            path.join(cwd, 'test_html', 'index.html'),
+            path.join(cwd, 'test_html', 'test.html'),
+            path.join(cwd, 'test_html', 'media_query.html'),
         }
-        project_directory = getcwd()
+        project_directory = cwd
         file_types = ('*.html', )
         file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
         self.assertEquals(set(file_finder.files), expected_files)
