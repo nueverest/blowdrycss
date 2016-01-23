@@ -31,7 +31,7 @@ class FileFinder(object):
     >>> from os import getcwd, chdir, path
     >>> current_dir = getcwd()
     >>> chdir('..')
-    >>> project_directory = path.join(current_dir + '\\examplesite')
+    >>> project_directory = path.join(current_dir, 'examplesite')
     >>> chdir(current_dir)    # Change it back.
     >>> file_types = ('*.html', )
     >>> file_finder = FileFinder(
@@ -100,7 +100,7 @@ class FileConverter(object):
     >>> # Valid file_path
     >>> current_dir = getcwd()
     >>> chdir('..')
-    >>> file_path = path.join(current_dir + '\\examplesite\\index.html')
+    >>> file_path = path.join(current_dir, 'examplesite', 'index.html')
     >>> chdir(current_dir)    # Change it back.
     >>> file_converter = FileConverter(file_path=file_path)
     >>> file_string = file_converter.get_file_as_string()
@@ -127,7 +127,7 @@ class FileConverter(object):
         >>> from os import getcwd, chdir, path
         >>> current_dir = getcwd()
         >>> chdir('..')
-        >>> file_path = path.join(current_dir + '\\examplesite\\index.html')
+        >>> file_path = path.join(current_dir, 'examplesite', 'index.html')
         >>> chdir(current_dir)    # Change it back.
         >>> file_converter = FileConverter(file_path=file_path)
         >>> file_string = file_converter.get_file_as_string()
@@ -157,8 +157,8 @@ class CSSFile(object):
     >>> from os import getcwd, chdir, path
     >>> current_dir = getcwd()
     >>> chdir('..')
-    >>> project_directory = path.join(current_dir + '\\examplesite')
-    >>> css_directory = path.join(project_directory + '\\css')
+    >>> project_directory = path.join(current_dir, 'examplesite')
+    >>> css_directory = path.join(project_directory, 'css')
     >>> chdir(current_dir)    # Change it back.
     >>> css_text = '.margin-top-50px { margin-top: 3.125em }'
     >>> css_file = CSSFile(

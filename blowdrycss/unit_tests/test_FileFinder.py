@@ -10,7 +10,7 @@ __project__ = 'blow dry css'
 
 class TestFileFinder(TestCase):
     def test_file_finder_wrong_path(self):
-        not_a_directory = 'not/a/ valid /directory/file.txt'
+        not_a_directory = 'not/a/ valid /directory\\file.txt'
         self.assertRaises(OSError, FileFinder, not_a_directory)
 
     # Reference:
@@ -45,10 +45,10 @@ class TestFileFinder(TestCase):
 
     def test_set_files(self):
         expected_files = {
-            path.join(getcwd() + '\\test_html\\index.html'),
-            path.join(getcwd() + '\\test_html\\test.html'),
-            path.join(getcwd() + '\\test_html\\media_query.html'),
-            path.join(getcwd() + '\\test_generic\\blowdry.html'),
+            path.join(getcwd(), 'test_html', 'index.html'),
+            path.join(getcwd(), 'test_html', 'test.html'),
+            path.join(getcwd(), 'test_html', 'media_query.html'),
+            path.join(getcwd(), 'test_generic', 'blowdry.html'),
         }
         project_directory = getcwd()
         file_types = ('*.html', )
@@ -60,7 +60,7 @@ class TestFileFinder(TestCase):
         self.assertRaises(OSError, FileConverter, wrong_file_path)
 
     def test_get_file_as_string(self):
-        test_file_path = path.join(getcwd() + '\\test_html\\test.html')
+        test_file_path = path.join(getcwd(), 'test_html', 'test.html')
         expected_string = '<html>	<body>		<h1 class="c-blue text-align-center padding-10">Blow Dry CSS</h1>' \
                           '        <div class="padding-10 margin-20">Testing<br class="hide" />1 2 3</div>	' \
                           '</body></html>'

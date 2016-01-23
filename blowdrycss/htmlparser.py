@@ -25,7 +25,7 @@ class HTMLAttributeParser(HTMLParser):
     >>> from os import getcwd, chdir, path
     >>> current_dir = getcwd()
     >>> chdir('..')
-    >>> file_string = path.join(current_dir + '\\examplesite\\index.html')
+    >>> file_string = path.join(current_dir, 'examplesite', 'index.html')
     >>> chdir(current_dir)    # Change it back.
     >>> class_parser = HTMLAttributeParser(attribute_name='class')
     >>> class_parser.feed(file_string)
