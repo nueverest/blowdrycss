@@ -1,8 +1,6 @@
 # python 2
 from __future__ import print_function
 from builtins import bytes, str
-# builtins
-from os import getcwd
 # custom
 import settings
 from filehandler import FileFinder, CSSFile, GenericFile
@@ -72,15 +70,27 @@ def main():
 
     # Generate Markdown documentation files.
     if settings.markdown_docs:
-        markdown_file = GenericFile(file_directory=settings.markdown_directory, file_name='clashing_aliases', extension='.md')
+        markdown_file = GenericFile(                                        # Document forbidden clashing aliases.
+                file_directory=settings.markdown_directory,
+                file_name='clashing_aliases',
+                extension='.md'
+        )
         markdown_file.write(str(clashing_alias_markdown))
-        markdown_file.file_name = 'property_aliases'                        # Changes file name.
+        markdown_file = GenericFile(                                        # Document allowed property aliases.
+                file_directory=settings.markdown_directory,
+                file_name='property_aliases',
+                extension='.md'
+        )
         markdown_file.write(str(property_alias_markdown))
 
     # Generate HTML documentation files. (This location is important since it allows encoded css to be included
     # in the documentation files.)
     if settings.html_docs:
-        html_file = GenericFile(file_directory=settings.project_directory, file_name='clashing_aliases', extension='.html')
+        html_file = GenericFile(
+                file_directory=settings.project_directory,
+                file_name='clashing_aliases',
+                extension='.html'
+        )
         html_file.write(str(clashing_alias_html))
         html_file.file_name = 'property_aliases'                            # Change file name.
         html_file.write(str(property_alias_html))
