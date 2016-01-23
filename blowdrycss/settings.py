@@ -1,6 +1,17 @@
 """
 **Parameters:**
 
+| markdown_directory (*string*) -- Generally used for development purposes only.
+
+| project_directory (*string) -- Path to your project directory
+
+| css_directory (*string*) -- Path to your projects CSS directory
+
+| docs_directory (*string*) -- Path to Sphinx docs.
+
+| file_types = (*tuple of strings*) -- All file types/extensions to search for in the defined project_directory
+  that contain encoded class selectors. Example wildcard format: ('*.html', )
+
 | timing_enabled (*bool*) -- Run performance timer
 
 | markdown_docs (*bool*) -- Generate a markdown files that provides a quick syntax and clashing alias reference.
@@ -18,8 +29,8 @@
 | use_em (*bool*) -- A ``pixels`` to ``em`` unit conversion flag. True enables unit conversion.
   False disables unit conversions meaning any pixel value remains unchanged.
 
-| base (*int*) -- Base used for unit conversion (typically set to 16). The pixel value will be divided by ``base`` during
-  unit conversion.
+| base (*int*) -- Base used for unit conversion (typically set to 16). The pixel value will be divided by
+  ``base`` during unit conversion.
 
 | xxsmall (*tuple of floats*) -- (0px, upper limit in pixels)
 
@@ -71,7 +82,7 @@ css_directory = path.join(project_directory, 'css')
 docs_directory = path.join(cwd, 'docs')
 chdir(original_directory)                                   # Reset current working directory.
 
-# Define File all file types/extensions to search for in project_directory
+# All file types/extensions to search for in the defined project_directory that contain encoded class selectors.
 file_types = ('*.html', )
 
 # Boolean Flags
