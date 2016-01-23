@@ -2,13 +2,18 @@
 from __future__ import division
 from builtins import round
 # general
-import settings
 from unittest import TestCase, main
 from os import getcwd, path
 # custom
+import settings
+from change_settings import change_settings_for_testing
 from utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, px_to_em
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
+
+
+# Change settings directories for testing
+change_settings_for_testing()
 
 
 class Test_utilities(TestCase):

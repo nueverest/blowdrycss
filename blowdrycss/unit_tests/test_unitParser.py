@@ -4,9 +4,14 @@ from __future__ import division
 from unittest import TestCase, main
 # custom 
 import settings
+from change_settings import change_settings_for_testing
 from unitparser import UnitParser
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
+
+
+# Change settings directories for testing
+change_settings_for_testing()
 
 
 class TestUnitParser(TestCase):

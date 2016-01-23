@@ -1,5 +1,5 @@
 from unittest import TestCase, main
-from os import chdir
+from os import getcwd, chdir
 import sys
 from io import StringIO
 # custom
@@ -19,8 +19,11 @@ class TestMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            chdir('..')
+            # original_directory = getcwd()
+            # chdir('..')                                                 # Navigate up one directory relative to this script.
+            # cur_dir = getcwd()
             blowdrycss.main()
+            # chdir(original_directory)
 
             output = out.getvalue()
             for substring in substrings:

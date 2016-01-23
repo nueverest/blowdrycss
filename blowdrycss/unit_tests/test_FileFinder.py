@@ -45,10 +45,11 @@ class TestFileFinder(TestCase):
 
     def test_set_files(self):
         expected_files = {
+            path.join(getcwd(), 'test_examplesite', 'clashing_aliases.html'),
+            path.join(getcwd(), 'test_generic', 'blowdry.html'),
             path.join(getcwd(), 'test_html', 'index.html'),
             path.join(getcwd(), 'test_html', 'test.html'),
             path.join(getcwd(), 'test_html', 'media_query.html'),
-            path.join(getcwd(), 'test_generic', 'blowdry.html'),
         }
         project_directory = getcwd()
         file_types = ('*.html', )

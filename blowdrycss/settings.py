@@ -64,10 +64,11 @@ __project__ = 'blow dry css'
 # Change to whatever you want.
 original_directory = getcwd()
 chdir('..')                                                 # Navigate up one directory relative to this script.
-markdown_directory = getcwd()
-project_directory = path.join(getcwd(), 'examplesite')
+cwd = getcwd()
+markdown_directory = cwd                                    # Shows up in root of github repository.
+project_directory = path.join(cwd, 'examplesite')
 css_directory = path.join(project_directory, 'css')
-docs_directory = path.join(getcwd(), 'docs')
+docs_directory = path.join(cwd, 'docs')
 chdir(original_directory)                                   # Reset current working directory.
 
 # Define File all file types/extensions to search for in project_directory

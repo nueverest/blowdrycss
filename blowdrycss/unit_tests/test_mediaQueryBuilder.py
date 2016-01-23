@@ -1,10 +1,15 @@
 from unittest import TestCase, main
 # custom
 import settings
+from change_settings import change_settings_for_testing
 from classpropertyparser import ClassPropertyParser
 from mediaquerybuilder import MediaQueryBuilder
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
+
+
+# Change settings directories for testing
+change_settings_for_testing()
 
 
 class TestMediaQueryBuilder(TestCase):
