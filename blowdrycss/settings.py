@@ -10,7 +10,7 @@
 | docs_directory (*string*) -- Path to Sphinx docs.
 
 | file_types = (*tuple of strings*) -- All file types/extensions to search for in the defined project_directory
-  that contain encoded class selectors. Example wildcard format: ('*.html', )
+  that contain encoded class selectors. Example format: ('*.html', )
 
 | timing_enabled (*bool*) -- Run performance timer
 
@@ -83,6 +83,7 @@ docs_directory = path.join(cwd, 'docs')
 chdir(original_directory)                                   # Reset current working directory.
 
 # All file types/extensions to search for in the defined project_directory that contain encoded class selectors.
+# Example format: ('*.html', )
 file_types = ('*.html', )
 
 # Boolean Flags
