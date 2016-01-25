@@ -56,12 +56,13 @@
     | 0.0.6 -- Advanced media query syntax added. Modules ``breakpointparser`` and ``scalingparser`` added to
       allow for the dynamic creation of media queries. (1/2/2016)
     | 0.0.7 -- Implemented backward compatibility with Python version 2.7.x.
+    | 0.0.8 -- Major refactoring to allow a custom settings file to be built inside of the users web project.
 
 """
 __author__ = 'chad nelson'
 
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
-__version__ = '0.0.7'
+__version__ = '0.0.8'
 
 __release__ = __version__ + 'a1'
