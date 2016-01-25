@@ -5,10 +5,13 @@ Declares string for building blowdrycss - settings.py.
 
 """
 
+# python 2
+from __future__ import print_function
+
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 
-settings_dot_py = """\"\"\"
+blowdrycss_settings_dot_py = """\"\"\"
 **Parameters:**
 
 | markdown_directory (*string*) -- Generally used for development purposes only.
@@ -138,27 +141,10 @@ profile._resetProperties()
 
 def write_blowdrycss_settings_dot_py():
     with open('blowdrycss_settings.py', 'wb') as generic_file:
-        generic_file.write(bytearray(settings_dot_py, 'utf-8'))
+        generic_file.write(bytearray(blowdrycss_settings_dot_py, 'utf-8'))
     print(
         '=' * 42 +
         '\n   "blowdrycss_settings.py" built for blowdrycss.\n\n' +
         '   Open "blowdrycss_settings.py" to customize\n   blowdrycss for your project.\n' +
         '=' * 42
     )
-
-
-def print_blow_dryer():
-    # png to ascii converter: http://picascii.com
-    blow_dryer_ascii = """
-                     .-'-.
-                  ;@@@@@@@@@'
-    ~~~~ ;@@@@@@@@@@@@@@@@@@@+`
-    ~~~~ ;@@@@@@@@@@@@@``@@@@@@
-                +@@@@@`  `@@@@@'
-                   @@@@``@@@@@
-                     .-@@@@@@@+
-                          @@@@@
-                           .@@@.
-                            `@@@.
-    """
-    print(blow_dryer_ascii)

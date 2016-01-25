@@ -1,3 +1,6 @@
+# python 2
+from __future__ import print_function
+from builtins import str
 # builtins
 from re import search, findall
 from inspect import currentframe
@@ -101,3 +104,20 @@ def get_file_path(file_directory='', file_name='blowdry', extension=''):
             raise ValueError(
                 'Extension: ' + extension + ' contains invalid characters. Only ".", "0-9", and "a-z" are allowed.'
             )
+
+
+def print_blow_dryer():
+    # png to ascii converter: http://picascii.com
+    blow_dryer_ascii = """
+                     .-'-.
+                  ;@@@@@@@@@'
+    ~~~~ ;@@@@@@@@@@@@@@@@@@@+`
+    ~~~~ ;@@@@@@@@@@@@@``@@@@@@
+                +@@@@@`  `@@@@@'
+                   @@@@``@@@@@
+                     .-@@@@@@@+
+                          @@@@@
+                           .@@@.
+                            `@@@.
+    """
+    print(str(blow_dryer_ascii))
