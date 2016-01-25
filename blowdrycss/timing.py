@@ -26,7 +26,9 @@ import atexit
 from time import time
 from datetime import timedelta, datetime
 from utilities import print_blow_dryer
-
+# custom
+# from blowdrycss_settings import minify
+# from utilities import print_css_stats
 
 __author__ = 'paul, nicojo, chad nelson'
 __project__ = 'blowdrycss'
@@ -64,6 +66,8 @@ def log(elapsed=None):
     print(str(border))
     if elapsed:
         print('It took: ' + str(elapsed) + 'seconds')
+    # if minify:
+    #     print_css_stats(file_name='blowdry')
     print(str(border))
     print_blow_dryer()
 

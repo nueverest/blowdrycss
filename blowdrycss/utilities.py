@@ -1,10 +1,12 @@
 # python 2
-from __future__ import print_function
-from builtins import str
+from __future__ import print_function, division
+from builtins import str, round
 # builtins
 from re import search, findall
 from inspect import currentframe
-from os import path
+from os import path, stat
+# custom
+from blowdrycss_settings import css_directory
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -106,6 +108,31 @@ def get_file_path(file_directory='', file_name='blowdry', extension=''):
             )
 
 
+# TODO: Test this.
+def print_css_stats(file_name=''):
+    # ``file_name`` the full file_name excluding extension e.g. 'blowdry' or 'site'.
+    # Assumes that the extensions to append to the file_name are '.css' and '.min.css'.
+    # Print the size of a file_name.
+    css_file = file_name + '.css'
+    min_file = file_name + '.min.css'
+
+    css_dir = path.join(css_directory, css_file)                                    # Get full file path.
+    min_dir = path.join(css_directory, min_file)
+
+    css_size = stat(css_dir).st_size                                                # Get file size in bytes.
+    min_size = stat(min_dir).st_size
+
+    percent_reduced = round(float(min_size) / float(css_size) * float(100), 1)      # Calculate percentage size reduced.
+
+    css_kb = round(float(css_size) / float(1000), 1)                                # Convert to kilobytes.
+    min_kb = round(float(min_size) / float(1000), 1)
+
+    print('\n' + css_file + ':\t', css_kb, 'kb')
+    print(min_file + ':', min_kb, 'kb')
+    print('CSS file size reduced by', str(percent_reduced) + '%.')
+
+
+# TODO: Write test.
 def print_blow_dryer():
     # png to ascii converter: http://picascii.com
     blow_dryer_ascii = """
