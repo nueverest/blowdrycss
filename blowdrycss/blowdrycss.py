@@ -138,13 +138,13 @@ def main():
     if settings.human_readable:
         css_file = CSSFile(file_directory=settings.css_directory, file_name='blowdry')
         css_file.write(css_text=css_text)
-        print(str(settings.css_directory + css_file.file_name) + u'.css created.')
+        print(str(settings.css_directory + css_file.file_name) + '.css created.')
 
     # Output the Minified DRY CSS file. (user command option)
     if settings.minify:
         css_file = CSSFile(file_directory=settings.css_directory, file_name='blowdry')
         css_file.minify(css_text=css_text)
-        print(str(settings.css_directory + css_file.file_name) + u'.min.css created.')
+        print(str(settings.css_directory + css_file.file_name) + '.min.css created.')
 
 
 if __name__ == '__main__':
