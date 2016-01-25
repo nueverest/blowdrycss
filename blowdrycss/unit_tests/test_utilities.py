@@ -5,9 +5,10 @@ from builtins import round
 from unittest import TestCase, main
 from os import getcwd, path
 # custom
-import settings
+import blowdrycss_settings as settings
 from change_settings import change_settings_for_testing
-from utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, px_to_em
+from utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path
+
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -72,7 +73,7 @@ class Test_utilities(TestCase):
         for pixels in range(-1000, 1001):
             expected = round(pixels / base, 4)
             expected = str(expected) + 'em'
-            actual = px_to_em(pixels=str(pixels))  # typecast to string str()
+            actual = settings.px_to_em(pixels=str(pixels))  # typecast to string str()
             self.assertEqual(actual, str(expected), msg=pixels)
 
 
@@ -81,7 +82,7 @@ class Test_utilities(TestCase):
         for pixels in range(-1000, 1001):
             expected = round(pixels / base, 4)
             expected = str(expected) + 'em'
-            actual = px_to_em(pixels=pixels)
+            actual = settings.px_to_em(pixels=pixels)
             self.assertEqual(actual, str(expected), msg=pixels)
 
     def test_px_to_em_float_input(self):
@@ -89,18 +90,17 @@ class Test_utilities(TestCase):
         # Thank you: http://stackoverflow.com/questions/477486/python-decimal-range-step-value#answer-477506
         for pixels in range(-11, 11, 1):
             pixels /= 10.0
-            expected = round(pixels / base, 4)
+            expected = round(float(pixels) / float(base), 4)
             expected = str(expected) + 'em'
-            actual = px_to_em(pixels=pixels)
-            self.assertEqual(actual, str(expected), msg=pixels)
+            actual = settings.px_to_em(pixels=pixels)
+            self.assertEqual(actual, str(expected), msg=str(pixels) + ': ' + str(actual) + ' vs ' + str(expected))
 
     def test_px_to_em_invalid_input(self):
         # Expect the value to pass through unchanged.
-        base = 16
         invalid_inputs = ['1 2', '5 6 5 6', 'cat', '11px', ' 234.8', 'n2_4p', '25deg', '16kHz', ]
         for invalid in invalid_inputs:
             expected = invalid
-            actual = px_to_em(pixels=invalid)
+            actual = settings.px_to_em(pixels=invalid)
             self.assertEqual(actual, expected, msg=invalid)
 
     def test_px_to_em_change_base(self):
@@ -108,20 +108,20 @@ class Test_utilities(TestCase):
         for pixels in range(-1000, 1001):
             expected = round(pixels / base, 4)
             expected = str(expected) + 'em'
-            actual = px_to_em(pixels=pixels)
-            self.assertEqual(actual, str(expected), msg=actual + u' vs ' + expected)
+            actual = settings.px_to_em(pixels=pixels)
+            self.assertEqual(actual, expected, msg=str(actual) + ' vs ' + str(expected))
 
     def test_px_to_em_string_base(self):
         base = 16
         for pixels in range(-1000, 1001):
             expected = round(pixels / base, 4)
             expected = str(expected) + 'em'
-            actual = px_to_em(pixels=pixels)
+            actual = settings.px_to_em(pixels=pixels)
             self.assertEqual(actual, str(expected), msg=pixels)
 
     def test_px_to_em_Wrong_base(self):
         settings.base = 'aoenth'
-        self.assertRaises(ValueError, px_to_em, pixels='32')
+        self.assertRaises(ValueError, settings.px_to_em, pixels='32')
         settings.base = 16
 
 if __name__ == '__main__':

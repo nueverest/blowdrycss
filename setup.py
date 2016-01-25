@@ -115,7 +115,7 @@ setup(
              'encoded class selector parser'),
 
     # Packages
-    packages=find_packages(exclude=['settings.py', ]),
+    packages=find_packages(exclude=['blowdrycss_settings.py', ]),
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:

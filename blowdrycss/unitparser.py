@@ -1,8 +1,8 @@
 # builtins
 from string import digits
 # custom
-import settings
-from utilities import px_to_em
+import blowdrycss_settings as settings
+
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
 
@@ -201,7 +201,7 @@ class UnitParser(object):
                 if set(val) <= self.allowed:
                     val = val.replace('px', '')                                     # Handle 'px' units case.
                     if settings.use_em and default_units == 'px':                     # Convert units if required.
-                        new_value.append(px_to_em(pixels=val))
+                        new_value.append(settings.px_to_em(pixels=val))
                     else:
                         new_value.append(val + default_units)                       # Use default units.
                 else:                                                               

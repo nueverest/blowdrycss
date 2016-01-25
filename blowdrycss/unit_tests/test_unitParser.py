@@ -3,7 +3,7 @@ from __future__ import division
 # general
 from unittest import TestCase, main
 # custom 
-import settings
+import blowdrycss_settings as settings
 from change_settings import change_settings_for_testing
 from unitparser import UnitParser
 __author__ = 'chad nelson'

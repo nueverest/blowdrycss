@@ -1,10 +1,9 @@
 # plugins
 from cssutils.css import Property
 # custom
-import settings     # Even though this is it gray it is required for utilities to work
 from utilities import deny_empty_or_whitespace
 from unitparser import UnitParser
-from settings import small, medium
+from blowdrycss_settings import small, medium
 
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'

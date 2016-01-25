@@ -60,12 +60,15 @@
 
 """
 
+# python 2
+from __future__ import division
+from builtins import round
 # builtins
 from os import chdir, getcwd, path
+from string import digits
 # plugins
 from cssutils import profile
-# custom
-from utilities import px_to_em
+
 
 __author__ = 'chad nelson'
 __project__ = 'blow dry css'
@@ -73,6 +76,7 @@ __project__ = 'blow dry css'
 # Set project_directory to the one containing the files you want to DRY out.
 # In this case it is set to the "examplesite" by default for demonstration purposes.
 # Change to whatever you want.
+# Note that this section differs from the settings file built on the users machine.
 original_directory = getcwd()
 chdir('..')                                                 # Navigate up one directory relative to this script.
 cwd = getcwd()
@@ -107,6 +111,49 @@ media_queries_enabled = True    # Generate breakpoint and scaling media queries.
 # Unit Conversion Defaults
 use_em = True
 base = 16
+
+
+def px_to_em(pixels):
+    """ Convert a numeric value from px to em using ``settings.base`` as the unit conversion factor.
+
+    **Rules:**
+
+    - ``pixels`` shall only contain [0-9.-].
+    - Inputs that contain any other value are simply passed through unchanged.
+    - Default ``base`` is 16 meaning ``16px = 1rem``
+
+    **Note:** Does not check the ``property_name`` or ``use_em`` values.  Rather, it blindly converts
+    whatever input is provided.  The calling method is expected to know what it is doing.
+
+    Rounds float to a maximum of 4 decimal places.
+
+    :type pixels: str, int, float
+    :param pixels: A numeric value with the units stripped.
+    :return: (str)
+
+        - If the input is convertible return the converted number as a string with the units ``em``
+          appended to the end.
+        - If the input is not convertible return the unprocessed input.
+
+    >>> from blowdrycss_settings import px_to_em
+    >>> # settings.use_em = True
+    >>> px_to_em(pixels='-16.0')
+    -1em
+    >>> # settings.use_em = False
+    >>> px_to_em(pixels='42px')
+    42px
+    >>> # Invalid input passes through.
+    >>> px_to_em(pixels='invalid')
+    invalid
+
+    """
+    if set(str(pixels)) <= set(digits + '-.'):
+        em = float(pixels) / float(base)
+        em = round(em, 4)
+        em = str(em) + 'em'                             # Add 'em'.
+        return em
+    return pixels
+
 
 # Default Screen Breakpoints / Transition Triggers
 # Tuple Format (Lower Limit, Upper Limit) in pixels.

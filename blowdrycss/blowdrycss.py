@@ -2,7 +2,7 @@
 from __future__ import print_function
 from builtins import bytes, str
 # custom
-import settings
+from settingsbuilder import write_blowdrycss_settings_dot_py
 from filehandler import FileFinder, CSSFile, GenericFile
 from htmlparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
@@ -63,6 +63,13 @@ def main():
     &nbsp;
 
     """
+
+    # Import settings. Better to ask forgiveness both importing and writing the file.
+    try:
+        import blowdrycss_settings as settings
+    except ImportError:
+        write_blowdrycss_settings_dot_py()
+        import blowdrycss_settings as settings
 
     # Performance timer
     if settings.timing_enabled:
