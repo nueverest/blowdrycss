@@ -5,7 +5,7 @@ from blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, x
 from utilities import deny_empty_or_whitespace
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class BreakpointParser(object):

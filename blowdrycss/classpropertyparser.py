@@ -56,7 +56,7 @@ from cssvalueparser import CSSPropertyValueParser
 from datalibrary import ordered_property_dict, property_alias_dict, property_regex_dict
 from utilities import deny_empty_or_whitespace
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class ClassPropertyParser(object):

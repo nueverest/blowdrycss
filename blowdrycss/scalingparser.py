@@ -6,7 +6,7 @@ from unitparser import UnitParser
 from blowdrycss_settings import small, medium
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 # TODO: Handle negative numbers, or list as unsupported.

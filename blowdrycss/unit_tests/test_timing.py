@@ -6,8 +6,9 @@ from string import digits
 from io import StringIO
 # custom
 import timing
+
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class TestTiming(TestCase):

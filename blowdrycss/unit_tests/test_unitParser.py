@@ -6,8 +6,9 @@ from unittest import TestCase, main
 import blowdrycss_settings as settings
 from change_settings import change_settings_for_testing
 from unitparser import UnitParser
+
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 # Change settings directories for testing

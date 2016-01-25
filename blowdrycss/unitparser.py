@@ -4,7 +4,7 @@ from string import digits
 import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class UnitParser(object):

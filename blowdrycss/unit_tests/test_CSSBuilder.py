@@ -5,7 +5,7 @@ from change_settings import change_settings_for_testing
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 # Change settings directories for testing

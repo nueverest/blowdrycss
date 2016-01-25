@@ -71,7 +71,7 @@ from cssutils import profile
 
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 # Set project_directory to the one containing the files you want to DRY out.
 # In this case it is set to the "examplesite" by default for demonstration purposes.

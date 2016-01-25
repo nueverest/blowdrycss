@@ -4,7 +4,7 @@ from unittest import TestCase, main
 import version
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class TestTiming(TestCase):

@@ -12,7 +12,7 @@ from datalibrary import clashing_alias_markdown, property_alias_markdown, clashi
     clashing_alias_rst, property_alias_rst
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 def main():

@@ -8,7 +8,7 @@ from classpropertyparser import ClassPropertyParser
 from breakpointparser import BreakpointParser
 from scalingparser import ScalingParser
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class MediaQueryBuilder(object):

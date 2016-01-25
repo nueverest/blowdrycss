@@ -2,8 +2,9 @@ from unittest import TestCase, main
 from cssutils.css import Property
 # custom
 from scalingparser import ScalingParser
+
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class TestBreakpointParser(TestCase):

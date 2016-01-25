@@ -1,8 +1,9 @@
 from unittest import TestCase, main
 # custom
 from fontparser import FontParser
+
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class TestFontParser(TestCase):

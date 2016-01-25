@@ -28,7 +28,7 @@ from utilities import contains_a_digit
 from datalibrary import property_regex_dict
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class ColorParser(object):

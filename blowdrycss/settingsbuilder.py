@@ -5,6 +5,9 @@ Declares string for building blowdrycss - settings.py.
 
 """
 
+__author__ = 'chad nelson'
+__project__ = 'blowdrycss'
+
 settings_dot_py = """\"\"\"
 **Parameters:**
 

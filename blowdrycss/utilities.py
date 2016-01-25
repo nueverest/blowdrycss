@@ -4,7 +4,7 @@ from inspect import currentframe
 from os import path
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 def contains_a_digit(string=''):

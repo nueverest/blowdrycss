@@ -4,8 +4,9 @@ import blowdrycss_settings as settings
 from change_settings import change_settings_for_testing
 from classpropertyparser import ClassPropertyParser
 from mediaquerybuilder import MediaQueryBuilder
+
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 # Change settings directories for testing

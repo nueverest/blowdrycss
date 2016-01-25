@@ -5,7 +5,7 @@ from copy import deepcopy
 from pypandoc import convert
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class DataLibrary(object):

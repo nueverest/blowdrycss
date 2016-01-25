@@ -9,7 +9,7 @@ from unitparser import UnitParser
 from fontparser import FontParser
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class CSSPropertyValueParser(object):

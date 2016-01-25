@@ -1,8 +1,9 @@
 from unittest import TestCase, main
 # custom
 from colorparser import ColorParser
+
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class TestColorParser(TestCase):

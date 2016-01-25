@@ -1,5 +1,5 @@
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 # TODO: Consider what it would take to handle shorthand property 'font'.

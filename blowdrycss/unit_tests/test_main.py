@@ -1,11 +1,11 @@
 from unittest import TestCase, main
-from os import getcwd, chdir
 import sys
 from io import StringIO
 # custom
 import blowdrycss
+
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class TestMain(TestCase):
@@ -19,11 +19,7 @@ class TestMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            # original_directory = getcwd()
-            # chdir('..')                                                 # Navigate up one directory relative to this script.
-            # cur_dir = getcwd()
             blowdrycss.main()
-            # chdir(original_directory)
 
             output = out.getvalue()
             for substring in substrings:

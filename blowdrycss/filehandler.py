@@ -10,7 +10,7 @@ from cssutils import parseString, ser
 from utilities import get_file_path
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class FileFinder(object):

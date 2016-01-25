@@ -3,7 +3,7 @@ from os import path, getcwd
 # custom
 from htmlparser import HTMLClassParser
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class TestHTMLClassParser(TestCase):

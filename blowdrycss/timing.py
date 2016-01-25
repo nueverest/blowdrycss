@@ -27,7 +27,7 @@ from time import time
 from datetime import timedelta, datetime
 
 __author__ = 'paul, nicojo, chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 def seconds_to_string(elapsed):

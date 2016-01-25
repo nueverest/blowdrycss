@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 from cssvalueparser import CSSPropertyValueParser
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class TestCSSPropertyValueParser(TestCase):

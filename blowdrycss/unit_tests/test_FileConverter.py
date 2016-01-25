@@ -3,7 +3,7 @@ from os import path, getcwd
 # custom
 from filehandler import FileConverter
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class TestFileConverter(TestCase):

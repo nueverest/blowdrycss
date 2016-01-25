@@ -5,7 +5,7 @@ from io import StringIO
 # custom
 from filehandler import FileFinder, FileConverter
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class TestFileFinder(TestCase):

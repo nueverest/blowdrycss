@@ -25,7 +25,7 @@ from xml.dom import SyntaxErr
 from classpropertyparser import ClassPropertyParser
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 
 class CSSBuilder(object):
