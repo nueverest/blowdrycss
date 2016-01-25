@@ -71,8 +71,6 @@ settings_dot_py = """\"\"\"
 from os import getcwd, path
 # plugins
 from cssutils import profile
-# custom
-from utilities import px_to_em
 
 __project__ = 'blowdrycss'
 
@@ -134,13 +132,13 @@ profile._resetProperties()
 """
 
 
-def write_settings_dot_py():
-    with open('settings.py', 'wb') as generic_file:
+def write_blowdrycss_settings_dot_py():
+    with open('blowdrycss_settings.py', 'wb') as generic_file:
         generic_file.write(bytearray(settings_dot_py, 'utf-8'))
     print(
         '=' * 42 +
-        '\n   "settings.py" built for blowdrycss.\n\n' +
-        '   Open "settings.py" to customize\n   blowdrycss for your project.\n' +
+        '\n   "blowdrycss_settings.py" built for blowdrycss.\n\n' +
+        '   Open "blowdrycss_settings.py" to customize\n   blowdrycss for your project.\n' +
         '=' * 42
     )
 
@@ -150,11 +148,11 @@ def print_blow_dryer():
     blow_dryer_ascii = """
                      .-'-.
                   ;@@@@@@@@@'
-    ~~~~ ;@@@@@@@@@@@@@@@@@@@@`
+    ~~~~ ;@@@@@@@@@@@@@@@@@@@+`
     ~~~~ ;@@@@@@@@@@@@@``@@@@@@
                 +@@@@@`  `@@@@@'
                    @@@@``@@@@@
-                     .@@@@@@@@+
+                     .-@@@@@@@+
                           @@@@@
                            .@@@.
                             `@@@.
