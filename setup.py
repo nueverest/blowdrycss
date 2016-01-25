@@ -45,8 +45,8 @@ except (IOError, ImportError):
 
 # Get current version number.
 version = {}
-with open('version.py') as file:
-    exec(file.read(), version)
+with open('version.py') as _file:
+    exec(_file.read(), version)
 
 setup(
     name='blowdrycss',
@@ -154,9 +154,9 @@ setup(
     # To provide executable scripts, use entry points in preference to the
     # "scripts" keyword. Entry points provide cross-platform support and allow
     # pip to create the appropriate form of executable for the target platform.
-    # entry_points={
-    #     'console_scripts': [
-    #         'blowdry=blowdry:main',
-    #     ],
-    # },
+    entry_points={
+        'console_scripts': [
+            'blowdrycss=blowdrycss:main',
+        ],
+    },
 )
