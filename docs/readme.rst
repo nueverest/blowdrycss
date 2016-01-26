@@ -1,15 +1,13 @@
 Read Me
 =======
 
-.. index:: single: Read Me
-
 `blowdrycss` is a rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
 
 **Why the name blowdrycss?**
 
 Inspiration for the name came from the blow dryer. A blow dryer rapidly drys and styles hair.
 
-Similarly, :mod:`blowdrycss` is used to rapidly style HTML and generate DRY CSS files using encoded class names.
+Similarly, ``blowdrycss`` is used to rapidly style HTML and generate DRY CSS files using encoded class names.
 
 Decomposition
 ~~~~~~~~~~~~~
@@ -29,11 +27,11 @@ Example Usage in HTML Tags:
         </p>
     </div>
 
-:mod:`blowdrycss` decodes the class names ``text-align-center``,
+``blowdrycss`` decodes the class names ``text-align-center``,
 ``margin-top-30``, ``font-size-25``, and ``green``; and generates the
 following CSS in ``blowdry.css``:
 
-.. code:: css
+::
 
     .text-align-center { text-align: center }
     .margin-top-30 { margin-top: 30px }
@@ -52,7 +50,7 @@ Advantages of blowdrycss
 #. **Extensible:** Want to extract class selectors from javascript files? Build a plugin.
 #. **Standardized:** HTML5 compatible. All `W3C CSS <http://www.w3.org/Style/CSS/Overview.en.html>`__ Level 2.1, and some Level 3 properties implemented. PEP8 Compliant.
 #. **Tested:** UnitTest Coverage
-#. **Permissive:** MIT :doc:`license`
+#. **Permissive:** MIT license
 
 Requirements
 ~~~~~~~~~~~~
@@ -116,8 +114,10 @@ Inside a CSS file you find the following:
         transition: 1s opacity;
     }
 
-Six months from now the person who wrote this CSS is then asked to remove the ``banner-video`` from the homepage.
-More often than not the front-end developer will remove the CSS class from the HTML file, but not from the CSS file.
+Six months later the person who wrote this CSS is then asked to remove
+banner-video from the homepage. More often than not the
+front-end developer will remove the CSS class from the HTML file, but
+not from the CSS file.
 
 Reasons include:
 ^^^^^^^^^^^^^^^^
@@ -223,7 +223,7 @@ Valuable References
 License
 ~~~~~~~
 
-    The MIT :doc:`license` (MIT)
+    The MIT license
 
 How to Contribute
 ~~~~~~~~~~~~~~~~~

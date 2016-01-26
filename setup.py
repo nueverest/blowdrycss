@@ -20,9 +20,13 @@ pip install twine
 python setup.py sdist bdist
 python setup.py bdist_wheel --universal
 
+[If it is the first time, then do this otherwise skip to next step.]
 Go here: https://pypi.python.org/pypi?%3Aaction=submit_form
 Choose Option 2: Upload PKG-INFO
 Click "Add Package Info"
+
+Open 'dist' folder in project
+Place all old ``*.zip`` and ``*.whl`` files in the ``archive`` folder.
 
 Back to the command line run:
 twine upload dist/*
@@ -56,7 +60,7 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version=version['__version__'],
 
-    description=u'A rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files',
+    description=u'The revolutionary CSS compiler',
     long_description=long_description,
 
     # The project's main homepage.
@@ -113,6 +117,8 @@ setup(
     # What does your project relate to?
     keywords=('blowdry blowdrycss css compiler pre-compiler pre-processor generator dry cascading style sheets html ' +
              'encoded class selector parser'),
+
+    platform='Independent',
 
     # Packages
     packages=find_packages(exclude=['blowdrycss_settings.py', ]),
