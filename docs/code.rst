@@ -1,13 +1,13 @@
 
 ``blowdrycss``
------------
+--------------
 
 .. automodule:: blowdrycss
 
 ____
 
 ``blowdrycss_settings``
-------------
+-----------------------
 
 .. automodule:: blowdrycss_settings
 
