@@ -1,15 +1,15 @@
 
-``blowdry``
+``blowdrycss``
 -----------
 
-.. automodule:: blowdry
+.. automodule:: blowdrycss
 
 ____
 
-``settings``
+``blowdrycss_settings``
 ------------
 
-.. automodule:: settings
+.. automodule:: blowdrycss_settings
 
 ____
 
