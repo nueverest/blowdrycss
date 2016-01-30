@@ -3,14 +3,18 @@
 
 | markdown_directory (*string*) -- Generally used for development purposes only.
 
-| project_directory (*string) -- Path to your project directory
+| project_directory (*string*) -- Path to your project directory
 
 | css_directory (*string*) -- Path to your projects CSS directory
 
 | docs_directory (*string*) -- Path to Sphinx docs.
 
 | file_types = (*tuple of strings*) -- All file types/extensions to search for in the defined project_directory
-  that contain encoded class selectors. Example format: ('*.html', )
+  that contain encoded class selectors. Example format:
+
+::
+
+('*.html', )
 
 | timing_enabled (*bool*) -- Run performance timer
 
