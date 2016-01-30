@@ -1,6 +1,7 @@
 # python 2 compatibility
 from __future__ import print_function, unicode_literals
 from builtins import str
+from io import open
 # builtins
 from os import path, walk, getcwd, makedirs
 from glob import glob
@@ -119,9 +120,9 @@ class FileConverter(object):
             # raise FileNotFoundError('file_path ' + file_path + ' does not exist.')       # python 3 only
 
     def get_file_as_string(self):
-        """ Convert the file to a string and return it.
+        """ Convert the _file to a string and return it.
 
-        :return: (*str*) Return the file as a string.
+        :return: (*str*) Return the _file as a string.
 
         **Example:**
 
@@ -133,8 +134,8 @@ class FileConverter(object):
         >>> file_converter = FileConverter(file_path=file_path)
         >>> file_string = file_converter.get_file_as_string()
         """
-        with open(self.file_path, 'r') as file:
-            file_as_string = file.read().replace('\n', '')
+        with open(self.file_path, 'r') as _file:
+            file_as_string = _file.read().replace('\n', '')
         return file_as_string
 
 
@@ -283,11 +284,11 @@ class ClassExtractor(object):
     {'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1', 'row', 'text-align-center'}
 
     """
-    def __init__(self, file_path='', sub=r'', findall=r''):
+    def __init__(self, file_path='', sub_regex=r'', findall_regex=r''):
         if path.isfile(file_path):
             self.file_path = file_path
-            self.sub_regex = sub
-            self.findall_regex = findall
+            self.sub_regex = sub_regex
+            self.findall_regex = findall_regex
         else:
             raise OSError(file_path + ' does not exist.')
 
@@ -301,7 +302,7 @@ class ClassExtractor(object):
         :return: (*list of strings*) -- Returns a list of raw class selector strings.
 
         """
-        with open(self.file_path, 'r') as _file:
+        with open(self.file_path, 'r', encoding='utf-8') as _file:
             text = _file.read()
             text = sub(self.sub_regex, '', text)
             return findall(self.findall_regex, text)
@@ -315,6 +316,7 @@ class ClassExtractor(object):
         """
         class_set = set()
 
+        print(self.raw_class_list)
         for classes in self.raw_class_list:
             class_set = set.union(
                 set(classes.split()),               # Split space delimited string into set().
