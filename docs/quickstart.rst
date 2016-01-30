@@ -13,7 +13,7 @@ This guide teaches you how to:
 Part 1 - Start the web browser to view the unstyled examplesite.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Create a virtual environment `command line <http://virtualenv.readthedocs.org/en/latest/userguide.html>`__ or `PyCharm <https://www.jetbrains.com/pycharm/help/creating-virtual-environment.html>`__.
+-  Create a virtual environment `python guide <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`__, `docs <http://virtualenv.readthedocs.org/en/latest/userguide.html>`__ or `PyCharm <https://www.jetbrains.com/pycharm/help/creating-virtual-environment.html>`__.
 -  Download :mod:`blowdrycss` from the `github repo <https://github.com/nueverest/blowdrycss>`__.
 -  Navigate to ``../blowdrycss/examplesite``
 -  Run ``python -m http.server 8080`` (Python 3.x) or
