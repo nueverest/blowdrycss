@@ -69,7 +69,7 @@ def log(elapsed=None):
     # if minify:
     #     print_css_stats(file_name='blowdry')
     print(str(border))
-    print_blow_dryer()
+    # print_blow_dryer()
 
 
 def end_log():
@@ -85,5 +85,6 @@ def end_log():
     log(elapsed=seconds_to_string(elapsed))
 
 
+# print_blow_dryer()
 start = time()
 atexit.register(end_log)
