@@ -297,7 +297,7 @@ Optional Unit Conversion
 
 - Implemented: 11/28/2015 in version: 0.0.2
 
-To enable 'px' to 'em' unit conversion open ``blowdry.py`` and set
+To enable 'px' to 'em' unit conversion open ``blowdrycss.py`` and set
 ``use_em = True``
 
 Explicitly Encoding Units in Class Name
@@ -325,7 +325,7 @@ Media Queries using Breakpoints
     # Allows elements to be visible or hidden.
     'breakpoint_key' + 'limit_key'
 
-- Breakpoint keys -- See ``settings.py`` if you want to customize these. ::
+- Breakpoint keys -- See ``blowdrycss_settings.py`` if you want to customize these. ::
 
     'xxsmall-', 'xsmall-', 'small-', 'medium-', 'large-',
     'xlarge-', 'xxlarge-', 'giant-', 'xgiant-', 'xxgiant-'

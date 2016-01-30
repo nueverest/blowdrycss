@@ -46,7 +46,7 @@ Advantages of blowdrycss
 #. **Symbiotic:** Can be integrated with the current ecosystem of CSS compilers and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
 #. **Documented:** Hands-on tutorial and sphinx documentation to get you up and running fast.
 #. **Robust:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all phases of a products lifecycle from prototype to production.
-#. **Customizable:** Features can be turned on and off inside of ``settings.py``. Examples include: unit parsing, color parsing, font parsing, minification, and media query parsing.
+#. **Customizable:** Features can be turned on and off inside of ``blowdrycss_settings.py``. Examples include: unit parsing, color parsing, font parsing, minification, and media query parsing.
 #. **Extensible:** Want to extract class selectors from javascript files? Build a plugin.
 #. **Standardized:** HTML5 compatible. All `W3C CSS <http://www.w3.org/Style/CSS/Overview.en.html>`__ Level 2.1, and some Level 3 properties implemented. PEP8 Compliant.
 #. **Tested:** UnitTest Coverage

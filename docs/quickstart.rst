@@ -13,7 +13,8 @@ This guide teaches you how to:
 Part 1 - Start the web browser to view the unstyled examplesite.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Download :mod:`blowdrycss` from the `github repo <https://github.com/nueverest/blowdrycss>`_.
+-  Create a virtual environment `command line <http://virtualenv.readthedocs.org/en/latest/userguide.html>`__ or `PyCharm <https://www.jetbrains.com/pycharm/help/creating-virtual-environment.html>`__.
+-  Download :mod:`blowdrycss` from the `github repo <https://github.com/nueverest/blowdrycss>`__.
 -  Navigate to ``../blowdrycss/examplesite``
 -  Run ``python -m http.server 8080`` (Python 3.x) or
    ``python -m SimpleHTTPServer 8080`` (Python 2.x)
@@ -27,7 +28,7 @@ Part 2 - Auto-generate CSS
 -  Navigate to ``../blowdrycss/python``
 -  Run ``pip install -r requirements.txt`` If pip is not install `go
    here <https://pip.pypa.io/en/latest/installing/>`__.
--  Run ``python blowdry.py``
+-  Run ``python blowdrycss.py``
 -  Navigate to ``../blowdrycss/examplesite/css`` and verify that
    ``blowdry.css`` and ``blowdry.min.css`` now exist.
 -  Open a web browser and go to
@@ -40,7 +41,7 @@ Notes about the auto-generated ``*.css`` files
 | The CSS files ``blowdry.css`` and ``blowdry.min.css`` are not intended
   to be edited by humans.
 | Any manual changes made to these two files are overwritten when
-  ``python blowdry.py`` is run.
+  ``python blowdrycss.py`` is run.
 
 Part 3 - Apply new styles in ``index.html``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -84,9 +85,9 @@ Lets actually change something.
 -  Now refresh the web page running on
    `localhost:8080 <http://localhost:8080>`__.
 -  What happened? Nothing happened because you need to run
-   ``blowdry.py``
+   ``blowdrycss.py``
 -  Navigate to ``../blowdrycss/python``
--  Run ``python blowdry.py``
+-  Run ``python blowdrycss.py``
 -  Now refresh the web page running on
    `localhost:8080 <http://localhost:8080>`__.
 -  The title at the top of the page should be large and green.
@@ -97,7 +98,7 @@ Let's make some more changes.
    the ``<div>`` containing the image.
 -  Find the ``+`` images and add the class ``padding-bottom-4p``
    directly to the ``img`` class attribute.
--  Run ``python blowdry.py``
+-  Run ``python blowdrycss.py``
 -  Now refresh the web page running on
    `localhost:8080 <http://localhost:8080>`__.
 -  Feel free to continue experimenting with different property names and
@@ -111,7 +112,7 @@ Part 4 - Experiment with these classes
    ``p-20-30-20-30`` ``w-50``
 -  Apply this to a div: ``display-none``
 -  Apply this to text: ``uppercase``
--  Run ``python blowdry.py``
+-  Run ``python blowdrycss.py``
 
 
 Want to learn more head on over to :doc:`advancedtopics`.

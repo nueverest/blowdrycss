@@ -10,7 +10,7 @@ Advanced Topics
 
 - Use ```watchdog`` <https://pypi.python.org/pypi/watchdog/0.8.3>`__ to automate CSS compilation.
 - Learn about :doc:`clashing_aliases` and :doc:`property_aliases`.
-- How to change settings in ``blowdry.py``.
+- How to change settings in ``blowdrycss.py``.
 - Customizing the alias dictionary.
 - Where are the semicolons?
 - How to build a plugin. (missing)
@@ -24,9 +24,9 @@ Automate CSS Compilation with Watchdog
 
 .. index:: single: Watchdog
 
--  Having to run ``python blowdry.py`` can annoying in a development environment.
+-  Having to run ``python blowdrycss.py`` can annoying in a development environment.
 -  What if it were possible to auto-detect that ``index.html`` was saved and automatically
-   run ``python blowdry.py``?
+   run ``python blowdrycss.py``?
 
    -  This is made possible with
       ```watchdog`` <https://pypi.python.org/pypi/watchdog/0.8.3>`__.
@@ -35,12 +35,12 @@ Automate CSS Compilation with Watchdog
 -  Navigate to ``/examplesite`` at the command line.
 -  From the command line run:
 
-   ``watchmedo shell-command --patterns="*.html;" --ignore-directories --recursive --command="python ../python/blowdry.py"``
+   ``watchmedo shell-command --patterns="*.html;" --ignore-directories --recursive --command="python ../python/blowdrycss.py"``
 -  Now add the class ``margin-150`` to one of the ``<div>`` tags, and
    save ``index.html``
 -  Refresh `localhost:8080 <http://localhost:8080>`__ in the browser,
    and the change should appear without manually re-running
-   ``blowdry.py``.
+   ``blowdrycss.py``.
 
 What if refreshing the browser doesn't work?
 ''''''''''''''''''''''''''''''''''''''''''''
@@ -49,14 +49,14 @@ What if refreshing the browser doesn't work?
 -  Check the shell or command prompt where ``watchog`` is running to see
    if there are any error messages.
 -  Double check that the command is running in the correct directory,
-   and that the python command ``python ../python/blowdry.py`` will run from the directory without
+   and that the python command ``python ../python/blowdrycss.py`` will run from the directory without
    ``watchdog``.
 
 Watchdog Parameter Modification
 '''''''''''''''''''''''''''''''
 
 ``--patterns`` can be set to any file type that should trigger
-``blowdry.py``. For example: ``--patterns="*.html;*.aspx;*.js"``
+``blowdrycss.py``. For example: ``--patterns="*.html;*.aspx;*.js"``
 
 ``--recursive`` causes the ``watchdog`` to monitor all of the files
 matching ``--patterns`` in all subdirectories of the current folder.
@@ -64,13 +64,13 @@ matching ``--patterns`` in all subdirectories of the current folder.
 ``--ignore-directories`` ignores all directory related events, and only
 focuses on file changes.
 
-``--command`` contains the path to ``blowdry.py``. Make sure that this
+``--command`` contains the path to ``blowdrycss.py``. Make sure that this
 is the correct directory otherwise it will not run.
 
 Setting Customization
 ~~~~~~~~~~~~~~~~~~~~~
 ``*.html``, ``*.aspx``, ``*.ascx``, or ``*.master`` files. Other
-file extensions can be added under ``blowdry.py``
+file extensions can be added under ``blowdrycss.py``
 
 ``file_types = ('*.html', '*.aspx', '*.master', '*.ascx', '*.custom_ext', )``
 
@@ -95,14 +95,14 @@ Where are the semicolons?
 I opened ``blowdry.css``, and I don't see any semicolons in the css rule declarations. Why?
 
 - The only or last css { property: value } pair is not required to end with a semicolon. `See section 4.1.8 of the current CSS Standard. <http://www.w3.org/TR/CSS2/syndata.html#declaration>`__
-- The auto--generated file ``blowdry.css`` is not intended to be human-editable. Any manual edits are over--written when ``blowdry.py`` is run. Generally, when building a CSS file by hand it is considered best practise to always include the final semicolon. The reason being that humans--error is reduced the next time a person adds a rule to the CSS block.
+- The auto--generated file ``blowdry.css`` is not intended to be human-editable. Any manual edits are over--written when ``blowdrycss.py`` is run. Generally, when building a CSS file by hand it is considered best practise to always include the final semicolon. The reason being that humans--error is reduced the next time a person adds a rule to the CSS block.
 - It is compatible with all browsers.
 - It results in faster page loads due to smaller ``*.css`` file size.
 
 Change the CSS File Name and Location:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TODO: Document how easy it is to edit blowdry.py
+TODO: Document how easy it is to edit blowdrycss.py
 
 DRY-ness must be balanced against other factors.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
