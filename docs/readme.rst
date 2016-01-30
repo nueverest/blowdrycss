@@ -210,6 +210,8 @@ generate, and something that still needs to be written by hand.
 Valuable References
 ~~~~~~~~~~~~~~~~~~~
 
+    `Slides presented at DessertPy <https://docs.google.com/presentation/d/1wjkbvQUorD9rzdPWjwPXaJcYPOBnrjE1qUJY2M4xwuY/edit#slide=id.gc6f8badac_0_0>`__
+
     `W3C Full CSS property table <http://www.w3.org/TR/CSS21/propidx.html>`__
 
     `Don't Repeat Yourself <https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>`__

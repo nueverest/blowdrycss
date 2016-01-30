@@ -16,6 +16,8 @@ About
 
 - `Download <https://github.com/nueverest/blowdrycss>`__
 
+- `Slides presented at DessertPy <https://docs.google.com/presentation/d/1wjkbvQUorD9rzdPWjwPXaJcYPOBnrjE1qUJY2M4xwuY/edit#slide=id.gc6f8badac_0_0>`__
+
 Quickstart
 ~~~~~~~~~~
 
