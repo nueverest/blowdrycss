@@ -13,6 +13,7 @@ future>=0.15.2
 
 # Development
 # wheel>=0.26.0
+# twine
 
 # Automatic CSS generation on save
 # watchdog>=0.8.3

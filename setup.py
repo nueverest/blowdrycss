@@ -144,7 +144,12 @@ setup(
         'auto_save': ['watchdog>=0.8.3', ],
         'docs': ['sphinx>=1.3.3', ],
         'testing': ['unittest', 'coverage>=4.0.2', ],
-        'development': ['wheel>=0.26.0', ],
+        'development': [
+            'watchdog>=0.8.3',
+            'sphinx>=1.3.3',
+            'unittest', 'coverage>=4.0.2',
+            'wheel>=0.26.0', 'twine>=',
+        ],
     },
 
     # If there are data files included in your packages that need to be
