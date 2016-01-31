@@ -33,6 +33,9 @@ twine upload dist/*
 
 """
 
+# python 2.7
+from __future__ import unicode_literals
+from io import open
 # builtins
 from setuptools import setup, find_packages     # Always prefer setuptools over distutils
 
@@ -45,7 +48,7 @@ try:
         long_description = f.read()
 except (IOError, ImportError):
     # default description
-    long_description = u'Rapid styling tool used to auto-generate DRY CSS files from encoded class selectors.'
+    long_description = 'Rapid styling tool used to auto-generate DRY CSS files from encoded class selectors.'
 
 # Get current version number.
 version = {}
@@ -60,7 +63,7 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version=version['__version__'],
 
-    description=u'The revolutionary CSS compiler',
+    description='The revolutionary CSS compiler',
     long_description=long_description,
 
     # The project's main homepage.
