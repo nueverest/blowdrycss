@@ -13,6 +13,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+build_archive/
 build/
 develop-eggs/
 dist/
@@ -95,7 +96,7 @@ coverage
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
+build_archive/0.0.8/build/Release
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
