@@ -19,6 +19,8 @@ Decomposition
 Example Usage in HTML Tags:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+**Use the CSS level 1, 2.1, and 3 syntax that you already know.**
+
 .. code:: html
 
     <div class="text-align-center margin-top-30">
