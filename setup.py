@@ -121,10 +121,11 @@ setup(
     keywords=('blowdry blowdrycss css compiler pre-compiler pre-processor generator dry cascading style sheets html ' +
              'encoded class selector parser'),
 
-    platform='Independent',
-
     # Packages
-    packages=find_packages(exclude=['blowdrycss_settings.py', ]),
+    packages=find_packages(),
+
+    # Excluded Items
+    exclude_package_data={'': ['blowdrycss_settings.py'], },
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
@@ -148,7 +149,7 @@ setup(
             'watchdog>=0.8.3',
             'sphinx>=1.3.3',
             'unittest', 'coverage>=4.0.2',
-            'wheel>=0.26.0', 'twine>=',
+            'wheel>=0.26.0', 'twine>=1.6.5',
         ],
     },
 
