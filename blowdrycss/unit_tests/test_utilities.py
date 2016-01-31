@@ -29,7 +29,7 @@ class Test_utilities(TestCase):
             self.assertFalse(contains_a_digit(string=value), msg=value)
 
     def test_deny_empty_or_whitespace_valid(self):
-        self.assertIsNone(deny_empty_or_whitespace(string='valid_string', variable_name='valid_variable'))
+        self.assertEqual(deny_empty_or_whitespace(string='valid_string', variable_name='valid_variable'), None)
 
     def test_deny_empty_or_whitespace_invalid_string(self):
         invalid = ['', None, '          ']
