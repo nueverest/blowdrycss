@@ -20,5 +20,6 @@ class TestTiming(TestCase):
     def test_release(self):
         self.assertIsNotNone(version.__release__)
 
+
 if __name__ == '__main__':
     main()
