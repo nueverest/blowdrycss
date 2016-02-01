@@ -6,14 +6,13 @@ from re import search, findall
 from inspect import currentframe
 from os import path, stat, getcwd
 # custom
-import blowdrycss.blowdrycss_settings as settings
-# try:
-#     import settings.blowdrycss_settings as settings                     # development case
-# except ImportError:
-#     try:
-#         import blowdrycss_settings as settings                          # development "python setup.py test" case
-#     except ImportError:
-#         import blowdrycss.blowdrycss_settings as settings               # packaged deployment case
+try:
+    import settings.blowdrycss_settings as settings                     # development case
+except ImportError:
+    try:
+        import blowdrycss_settings as settings                          # development "python setup.py test" case
+    except ImportError:
+        import blowdrycss.blowdrycss_settings as settings               # packaged deployment case
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

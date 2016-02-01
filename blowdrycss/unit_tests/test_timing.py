@@ -6,13 +6,10 @@ from string import digits
 from io import StringIO
 # custom
 import timing
-from utilities import change_settings_for_testing
+import unittest_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
-
-
-change_settings_for_testing()
 
 
 class TestTiming(TestCase):

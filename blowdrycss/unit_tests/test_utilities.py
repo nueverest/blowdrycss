@@ -5,15 +5,11 @@ from builtins import round
 from unittest import TestCase, main
 from os import getcwd, path
 # custom
-from settings import blowdrycss_settings as settings
-from utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, change_settings_for_testing
+import unittest_settings as settings
+from utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
-
-
-# Change settings directories for testing
-change_settings_for_testing()
 
 
 class Test_utilities(TestCase):
