@@ -125,27 +125,10 @@ setup(
 
     # What does your project relate to?
     keywords=('blowdry blowdrycss css compiler pre-compiler pre-processor generator dry cascading style sheets html ' +
-             'encoded class selector parser'),
+             'encoded class selector parser optimizer internet'),
 
-    # Packages
-    packages=find_packages(),
-
-    # Excluded Items - reference: https://pythonhosted.org/setuptools/setuptools.html#including-data-files
-    #
-    # exclude_package_data
-    #     Specify patterns for data files and directories that should not be included when a package is installed,
-    #     even if they would otherwise have been included due to the use of the preceding options.
-    #
-    # NOTE: Due to the way the distutils build process works, a data file that you include in your project and then
-    # stop including may be "orphaned" in your project's build directories, requiring you to run setup.py clean --all
-    # to fully remove them. This may also be important for your users and contributors if they track intermediate
-    # revisions of your project using Subversion; be sure to let them know when you make changes that remove files
-    # from inclusion so they can run setup.py clean --all.
-    exclude_package_data={
-        '': ['blowdrycss_settings.py'],
-        '': ['blowdrycss/blowdrycss_settings.py'],
-        'blowdrycss': ['blowdrycss_settings.py'],
-    },
+    # Packages - reference: https://pythonhosted.org/setuptools/setuptools.html#using-find-packages
+    packages=find_packages(exclude=['*.settings', ]),
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:

@@ -1,17 +1,11 @@
 # builtins
 from unittest import TestCase, main
-from os import path, remove
+from os import getcwd, path, remove
 # custom
 from settingsbuilder import write_blowdrycss_settings_dot_py
 
 
 class TestWrite_blowdrycss_settings_dot_py(TestCase):
-    """
-    IMPORTANT: This particular test can only be run in isolation. The other tests import the settings file from the
-    actual module as opposed along with all of the other tests.
-
-    Uncomment ``test directory and file_type settings`` section and run this test.
-    """
     def test_write_blowdrycss_settings_dot_py(self):
         settings_file = 'blowdrycss_settings.py'
 
@@ -27,15 +21,14 @@ class TestWrite_blowdrycss_settings_dot_py(TestCase):
         self.assertTrue(path.isfile('blowdrycss_settings.py'))
 
         # test directory and file_type settings
-        # IMPORTANT: When running this test in isolation uncomment these lines.
-        # cwd = getcwd()
-        # self.assertTrue(
-        #     settings.markdown_directory == path.join(cwd, 'docs', 'markdown'),
-        #     msg=settings.markdown_directory + '\t' + path.join(cwd, 'docs', 'markdown')
-        # )
-        # self.assertTrue(settings.project_directory == cwd)
-        # self.assertTrue(settings.css_directory == path.join(cwd, 'css'))
-        # self.assertTrue(settings.docs_directory == path.join(cwd, 'docs'))
+        cwd = getcwd()
+        self.assertTrue(
+            settings.markdown_directory == path.join(cwd, 'docs', 'markdown'),
+            msg=settings.markdown_directory + '\t' + path.join(cwd, 'docs', 'markdown')
+        )
+        self.assertTrue(settings.project_directory == cwd)
+        self.assertTrue(settings.css_directory == path.join(cwd, 'css'))
+        self.assertTrue(settings.docs_directory == path.join(cwd, 'docs'))
 
         self.assertTrue(settings.file_types == ('*.html', ))
 
@@ -65,6 +58,11 @@ class TestWrite_blowdrycss_settings_dot_py(TestCase):
         self.assertTrue(settings.giant == (settings.px_to_em(1921), settings.px_to_em(2560)))
         self.assertTrue(settings.xgiant == (settings.px_to_em(2561), settings.px_to_em(2800)))
         self.assertTrue(settings.xxgiant == (settings.px_to_em(2801), settings.px_to_em(10**6)))
+
+        # Clean up by deleting test settings file.  Can be commented to see what the generated file looks like.
+        # Remove it if it exists.
+        if path.isfile(settings_file):
+            remove(settings_file)
 
 
 if __name__ == '__main__':

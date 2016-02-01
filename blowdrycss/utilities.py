@@ -1,12 +1,13 @@
 # python 2
 from __future__ import print_function, division
+
 from builtins import str, round
 # builtins
 from re import search, findall
 from inspect import currentframe
 from os import path, stat
 # custom
-from blowdrycss_settings import css_directory
+from settings.blowdrycss_settings import css_directory
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 # custom
-import blowdrycss_settings as settings
+from settings import blowdrycss_settings as settings
 from change_settings import change_settings_for_testing
 from classpropertyparser import ClassPropertyParser
 from mediaquerybuilder import MediaQueryBuilder

@@ -1,5 +1,6 @@
 # python 2
 from __future__ import print_function
+
 from builtins import bytes, str
 # custom
 from settingsbuilder import write_blowdrycss_settings_dot_py
@@ -65,15 +66,17 @@ def main():
     """
 
     # Import settings. Better to ask forgiveness both importing and writing the file.
+    # The long name blowdrycss_settings is used since the django uses settings.py and using the same name would
+    # cause a name conflict.
     try:
-        import blowdrycss_settings as settings
+        from settings import blowdrycss_settings as settings
     except ImportError:
         write_blowdrycss_settings_dot_py()
-        import blowdrycss_settings as settings
+        from settings import blowdrycss_settings as settings
 
     # Performance timer
     if settings.timing_enabled:
-        import timing
+        pass
 
     # Generate Markdown documentation files.
     if settings.markdown_docs:

@@ -1,4 +1,4 @@
-import blowdrycss_settings as settings
+from settings import blowdrycss_settings as settings
 from os import getcwd, path
 
 

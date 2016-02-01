@@ -1,7 +1,7 @@
 # plugins
 from cssutils.css import Property
 # custom
-from blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, xlarge, xxlarge, giant, xgiant, xxgiant
+from settings.blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, xlarge, xxlarge, giant, xgiant, xxgiant
 from utilities import deny_empty_or_whitespace
 
 __author__ = 'chad nelson'

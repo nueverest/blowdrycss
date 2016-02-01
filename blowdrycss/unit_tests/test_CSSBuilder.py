@@ -1,6 +1,9 @@
+# python 2
+# from lib2to3.fixes import fix_set_literal  http://python-future.org/futurize.html?highlight=set
+# builtins
 from unittest import TestCase, main
 # custom
-import blowdrycss_settings as settings
+from settings import blowdrycss_settings as settings
 from change_settings import change_settings_for_testing
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
@@ -10,7 +13,6 @@ __project__ = 'blowdrycss'
 
 # Change settings directories for testing
 change_settings_for_testing()
-
 
 class TestCSSStyleBuilder(TestCase):
     def test_get_css_text_sets(self):

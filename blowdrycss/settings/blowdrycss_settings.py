@@ -1,4 +1,20 @@
 """
+**Usage Notes:**
+
+| *Typical* -- Run ``blowdrycss.py`` to auto-build ``blowdrycss_settings.py`` in the
+  root of the users web project or virtualenv. This makes it easy for the user to find and edit the settings.
+
+| *Development* -- Use ``settings.blowdrycss_settings`` when developing ``blowdrycss`` itself.
+
+.. note::
+
+    The ``settings``  module is excluded from the package distribution via ``setup.py``.
+
+**Why such a long name?**
+
+Popular web frameworks such as django and flask auto-generate a settings file called ``settings.py``.
+The longer more specific name is used to prevent conflicts.
+
 **Parameters:**
 
 | markdown_directory (*string*) -- Generally used for development purposes only.
@@ -10,7 +26,9 @@
 | docs_directory (*string*) -- Path to Sphinx docs.
 
 | file_types = (*tuple of strings*) -- All file types/extensions to search for in the defined project_directory
-  that contain encoded class selectors. Example format:
+  that contain encoded class selectors.
+
+  *Example format:*
 
 ::
 
@@ -139,7 +157,7 @@ def px_to_em(pixels):
           appended to the end.
         - If the input is not convertible return the unprocessed input.
 
-    >>> from blowdrycss_settings import px_to_em
+    >>> from settings.blowdrycss_settings import px_to_em
     >>> # settings.use_em = True
     >>> px_to_em(pixels='-16.0')
     -1em

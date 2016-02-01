@@ -1,0 +1,18 @@
+{% set navigation = [('index.html', 'Index'), ('about.html', 'About')] %}
+
+{% if latest_question_list %}
+    <ul class="purple {{ align.left }} padding-left-5">
+    {% for question in latest_question_list %}
+        <li class="{{ li_style }} squirrel text-align-center"><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p class="large-up {{ five.fives }} border-1">No polls are available.</p>
+{% endif %}
+
+{% if loop.index is divisibleby(3) %}
+    <div class="row text-align-center">Poll {{ user.username|e }}</div>
+    {% for row in rows %}
+        <li class="{{ loop.cycle('odd', 'even') }}">{{ row }}</li>
+    {% endfor %}
+{% endif %}

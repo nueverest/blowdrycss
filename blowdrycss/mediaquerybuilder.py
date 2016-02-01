@@ -25,7 +25,7 @@ class MediaQueryBuilder(object):
 
     **Example Usage:**
 
-    >>> import blowdrycss_settings as settings
+    >>> from settings import blowdrycss_settings as settings
     >>> from classpropertyparser import ClassPropertyParser
     >>> class_set = {'bold', 'large-down', 'font-size-25-s'}
     >>> # Filter class names. Only keep classes matching the defined class encoding.
