@@ -18,11 +18,8 @@ Steps:
 pip install wheel
 pip install twine
 
-Create a folder in build_archive named after the current version number.
-Copy the old egg, build, and dist.
-Paste them into a version folder in build_archive that you just created.
+Delete the old egg, build, and dist from the project root.
 
-python setup.py clean --all
 python setup.py sdist bdist
 python setup.py bdist_wheel --universal
 
@@ -31,8 +28,8 @@ Go here: https://pypi.python.org/pypi?%3Aaction=submit_form
 Choose Option 2: Upload PKG-INFO
 Click "Add Package Info"
 
-Open 'dist' folder in project
-Place all old ``*.zip`` and ``*.whl`` files in the ``archive`` folder.
+Create a new folder in ``build_archive`` named after the current version number.
+Copy the new egg, build, and dist.
 
 Back to the command line run:
 twine upload dist/*
@@ -50,7 +47,7 @@ __project__ = 'blow dry css'
 
 # Get readme.rst from sphinx docs.
 try:
-    with open('docs/readme.rst', encoding='utf-8') as f:
+    with open('readme.rst', encoding='utf-8') as f:
         long_description = f.read()
 except (IOError, ImportError):
     # default description
