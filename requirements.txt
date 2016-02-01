@@ -2,6 +2,10 @@
 # unittest
 # coverage>=4.0.2
 
+# Installation and distribution
+pip>=8.0.2
+setuptools>=19.6.2
+
 # CSS Creation
 cssutils>=1.0.1
 
@@ -13,7 +17,7 @@ future>=0.15.2
 
 # Development
 # wheel>=0.26.0
-# twine
+# twine>=1.6.5
 
 # Automatic CSS generation on save
 # watchdog>=0.8.3
