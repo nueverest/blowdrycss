@@ -7,7 +7,10 @@ from re import search, findall
 from inspect import currentframe
 from os import path, stat, getcwd
 # custom
-from settings import blowdrycss_settings as settings
+try:
+    from blowdrycss.settings import blowdrycss_settings as settings     # development case
+except ImportError:
+    from blowdrycss import blowdrycss_settings as settings              # packaged deployment case
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -133,8 +136,16 @@ def print_css_stats(file_name=''):
     print('CSS file size reduced by', str(percent_reduced) + '%.')
 
 
-# Change settings directories for testing
 def change_settings_for_testing():
+    """ Change settings directories for testing.
+
+    .. warning::
+
+        This method should only be used by the unit_test framework.
+
+    :return: None
+
+    """
     cwd = getcwd()
     settings.markdown_directory = path.join(cwd, 'test_markdown')
     settings.project_directory = path.join(cwd, 'test_examplesite')
@@ -144,7 +155,13 @@ def change_settings_for_testing():
 
 # TODO: Write test.
 def print_blow_dryer():
-    # png to ascii converter: http://picascii.com
+    """ Prints an image of a blow dryer with ASCII.
+
+    `A nice png to ascii converter <http://picascii.com>`__
+
+    :return: None
+
+    """
     blow_dryer_ascii = """
                      .-'-.
                   ;@@@@@@@@@'
