@@ -43,7 +43,7 @@ from io import open
 from setuptools import setup, find_packages     # Always prefer setuptools over distutils
 
 __author__ = 'chad nelson'
-__project__ = 'blow dry css'
+__project__ = 'blowdrycss'
 
 # Get readme.rst from sphinx docs.
 try:
@@ -171,7 +171,9 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': [
-            'blowdrycss=blowdrycss:main',
+            'blowdrycss=blowdrycss.blowdrycss:main',
         ],
     },
+
+    test_suite="blowdrycss.unit_tests",
 )

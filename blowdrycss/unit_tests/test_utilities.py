@@ -5,8 +5,11 @@ from builtins import round
 from unittest import TestCase, main
 from os import getcwd, path
 # custom
-from settings import blowdrycss_settings as settings
-from utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, change_settings_for_testing
+from blowdrycss.utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, change_settings_for_testing
+try:
+    import blowdrycss.settings.blowdrycss_settings as settings      # development case
+except ImportError:
+    import blowdrycss.blowdrycss_settings as settings               # packaged deployment case
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

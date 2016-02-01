@@ -1,8 +1,11 @@
 from unittest import TestCase, main
 from cssutils.css import Property
 # custom
-from breakpointparser import BreakpointParser
-from settings.blowdrycss_settings import px_to_em
+from blowdrycss.breakpointparser import BreakpointParser
+try:
+    from blowdrycss.settings.blowdrycss_settings import px_to_em    # development case
+except ImportError:
+    from blowdrycss.blowdrycss_settings import px_to_em             # deployed package case
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

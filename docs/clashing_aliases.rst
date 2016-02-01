@@ -6,19 +6,19 @@ Invalid Clashing Aliases
 +---------------------+--------------------------+
 | background-color    | ``bc-``                  |
 +---------------------+--------------------------+
-| background-repeat   | ``br-`` ``repeat``       |
+| background-repeat   | ``repeat`` ``br-``       |
 +---------------------+--------------------------+
 | border-collapse     | ``bc-`` ``border-c-``    |
 +---------------------+--------------------------+
 | border-color        | ``bc-`` ``border-c-``    |
 +---------------------+--------------------------+
-| border-radius       | ``br-`` ``border-r-``    |
+| border-radius       | ``border-r-`` ``br-``    |
 +---------------------+--------------------------+
-| border-right        | ``br-`` ``border-r-``    |
+| border-right        | ``border-r-`` ``br-``    |
 +---------------------+--------------------------+
-| border-spacing      | ``bs-`` ``border-s-``    |
+| border-spacing      | ``border-s-`` ``bs-``    |
 +---------------------+--------------------------+
-| border-style        | ``bs-`` ``border-s-``    |
+| border-style        | ``border-s-`` ``bs-``    |
 +---------------------+--------------------------+
 | font-size           | ``font-s-`` ``fs-``      |
 +---------------------+--------------------------+
