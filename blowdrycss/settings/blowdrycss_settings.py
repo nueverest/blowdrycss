@@ -100,7 +100,8 @@ __project__ = 'blowdrycss'
 # Change to whatever you want.
 # Note that this section differs from the settings file built on the users machine.
 original_directory = getcwd()
-chdir('..')                                                 # Navigate up one directory relative to this script.
+chg = path.join('..', '..')
+chdir(chg)                                                  # Navigate up one directory relative to this script.
 cwd = getcwd()
 markdown_directory = cwd                                    # Shows up in root of github repository.
 project_directory = path.join(cwd, 'examplesite')

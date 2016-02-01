@@ -1,23 +1,12 @@
 # python 2
 from __future__ import division
 from builtins import round
-# builtin
+# general
 from unittest import TestCase, main
 from os import getcwd, path
 # custom
-try:
-    from utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, change_settings_for_testing
-except ImportError:
-    from blowdrycss.utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, \
-        change_settings_for_testing
-
-try:
-    import settings.blowdrycss_settings as settings                     # development case
-except ImportError:
-    try:
-        import blowdrycss_settings as settings                          # development "python setup.py test" case
-    except ImportError:
-        import blowdrycss.blowdrycss_settings as settings               # packaged deployment case
+from settings import blowdrycss_settings as settings
+from utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, change_settings_for_testing
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

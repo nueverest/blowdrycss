@@ -8,9 +8,9 @@ from filehandler import FileFinder, CSSFile, GenericFile
 from htmlparser import HTMLClassParser
 from classpropertyparser import ClassPropertyParser
 from cssbuilder import CSSBuilder
-from mediaquerybuilder import MediaQueryBuilder
 from datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, property_alias_html, \
     clashing_alias_rst, property_alias_rst
+from mediaquerybuilder import MediaQueryBuilder
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

@@ -3,13 +3,13 @@
 | Property Name | Invalid Clashing Aliases |
 | --- | --- |
 | background-color | `bc-`  |
-| background-repeat | `repeat` `br-`  |
+| background-repeat | `br-` `repeat`  |
 | border-collapse | `bc-` `border-c-`  |
 | border-color | `bc-` `border-c-`  |
-| border-radius | `border-r-` `br-`  |
-| border-right | `border-r-` `br-`  |
-| border-spacing | `border-s-` `bs-`  |
-| border-style | `border-s-` `bs-`  |
+| border-radius | `br-` `border-r-`  |
+| border-right | `br-` `border-r-`  |
+| border-spacing | `bs-` `border-s-`  |
+| border-style | `bs-` `border-s-`  |
 | font-size | `font-s-` `fs-`  |
 | font-style | `font-s-` `fs-`  |
 | letter-spacing | `ls-`  |
