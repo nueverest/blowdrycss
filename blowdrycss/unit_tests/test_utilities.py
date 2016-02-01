@@ -6,8 +6,7 @@ from unittest import TestCase, main
 from os import getcwd, path
 # custom
 from settings import blowdrycss_settings as settings
-from change_settings import change_settings_for_testing
-from utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path
+from utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, change_settings_for_testing
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

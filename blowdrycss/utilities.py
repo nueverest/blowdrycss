@@ -5,9 +5,9 @@ from builtins import str, round
 # builtins
 from re import search, findall
 from inspect import currentframe
-from os import path, stat
+from os import path, stat, getcwd
 # custom
-from settings.blowdrycss_settings import css_directory
+from settings import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -117,8 +117,8 @@ def print_css_stats(file_name=''):
     css_file = file_name + '.css'
     min_file = file_name + '.min.css'
 
-    css_dir = path.join(css_directory, css_file)                                    # Get full file path.
-    min_dir = path.join(css_directory, min_file)
+    css_dir = path.join(settings.css_directory, css_file)                                    # Get full file path.
+    min_dir = path.join(settings.css_directory, min_file)
 
     css_size = stat(css_dir).st_size                                                # Get file size in bytes.
     min_size = stat(min_dir).st_size
@@ -131,6 +131,15 @@ def print_css_stats(file_name=''):
     print('\n' + css_file + ':\t', css_kb, 'kb')
     print(min_file + ':', min_kb, 'kb')
     print('CSS file size reduced by', str(percent_reduced) + '%.')
+
+
+# Change settings directories for testing
+def change_settings_for_testing():
+    cwd = getcwd()
+    settings.markdown_directory = path.join(cwd, 'test_markdown')
+    settings.project_directory = path.join(cwd, 'test_examplesite')
+    settings.css_directory = path.join(settings.project_directory, 'test_css')
+    settings.docs_directory = path.join(cwd, 'test_docs')
 
 
 # TODO: Write test.

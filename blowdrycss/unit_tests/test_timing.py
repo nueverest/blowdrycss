@@ -6,7 +6,7 @@ from string import digits
 from io import StringIO
 # custom
 import timing
-from change_settings import change_settings_for_testing
+from utilities import change_settings_for_testing
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
