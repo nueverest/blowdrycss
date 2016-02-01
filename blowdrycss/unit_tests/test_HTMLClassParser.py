@@ -1,7 +1,9 @@
+# builtin
 from unittest import TestCase, main
 from os import path, getcwd
 # custom
-from htmlparser import HTMLClassParser
+from blowdrycss.htmlparser import HTMLClassParser
+
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 

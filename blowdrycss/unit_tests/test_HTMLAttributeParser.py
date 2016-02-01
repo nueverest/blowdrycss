@@ -1,8 +1,9 @@
+# builtin
 from unittest import TestCase, main
 from os import path, getcwd
 # custom
-from filehandler import FileConverter
-from htmlparser import HTMLAttributeParser
+from blowdrycss.filehandler import FileConverter
+from blowdrycss.htmlparser import HTMLAttributeParser
 
 
 class TestHTMLAttributeParser(TestCase):

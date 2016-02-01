@@ -1,10 +1,11 @@
 # python 2
 from builtins import str
-# general
+# builtin
 from unittest import TestCase
 from os import path, getcwd, remove
 # custom
-from filehandler import GenericFile
+from blowdrycss.filehandler import GenericFile
+
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 

@@ -1,5 +1,8 @@
+# builtin
 from unittest import TestCase, main
-from cssvalueparser import CSSPropertyValueParser
+# custom
+from blowdrycss.cssvalueparser import CSSPropertyValueParser
+
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 

@@ -1,9 +1,11 @@
+# builtin
 from unittest import TestCase, main
-from os import chdir, path, getcwd
+from os import path, getcwd
 import sys
 from io import StringIO
 # custom
-from filehandler import FileFinder, FileConverter
+from blowdrycss.filehandler import FileFinder, FileConverter
+
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 

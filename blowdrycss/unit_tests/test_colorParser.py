@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 # custom
-from colorparser import ColorParser
+from blowdrycss.colorparser import ColorParser
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
