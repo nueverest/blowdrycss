@@ -72,7 +72,7 @@ def main():
         from settings import blowdrycss_settings as settings
     except ImportError:
         write_blowdrycss_settings_dot_py()
-        from settings import blowdrycss_settings as settings
+        import blowdrycss_settings as settings
 
     # Performance timer
     if settings.timing_enabled:

@@ -1,7 +1,10 @@
 # builtins
 from string import digits
 # custom
-from settings import blowdrycss_settings as settings
+try:
+    from settings import blowdrycss_settings as settings
+except ImportError:
+    import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
