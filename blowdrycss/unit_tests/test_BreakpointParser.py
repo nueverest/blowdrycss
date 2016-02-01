@@ -1,11 +1,18 @@
 from unittest import TestCase, main
 from cssutils.css import Property
 # custom
-from breakpointparser import BreakpointParser
 try:
-    from settings.blowdrycss_settings import px_to_em    # development case
+    from blowdrycss.breakpointparser import BreakpointParser
 except ImportError:
-    from blowdrycss.blowdrycss_settings import px_to_em             # deployed package case
+    from breakpointparser import BreakpointParser
+
+try:
+    from settings.blowdrycss_settings import px_to_em                     # development case
+except ImportError:
+    try:
+        from blowdrycss_settings import px_to_em                          # development "python setup.py test" case
+    except ImportError:
+        from blowdrycss.blowdrycss_settings import px_to_em               # packaged deployment case
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
