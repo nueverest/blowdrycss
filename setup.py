@@ -20,6 +20,7 @@ pip install twine
 
 Delete the old egg, build, and dist from the project root.
 
+python setup.py clean --all
 python setup.py sdist bdist
 python setup.py bdist_wheel --universal
 
@@ -125,7 +126,9 @@ setup(
              'encoded class selector parser optimizer internet'),
 
     # Packages - reference: https://pythonhosted.org/setuptools/setuptools.html#using-find-packages
-    packages=find_packages(exclude=['*.settings', ]),
+    #package_dir={'': 'blowdrycss'},
+    #packages=find_packages('blowdrycss', exclude=['*.settings', '*.settings.*', 'settings.*', 'settings']),
+    packages=find_packages(exclude=['*.settings']),
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
@@ -175,5 +178,7 @@ setup(
         ],
     },
 
+    # unit_tests
     test_suite="blowdrycss.unit_tests",
+    tests_require=['coverage', ],
 )
