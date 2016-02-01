@@ -2,7 +2,10 @@
 from unittest import TestCase, main
 from os import path, getcwd
 # custom
-from blowdrycss.filehandler import FileConverter
+try:
+    from filehandler import FileConverter
+except ImportError:
+    from blowdrycss.filehandler import FileConverter
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

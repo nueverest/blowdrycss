@@ -2,7 +2,10 @@
 from unittest import TestCase, main
 from os import path, getcwd
 # custom
-from blowdrycss.htmlparser import HTMLClassParser
+try:
+    from htmlparser import HTMLClassParser
+except ImportError:
+    from blowdrycss.htmlparser import HTMLClassParser
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

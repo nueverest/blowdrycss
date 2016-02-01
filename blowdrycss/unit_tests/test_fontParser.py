@@ -1,7 +1,10 @@
 # builtin
 from unittest import TestCase, main
 # custom
-from blowdrycss.fontparser import FontParser
+try:
+    from fontparser import FontParser
+except ImportError:
+    from blowdrycss.fontparser import FontParser
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

@@ -2,7 +2,10 @@
 from unittest import TestCase, main
 from os import getcwd, path, remove
 # custom
-from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
+try:
+    from settingsbuilder import write_blowdrycss_settings_dot_py
+except ImportError:
+    from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
 
 
 class TestWrite_blowdrycss_settings_dot_py(TestCase):
@@ -15,10 +18,12 @@ class TestWrite_blowdrycss_settings_dot_py(TestCase):
 
         # Identical section of code from blowdrycss.py for test purposes.
         write_blowdrycss_settings_dot_py()
+
+        # Import from the current folder.
         try:
-            import blowdrycss.settings.blowdrycss_settings as settings      # development case
+            import blowdrycss_settings as settings                          # development case
         except ImportError:
-            import blowdrycss.blowdrycss_settings as settings               # deployed package case
+            import blowdrycss.unit_tests.blowdrycss_settings as settings    # python setup.py test
 
         # test file existence
         self.assertTrue(path.isfile('blowdrycss_settings.py'))

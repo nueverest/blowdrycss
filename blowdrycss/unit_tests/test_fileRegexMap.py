@@ -2,7 +2,10 @@
 from unittest import TestCase, main
 from os import path
 # custom
-from blowdrycss.filehandler import FileRegexMap
+try:
+    from filehandler import FileRegexMap
+except ImportError:
+    from blowdrycss.filehandler import FileRegexMap
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

@@ -1,7 +1,10 @@
 # builtin
 from unittest import TestCase, main
 # custom
-from blowdrycss.datalibrary import DataLibrary     # Normally one would never do this.
+try:
+    from datalibrary import DataLibrary     # Normally one would never do this.
+except ImportError:
+    from blowdrycss.datalibrary import DataLibrary
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

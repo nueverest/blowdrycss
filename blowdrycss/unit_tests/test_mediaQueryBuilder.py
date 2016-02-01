@@ -1,12 +1,21 @@
 from unittest import TestCase, main
 # custom
-from blowdrycss.utilities import change_settings_for_testing
-from blowdrycss.classpropertyparser import ClassPropertyParser
-from blowdrycss.mediaquerybuilder import MediaQueryBuilder
 try:
-    import blowdrycss.settings.blowdrycss_settings as settings      # development case
+    from utilities import change_settings_for_testing
+    from classpropertyparser import ClassPropertyParser
+    from mediaquerybuilder import MediaQueryBuilder
 except ImportError:
-    import blowdrycss.blowdrycss_settings as settings               # packaged deployment case
+    from blowdrycss.utilities import change_settings_for_testing
+    from blowdrycss.classpropertyparser import ClassPropertyParser
+    from blowdrycss.mediaquerybuilder import MediaQueryBuilder
+
+try:
+    import settings.blowdrycss_settings as settings                     # development case
+except ImportError:
+    try:
+        import blowdrycss_settings as settings                          # development "python setup.py test" case
+    except ImportError:
+        import blowdrycss.blowdrycss_settings as settings               # packaged deployment case
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

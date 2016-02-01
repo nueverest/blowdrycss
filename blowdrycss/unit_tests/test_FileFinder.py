@@ -4,7 +4,10 @@ from os import path, getcwd
 import sys
 from io import StringIO
 # custom
-from blowdrycss.filehandler import FileFinder, FileConverter
+try:
+    from filehandler import FileFinder, FileConverter
+except ImportError:
+    from blowdrycss.filehandler import FileFinder, FileConverter
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

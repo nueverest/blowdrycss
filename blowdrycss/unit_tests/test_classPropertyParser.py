@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 # custom
-from blowdrycss.classpropertyparser import ClassPropertyParser
+from classpropertyparser import ClassPropertyParser
 
 
 class TestClassPropertyParser(TestCase):

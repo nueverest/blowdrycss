@@ -4,7 +4,10 @@ from builtins import str
 from unittest import TestCase
 from os import path, getcwd, remove
 # custom
-from blowdrycss.filehandler import GenericFile
+try:
+    from filehandler import GenericFile
+except ImportError:
+    from blowdrycss.filehandler import GenericFile
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

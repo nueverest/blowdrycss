@@ -8,9 +8,12 @@ from inspect import currentframe
 from os import path, stat, getcwd
 # custom
 try:
-    import blowdrycss.settings.blowdrycss_settings as settings      # development case
+    import settings.blowdrycss_settings as settings                     # development case
 except ImportError:
-    import blowdrycss.blowdrycss_settings as settings               # deployed package case
+    try:
+        import blowdrycss_settings as settings                          # development "python setup.py test" case
+    except ImportError:
+        import blowdrycss.blowdrycss_settings as settings               # packaged deployment case
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

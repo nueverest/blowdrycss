@@ -1,9 +1,9 @@
 from unittest import TestCase, main
 from cssutils.css import Property
 # custom
-from blowdrycss.breakpointparser import BreakpointParser
+from breakpointparser import BreakpointParser
 try:
-    from blowdrycss.settings.blowdrycss_settings import px_to_em    # development case
+    from settings.blowdrycss_settings import px_to_em    # development case
 except ImportError:
     from blowdrycss.blowdrycss_settings import px_to_em             # deployed package case
 

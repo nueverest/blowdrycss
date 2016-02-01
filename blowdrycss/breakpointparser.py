@@ -1,10 +1,10 @@
 # plugins
 from cssutils.css import Property
 # custom
-from blowdrycss.utilities import deny_empty_or_whitespace
+from utilities import deny_empty_or_whitespace
 try:
     # development case
-    from blowdrycss.settings.blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, \
+    from settings.blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, \
         xlarge, xxlarge, giant, xgiant, xxgiant
 except ImportError:
     # packaged deployment case

@@ -1,10 +1,10 @@
 # plugins
 from cssutils.css import Property
 # custom
-from blowdrycss.utilities import deny_empty_or_whitespace
-from blowdrycss.unitparser import UnitParser
+from utilities import deny_empty_or_whitespace
+from unitparser import UnitParser
 try:
-    from blowdrycss.settings.blowdrycss_settings import small, medium      # development case
+    from settings.blowdrycss_settings import small, medium      # development case
 except ImportError:
     from blowdrycss.blowdrycss_settings import small, medium               # packaged deployment case
 
