@@ -1,6 +1,8 @@
 # python 2
 from __future__ import print_function
 from builtins import bytes, str
+# builtins
+from os import path
 # custom
 try:
     from settingsbuilder import write_blowdrycss_settings_dot_py
@@ -12,6 +14,7 @@ try:
         clashing_alias_rst, property_alias_rst
     from mediaquerybuilder import MediaQueryBuilder
 except ImportError:
+    # pass
     from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
     from blowdrycss.filehandler import FileFinder, CSSFile, GenericFile
     from blowdrycss.htmlparser import HTMLClassParser
@@ -80,7 +83,8 @@ def main():
     try:
         from settings import blowdrycss_settings as settings
     except ImportError:
-        write_blowdrycss_settings_dot_py()
+        if not path.isfile('blowdrycss_settings.py'):
+            write_blowdrycss_settings_dot_py()
         import blowdrycss_settings as settings
 
     # Performance timer

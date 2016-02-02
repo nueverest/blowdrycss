@@ -24,8 +24,12 @@ True
 # builtins
 from re import findall
 # custom
-from utilities import contains_a_digit
-from datalibrary import property_regex_dict
+try:
+    from utilities import contains_a_digit
+    from datalibrary import property_regex_dict
+except ImportError:
+    from blowdrycss.utilities import contains_a_digit
+    from blowdrycss.datalibrary import property_regex_dict
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

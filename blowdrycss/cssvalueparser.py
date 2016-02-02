@@ -2,11 +2,18 @@
 from cssutils.css import Property
 from xml.dom import SyntaxErr
 # custom
-from utilities import contains_a_digit
-from datalibrary import property_alias_dict
-from colorparser import ColorParser
-from unitparser import UnitParser
-from fontparser import FontParser
+try:
+    from utilities import contains_a_digit
+    from datalibrary import property_alias_dict
+    from colorparser import ColorParser
+    from unitparser import UnitParser
+    from fontparser import FontParser
+except ImportError:
+    from blowdrycss.utilities import contains_a_digit
+    from blowdrycss.datalibrary import property_alias_dict
+    from blowdrycss.colorparser import ColorParser
+    from blowdrycss.unitparser import UnitParser
+    from blowdrycss.fontparser import FontParser
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

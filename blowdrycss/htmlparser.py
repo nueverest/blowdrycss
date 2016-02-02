@@ -1,7 +1,11 @@
 # builtins
 from html.parser import HTMLParser
 # custom
-from filehandler import FileConverter
+try:
+    from filehandler import FileConverter
+except ImportError:
+    from blowdrycss.filehandler import FileConverter
+
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 

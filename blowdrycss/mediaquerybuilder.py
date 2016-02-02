@@ -4,9 +4,15 @@ from __future__ import print_function
 from cssutils.css import Property
 from xml.dom import SyntaxErr
 # custom
-from classpropertyparser import ClassPropertyParser
-from breakpointparser import BreakpointParser
-from scalingparser import ScalingParser
+try:
+    from classpropertyparser import ClassPropertyParser
+    from breakpointparser import BreakpointParser
+    from scalingparser import ScalingParser
+except ImportError:
+    from blowdrycss.classpropertyparser import ClassPropertyParser
+    from blowdrycss.breakpointparser import BreakpointParser
+    from blowdrycss.scalingparser import ScalingParser
+
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 

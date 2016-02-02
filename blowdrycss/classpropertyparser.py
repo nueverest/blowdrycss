@@ -52,9 +52,14 @@ from re import findall
 # plugins
 from cssutils import parseString
 # custom
-from cssvalueparser import CSSPropertyValueParser
-from datalibrary import ordered_property_dict, property_alias_dict, property_regex_dict
-from utilities import deny_empty_or_whitespace
+try:
+    from cssvalueparser import CSSPropertyValueParser
+    from datalibrary import ordered_property_dict, property_alias_dict, property_regex_dict
+    from utilities import deny_empty_or_whitespace
+except ImportError:
+    from cssvalueparser import CSSPropertyValueParser
+    from datalibrary import ordered_property_dict, property_alias_dict, property_regex_dict
+    from utilities import deny_empty_or_whitespace
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
