@@ -85,7 +85,10 @@ def main():
     except ImportError:
         if not path.isfile('blowdrycss_settings.py'):
             write_blowdrycss_settings_dot_py()
-        import blowdrycss_settings as settings
+        try:
+            import blowdrycss_settings as settings
+        except ImportError:
+            import blowdrycss.blowdrycss_settings as settings
 
     # Performance timer
     if settings.timing_enabled:

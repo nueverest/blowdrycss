@@ -26,6 +26,14 @@ python setup.py clean --all
 python setup.py sdist bdist
 python setup.py bdist_wheel --universal
 
+Test it to see if it works
+
+Activate a test virtualenv.
+pip freeze                  # ensure blowdrycss is not already installed.
+pip uninstall blowdrycss    # uninstall if it is already installed.
+python setup.py install     # install the latest
+blowdrycss                  # run it
+
 [If it is the first time, then do this otherwise skip to next step.]
 Go here: https://pypi.python.org/pypi?%3Aaction=submit_form
 Choose Option 2: Upload PKG-INFO

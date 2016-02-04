@@ -55,16 +55,18 @@
       unit tests added.
     | 0.0.6 -- Advanced media query syntax added. Modules ``breakpointparser`` and ``scalingparser`` added to
       allow for the dynamic creation of media queries. (1/2/2016)
-    | 0.0.7 -- Implemented backward compatibility with Python version 2.7.x.
-    | 0.0.8 -- Major refactoring of directory structure, and preparation of new settings file.
-    | 0.0.9 -- This version auto-builds blowdrycss_settings.py inside of the users web project making the settings
+    | 0.0.7 -- ALPHA: Implemented backward compatibility with Python version 2.7.x.
+    | 0.0.8 -- ALPHA: Major refactoring of directory structure, and preparation of new settings file.
+    | 0.0.9 -- ALPHA: This version auto-builds blowdrycss_settings.py inside of the users web project making the settings
       easier to find and edit.
+    | 0.1.0 -- BETA: Fixed all ImportErrors when running blowdrycss after
+      ``pip install blowdrycss`` or ``python setup.py install``. Entered BETA.
 
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.0.9'
+__version__ = '0.1.0'
 
-__release__ = __version__ + 'a1'
+__release__ = __version__ + 'b1'
