@@ -20,6 +20,7 @@ pip install twine
 
 Delete the old egg, build, and dist from the project root.
 
+python setup.py test
 python setup.py clean --all
 python setup.py sdist bdist
 python setup.py bdist_wheel --universal
