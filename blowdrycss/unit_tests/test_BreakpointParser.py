@@ -1,4 +1,6 @@
+# builtins
 from unittest import TestCase, main
+# plugins
 from cssutils.css import Property
 # custom
 try:

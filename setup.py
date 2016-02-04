@@ -20,6 +20,7 @@ pip install twine
 
 Delete the old egg, build, and dist from the project root.
 
+python -m unittest discover unit_tests
 python setup.py test
 python setup.py clean --all
 python setup.py sdist bdist
@@ -148,7 +149,7 @@ setup(
     extras_require={
         'auto_save': ['watchdog>=0.8.3', ],
         'docs': ['sphinx>=1.3.3', ],
-        'testing': ['unittest', 'coverage>=4.0.2', ],
+        'testing': ['coverage>=4.0.2', ],
         'development': [
             'watchdog>=0.8.3',
             'sphinx>=1.3.3',
