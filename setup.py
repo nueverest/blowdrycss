@@ -20,7 +20,8 @@ pip install twine
 
 Delete the old egg, build, and dist from the project root.
 
-python -m unittest discover unit_tests
+unittest reference: https://docs.python.org/2/library/unittest.html
+python -m unittest discover -s blowdrycss -p "test_*.py"
 python setup.py test
 python setup.py clean --all
 python setup.py sdist bdist
