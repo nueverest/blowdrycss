@@ -12,8 +12,13 @@ try:
         xlarge, xxlarge, giant, xgiant, xxgiant
 except ImportError:
     # packaged deployment case
-    from blowdrycss.blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, \
-        xlarge, xxlarge, giant, xgiant, xxgiant
+    try:
+        from blowdrycss.blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, \
+            xlarge, xxlarge, giant, xgiant, xxgiant
+    except ImportError:
+        # default packaged deployment case
+        from blowdrycss.blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, \
+            xlarge, xxlarge, giant, xgiant, xxgiant
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

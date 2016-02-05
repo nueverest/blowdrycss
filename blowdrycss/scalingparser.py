@@ -10,7 +10,10 @@ except ImportError:
 try:
     from settings.blowdrycss_settings import small, medium      # development case
 except ImportError:
-    from blowdrycss.blowdrycss_settings import small, medium    # packaged deployment case
+    try:
+        from blowdrycss_settings import small, medium           # packaged deployment case
+    except ImportError:
+        from blowdrycss.blowdrycss_settings import small, medium    # defaults packaged deployment case
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
