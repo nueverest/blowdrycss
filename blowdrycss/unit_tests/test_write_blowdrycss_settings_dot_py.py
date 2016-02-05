@@ -2,10 +2,7 @@
 from unittest import TestCase, main
 from os import getcwd, path, remove
 # custom
-try:
-    from settingsbuilder import write_blowdrycss_settings_dot_py
-except ImportError:
-    from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
+from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
 
 
 class TestWrite_blowdrycss_settings_dot_py(TestCase):

@@ -1,8 +1,7 @@
 from unittest import TestCase, main
 # custom
-from classpropertyparser import ClassPropertyParser
-from mediaquerybuilder import MediaQueryBuilder
-import unittest_settings as settings
+from blowdrycss.classpropertyparser import ClassPropertyParser
+from blowdrycss.mediaquerybuilder import MediaQueryBuilder
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

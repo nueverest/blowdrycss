@@ -2,10 +2,7 @@
 from unittest import TestCase, main
 from os import path
 # custom
-try:
-    from filehandler import ClassExtractor, FileRegexMap
-except ImportError:
-    from blowdrycss.filehandler import ClassExtractor, FileRegexMap
+from blowdrycss.filehandler import ClassExtractor, FileRegexMap
 
 
 class TestClassExtractor(TestCase):

@@ -1,10 +1,7 @@
 from unittest import TestCase, main
 from cssutils.css import Property
 # custom
-try:
-    from scalingparser import ScalingParser
-except ImportError:
-    from blowdrycss.scalingparser import ScalingParser
+from blowdrycss.scalingparser import ScalingParser
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

@@ -4,11 +4,9 @@ from datetime import datetime
 from time import time
 from string import digits
 from io import StringIO
-from os import path
 
 # custom
-import timing
-import unittest_settings as settings
+import blowdrycss.timing as timing
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
