@@ -19,6 +19,7 @@ if not os.path.isfile('blowdrycss_settings.py'):
 
 # Allow blowdrycss_settings.py to be found in the users current working directory (cwd).
 # The 0 in insert(0, cwd) enables blowdrycss_settings.py to override the blowdrycss module default settings.
+# Reference: http://stackoverflow.com/questions/4580101/python-add-pythonpath-during-command-line-module-run#4580130
 cwd = os.getcwd()
 sys.path.insert(0, cwd)
 
