@@ -13,7 +13,7 @@ try:
 except ImportError:
     # packaged deployment case
     try:
-        from blowdrycss.blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, \
+        from blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, \
             xlarge, xxlarge, giant, xgiant, xxgiant
     except ImportError:
         # default packaged deployment case
