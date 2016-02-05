@@ -6,7 +6,7 @@ from unittest import TestCase, main
 from os import getcwd, path
 # custom
 import blowdrycss.unit_tests.unittest_settings as settings
-from blowdrycss.utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path
+from blowdrycss.utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, unittest_file_path
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -118,6 +118,14 @@ class Test_utilities(TestCase):
         settings.base = 'aoenth'
         self.assertRaises(ValueError, settings.px_to_em, pixels='32')
         settings.base = 16
+
+    def test_unittest_file_path(self):
+        folders = ['test_aspx', 'test_jinja', ]
+        filenames = ['test.aspx', 'test.jinja2', ]
+
+        for i, folder in enumerate(folders):
+            the_path = unittest_file_path(folder, filenames[i])
+            self.assertTrue(path.isfile(the_path))
 
 if __name__ == '__main__':
     main()

@@ -155,9 +155,32 @@ def change_settings_for_testing():
     settings.docs_directory = path.join(cwd, 'test_docs')
 
 
+def unittest_file_path(folder='', filename=''):
+    """ Determines the path of assigned to the folder and file based on the directory in which the unittest command
+    is executed.
+
+    :type folder: str
+    :type filename: str
+
+    :param folder: Name of the folder where the file is located.
+    :param filename: Name of the file including extension e.g. test_aspx.aspx
+
+    :return: (*str*) -- Return the path of the file to test.
+
+    """
+    cwd = getcwd()
+
+    if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+        the_path = path.join(folder, filename)
+    else:                                                       # Run unittest cmd from the root directory.
+        the_path = path.join('blowdrycss', 'unit_tests', folder, filename)
+
+    return the_path
+
+
 # TODO: Write test.
 def print_blow_dryer():
-    """ Prints an image of a blow dryer with ASCII.
+    """ Prints an image of a blow dryer using ASCII.
 
     `A nice png to ascii converter <http://picascii.com>`__
 
