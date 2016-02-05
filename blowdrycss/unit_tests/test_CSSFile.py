@@ -1,10 +1,7 @@
 from unittest import TestCase, main
 from os import path, getcwd, remove
 # custom
-try:
-    from filehandler import CSSFile
-except ImportError:
-    from blowdrycss.filehandler import CSSFile
+from blowdrycss.filehandler import CSSFile
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

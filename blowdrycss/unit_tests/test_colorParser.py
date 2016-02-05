@@ -1,9 +1,6 @@
 from unittest import TestCase, main
 # custom
-try:
-    from colorparser import ColorParser
-except ImportError:
-    from blowdrycss.colorparser import ColorParser
+from blowdrycss.colorparser import ColorParser
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

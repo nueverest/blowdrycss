@@ -1,8 +1,8 @@
 # builtins
 from unittest import TestCase, main
-from os import path
 # custom
 from blowdrycss.filehandler import ClassExtractor, FileRegexMap
+from blowdrycss.utilities import unittest_file_path
 
 
 class TestClassExtractor(TestCase):
@@ -11,7 +11,7 @@ class TestClassExtractor(TestCase):
             ' row bgc-green padding-top-30 padding-bottom-30', 'row padding-top-30 padding-bottom-30 ',
             'row padding-top-30 padding-bottom-30 ', 'row '
         ]
-        aspx_file = path.join('test_aspx', 'test.aspx')
+        aspx_file = unittest_file_path('test_aspx', 'test.aspx')
         aspx_sub = r'<%.*?%>'
         aspx_findall = r'class="(.*?)"'
         class_extractor = ClassExtractor(file_path=aspx_file, sub_regex=aspx_sub, findall_regex=aspx_findall)
@@ -22,7 +22,7 @@ class TestClassExtractor(TestCase):
         expected_raw_class_list = [
             'purple  padding-left-5', ' squirrel text-align-center', 'large-up  border-1', 'row text-align-center', ''
         ]
-        jinja2_file = path.join('test_jinja', 'test.jinja2')
+        jinja2_file = unittest_file_path('test_jinja', 'test.jinja2')
         jinja2_sub = r'{.*?}?}'
         jinja2_findall = r'class="(.*?)"'
         class_extractor = ClassExtractor(file_path=jinja2_file, sub_regex=jinja2_sub, findall_regex=jinja2_findall)
@@ -31,7 +31,7 @@ class TestClassExtractor(TestCase):
 
     def test_class_set_aspx(self):
         expected_class_set = {'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green'}
-        aspx_file = path.join('test_aspx', 'test.aspx')
+        aspx_file = unittest_file_path('test_aspx', 'test.aspx')
         aspx_sub = r'<%.*?%>'
         aspx_findall = r'class="(.*?)"'
         class_extractor = ClassExtractor(file_path=aspx_file, sub_regex=aspx_sub, findall_regex=aspx_findall)
@@ -43,7 +43,7 @@ class TestClassExtractor(TestCase):
             'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1', 'row',
             'text-align-center'
         }
-        jinja2_file = path.join('test_jinja', 'test.jinja2')
+        jinja2_file = unittest_file_path('test_jinja', 'test.jinja2')
         jinja2_sub = r'{.*?}?}'
         jinja2_findall = r'class="(.*?)"'
         class_extractor = ClassExtractor(file_path=jinja2_file, sub_regex=jinja2_sub, findall_regex=jinja2_findall)
@@ -56,7 +56,7 @@ class TestClassExtractor(TestCase):
     # Integration testing
     def test_integration_class_set_aspx(self):
         expected_class_set = {'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green'}
-        aspx_file = path.join('test_aspx', 'test.aspx')
+        aspx_file = unittest_file_path('test_aspx', 'test.aspx')
         file_regex_map = FileRegexMap(_path=aspx_file)
         regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(
@@ -70,7 +70,7 @@ class TestClassExtractor(TestCase):
             'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1', 'row',
             'text-align-center'
         }
-        jinja2_file = path.join('test_jinja', 'test.jinja2')
+        jinja2_file = unittest_file_path('test_jinja', 'test.jinja2')
         file_regex_map = FileRegexMap(_path=jinja2_file)
         regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(
