@@ -9,10 +9,7 @@ from re import sub, findall
 # plugins
 from cssutils import parseString, ser
 # custom
-try:
-    from utilities import get_file_path
-except ImportError:
-    from blowdrycss.utilities import get_file_path
+from blowdrycss.utilities import get_file_path
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
