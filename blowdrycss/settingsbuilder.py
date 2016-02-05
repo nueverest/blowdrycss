@@ -98,6 +98,7 @@ docs_directory = path.join(cwd, 'docs')
 file_types = ('*.html', )
 
 # Boolean Flags
+hide_css_errors = True          # Hide errors and warnings from cssutils.
 timing_enabled = True           # Run performance timer
 markdown_docs = False           # Generate a markdown files that provides a quick syntax and clashing alias reference.
 html_docs = False               # Generate a html file that provides a quick syntax and clashing alias reference.

@@ -91,7 +91,6 @@ from string import digits
 # plugins
 from cssutils import profile
 
-
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 
@@ -100,7 +99,7 @@ __project__ = 'blowdrycss'
 # Change to whatever you want.
 # Note that this section differs from the settings file built on the users machine.
 original_directory = getcwd()
-chg = path.join('..', '..')
+chg = path.join('..')
 chdir(chg)                                                  # Navigate up one directory relative to this script.
 cwd = getcwd()
 markdown_directory = cwd                                    # Shows up in root of github repository.
@@ -114,6 +113,7 @@ chdir(original_directory)                                   # Reset current work
 file_types = ('*.html', )
 
 # Boolean Flags
+hide_css_errors = False         # Hide errors and warnings from cssutils.
 timing_enabled = True           # Run performance timer
 markdown_docs = True            # Generate a markdown files that provides a quick syntax and clashing alias reference.
 html_docs = True                # Generate a html file that provides a quick syntax and clashing alias reference.

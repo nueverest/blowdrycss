@@ -2,20 +2,9 @@
 from __future__ import print_function
 from builtins import bytes, str
 # builtins
-from os import path
+import logging
+import cssutils
 # custom
-# try:
-# from settingsbuilder import write_blowdrycss_settings_dot_py
-# from filehandler import FileFinder, CSSFile, GenericFile
-# from htmlparser import HTMLClassParser
-# from classpropertyparser import ClassPropertyParser
-# from cssbuilder import CSSBuilder
-# from datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, \
-#     property_alias_html, clashing_alias_rst, property_alias_rst
-# from mediaquerybuilder import MediaQueryBuilder
-# except ImportError:
-#     # pass
-from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
 from blowdrycss.filehandler import FileFinder, CSSFile, GenericFile
 from blowdrycss.htmlparser import HTMLClassParser
 from blowdrycss.classpropertyparser import ClassPropertyParser
@@ -83,12 +72,13 @@ def main():
     try:
         from settings import blowdrycss_settings as settings
     except ImportError:
-        if not path.isfile('blowdrycss_settings.py'):
-            write_blowdrycss_settings_dot_py()
         try:
             import blowdrycss_settings as settings
         except ImportError:
             import blowdrycss.blowdrycss_settings as settings
+
+    if settings.hide_css_errors:
+        cssutils.log.setLevel(logging.CRITICAL)
 
     # Performance timer
     if settings.timing_enabled:
