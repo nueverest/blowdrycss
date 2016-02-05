@@ -3,9 +3,9 @@ import sys
 from io import StringIO
 # custom
 try:
-    import blowdrycss
+    import blowdry
 except ImportError:
-    import blowdrycss.blowdrycss as blowdrycss
+    import blowdrycss.blowdry as blowdry
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -22,7 +22,7 @@ class TestMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            blowdrycss.main()
+            blowdry.main()
 
             output = out.getvalue()
             for substring in substrings:

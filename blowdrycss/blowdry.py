@@ -4,25 +4,25 @@ from builtins import bytes, str
 # builtins
 from os import path
 # custom
-try:
-    from settingsbuilder import write_blowdrycss_settings_dot_py
-    from filehandler import FileFinder, CSSFile, GenericFile
-    from htmlparser import HTMLClassParser
-    from classpropertyparser import ClassPropertyParser
-    from cssbuilder import CSSBuilder
-    from datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, \
-        property_alias_html, clashing_alias_rst, property_alias_rst
-    from mediaquerybuilder import MediaQueryBuilder
-except ImportError:
-    # pass
-    from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
-    from blowdrycss.filehandler import FileFinder, CSSFile, GenericFile
-    from blowdrycss.htmlparser import HTMLClassParser
-    from blowdrycss.classpropertyparser import ClassPropertyParser
-    from blowdrycss.cssbuilder import CSSBuilder
-    from blowdrycss.datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, \
-        property_alias_html, clashing_alias_rst, property_alias_rst
-    from blowdrycss.mediaquerybuilder import MediaQueryBuilder
+# try:
+# from settingsbuilder import write_blowdrycss_settings_dot_py
+# from filehandler import FileFinder, CSSFile, GenericFile
+# from htmlparser import HTMLClassParser
+# from classpropertyparser import ClassPropertyParser
+# from cssbuilder import CSSBuilder
+# from datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, \
+#     property_alias_html, clashing_alias_rst, property_alias_rst
+# from mediaquerybuilder import MediaQueryBuilder
+# except ImportError:
+#     # pass
+from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
+from blowdrycss.filehandler import FileFinder, CSSFile, GenericFile
+from blowdrycss.htmlparser import HTMLClassParser
+from blowdrycss.classpropertyparser import ClassPropertyParser
+from blowdrycss.cssbuilder import CSSBuilder
+from blowdrycss.datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, \
+    property_alias_html, clashing_alias_rst, property_alias_rst
+from blowdrycss.mediaquerybuilder import MediaQueryBuilder
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
