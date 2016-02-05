@@ -149,10 +149,17 @@ def change_settings_for_testing():
 
     """
     cwd = getcwd()
-    settings.markdown_directory = path.join(cwd, 'test_markdown')
-    settings.project_directory = path.join(cwd, 'test_examplesite')
-    settings.css_directory = path.join(settings.project_directory, 'test_css')
-    settings.docs_directory = path.join(cwd, 'test_docs')
+
+    if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+        settings.markdown_directory = path.join(cwd, 'test_markdown')
+        settings.project_directory = path.join(cwd, 'test_examplesite')
+        settings.css_directory = path.join(settings.project_directory, 'test_css')
+        settings.docs_directory = path.join(cwd, 'test_docs')
+    else:                                                       # Run unittest cmd from the root directory.
+        settings.markdown_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_markdown')
+        settings.project_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_examplesite')
+        settings.css_directory = path.join(settings.project_directory, 'test_css')
+        settings.docs_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_docs')
 
 
 def unittest_file_path(folder='', filename=''):

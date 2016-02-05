@@ -4,10 +4,7 @@ from builtins import str
 from unittest import TestCase
 from os import path, getcwd, remove
 # custom
-try:
-    from filehandler import GenericFile
-except ImportError:
-    from blowdrycss.filehandler import GenericFile
+from blowdrycss.filehandler import GenericFile
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -15,9 +12,15 @@ __project__ = 'blowdrycss'
 
 class TestGenericFile(TestCase):
     def test_write_valid(self):
-        sample_markdown = u'# Sample Title\nThis is a paragraph.\n'
+        sample_markdown = '# Sample Title\nThis is a paragraph.\n'
         expected_string = sample_markdown
-        generic_directory = path.join(getcwd(), 'test_generic')
+
+        cwd = getcwd()
+        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+            generic_directory = path.join(cwd, 'test_generic')
+        else:                                                       # Run unittest cmd from the root directory.
+            generic_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_generic')
+
         file_name = 'blowdry'
         extensions = ['.md', '.rst', '.html', '.txt', ]
 
@@ -35,7 +38,13 @@ class TestGenericFile(TestCase):
 
     def test_write_invalid_input(self):
         invalid_inputs = [1239487.234, ['nth', 'rcghtn'], {2, 1, '&^'}, 546, ]
-        generic_directory = path.join(getcwd(), 'test_generic')
+
+        cwd = getcwd()
+        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+            generic_directory = path.join(cwd, 'test_generic')
+        else:                                                       # Run unittest cmd from the root directory.
+            generic_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_generic')
+
         file_name = 'blowdry'
         extension = '.md'
 
@@ -44,7 +53,12 @@ class TestGenericFile(TestCase):
             self.assertRaises(TypeError, generic_file.write, invalid_text)
 
     def test_invalid_initialization(self):
-        generic_directory = path.join(getcwd(), 'test_generic')
+        cwd = getcwd()
+        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+            generic_directory = path.join(cwd, 'test_generic')
+        else:                                                       # Run unittest cmd from the root directory.
+            generic_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_generic')
+
         file_name = 'blowdry'
         extension = '.md'
 

@@ -75,10 +75,17 @@ __project__ = 'blowdrycss'
 # Set project_directory to the one containing the files you want to DRY out.
 # Change it to whatever you want.
 cwd = getcwd()
-markdown_directory = path.join(cwd, 'test_markdown')
-project_directory = path.join(cwd, 'test_examplesite')
-css_directory = path.join(project_directory, 'test_css')
-docs_directory = path.join(cwd, 'test_docs')
+
+if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+    markdown_directory = path.join(cwd, 'test_markdown')
+    project_directory = path.join(cwd, 'test_examplesite')
+    css_directory = path.join(project_directory, 'test_css')
+    docs_directory = path.join(cwd, 'test_docs')
+else:                                                       # Run unittest cmd from the root directory.
+    markdown_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_markdown')
+    project_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_examplesite')
+    css_directory = path.join(project_directory, 'test_css')
+    docs_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_docs')
 
 # All file types/extensions to search for in the defined project_directory that contain encoded class selectors.
 # Example format: ('*.html', )
