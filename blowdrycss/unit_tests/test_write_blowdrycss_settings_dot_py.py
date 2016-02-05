@@ -16,14 +16,14 @@ class TestWrite_blowdrycss_settings_dot_py(TestCase):
         # Identical section of code from blowdrycss.py for test purposes.
         write_blowdrycss_settings_dot_py()
 
+        # test file existence
+        self.assertTrue(path.isfile('blowdrycss_settings.py'))
+
         # Import from the current folder.
         try:
             import blowdrycss_settings as settings                          # development case
         except ImportError:
             import blowdrycss.unit_tests.blowdrycss_settings as settings    # python setup.py test
-
-        # test file existence
-        self.assertTrue(path.isfile('blowdrycss_settings.py'))
 
         # test directory and file_type settings
         cwd = getcwd()
