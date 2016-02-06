@@ -13,6 +13,8 @@ About
     :maxdepth: 1
 
     readme.rst
+    syntax.rst
+
 
 - `Download from Github <https://github.com/nueverest/blowdrycss>`__
 

@@ -8,7 +8,7 @@ Advanced Topics
 
     This document is currently a work in progress.
 
-- Use ```watchdog`` <https://pypi.python.org/pypi/watchdog/0.8.3>`__ to automate CSS compilation.
+- Use `watchdog <https://pypi.python.org/pypi/watchdog/0.8.3>`__ to automate CSS compilation.
 - Learn about :doc:`clashing_aliases` and :doc:`property_aliases`.
 - How to change settings in ``blowdrycss.py``.
 - Customizing the alias dictionary.
@@ -29,7 +29,7 @@ Automate CSS Compilation with Watchdog
    run ``python blowdrycss.py``?
 
    -  This is made possible with
-      ```watchdog`` <https://pypi.python.org/pypi/watchdog/0.8.3>`__.
+      `watchdog <https://pypi.python.org/pypi/watchdog/0.8.3>`__.
 
 -  To setup watchdog run ``pip install watchdog``
 -  Navigate to ``/examplesite`` at the command line.
