@@ -1,4 +1,17 @@
-""" Builds CSS text with the ``cssutils.css`` module.
+# python 2
+from __future__ import print_function
+# plugins
+from cssutils.css import Property, CSSStyleRule, CSSStyleSheet
+from xml.dom import SyntaxErr
+# custom
+from blowdrycss.classpropertyparser import ClassPropertyParser
+
+__author__ = 'chad nelson'
+__project__ = 'blowdrycss'
+
+
+class CSSBuilder(object):
+    """ Builds CSS text with the ``cssutils.css`` module.
 
     **Note:** Removes invalid classes. A class is invalid for one of the following reasons:
 
@@ -15,20 +28,7 @@
       populated class_set.
     | **Returns:** None
 
-"""
-# python 2
-from __future__ import print_function
-# plugins
-from cssutils.css import Property, CSSStyleRule, CSSStyleSheet
-from xml.dom import SyntaxErr
-# custom
-from blowdrycss.classpropertyparser import ClassPropertyParser
-
-__author__ = 'chad nelson'
-__project__ = 'blowdrycss'
-
-
-class CSSBuilder(object):
+    """
     def __init__(self, property_parser=ClassPropertyParser()):
         print(u'\nCSSBuilder Running...\n')
         self.property_parser = property_parser

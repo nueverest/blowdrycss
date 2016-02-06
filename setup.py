@@ -139,7 +139,7 @@ setup(
     # Packages - reference: https://pythonhosted.org/setuptools/setuptools.html#using-find-packages
     #package_dir={'': 'blowdrycss'},
     #packages=find_packages('blowdrycss', exclude=['*.settings', '*.settings.*', 'settings.*', 'settings']),
-    packages=find_packages(exclude=['*.settings']),
+    # packages=find_packages(exclude=['*.settings']),   # THIS ONE WORKED BUT IS NO LONGER NEEDED
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:

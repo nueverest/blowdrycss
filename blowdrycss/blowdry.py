@@ -12,6 +12,7 @@ from blowdrycss.cssbuilder import CSSBuilder
 from blowdrycss.datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, \
     property_alias_html, clashing_alias_rst, property_alias_rst
 from blowdrycss.mediaquerybuilder import MediaQueryBuilder
+import blowdrycss.blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -69,10 +70,8 @@ def main():
     # Import settings. Better to ask forgiveness both importing and writing the file.
     # The long name blowdrycss_settings is used since the django uses settings.py and using the same name would
     # cause a name conflict.
-    try:
-        from settings import blowdrycss_settings as settings
-    except ImportError:
-        import blowdrycss.blowdrycss_settings as settings
+
+    # TODO: Overwrite settings
 
     if settings.hide_css_errors:
         cssutils.log.setLevel(logging.CRITICAL)

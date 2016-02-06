@@ -25,10 +25,9 @@ from builtins import str
 import atexit
 from time import time
 from datetime import timedelta, datetime
-# from utilities import print_blow_dryer
 # custom
 # from blowdrycss_settings import minify
-# from utilities import print_css_stats
+# from utilities import print_css_stats, print_blow_dryer
 
 __author__ = 'paul, nicojo, chad nelson'
 __project__ = 'blowdrycss'

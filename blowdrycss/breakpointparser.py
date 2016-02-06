@@ -2,15 +2,8 @@
 from cssutils.css import Property
 # custom
 from blowdrycss.utilities import deny_empty_or_whitespace
-
-try:
-    # development case
-    from settings.blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, \
-        xlarge, xxlarge, giant, xgiant, xxgiant
-except ImportError:
-    # packaged deployment case
-    from blowdrycss.blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, \
-        xlarge, xxlarge, giant, xgiant, xxgiant
+from blowdrycss.blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, xlarge, xxlarge, \
+    giant, xgiant, xxgiant
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

@@ -1,10 +1,7 @@
 # builtin
 from unittest import TestCase, main
 # custom
-try:
-    from cssvalueparser import CSSPropertyValueParser
-except ImportError:
-    from blowdrycss.cssvalueparser import CSSPropertyValueParser
+from blowdrycss.cssvalueparser import CSSPropertyValueParser
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

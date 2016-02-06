@@ -1,5 +1,5 @@
 # builtins
-from html.parser import HTMLParser
+from html.parser import HTMLParser                  # Allowed after pip install future
 # custom
 from blowdrycss.filehandler import FileConverter
 

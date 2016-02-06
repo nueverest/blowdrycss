@@ -6,11 +6,7 @@ from blowdrycss.utilities import contains_a_digit
 from blowdrycss.datalibrary import property_alias_dict
 from blowdrycss.colorparser import ColorParser
 from blowdrycss.fontparser import FontParser
-
-try:
-    from unitparser import UnitParser
-except ImportError:
-    from blowdrycss.unitparser import UnitParser
+from blowdrycss.unitparser import UnitParser
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

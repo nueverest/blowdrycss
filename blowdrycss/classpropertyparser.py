@@ -54,12 +54,7 @@ from cssutils import parseString
 # custom
 from blowdrycss.datalibrary import ordered_property_dict, property_alias_dict, property_regex_dict
 from blowdrycss.utilities import deny_empty_or_whitespace
-
-try:
-    from cssvalueparser import CSSPropertyValueParser
-except ImportError:
-    from blowdrycss.cssvalueparser import CSSPropertyValueParser
-
+from blowdrycss.cssvalueparser import CSSPropertyValueParser
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -67,7 +62,7 @@ __project__ = 'blowdrycss'
 
 class ClassPropertyParser(object):
     def __init__(self, class_set=set()):
-        css = u'''/* Generated with blowdrycss. */'''
+        css = '''/* Generated with blowdrycss. */'''
         self.sheet = parseString(css)
         self.rules = []
         self.importance_designator = '-i'       # '-i' is used to designate that the priority level is '!important'

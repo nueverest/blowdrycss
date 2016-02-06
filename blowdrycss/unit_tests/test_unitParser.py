@@ -4,16 +4,8 @@ from __future__ import division
 from unittest import TestCase, main
 # custom
 from blowdrycss.utilities import change_settings_for_testing
-
-try:
-    from unitparser import UnitParser
-except ImportError:
-    from blowdrycss.unitparser import UnitParser
-
-try:
-    import settings.blowdrycss_settings as settings                     # development case
-except ImportError:
-    import blowdrycss.blowdrycss_settings as settings               # packaged deployment case
+from blowdrycss.unitparser import UnitParser
+import blowdrycss.blowdrycss_settings as settings               # packaged deployment case
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

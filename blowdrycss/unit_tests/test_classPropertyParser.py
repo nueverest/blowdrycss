@@ -1,10 +1,7 @@
 # builtin
 from unittest import TestCase, main
 # custom
-try:
-    from classpropertyparser import ClassPropertyParser
-except ImportError:
-    from blowdrycss.classpropertyparser import ClassPropertyParser
+from blowdrycss.classpropertyparser import ClassPropertyParser
 
 
 class TestClassPropertyParser(TestCase):

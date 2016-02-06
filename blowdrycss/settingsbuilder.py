@@ -187,6 +187,12 @@ profile._resetProperties()
 
 
 def write_blowdrycss_settings_dot_py():
+    """ If the file doesn't currently exist, then write a settings override file named ``blowdrycss_settings.py``
+    to the users current working directory.
+
+    :return: None
+
+    """
     with open('blowdrycss_settings.py', 'wb') as generic_file:
         generic_file.write(bytearray(blowdrycss_settings_dot_py, 'utf-8'))
     print(
@@ -195,3 +201,7 @@ def write_blowdrycss_settings_dot_py():
         ' Open "blowdrycss_settings.py" to customize\n blowdrycss for your project.\n' +
         '=' * 44
     )
+
+
+# TODO: write
+# def install_custom_settings():
