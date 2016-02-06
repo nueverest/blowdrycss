@@ -2,10 +2,7 @@ from unittest import TestCase, main
 import sys
 from io import StringIO
 # custom
-try:
-    import blowdry
-except ImportError:
-    import blowdrycss.blowdry as blowdry
+import blowdrycss.blowdry as blowdry
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

@@ -3,7 +3,7 @@ from unittest import TestCase, main
 # plugins
 from cssutils.css import Property
 # custom
-from breakpointparser import BreakpointParser
+from blowdrycss.breakpointparser import BreakpointParser
 from blowdrycss.blowdrycss_settings import px_to_em
 
 __author__ = 'chad nelson'
