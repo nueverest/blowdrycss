@@ -22,10 +22,7 @@ from __future__ import print_function
 from cssutils.css import Property, CSSStyleRule, CSSStyleSheet
 from xml.dom import SyntaxErr
 # custom
-try:
-    from classpropertyparser import ClassPropertyParser
-except ImportError:
-    from blowdrycss.classpropertyparser import ClassPropertyParser
+from blowdrycss.classpropertyparser import ClassPropertyParser
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

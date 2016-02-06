@@ -72,10 +72,7 @@ def main():
     try:
         from settings import blowdrycss_settings as settings
     except ImportError:
-        try:
-            import blowdrycss_settings as settings
-        except ImportError:
-            import blowdrycss.blowdrycss_settings as settings
+        import blowdrycss.blowdrycss_settings as settings
 
     if settings.hide_css_errors:
         cssutils.log.setLevel(logging.CRITICAL)
