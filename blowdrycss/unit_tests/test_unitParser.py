@@ -3,11 +3,11 @@ from __future__ import division
 # general
 from unittest import TestCase, main
 # custom
+from blowdrycss.utilities import change_settings_for_testing
+
 try:
-    from utilities import change_settings_for_testing
     from unitparser import UnitParser
 except ImportError:
-    from blowdrycss.utilities import change_settings_for_testing
     from blowdrycss.unitparser import UnitParser
 
 try:
