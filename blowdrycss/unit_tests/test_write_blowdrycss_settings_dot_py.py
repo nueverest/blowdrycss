@@ -1,6 +1,6 @@
 # builtins
 from unittest import TestCase, main
-from os import getcwd, path, remove
+from os import getcwd, path, remove, chdir
 # custom
 from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
 
@@ -9,18 +9,28 @@ class TestWrite_blowdrycss_settings_dot_py(TestCase):
     def test_write_blowdrycss_settings_dot_py(self):
         settings_file = 'blowdrycss_settings.py'
 
-        # Remove it if it exists.
-        if path.isfile(settings_file):
-            remove(settings_file)
-
         # Identical section of code from blowdrycss.py for test purposes.
-        write_blowdrycss_settings_dot_py()
+        cwd = getcwd()
 
-        # test file existence
-        self.assertTrue(path.isfile('blowdrycss_settings.py'))
+        # The if/else logic is required for unit testing
+        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+            if path.isfile(settings_file):                          # Remove it if it exists.
+                remove(settings_file)
+
+            write_blowdrycss_settings_dot_py()
+            self.assertTrue(path.isfile('blowdrycss_settings.py'))  # test file existence
+        else:                                                       # python setup.py test
+            chdir(path.join('blowdrycss', 'unit_tests'))
+
+            if path.isfile(settings_file):                          # Remove it if it exists.
+                remove(settings_file)
+
+            write_blowdrycss_settings_dot_py()
+            self.assertTrue(path.isfile('blowdrycss_settings.py'))  # test file existence
+            chdir(cwd)                                              # Reset current working directory.
 
         # Import from the current folder.
-        import blowdrycss_settings as test_settings    # python setup.py test
+        import blowdrycss.unit_tests.blowdrycss_settings as test_settings    # python setup.py test
 
         # test directory settings
         cwd = getcwd()
@@ -61,11 +71,6 @@ class TestWrite_blowdrycss_settings_dot_py(TestCase):
         self.assertTrue(test_settings.giant == (test_settings.px_to_em(1921), test_settings.px_to_em(2560)))
         self.assertTrue(test_settings.xgiant == (test_settings.px_to_em(2561), test_settings.px_to_em(2800)))
         self.assertTrue(test_settings.xxgiant == (test_settings.px_to_em(2801), test_settings.px_to_em(10**6)))
-
-        # Clean up by deleting test settings file.  Can be commented to see what the generated file looks like.
-        # Remove it if it exists.
-        if path.isfile(settings_file):
-            remove(settings_file)
 
 
 if __name__ == '__main__':
