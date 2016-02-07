@@ -72,6 +72,17 @@ class TestWrite_blowdrycss_settings_dot_py(TestCase):
         self.assertTrue(test_settings.xgiant == (test_settings.px_to_em(2561), test_settings.px_to_em(2800)))
         self.assertTrue(test_settings.xxgiant == (test_settings.px_to_em(2801), test_settings.px_to_em(10**6)))
 
+        # Clean up. Removed created file.
+        if path.isfile(settings_file):                          # Remove it if it exists.
+            remove(settings_file)
+
+        if not cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+            chdir(path.join('blowdrycss', 'unit_tests'))
+            if path.isfile(settings_file):                          # Remove it if it exists.
+                remove(settings_file)
+            chdir(cwd)
+
+
 
 if __name__ == '__main__':
     main()
