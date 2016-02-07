@@ -1,5 +1,5 @@
 # python 2
-from __future__ import print_function
+from __future__ import print_function, unicode_literals
 from builtins import bytes, str
 # builtins
 import logging
@@ -12,7 +12,7 @@ from blowdrycss.cssbuilder import CSSBuilder
 from blowdrycss.datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, \
     property_alias_html, clashing_alias_rst, property_alias_rst
 from blowdrycss.mediaquerybuilder import MediaQueryBuilder
-import blowdrycss.blowdrycss_settings as settings
+import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -66,13 +66,6 @@ def main():
     &nbsp;
 
     """
-
-    # Import settings. Better to ask forgiveness both importing and writing the file.
-    # The long name blowdrycss_settings is used since the django uses settings.py and using the same name would
-    # cause a name conflict.
-
-    # TODO: Use custom settings.
-
     if settings.hide_css_errors:
         cssutils.log.setLevel(logging.CRITICAL)
 
@@ -113,7 +106,7 @@ def main():
 
     # Generate reStructuredText documentation files.
     if settings.rst_docs:
-        print(str(settings.docs_directory))                                              # Python 2 requires str().
+        print('Documentation Directory:', str(settings.docs_directory))     # str() is required for Python2
         rst_file = GenericFile(file_directory=settings.docs_directory, file_name='clashing_aliases', extension='.rst')
         rst_file.write(str(clashing_alias_rst))
         rst_file = GenericFile(file_directory=settings.docs_directory, file_name='property_aliases', extension='.rst')

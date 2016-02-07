@@ -3,7 +3,7 @@ from cssutils.css import Property
 # custom
 from blowdrycss.utilities import deny_empty_or_whitespace
 from blowdrycss.unitparser import UnitParser
-from blowdrycss.blowdrycss_settings import small, medium
+from blowdrycss_settings import small, medium
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

@@ -6,7 +6,7 @@ from re import search, findall
 from inspect import currentframe
 from os import path, stat, getcwd
 # custom
-import blowdrycss.blowdrycss_settings as settings           # packaged deployment case
+import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
