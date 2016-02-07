@@ -9,7 +9,7 @@ ____
 ``blowdrycss_settings``
 -----------------------
 
-.. automodule:: settings.blowdrycss_settings
+.. automodule:: blowdrycss_settings
 
 ____
 
