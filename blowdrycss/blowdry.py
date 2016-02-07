@@ -71,7 +71,7 @@ def main():
     # The long name blowdrycss_settings is used since the django uses settings.py and using the same name would
     # cause a name conflict.
 
-    # TODO: Overwrite settings
+    # TODO: Use custom settings.
 
     if settings.hide_css_errors:
         cssutils.log.setLevel(logging.CRITICAL)

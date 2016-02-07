@@ -200,7 +200,7 @@ class UnitParser(object):
             for val in property_value.split():                                      # single, double and quadruple
                 if set(val) <= self.allowed:
                     val = val.replace('px', '')                                     # Handle 'px' units case.
-                    if settings.use_em and default_units == 'px':                     # Convert units if required.
+                    if settings.use_em and default_units == 'px':                   # Convert units if required.
                         new_value.append(settings.px_to_em(pixels=val))
                     else:
                         new_value.append(val + default_units)                       # Use default units.
