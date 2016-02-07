@@ -71,7 +71,7 @@ def main():
 
     # Performance timer
     if settings.timing_enabled:
-        pass
+        import blowdrycss.timing
 
     # Generate Markdown documentation files.
     if settings.markdown_docs:
