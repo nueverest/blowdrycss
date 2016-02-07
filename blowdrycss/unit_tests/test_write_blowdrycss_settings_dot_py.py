@@ -48,7 +48,8 @@ class TestWrite_blowdrycss_settings_dot_py(TestCase):
         # test accessibility of true settings
         true_settings = [
             test_settings.html_docs, test_settings.timing_enabled, test_settings.human_readable,
-            test_settings.minify, test_settings.media_queries_enabled, test_settings.use_em
+            test_settings.minify, test_settings.media_queries_enabled, test_settings.use_em,
+            test_settings.hide_css_errors,
         ]
         for true_setting in true_settings:
             self.assertTrue(true_setting)
