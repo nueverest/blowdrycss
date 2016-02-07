@@ -4,7 +4,7 @@ from unittest import TestCase, main
 from cssutils.css import Property
 # custom
 from blowdrycss.breakpointparser import BreakpointParser
-from blowdrycss.blowdrycss_settings import px_to_em
+from blowdrycss_settings import px_to_em
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

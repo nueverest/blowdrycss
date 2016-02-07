@@ -2,18 +2,26 @@
 # from lib2to3.fixes import fix_set_literal  http://python-future.org/futurize.html?highlight=set
 # builtins
 from unittest import TestCase, main
+from os import getcwd
 # custom
 from blowdrycss.utilities import change_settings_for_testing
 from blowdrycss.classpropertyparser import ClassPropertyParser
 from blowdrycss.cssbuilder import CSSBuilder
-import blowdrycss.blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 
 
 # Change settings directories for testing
+cwd = getcwd()
+
+if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+    import blowdrycss.blowdrycss_settings as settings
+else:                                                       # python setup.py test
+    import blowdrycss_settings as settings
+
 change_settings_for_testing()
+
 
 class TestCSSStyleBuilder(TestCase):
     def test_get_css_text_sets(self):

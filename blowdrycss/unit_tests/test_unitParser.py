@@ -1,17 +1,24 @@
 # python 2
 from __future__ import division
-# general
+# builtins
 from unittest import TestCase, main
+from os import getcwd
 # custom
 from blowdrycss.utilities import change_settings_for_testing
 from blowdrycss.unitparser import UnitParser
-import blowdrycss.blowdrycss_settings as settings               # packaged deployment case
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 
 
 # Change settings directories for testing
+cwd = getcwd()
+
+if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+    import blowdrycss.blowdrycss_settings as settings
+else:                                                       # python setup.py test
+    import blowdrycss_settings as settings
+
 change_settings_for_testing()
 
 
