@@ -7,6 +7,8 @@ Declares string for building blowdrycss - settings.py.
 
 # python 2
 from __future__ import print_function
+# builtins
+import os
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -193,14 +195,15 @@ def write_blowdrycss_settings_dot_py():
     :return: None
 
     """
-    with open('blowdrycss_settings.py', 'wb') as generic_file:
-        generic_file.write(bytearray(blowdrycss_settings_dot_py, 'utf-8'))
-    print(
-        '=' * 44 +
-        '\n Built "blowdrycss_settings.py".\n\n' +
-        ' Open "blowdrycss_settings.py" to customize\n blowdrycss for your project.\n' +
-        '=' * 44
-    )
+    if not os.path.isfile('blowdrycss_settings.py'):
+        with open('blowdrycss_settings.py', 'wb') as generic_file:
+            generic_file.write(bytearray(blowdrycss_settings_dot_py, 'utf-8'))
+        print(
+            '=' * 44 +
+            '\n Built "blowdrycss_settings.py".\n\n' +
+            ' Open "blowdrycss_settings.py" to customize\n blowdrycss for your project.\n' +
+            '=' * 44
+        )
 
 
 # TODO: write
