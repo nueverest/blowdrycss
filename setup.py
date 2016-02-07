@@ -18,14 +18,13 @@ Steps:
 pip install wheel
 pip install twine
 
-Delete the old egg, build, and dist from the project root.
+Delete the old .egg-info, build, and dist from the project root.
 
 unittest reference: https://docs.python.org/2/library/unittest.html
 python -m unittest discover -s blowdrycss -p "test_*.py"
-python setup.py test
 python setup.py clean --all
-python setup.py sdist bdist
-python setup.py bdist_wheel --universal
+python setup.py sdist bdist bdist_wheel
+python setup.py test
 
 Test it to see if it works
 
