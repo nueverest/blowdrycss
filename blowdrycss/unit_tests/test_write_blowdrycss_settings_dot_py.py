@@ -38,8 +38,8 @@ class TestWrite_blowdrycss_settings_dot_py(TestCase):
             test_settings.markdown_directory, path.join(cwd, 'docs', 'markdown'),
             msg=test_settings.markdown_directory + '\t' + path.join(cwd, 'docs', 'markdown')
         )
-        self.assertEqual(test_settings.project_directory, cwd)
-        self.assertEqual(test_settings.css_directory, path.join(cwd, 'css'))
+        self.assertEqual(test_settings.project_directory, path.join(cwd, 'examplesite'))
+        self.assertEqual(test_settings.css_directory, path.join(cwd, 'examplesite', 'css'))
         self.assertEqual(test_settings.docs_directory, path.join(cwd, 'docs'))
 
         # test file_type settings
