@@ -133,8 +133,10 @@ setup(
     ],
 
     # What does your project relate to?
-    keywords=('blowdry blowdrycss css compiler pre-compiler pre-processor generator dry cascading style sheets html ' +
-             'encoded class selector parser optimizer internet'),
+    keywords=(
+        'blowdry blowdrycss css compiler pre-compiler pre-processor generator dry cascading style sheets html ' +
+        'encoded class selector parser optimizer internet'
+    ),
 
     # Packages - reference: https://pythonhosted.org/setuptools/setuptools.html#using-find-packages
     #package_dir={'': 'blowdrycss'},
