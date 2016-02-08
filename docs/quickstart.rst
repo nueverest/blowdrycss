@@ -137,12 +137,14 @@ Part 3 - Auto-generate CSS
 - Navigate to ``../name_of_project_folder/examplesite/css``, and verify that ``blowdry.css`` and
   ``blowdry.min.css`` now exist.
 
-- Also note that two new HTML files ``clashing_aliases.html`` and ``property_aliases.html``. There is more about
-  these files in the advanced topics.
+- Also note that two new HTML files ``property_aliases.html`` and ``clashing_aliases.html``. There is more about
+  these files in the advanced topics. In general, they document syntax that can (property_aliases) and
+  cannot be used (clashing_aliases).
 
 - Open a web browser and go to `localhost:8080 <http://localhost:8080>`__.
 
-- The page should now be styled better. Keep in mind that some elements are intentionally left un-styled.
+- The page should now be styled better. Keep in mind that some elements are intentionally left un-styled
+  for tutorial purposes.
 
 .. note::
 
