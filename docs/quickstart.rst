@@ -199,39 +199,122 @@ following CSS in ``blowdry.css``:
     .font-size-25 { font-size: 25px }
     .green { color: green }
 
-Lets actually change something.
-'''''''''''''''''''''''''''''''
+Lets actually style something.
+''''''''''''''''''''''''''''''
 
--  Navigate to ``../blowdrycss_tutorial/examplesite/``
+- Navigate to ``../blowdrycss_tutorial/examplesite/``
 
--  Open ``index.html``
+- Open ``index.html``
 
--  Find the line
+- Go to line 12 and find: ::
 
-   ``<h1 class="c-blue text-align-center">Blow Dry CSS</h1>``
--  From the class attribute delete ``c-blue`` and replace it with the word ``green``.
+    <h1 class="c-blue text-align-center display-medium-up font-size-48-s">
 
--  Add the class ``font-size-148``
+- From the class attribute delete ``c-blue`` and replace it with the word ``green``.
 
--  The line should now look like this ::
+- Change ``font-size-48-s`` to ``font-size-148-s``.
 
-    <h1 class="green font-size-148 text-align-center">Blow Dry CSS</h1>
+- The line should now look like this: ::
 
--  Now refresh the web page running on `localhost:8080 <http://localhost:8080>`__.
+    <h1 class="green text-align-center display-medium-up font-size-148-s">
 
--  What happened? Nothing happened because you need to run ``blowdrycss`` first.
-   Sorry for the trick, but this is the most common reason why it doesn't seem to be working.
+- Save the changes.
 
--  Ensure that the current folder is ``blowdrycss_tutorial``.
+- Now refresh the web page running on `localhost:8080 <http://localhost:8080>`__.
 
--  Run ``> blowdrycss``
+- What happened? Nothing happened because you need to run ``blowdrycss`` first.
+  Sorry for the trick, but this is the most common reason why it doesn't seem to be working.
 
--  Now refresh the web page running on `localhost:8080 <http://localhost:8080>`__.
+- Ensure that the current folder is ``../blowdrycss_tutorial``.
 
--  The title at the top of the page should be large and green.
+- Run ``> blowdrycss``
+
+- Now refresh the browser for the web page running on `localhost:8080 <http://localhost:8080>`__.
+
+- The title at the top of the page should be large and green.
 
 
-Part 5 - Let's make some more changes
+Part 5 - Exploring the auto-generated CSS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Navigate to ``../blowdrycss_tutorial/examplesite/css``.
+
+- List the items in the directory ``ls`` or ``dir``.
+
+- The following files should appear: ::
+
+    blowdry.css
+    blowdry.min.css
+
+- Both of these files contain the exact same style rules. The only difference is that the one with the ``*.min.css``
+  extension in minified. This means that it is smaller and takes less time to upload and download over the Internet.
+  However, minified files are not designed to be human-readable. The ``*.css`` is designed to be human-readable.
+
+- Open each file and see the difference.
+
+- Look in ``blowdry.css`` for ``.green``. ::
+
+    .green {
+        color: green
+        }
+
+- This is the actual CSS that was generated as a result of adding the ``green`` CSS class selector to the
+  ``<h1>`` tag.
+
+- Change ``color: green`` to ``color: black``.
+
+- Save ``blowdry.css``.
+
+- Navigate back to ``../blowdrycss_tutorial``
+
+- Run ``blowdrycss``.
+
+- Navigate to ``../blowdrycss_tutorial/examplesite/css``.
+
+- Look in ``blowdry.css`` for the ``.green`` class selector. The CSS is automatically changed
+  from ``color: black`` back to ``color: green``. The reason is that ``blowdry.css`` and ``blowdry.min.css``
+  are auto-generated. They are both completely overwritten every time ``blowdrycss`` is run.
+  The auto-generated CSS files are not human-editable. ::
+
+    .green {
+        color: green
+        }
+
+  .. important::
+
+    The auto-generated CSS files blowdry.css and blowdry.min.css are not human-editable.
+    They are both overwritten each time blowdrycss is run.
+
+- Navigate back to ``../examplesite``
+
+- Open ``index.html``
+
+- The following is on line 7: ::
+
+    <link rel="stylesheet" type="text/css" href="css/blowdry.min.css" />
+
+- This line tells the browser which CSS file to use. In this case, it is ``css/blowdry.min.css``. Though
+  this could be replaced with ``css/blowdry.css`` and the page would still look the same.
+  The minified version causes the web page to load faster since the file is smaller.
+
+- Change line 7 of ``index.html`` to: ::
+
+    <link rel="stylesheet" type="text/css" href="css/blowdry.css" />
+
+- Save ``index.html``.
+
+- Now refresh the web page running on `localhost:8080 <http://localhost:8080>`__.
+
+- The page should still look the same.
+
+- Change line 7 of ``index.html`` back to the way it was. ::
+
+    <link rel="stylesheet" type="text/css" href="css/blowdry.min.css" />
+
+- Save ``index.html``.
+
+
+Part 6 - Let's make some more changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Center the image below the title with the class ``text-align-center`` in the ``<div>`` containing the image.
@@ -248,7 +331,7 @@ Part 5 - Let's make some more changes
 - Feel free to continue experimenting with different property names and values.
   More information about how to form write well-form encoded class names is found on the :doc:`syntax` page.
 
--  Apply these to an encoded class selectors to an image: ::
+- Apply these to an encoded class selectors to an image: ::
 
     border-10px-solid-black p-20-30-20-30 w-50
 
@@ -261,13 +344,13 @@ Part 5 - Let's make some more changes
    | ``w-50`` Make the image 50px wide.
 
 
--  Apply this to any div: ``display-none``
+- Apply this to any div: ``display-none``
 
--  Apply this to any paragraph tag: ``uppercase``
+- Apply this to any paragraph tag: ``uppercase``
 
--  Ensure that the current folder is ``blowdrycss_tutorial``.
+- Ensure that the current folder is ``blowdrycss_tutorial``.
 
--  Run ``> blowdrycss``
+- Run ``> blowdrycss``
 
 |
 
