@@ -5,12 +5,15 @@ Quick Start Guide
 
 This guide teaches you how to:
 
+- Setup the tutorial's virtual environment.
 - Install :mod:`blowdrycss`.
 - Run the '/examplesite' demo.
 - Auto-generate DRY CSS.
-- Rapidly style your HTML with encoded class syntax.
+- Rapidly style HTML with encoded class syntax.
 
-*No assumptions are made about your level of proficiency with python.*
+.. note::
+
+    *No assumptions are made about your level of proficiency with python.*
 
 Part 1 - Setup virtualenv and install blowdrycss
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,7 +79,7 @@ Part 1 - Setup virtualenv and install blowdrycss
 |
 | ``deactivate`` deactivates the virtual environment.
 
-**References:**
+**Good References:**
 
 - `Python Guide <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`__
 - `The virtualenv docs <http://virtualenv.readthedocs.org/en/latest/userguide.html>`__
@@ -95,7 +98,7 @@ Part 2 - Setup examplesite and run a local webserver.
 - Run ``python -m http.server 8080`` (Python 3.x) or
   ``python -m SimpleHTTPServer 8080`` (Python 2.x) depending on your version of python.
 
-- Open a web browser and go to `localhost:8080 or click this link <http://localhost:8080>`__.
+- Open a web browser and go to `localhost:8080 by clicking here <http://localhost:8080>`__.
 
 - The page should contain lots of unstyled text and images. It should basically be a mess.
 
@@ -216,6 +219,15 @@ Part 5 - Let's make some more changes
 -  Apply these to an encoded class selectors to an image: ::
 
     border-10px-solid-black p-20-30-20-30 w-50
+
+   **Decomposition**
+
+   | ``border-10px-solid-black`` Add a solid black border that is 10px thick.
+   |
+   | ``p-20-30-20-30`` Add 20px padding top and bottom. Add 30px padding left and right.
+   |
+   | ``w-50`` Make the image 50px wide.
+
 
 -  Apply this to any div: ``display-none``
 
