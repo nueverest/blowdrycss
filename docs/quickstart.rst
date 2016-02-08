@@ -138,7 +138,7 @@ Part 3 - Auto-generate CSS
 
 - Open a web browser and go to `localhost:8080 <http://localhost:8080>`__.
 
-- The page should now be styled better (but not completely).
+- The page should now be styled better. Keep in mind that some elements are intentionally left un-styled.
 
 .. note::
 
