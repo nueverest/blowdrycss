@@ -134,7 +134,11 @@ Part 3 - Auto-generate CSS
                 blowdry.min.css
             ...
 
-- Navigate to ``../name_of_project_folder/examplesite/css``, and verify that ``blowdry.css`` and ``blowdry.min.css`` now exist.
+- Navigate to ``../name_of_project_folder/examplesite/css``, and verify that ``blowdry.css`` and
+  ``blowdry.min.css`` now exist.
+
+- Also note that two new HTML files ``clashing_aliases.html`` and ``property_aliases.html``. There is more about
+  these files in the advanced topics.
 
 - Open a web browser and go to `localhost:8080 <http://localhost:8080>`__.
 
