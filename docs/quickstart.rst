@@ -19,10 +19,10 @@ Part 1 - Setup virtualenv and install blowdrycss
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Python is required. Python 3.x is preferred. `Download it here <https://www.python.org/downloads/>`__.
-- Check your python installation or version number. Open a command line interface (cli), and enter the
+- Check your python installation or version number. Open a command line interface (CLI), and enter the
   following command.  ::
 
-    python
+    > python
 
   Something like the following should appear. ::
 
@@ -35,25 +35,26 @@ Part 1 - Setup virtualenv and install blowdrycss
 - Create a virtual environment.
   (For the purposes of this tutorial the project folder should be initially empty.) ::
 
-    pip install virtualenv
-    cd name_of_project_folder
-    virtualenv
+    > pip install virtualenv
+    > mkdir blowdrycss_tutorial
+    > cd blowdrycss_tutorial
+    > virtualenv
 
 - Activate the virtual environment. Verify initial state. ::
 
-    source bin/activate
-    python
+    > source bin/activate
+    > python
     >>> exit()
-    pip freeze
+    > pip freeze
 
 - Install ``blowdrycss``. ::
 
-    pip install blowdrycss
-    pip freeze
+    > pip install blowdrycss
+    > pip freeze
 
 - Deactivate virtual environment. ::
 
-    deactivate
+    > deactivate
 
 
 
@@ -61,7 +62,9 @@ Part 1 - Setup virtualenv and install blowdrycss
 
 | ``pip install virtualenv`` Install virtual environment package from PyPi.
 |
-| ``cd name_of_project_folder`` Sets the current working directory to your web projects directory.
+| ``mkdir blowdrycss_tutorial`` Create a folder for this tutorial.
+|
+| ``cd blowdrycss_tutorial`` Sets the current working directory to your web projects directory.
 |
 | ``virtualenv`` Setup your project up as a virtual environment.
 |
@@ -89,21 +92,23 @@ Part 1 - Setup virtualenv and install blowdrycss
 Part 2 - Setup examplesite and run a local webserver.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Download ``blowdrycss`` from the `github repo <https://github.com/nueverest/blowdrycss>`__.
+- Download the zip version of ``blowdrycss`` from the `github repository <https://github.com/nueverest/blowdrycss>`__.
 
-- Copy and paste the ``examplesite`` folder into the empty project folder.
+- Copy and paste the ``examplesite`` folder into the ``blowdrycss_tutorial`` folder created in Step 1.
 
 - ``cd examplesite``
 
 - Run ``python -m http.server 8080`` (Python 3.x) or
-  ``python -m SimpleHTTPServer 8080`` (Python 2.x) depending on your version of python.
+  ``python -m SimpleHTTPServer 8080`` (Python 2.x) depending on your version of python. On Windows the firewall
+  might complain. Tell it to allow this server to run.
 
 - Open a web browser and go to `localhost:8080 by clicking here <http://localhost:8080>`__.
 
 - The page should contain lots of unstyled text and images. It should basically be a mess.
 
-- The local webserver can be stopped by pressing ``Ctrl + C`` or closing the window.
-  If you want to keep the webserver running then you will need to open another command line interface (cli).
+- Go back to the command line interface (CLI). The local webserver can be stopped by pressing ``Ctrl + C`` or 
+  closing the window. If you want to keep the webserver running then you will need to open 
+  a separate CLI.
 
 
 Part 3 - Auto-generate CSS
@@ -111,7 +116,7 @@ Part 3 - Auto-generate CSS
 
 - Look at the files inside of the ``examplesite`` folder. There should be the following: ::
 
-    name_of_project_folder/
+    blowdrycss_tutorial/
         examplesite/
             images/
             index.html
@@ -119,25 +124,39 @@ Part 3 - Auto-generate CSS
             test.html
             test.jinja2
 
+- Ensure that the current folder is ``blowdrycss_tutorial``. ::
+
+    > cd ..
+
 - Reactivate the virtualenv and run blowdrycss. ::
 
-    source bin/activate
-    blowdrycss
+    > source bin/activate
+    > blowdrycss
 
 - Look at the files inside of the ``examplesite`` folder again. There should be a new subfolder called ``css``
   containing the files ``blowdry.css`` and ``blowdry.min.css``. ::
 
-    name_of_project_folder/
+    blowdrycss_tutorial/
         examplesite/
             css/
                 blowdry.css
                 blowdry.min.css
-            ...
+            images/
+            blowdrycss_settings.py
+            clashing_aliases.html
+            index.html
+            property_aliases.html
+            test.aspx
+            test.html
+            test.jinja2
 
-- Navigate to ``../name_of_project_folder/examplesite/css``, and verify that ``blowdry.css`` and
+- Navigate to ``../blowdrycss_tutorial/examplesite/css``, and verify that ``blowdry.css`` and
   ``blowdry.min.css`` now exist.
 
-- Also note that two new HTML files ``property_aliases.html`` and ``clashing_aliases.html``. There is more about
+- A file ``blowdrycss_settings.py`` appears. This file can be used to modify or override default settings.
+  Use of this file is documented in the advanced topics section.
+
+- Two new HTML files ``property_aliases.html`` and ``clashing_aliases.html`` also appear. There is more about
   these files in the advanced topics. In general, they document syntax that can (property_aliases) and
   cannot be used (clashing_aliases).
 
@@ -183,7 +202,7 @@ following CSS in ``blowdry.css``:
 Lets actually change something.
 '''''''''''''''''''''''''''''''
 
--  Navigate to ``../name_of_project_folder/examplesite/``
+-  Navigate to ``../blowdrycss_tutorial/examplesite/``
 
 -  Open ``index.html``
 
@@ -203,7 +222,9 @@ Lets actually change something.
 -  What happened? Nothing happened because you need to run ``blowdrycss`` first.
    Sorry for the trick, but this is the most common reason why it doesn't seem to be working.
 
--  Run ``blowdrycss``
+-  Ensure that the current folder is ``blowdrycss_tutorial``.
+
+-  Run ``> blowdrycss``
 
 -  Now refresh the web page running on `localhost:8080 <http://localhost:8080>`__.
 
@@ -218,7 +239,9 @@ Part 5 - Let's make some more changes
 - Find the ``+`` images named ``images/plus.png`` and add the class ``padding-bottom-4p``
   directly to the ``img`` class attribute.
 
-- Run ``blowdrycss``
+- Ensure that the current folder is ``blowdrycss_tutorial``.
+
+- Run ``> blowdrycss``
 
 - Now refresh the web page running on  `localhost:8080 <http://localhost:8080>`__.
 
@@ -242,7 +265,9 @@ Part 5 - Let's make some more changes
 
 -  Apply this to any paragraph tag: ``uppercase``
 
--  Run ``blowdrycss``
+-  Ensure that the current folder is ``blowdrycss_tutorial``.
+
+-  Run ``> blowdrycss``
 
 |
 
