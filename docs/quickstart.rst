@@ -172,7 +172,9 @@ Lets actually change something.
 '''''''''''''''''''''''''''''''
 
 -  Navigate to ``../name_of_project_folder/examplesite/``
+
 -  Open ``index.html``
+
 -  Find the line
 
    ``<h1 class="c-blue text-align-center">Blow Dry CSS</h1>``
@@ -180,9 +182,9 @@ Lets actually change something.
 
 -  Add the class ``font-size-148``
 
--  The line should now look like this
+-  The line should now look like this ::
 
-   ``<h1 class="green font-size-148 text-align-center">Blow Dry CSS</h1>``
+    <h1 class="green font-size-148 text-align-center">Blow Dry CSS</h1>
 
 -  Now refresh the web page running on `localhost:8080 <http://localhost:8080>`__.
 
@@ -195,24 +197,23 @@ Lets actually change something.
 
 -  The title at the top of the page should be large and green.
 
-Let's make some more changes.
-'''''''''''''''''''''''''''''
--  Center the image below the title with the class ``text-align-center`` in the ``<div>`` containing the image.
 
--  Find the ``+`` images named ``images/plus.png`` and add the class ``padding-bottom-4p``
-   directly to the ``img`` class attribute.
+Part 5 - Let's make some more changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Run ``blowdrycss``
+- Center the image below the title with the class ``text-align-center`` in the ``<div>`` containing the image.
 
--  Now refresh the web page running on  `localhost:8080 <http://localhost:8080>`__.
+- Find the ``+`` images named ``images/plus.png`` and add the class ``padding-bottom-4p``
+  directly to the ``img`` class attribute.
 
--  Feel free to continue experimenting with different property names and values.
-   More information about how to form write well-form encoded class names is found on the :doc:`syntax` page.
+- Run ``blowdrycss``
 
-Part 5 - Experiment with these classes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Now refresh the web page running on  `localhost:8080 <http://localhost:8080>`__.
 
--  Apply these to an image: ::
+- Feel free to continue experimenting with different property names and values.
+  More information about how to form write well-form encoded class names is found on the :doc:`syntax` page.
+
+-  Apply these to an encoded class selectors to an image: ::
 
     border-10px-solid-black p-20-30-20-30 w-50
 
@@ -222,5 +223,9 @@ Part 5 - Experiment with these classes
 
 -  Run ``blowdrycss``
 
+|
 
-Want to learn more head on over to :doc:`advancedtopics`.
+
+| **Want to learn more?**
+|
+| Head on over to :doc:`advancedtopics`.
