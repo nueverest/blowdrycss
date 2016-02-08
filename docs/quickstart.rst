@@ -152,6 +152,9 @@ Part 3 - Auto-generate CSS
 
     | Any manual changes made to these two files are overwritten when ``blowdrycss`` is run.
 
+    | To test this delete the ``css`` folder, and run ``blowdrycss``. The ``css`` will automatically appear
+      under examplesite.
+
 Part 4 - Apply new styles in ``index.html``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
