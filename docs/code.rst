@@ -6,6 +6,15 @@
 
 ____
 
+
+``blowdry``
+-----------
+
+.. automodule:: blowdry
+
+____
+
+
 ``blowdrycss_settings``
 -----------------------
 

@@ -7,8 +7,8 @@ This guide teaches you how to:
 
 - Setup the tutorial's virtual environment.
 - Install :mod:`blowdrycss`.
-- Run the '/examplesite' demo.
-- Auto-generate DRY CSS.
+- Walk through the ``/examplesite`` demo.
+- Auto-generate DRY CSS with blowdrycss.
 - Rapidly style HTML with encoded class syntax.
 
 .. note::
