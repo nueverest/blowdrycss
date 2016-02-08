@@ -250,7 +250,11 @@ Part 5 - Exploring the auto-generated CSS
   extension in minified. This means that it is smaller and takes less time to upload and download over the Internet.
   However, minified files are not designed to be human-readable. The ``*.css`` is designed to be human-readable.
 
-- Open each file and see the difference.
+- Open each file and see the difference.  The ``blowdry.css`` contains line breaks and whitespace.
+Whereas, ``blowdry.min.css`` is written as a single line with whitespace removed.
+
+CSS is Auto-Generated
+'''''''''''''''''''''
 
 - Look in ``blowdry.css`` for ``.green``. ::
 
@@ -284,6 +288,9 @@ Part 5 - Exploring the auto-generated CSS
 
     The auto-generated CSS files blowdry.css and blowdry.min.css are not human-editable.
     They are both overwritten each time blowdrycss is run.
+
+Link Tag
+''''''''
 
 - Navigate back to ``../examplesite``
 
@@ -335,13 +342,13 @@ Part 6 - Let's make some more changes
 
     border-10px-solid-black p-20-30-20-30 w-50
 
-   **Decomposition**
+  **Decomposition**
 
-   | ``border-10px-solid-black`` Add a solid black border that is 10px thick.
-   |
-   | ``p-20-30-20-30`` Add 20px padding top and bottom. Add 30px padding left and right.
-   |
-   | ``w-50`` Make the image 50px wide.
+  | ``border-10px-solid-black`` Add a solid black border that is 10px thick.
+  |
+  | ``p-20-30-20-30`` Add 20px padding top and bottom. Add 30px padding left and right.
+  |
+  | ``w-50`` Make the image 50px wide.
 
 
 - Apply this to any div: ``display-none``
