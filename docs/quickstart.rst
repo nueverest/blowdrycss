@@ -5,7 +5,7 @@ Quick Start Guide
 
 This guide teaches you how to:
 
-- Install :mod:`blowdrycss` the `github repo <https://github.com/nueverest/blowdrycss>`_.
+- Install :mod:`blowdrycss`.
 - Run the '/examplesite' demo.
 - Auto-generate DRY CSS.
 - Rapidly style your HTML with encoded class syntax.
