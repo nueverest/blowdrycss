@@ -251,7 +251,7 @@ Part 5 - Exploring the auto-generated CSS
   However, minified files are not designed to be human-readable. The ``*.css`` is designed to be human-readable.
 
 - Open each file and see the difference.  The ``blowdry.css`` contains line breaks and whitespace.
-Whereas, ``blowdry.min.css`` is written as a single line with whitespace removed.
+  Whereas, ``blowdry.min.css`` is written as a single line with whitespace removed.
 
 CSS is Auto-Generated
 '''''''''''''''''''''
@@ -321,13 +321,23 @@ Link Tag
 - Save ``index.html``.
 
 
-Part 6 - Let's make some more changes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Part 6 - Experimentation
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Center the image below the title with the class ``text-align-center`` in the ``<div>`` containing the image.
 
-- Find the ``+`` images named ``images/plus.png`` and add the class ``padding-bottom-4p``
-  directly to the ``img`` class attribute.
+- Now (without running ``blowdrycss``) refresh the web page running on  `localhost:8080 <http://localhost:8080>`__.
+
+- It worked. But why? The reason it worked is that ``text-align-center`` is already used in ``index.html``, and
+  is already defined in ``blowdry.min.css``.
+
+
+Padding Percentages and Decimals
+''''''''''''''''''''''''''''''''
+
+- Go back to ``index.html`` and find the '+ sign' images named ``images/plus.png``, and
+  add the class ``padding-bottom-3p`` directly to the ``img`` class attribute to both of them. They are located
+  at lines 19 and 21.
 
 - Ensure that the current folder is ``blowdrycss_tutorial``.
 
@@ -335,10 +345,56 @@ Part 6 - Let's make some more changes
 
 - Now refresh the web page running on  `localhost:8080 <http://localhost:8080>`__.
 
-- Feel free to continue experimenting with different property names and values.
-  More information about how to form write well-form encoded class names is found on the :doc:`syntax` page.
+- The '+ sign' images now appear closer to the vertical center, but not quite.
 
-- Apply these to an encoded class selectors to an image: ::
+- Open ``index.html`` and change one of the '+ sign' image class selectors from ``padding-bottom-3p`` to
+  ``padding-bottom-4_5p``.
+
+- Ensure that the current folder is ``blowdrycss_tutorial``.
+
+- Run ``> blowdrycss``
+
+- Now refresh the web page running on  `localhost:8080 <http://localhost:8080>`__.
+
+- The '+ sign' image with the ``padding-bottom-4_5p`` is now closer to the vertical center.
+
+- What is going on here, and what do the ``p`` and the ``_`` do?
+
+- To understand this better open up ``blowdry.css`` and search for ``padding-bottom-3p``. The following CSS
+  is found: ::
+
+    .padding-bottom-3p {
+        padding-bottom: 3%
+        }
+
+  The ``3p`` property value is converted into ``3%``. So the letter ``p`` allows the percentage sign ``%`` to be
+  encoded.
+
+- Now search for ``padding-bottom-4_5p``. The following CSS is found: ::
+
+    .padding-bottom-4_5p {
+        padding-bottom: 4.5%
+        }
+
+  The ``4_5p`` property value is converted into ``4.5%``. Meaning that the underscore ``_`` represents the decimal
+  point ``.`` character.
+
+- Generally, these encodings are necessary because characters like ``.`` and ``%`` are not allowed in class selector
+  names (`See here <http://stackoverflow.com/a/449000/1783439>`__).
+
+    - On an advanced note, it is possible to escape the ``.`` and the ``%`` characters in the CSS file like so: ::
+
+        .padding-bottom-4\.5\%
+
+      However, this is hard to read and non-standard CSS. Though it is *valid*. Therefore, escape characters are
+      ignored and unsupported by ``blowdrycss``. It is possible to learn more about escape characters
+      `here <https://mothereff.in/css-escapes>`__.
+
+
+Shortcut and Multi-value CSS Properties
+'''''''''''''''''''''''''''''''''''''''
+
+- Apply these encoded class selectors to an image: ::
 
     border-10px-solid-black p-20-30-20-30 w-50
 
@@ -350,17 +406,25 @@ Part 6 - Let's make some more changes
   |
   | ``w-50`` Make the image 50px wide.
 
-
-- Apply this to any div: ``display-none``
-
-- Apply this to any paragraph tag: ``uppercase``
-
-- Ensure that the current folder is ``blowdrycss_tutorial``.
+- Ensure that the current folder is ``../blowdrycss_tutorial``.
 
 - Run ``> blowdrycss``
 
-|
 
+More Practice
+'''''''''''''
+
+- Change ``border-10px-solid-black`` to ``border-10px-dashed-cornflowerblue``.
+
+- Apply ``display-none`` to a div.
+
+- Apply ``uppercase`` to any paragraph tag.
+
+- Feel free to continue experimenting with different property names and values.
+
+  More information about how to write well-form encoded class names is found on the :doc:`syntax` page.
+
+|
 
 | **Want to learn more?**
 |
