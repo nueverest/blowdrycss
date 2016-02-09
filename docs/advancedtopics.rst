@@ -10,67 +10,93 @@ Advanced Topics
 
 - Use `watchdog <https://pypi.python.org/pypi/watchdog/0.8.3>`__ to automate CSS compilation.
 - Learn about :doc:`clashing_aliases` and :doc:`property_aliases`.
-- How to change settings in ``blowdrycss.py``.
+- How to change settings in ``blowdrycss_settings.py``.
 - Customizing the alias dictionary.
 - Where are the semicolons?
-- How to build a plugin. (missing)
+- How to build a plugin. [missing]
 - Why do I want to minify my css?
-- Pro-tip: Want to share your site with a client, co-worker, or colleague. Use `ngrok <https://ngrok.com/>`__
+- Non-HTML files (jinja, .NET, and ruby templates). [missing]
+- Pro-tip: Want to share your site with a client, co-worker, or colleague. Use `ngrok <https://ngrok.com/>`__.
 - DRYness
 - Syntax Guide
+
 
 Automate CSS Compilation with Watchdog
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. index:: single: Watchdog
 
--  Having to run ``python blowdrycss.py`` can annoying in a development environment.
--  What if it were possible to auto-detect that ``index.html`` was saved and automatically
-   run ``python blowdrycss.py``?
+- Having to run ``blowdrycss`` can annoying in a development environment.
+- What if it were possible to auto-detect that ``index.html`` was saved and automatically
+   run ``blowdrycss``?
 
-   -  This is made possible with
-      `watchdog <https://pypi.python.org/pypi/watchdog/0.8.3>`__.
+   - It is possible with `watchdog <https://pypi.python.org/pypi/watchdog/0.8.3>`__.
 
--  To setup watchdog run ``pip install watchdog``
--  Navigate to ``/examplesite`` at the command line.
--  From the command line run:
+Setup watchdog
+''''''''''''''
 
-   ``watchmedo shell-command --patterns="*.html;" --ignore-directories --recursive --command="python ../python/blowdrycss.py"``
--  Now add the class ``margin-150`` to one of the ``<div>`` tags, and
-   save ``index.html``
--  Refresh `localhost:8080 <http://localhost:8080>`__ in the browser,
-   and the change should appear without manually re-running
-   ``blowdrycss.py``.
+- If the virtualenv is not already active, then activate the virtualenv with ``source/bin activate``.
+
+- Run ``pip install watchdog``
+
+- Navigate to ``../blowdrycss_tutorial`` at the command line.
+
+- From the command line run: ::
+
+    watchmedo shell-command --patterns="*.html;" --ignore-directories --recursive --command="blowdrycss"
+
+  **Decomposition**
+
+  | Recursively monitors all ``*.html`` files in all directories and subdirectories of ``../blowdrycss_tutorial``.
+  |
+  | When it detects that an HTML file is saved it runs the command ``blowdrycss``.
+
+- Now add the class ``margin-150`` to one of the ``<div>`` tags, and save ``index.html``.
+
+- Refresh `localhost:8080 <http://localhost:8080>`__ in the browser, and the change
+  should appear without manually re-running ``blowdrycss``.
+
+- The ``watchmedo`` command can be shortened to: ::
+
+    watchmedo shell-command -p="*.html;" -D -R -c="blowdrycss"
+
+- To learn more about ``watchmedo`` run: ::
+
+    watchmedo shell-command --help
 
 What if refreshing the browser doesn't work?
 ''''''''''''''''''''''''''''''''''''''''''''
 
--  Ensure ``watchdog`` is running.
--  Check the shell or command prompt where ``watchog`` is running to see
-   if there are any error messages.
--  Double check that the command is running in the correct directory,
-   and that the python command ``python ../python/blowdrycss.py`` will run from the directory without
-   ``watchdog``.
+- Was the file saved?
+
+- Ensure ``watchdog`` is running.
+
+- Check the shell or command prompt where ``watchog`` is running to see
+  if there are any error messages.
+
+- Double check that the command is running in the correct directory, and that the python
+  command ``blowdrycss`` will run from the directory without ``watchdog``.
+
 
 Watchdog Parameter Modification
 '''''''''''''''''''''''''''''''
 
-``--patterns`` can be set to any file type that should trigger
-``blowdrycss.py``. For example: ``--patterns="*.html;*.aspx;*.js"``
+``--patterns`` can be set to any file type that should trigger ``blowdrycss``.
+For example: ``--patterns="*.html;*.aspx;*.js"``
 
-``--recursive`` causes the ``watchdog`` to monitor all of the files
-matching ``--patterns`` in all subdirectories of the current folder.
+``--recursive`` causes the ``watchdog`` to monitor all of the files matching ``--patterns`` in all
+subdirectories of the current folder.
 
-``--ignore-directories`` ignores all directory related events, and only
-focuses on file changes.
+``--ignore-directories`` ignores all directory related events, and only focuses on file changes.
 
-``--command`` contains the path to ``blowdrycss.py``. Make sure that this
+``--command`` contains the path to ``blowdrycss``. Make sure that this
 is the correct directory otherwise it will not run.
 
 Setting Customization
 ~~~~~~~~~~~~~~~~~~~~~
+
 ``*.html``, ``*.aspx``, ``*.ascx``, or ``*.master`` files. Other
-file extensions can be added under ``blowdrycss.py``
+file extensions can be added under ``blowdrycss``
 
 ``file_types = ('*.html', '*.aspx', '*.master', '*.ascx', '*.custom_ext', )``
 
@@ -95,7 +121,7 @@ Where are the semicolons?
 I opened ``blowdry.css``, and I don't see any semicolons in the css rule declarations. Why?
 
 - The only or last css { property: value } pair is not required to end with a semicolon. `See section 4.1.8 of the current CSS Standard. <http://www.w3.org/TR/CSS2/syndata.html#declaration>`__
-- The auto--generated file ``blowdry.css`` is not intended to be human-editable. Any manual edits are over--written when ``blowdrycss.py`` is run. Generally, when building a CSS file by hand it is considered best practise to always include the final semicolon. The reason being that humans--error is reduced the next time a person adds a rule to the CSS block.
+- The auto--generated file ``blowdry.css`` is not intended to be human-editable. Any manual edits are over--written when ``blowdrycss`` is run. Generally, when building a CSS file by hand it is considered best practise to always include the final semicolon. The reason being that humans--error is reduced the next time a person adds a rule to the CSS block.
 - It is compatible with all browsers.
 - It results in faster page loads due to smaller ``*.css`` file size.
 
