@@ -27,10 +27,10 @@ Automate CSS Compilation with Watchdog
 .. index:: single: Watchdog
 
 - Having to run ``blowdrycss`` can annoying in a development environment.
-- What if it were possible to auto-detect that ``index.html`` was saved and automatically
-   run ``blowdrycss``?
 
-   - It is possible with `watchdog <https://pypi.python.org/pypi/watchdog/0.8.3>`__.
+- What if it were possible to auto-detect that ``index.html`` was saved and automatically run ``blowdrycss``?
+
+- It is possible with `watchdog <https://pypi.python.org/pypi/watchdog/0.8.3>`__.
 
 Setup watchdog
 ''''''''''''''
