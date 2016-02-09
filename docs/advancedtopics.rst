@@ -92,28 +92,36 @@ subdirectories of the current folder.
 ``--command`` contains the path to ``blowdrycss``. Make sure that this
 is the correct directory otherwise it will not run.
 
+
 Setting Customization
 ~~~~~~~~~~~~~~~~~~~~~
 
-``*.html``, ``*.aspx``, ``*.ascx``, or ``*.master`` files. Other
-file extensions can be added under ``blowdrycss``
+**Handle other file types**
+|
+``*.html``, ``*.aspx``, ``*.ascx``, or ``*.master`` files. Other file extensions can be added under ``blowdrycss``
 
 ``file_types = ('*.html', '*.aspx', '*.master', '*.ascx', '*.custom_ext', )``
+
+
+**Change the CSS File Name and Location:**
+|
+TODO: Document how easy it is to edit blowdrycss_settings.py
 
 Find Non-matching classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If the encoded class name contains a typo or invalid value e.g.
-``ppadding-5``, ``margin-A``, ``font-color-h000rem``, or
-``squirrel-gray`` it will be placed in ``removed_class_set``. The
-variable ``removed_class_set`` is found in ``ClassPropertyParser()``
-inside of ``classpropertyparser.py``.
+If the encoded class name contains a typo or invalid value e.g. ``ppadding-5``, ``margin-A``,
+``font-color-h000rem``, or ``squirrel-gray`` it will be placed in ``removed_class_set``. The
+variable ``removed_class_set`` is found in ``ClassPropertyParser()`` inside of ``classpropertyparser.py``.
+
 
 Customize Aliases:
 ~~~~~~~~~~~~~~~~~~
 
 - Open ``python/datalibrary.py``
+
 - In the ``DataLibrary`` class edit ``self.custom_property_alias_dict``
+
 
 Where are the semicolons?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -121,14 +129,13 @@ Where are the semicolons?
 I opened ``blowdry.css``, and I don't see any semicolons in the css rule declarations. Why?
 
 - The only or last css { property: value } pair is not required to end with a semicolon. `See section 4.1.8 of the current CSS Standard. <http://www.w3.org/TR/CSS2/syndata.html#declaration>`__
+
 - The auto--generated file ``blowdry.css`` is not intended to be human-editable. Any manual edits are over--written when ``blowdrycss`` is run. Generally, when building a CSS file by hand it is considered best practise to always include the final semicolon. The reason being that humans--error is reduced the next time a person adds a rule to the CSS block.
+
 - It is compatible with all browsers.
+
 - It results in faster page loads due to smaller ``*.css`` file size.
 
-Change the CSS File Name and Location:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-TODO: Document how easy it is to edit blowdrycss.py
 
 DRY-ness must be balanced against other factors.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
