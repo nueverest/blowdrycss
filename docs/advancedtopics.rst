@@ -96,16 +96,10 @@ is the correct directory otherwise it will not run.
 Setting Customization
 ~~~~~~~~~~~~~~~~~~~~~
 
-**Handle other file types**
-|
-``*.html``, ``*.aspx``, ``*.ascx``, or ``*.master`` files. Other file extensions can be added under ``blowdrycss``
+The first time the ``blowdrycss`` command is run a file is auto-generated in the current directory named
+``blowdrycss_settings.py``. This file provide the ability to override the default settings for a given project.
 
-``file_types = ('*.html', '*.aspx', '*.master', '*.ascx', '*.custom_ext', )``
-
-
-**Change the CSS File Name and Location:**
-|
-TODO: Document how easy it is to edit blowdrycss_settings.py
+It is possible to change the directories where
 
 Find Non-matching classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~

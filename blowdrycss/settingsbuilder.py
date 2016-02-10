@@ -14,30 +14,46 @@ __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 
 blowdrycss_settings_dot_py = """\"\"\"
+**Usage Notes:**
+
+The first time ``blowdrycss`` is run it auto-builds ``blowdrycss_settings.py`` via ``__init__.py``.
+This makes it easy to find and customize related settings.
+
+**Why such a long name? -- blowdrycss_settings.py**
+
+Popular web frameworks such as django and flask already auto-generate a settings file called ``settings.py``.
+The longer more specific name is used to prevent naming conflicts, and increase clarity.
+
 **Parameters:**
 
-| markdown_directory (*string*) -- Generally used for development purposes only.
+| markdown_directory (*string*) -- Generally used for development purposes and github documentation.
 
-| project_directory (*string) -- Path to your project directory
+| project_directory (*string*) -- Path to recursively search for all defined ``file_types``.
 
-| css_directory (*string*) -- Path to your projects CSS directory
+| css_directory (*string*) -- Path where the projects CSS files are located.
 
-| docs_directory (*string*) -- Path to Sphinx docs.
+| docs_directory (*string*) -- Path where Sphinx docs are located (requires sphinx to be installed and run).
 
 | file_types = (*tuple of strings*) -- All file types/extensions to search for in the defined project_directory
   that contain encoded class selectors.
 
-| timing_enabled (*bool*) -- Run performance timer
+  *Example format:* ::
+
+    ('*.html', )
+
+| timing_enabled (*bool*) -- Run performance timer to see the performance of ``blowdrycss``.
 
 | markdown_docs (*bool*) -- Generate a markdown files that provides a quick syntax and clashing alias reference.
+  Normally set to False except when posting to github.
 
 | html_docs (*bool*) -- Generate a html file that provides a quick syntax and clashing alias reference.
 
 | rst_docs (*bool*) -- Generate a sphinx rst file that provides a quick syntax and clashing alias reference.
 
-| human_readable (*bool*) -- Generate a standard human readable css file.
+| human_readable (*bool*) -- Generate a standard human readable css file. This file is named ``blowdry.css`` by
+  default.
 
-| minify (*bool*) -- Generate a minified version of the css file.
+| minify (*bool*) -- Generate a minified version of the css file. This file is named ``blowdry.min.css`` by default.
 
 | media_queries_enabled (*bool*) -- Generate breakpoint and scaling media queries.
 
@@ -180,7 +196,7 @@ giant = (px_to_em(1921), px_to_em(2560))        # 120.0625 - 160.0em
 xgiant = (px_to_em(2561), px_to_em(2800))       # 160.0625 - 175.0em
 xxgiant = (px_to_em(2801), px_to_em(10**6))     # 175.0625 - float('inf')) # Python 2.x representation of Infinity.
 
-# Patches cssutils
+# Patches cssutils - Generally this does not need to be edited.
 profile._MACROS['length'] = r'0|{num}(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)'
 profile._MACROS['positivelength'] = r'0|{positivenum}(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)'
 profile._MACROS['angle'] = r'0|{num}(deg|grad|rad|turn)'
