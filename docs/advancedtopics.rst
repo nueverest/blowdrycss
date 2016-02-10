@@ -143,8 +143,8 @@ Consider the following:
 
 .. code:: html
 
-    <div class="background-size-cover min-h-7rem bold font-size-3_5625rem white line-height-3_6875rem talign-center
-                t-shadow-n2px-2px-4px-rgba-0-0-0-0_5">
+    <div class="background-size-cover min-h-7rem bold font-size-3_5625rem white line-height-3_6875rem
+                talign-center t-shadow-n2px-2px-4px-rgba-0-0-0-0_5">
         <!-- div contents -->
     </div>
 
