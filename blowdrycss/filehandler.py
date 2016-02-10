@@ -50,11 +50,11 @@ class FileFinder(object):
             self.project_directory = project_directory
             self.file_types = file_types
             self.files = []
-            print(u'Project Directory:', str(project_directory))
-            print(u'\nFile Types:', ', '.join(self.file_types))
+            print('Project Directory:', str(project_directory))
+            print('\nFile Types:', ', '.join(self.file_types))
 
             self.set_files()
-            print(u'\nProject Files Found:')
+            print('\nProject Files Found:')
             self.print_collection(self.files)
         else:
             raise OSError(project_directory + ' is not a directory.')
