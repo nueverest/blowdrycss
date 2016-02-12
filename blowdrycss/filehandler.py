@@ -36,11 +36,7 @@ class FileFinder(object):
     >>> chdir('..')
     >>> project_directory = path.join(current_dir, 'examplesite')
     >>> chdir(current_dir)    # Change it back.
-    >>> file_types = ('*.html', )
-    >>> file_finder = FileFinder(
-    >>>     project_directory=project_directory,
-    >>>     file_types=file_types
-    >>> )
+    >>> file_finder = FileFinder(project_directory=project_directory)
     >>> files = file_finder.files
 
     """
@@ -48,24 +44,24 @@ class FileFinder(object):
         if path.isdir(project_directory):
             self.project_directory = project_directory
             self.files = []
+            self.file_dict = {}
             print('Project Directory:', str(project_directory))
             print('\nFile Types:', ', '.join(settings.file_types))
-
             self.set_files()
+            self.set_file_dict()
             print('\nProject Files Found:')
             self.print_collection(self.files)
         else:
             raise OSError(project_directory + ' is not a directory.')
-            # raise NotADirectoryError(project_directory + ' is not a directory.') # python 3 only
 
     @staticmethod
     def print_collection(collection):
         """
         Takes a list or tuple as input and prints each item.
 
-        :type collection: list
+        :type collection: iterable
 
-        :param collection: A list of unicode strings to be printed.
+        :param collection: A list or tu of unicode strings to be printed.
         :return: None
 
         """
@@ -87,6 +83,27 @@ class FileFinder(object):
         for directory, _, _ in walk(self.project_directory):
             for file_type in settings.file_types:
                 self.files.extend(glob(path.join(directory, file_type)))
+
+    def set_file_dict(self):
+        """ Filter and organize files by type in ``file_dict``.
+
+        Dictionary Format: ::
+
+            self.file_dict = {
+                '.html': {'filepath_1.html', 'filepath_2.html', ..., 'filepath_n.html'},
+                '.aspx': {'filepath_1.aspx', 'filepath_2.aspx', ..., 'filepath_n.aspx'},
+                ...
+                '.file_type': {'filepath_1.file_type', 'filepath_2.file_type', ..., 'filepath_n.file_type'},
+            }
+
+        Automatically removes the * wildcard from ``file_type``.
+
+        :return: None
+
+        """
+        for file_type in settings.file_types:
+            file_type = file_type.replace('*', '')  # Remove the * wildcard.
+            self.file_dict[file_type] = {_file for _file in self.files if path.splitext(_file)[1] == file_type}
 
 
 class FileConverter(object):
