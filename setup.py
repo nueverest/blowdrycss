@@ -20,6 +20,7 @@ pip install twine
 
 Delete the old .egg-info, build, and dist from the project root.
 
+Activate a test virtualenv.
 unittest reference: https://docs.python.org/2/library/unittest.html
 python -m unittest discover -s blowdrycss -p "test_*.py"
 python setup.py clean --all
@@ -28,22 +29,52 @@ python setup.py test
 
 Test it to see if it works
 
-Activate a test virtualenv.
 pip freeze                  # ensure blowdrycss is not already installed.
 pip uninstall blowdrycss    # uninstall if it is already installed.
 python setup.py install     # install the latest
 blowdrycss                  # run it
 
 [If it is the first time, then do this otherwise skip to next step.]
-Go here: https://pypi.python.org/pypi?%3Aaction=submit_form
-Choose Option 2: Upload PKG-INFO
-Click "Add Package Info"
+Reference: `How to setup a .pypirc file <http://stackoverflow.com/a/35087459/1783439>`__.
 
-Create a new folder in ``build_archive`` named after the current version number.
-Copy the new egg, build, and dist.
+Create a file named `.pypirc` in your home directory.
 
-Back to the command line run:
+On Linux, OS X, or Unix: `~/.pypirc`
+On Windows (Typically): `C:\Users\USERNAME\.pypirc`
+
+Contents of `.pypirc` ::
+
+    [distutils]
+    index-servers =
+        pypi
+        pypitest
+
+    [pypitest]
+    repository = https://testpypi.python.org/pypi
+    username = <your user name goes here>
+    password = <your password goes here>
+
+    [pypi]
+    repository = https://pypi.python.org/pypi
+    username = <your user name goes here>
+    password = <your password goes here>
+
+Create a new folder inside of the ``archive`` folder named after the current version number
+e.g. `blowdrycss\archive\0.1.1`.
+Copy the new egg, build, and dist into this new folder.
+
+[Test on testPyPi First.]
+python setup.py register -r pypitest
+
+Complete testing on testPyPi.
+
+Back at the command line run (to upload to official PyPi):
 twine upload dist/*
+
+
+[Supplemental: manual registration how to]
+testpypi here: https://testpypi.python.org/pypi?%3Aaction=submit_form
+pypi here: https://pypi.python.org/pypi?%3Aaction=submit_form
 
 """
 
