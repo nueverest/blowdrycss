@@ -113,7 +113,7 @@ def main():
         rst_file.write(str(property_alias_rst))
 
     # Get all files associated with defined file_types in project_directory
-    file_finder = FileFinder(project_directory=settings.project_directory, file_types=settings.file_types)
+    file_finder = FileFinder(project_directory=settings.project_directory)
 
     # Create set of all defined classes
     class_parser = HTMLClassParser(files=file_finder.files)

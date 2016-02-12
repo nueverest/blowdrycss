@@ -10,7 +10,7 @@ from re import sub, findall
 from cssutils import parseString, ser
 # custom
 from blowdrycss.utilities import get_file_path
-from blowdrycss_settings import file_types
+import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -44,13 +44,12 @@ class FileFinder(object):
     >>> files = file_finder.files
 
     """
-    def __init__(self, project_directory='', file_types=file_types):
+    def __init__(self, project_directory=''):
         if path.isdir(project_directory):
             self.project_directory = project_directory
-            self.file_types = file_types
             self.files = []
             print('Project Directory:', str(project_directory))
-            print('\nFile Types:', ', '.join(self.file_types))
+            print('\nFile Types:', ', '.join(settings.file_types))
 
             self.set_files()
             print('\nProject Files Found:')
@@ -86,7 +85,7 @@ class FileFinder(object):
 
         """
         for directory, _, _ in walk(self.project_directory):
-            for file_type in self.file_types:
+            for file_type in settings.file_types:
                 self.files.extend(glob(path.join(directory, file_type)))
 
 

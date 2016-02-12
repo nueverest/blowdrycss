@@ -69,7 +69,7 @@ class TestFileFinder(TestCase):
 
         project_directory = cwd
         file_types = ('*.html', )
-        file_finder = FileFinder(project_directory=project_directory, file_types=file_types)
+        file_finder = FileFinder(project_directory=project_directory)
         for expected_file in expected_files:
             self.assertTrue(expected_file in file_finder.files)
 
