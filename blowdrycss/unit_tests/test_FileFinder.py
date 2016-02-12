@@ -111,6 +111,30 @@ class TestFileFinder(TestCase):
         settings.file_types = ('*.html', )                                                  # Reset file_types
         chdir(original_cwd)                                                                 # Reset directory
 
+    def test_set_file_dict_extension_not_found(self):
+        original_cwd = getcwd()
+
+        if original_cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+            import blowdrycss.blowdrycss_settings as settings
+            cwd = original_cwd
+        else:                                                       # Run unittest cmd from the root directory.
+            import blowdrycss_settings as settings
+            cwd = path.join(original_cwd, 'blowdrycss', 'unit_tests')
+
+        valid_dict = {'.not_found': set(),}
+
+        project_directory = cwd
+
+        valid_keys = ['.not_found']
+        settings.file_types = ('*.not_found', )                                             # Override file_types
+        file_finder = FileFinder(project_directory=project_directory)
+        for valid_key in valid_keys:
+            self.assertTrue(valid_key in file_finder.file_dict, msg=file_finder.file_dict)
+            self.assertEqual(file_finder.file_dict[valid_key], valid_dict[valid_key],
+                             msg=file_finder.file_dict[valid_key])
+        settings.file_types = ('*.html', )                                                  # Reset file_types
+        chdir(original_cwd)                                                                 # Reset directory
+
     def test_fileconverter_wrongpath(self):
         wrong_file_path = '/this/is/wrong/file/path'
         self.assertRaises(OSError, FileConverter, wrong_file_path)
