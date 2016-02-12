@@ -40,7 +40,7 @@ Reference: `How to setup a .pypirc file <http://stackoverflow.com/a/35087459/178
 Create a file named `.pypirc` in your home directory.
 
 On Linux, OS X, or Unix: `~/.pypirc`
-On Windows (Typically): `C:\Users\USERNAME\.pypirc`
+On Windows: `C:\Users\USERNAME\.pypirc`
 
 Contents of `.pypirc` ::
 
