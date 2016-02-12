@@ -1,11 +1,10 @@
 # builtin
 from unittest import TestCase, main
-from os import path, getcwd
+from os import path, getcwd, chdir
 import sys
 from io import StringIO
 # custom
 from blowdrycss.filehandler import FileFinder, FileConverter
-import blowdrycss.blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -74,46 +73,35 @@ class TestFileFinder(TestCase):
             self.assertTrue(expected_file in file_finder.files)
 
     def test_set_file_dict(self):
-        cwd = getcwd()
+        original_cwd = getcwd()
 
-        valid_keys = ['.html', '.aspx']
-
-        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
-            valid_dict = {
-                '.html': {
-                    path.join(cwd, 'test_examplesite', 'clashing_aliases.html'),
-                    path.join(cwd, 'test_examplesite', 'property_aliases.html'),
-                    path.join(cwd, 'test_generic', 'blowdry.html'),
-                    path.join(cwd, 'test_html', 'index.html'),
-                    path.join(cwd, 'test_html', 'test.html'),
-                    path.join(cwd, 'test_html', 'media_query.html'),
-                },
-                '.aspx': {
-                    path.join(cwd, 'test_aspx', 'test.aspx'),
-                },
-                '.jinja2': {
-                    path.join(cwd, 'test_jinja', 'test.jinja2'),
-                }
-            }
+        if original_cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+            import blowdrycss.blowdrycss_settings as settings
+            cwd = original_cwd
         else:                                                       # Run unittest cmd from the root directory.
-            valid_dict = {
-                '.html': {
-                    path.join(cwd, 'blowdrycss', 'unit_tests', 'test_examplesite', 'clashing_aliases.html'),
-                    path.join(cwd, 'blowdrycss', 'unit_tests', 'test_examplesite', 'property_aliases.html'),
-                    path.join(cwd, 'blowdrycss', 'unit_tests', 'test_generic', 'blowdry.html'),
-                    path.join(cwd, 'blowdrycss', 'unit_tests', 'test_html', 'index.html'),
-                    path.join(cwd, 'blowdrycss', 'unit_tests', 'test_html', 'test.html'),
-                    path.join(cwd, 'blowdrycss', 'unit_tests', 'test_html', 'media_query.html'),
-                },
-                '.aspx': {
-                    path.join(cwd, 'test_aspx', 'test.aspx'),
-                },
-                '.jinja2': {
-                    path.join(cwd, 'test_jinja', 'test.jinja2'),
-                }
+            import blowdrycss_settings as settings
+            cwd = path.join(original_cwd, 'blowdrycss', 'unit_tests')
+
+        valid_dict = {
+            '.html': {
+                path.join(cwd, 'test_examplesite', 'clashing_aliases.html'),
+                path.join(cwd, 'test_examplesite', 'property_aliases.html'),
+                path.join(cwd, 'test_generic', 'blowdry.html'),
+                path.join(cwd, 'test_html', 'index.html'),
+                path.join(cwd, 'test_html', 'test.html'),
+                path.join(cwd, 'test_html', 'media_query.html'),
+            },
+            '.aspx': {
+                path.join(cwd, 'test_aspx', 'test.aspx'),
+            },
+            '.jinja2': {
+                path.join(cwd, 'test_jinja', 'test.jinja2'),
             }
+        }
 
         project_directory = cwd
+
+        valid_keys = ['.html', '.aspx', '.jinja2']
         settings.file_types = ('*.html', '*.aspx', '*.jinja2')                              # Override file_types
         file_finder = FileFinder(project_directory=project_directory)
         for valid_key in valid_keys:
@@ -121,6 +109,7 @@ class TestFileFinder(TestCase):
             self.assertEqual(file_finder.file_dict[valid_key], valid_dict[valid_key],
                              msg=file_finder.file_dict[valid_key])
         settings.file_types = ('*.html', )                                                  # Reset file_types
+        chdir(original_cwd)                                                                 # Reset directory
 
     def test_fileconverter_wrongpath(self):
         wrong_file_path = '/this/is/wrong/file/path'

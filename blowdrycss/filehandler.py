@@ -18,8 +18,8 @@ __project__ = 'blowdrycss'
 
 class FileFinder(object):
     """
-    Designed to find all ``files_types`` specified within a particular ``project_directory``. All folders within the
-    ``project_directory`` are searched.
+    Designed to find all ``settings.files_types`` specified within a particular ``project_directory``.
+    All folders within the ``project_directory`` are searched.
 
     | **Parameters:**
 
