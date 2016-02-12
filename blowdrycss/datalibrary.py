@@ -1,3 +1,6 @@
+# python 2.7
+from __future__ import unicode_literals
+from builtins import str
 # builtins
 from collections import OrderedDict
 from copy import deepcopy
@@ -279,37 +282,37 @@ class DataLibrary(object):
 
         # Generate Markdown Files
         self.clashing_alias_markdown = self.dict_to_markdown(
-            h1_text=u'Clashing Aliases',
-            key_title=u'Property Name',
-            value_title=u'Invalid Clashing Aliases',
+            h1_text=str('Clashing Aliases'),
+            key_title=str('Property Name'),
+            value_title=str('Invalid Clashing Aliases'),
             _dict=self.alphabetical_clashing_dict
         )
         self.property_alias_markdown = self.dict_to_markdown(
-            h1_text=u'Valid Property Aliases',
-            key_title=u'Property Name',
-            value_title=u'Valid Aliases',
+            h1_text=str('Valid Property Aliases'),
+            key_title=str('Property Name'),
+            value_title=str('Valid Aliases'),
             _dict=self.alphabetical_property_dict
         )
 
         # Generate HTML Files
         self.clashing_alias_html = self.dict_to_html(
-            h1_text=u'Invalid Clashing Aliases',
-            key_title=u'Property Name',
-            value_title=u'Clashing Aliases',
+            h1_text=str('Invalid Clashing Aliases'),
+            key_title=str('Property Name'),
+            value_title=str('Clashing Aliases'),
             _dict=self.alphabetical_clashing_dict
         )
         self.property_alias_html = self.dict_to_html(
-            h1_text=u'Valid Property Aliases',
-            key_title=u'Property Name',
-            value_title=u'Valid Aliases',
+            h1_text=str('Valid Property Aliases'),
+            key_title=str('Property Name'),
+            value_title=str('Valid Aliases'),
             _dict=self.alphabetical_property_dict
         )
 
         # Generate reStructuredText
         clashing_html = self.clashing_alias_html.replace('&emsp;', '   ')                   # Remove 'tab'
         property_html = self.property_alias_html.replace('&emsp;', '   ')                   # Remove 'tab'
-        self.clashing_alias_rst = convert(source=clashing_html, to='rst', format='html')
-        self.property_alias_rst = convert(source=property_html, to='rst', format='html')
+        self.clashing_alias_rst = convert(source=clashing_html, to=str('rst'), format=str('html'))
+        self.property_alias_rst = convert(source=property_html, to=str('rst'), format=str('html'))
 
         # Debug
         # print('property_alias_dict', self.property_alias_dict)
@@ -469,14 +472,14 @@ class DataLibrary(object):
         """
 
         # H1 plus table header.
-        _markdown = u'# ' + h1_text + '\n\n' \
-                    '| ' + key_title + u' | ' + value_title + u' |\n| --- | --- |\n'
+        _markdown = '# ' + h1_text + '\n\n' \
+                    '| ' + key_title + ' | ' + value_title + ' |\n| --- | --- |\n'
         for key, value in _dict.items():
             value_str = ''
             if isinstance(value, set):
                 for v in value:
-                    value_str += u"`" + v + u"` "
-            _markdown += u'| ' + key + u' | ' + str(value_str) + u' |\n'                # Key | Value row(s).
+                    value_str += "`" + v + "` "
+            _markdown += '| ' + key + ' | ' + str(value_str) + ' |\n'                # Key | Value row(s).
         return _markdown
 
     @staticmethod
@@ -525,8 +528,8 @@ class DataLibrary(object):
         :return: (str) -- Returns a HTML formatted 2-column table based on the key/value pairs in ``_dict``.
 
         """
-        common_classes = u' padding-5 border-1px-solid-gray display-inline '
-        alternating_bg = u' bgc-hf8f8f8 '
+        common_classes = ' padding-5 border-1px-solid-gray display-inline '
+        alternating_bg = ' bgc-hf8f8f8 '
         _html = str(
             '<html>\n' +
             '\t<head>\n' +
@@ -541,20 +544,20 @@ class DataLibrary(object):
             '\t\t<table>\n' +
             '\t\t\t<tbody>\n'
             '\t\t\t\t<tr>\n' +
-            '\t\t\t\t\t<td class="' + common_classes + 'talign-center bold">' + key_title + u'</td>\n' +
-            '\t\t\t\t\t<td class="' + common_classes + 'talign-center bold">' + value_title + u'</td>\n' +
+            '\t\t\t\t\t<td class="' + common_classes + 'talign-center bold">' + key_title + '</td>\n' +
+            '\t\t\t\t\t<td class="' + common_classes + 'talign-center bold">' + value_title + '</td>\n' +
             '\t\t\t\t</tr>\n'
         )
         count = 1
         for key, value in _dict.items():
             classes = (common_classes + alternating_bg) if count % 2 == 0 else common_classes   # Alternate Style
-            value_str = u''
-            _html += u'\t\t\t\t<tr>\n'                                                          # Open Key | Value row.
+            value_str = ''
+            _html += '\t\t\t\t<tr>\n'                                                          # Open Key | Value row.
             if isinstance(value, set):
                 vcount = 1
                 for v in value:
-                    value_str += u"<code>" + v + u"</code>&emsp;"
-                    value_str += u'<br>' if vcount % 5 == 0 else u''
+                    value_str += "<code>" + v + "</code>&emsp;"
+                    value_str += '<br>' if vcount % 5 == 0 else ''
                     vcount += 1
             _html += str(
                 '\t\t\t\t\t<td class="' + classes + '">' + key + '</td>\n' +
