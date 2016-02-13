@@ -11,8 +11,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderFront" Runat="Server">
     <div class=" row bgc-green padding-top-30 padding-bottom-30">
         Main Content<br />
-        30px top and bottom margin
-
+        Padding is 30px top and bottom
+        Background color is green.
     </div>
 
     <div class="row padding-top-30 padding-bottom-30 <%=ClassSelector.Green %>">Is this green?</div>

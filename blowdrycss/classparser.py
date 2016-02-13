@@ -193,7 +193,7 @@ class ClassExtractor(object):
         """
         class_set = set()
 
-        print(self.raw_class_list)
+        # print('raw_class_list', self.raw_class_list)
         for classes in self.raw_class_list:
             class_set = set.union(
                 set(classes.split()),               # Split space delimited string into set().
@@ -229,18 +229,21 @@ class ClassParser(object):
 
     """
     def __init__(self, file_dict):
-        self.html_class_parser = HTMLClassParser(files=file_dict['.html'])
-
-        # Exclude 'html' files. They are already handled on the line above.
+        # Handled 'html' files with HTMLClassParser, and remove *.html files from file_dict.
         if '.html' in file_dict:
+            self.html_class_parser = HTMLClassParser(files=file_dict['.html'])
             del file_dict['.html']
+            self.class_set = self.html_class_parser.class_set
+        else:
+            self.html_class_parser = None
+            self.class_set = set()
 
         self.file_dict = file_dict
 
         self.file_path_list = []
         self.build_file_path_list()
 
-        self.class_set = self.html_class_parser.class_set
+        # print('html_class_parser.class_set', self.class_set)
         self.build_class_set()
 
     def build_file_path_list(self):
@@ -265,4 +268,6 @@ class ClassParser(object):
             sub_regex = regex_dict['sub_regex']
             findall_regex = regex_dict['findall_regex']
             class_extractor = ClassExtractor(file_path=file_path, sub_regex=sub_regex, findall_regex=findall_regex)
+            # print('class_extractor.class_set:', class_extractor.class_set)
             self.class_set = self.class_set.union(class_extractor.class_set)
+            # print('final class_set', self.class_set)

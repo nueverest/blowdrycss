@@ -116,7 +116,7 @@ def main():
     file_finder = FileFinder(project_directory=settings.project_directory)
 
     # Create set of all defined classes
-    #class_parser = ClassParser(file_dict=file_finder.file_dict)
+    class_parser = ClassParser(file_dict=file_finder.file_dict)
 
     # Filter class names. Only keep classes matching the defined class encoding.
     class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
