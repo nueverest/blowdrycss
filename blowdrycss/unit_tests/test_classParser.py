@@ -48,13 +48,13 @@ class TestClassParser(TestCase):
 
         project_directory = cwd
 
-        settings.file_types = ('*.aspx', '*.jinja2')                              # Override file_types
+        settings.file_types = ('*.aspx', '*.jinja2')                                            # Override file_types
         file_finder = FileFinder(project_directory=project_directory)
         self.assertFalse('.html' in list(file_finder.file_dict), msg=settings.file_types)
         self.assertTrue('.aspx' in list(file_finder.file_dict), msg=settings.file_types)
         class_parser = ClassParser(file_dict=file_finder.file_dict)
         self.assertEqual(class_parser.class_set, expected_class_set, msg=class_parser.class_set)
-        settings.file_types = ('*.html', )                                                  # Reset file_types
+        settings.file_types = ('*.html', )                                                      # Reset file_types
 
 
 if __name__ == '__main__':
