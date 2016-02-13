@@ -1,0 +1,20 @@
+<html>
+	<body>
+	<h1 class="font-size-53">Indigenious Languages details</h1>
+	<table border="1">
+		<tr class="brown">
+			<th>Language</th>
+			<th>Family/Origin</th>
+			<th class="text-align-right">No. of speakers</th>
+			<th>Region</th>
+		</tr>
+		 <% @list_of_langauges.each do |item| %>
+		<tr>
+			<td class="medium-down"><%= item.name %></td>
+			<td><%=item.family %></td>
+			<td><%=item.users %></td>
+			<td><%=item.region %></td>
+		</tr><% end %>
+	</table>
+	</body>
+</html>

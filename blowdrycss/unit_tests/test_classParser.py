@@ -6,7 +6,7 @@ from blowdrycss.filehandler import FileFinder
 from blowdrycss.classparser import ClassParser
 
 
-class TestGeneralClassParser(TestCase):
+class TestClassParser(TestCase):
     def test_build_file_path_list(self):
         original_cwd = getcwd()
 

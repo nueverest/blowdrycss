@@ -50,6 +50,17 @@ class TestClassExtractor(TestCase):
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
 
+    def test_class_set_ruby_erb(self):
+        expected_class_set = {
+            'font-size-53', 'brown', 'text-align-right', 'medium-down',
+        }
+        erb_file = unittest_file_path('test_erb', 'test.erb')
+        erb_sub = r'{.*?}?}'
+        erb_findall = r'class="(.*?)"'
+        class_extractor = ClassExtractor(file_path=erb_file, sub_regex=erb_sub, findall_regex=erb_findall)
+        actual_class_set = class_extractor.class_set
+        self.assertEqual(actual_class_set, expected_class_set)
+
     def test_wrong_path_OSError(self):
         self.assertRaises(OSError, ClassExtractor, 'wrong_path', r'', r'')
 
@@ -75,6 +86,19 @@ class TestClassExtractor(TestCase):
         regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(
                 file_path=jinja2_file, sub_regex=regex_dict['sub_regex'], findall_regex=regex_dict['findall_regex']
+        )
+        actual_class_set = class_extractor.class_set
+        self.assertEqual(actual_class_set, expected_class_set)
+
+    def test_integration_class_set_ruby_erb(self):
+        expected_class_set = {
+            'font-size-53', 'brown', 'text-align-right', 'medium-down',
+        }
+        erb_file = unittest_file_path('test_erb', 'test.erb')
+        file_regex_map = FileRegexMap(file_path=erb_file)
+        regex_dict = file_regex_map.regex_dict
+        class_extractor = ClassExtractor(
+                file_path=erb_file, sub_regex=regex_dict['sub_regex'], findall_regex=regex_dict['findall_regex']
         )
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
