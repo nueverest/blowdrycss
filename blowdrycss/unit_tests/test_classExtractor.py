@@ -1,7 +1,7 @@
 # builtins
 from unittest import TestCase, main
 # custom
-from blowdrycss.filehandler import ClassExtractor, FileRegexMap
+from blowdrycss.classparser import ClassExtractor, FileRegexMap
 from blowdrycss.utilities import unittest_file_path
 
 

@@ -1,7 +1,7 @@
 # builtins
 from unittest import TestCase, main
 # custom
-from blowdrycss.filehandler import FileRegexMap
+from blowdrycss.classparser import FileRegexMap
 from blowdrycss.utilities import unittest_file_path
 
 __author__ = 'chad nelson'
