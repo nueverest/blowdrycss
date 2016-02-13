@@ -57,7 +57,7 @@ class TestClassExtractor(TestCase):
     def test_integration_class_set_aspx(self):
         expected_class_set = {'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green'}
         aspx_file = unittest_file_path('test_aspx', 'test.aspx')
-        file_regex_map = FileRegexMap(_path=aspx_file)
+        file_regex_map = FileRegexMap(file_path=aspx_file)
         regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(
                 file_path=aspx_file, sub_regex=regex_dict['sub_regex'], findall_regex=regex_dict['findall_regex']
@@ -71,7 +71,7 @@ class TestClassExtractor(TestCase):
             'text-align-center'
         }
         jinja2_file = unittest_file_path('test_jinja', 'test.jinja2')
-        file_regex_map = FileRegexMap(_path=jinja2_file)
+        file_regex_map = FileRegexMap(file_path=jinja2_file)
         regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(
                 file_path=jinja2_file, sub_regex=regex_dict['sub_regex'], findall_regex=regex_dict['findall_regex']

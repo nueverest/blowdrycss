@@ -6,7 +6,7 @@ import logging
 import cssutils
 # custom
 from blowdrycss.filehandler import FileFinder, CSSFile, GenericFile
-from blowdrycss.htmlparser import HTMLClassParser
+from blowdrycss.classparser import ClassParser
 from blowdrycss.classpropertyparser import ClassPropertyParser
 from blowdrycss.cssbuilder import CSSBuilder
 from blowdrycss.datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, \
@@ -116,7 +116,7 @@ def main():
     file_finder = FileFinder(project_directory=settings.project_directory)
 
     # Create set of all defined classes
-    class_parser = HTMLClassParser(files=file_finder.files)
+    #class_parser = ClassParser(file_dict=file_finder.file_dict)
 
     # Filter class names. Only keep classes matching the defined class encoding.
     class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)

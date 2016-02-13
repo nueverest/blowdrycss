@@ -12,20 +12,20 @@ class TestFileRegexMap(TestCase):
     def test_is_valid_extension_true(self):
         file_paths = [unittest_file_path('test_aspx', 'test.aspx'), unittest_file_path('test_jinja', 'test.jinja2')]
         for _path in file_paths:
-            file_regex_map = FileRegexMap(_path=_path)
+            file_regex_map = FileRegexMap(file_path=_path)
             self.assertTrue(file_regex_map.is_valid_extension(), msg=_path)
 
     def test_is_valid_extension_whitespace(self):
         file_paths = [unittest_file_path('test_aspx', 'test.aspx  '), unittest_file_path('test_jinja', 'test.jinja2 ')]
         for _path in file_paths:
-            file_regex_map = FileRegexMap(_path=_path)
+            file_regex_map = FileRegexMap(file_path=_path)
             self.assertTrue(file_regex_map.is_valid_extension(), msg=_path)
 
     def test_is_valid_extension_false(self):
         wrong_extensions = ['.wrong', '.squirrel', '.incorrect']
         file_path = unittest_file_path('test_aspx', 'test.aspx')
         for wrong_extension in wrong_extensions:
-            file_regex_map = FileRegexMap(_path=file_path)
+            file_regex_map = FileRegexMap(file_path=file_path)
             file_regex_map.extension = wrong_extension
             self.assertFalse(file_regex_map.is_valid_extension())
 
@@ -49,7 +49,7 @@ class TestFileRegexMap(TestCase):
         ]
         file_paths = [unittest_file_path('test_aspx', 'test.aspx'), unittest_file_path('test_jinja', 'test.jinja2')]
         for i, _path in enumerate(file_paths):
-            file_regex_map = FileRegexMap(_path=_path)
+            file_regex_map = FileRegexMap(file_path=_path)
             actual_dict = file_regex_map.regex_dict
             self.assertEqual(actual_dict, expected_dicts[i], msg=_path)
 

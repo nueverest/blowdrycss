@@ -1,3 +1,6 @@
+# python 2 compatibility
+from __future__ import print_function, unicode_literals
+from io import open
 # builtins
 from os import path
 from re import sub, findall
@@ -107,7 +110,7 @@ class FileRegexMap(object):
                 },
             }
         else:
-            raise OSError(self.file_path + ' does not exist.')
+            raise OSError(file_path + ' does not exist.')
 
     def is_valid_extension(self):
         """ Validates the extension. Returns whether True or False based on whether the extension is a key in
@@ -233,7 +236,10 @@ class ClassParser(object):
             del file_dict['.html']
 
         self.file_dict = file_dict
+
         self.file_path_list = []
+        self.build_file_path_list()
+
         self.class_set = self.html_class_parser.class_set
         self.build_class_set()
 

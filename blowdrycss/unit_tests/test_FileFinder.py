@@ -1,6 +1,6 @@
 # builtin
 from unittest import TestCase, main
-from os import path, getcwd, chdir
+from os import path, getcwd
 import sys
 from io import StringIO
 # custom
@@ -109,7 +109,6 @@ class TestFileFinder(TestCase):
             self.assertEqual(file_finder.file_dict[valid_key], valid_dict[valid_key],
                              msg=file_finder.file_dict[valid_key])
         settings.file_types = ('*.html', )                                                  # Reset file_types
-        chdir(original_cwd)                                                                 # Reset directory
 
     def test_set_file_dict_extension_not_found(self):
         original_cwd = getcwd()
@@ -133,7 +132,6 @@ class TestFileFinder(TestCase):
             self.assertEqual(file_finder.file_dict[valid_key], valid_dict[valid_key],
                              msg=file_finder.file_dict[valid_key])
         settings.file_types = ('*.html', )                                                  # Reset file_types
-        chdir(original_cwd)                                                                 # Reset directory
 
     def test_fileconverter_wrongpath(self):
         wrong_file_path = '/this/is/wrong/file/path'
