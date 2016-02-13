@@ -96,6 +96,7 @@ except (IOError, ImportError):
     long_description = 'Rapid styling tool used to auto-generate DRY CSS files from encoded class selectors.'
 
 # Get current version number.
+# http://python-future.org/_modules/future/utils.html#exec_
 version = {}
 with open('version.py') as _file:
     exec(_file.read(), version)
@@ -124,7 +125,7 @@ setup(
 
     # Classifier Reference: https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        'Development Status :: 3 - Alpha',                  # 3 - Alpha, 4 - Beta, 5 - Production/Stable
+        'Development Status :: 4 - Beta',                  # 3 - Alpha, 4 - Beta, 5 - Production/Stable
         'Intended Audience :: Developers',
         'Intended Audience :: Information Technology',
         'Natural Language :: English',
