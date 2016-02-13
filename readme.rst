@@ -37,11 +37,11 @@ Version Changelog
   discovered in them. To use open ``blowdrycss_settings.py`` and set ``file_types = ('*.html', '.<extension>')``.
   See ``blowdrycss.classparser`` for more details about available extensions.
 |
-| **Supported jinja and django template extensions:** ::
+| **Supported jinja and django template extensions:**
 
     .jinja, .jinja2, .jnj, .ja, .djt, .djhtml
 
-| **Supported XHTML, asp.net, and ruby template extensions:** ::
+| **Supported XHTML, asp.net, and ruby template extensions:**
 
     .aspx, .ascx, .master, .erb
 
