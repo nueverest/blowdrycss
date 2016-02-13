@@ -3,7 +3,51 @@ Read Me
 
 `blowdrycss` is a rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
 
-**Why the name blowdrycss?**
+Version Changelog
+~~~~~~~~~~~~~~~~~
+
+| **0.0.1** -- Initial Release with basic functions working.
+|
+| **0.0.2** -- Extended functionality to allow for a subset of shorthand properties to be decoded correctly
+|
+| **0.0.3** -- Modularized the color, font, and unit parsers.
+|
+| **0.0.4** -- Sphinx integration started.
+|
+| **0.0.5** -- All docstrings added. Many modules refactored and improved during the documentation process. New
+  unit tests added.
+|
+| **0.0.6** -- Advanced media query syntax added. Modules ``breakpointparser`` and ``scalingparser`` added to
+  allow for the dynamic creation of media queries. (1/2/2016)
+|
+| **0.0.7** -- ALPHA release: Implemented backward compatibility with Python version 2.7.x.
+|
+| **0.0.8** -- Major refactoring of directory structure, and preparation of new settings file.
+|
+| **0.0.9** -- This version auto-builds blowdrycss_settings.py inside of the users web project making the settings
+  easier to find and edit.
+|
+| **0.1.0** -- BETA release: Fixed ImportErrors when running blowdrycss after
+  ``pip install blowdrycss`` or ``python setup.py install``. Entered BETA.
+|
+| **0.1.1** -- Corrected more errors in the import infrastructure. Fixed ``blowdrycss_settings.py`` so that
+  settings can be customized.
+|
+| **0.1.2** -- ``HTML, JINJA, .NET, and RUBY Template`` file types are now supported. Meaning that classes can be
+  discovered in them. To use open ``blowdrycss_settings.py`` and set ``file_types = ('*.html', '.<extension>')``.
+  See ``blowdrycss.classparser`` for more details about available extensions.
+|
+| **Supported jinja and django template extensions:** ::
+
+    .jinja, .jinja2, .jnj, .ja, .djt, .djhtml
+
+| **Supported XHTML, asp.net, and ruby template extensions:** ::
+
+    .aspx, .ascx, .master, .erb
+
+
+Why the name blowdrycss?
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Inspiration for the name came from the blow dryer. A blow dryer rapidly drys and styles hair.
 
