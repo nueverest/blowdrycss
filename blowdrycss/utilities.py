@@ -8,6 +8,7 @@ from os import path, stat, getcwd
 # custom
 import blowdrycss_settings as settings
 
+
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 
@@ -173,9 +174,9 @@ def unittest_file_path(folder='', filename=''):
     cwd = getcwd()
 
     if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
-        the_path = path.join(folder, filename)
+        the_path = path.join(cwd, folder, filename)
     else:                                                       # Run unittest cmd from the root directory.
-        the_path = path.join('blowdrycss', 'unit_tests', folder, filename)
+        the_path = path.join(cwd, 'blowdrycss', 'unit_tests', folder, filename)
 
     return the_path
 

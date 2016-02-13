@@ -2,7 +2,7 @@
 # from lib2to3.fixes import fix_set_literal  http://python-future.org/futurize.html?highlight=set
 # builtins
 from unittest import TestCase, main
-from os import getcwd
+import sys
 # custom
 from blowdrycss.utilities import change_settings_for_testing
 from blowdrycss.classpropertyparser import ClassPropertyParser
@@ -11,13 +11,10 @@ from blowdrycss.cssbuilder import CSSBuilder
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 
-
-# Change settings directories for testing
-cwd = getcwd()
-
-if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+# required for pycharm unittest feature to work under both python 2.7 and python 3.x
+if sys.hexversion < 0x03000000:
     import blowdrycss.blowdrycss_settings as settings
-else:                                                       # python setup.py test
+else:
     import blowdrycss_settings as settings
 
 change_settings_for_testing()
