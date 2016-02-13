@@ -211,18 +211,16 @@ matching input parameter resulting in thousands of duplicate CSS
 properties.
 
 Auto-generating ``font-size: 1rem;`` 500 times is now super easy with a
-pre-compiler and a for-loop. Some might say,
+pre-compiler and a for-loop. Some might say, ::
 
-> Well we minified it to save space.
+    Well we minified it to save space.
 
-Yes but,
+Yes but, ::
 
+    Why did you write the same property 500 times in your main CSS file?
 
-    Why did you write the same property 500 times into your main CSS
-    file?
-
-CSS File size does matter. Large style files result in the following:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CSS File size does matter. For consideration:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 -  Longer download times increase user bounce rates especially on mobile
    devices.
