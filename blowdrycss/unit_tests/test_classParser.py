@@ -24,12 +24,12 @@ class TestClassParser(TestCase):
 
         project_directory = cwd
 
-        settings.file_types = ('*.html', '*.aspx', '*.jinja2')                              # Override file_types
+        settings.file_types = ('*.html', '*.aspx', '*.jinja2')                                  # Override file_types
         file_finder = FileFinder(project_directory=project_directory)
         self.assertTrue('.aspx' in list(file_finder.file_dict), msg=settings.file_types)
         class_parser = ClassParser(file_dict=file_finder.file_dict)
         self.assertEqual(set(class_parser.file_path_list), expected_file_paths, msg=class_parser.file_path_list)
-        settings.file_types = ('*.html', )                                                  # Reset file_types
+        settings.file_types = ('*.html', )                                                      # Reset file_types
 
     def test_build_class_set(self):
         original_cwd = getcwd()
