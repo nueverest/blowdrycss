@@ -1,7 +1,8 @@
 from unittest import TestCase, main
-from os import path, getcwd, remove
+from os import path, remove
 # custom
 from blowdrycss.filehandler import CSSFile
+from blowdrycss.utilities import unittest_file_path
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -14,12 +15,7 @@ class TestCSSFile(TestCase):
         self.assertRaises(OSError, CSSFile, not_a_directory, file_name)
 
     def test_write_created(self):
-        cwd = getcwd()
-        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
-            css_directory = path.join(cwd, 'test_css')
-        else:                                                       # Run unittest cmd from the root directory.
-            css_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_css')
-
+        css_directory = unittest_file_path(folder='test_css')
         file_name = 'blowdry'
         css_file = CSSFile(file_directory=css_directory, file_name=file_name)
         file_path = path.join(css_directory, css_file.file_name + '.css')
@@ -31,12 +27,7 @@ class TestCSSFile(TestCase):
         self.assertTrue(path.isfile(file_path))
 
     def test_write_verify_css_text(self):
-        cwd = getcwd()
-        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
-            css_directory = path.join(cwd, 'test_css')
-        else:                                                       # Run unittest cmd from the root directory.
-            css_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_css')
-
+        css_directory = unittest_file_path(folder='test_css')
         file_name = 'blowdry'
         css_file = CSSFile(file_directory=css_directory, file_name=file_name)
         file_path = path.join(css_directory, css_file.file_name + '.css')
@@ -56,12 +47,7 @@ class TestCSSFile(TestCase):
         self.assertEqual(file_string, expected_string)
 
     def test_minify_created(self):
-        cwd = getcwd()
-        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
-            css_directory = path.join(cwd, 'test_css')
-        else:                                                       # Run unittest cmd from the root directory.
-            css_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_css')
-
+        css_directory = unittest_file_path(folder='test_css')
         file_name = 'blowdry'
         css_file = CSSFile(file_directory=css_directory, file_name=file_name)
         file_path = path.join(css_directory, css_file.file_name + '.min.css')
@@ -73,12 +59,7 @@ class TestCSSFile(TestCase):
         self.assertTrue(path.isfile(file_path))
 
     def test_minify_verify_css_text(self):
-        cwd = getcwd()
-        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
-            css_directory = path.join(cwd, 'test_css')
-        else:                                                       # Run unittest cmd from the root directory.
-            css_directory = path.join(cwd, 'blowdrycss', 'unit_tests', 'test_css')
-
+        css_directory = unittest_file_path(folder='test_css')
         file_name = 'blowdry'
         css_file = CSSFile(file_directory=css_directory, file_name=file_name)
         file_path = path.join(css_directory, css_file.file_name + '.min.css')
