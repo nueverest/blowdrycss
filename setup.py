@@ -67,8 +67,9 @@ Copy the new egg, build, and dist into this new folder.
 python setup.py register -r pypitest
 
 Complete testing on testPyPi.
+Go `here <https://testpypi.python.org/>`__ and ensure everything looks correct.
 
-Back at the command line run (to upload to official PyPi):
+Upload to official PyPi. Back at the command line run:
 twine upload dist/*
 
 

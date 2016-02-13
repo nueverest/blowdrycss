@@ -45,6 +45,7 @@ Version Changelog
 
     .aspx, .ascx, .master, .erb
 
+|
 
 Why the name blowdrycss?
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -210,8 +211,9 @@ matching input parameter resulting in thousands of duplicate CSS
 properties.
 
 Auto-generating ``font-size: 1rem;`` 500 times is now super easy with a
-pre-compiler and a for-loop. Some might say, > Well we minified it to
-save space.
+pre-compiler and a for-loop. Some might say,
+
+> Well we minified it to save space.
 
 Yes but,
 
