@@ -20,15 +20,15 @@ pip install twine
 
 Delete the old .egg-info, build, and dist from the project root.
 
+``unittest`` Reference: https://docs.python.org/2/library/unittest.html
+
 Activate a test virtualenv.
-unittest reference: https://docs.python.org/2/library/unittest.html
 python -m unittest discover -s blowdrycss -p "test_*.py"
+python setup.py test
 python setup.py clean --all
 python setup.py sdist bdist bdist_wheel
-python setup.py test
 
 Test it to see if it works
-
 pip freeze                  # ensure blowdrycss is not already installed.
 pip uninstall blowdrycss    # uninstall if it is already installed.
 python setup.py install     # install the latest
@@ -37,10 +37,10 @@ blowdrycss                  # run it
 [If it is the first time, then do this otherwise skip to next step.]
 Reference: `How to setup a .pypirc file <http://stackoverflow.com/a/35087459/1783439>`__.
 
-Create a file named `.pypirc` in your home directory.
+Create a file named `.pypirc` in your home directory. ::
 
-On Linux, OS X, or Unix: `~/.pypirc`
-On Windows: `C:\\Users\\USERNAME\\.pypirc`
+    On Linux, OS X, or Unix: `~/.pypirc`
+    On Windows: `C:\\Users\\USERNAME\\.pypirc`
 
 Contents of `.pypirc` ::
 
