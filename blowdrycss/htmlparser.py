@@ -185,4 +185,3 @@ class HTMLClassParser(object):
                 set(value.split()),         # Split space delimited string into set().
                 self.class_set              # Unite the new set with class_set.
             )                               # Assign union() to self.class_set.
-
