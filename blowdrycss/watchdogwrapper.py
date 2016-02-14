@@ -76,10 +76,24 @@ def main():
 
     :return: None
 
+    **Example**
+
+    >>> from blowdrycss import watchdogwrapper
+    >>> # blowdrycss_settings.auto_generate = True
+    >>> watchdogwrapper.main()
+    ------------------------------------------------------------------------------------------------
+    blowdry_watchdog is now watching all (.html) files
+    in the project directory: <project directory>
+    ------------------------------------------------------------------------------------------------
+    Press Ctrl + C to exit.
+    >>> # blowdrycss_settings.auto_generate = True
+    >>> watchdogwrapper.main()
+    ☴ blowdrycss started ☴
+    ...
+
     """
     if settings.auto_generate:
-        # Uncomment for testing
-        # logging.basicConfig(level=logging.DEBUG)
+        # logging.basicConfig(level=logging.DEBUG)                  # Uncomment for testing
 
         event_handler = FileEditEventHandler(
                 patterns=list(settings.file_types),
