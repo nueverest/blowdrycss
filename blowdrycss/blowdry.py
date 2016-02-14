@@ -4,6 +4,7 @@ from builtins import bytes, str
 # builtins
 import logging
 import cssutils
+from os import path
 # custom
 from blowdrycss.filehandler import FileFinder, CSSFile, GenericFile
 from blowdrycss.classparser import ClassParser
@@ -66,6 +67,8 @@ def main():
     &nbsp;
 
     """
+    print('\n☴ blowdrycss started ☴')       # ☴ is the trigram for wind in the I Ching.
+
     if settings.hide_css_errors:
         cssutils.log.setLevel(logging.CRITICAL)
 
@@ -138,18 +141,19 @@ def main():
 
     # print('CSS Text:')
     # print(css_text)
+    print('Auto-Generated CSS:')
 
     # Output the DRY CSS file. (user command option)
     if settings.human_readable:
         css_file = CSSFile(file_directory=settings.css_directory, file_name='blowdry')
         css_file.write(css_text=css_text)
-        print(str(settings.css_directory + css_file.file_name) + '.css created.')
+        print(path.join(settings.css_directory, css_file.file_name) + '.css')
 
     # Output the Minified DRY CSS file. (user command option)
     if settings.minify:
         css_file = CSSFile(file_directory=settings.css_directory, file_name='blowdry')
         css_file.minify(css_text=css_text)
-        print(str(settings.css_directory + css_file.file_name) + '.min.css created.')
+        print(path.join(settings.css_directory, css_file.file_name) + '.min.css')
 
 
 if __name__ == '__main__':
