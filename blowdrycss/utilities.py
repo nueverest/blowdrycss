@@ -111,9 +111,15 @@ def get_file_path(file_directory='', file_name='blowdry', extension=''):
 
 # TODO: Test this.
 def print_css_stats(file_name=''):
-    # ``file_name`` the full file_name excluding extension e.g. 'blowdry' or 'site'.
-    # Assumes that the extensions to append to the file_name are '.css' and '.min.css'.
-    # Print the size of a file_name.
+    """ ``file_name`` the full file_name excluding extension e.g. 'blowdry' or 'site'.
+    Assumes that the extensions to append to the file_name are '.css' and '.min.css'.
+    Print the size of a file_name.
+
+    :type file_name: str
+    :param file_name: Name of the CSS files.
+    :return:
+    """
+
     css_file = file_name + '.css'
     min_file = file_name + '.min.css'
 
