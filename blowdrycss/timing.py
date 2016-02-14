@@ -22,68 +22,91 @@ It took: 0.17296 seconds
 from __future__ import print_function, division, unicode_literals
 from builtins import str
 # builtins
-import atexit
 from time import time
 from datetime import timedelta, datetime
-# custom
-# from blowdrycss_settings import minify
-# from utilities import print_css_stats, print_blow_dryer
 
-__author__ = 'paul, nicojo, chad nelson'
+__author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 
 
-def seconds_to_string(elapsed):
-    """ Converts the amount of time elapsed to seconds, and returns it as a string.
+class Timer(object):
+    def __init__(self):
+        """
 
-    :type elapsed: float
-    :param elapsed: A time delta value.
-    :return: (str) -- Returns a string version of the total time elapsed in seconds.
+        :return: None
 
-    """
-    return str(timedelta(seconds=elapsed).total_seconds())
+        **Example**
 
+        >>> from blowdrycss.timing import Timer
+        >>> timer = Timer()
+        >>> timer.report()
+        Completed 2015-12-14 16:56:08.665080
+        =====================================
+        It took: 0.17296 seconds
+        =====================================
+        >>> timer.reset()       # Resets start time to now.
+        >>> timer.report()
+        Completed 2015-12-14 17:05:12.164030
+        =====================================
+        It took: 1.45249 seconds
+        =====================================
 
-def log(elapsed=None):
-    """ Prints the temporal metadata to the console.
+        """
+        self.start = time()
+        self.end = time()
 
-    :type elapsed: str
-    :param elapsed: A string containing the number of seconds elapsed after the ``import timing`` statement
-        was declared.
-    :return: None
+    @staticmethod
+    def seconds_to_string(seconds):
+        """ Converts the amount of time elapsed to seconds, and returns it as a string.
 
-    >>> # Example Output
-    Completed @ 2015-12-14 16:56:08.665080
-    =======================================
-    It took: 0.17296 seconds
-    =======================================
+        :type seconds: float
+        :param seconds: ΔT value.
+        :return: (*str*) -- Returns a string version of the total time elapsed in seconds.
 
-    """
-    completed_at = '\nCompleted @ ' + str(datetime.now())
-    border = '=' * len(completed_at)
-    print(str(completed_at))
-    print(str(border))
-    if elapsed:
-        print('It took: ' + str(elapsed) + 'seconds')
-    # if minify:
-    #     print_css_stats(file_name='blowdry')
-    print(str(border))
-    # print_blow_dryer()
+        """
+        return str(timedelta(seconds=seconds).total_seconds())
 
+    @property
+    def elapsed(self):
+        """ Calculates the amount of time elapsed (ΔT) by subtracting start ``time()`` from end ``time()``.
 
-def end_log():
-    """
-    - Calculates the amount of time elapsed by subtracting start ``time()`` from end ``time()``.
-    - Calls ``log()``, so that, the temporal metadata is printed.
+        **Math:** elapsed = ΔT = end - start
 
-    :return: None
+        :return: (*str*) -- Returns ΔT in units of seconds as a string.
 
-    """
-    end = time()
-    elapsed = end - start
-    log(elapsed=seconds_to_string(elapsed))
+        """
+        seconds_elapsed = self.end - self.start
+        return self.seconds_to_string(seconds=seconds_elapsed)
 
+    def print_time(self):
+        """ Prints temporal metadata to the console. Including the completion timestamp and ΔT in seconds.
 
-# print_blow_dryer()
-start = time()
-atexit.register(end_log)
+        :return: None
+
+        **Example**
+
+        >>> # Example Output
+        Completed 2015-12-14 16:56:08.665080
+        =====================================
+        It took: 0.17296 seconds
+        =====================================
+
+        """
+        completed_at = '\nCompleted ' + str(datetime.now())
+        border = '=' * len(completed_at)
+        print(str(completed_at))
+        print(str(border))
+        print('It took: ' + self.elapsed + 'seconds')
+        print(str(border))
+
+    def report(self):
+        """ Sets ``end`` time and prints the time elapsed (ΔT).
+
+        -
+        - Calls ``log()``, so that, the temporal metadata is printed.
+
+        :return: None
+
+        """
+        self.end = time()
+        self.print_time()
