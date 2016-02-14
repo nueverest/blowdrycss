@@ -68,8 +68,11 @@ class FileEditEventHandler(PatternMatchingEventHandler):
 
 
 def main():
-    """ Creates and attaches an file event handler to an observer. When a file is modified or deleted it triggers
-    blowdry.main().
+    """ If ``settings.auto_generate == True`` indefinitely run blowdrycss inside of the watchdog wrapper.
+    The wrapper creates and attaches an file event handler to an observer. When a file is modified or
+    deleted it triggers blowdry.main().
+
+    Else, blowdry.main() is run once.
 
     :return: None
 
