@@ -220,7 +220,8 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': [
-            'blowdrycss=blowdrycss.blowdry:main',
+            #'blowdrycss=blowdrycss.blowdry:main',
+            'blowdrycss=blowdrycss.watchdogwrapper:main',
         ],
     },
 
