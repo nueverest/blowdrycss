@@ -5,8 +5,9 @@ from time import sleep
 from watchdog.events import PatternMatchingEventHandler, FileModifiedEvent, FileDeletedEvent
 from watchdog.observers import Observer
 # custom
-import blowdrycss.blowdrycss_settings as settings
+from blowdrycss.utilities import print_blow_dryer
 from blowdrycss import blowdry
+import blowdrycss_settings as settings
 
 
 class FileEditEventHandler(PatternMatchingEventHandler):
@@ -22,11 +23,11 @@ class FileEditEventHandler(PatternMatchingEventHandler):
         print()
         print('-' * 96)
         print(
-            'blowdry_watchdog is now watching all', file_types, 'files',
+            'The blowdrycss watchdog is watching all', file_types, 'files',
             '\nin the project directory:', settings.project_directory
         )
         print('-' * 96)
-        print('Press Ctrl + C to exit.')
+        print('Pressing Ctrl + C stops the process.')
         print()
 
     @staticmethod
@@ -85,7 +86,7 @@ def main():
     blowdry_watchdog is now watching all (.html) files
     in the project directory: <project directory>
     ------------------------------------------------------------------------------------------------
-    Press Ctrl + C to exit.
+    Pressing Ctrl + C stops the process.
     >>> # blowdrycss_settings.auto_generate = True
     >>> watchdogwrapper.main()
     ☴ blowdrycss started ☴
@@ -112,6 +113,7 @@ def main():
                 sleep(1)
         except KeyboardInterrupt:
             observer.stop()
+            print_blow_dryer()
 
         observer.join()
     else:
