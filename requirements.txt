@@ -1,7 +1,3 @@
-# Unit Tests
-# unittest
-# coverage>=4.0.2
-
 # Installation and distribution
 pip>=8.0.2
 setuptools>=19.6.2
@@ -15,9 +11,10 @@ pypandoc>=1.1.2
 # Python 2.7 Support
 future>=0.15.2
 
-# Development
-# wheel>=0.26.0
-# twine>=1.6.5
-
 # Automatic CSS generation on save
 # watchdog>=0.8.3
+
+# Development
+# coverage>=4.0.2
+# wheel>=0.26.0
+# twine>=1.6.5
