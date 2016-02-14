@@ -44,10 +44,10 @@ class FileFinder(object):
             self.project_directory = project_directory
             self.files = []
             self.file_dict = {}
-            print('Project Directory:', str(project_directory))
-            print('\nFile Types:', ', '.join(settings.file_types))
             self.set_files()
             self.set_file_dict()
+            print('\nFile Types:', ', '.join(settings.file_types))
+            print('\nProject Directory:', str(project_directory))
             print('\nProject Files Found:')
             self.print_collection(self.files)
         else:
