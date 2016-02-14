@@ -80,15 +80,15 @@ def main():
     # Generate Markdown documentation files.
     if settings.markdown_docs:
         markdown_file = GenericFile(                                        # Document forbidden clashing aliases.
-                file_directory=settings.markdown_directory,
-                file_name='clashing_aliases',
-                extension='.md'
+            file_directory=settings.markdown_directory,
+            file_name='clashing_aliases',
+            extension='.md'
         )
         markdown_file.write(str(clashing_alias_markdown))
         markdown_file = GenericFile(                                        # Document allowed property aliases.
-                file_directory=settings.markdown_directory,
-                file_name='property_aliases',
-                extension='.md'
+            file_directory=settings.markdown_directory,
+            file_name='property_aliases',
+            extension='.md'
         )
         markdown_file.write(str(property_alias_markdown))
 
@@ -96,15 +96,15 @@ def main():
     # in the documentation files.)
     if settings.html_docs:
         html_file = GenericFile(                                            # Document forbidden clashing aliases.
-                file_directory=settings.project_directory,
-                file_name='clashing_aliases',
-                extension='.html'
+            file_directory=settings.project_directory,
+            file_name='clashing_aliases',
+            extension='.html'
         )
         html_file.write(str(clashing_alias_html))
         html_file = GenericFile(                                            # Document allowed property aliases.
-                file_directory=settings.project_directory,
-                file_name='property_aliases',
-                extension='.html'
+            file_directory=settings.project_directory,
+            file_name='property_aliases',
+            extension='.html'
         )
         html_file.write(str(property_alias_html))
 
