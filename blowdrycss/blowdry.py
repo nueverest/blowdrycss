@@ -13,6 +13,7 @@ from blowdrycss.cssbuilder import CSSBuilder
 from blowdrycss.datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, \
     property_alias_html, clashing_alias_rst, property_alias_rst
 from blowdrycss.mediaquerybuilder import MediaQueryBuilder
+from blowdrycss.utilities import print_css_stats
 import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
@@ -67,14 +68,14 @@ def main():
     &nbsp;
 
     """
-    print('\n☴ blowdrycss started ☴')       # ☴ is the trigram for wind in the I Ching.
+    if settings.timing_enabled:
+        from blowdrycss.timing import Timer
+        timer = Timer()
+
+    print('\n~~~ blowdrycss started ~~~')
 
     if settings.hide_css_errors:
         cssutils.log.setLevel(logging.CRITICAL)
-
-    # Performance timer
-    if settings.timing_enabled:
-        import blowdrycss.timing
 
     # Generate Markdown documentation files.
     if settings.markdown_docs:
@@ -155,6 +156,11 @@ def main():
         css_file.minify(css_text=css_text)
         print(path.join(settings.css_directory, css_file.file_name) + '.min.css')
 
+    if settings.timing_enabled:
+        timer.report()
+
+    if settings.minify:
+        print_css_stats(file_name='blowdry')
 
 if __name__ == '__main__':
     main()
