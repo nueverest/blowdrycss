@@ -22,9 +22,10 @@ change_settings_for_testing()
 
 
 class TestWatchdogWrapperMain(TestCase):
-    def monitor_output_stop_watchdog(self, file_path):
-        """ Created due to inability to stop test_main_auto_generate_True(). Reference:
-        http://stackoverflow.com/questions/7602120/sending-keyboard-interrupt-programmatically
+    def monitor_delete_stop(self, file_path_to_delete):
+        """ Monitor console output. Delete file at file_path_to_delete. Stop watchdogwrapper.main()
+        Reference: http://stackoverflow.com/questions/7602120/sending-keyboard-interrupt-programmatically
+
         """
         substrings = [
             '~~~ blowdrycss started ~~~',
@@ -36,14 +37,14 @@ class TestWatchdogWrapperMain(TestCase):
             'blowdry.min.css',
         ]
 
-        saved_stdout = sys.stdout
+        saved_stdout = sys.stdout           # Monitor console
         try:
             out = StringIO()
             sys.stdout = out
 
-            sleep(0.1)                    # Wait for main() to start.
-            remove(file_path)           # Delete delete.html
-            sleep(0.25)                 # IMPORTANT: Must wait for output otherwise test will fail.
+            sleep(0.1)                      # Wait for main() to start.
+            remove(file_path_to_delete)     # Delete delete.html
+            sleep(0.25)                     # IMPORTANT: Must wait for output otherwise test will fail.
 
             output = out.getvalue()
 
@@ -52,7 +53,7 @@ class TestWatchdogWrapperMain(TestCase):
         finally:
             sys.stdout = saved_stdout
 
-        _thread.interrupt_main()        # Stop watchdogwrapper.main().
+        _thread.interrupt_main()            # Stop watchdogwrapper.main().
 
     def test_main_auto_generate_True(self):
         # Integration test
@@ -67,8 +68,8 @@ class TestWatchdogWrapperMain(TestCase):
         self.assertTrue(path.isfile(delete_dot_html))
 
         settings.auto_generate = True
-        _thread.start_new_thread(self.monitor_output_stop_watchdog, (delete_dot_html,))
-        watchdogwrapper.main()
+        _thread.start_new_thread(self.monitor_delete_stop, (delete_dot_html,))
+        watchdogwrapper.main()              # Caution: Nothing will run after this line.
 
     def test_main_auto_generate_False(self):
         # Integration test
