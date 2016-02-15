@@ -4,6 +4,7 @@ from builtins import str
 # builtins
 from unittest import TestCase, main
 from os import path, remove, SEEK_END
+import logging
 import sys
 from io import StringIO, open
 from time import sleep
@@ -82,6 +83,7 @@ class TestFileEditEventHandler(TestCase):
 
     def test_on_modified(self):
         # Integration test
+        logging.basicConfig(level=logging.DEBUG)
         original_file = ''
         substrings = [
             '~~~ blowdrycss started ~~~',
@@ -141,6 +143,7 @@ class TestFileEditEventHandler(TestCase):
 
     def test_on_deleted(self):
         # Integration test
+        logging.basicConfig(level=logging.DEBUG)
         substrings = [
             '~~~ blowdrycss started ~~~',
             'File Types: *.html',
