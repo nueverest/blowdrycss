@@ -184,18 +184,16 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['cssutils>=1.0.1', 'pypandoc>=1.1.2', 'future>=0.15.2'],
+    install_requires=['cssutils>=1.0.1', 'pypandoc>=1.1.2', 'future>=0.15.2', 'watchdog>=0.8.3'],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
     # for example:
     # $ pip install blowdrycss -e .[auto_save, docs, testing]
     extras_require={
-        'auto_save': ['watchdog>=0.8.3', ],
         'docs': ['sphinx>=1.3.3', ],
         'testing': ['coverage>=4.0.2', ],
         'development': [
-            'watchdog>=0.8.3',
             'sphinx>=1.3.3',
             'unittest', 'coverage>=4.0.2',
             'wheel>=0.26.0', 'twine>=1.6.5',

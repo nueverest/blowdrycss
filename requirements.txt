@@ -12,7 +12,7 @@ pypandoc>=1.1.2
 future>=0.15.2
 
 # Automatic CSS generation on save
-# watchdog>=0.8.3
+watchdog>=0.8.3
 
 # Development
 # coverage>=4.0.2
