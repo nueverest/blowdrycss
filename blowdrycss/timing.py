@@ -9,9 +9,9 @@ Simple code performance timer that allows for the execution time to be recorded
 **Usage Case:**
 
 >>> # At the beginning of the chunk of code to be timed.
->>> import timing
->>> # Once the program finish execution it will print
->>> # temporal metadata in this form.
+>>> from blowdrycss.timing import Timer
+>>> timer = Timer()
+>>> timer.report()
 Completed @ 2015-12-14 16:56:08.665080
 =======================================
 It took: 0.17296 seconds
@@ -30,41 +30,41 @@ __project__ = 'blowdrycss'
 
 
 class Timer(object):
+    """ A performance Timer that reports the amount of time it took to run a block of code.
+
+    :return: None
+
+    **Example**
+
+    >>> from blowdrycss.timing import Timer
+    >>> timer = Timer()
+    >>> timer.report()
+    Completed 2015-12-14 16:56:08.665080
+    =====================================
+    It took: 0.17296 seconds
+    =====================================
+    >>> timer.reset()       # Resets start time to now.
+    >>> timer.report()
+    Completed 2015-12-14 17:05:12.164030
+    =====================================
+    It took: 1.45249 seconds
+    =====================================
+
+    """
     def __init__(self):
-        """
-
-        :return: None
-
-        **Example**
-
-        >>> from blowdrycss.timing import Timer
-        >>> timer = Timer()
-        >>> timer.report()
-        Completed 2015-12-14 16:56:08.665080
-        =====================================
-        It took: 0.17296 seconds
-        =====================================
-        >>> timer.reset()       # Resets start time to now.
-        >>> timer.report()
-        Completed 2015-12-14 17:05:12.164030
-        =====================================
-        It took: 1.45249 seconds
-        =====================================
-
-        """
         self.start = time()
         self.end = time()
 
     @staticmethod
-    def seconds_to_string(seconds):
-        """ Converts the amount of time elapsed to seconds, and returns it as a string.
+    def seconds_to_string(seconds_elapsed=0.00):
+        """ Converts the amount of time elapsed to seconds_elapsed, and returns it as a string.
 
-        :type seconds: float
-        :param seconds: ΔT value.
-        :return: (*str*) -- Returns a string version of the total time elapsed in seconds.
+        :type seconds_elapsed: float
+        :param seconds_elapsed: A time() value in units of seconds_elapsed.
+        :return: (*str*) -- Returns a string version of the total time elapsed in seconds_elapsed.
 
         """
-        return str(timedelta(seconds=seconds).total_seconds())
+        return str(timedelta(seconds=seconds_elapsed).total_seconds())
 
     @property
     def elapsed(self):
@@ -76,20 +76,12 @@ class Timer(object):
 
         """
         seconds_elapsed = self.end - self.start
-        return self.seconds_to_string(seconds=seconds_elapsed)
+        return self.seconds_to_string(seconds_elapsed=seconds_elapsed)
 
     def print_time(self):
         """ Prints temporal metadata to the console. Including the completion timestamp and ΔT in seconds.
 
         :return: None
-
-        **Example**
-
-        >>> # Example Output
-        Completed 2015-12-14 16:56:08.665080
-        =====================================
-        It took: 0.17296 seconds
-        =====================================
 
         """
         completed_at = '\nCompleted ' + str(datetime.now())
@@ -100,10 +92,7 @@ class Timer(object):
         print(str(border))
 
     def report(self):
-        """ Sets ``end`` time and prints the time elapsed (ΔT).
-
-        -
-        - Calls ``log()``, so that, the temporal metadata is printed.
+        """ Sets ``end`` time and prints the time elapsed (ΔT).  Calls ``print_time()``, and prints temporal metadata.
 
         :return: None
 
