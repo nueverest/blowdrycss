@@ -11,8 +11,8 @@ __project__ = 'blowdrycss'
 class TestMain(TestCase):
     def test_main(self):
         substrings = [
-            'Project Directory:', 'File Types:', 'Project Files Found:', 'CSSBuilder Running...',
-            '.css created.',
+            '~~~ blowdrycss started ~~~', 'Project Directory:', 'File Types:', 'Project Files Found:',
+            'CSSBuilder Running...', '.css',
         ]
         saved_stdout = sys.stdout
         try:
