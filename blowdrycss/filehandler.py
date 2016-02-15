@@ -1,5 +1,5 @@
 # python 2 compatibility
-from __future__ import print_function, unicode_literals
+from __future__ import print_function, unicode_literals, with_statement
 from builtins import str
 from io import open
 # builtins

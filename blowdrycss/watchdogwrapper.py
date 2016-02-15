@@ -105,9 +105,9 @@ def main():
         # logging.basicConfig(level=logging.DEBUG)                  # Uncomment for testing
 
         event_handler = FileEditEventHandler(
-                patterns=list(settings.file_types),
-                ignore_patterns=[],
-                ignore_directories=True
+            patterns=list(settings.file_types),
+            ignore_patterns=[],
+            ignore_directories=True
         )
 
         observer = Observer()
