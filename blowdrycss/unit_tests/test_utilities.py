@@ -82,7 +82,6 @@ class Test_utilities(TestCase):
             actual = unittest_settings.px_to_em(pixels=str(pixels))  # typecast to string str()
             self.assertEqual(actual, str(expected), msg=pixels)
 
-
     def test_px_to_em_int_input(self):
         base = 16
         for pixels in range(-1000, 1001):
@@ -138,6 +137,31 @@ class Test_utilities(TestCase):
             the_path = unittest_file_path(folder, filenames[i])
             self.assertTrue(path.isfile(the_path))
 
+    def test_change_settings_for_testing(self):
+        cwd = getcwd()
+
+        if_cases = (
+            settings.markdown_directory == path.join(cwd, 'test_markdown'),
+            settings.project_directory == path.join(cwd, 'test_examplesite'),
+            settings.css_directory == path.join(settings.project_directory, 'test_css'),
+            settings.docs_directory == path.join(cwd, 'test_docs'),
+        )
+        else_cases = (
+            settings.markdown_directory == path.join(cwd, 'blowdrycss', 'unit_tests', 'test_markdown'),
+            settings.project_directory == path.join(cwd, 'blowdrycss', 'unit_tests', 'test_examplesite'),
+            settings.css_directory == path.join(settings.project_directory, 'test_css'),
+            settings.docs_directory == path.join(cwd, 'blowdrycss', 'unit_tests', 'test_docs'),
+        )
+
+        change_settings_for_testing()
+
+        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+            for if_case in if_cases:
+                self.assertTrue(if_case)
+        else:                                                       # Run unittest cmd from the root directory.
+            for else_case in else_cases:
+                self.assertTrue(else_case)
+
     def test_print_css_stats(self):
         # Checks variable date components and constant string output.
         substrings = [
@@ -155,6 +179,32 @@ class Test_utilities(TestCase):
             output = out.getvalue()
             for substring in substrings:
                 self.assertTrue(substring in output, msg=substring + '\noutput:\n' + output)
+        finally:
+            sys.stdout = saved_stdout
+
+    def test_print_blow_dryer(self):
+        # Warning: Do not change the indentation.
+        expected_ascii = """
+                     .-'-.
+                  ;@@@@@@@@@'
+    ~~~~ ;@@@@@@@@@@@@@@@@@@@+`
+    ~~~~ ;@@@@@@@@@@@@@``@@@@@@
+                +@@@@@`  `@@@@@'
+                   @@@@``@@@@@
+                     .-@@@@@@@+
+                          @@@@@
+                           .@@@.
+                            `@@@.
+    """
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+
+            print_blow_dryer()
+
+            output = out.getvalue()
+            self.assertTrue(expected_ascii in output, msg=expected_ascii + '\noutput:\n' + output)
         finally:
             sys.stdout = saved_stdout
 

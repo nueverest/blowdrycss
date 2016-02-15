@@ -157,7 +157,6 @@ def unittest_file_path(folder='', filename=''):
     return the_path
 
 
-# TODO: Test this.
 def print_css_stats(file_name=''):
     """ ``file_name`` the full file_name excluding extension e.g. 'blowdry' or 'site'.
     Assumes that the extensions to append to the file_name are '.css' and '.min.css'.
@@ -187,7 +186,6 @@ def print_css_stats(file_name=''):
     print('CSS file size reduced by', str(percent_reduced) + '%.')
 
 
-# TODO: Write test.
 def print_blow_dryer():
     """ Prints an image of a blow dryer using ASCII.
 
