@@ -177,7 +177,6 @@ class Test_utilities(TestCase):
                 self.assertTrue(else_case)
 
     def test_print_css_stats(self):
-        # Checks variable date components and constant string output.
         substrings = [
             'blowdry.css:\t 0.3 kB',
             'blowdry.min.css: 0.2 kB',
