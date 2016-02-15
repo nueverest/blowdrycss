@@ -97,7 +97,7 @@ def main():
     Pressing Ctrl + C stops the process.
     >>> # blowdrycss_settings.auto_generate = True
     >>> watchdogwrapper.main()
-    ☴ blowdrycss started ☴
+    ~~~ blowdrycss started ~~~
     ...
 
     """
