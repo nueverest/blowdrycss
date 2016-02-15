@@ -137,6 +137,20 @@ class Test_utilities(TestCase):
             the_path = unittest_file_path(folder, filenames[i])
             self.assertTrue(path.isfile(the_path))
 
+    def test_unittest_file_path_exact_path(self):
+        folder = 'test_html'
+        filename = 'index.html'
+        cwd = getcwd()
+        expected_if_path = path.join(cwd, folder, filename)
+        expecetd_else_path = path.join(cwd, 'blowdrycss', 'unit_tests', folder, filename)
+
+        test_path = unittest_file_path(folder=folder, filename=filename)
+
+        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+            self.assertTrue(test_path, expected_if_path)
+        else:                                                       # Run unittest cmd from the root directory.
+            self.assertTrue(test_path, expecetd_else_path)
+
     def test_change_settings_for_testing(self):
         cwd = getcwd()
 
