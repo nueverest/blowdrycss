@@ -24,7 +24,8 @@ Version Changelog
   Watchdog will trigger blowdrycss and auto-generate the CSS files. Watchdog is now a required dependency.
   The setting ``auto-generate`` is currently ``False`` by default.
 |
-| To enable open ``blowdrycss_settings.py``, and set ``auto_generate = True``.
+| *To enable it* open ``blowdrycss_settings.py``, and set ``auto_generate = True``.
+| *To test it* change one of the project files, and see what happens at the console.
 |
 | ``Timing.py`` was completely re-written and now contains a ``Timer`` class. These changes were needed to
   accommodate watchdog feature.
