@@ -86,11 +86,25 @@
 
         .aspx, .ascx, .master, .erb
 
+    | **0.1.3** -- Implemented support for auto-generated CSS via Watchdog. Watchdog can now monitor all files
+      associated with the ``file_types`` defined in ``blowdrycss_settings.py``. If a file is modified or deleted,
+      Watchdog will trigger blowdrycss and auto-generate the CSS files. Watchdog is now a required dependency.
+      The setting ``auto-generate`` is currently ``False`` by default.
+    |
+    | To enable it open ``blowdrycss_settings.py``, and set ``auto_generate = True``.
+    |
+    | ``Timing.py`` was completely re-written and now contains a ``Timer`` class. These changes were needed to
+      accommodate watchdog feature.
+    |
+    | CSS file size reduction statistics are now printed.
+    |
+    | An ASCII blow dryer is now printed on program exit.
+
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 __release__ = __version__ + 'b1'

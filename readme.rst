@@ -6,33 +6,7 @@ Read Me
 Version Changelog
 ~~~~~~~~~~~~~~~~~
 
-| **0.0.1** -- Initial Release with basic functions working.
-|
-| **0.0.2** -- Extended functionality to allow for a subset of shorthand properties to be decoded correctly
-|
-| **0.0.3** -- Modularized the color, font, and unit parsers.
-|
-| **0.0.4** -- Sphinx integration started.
-|
-| **0.0.5** -- All docstrings added. Many modules refactored and improved during the documentation process. New
-  unit tests added.
-|
-| **0.0.6** -- Advanced media query syntax added. Modules ``breakpointparser`` and ``scalingparser`` added to
-  allow for the dynamic creation of media queries. (1/2/2016)
-|
-| **0.0.7** -- ALPHA release: Implemented backward compatibility with Python version 2.7.x.
-|
-| **0.0.8** -- Major refactoring of directory structure, and preparation of new settings file.
-|
-| **0.0.9** -- This version auto-builds blowdrycss_settings.py inside of the users web project making the settings
-  easier to find and edit.
-|
-| **0.1.0** -- BETA release: Fixed ImportErrors when running blowdrycss after
-  ``pip install blowdrycss`` or ``python setup.py install``. Entered BETA.
-|
-| **0.1.1** -- Corrected more errors in the import infrastructure. Fixed ``blowdrycss_settings.py`` so that
-  settings can be customized.
-|
+| See ``version.py`` for full changelog.
 | **0.1.2** -- ``HTML, JINJA, .NET, and RUBY Template`` file types are now supported. Meaning that classes can be
   discovered in them. To use open ``blowdrycss_settings.py`` and set ``file_types = ('*.html', '.<extension>')``.
   See ``blowdrycss.classparser`` for more details about available extensions.
@@ -45,7 +19,19 @@ Version Changelog
 
     .aspx, .ascx, .master, .erb
 
+| **0.1.3** -- Implemented support for auto-generated CSS via Watchdog. Watchdog can now monitor all files
+  associated with the ``file_types`` defined in ``blowdrycss_settings.py``. If a file is modified or deleted,
+  Watchdog will trigger blowdrycss and auto-generate the CSS files. Watchdog is now a required dependency.
+  The setting ``auto-generate`` is currently ``False`` by default.
 |
+| To enable open ``blowdrycss_settings.py``, and set ``auto_generate = True``.
+|
+| ``Timing.py`` was completely re-written and now contains a ``Timer`` class. These changes were needed to
+  accommodate watchdog feature.
+|
+| CSS file size reduction statistics are now printed.
+|
+| An ASCII blow dryer is now printed on program exit.
 
 Why the name blowdrycss?
 ~~~~~~~~~~~~~~~~~~~~~~~~
