@@ -1,5 +1,6 @@
 # python 2
 from __future__ import print_function, unicode_literals, with_statement
+import _thread
 # builtins
 from unittest import TestCase, main
 import logging
@@ -21,48 +22,53 @@ change_settings_for_testing()
 
 
 class TestWatchdogWrapperMain(TestCase):
-    # Unable to test this at present as main() is in a process of its' own.
-    # Need something like this http://stackoverflow.com/questions/7602120/sending-keyboard-interrupt-programmatically
+    def monitor_output_stop_watchdog(self, file_path):
+        """ Created due to inability to stop test_main_auto_generate_True(). Reference:
+        http://stackoverflow.com/questions/7602120/sending-keyboard-interrupt-programmatically
+        """
+        substrings = [
+            '~~~ blowdrycss started ~~~',
+            'File Types: *.html',
+            'Project Directory:',
+            'Auto-Generated CSS',
+            'Completed',
+            'blowdry.css',
+            'blowdry.min.css',
+        ]
 
-    # def test_main_auto_generate_True(self):
-    #     # Integration test
-    #     logging.basicConfig(level=logging.DEBUG)
-    #     substrings = [
-    #         '~~~ blowdrycss started ~~~',
-    #         'File Types: *.html',
-    #         'Project Directory:',
-    #         'Auto-Generated CSS',
-    #         'Completed',
-    #         'blowdry.css',
-    #         'blowdry.min.css',
-    #     ]
-    #     html_text = '<html></html>'
-    #     delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
-    #
-    #     # Create delete.html
-    #     with open(delete_dot_html, 'w') as _file:
-    #         _file.write(html_text)
-    #
-    #     self.assertTrue(path.isfile(delete_dot_html))
-    #
-    #     saved_stdout = sys.stdout
-    #     try:
-    #         out = StringIO()
-    #         sys.stdout = out
-    #
-    #         settings.auto_generate = True
-    #         watchdogwrapper.main()
-    #
-    #         remove(delete_dot_html)     # Delete delete.html
-    #
-    #         sleep(0.25)                 # IMPORTANT: Must wait for output otherwise test will fail.
-    #
-    #         output = out.getvalue()
-    #
-    #         for substring in substrings:
-    #             self.assertTrue(substring in output, msg=substring + '\noutput:\n' + output)
-    #     finally:
-    #         sys.stdout = saved_stdout
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+
+            sleep(0.1)                    # Wait for main() to start.
+            remove(file_path)           # Delete delete.html
+            sleep(0.25)                 # IMPORTANT: Must wait for output otherwise test will fail.
+
+            output = out.getvalue()
+
+            for substring in substrings:
+                self.assertTrue(substring in output, msg=substring + '\noutput:\n' + output)
+        finally:
+            sys.stdout = saved_stdout
+
+        _thread.interrupt_main()        # Stop watchdogwrapper.main().
+
+    def test_main_auto_generate_True(self):
+        # Integration test
+        logging.basicConfig(level=logging.DEBUG)
+        html_text = '<html></html>'
+        delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
+
+        # Create delete.html
+        with open(delete_dot_html, 'w') as _file:
+            _file.write(html_text)
+
+        self.assertTrue(path.isfile(delete_dot_html))
+
+        settings.auto_generate = True
+        _thread.start_new_thread(self.monitor_output_stop_watchdog, (delete_dot_html,))
+        watchdogwrapper.main()
 
     def test_main_auto_generate_False(self):
         # Integration test
