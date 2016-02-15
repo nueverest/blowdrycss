@@ -18,6 +18,12 @@ class FileEditEventHandler(PatternMatchingEventHandler):
     """
     @staticmethod
     def print_status():
+        """ Prints the current status of the watchdog process. Lets the user know that the project directory is
+        being watched.
+
+        :return: None
+
+        """
         file_types = '(' + ', '.join(settings.file_types) + ')'
 
         print()
@@ -32,8 +38,10 @@ class FileEditEventHandler(PatternMatchingEventHandler):
 
     @staticmethod
     def excluded(src_path=''):
-        """
-        :param src_path:
+        """ Returns True if the src_path matches an excluded file. Otherwise, it returns False.
+
+        :type src_path: str
+        :param src_path: Source path of the file system object that triggered this event. `Reference <https://github.com/gorakhargosh/watchdog/blob/c05183a96a5a307f00dd3a775244c98b156fc001/src/watchdog/events.py>`__
         :return: (*bool*) -- Return True if ``src_path`` ends with a file in ``excluded_files``
 
         """
