@@ -33,6 +33,7 @@ Version Changelog
 | CSS file size reduction statistics are now printed.
 |
 | An ASCII blow dryer is now printed on program exit.
+|
 
 Why the name blowdrycss?
 ~~~~~~~~~~~~~~~~~~~~~~~~
