@@ -109,36 +109,6 @@ def get_file_path(file_directory='', file_name='blowdry', extension=''):
             )
 
 
-# TODO: Test this.
-def print_css_stats(file_name=''):
-    """ ``file_name`` the full file_name excluding extension e.g. 'blowdry' or 'site'.
-    Assumes that the extensions to append to the file_name are '.css' and '.min.css'.
-    Print the size of a file_name.
-
-    :type file_name: str
-    :param file_name: Name of the CSS files.
-    :return:
-    """
-
-    css_file = file_name + '.css'
-    min_file = file_name + '.min.css'
-
-    css_dir = path.join(settings.css_directory, css_file)                           # Get full file path.
-    min_dir = path.join(settings.css_directory, min_file)
-
-    css_size = stat(css_dir).st_size                                                # Get file size in bytes.
-    min_size = stat(min_dir).st_size
-
-    percent_reduced = round(float(min_size) / float(css_size) * float(100), 1)      # Calculate percentage size reduced.
-
-    css_kb = round(float(css_size) / float(1000), 1)                                # Convert to kilobytes.
-    min_kb = round(float(min_size) / float(1000), 1)
-
-    print('\n' + css_file + ':\t', css_kb, 'kb')
-    print(min_file + ':', min_kb, 'kb')
-    print('CSS file size reduced by', str(percent_reduced) + '%.')
-
-
 def change_settings_for_testing():
     """ Change settings directories for testing.
 
@@ -185,6 +155,36 @@ def unittest_file_path(folder='', filename=''):
         the_path = path.join(cwd, 'blowdrycss', 'unit_tests', folder, filename)
 
     return the_path
+
+
+# TODO: Test this.
+def print_css_stats(file_name=''):
+    """ ``file_name`` the full file_name excluding extension e.g. 'blowdry' or 'site'.
+    Assumes that the extensions to append to the file_name are '.css' and '.min.css'.
+    Print the size of a file_name.
+
+    :type file_name: str
+    :param file_name: Name of the CSS files.
+    :return:
+    """
+
+    css_file = file_name + '.css'
+    min_file = file_name + '.min.css'
+
+    css_dir = path.join(settings.css_directory, css_file)                           # Get full file path.
+    min_dir = path.join(settings.css_directory, min_file)
+
+    css_size = stat(css_dir).st_size                                                # Get file size in Bytes.
+    min_size = stat(min_dir).st_size
+
+    percent_reduced = round(float(min_size) / float(css_size) * float(100), 1)      # Calculate percentage size reduced.
+
+    css_kb = round(float(css_size) / float(1000), 1)                                # Convert to kiloBytes.
+    min_kb = round(float(min_size) / float(1000), 1)
+
+    print('\n' + css_file + ':\t', css_kb, 'kB')
+    print(min_file + ':', min_kb, 'kB')
+    print('CSS file size reduced by', str(percent_reduced) + '%.')
 
 
 # TODO: Write test.

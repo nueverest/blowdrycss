@@ -4,12 +4,23 @@ from builtins import round
 # general
 from unittest import TestCase, main
 from os import getcwd, path
+import sys
+from io import StringIO
 # custom
-import blowdrycss.unit_tests.unittest_settings as settings
-from blowdrycss.utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, unittest_file_path
+import blowdrycss.unit_tests.unittest_settings as unittest_settings
+from blowdrycss.utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, unittest_file_path, \
+    change_settings_for_testing, print_css_stats, print_blow_dryer
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
+
+# required for pycharm unittest feature to work under both python 2.7 and python 3.x
+if sys.hexversion < 0x03000000:
+    import blowdrycss.blowdrycss_settings as settings
+else:
+    import blowdrycss_settings as settings
+
+change_settings_for_testing()
 
 
 class Test_utilities(TestCase):
@@ -68,7 +79,7 @@ class Test_utilities(TestCase):
         for pixels in range(-1000, 1001):
             expected = round(pixels / base, 4)
             expected = str(expected) + 'em'
-            actual = settings.px_to_em(pixels=str(pixels))  # typecast to string str()
+            actual = unittest_settings.px_to_em(pixels=str(pixels))  # typecast to string str()
             self.assertEqual(actual, str(expected), msg=pixels)
 
 
@@ -77,7 +88,7 @@ class Test_utilities(TestCase):
         for pixels in range(-1000, 1001):
             expected = round(pixels / base, 4)
             expected = str(expected) + 'em'
-            actual = settings.px_to_em(pixels=pixels)
+            actual = unittest_settings.px_to_em(pixels=pixels)
             self.assertEqual(actual, str(expected), msg=pixels)
 
     def test_px_to_em_float_input(self):
@@ -87,7 +98,7 @@ class Test_utilities(TestCase):
             pixels /= 10.0
             expected = round(float(pixels) / float(base), 4)
             expected = str(expected) + 'em'
-            actual = settings.px_to_em(pixels=pixels)
+            actual = unittest_settings.px_to_em(pixels=pixels)
             self.assertEqual(actual, str(expected), msg=str(pixels) + ': ' + str(actual) + ' vs ' + str(expected))
 
     def test_px_to_em_invalid_input(self):
@@ -95,7 +106,7 @@ class Test_utilities(TestCase):
         invalid_inputs = ['1 2', '5 6 5 6', 'cat', '11px', ' 234.8', 'n2_4p', '25deg', '16kHz', ]
         for invalid in invalid_inputs:
             expected = invalid
-            actual = settings.px_to_em(pixels=invalid)
+            actual = unittest_settings.px_to_em(pixels=invalid)
             self.assertEqual(actual, expected, msg=invalid)
 
     def test_px_to_em_change_base(self):
@@ -103,7 +114,7 @@ class Test_utilities(TestCase):
         for pixels in range(-1000, 1001):
             expected = round(pixels / base, 4)
             expected = str(expected) + 'em'
-            actual = settings.px_to_em(pixels=pixels)
+            actual = unittest_settings.px_to_em(pixels=pixels)
             self.assertEqual(actual, expected, msg=str(actual) + ' vs ' + str(expected))
 
     def test_px_to_em_string_base(self):
@@ -111,13 +122,13 @@ class Test_utilities(TestCase):
         for pixels in range(-1000, 1001):
             expected = round(pixels / base, 4)
             expected = str(expected) + 'em'
-            actual = settings.px_to_em(pixels=pixels)
+            actual = unittest_settings.px_to_em(pixels=pixels)
             self.assertEqual(actual, str(expected), msg=pixels)
 
     def test_px_to_em_Wrong_base(self):
-        settings.base = 'aoenth'
-        self.assertRaises(ValueError, settings.px_to_em, pixels='32')
-        settings.base = 16
+        unittest_settings.base = 'aoenth'
+        self.assertRaises(ValueError, unittest_settings.px_to_em, pixels='32')
+        unittest_settings.base = 16
 
     def test_unittest_file_path(self):
         folders = ['test_aspx', 'test_jinja', ]
@@ -126,6 +137,27 @@ class Test_utilities(TestCase):
         for i, folder in enumerate(folders):
             the_path = unittest_file_path(folder, filenames[i])
             self.assertTrue(path.isfile(the_path))
+
+    def test_print_css_stats(self):
+        # Checks variable date components and constant string output.
+        substrings = [
+            'blowdry.css:\t 0.3 kB',
+            'blowdry.min.css: 0.2 kB',
+            'CSS file size reduced by 67.5%.'
+        ]
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+
+            print_css_stats(file_name='blowdry')
+
+            output = out.getvalue()
+            for substring in substrings:
+                self.assertTrue(substring in output, msg=substring + '\noutput:\n' + output)
+        finally:
+            sys.stdout = saved_stdout
+
 
 if __name__ == '__main__':
     main()
