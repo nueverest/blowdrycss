@@ -96,8 +96,13 @@ class TestFileEditEventHandler(TestCase):
             'The blowdrycss watchdog is watching all (*.html) files',
             '-' * 96,
         ]
+        html_text = '<html></html>'
         modify_dot_html = unittest_file_path(folder='test_examplesite', filename='modify.html')
         file_types = '(' + ', '.join(settings.file_types) + ')'
+
+        # Create modify.html
+        with open(modify_dot_html, 'w') as _file:
+            _file.write(html_text)
 
         event_handler = FileEditEventHandler(
             patterns=list(file_types),
@@ -114,11 +119,7 @@ class TestFileEditEventHandler(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            # Read original file
-            with open(modify_dot_html, 'r') as _file:
-                original_file = _file.read()
-
-            # Modify remove one character (should trigger on_modified)
+            # Modify remove one character (triggers on_modified).
             with open(modify_dot_html, 'rb+') as _file:
                 _file.seek(-1, SEEK_END)
                 _file.truncate()
@@ -132,11 +133,8 @@ class TestFileEditEventHandler(TestCase):
         finally:
             sys.stdout = saved_stdout
 
-        # Write the original text back to the file. (Triggers on_modified)
-        with open(modify_dot_html, 'r+') as _file:
-            _file.seek(0)
-            _file.write(original_file)
-            _file.truncate()
+        # Delete modify.html.
+        remove(modify_dot_html)
 
         observer.stop()
         observer.join()
