@@ -1,0 +1,62 @@
+# python 2
+from __future__ import print_function, unicode_literals, with_statement
+from builtins import str
+# builtins
+from unittest import TestCase, main
+import logging
+import sys
+from io import StringIO, open
+from time import sleep
+from os import path, remove
+# plugins
+from blowdrycss.utilities import unittest_file_path, change_settings_for_testing
+from blowdrycss import watchdogwrapper
+
+
+change_settings_for_testing()
+
+
+class TestWatchdogWrapperMain(TestCase):
+    def test_main(self):
+        # Integration test
+        logging.basicConfig(level=logging.DEBUG)
+        substrings = [
+            '~~~ blowdrycss started ~~~',
+            'File Types: *.html',
+            'Project Directory:',
+            'Auto-Generated CSS',
+            'Completed',
+            'blowdry.css',
+            'blowdry.min.css',
+        ]
+        html_text = '<html></html>'
+        delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
+
+        # Create delete.html
+        with open(delete_dot_html, 'w') as _file:
+            _file.write(html_text)
+
+        self.assertTrue(path.isfile(delete_dot_html))
+
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+
+            watchdogwrapper.main()
+
+            remove(delete_dot_html)     # Delete delete.html
+
+            sleep(0.25)                 # IMPORTANT: Must wait for output otherwise test will fail.
+
+            output = out.getvalue()
+
+            for substring in substrings:
+                self.assertTrue(substring in output, msg=substring + '\noutput:\n' + output)
+        finally:
+            sys.stdout = saved_stdout
+
+
+if __name__ == '__main__':
+    main()
+
