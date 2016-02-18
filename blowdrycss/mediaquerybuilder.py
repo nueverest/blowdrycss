@@ -218,5 +218,5 @@ class MediaQueryBuilder(object):
         }
 
         """
-        return str.join('', self.css_media_queries)
+        return str.join(str(''), self.css_media_queries)
 

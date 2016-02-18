@@ -1,5 +1,5 @@
 # python 2
-from __future__ import print_function, with_statement
+from __future__ import print_function, with_statement, unicode_literals
 from builtins import str
 # builtins
 from unittest import TestCase, main
@@ -55,8 +55,8 @@ class TestFileEditEventHandler(TestCase):
 
     def test_excluded_True(self):
         excluded_true = [
-            unittest_file_path(folder='test_examplesite', filename='clashing_aliases.html'),
-            unittest_file_path(folder='test_examplesite', filename='property_aliases.html'),
+            unittest_file_path(folder=str('test_examplesite'), filename=str('clashing_aliases.html')),
+            unittest_file_path(folder=str('test_examplesite'), filename=str('property_aliases.html')),
         ]
         file_types = '(' + ', '.join(settings.file_types) + ')'
         event_handler = FileEditEventHandler(
@@ -101,7 +101,7 @@ class TestFileEditEventHandler(TestCase):
         file_types = '(' + ', '.join(settings.file_types) + ')'
 
         # Create modify.html
-        with open(modify_dot_html, 'w') as _file:
+        with open(modify_dot_html, 'w', encoding='utf-8') as _file:
             _file.write(html_text)
 
         event_handler = FileEditEventHandler(
@@ -124,7 +124,7 @@ class TestFileEditEventHandler(TestCase):
                 _file.seek(-1, SEEK_END)
                 _file.truncate()
 
-            sleep(0.25)     # IMPORTANT: Must wait for output otherwise test will fail.
+            sleep(0.5)     # IMPORTANT: Must wait for output otherwise test will fail.
 
             output = out.getvalue()
 
@@ -164,7 +164,7 @@ class TestFileEditEventHandler(TestCase):
         )
 
         # Create delete.html
-        with open(delete_dot_html, 'w') as _file:
+        with open(delete_dot_html, 'w', encoding='utf-8') as _file:
             _file.write(html_text)
 
         self.assertTrue(path.isfile(delete_dot_html))

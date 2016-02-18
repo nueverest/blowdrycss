@@ -1,5 +1,6 @@
 # python 27
-# from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
+from builtins import str
 # builtins
 import logging
 from time import sleep
@@ -28,15 +29,13 @@ class FileEditEventHandler(PatternMatchingEventHandler):
         """
         file_types = '(' + ', '.join(settings.file_types) + ')'
 
-        print()
+        print(' ')
         print('-' * 96)
-        print(
-            'The blowdrycss watchdog is watching all', file_types, 'files',
-            '\nin the project directory:', settings.project_directory
-        )
+        print('The blowdrycss watchdog is watching all', file_types, 'files')
+        print('in the project directory:', settings.project_directory.decode('utf-8'))
         print('-' * 96)
         print('Pressing Ctrl + C stops the process.')
-        print()
+        print(' ')
 
     @staticmethod
     def excluded(src_path=''):

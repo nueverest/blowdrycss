@@ -1,5 +1,5 @@
 # python 2
-from __future__ import print_function, division
+from __future__ import print_function, division, unicode_literals
 from builtins import str, round
 # builtins
 from re import search, findall
@@ -181,8 +181,8 @@ def print_css_stats(file_name=''):
     css_kb = round(float(css_size) / float(1000), 1)                                # Convert to kiloBytes.
     min_kb = round(float(min_size) / float(1000), 1)
 
-    print('\n' + css_file + ':\t', css_kb, 'kB')
-    print(min_file + ':', min_kb, 'kB')
+    print('\n' + str(css_file) + ':\t', str(css_kb), 'kB')
+    print(str(min_file) + ':', str(min_kb), 'kB')
     print('CSS file size reduced by', str(percent_reduced) + '%.')
 
 

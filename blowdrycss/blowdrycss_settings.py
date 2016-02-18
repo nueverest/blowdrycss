@@ -77,7 +77,7 @@ The longer more specific name is used to prevent naming conflicts, and increase 
 """
 
 # python 2
-from __future__ import division
+from __future__ import division, unicode_literals
 from builtins import round
 # builtins
 from os import chdir, getcwd, path
