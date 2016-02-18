@@ -27,65 +27,27 @@ Automate CSS Compilation with Watchdog
 
 - It is possible with `watchdog <https://pypi.python.org/pypi/watchdog/0.8.3>`__.
 
-Setup watchdog
-''''''''''''''
+.. note::
+
+    As of version ``0.1.3`` this is now much easier.
+
+
+Enable watchdog
+'''''''''''''''
 
 - If the virtualenv is not already active, then activate the virtualenv with ``source/bin activate``.
 
-- Run ``pip install watchdog``
+- Navigate to ``<path>/blowdrycss_tutorial`` at the command line.
 
-- Navigate to ``../blowdrycss_tutorial`` at the command line.
+- Open ``blowdrycss_settings.py``.
 
-- From the command line run: ::
+- Set ``auto_generate = True``.
 
-    watchmedo shell-command --patterns="*.html;" --ignore-directories --recursive --command="blowdrycss"
+- Run ``blowdrycss``.
 
-  **Decomposition**
+- Notice that what is printed differs from the default mode.
 
-  | Recursively monitors all ``*.html`` files in all directories and subdirectories of ``../blowdrycss_tutorial``.
-  |
-  | When it detects that an HTML file is saved it runs the command ``blowdrycss``.
-
-- Now add the class ``margin-150`` to one of the ``<div>`` tags, and save ``index.html``.
-
-- Refresh `localhost:8080 <http://localhost:8080>`__ in the browser, and the change
-  should appear without manually re-running ``blowdrycss``.
-
-- The ``watchmedo`` command can be shortened to: ::
-
-    watchmedo shell-command -p="*.html;" -D -R -c="blowdrycss"
-
-- To learn more about ``watchmedo`` run: ::
-
-    watchmedo shell-command --help
-
-What if refreshing the browser doesn't work?
-''''''''''''''''''''''''''''''''''''''''''''
-
-- Was the file saved?
-
-- Ensure ``watchdog`` is running.
-
-- Check the shell or command prompt where ``watchog`` is running to see
-  if there are any error messages.
-
-- Double check that the command is running in the correct directory, and that the python
-  command ``blowdrycss`` will run from the directory without ``watchdog``.
-
-
-Watchdog Parameter Modification
-'''''''''''''''''''''''''''''''
-
-``--patterns`` can be set to any file type that should trigger ``blowdrycss``.
-For example: ``--patterns="*.html;*.aspx;*.js"``
-
-``--recursive`` causes the ``watchdog`` to monitor all of the files matching ``--patterns`` in all
-subdirectories of the current folder.
-
-``--ignore-directories`` ignores all directory related events, and only focuses on file changes.
-
-``--command`` contains the path to ``blowdrycss``. Make sure that this
-is the correct directory otherwise it will not run.
+- Test it by saving a change to one of the project files e.g. change ``<path>/blowdryexample/examplesite/index.html``.
 
 
 Setting Customization
