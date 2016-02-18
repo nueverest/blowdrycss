@@ -32,7 +32,7 @@ class FileEditEventHandler(PatternMatchingEventHandler):
         print(' ')
         print('-' * 96)
         print('The blowdrycss watchdog is watching all', file_types, 'files')
-        print('in the project directory:', settings.project_directory.decode('utf-8'))
+        print('in the project directory:', str(settings.project_directory))
         print('-' * 96)
         print('Pressing Ctrl + C stops the process.')
         print(' ')
