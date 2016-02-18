@@ -24,6 +24,14 @@ Quickstart
 
     quickstart.rst
 
+Tutorial
+~~~~~~~~
+
+.. toctree::
+    :maxdepth: 1
+
+    tutorial.rst
+
 
 Repository and Slides
 *********************
