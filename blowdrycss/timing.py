@@ -68,18 +68,18 @@ class Timer(object):
 
     @property
     def elapsed(self):
-        """ Calculates the amount of time elapsed (ΔT) by subtracting start ``time()`` from end ``time()``.
+        """ Calculates the amount of time elapsed (delta T) by subtracting start ``time()`` from end ``time()``.
 
-        **Math:** elapsed = ΔT = end - start
+        **Math:** elapsed = delta T = end - start
 
-        :return: (*str*) -- Returns ΔT in units of seconds as a string.
+        :return: (*str*) -- Returns delta T in units of seconds as a string.
 
         """
         seconds_elapsed = self.end - self.start
         return self.seconds_to_string(seconds_elapsed=seconds_elapsed)
 
     def print_time(self):
-        """ Prints temporal metadata to the console. Including the completion timestamp and ΔT in seconds.
+        """ Prints temporal metadata to the console. Including the completion timestamp and delta T in seconds.
 
         :return: None
 
@@ -92,7 +92,7 @@ class Timer(object):
         print(str(border))
 
     def report(self):
-        """ Sets ``end`` time and prints the time elapsed (ΔT).  Calls ``print_time()``, and prints temporal metadata.
+        """ Sets ``end`` time and prints the time elapsed (delta T).  Calls ``print_time()``, and prints temporal metadata.
 
         :return: None
 

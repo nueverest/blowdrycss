@@ -81,6 +81,7 @@ twine upload dist/*
 
 # python 2.7
 from __future__ import unicode_literals
+from future.utils import exec_
 from io import open
 # builtins
 from setuptools import setup, find_packages     # Always prefer setuptools over distutils
@@ -100,7 +101,7 @@ except (IOError, ImportError):
 # http://python-future.org/_modules/future/utils.html#exec_
 version = {}
 with open('version.py') as _file:
-    exec(_file.read(), version)
+    exec_(_file.read(), version)
 
 setup(
     name='blowdrycss',
@@ -223,5 +224,5 @@ setup(
 
     # unit_tests
     test_suite="blowdrycss.unit_tests",
-    tests_require=['coverage', ],
+    #tests_require=['tox', 'coverage', ],
 )

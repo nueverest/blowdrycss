@@ -1,3 +1,5 @@
+# python 27
+# from __future__ import unicode_literals
 # builtins
 import logging
 from time import sleep
