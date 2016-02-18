@@ -72,7 +72,7 @@ This guide rapidly shows you how to:
             test.jinja2
         blowdrycss_settings.py
 
-- Navigate to ``../blowdrycss_tutorial/examplesite/css``, and verify that ``blowdry.css`` and
+- Navigate to ``<path>/blowdrycss_tutorial/examplesite/css``, and verify that ``blowdry.css`` and
   ``blowdry.min.css`` now exist.
 
 - A file ``blowdrycss_settings.py`` appears. This file can be used to modify or override default settings.
@@ -81,7 +81,7 @@ This guide rapidly shows you how to:
 - Two new HTML files ``property_aliases.html`` and ``clashing_aliases.html`` also appear. There is more about
   these files in the :doc:`advancedtopics`.
 
-- Open ``../blowdrycss_tutorial/examplesite/index.html``
+- Open ``<path>/blowdrycss_tutorial/examplesite/index.html``
 
 - Go to line 12 and find: ::
 
@@ -97,7 +97,7 @@ This guide rapidly shows you how to:
 
 - Save the changes.
 
-- Ensure that the current folder is ``../blowdrycss_tutorial``.
+- Ensure that the current folder is ``<path>/blowdrycss_tutorial``.
 
 - Run ``> blowdrycss``
 

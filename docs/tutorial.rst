@@ -153,7 +153,7 @@ Part 3 - Auto-generate CSS
             test.jinja2
         blowdrycss_settings.py
 
-- Navigate to ``../blowdrycss_tutorial/examplesite/css``, and verify that ``blowdry.css`` and
+- Navigate to ``<path>/blowdrycss_tutorial/examplesite/css``, and verify that ``blowdry.css`` and
   ``blowdry.min.css`` now exist.
 
 - A file ``blowdrycss_settings.py`` appears. This file can be used to modify or override default settings.
@@ -205,7 +205,7 @@ following CSS in ``blowdry.css``:
 Lets actually style something.
 ''''''''''''''''''''''''''''''
 
-- Navigate to ``../blowdrycss_tutorial/examplesite/``
+- Navigate to ``<path>/blowdrycss_tutorial/examplesite/``
 
 - Open ``index.html``
 
@@ -228,7 +228,7 @@ Lets actually style something.
 - What happened? Nothing happened because you need to run ``blowdrycss`` first.
   Sorry for the trick, but this is the most common reason why it doesn't seem to be working.
 
-- Ensure that the current folder is ``../blowdrycss_tutorial``.
+- Ensure that the current folder is ``<path>/blowdrycss_tutorial``.
 
 - Run ``> blowdrycss``
 
@@ -240,7 +240,7 @@ Lets actually style something.
 Part 5 - Exploring the auto-generated CSS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Navigate to ``../blowdrycss_tutorial/examplesite/css``.
+- Navigate to ``<path>/blowdrycss_tutorial/examplesite/css``.
 
 - List the items in the directory ``ls`` or ``dir``.
 
@@ -272,11 +272,11 @@ CSS is Auto-Generated
 
 - Save ``blowdry.css``.
 
-- Navigate back to ``../blowdrycss_tutorial``
+- Navigate back to ``<path>/blowdrycss_tutorial``
 
 - Run ``blowdrycss``.
 
-- Navigate to ``../blowdrycss_tutorial/examplesite/css``.
+- Navigate to ``<path>/blowdrycss_tutorial/examplesite/css``.
 
 - Look in ``blowdry.css`` for the ``.green`` class selector. The CSS is automatically changed
   from ``color: black`` back to ``color: green``. The reason is that ``blowdry.css`` and ``blowdry.min.css``
@@ -295,7 +295,7 @@ CSS is Auto-Generated
 Link Tag
 ''''''''
 
-- Navigate back to ``../examplesite``
+- Navigate back to ``<path>/examplesite``
 
 - Open ``index.html``
 
@@ -409,7 +409,7 @@ Shortcut and Multi-value CSS Properties
   |
   | ``w-50`` Make the image 50px wide.
 
-- Ensure that the current folder is ``../blowdrycss_tutorial``.
+- Ensure that the current folder is ``<path>/blowdrycss_tutorial``.
 
 - Run ``> blowdrycss``
 
