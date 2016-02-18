@@ -1,3 +1,5 @@
+# python 27
+from __future__ import unicode_literals
 # builtin
 from unittest import TestCase, main
 import sys
