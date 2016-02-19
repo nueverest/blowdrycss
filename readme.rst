@@ -34,6 +34,8 @@ Version Changelog
 |
 | An ASCII blow dryer is now printed on program exit.
 |
+| **0.1.4** -- Dropped support for py30, py31, and py32. Integrated tox to support testing of py27, py33, py34, and
+  py35 environments. Fixed unicode issues that caused tests to fail with py27.
 
 Why the name blowdrycss?
 ~~~~~~~~~~~~~~~~~~~~~~~~

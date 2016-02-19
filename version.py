@@ -100,12 +100,15 @@
     | CSS file size reduction statistics are now printed.
     |
     | An ASCII blow dryer is now printed on program exit.
+    |
+    | **0.1.4** -- Dropped support for py30, py31, and py32. Integrated tox to support testing of py27, py33, py34, and
+      py35 environments. Fixed unicode issues that caused tests to fail with py27.
 
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 
 __release__ = __version__ + 'b1'
