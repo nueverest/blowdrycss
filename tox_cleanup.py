@@ -6,14 +6,21 @@ The settings file is auto-generated as part of the integration testing.
 If the settings file is in the root folder the py33+ could fail if the settings files changed. It is a strange
 corner case that took a while to figure out since the python3 import system is different that py27.
 
-Reproducing the error:
+Reproducing the error (scenario 1):
+Go to project root where setup.py resides.
+Activate virtual environment
+Run: tox
+If certain tests fail blowdrycss_settings.py could now be in the root directory.
+Now subsequent py3x tests will fail.
+
+Reproducing the error (scenario 2):
 Go to project root where setup.py resides.
 Activate virtual environment
 Run: python setup.py install
 blowdrycss_settings.py is now in the root directory.
 Modify blowdrycss/blowdrycss/blowdrycss_settings.py
 Run: tox
-py3x texts will fail.
+py3x tests will fail.
 
 """
 
