@@ -3,6 +3,11 @@ Read Me
 
 `blowdrycss` is a rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
 
+Quick Start
+~~~~~~~~~~~
+
+`Quick Start Docs <http://blowdrycss.readthedocs.org/en/latest/quickstart.html>`__
+
 Version Changelog
 ~~~~~~~~~~~~~~~~~
 
@@ -36,6 +41,7 @@ Version Changelog
 |
 | **0.1.4** -- Dropped support for py30, py31, and py32. Integrated tox to support testing of py27, py33, py34, and
   py35 environments. Fixed unicode issues that caused tests to fail with py27.
+|
 
 Why the name blowdrycss?
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,7 +98,7 @@ Advantages of blowdrycss
 Requirements
 ~~~~~~~~~~~~
 
-- `Python 2.7.x or 3.x <https://www.python.org/downloads/>`__ (required)
+- `Python 2.7.x or 3.3+ <https://www.python.org/downloads/>`__ (required)
 - `cssutils 1.0.1+ <https://bitbucket.org/cthedot/cssutils>`__ (required)
 - `future 0.15.2+ <https://pypi.python.org/pypi/future>`__ (required - for Python 2.7)
 - pypandoc 1.1.2+ (required - file type conversion)
@@ -248,13 +254,17 @@ generate, and something that still needs to be written by hand.
 Valuable References
 ~~~~~~~~~~~~~~~~~~~
 
+    `Blowdrycss Documentation <http://blowdrycss.readthedocs.org/en/latest/index.html>`__
+
+    `Github Repo <https://github.com/nueverest/blowdrycss>`__
+
     `Slides presented at DessertPy <https://docs.google.com/presentation/d/1wjkbvQUorD9rzdPWjwPXaJcYPOBnrjE1qUJY2M4xwuY/edit#slide=id.gc6f8badac_0_0>`__
 
     `W3C Full CSS property table <http://www.w3.org/TR/CSS21/propidx.html>`__
 
     `Don't Repeat Yourself <https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>`__
 
-    `Python 3.4+ <https://www.python.org/downloads/>`__
+    `Download Python <https://www.python.org/downloads/>`__
 
     `cssutils 1.0.1+ <https://bitbucket.org/cthedot/cssutils>`__
 

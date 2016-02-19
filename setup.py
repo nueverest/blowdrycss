@@ -23,8 +23,10 @@ Delete the old .egg-info, build, and dist from the project root.
 ``unittest`` Reference: https://docs.python.org/2/library/unittest.html
 
 Activate a test virtualenv.
-python -m unittest discover -s blowdrycss -p "test_*.py"
-python setup.py test
+Run Sphinx
+tox                         # tox will run the following two commands:
+                            # python -m unittest discover -s blowdrycss -p "test_*.py"
+                            # python setup.py test
 python setup.py clean --all
 python setup.py sdist bdist bdist_wheel
 
