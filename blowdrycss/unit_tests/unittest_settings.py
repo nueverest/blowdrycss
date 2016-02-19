@@ -171,6 +171,34 @@ giant = (px_to_em(1921), px_to_em(2560))        # 120.0625 - 160.0em
 xgiant = (px_to_em(2561), px_to_em(2800))       # 160.0625 - 175.0em
 xxgiant = (px_to_em(2801), px_to_em(10**6))     # 175.0625 - float("inf")) # Python 2.x representation of Infinity.
 
+# Custom CSS Property Syntax
+# When adding a new alias it must end with a '-'.
+# To add a new alias 'azi' for 'azimuth' add the (key: value) pair 'azimuth': {'azi-'}, to custom_property_alias_dict.
+# key = A valid CSS property name (consult the W3C standard and datalibrary.DataLibrary.property_names).
+# value = An alias set().
+# If 'azi' is used without the '-', then blowdrycss assumes that 'azi' is a valid CSS property (which it is not).
+# Defining 'azi-' allows the following encoded class selector syntax:
+# 'azi-left-side', 'azi-far-left', ..., 'azi-rightwards'
+#
+# These encoded class selectors can be used inside of Web project files matching 'file_type' defined above.
+custom_property_alias_dict = {
+    'background': {'bg-', },
+    'background-color': {'bgc-', 'bg-c-', 'bg-color-', },
+    'color': {'c-', },
+    'font-size': {'fsize-', 'f-size-', },
+    'font-weight': {'fweight-', 'f-weight-', },
+    'height': {'h-', },
+    'margin': {'m-', },
+    'margin-top': {'m-top-', },
+    'margin-bottom': {'m-bot-', },
+    'padding': {'p-', 'pad-', },
+    'padding-top': {'p-top-', },
+    'position': {'pos-', },
+    'text-align': {'talign-', 't-align-', },
+    'vertical-align': {'valign-', 'v-align-', },
+    'width': {'w-', },
+}
+
 # Patches cssutils
 profile._MACROS['length'] = r'0|{num}(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)'
 profile._MACROS['positivelength'] = r'0|{positivenum}(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)'

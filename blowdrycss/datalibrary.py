@@ -6,6 +6,8 @@ from collections import OrderedDict
 from copy import deepcopy
 # plugins
 from pypandoc import convert
+# custom
+import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -37,7 +39,7 @@ class DataLibrary(object):
             - ``{3}`` or ``{6}`` -- Limit the number of hexidecimal characters to either 3 or 6 only.
             - ``' ?'`` -- The substring may optionally be followed by a space.
 
-    | **custom_property_alias_dict** (*dict*)
+    | **property_value_as_alias_dict** (*dict*)
 
         Allows custom aliases to be assigned as shorthand for a
         particular css property name e.g. ``c-`` is an alias for ``color``.
@@ -147,21 +149,19 @@ class DataLibrary(object):
 
     """
     def __init__(self):
-        # TODO: If by June 2016 no new regexes are added consider moving to colorparser.
-        # TODO: Note: If this dictionary grows write a function that detects regex conflicts.
         self.property_regex_dict = {
             'color': {r"(h[0-9a-f]{3} ?)$", r"(h[0-9a-f]{6} ?)$"},
         }
 
-        # TODO: move this to a CSV file and autogenerate this dictionary from CSV.
-        self.custom_property_alias_dict = {
+        self.custom_property_alias_dict = settings.custom_property_alias_dict
+
+        self.property_value_as_alias_dict = {
             'azimuth': {'left-side', 'far-left', 'center-left', 'center-right', 'far-right', 'right-side', 'behind',
                         'leftwards', 'rightwards', },
-            'background': {'bg-', },
-            'background-color': {'bgc-', 'bg-c-', 'bg-color-', },
             'background-repeat': {'repeat', 'repeat-x', 'repeat-y', 'no-repeat', },
             'color': {
-                'c-', 'rgb', 'rgba', 'hsl', 'hsla',
+                # Special format cases
+                'rgb', 'rgba', 'hsl', 'hsla',
                 # SVG 1.1 Color Keyword Reference: http://www.w3.org/TR/SVG/types.html#ColorKeywords
                 'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure',
                 'beige', 'bisque', 'black', 'blanchedalmond', 'blue', 'blueviolet', 'brown', 'burlywood',
@@ -210,37 +210,28 @@ class DataLibrary(object):
                             'geneva', 'verdana', 'calibri', 'candara', 'futura', 'optima',
                             'monospace', 'courier', 'monaco', 'consolas',
                             'fantasy', 'copperplate', 'papyrus', },
-            'font-size': {'fsize-', 'f-size-', },
             'font-style': {'italic', 'oblique', },
             'font-variant': {'small-caps', },
-            'font-weight': {'bold', 'bolder', 'lighter', 'fweight-', 'f-weight-', },
-            'height': {'h-', },
+            'font-weight': {'bold', 'bolder', 'lighter',},
             'list-style-position': {'inside', 'outside', },
             'list-style-type': {'disc', 'circle', 'square', 'decimal', 'decimal-leading-zero', 'lower-roman',
                                 'upper-roman', 'lower-greek', 'lower-latin', 'upper-latin', 'armenian',
                                 'georgian', 'lower-alpha', 'upper-alpha', },
-            'margin': {'m-', },
-            'margin-top': {'m-top-', },
-            'margin-bottom': {'m-bot-', },
             'overflow': {'visible', 'hidden', 'scroll', },
-            'padding': {'p-', 'pad-', },
-            'padding-top': {'p-top-', },
             'pitch': {'x-low', 'low', 'high', 'x-high'},
             'play-during': {'mix', 'repeat', },
-            'position': {'static', 'relative', 'absolute', 'pos-', },
+            'position': {'static', 'relative', 'absolute', },
             'speak-header': {'once', 'always'},
             'speak-numeral': {'digits', 'continuous', },
             'speak-punctuation': {'code', },
             'speak': {'spell-out', },
             'speech-rate': {'x-slow', 'slow', 'fast', 'x-fast', 'faster', 'slower', },
-            'text-align': {'talign-', 't-align-', },
             'text-decoration': {'underline', 'overline', 'line-through', 'blink', },
             'text-transform': {'capitalize', 'uppercase', 'lowercase', },
             'unicode-bidi': {'embed', 'bidi-override', },
-            'vertical-align': {'baseline', 'sub', 'super', 'middle', 'text-top', 'text-bottom', 'valign-', 'v-align-'},
+            'vertical-align': {'baseline', 'sub', 'super', 'middle', 'text-top', 'text-bottom', },
             'visibility': {'visible', 'hidden', 'collapse', },
             'volume': {'silent', 'x-soft', 'soft', 'loud', 'x-loud', },
-            'width': {'w-', },
         }
 
         self.property_names = {
@@ -398,13 +389,22 @@ class DataLibrary(object):
             self.property_alias_dict[property_name] = value
 
     def merge_dictionaries(self):
-        """ Merges the ``property_alias_dict`` with ``custom_property_alias_dict``.
+        """ Merges the ``property_alias_dict`` with ``property_value_as_alias_dict``.
 
         **Note:** All keys in both dictionaries much match.
 
         :raises KeyError: Raises KeyError if property name does not exist as a key in ``property_alias_dict``.
 
         """
+        # Merge property values
+        if self.property_value_as_alias_dict is not None:
+            for property_name, alias_set in self.property_value_as_alias_dict.items():
+                try:
+                    self.property_alias_dict[property_name] = self.property_alias_dict[property_name].union(alias_set)
+                except KeyError:
+                    print('KeyError: property_name ->', property_name, '<- not found in property_alias_dict.')
+                    raise KeyError
+        # Merge user defined custom property aliases.
         if self.custom_property_alias_dict is not None:
             for property_name, alias_set in self.custom_property_alias_dict.items():
                 try:

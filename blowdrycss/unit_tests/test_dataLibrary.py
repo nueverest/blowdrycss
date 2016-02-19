@@ -118,46 +118,56 @@ class TestDataLibrary(TestCase):
         )
 
     def test_merge_dictionaries(self):
-        dict1 = {
+        data_library2 = DataLibrary()
+        full_dict = {
             'background': {'bg-', },
+            'background-color': set(),
             'color': {'c-', },
             'font-size': {'fsize-', 'f-size-', },
             'font-weight': {'bold', 'bolder', 'lighter', 'fweight-', 'f-weight-', },
             'height': {'h-', },
             'margin': {'m-', },
         }
-        dict2 = {
+        value_as_dict = {
             'color': {'col-', },
             'margin': {'mar-', },
         }
+        settings_custom_alias_dict = {
+            'background-color': {'bgc-', 'bg-c-', 'bg-color-', },
+            'color': {'coco-', },
+        }
         expected_dict = {
             'background': {'bg-', },
-            'color': {'c-', 'col-'},
+            'background-color': {'bgc-', 'bg-c-', 'bg-color-', },
+            'color': {'c-', 'col-', 'coco-', },
             'font-size': {'fsize-', 'f-size-', },
             'font-weight': {'bold', 'bolder', 'lighter', 'fweight-', 'f-weight-', },
             'height': {'h-', },
             'margin': {'m-', 'mar-', },
         }
-        self.data_library.property_alias_dict = dict1
-        self.data_library.custom_property_alias_dict = dict2
-        self.data_library.merge_dictionaries()
-        self.assertEqual(self.data_library.property_alias_dict, expected_dict)
+        data_library2.property_alias_dict = full_dict
+        data_library2.property_value_as_alias_dict = value_as_dict
+        data_library2.custom_property_alias_dict = settings_custom_alias_dict
+        data_library2.merge_dictionaries()
+        self.assertEqual(data_library2.property_alias_dict, expected_dict)
 
     def test_merge_dictionaries_invalid_key(self):
         dict1 = {'font-size': {'fsize-', 'f-size-', }, }
         dict2 = {'invalid_key': {'col-', }, }
         self.data_library.property_alias_dict = dict1
-        self.data_library.custom_property_alias_dict = dict2
+        self.data_library.property_value_as_alias_dict = dict2
         self.assertRaises(KeyError, self.data_library.merge_dictionaries)
 
     # Expects that dict1 will pass straight through since there is nothing to merge with it.
     def test_merge_dictionaries_empty_custom_dict(self):
+        data_library2 = DataLibrary()
         dict1 = {'font-size': {'fsize-', 'f-size-', }, }
-        custom_dict = None
-        self.data_library.property_alias_dict = dict1
-        self.data_library.custom_property_alias_dict = custom_dict
-        self.data_library.merge_dictionaries()
-        self.assertEqual(self.data_library.property_alias_dict, dict1)
+        value_as_dict = None
+        data_library2.property_alias_dict = dict1
+        data_library2.property_value_as_alias_dict = value_as_dict
+        data_library2.custom_property_alias_dict = None
+        data_library2.merge_dictionaries()
+        self.assertEqual(data_library2.property_alias_dict, dict1)
 
     def test_set_clashing_aliases(self):
         expected_clashes = {
