@@ -8,7 +8,7 @@ Allows logging to std.stdout at the console and logging to a file.
 import logging
 import sys
 from logging.handlers import RotatingFileHandler
-from os import path, makedirs
+from os import path
 # custom
 from blowdrycss.utilities import make_directory
 import blowdrycss_settings as settings
