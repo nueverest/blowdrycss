@@ -28,11 +28,11 @@ py3x tests will fail.
 from os import path, getcwd, remove
 
 
-cwd = getcwd()
-settings_file = path.join(cwd, 'blowdrycss_settings.py')
-
-if path.isfile(settings_file):
-    remove(settings_file)
-    print('Deleted', settings_file)
-
-print('Project root is clean.')
+# cwd = getcwd()
+# settings_file = path.join(cwd, 'blowdrycss_settings.py')
+#
+# if path.isfile(settings_file):
+#     remove(settings_file)
+#     print('Deleted', settings_file)
+#
+# print('Project root is clean.')

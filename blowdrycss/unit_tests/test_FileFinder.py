@@ -58,6 +58,7 @@ class TestFileFinder(TestCase):
         expected_files = {
             unittest_file_path('test_examplesite', 'clashing_aliases.html'),
             unittest_file_path('test_examplesite', 'property_aliases.html'),
+            unittest_file_path('test_examplesite', 'modify.html'),
             unittest_file_path('test_generic', 'blowdry.html'),
             unittest_file_path('test_html', 'index.html'),
             unittest_file_path('test_html', 'test.html'),
@@ -72,6 +73,7 @@ class TestFileFinder(TestCase):
         valid_dict = {
             '.html': {
                 unittest_file_path('test_examplesite', 'clashing_aliases.html'),
+                unittest_file_path('test_examplesite', 'modify.html'),
                 unittest_file_path('test_examplesite', 'property_aliases.html'),
                 unittest_file_path('test_generic', 'blowdry.html'),
                 unittest_file_path('test_html', 'index.html'),

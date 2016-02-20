@@ -100,7 +100,7 @@ class TestFileEditEventHandler(TestCase):
         modify_dot_html = unittest_file_path(folder='test_examplesite', filename='modify.html')
         file_types = '(' + ', '.join(settings.file_types) + ')'
 
-        # Create modify.html
+        # Add contents to modify.html
         with open(modify_dot_html, 'w', encoding='utf-8') as _file:
             _file.write(html_text)
 
@@ -133,8 +133,9 @@ class TestFileEditEventHandler(TestCase):
         finally:
             sys.stdout = saved_stdout
 
-        # Delete modify.html.
-        remove(modify_dot_html)
+        # Delete contents of modify.html.
+        with open(modify_dot_html, 'w'):
+            pass
 
         observer.stop()
         observer.join()

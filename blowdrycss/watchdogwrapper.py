@@ -9,7 +9,7 @@ from watchdog.events import PatternMatchingEventHandler, FileModifiedEvent, File
 from watchdog.observers import Observer
 # custom
 from blowdrycss.utilities import print_blow_dryer
-from blowdrycss import blowdry
+from blowdrycss import blowdry, log
 import blowdrycss_settings as settings
 
 
@@ -103,7 +103,9 @@ def main():
 
     """
     if settings.auto_generate:
-        # logging.basicConfig(level=logging.DEBUG)                  # Uncomment for testing
+        # logging.basicConfig(level=settings.logging_level)                  # Uncomment for testing
+        if settings.logging_enabled:
+            log.enable()
 
         event_handler = FileEditEventHandler(
             patterns=list(settings.file_types),
