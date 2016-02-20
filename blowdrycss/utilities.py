@@ -4,7 +4,8 @@ from builtins import str, round
 # builtins
 from re import search, findall
 from inspect import currentframe
-from os import path, stat, getcwd
+from os import path, stat, getcwd, makedirs
+import logging
 # custom
 import blowdrycss_settings as settings
 
@@ -207,3 +208,23 @@ def print_blow_dryer():
                             `@@@.
     """
     print(str(blow_dryer_ascii))
+
+
+def make_directory(directory=''):
+    """ Try to make a directory or verify its' existence. Raises an error if neither of these are possible.
+
+    :raise OSError: Raises an OSError if the directory cannot be made or found.
+
+    :type directory: str
+
+    :param directory: A directory path in the file system.
+
+    :return: None
+
+    """
+    try:                                            # Python 2.7 Compliant
+        makedirs(directory)                         # Make 'log' directory
+        logging.debug('%s created.', directory)
+    except OSError:
+        if not path.isdir(directory):               # Verify directory existences
+            raise OSError(directory + ' is not a directory, and could not be created.')

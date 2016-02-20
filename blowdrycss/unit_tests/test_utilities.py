@@ -3,13 +3,13 @@ from __future__ import division
 from builtins import round
 # general
 from unittest import TestCase, main
-from os import getcwd, path
+from os import getcwd, path, removedirs
 import sys
 from io import StringIO
 # custom
 import blowdrycss.unit_tests.unittest_settings as unittest_settings
 from blowdrycss.utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, unittest_file_path, \
-    change_settings_for_testing, print_css_stats, print_blow_dryer
+    change_settings_for_testing, print_css_stats, print_blow_dryer, make_directory
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -220,6 +220,28 @@ class Test_utilities(TestCase):
             self.assertTrue(expected_ascii in output, msg=expected_ascii + '\noutput:\n' + output)
         finally:
             sys.stdout = saved_stdout
+
+    def test_make_directory_non_existing(self):
+        directory_name = 'test_make_directory'
+        directory = unittest_file_path(folder=directory_name)
+
+        if path.isdir(directory):       # Remove test directory
+            removedirs(directory)
+
+        self.assertFalse(path.isdir(directory))
+        make_directory(directory=directory)
+        self.assertTrue(path.isdir(directory))
+
+        if path.isdir(directory):       # Remove test directory
+            removedirs(directory)
+
+    def test_make_directory_pre_existing(self):
+        directory_name = 'test_html'                    # pre-existing case
+        directory = unittest_file_path(folder=directory_name)
+
+        self.assertTrue(path.isdir(directory))
+        make_directory(directory=directory)             # should do nothing
+        self.assertTrue(path.isdir(directory))
 
 
 if __name__ == '__main__':
