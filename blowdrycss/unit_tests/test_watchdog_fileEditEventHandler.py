@@ -124,7 +124,7 @@ class TestFileEditEventHandler(TestCase):
                 _file.seek(-1, SEEK_END)
                 _file.truncate()
 
-            sleep(0.5)     # IMPORTANT: Must wait for output otherwise test will fail.
+            sleep(0.25)     # IMPORTANT: Must wait for output otherwise test will fail.
 
             output = out.getvalue()
 
