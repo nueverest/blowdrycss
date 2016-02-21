@@ -28,7 +28,7 @@ class TestToxCleanup(TestCase):
         print('The tox_cleanup started in', original_dir)
 
         cwd = original_dir
-        module_path = path.join(cwd, 'blowdrycss')            # Prevent removal of source settings file.
+        module_path = path.join(cwd, 'blowdrycss')                      # Prevent removal of source settings file.
 
         if cwd.endswith('unit_tests') and not path.isdir(module_path):
             up2 = path.join('..', '..')
@@ -44,7 +44,7 @@ class TestToxCleanup(TestCase):
         tox_cleanup.main()
         self.assertFalse(path.isfile(settings_path), msg=settings_path)
 
-        chdir(original_dir)     # Reset directory
+        chdir(original_dir)                                             # Reset directory
 
     def test_tox_cleanup_file_does_not_exist(self):
         original_dir = getcwd()
@@ -66,7 +66,7 @@ class TestToxCleanup(TestCase):
         tox_cleanup.main()
         self.assertFalse(path.isfile(settings_path), msg=settings_path)
 
-        chdir(original_dir)     # Reset directory
+        chdir(original_dir)                                             # Reset directory
 
 
 if __name__ == '__main__':
