@@ -84,6 +84,5 @@ class TestWrite_blowdrycss_settings_dot_py(TestCase):
             chdir(cwd)
 
 
-
 if __name__ == '__main__':
     main()
