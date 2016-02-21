@@ -1,8 +1,9 @@
 # python 2
 # from lib2to3.fixes import fix_set_literal  http://python-future.org/futurize.html?highlight=set
 # builtins
-from unittest import TestCase, main
 import sys
+from unittest import TestCase, main
+
 # custom
 from blowdrycss.utilities import change_settings_for_testing
 from blowdrycss.classpropertyparser import ClassPropertyParser

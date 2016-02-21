@@ -62,13 +62,13 @@ Contents of `.pypirc` ::
     password = <your password goes here>
 
 [Test on testPyPi First.]
-python setup.py register -r pypitest
+twine upload dist/* -r pypitest
 
 Complete testing on testPyPi.
 Go `here <https://testpypi.python.org/>`__ and ensure everything looks correct.
 
 Upload to official PyPi. Back at the command line run:
-twine upload dist/*
+twine upload dist/* -r pypi
 
 
 Create a new folder inside of the ``archive`` folder named after the current version number

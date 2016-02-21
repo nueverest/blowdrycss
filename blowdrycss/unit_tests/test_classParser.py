@@ -1,6 +1,7 @@
 # builtin
-from unittest import TestCase, main
 import sys
+from unittest import TestCase, main
+
 # custom
 from blowdrycss.filehandler import FileFinder
 from blowdrycss.classparser import ClassParser

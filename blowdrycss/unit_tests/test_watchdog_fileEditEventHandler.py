@@ -1,5 +1,6 @@
 # python 2
 from __future__ import print_function, with_statement, unicode_literals
+
 from builtins import str
 # builtins
 from unittest import TestCase, main

@@ -104,7 +104,10 @@
     | **0.1.4** -- Dropped support for py30, py31, and py32. Integrated tox to support testing of py27, py33, py34, and
       py35 environments. Fixed unicode issues that caused tests to fail with py27.
     |
-    | **0.1.5** -- Integrated debug level logging settings. Fixed a logic error in tox_cleanup.py. Compressed
+    | **0.1.5** -- Upload corrupted on pypi. Everything worked fine on testpypi, but when uploaded to pypi something
+      went wrong.
+    |
+    | **0.1.6** -- Integrated debug level logging settings. Fixed a logic error in tox_cleanup.py. Compressed
       some of the user feedback. Created a new utility method make_directory().
 
 """
@@ -112,6 +115,6 @@ __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.1.5'
+__version__ = '0.1.6'
 
 __release__ = __version__ + 'b1'
