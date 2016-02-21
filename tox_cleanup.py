@@ -33,7 +33,7 @@ from os import path, getcwd, remove
 def main():
     cwd = getcwd()
     print('The tox_cleanup started in', cwd)
-    module_path = path.join(cwd, 'blowdrycss')            # Prevent removal of source settings file.
+    module_path = path.join(cwd, 'blowdrycss')                          # Prevent removal of settings file from module.
 
     if cwd.endswith('blowdrycss') and path.isdir(module_path):
         settings_file = path.join(cwd, 'blowdrycss_settings.py')
