@@ -187,8 +187,8 @@ def print_css_stats(file_name=''):
         str(min_file) + ': ' + str(min_kb) + 'kB\n' +
         'CSS file size reduced by ' + str(percent_reduced) + '%.'
     )
+    logging.debug(css_stats)
     print(css_stats)
-    #logging.info(css_stats)
 
 
 def print_blow_dryer():

@@ -178,8 +178,8 @@ class Test_utilities(TestCase):
 
     def test_print_css_stats(self):
         substrings = [
-            'blowdry.css:\t 0.3 kB',
-            'blowdry.min.css: 0.2 kB',
+            'blowdry.css:\t 0.3kB',
+            'blowdry.min.css: 0.2kB',
             'CSS file size reduced by 67.5%.'
         ]
         saved_stdout = sys.stdout
