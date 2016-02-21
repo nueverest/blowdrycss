@@ -29,7 +29,6 @@ class TestWatchdogWrapperMain(TestCase):
         """
         substrings = [
             '~~~ blowdrycss started ~~~',
-            'File Types: *.html',
             'Project Directory:',
             'Auto-Generated CSS',
             'Completed',
