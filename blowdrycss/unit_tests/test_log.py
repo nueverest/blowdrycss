@@ -26,6 +26,7 @@ class TestEnable(TestCase):
         settings.logging_enabled = True
         settings.log_to_console = True
         settings.log_to_file = False
+        settings.logging_level = logging.DEBUG
 
         saved_stdout = sys.stdout                                                       # Monitor console
         try:
@@ -46,6 +47,7 @@ class TestEnable(TestCase):
         settings.log_to_console = False
         settings.log_to_file = True
         settings.log_directory = unittest_file_path(folder='log')       # Create the log directory inside of unit_tests.
+        settings.logging_level = logging.DEBUG
         log_file_path = path.join(settings.log_directory, settings.log_file_name)
 
         if path.isfile(log_file_path):                                                  # Clear log file.
@@ -67,6 +69,7 @@ class TestEnable(TestCase):
         settings.logging_enabled = True
         settings.log_to_console = True
         settings.log_to_file = True
+        settings.logging_level = logging.DEBUG
         settings.log_directory = unittest_file_path(folder='log')       # Create the log directory inside of unit_tests.
         log_file_path = path.join(settings.log_directory, settings.log_file_name)
 
