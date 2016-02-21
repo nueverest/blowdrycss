@@ -29,7 +29,6 @@ class TestWatchdogWrapperMain(TestCase):
         """
         substrings = [
             '~~~ blowdrycss started ~~~',
-            'Project Directory:',
             'Auto-Generated CSS',
             'Completed',
             'blowdry.css',
@@ -75,8 +74,6 @@ class TestWatchdogWrapperMain(TestCase):
         logging.basicConfig(level=logging.DEBUG)
         substrings = [
             '~~~ blowdrycss started ~~~',
-            'File Types: *.html',
-            'Project Directory:',
             'Auto-Generated CSS',
             'Completed',
             'blowdry.css',

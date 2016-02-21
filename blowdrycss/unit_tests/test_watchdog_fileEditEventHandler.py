@@ -87,8 +87,6 @@ class TestFileEditEventHandler(TestCase):
         original_file = ''
         substrings = [
             '~~~ blowdrycss started ~~~',
-            'File Types: *.html',
-            'Project Directory:',
             'Auto-Generated CSS',
             'Completed',
             'blowdry.css',
@@ -145,8 +143,6 @@ class TestFileEditEventHandler(TestCase):
         logging.basicConfig(level=logging.DEBUG)
         substrings = [
             '~~~ blowdrycss started ~~~',
-            'File Types: *.html',
-            'Project Directory:',
             'Auto-Generated CSS',
             'Completed',
             'blowdry.css',
