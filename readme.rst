@@ -12,18 +12,7 @@ Version Changelog
 ~~~~~~~~~~~~~~~~~
 
 | See ``version.py`` for full changelog.
-| **0.1.2** -- ``HTML, JINJA, .NET, and RUBY Template`` file types are now supported. Meaning that classes can be
-  discovered in them. To use open ``blowdrycss_settings.py`` and set ``file_types = ('*.html', '.<extension>')``.
-  See ``blowdrycss.classparser`` for more details about available extensions.
 |
-| **Supported jinja and django template extensions:**
-
-    .jinja, .jinja2, .jnj, .ja, .djt, .djhtml
-
-| **Supported XHTML, asp.net, and ruby template extensions:**
-
-    .aspx, .ascx, .master, .erb
-
 | **0.1.3** -- Implemented support for auto-generated CSS via Watchdog. Watchdog can now monitor all files
   associated with the ``file_types`` defined in ``blowdrycss_settings.py``. If a file is modified or deleted,
   Watchdog will trigger blowdrycss and auto-generate the CSS files. Watchdog is now a required dependency.
@@ -41,6 +30,9 @@ Version Changelog
 |
 | **0.1.4** -- Dropped support for py30, py31, and py32. Integrated tox to support testing of py27, py33, py34, and
   py35 environments. Fixed unicode issues that caused tests to fail with py27.
+|
+| **0.1.5** -- Integrated debug level logging settings. Fixed a logic error in tox_cleanup.py. Compressed
+  some of the user feedback. Created a new utility method make_directory().
 |
 
 Why the name blowdrycss?
