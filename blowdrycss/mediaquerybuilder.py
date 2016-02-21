@@ -48,7 +48,9 @@ class MediaQueryBuilder(object):
     """
 
     def __init__(self, property_parser=ClassPropertyParser()):
-        logging.info(msg='MediaQueryBuilder Running...')
+        message = 'MediaQueryBuilder Running...'
+        print(message)
+        logging.debug(msg=message)
         self.property_parser = property_parser
         self.css_media_queries = set()
         self.media_query_text = ''

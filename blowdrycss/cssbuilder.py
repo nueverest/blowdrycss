@@ -32,7 +32,9 @@ class CSSBuilder(object):
 
     """
     def __init__(self, property_parser=ClassPropertyParser()):
-        logging.info(msg='CSSBuilder Running...')
+        message = 'CSSBuilder Running...'
+        print(message)
+        logging.debug(msg=message)
         self.property_parser = property_parser
         self.css_rules = set()
         self.css_stylesheet = CSSStyleSheet()
