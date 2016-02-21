@@ -174,8 +174,8 @@ docs_directory = path.join(cwd, 'docs')
 # Logging
 logging_enabled = False
 logging_level = DEBUG                                       # Allowed: DEBUG, INFO, WARNING, ERROR, CRITICAL
-log_to_console = True
-log_to_file = True
+log_to_console = False
+log_to_file = False
 log_directory = path.join(cwd, 'log')
 log_file_name = 'blowdrycss.log'
 one_mega_byte = 1048576
