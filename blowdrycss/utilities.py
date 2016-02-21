@@ -165,9 +165,9 @@ def print_css_stats(file_name=''):
 
     :type file_name: str
     :param file_name: Name of the CSS files.
-    :return:
-    """
+    :return: None
 
+    """
     css_file = file_name + '.css'
     min_file = file_name + '.min.css'
 
@@ -182,9 +182,13 @@ def print_css_stats(file_name=''):
     css_kb = round(float(css_size) / float(1000), 1)                                # Convert to kiloBytes.
     min_kb = round(float(min_size) / float(1000), 1)
 
-    print('\n' + str(css_file) + ':\t', str(css_kb), 'kB')
-    print(str(min_file) + ':', str(min_kb), 'kB')
-    print('CSS file size reduced by', str(percent_reduced) + '%.')
+    css_stats = (
+        '\n' + str(css_file) + ':\t ' + str(css_kb) + 'kB\n' +
+        str(min_file) + ': ' + str(min_kb) + 'kB\n' +
+        'CSS file size reduced by ' + str(percent_reduced) + '%.'
+    )
+    print(css_stats)
+    #logging.info(css_stats)
 
 
 def print_blow_dryer():
