@@ -13,7 +13,7 @@ class TestHTMLClassParser(TestCase):
         expected_output = {'c-blue', 'text-align-center', 'margin-20', 'padding-10', 'hide'}
         test_file_path = unittest_file_path('test_html', 'test.html')
         class_parser = HTMLClassParser(files=[test_file_path])
-        self.assertEquals(class_parser.class_set, expected_output)
+        self.assertEqual(class_parser.class_set, expected_output)
 
 
 if __name__ == '__main__':

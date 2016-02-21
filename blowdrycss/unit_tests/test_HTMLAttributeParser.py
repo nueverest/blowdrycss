@@ -14,7 +14,7 @@ class TestHTMLAttributeParser(TestCase):
         file_string = file_converter.get_file_as_string()
         attribute_parser = HTMLAttributeParser(attribute_name='class')
         attribute_parser.feed(file_string)
-        self.assertEquals(attribute_parser.attribute_value_list, expected_output)
+        self.assertEqual(attribute_parser.attribute_value_list, expected_output)
 
 
 if __name__ == '__main__':

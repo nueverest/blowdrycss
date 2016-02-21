@@ -25,16 +25,18 @@ class TestTiming(TestCase):
         cwd = original_dir
         module_path = path.join(cwd, 'blowdrycss')            # Prevent removal of source settings file.
 
-        if not cwd.endswith('blowdrycss') and not path.isdir(module_path):
+        if cwd.endswith('unit_tests') and not path.isdir(module_path):
             up2 = path.join('..', '..')
             chdir(up2)
             cwd = getcwd()
 
-        self.assertFalse(path.isfile('blowdrycss_settings.py'))
+        settings_path = path.join(cwd, 'blowdrycss_settings.py')
+
+        self.assertFalse(path.isfile(settings_path))
         create_settings(cwd=cwd)
-        self.assertTrue(path.isfile('blowdrycss_settings.py'))
+        self.assertTrue(path.isfile(settings_path))
         tox_cleanup.main()
-        self.assertFalse(path.isfile('blowdrycss_settings.py'))
+        self.assertFalse(path.isfile(settings_path))
 
         chdir(original_dir)     # Reset directory
 
@@ -43,16 +45,16 @@ class TestTiming(TestCase):
         print('The tox_cleanup started in', original_dir)
 
         cwd = original_dir
-        module_path = path.join(cwd, 'blowdrycss')            # Prevent removal of source settings file.
 
-        if not cwd.endswith('blowdrycss') and not path.isdir(module_path):
+        if cwd.endswith('unit_tests'):
             up2 = path.join('..', '..')
             chdir(up2)
             cwd = getcwd()
 
-        self.assertFalse(path.isfile('blowdrycss_settings.py'))
+        settings_path = path.join(cwd, 'blowdrycss_settings.py')
+        self.assertFalse(path.isfile(settings_path))
         tox_cleanup.main()
-        self.assertFalse(path.isfile('blowdrycss_settings.py'))
+        self.assertFalse(path.isfile(settings_path))
 
         chdir(original_dir)     # Reset directory
 

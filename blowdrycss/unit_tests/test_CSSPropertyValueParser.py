@@ -32,7 +32,7 @@ class TestCSSPropertyValueParser(TestCase):
         expected_values = ['bold', 'white', '1 5 1 5', 'h0ff48f']
         property_parser = CSSPropertyValueParser()
         for i, value in enumerate(input_values):
-            self.assertEquals(property_parser.replace_dashes(value=value), expected_values[i])
+            self.assertEqual(property_parser.replace_dashes(value=value), expected_values[i])
 
     def test_replace_underscore_with_decimal(self):
         # '_' becomes '.'   example: '1_32rem' --> '1.32rem'
@@ -40,21 +40,21 @@ class TestCSSPropertyValueParser(TestCase):
         expected = ['1.32rem', '0.0435p', 'none']
         property_parser = CSSPropertyValueParser()
         for i, value in enumerate(test_values):
-            self.assertEquals(property_parser.replace_underscore_with_decimal(value=value), expected[i])
+            self.assertEqual(property_parser.replace_underscore_with_decimal(value=value), expected[i])
 
     def test_replace_p_with_percent(self):
         test_values = ['1_32p', '0.0435p', '1p 2p 1p 2p', 'none']
         expected = ['1_32%', '0.0435%', '1% 2% 1% 2%', 'none']
         property_parser = CSSPropertyValueParser()
         for i, value in enumerate(test_values):
-            self.assertEquals(property_parser.replace_p_with_percent(value=value), expected[i])
+            self.assertEqual(property_parser.replace_p_with_percent(value=value), expected[i])
 
     def test_replace_n_with_minus(self):
         test_values = ['n5cm n6cm', 'n12rem', 'n0.0435%', 'n1p n2p n1p n2p', 'n9in', 'none']
         expected = ['-5cm -6cm', '-12rem', '-0.0435%', '-1p -2p -1p -2p', '-9in', 'none']
         property_parser = CSSPropertyValueParser()
         for i, value in enumerate(test_values):
-            self.assertEquals(property_parser.replace_n_with_minus(value=value), expected[i])
+            self.assertEqual(property_parser.replace_n_with_minus(value=value), expected[i])
 
     def test_decode_property_value(self):
         valid_property_name = 'color'
@@ -68,7 +68,7 @@ class TestCSSPropertyValueParser(TestCase):
         ]
         property_parser = CSSPropertyValueParser(property_name=valid_property_name)
         for i, value in enumerate(encoded_property_values):
-            self.assertEquals(
+            self.assertEqual(
                 property_parser.decode_property_value(value=value),
                 expected_property_values[i],
                 msg=value
@@ -85,7 +85,7 @@ class TestCSSPropertyValueParser(TestCase):
         ]
         property_parser = CSSPropertyValueParser(property_name=valid_property_name)
         for i, value in enumerate(encoded_property_values):
-            self.assertEquals(
+            self.assertEqual(
                 property_parser.decode_property_value(value=value),
                 expected_property_values[i],
                 msg=value
@@ -111,7 +111,7 @@ class TestCSSPropertyValueParser(TestCase):
         ]
         property_parser = CSSPropertyValueParser(property_name=valid_property_name)
         for i, value in enumerate(encoded_property_values):
-            self.assertEquals(
+            self.assertEqual(
                 property_parser.decode_property_value(value=value),
                 expected_property_values[i],
                 msg=value
@@ -125,7 +125,7 @@ class TestCSSPropertyValueParser(TestCase):
         expected_property_values = ['bold 50', '5u5', 'b1 a5 c1% e5', '5pxrem', '1a% 10x% 3q% 1mp3', 'p12px']
         property_parser = CSSPropertyValueParser(property_name=valid_property_name)
         for i, value in enumerate(encoded_property_values):
-            self.assertEquals(
+            self.assertEqual(
                 property_parser.decode_property_value(value=value),
                 expected_property_values[i],
                 msg=value

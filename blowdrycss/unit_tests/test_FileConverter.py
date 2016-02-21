@@ -20,7 +20,7 @@ class TestFileConverter(TestCase):
                           '        <div class="padding-10 margin-20">Testing<br class="hide" />1 2 3</div>	' \
                           '</body></html>'
         file_converter = FileConverter(file_path=test_file_path)
-        self.assertEquals(file_converter.get_file_as_string(), expected_string)
+        self.assertEqual(file_converter.get_file_as_string(), expected_string)
 
 
 if __name__ == '__main__':

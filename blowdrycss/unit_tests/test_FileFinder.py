@@ -35,7 +35,7 @@ class TestFileFinder(TestCase):
             sys.stdout = out
             file_finder.print_collection(collection1)
             output = out.getvalue().strip()
-            self.assertEquals(output, expected_output)
+            self.assertEqual(output, expected_output)
         finally:
             sys.stdout = saved_stdout
 
@@ -50,7 +50,7 @@ class TestFileFinder(TestCase):
             sys.stdout = out
             file_finder.print_collection(collection2)
             output = out.getvalue().strip()
-            self.assertEquals(output, expected_output)
+            self.assertEqual(output, expected_output)
         finally:
             sys.stdout = saved_stdout
 
@@ -119,7 +119,7 @@ class TestFileFinder(TestCase):
                           '        <div class="padding-10 margin-20">Testing<br class="hide" />1 2 3</div>	' \
                           '</body></html>'
         file_converter = FileConverter(file_path=test_file_path)
-        self.assertEquals(file_converter.get_file_as_string(), expected_string)
+        self.assertEqual(file_converter.get_file_as_string(), expected_string)
 
 
 if __name__ == '__main__':
