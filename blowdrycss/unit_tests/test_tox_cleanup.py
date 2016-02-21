@@ -1,23 +1,28 @@
+# python 2.7
+from __future__ import unicode_literals, with_statement
+from io import open
 # builtins
 from unittest import TestCase, main
-from os import path, getcwd, chdir
+from os import path, getcwd, chdir, remove
 # custom
 import tox_cleanup
-from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 
 
-def create_settings(cwd=''):
-    """ Build blowdrycss_settings.py if it doesn't exist and the user is not inside the sphinx docs directory.
+def create_file(file_path=''):
+    """ Build create a file at the defined file_path, and write the word 'test' inside it.
+
+    :type file_path: str
+    :param file_path: Path to the file to be created.
 
     """
-    if not path.isfile('blowdrycss_settings.py') and not cwd.endswith('docs'):
-        write_blowdrycss_settings_dot_py()
+    with open(file_path, 'w', encoding='utf-8') as _file:
+        _file.write('test')
 
 
-class TestTiming(TestCase):
+class TestToxCleanup(TestCase):
     def test_tox_cleanup_file_exists(self):
         original_dir = getcwd()
         print('The tox_cleanup started in', original_dir)
@@ -32,11 +37,12 @@ class TestTiming(TestCase):
 
         settings_path = path.join(cwd, 'blowdrycss_settings.py')
 
-        self.assertFalse(path.isfile(settings_path))
-        create_settings(cwd=cwd)
-        self.assertTrue(path.isfile(settings_path))
+        if not path.isfile(settings_path):
+            create_file(file_path=settings_path)
+
+        self.assertTrue(path.isfile(settings_path), msg=settings_path)
         tox_cleanup.main()
-        self.assertFalse(path.isfile(settings_path))
+        self.assertFalse(path.isfile(settings_path), msg=settings_path)
 
         chdir(original_dir)     # Reset directory
 
@@ -52,9 +58,13 @@ class TestTiming(TestCase):
             cwd = getcwd()
 
         settings_path = path.join(cwd, 'blowdrycss_settings.py')
-        self.assertFalse(path.isfile(settings_path))
+
+        if path.isfile(settings_path):
+            remove(settings_path)                                       # Delete blowdrycss_settings.py if it exists.
+
+        self.assertFalse(path.isfile(settings_path), msg=settings_path)
         tox_cleanup.main()
-        self.assertFalse(path.isfile(settings_path))
+        self.assertFalse(path.isfile(settings_path), msg=settings_path)
 
         chdir(original_dir)     # Reset directory
 

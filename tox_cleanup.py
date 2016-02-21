@@ -24,6 +24,8 @@ py3x tests will fail.
 
 """
 
+# python 2.7
+from __future__ import print_function
 # builtins
 from os import path, getcwd, remove
 
