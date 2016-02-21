@@ -25,7 +25,7 @@ def enable():
     if settings.logging_enabled:
         logger = logging.getLogger('')
         logger.setLevel(settings.logging_level)
-        formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s\n%(message)s")
+        formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
 
         if settings.log_to_console:
             stream_handler = logging.StreamHandler(sys.stdout)

@@ -163,7 +163,7 @@ docs_directory = path.join(cwd, 'docs')
 chdir(original_directory)                                   # Reset current working directory.
 
 # Logging
-logging_enabled = False
+logging_enabled = True
 logging_level = DEBUG                                       # Allowed: DEBUG, INFO, WARNING, ERROR, CRITICAL
 log_to_console = True
 log_to_file = True
@@ -171,7 +171,7 @@ log_directory = path.join(cwd, 'log')
 log_file_name = 'blowdrycss.log'
 one_mega_byte = 1048576
 log_file_size = 4 * one_mega_byte                           # Max log file size
-log_backup_count = 1                                        # Maximum number of log files.
+log_backup_count = 1                                        # Maximum number of backup log files.
 
 # All file types/extensions to search for in the defined project_directory that contain encoded class selectors.
 # Example format: ('*.html', )

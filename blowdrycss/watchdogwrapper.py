@@ -60,7 +60,7 @@ class FileEditEventHandler(PatternMatchingEventHandler):
 
         """
         if type(event) == FileModifiedEvent and not self.excluded(src_path=event.src_path):
-            logging.debug('  ' + event.event_type + ' :: ' + str(event.key))
+            logging.debug('File ' + event.event_type + ' --> ' + str(event.src_path))
             blowdry.main()
             self.print_status()
 
@@ -72,7 +72,7 @@ class FileEditEventHandler(PatternMatchingEventHandler):
 
         """
         if type(event) == FileDeletedEvent and not self.excluded(src_path=event.src_path):
-            logging.debug('  ' + event.event_type.ljust(8) + ' :: ' + str(event))
+            logging.debug('File ' + event.event_type.capitalize() + ' --> ' + str(event))
             blowdry.main()
             self.print_status()
 
@@ -103,7 +103,6 @@ def main():
 
     """
     if settings.auto_generate:
-        # logging.basicConfig(level=settings.logging_level)                  # Uncomment for testing
         if settings.logging_enabled:
             log.enable()
 
