@@ -4,6 +4,7 @@ from builtins import str
 # builtins
 from collections import OrderedDict
 from copy import deepcopy
+import logging
 # plugins
 from pypandoc import convert
 # custom
@@ -288,10 +289,10 @@ class DataLibrary(object):
         self.property_alias_rst = convert(source=property_html, to=str('rst'), format=str('html'))
 
         # Debug
-        # print('property_alias_dict', self.property_alias_dict)
-        # print('clashing_alias_markdown', self.clashing_alias_markdown)
-        # print('clashing_alias_html\n', self.clashing_alias_html)
-        # print('property_alias_markdown', self.property_alias_markdown)
+        logging.debug('\nproperty_alias_dict:\n' + str(self.property_alias_dict))
+        logging.debug('\nclashing_alias_markdown:\n' + str(self.clashing_alias_markdown))
+        logging.debug('\nclashing_alias_html:\n' + str(self.clashing_alias_html))
+        logging.debug('\nproperty_alias_markdown:\n' + str(self.property_alias_markdown))
 
         self.ordered_property_dict = OrderedDict(
             sorted(self.property_alias_dict.items(), key=lambda t: len(t[0]), reverse=True)
@@ -408,7 +409,7 @@ class DataLibrary(object):
                         self.clashing_alias_dict[key1] = self.clashing_alias_dict[key1].union(intersection)
                     except KeyError:
                         self.clashing_alias_dict[key1] = intersection
-        # print('clashing aliases', self.clashing_alias_dict)
+        logging.debug(msg='\ndatalibrary.clashing_aliases_dict:\n' + str(self.clashing_alias_dict))
 
     def remove_clashing_aliases(self):
         """ Removes clashing aliases stored in ``clashing_alias_dict`` from ``property_alias_dict`` and
@@ -424,7 +425,7 @@ class DataLibrary(object):
                         clean_dict[property_name].remove(clashing_alias)             # Remove it.
             except KeyError:
                 pass
-        # print('clashing aliases removed', clean_dict)
+        logging.debug(msg='Clashing aliases removed: datalibrary clean_dict\n' + str(clean_dict))
         self.property_alias_dict = deepcopy(clean_dict)
 
     @staticmethod

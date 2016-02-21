@@ -124,7 +124,7 @@ def main():
 
     # Filter class names. Only keep classes matching the defined class encoding.
     class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
-    logging.debug(msg='\nclass_property_parser.class_set:\n' + str(class_property_parser.class_set) + '\n')
+    logging.debug(msg='blowdry.class_property_parser.class_set:\t' + str(class_property_parser.class_set))
     class_set = class_property_parser.class_set.copy()
 
     # Build a set() of valid css properties. Some classes may be removed during cssutils validation.
@@ -139,8 +139,8 @@ def main():
         media_query_builder = MediaQueryBuilder(property_parser=class_property_parser)
         logging.debug(
             msg=(
-                '\nmedia_query_builder.property_parser.class_set:\n' +
-                str(media_query_builder.property_parser.class_set) + '\n'
+                'blowdry.media_query_builder.property_parser.class_set:\t' +
+                str(media_query_builder.property_parser.class_set)
             )
         )
         css_text += bytes(media_query_builder.get_css_text(), 'utf-8')

@@ -1,5 +1,7 @@
-# builtins
+# python 2 and 3
 from html.parser import HTMLParser                  # Allowed after pip install future
+# builtins
+import logging
 # custom
 from blowdrycss.filehandler import FileConverter
 
@@ -153,7 +155,7 @@ class HTMLClassParser(object):
             # Convert file to string.
             file_converter = FileConverter(file_path=_file)
             file_string = file_converter.get_file_as_string()
-            # print(file_string)
+            logging.debug(msg=file_string)
 
             # Generate list of class strings
             class_parser = HTMLAttributeParser(attribute_name='class')
@@ -161,8 +163,8 @@ class HTMLClassParser(object):
 
             # Convert list of class strings to set
             self.__set_class_set(class_parser.attribute_value_list)
-            # print("Class List:\t", class_parser.attribute_value_list)
-            # print(" Class Set:\t", self.class_set)
+            logging.debug(msg='Class List:\t' + str(class_parser.attribute_value_list))
+            logging.debug(msg='Class Set:\t' + str(self.class_set))
 
     def __set_class_set(self, attribute_value_list):
         """ Private Method

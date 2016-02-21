@@ -4,6 +4,7 @@ from io import open
 # builtins
 from os import path
 from re import sub, findall
+import logging
 # custom
 from blowdrycss.htmlparser import HTMLClassParser
 
@@ -193,7 +194,7 @@ class ClassExtractor(object):
         """
         class_set = set()
 
-        # print('raw_class_list', self.raw_class_list)
+        logging.debug(msg='classparser.raw_class_list:\t' + str(self.raw_class_list))
         for classes in self.raw_class_list:
             class_set = set.union(
                 set(classes.split()),               # Split space delimited string into set().
@@ -243,7 +244,7 @@ class ClassParser(object):
         self.file_path_list = []
         self.build_file_path_list()
 
-        # print('html_class_parser.class_set', self.class_set)
+        logging.debug(msg='classparser.html_class_parser.class_set:\t' + str(self.class_set))
         self.build_class_set()
 
     def build_file_path_list(self):
@@ -268,6 +269,6 @@ class ClassParser(object):
             sub_regex = regex_dict['sub_regex']
             findall_regex = regex_dict['findall_regex']
             class_extractor = ClassExtractor(file_path=file_path, sub_regex=sub_regex, findall_regex=findall_regex)
-            # print('class_extractor.class_set:', class_extractor.class_set)
+            logging.debug(msg='classparser.class_extractor.class_set:\t' + str(class_extractor.class_set))
             self.class_set = self.class_set.union(class_extractor.class_set)
-            # print('final class_set', self.class_set)
+            logging.debug(msg='classparser final class_set:\t' + str(self.class_set))
