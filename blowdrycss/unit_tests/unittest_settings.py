@@ -96,8 +96,8 @@ log_to_file = True
 log_directory = path.join(cwd, 'log')
 log_file_name = 'blowdrycss.log'
 one_mega_byte = 1048576
-log_file_size = 5 * one_mega_byte                           # Max log file size
-log_backup_count = 7                                        # Maximum number of log files.
+log_file_size = 4 * one_mega_byte                           # Max log file size
+log_backup_count = 1                                        # Maximum number of log files.
 
 # All file types/extensions to search for in the defined project_directory that contain encoded class selectors.
 # Example format: ('*.html', )
