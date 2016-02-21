@@ -28,11 +28,15 @@ py3x tests will fail.
 from os import path, getcwd, remove
 
 
-# cwd = getcwd()
-# settings_file = path.join(cwd, 'blowdrycss_settings.py')
-#
-# if path.isfile(settings_file):
-#     remove(settings_file)
-#     print('Deleted', settings_file)
-#
-# print('Project root is clean.')
+cwd = getcwd()
+print('The tox_cleanup started in', cwd)
+module_path = path.join(cwd, 'blowdrycss', 'blowdrycss')            # Prevent removal of source settings file.
+
+if cwd.endswith('blowdrycss') and path.isdir(module_path):
+    settings_file = path.join(cwd, 'blowdrycss_settings.py')
+
+    if path.isfile(settings_file):
+        remove(settings_file)
+        print('Deleted', settings_file)
+
+    print('The tox_clean finished. Project root is clean.')
