@@ -1,5 +1,7 @@
 # python 2
 from __future__ import print_function, unicode_literals
+# builtins
+import logging
 # plugins
 from cssutils.css import Property
 from xml.dom import SyntaxErr
@@ -46,7 +48,7 @@ class MediaQueryBuilder(object):
     """
 
     def __init__(self, property_parser=ClassPropertyParser()):
-        print('MediaQueryBuilder Running...\n')
+        logging.info(msg='MediaQueryBuilder Running...')
         self.property_parser = property_parser
         self.css_media_queries = set()
         self.media_query_text = ''

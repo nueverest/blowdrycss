@@ -5,6 +5,7 @@ from io import open
 # builtins
 from os import path, walk, getcwd
 from glob import glob
+import logging
 # plugins
 from cssutils import parseString, ser
 # custom
@@ -46,8 +47,8 @@ class FileFinder(object):
             self.file_dict = {}
             self.set_files()
             self.set_file_dict()
-            print('\nFile Types:', ', '.join(settings.file_types))
-            print('\nProject Directory:', str(project_directory))
+            logging.debug(msg='File Types:' + ', '.join(settings.file_types))
+            logging.debug(msg='Project Directory:' + str(project_directory))
             print('\nProject Files Found:')
             self.print_collection(self.files)
         else:
@@ -66,6 +67,7 @@ class FileFinder(object):
         """
         for item in collection:
             print(str(item))        # Python 2 requires str().
+        print(' ')                  # Add a blank line
 
     def set_files(self):
         """

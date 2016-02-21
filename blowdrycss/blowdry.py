@@ -110,7 +110,7 @@ def main():
 
     # Generate reStructuredText documentation files.
     if settings.rst_docs:
-        print('Documentation Directory:', str(settings.docs_directory))     # str() is required for Python2
+        print('\nDocumentation Directory:', str(settings.docs_directory))     # str() is required for Python2
         rst_file = GenericFile(file_directory=settings.docs_directory, file_name='clashing_aliases', extension='.rst')
         rst_file.write(str(clashing_alias_rst))
         rst_file = GenericFile(file_directory=settings.docs_directory, file_name='property_aliases', extension='.rst')
@@ -124,7 +124,7 @@ def main():
 
     # Filter class names. Only keep classes matching the defined class encoding.
     class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
-    # print('\nclass_property_parser.class_set:', class_property_parser.class_set)
+    logging.debug(msg='\nclass_property_parser.class_set:\n' + str(class_property_parser.class_set) + '\n')
     class_set = class_property_parser.class_set.copy()
 
     # Build a set() of valid css properties. Some classes may be removed during cssutils validation.
@@ -137,12 +137,16 @@ def main():
         css_builder.property_parser.class_set = unassigned_class_set                # Only use unassigned classes
         css_builder.property_parser.removed_class_set = set()                       # Clear set
         media_query_builder = MediaQueryBuilder(property_parser=class_property_parser)
-        # print(media_query_builder.property_parser.class_set)
+        logging.debug(
+            msg=(
+                '\nmedia_query_builder.property_parser.class_set:\n' +
+                str(media_query_builder.property_parser.class_set) + '\n'
+            )
+        )
         css_text += bytes(media_query_builder.get_css_text(), 'utf-8')
 
-    # print('CSS Text:')
-    # print(css_text)
-    print('Auto-Generated CSS:')
+    logging.debug('\nCSS Text:\n\n' + str(css_text))
+    print('\nAuto-Generated CSS:')
 
     # Output the DRY CSS file. (user command option)
     if settings.human_readable:

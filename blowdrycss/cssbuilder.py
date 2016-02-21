@@ -1,5 +1,7 @@
 # python 2
-from __future__ import print_function
+from __future__ import print_function, unicode_literals
+# builtins
+import logging
 # plugins
 from cssutils.css import Property, CSSStyleRule, CSSStyleSheet
 from xml.dom import SyntaxErr
@@ -30,7 +32,7 @@ class CSSBuilder(object):
 
     """
     def __init__(self, property_parser=ClassPropertyParser()):
-        print(u'\nCSSBuilder Running...\n')
+        logging.info(msg='CSSBuilder Running...')
         self.property_parser = property_parser
         self.css_rules = set()
         self.css_stylesheet = CSSStyleSheet()
