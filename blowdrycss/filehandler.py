@@ -3,12 +3,12 @@ from __future__ import print_function, unicode_literals, with_statement
 from builtins import str
 from io import open
 # builtins
-from os import path, walk, getcwd, makedirs
+from os import path, walk, getcwd
 from glob import glob
 # plugins
 from cssutils import parseString, ser
 # custom
-from blowdrycss.utilities import get_file_path
+from blowdrycss.utilities import get_file_path, make_directory
 import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
@@ -187,12 +187,7 @@ class CSSFile(object):
     def __init__(self, file_directory=getcwd(), file_name='blowdry'):
         self.file_directory = file_directory
         self.file_name = file_name
-
-        try:                                        # Python 2.7 Compliant
-            makedirs(file_directory)                # Make 'css' directory
-        except OSError:
-            if not path.isdir(file_directory):      # Verify directory existences
-                raise OSError(file_directory + ' is not a directory, and could not be created.')
+        make_directory(file_directory)
 
     def write(self, css_text=''):
         """ Output a human readable version of the css file in utf-8 format.
@@ -309,11 +304,7 @@ class GenericFile(object):
                 file_name=self.file_name,
                 extension=str(extension)
         )
-        try:                                        # Python 2.7 Compliant
-            makedirs(file_directory)                # Make 'html' directory
-        except OSError:
-            if not path.isdir(file_directory):      # Verify directory existences
-                raise OSError(file_directory + ' is not a directory, and could not be created.')
+        make_directory(file_directory)
 
     def write(self, text=''):
         """ Output a human readable version of the file in utf-8 format.
