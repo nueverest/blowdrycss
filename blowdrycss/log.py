@@ -4,6 +4,8 @@ Allows logging to std.stdout at the console and logging to a file.
 
 """
 
+# python 2.7
+from __future__ import unicode_literals
 # builtins
 import logging
 import sys
