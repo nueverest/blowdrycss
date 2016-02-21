@@ -45,4 +45,6 @@ def enable():
             logger.addHandler(rotating_file_handler)
             logging.debug('Rotating file logging enabled.')
     else:
-        raise ValueError('Logging could not be enabled because settings.logging_enabled is False.')
+        error_message = 'Logging could not be enabled because settings.logging_enabled is False.'
+        logging.error(error_message)
+        raise ValueError(error_message)

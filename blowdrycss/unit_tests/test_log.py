@@ -6,6 +6,7 @@ from unittest import TestCase, main
 import sys
 from io import StringIO, open
 from os import path
+import logging
 # custom
 from blowdrycss.utilities import change_settings_for_testing, unittest_file_path
 from blowdrycss import log
@@ -104,6 +105,29 @@ class TestEnable(TestCase):
         settings.log_to_console = True                                                  # Should produce no effect.
         settings.log_to_file = True                                                     # Should produce no effect.
         self.assertRaises(ValueError, log.enable)
+
+    def test_logging_level_INFO(self):
+        not_expected = 'Console logging enabled.\n'
+        info_message = 'Testing 123. This should get logged.'
+        settings.logging_enabled = True
+        settings.log_to_console = True
+        settings.log_to_file = False
+        settings.logging_level = logging.INFO
+
+        saved_stdout = sys.stdout                                                       # Monitor console
+        try:
+            out = StringIO()
+            sys.stdout = out
+
+            log.enable()
+            logging.info(msg=info_message)
+
+            output = out.getvalue()
+
+            self.assertFalse(output.endswith(not_expected), msg=not_expected + '\noutput:\n' + output)
+            self.assertTrue(info_message in output, msg=info_message + '\noutput:\n' + output)
+        finally:
+            sys.stdout = saved_stdout
 
 
 if __name__ == '__main__':
