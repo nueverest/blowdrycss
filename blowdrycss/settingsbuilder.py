@@ -96,7 +96,7 @@ The longer more specific name is used to prevent naming conflicts, and increase 
 
 **cssutils Patch:**
 
-``cssutils`` does not currently support CSS 3 Units.  The patch in this file allows length units of
+``cssutils`` does not currently support all CSS 3 Units.  The patch in this file allows length units of
 ``q``, ``ch``, ``rem``, ``vw``, ``vh``, ``vmin``, and ``vmax``. It also allows angle units of ``turn``.
 
 \"\"\"

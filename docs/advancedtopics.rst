@@ -87,48 +87,64 @@ New custom aliases can be assigned as shorthand abbreviation for an official CSS
 
 **Custom Alias Rules:**
 
-- The ``key`` is the official `W3C CSS property name <https://www.w3.org/TR/CSS21/propidx.html>`__.
-  Also the ``key`` must exist in the set ``datalibrary.DataLibrary.property_names`` (shown here). ::
+- The dictionary ``key`` is the official `W3C CSS property name <https://www.w3.org/TR/CSS21/propidx.html>`__.
+  Also the ``key`` must exist in the set ``datalibrary.DataLibrary.property_names``, as follows: ::
 
     {
-        'azimuth', 'background', 'background-attachment', 'background-color', 'background-image',
-        'background-position', 'background-repeat', 'border', 'border-bottom', 'border-bottom-color',
-        'border-bottom-style', 'border-bottom-width', 'border-collapse', 'border-color', 'border-left',
-        'border-left-color', 'border-left-style', 'border-left-width', 'border-right', 'border-right-color',
-        'border-right-style', 'border-right-width', 'border-spacing', 'border-style', 'border-top',
-        'border-radius', 'border-top-left-radius', 'border-top-right-radius', 'border-bottom-right-radius',
-        'border-bottom-left-radius',
-        'border-top-color', 'border-top-style', 'border-top-width', 'border-width', 'bottom',
-        'caption-side', 'clear', 'clip', 'color', 'content', 'counter-increment', 'counter-reset', 'cue',
-        'cue-after', 'cue-before', 'cursor', 'direction', 'display', 'elevation', 'empty-cells', 'float',
-        'font', 'font-family', 'font-size', 'font-style', 'font-variant', 'font-weight', 'height', 'left',
-        'letter-spacing', 'line-height', 'list-style', 'list-style-image', 'list-style-position',
-        'list-style-type', 'margin', 'margin-bottom', 'margin-left', 'margin-right', 'margin-top', 'max-height',
-        'max-width', 'min-height', 'min-width', 'opacity', 'orphans', 'outline', 'outline-color', 'outline-style',
-        'outline-width', 'overflow', 'padding', 'padding-bottom', 'padding-left', 'padding-right',
-        'padding-top', 'page-break-after', 'page-break-before', 'page-break-inside', 'pause', 'pause-after',
-        'pause-before', 'pitch', 'pitch-range', 'play-during', 'position', 'quotes', 'richness', 'right', 'speak',
-        'speak-header', 'speak-numeral', 'speak-punctuation', 'speech-rate', 'stress', 'table-layout',
-        'text-align', 'text-decoration', 'text-indent', 'text-shadow', 'text-transform', 'top', 'unicode-bidi',
-        'vertical-align',
-        'visibility', 'voice-family', 'volume', 'white-space', 'widows', 'width', 'word-spacing', 'z-index'
+        'azimuth', 'background', 'background-attachment',
+        'background-color', 'background-image', 'background-position',
+        'background-repeat', 'border', 'border-bottom',
+        'border-bottom-color', 'border-bottom-style',
+        'border-bottom-width', 'border-collapse', 'border-color',
+        'border-left', 'border-left-color', 'border-left-style',
+        'border-left-width', 'border-right', 'border-right-color',
+        'border-right-style', 'border-right-width', 'border-spacing',
+        'border-style', 'border-top', 'border-radius',
+        'border-top-left-radius', 'border-top-right-radius',
+        'border-bottom-right-radius', 'border-bottom-left-radius',
+        'border-top-color', 'border-top-style', 'border-top-width',
+        'border-width', 'bottom', 'caption-side', 'clear', 'clip',
+        'color', 'content', 'counter-increment', 'counter-reset',
+        'cue', 'cue-after', 'cue-before', 'cursor', 'direction',
+        'display', 'elevation', 'empty-cells', 'float', 'font',
+        'font-family', 'font-size', 'font-style', 'font-variant',
+        'font-weight', 'height', 'left', 'letter-spacing',
+        'line-height', 'list-style', 'list-style-image',
+        'list-style-position', 'list-style-type', 'margin',
+        'margin-bottom', 'margin-left', 'margin-right',
+        'margin-top', 'max-height', 'max-width', 'min-height',
+        'min-width', 'opacity', 'orphans', 'outline',
+        'outline-color', 'outline-style', 'outline-width',
+        'overflow', 'padding', 'padding-bottom', 'padding-left',
+        'padding-right', 'padding-top', 'page-break-after',
+        'page-break-before', 'page-break-inside', 'pause',
+        'pause-after', 'pause-before', 'pitch', 'pitch-range',
+        'play-during', 'position', 'quotes', 'richness',
+        'right', 'speak', 'speak-header', 'speak-numeral',
+        'speak-punctuation', 'speech-rate', 'stress',
+        'table-layout', 'text-align', 'text-decoration',
+        'text-indent', 'text-shadow', 'text-transform', 'top',
+        'unicode-bidi', 'vertical-align', 'visibility',
+        'voice-family', 'volume', 'white-space', 'widows',
+        'width', 'word-spacing', 'z-index'
     }
 
 .. note::
 
-    If a new key is added to the standard, but not listed here feel free to raise an issue on github.
+    If a new key is added to the official W3C CSS standard, but not listed here feel free to raise an issue in
+    the `code repository <https://github.com/nueverest/blowdrycss>`__.
 
 
-- The ``value`` is a ``set()`` of custom string aliases.  For example: ::
+- The dictionary ``value`` is a ``set()`` of custom string aliases.  For example: ::
 
     {'bgc-', 'bg-c-', 'bg-color-', }
 
-- When adding a new alias it must end with a ``'-'``. Specifically, ``'bgc-'`` is a valid custom alias format.
+- When adding a new alias it must end with a ``'-'``. As an example, ``'bgc-'`` is a valid custom alias format.
   If the ``'-'`` is removed, then blowdrycss assumes that ``'bgc'`` expects it to be a valid and
   unique CSS property value (*which it is not*). An example of a valid, unique CSS property value would be ``'bold'``.
 
 - An alias must be unique across all defined aliases. Any alias that clashes with an alias in this dictionary
-  or the dictionary auto-generated by ``initialize_property_alias_dict()`` is removed, and becomes unusable.
+  or the dictionary auto-generated by ``DataLibrary.initialize_property_alias_dict()`` is removed, and becomes unusable.
 
 - Clashing aliases are:
     - Printed when ``get_clashing_aliases()`` is run.
@@ -170,8 +186,8 @@ New custom aliases can be assigned as shorthand abbreviation for an official CSS
     'word-spacing': {'ws-'},
 
 
-Where are the semicolons?
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Where are the semicolons in the CSS file?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After opening ``blowdry.css``, it becomes evident that semicolons are not used for most of the css rule declarations.
 
@@ -192,8 +208,8 @@ Why?
 - It results in faster page loads due to smaller ``*.css`` file size.
 
 
-DRY-ness must be balanced against other factors.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+DRY-ness must be balanced with other factors.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Consider the following:
 
