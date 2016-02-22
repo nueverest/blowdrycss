@@ -109,6 +109,10 @@
     |
     | **0.1.6** -- Integrated debug level logging settings. Fixed a logic error in tox_cleanup.py. Compressed
       some of the user feedback. Created a new utility method make_directory().
+    |
+    | **0.1.7** -- Fancy new favicons. Documentation improved. Official site launched
+      `www.blowdrycss.org <www.blowdrycss.org>`__.
+    |
 
 """
 __author__ = 'chad nelson'
