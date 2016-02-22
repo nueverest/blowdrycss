@@ -82,7 +82,7 @@ New custom aliases can be assigned as shorthand abbreviation for an official CSS
 | custom_property_alias_dict (*dict*) -- Contains customized shorthand encodings for a CSS property name.
   e.g. ``'c-'`` is an alias for ``'color'``. This saves on typing.
 
-| These encoded class selectors can be used inside of Web project files matching ``file_type``.
+| These encoded class selectors can be used inside of Web project files matching ``blowdrycss_settings.file_type``.
   They can be customized to your liking.
 
 **Custom Alias Rules:**
