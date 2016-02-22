@@ -31,7 +31,10 @@ Version Changelog
 | **0.1.4** -- Dropped support for py30, py31, and py32. Integrated tox to support testing of py27, py33, py34, and
   py35 environments. Fixed unicode issues that caused tests to fail with py27.
 |
-| **0.1.5 and 0.1.6** -- Integrated debug level logging settings. Fixed a logic error in tox_cleanup.py. Compressed
+| **0.1.5** -- Upload corrupted on pypi. Everything worked fine on testpypi, but when uploaded to pypi something
+  went wrong.
+|
+| **0.1.6** -- Integrated debug level logging settings. Fixed a logic error in tox_cleanup.py. Compressed
   some of the user feedback. Created a new utility method make_directory().
 |
 
@@ -78,14 +81,24 @@ Advantages of blowdrycss
 
 #. **Rapid Development:** Less time spent writing CSS, and cleaning up unused style rules.
 #. **DRY (Don't Repeat Yourself):** Reduces CSS file size by only defining properties once.
-#. **Symbiotic:** Can be integrated with the current ecosystem of CSS compilers and frameworks. Is compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
-#. **Documented:** Hands-on tutorial and sphinx documentation to get you up and running fast.
+#. **Symbiotic:**
+    * Can be integrated with the current ecosystem of CSS compilers and frameworks.
+      Compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
+    * Supports HTML, JINJA, XHTML, .NET, Ruby Template ERB class selector discovery.
+#. **Documented:** Hands-on `tutorial <http://blowdrycss.readthedocs.org/en/latest/quickstart.html>`__ and sphinx `documentation <http://blowdrycss.readthedocs.org/en/latest/index.html>`__ to get you up and running fast.
 #. **Robust:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all phases of a products lifecycle from prototype to production.
-#. **Customizable:** Features can be turned on and off inside of ``blowdrycss_settings.py``. Examples include: unit parsing, color parsing, font parsing, minification, and media query parsing.
+#. **Customizable:** Features can be turned on and off inside of `blowdrycss_settings.py <https://github.com/nueverest/blowdrycss/blob/master/blowdrycss/blowdrycss_settings.py>`__. Examples include:
+    * Watchdog file monitoring
+    * Logging
+    * Unit parsing
+    * Color parsing
+    * Font parsing
+    * CSS Minification
+    * Media query parsing.
 #. **Extensible:** Want to extract class selectors from javascript files? Build a plugin.
-#. **Standardized:** HTML5 compatible. All `W3C CSS <http://www.w3.org/Style/CSS/Overview.en.html>`__ Level 2.1, and some Level 3 properties implemented. PEP8 Compliant.
+#. **Standardized:** HTML5 compatible. All `W3C CSS <http://www.w3.org/Style/CSS/Overview.en.html>`__ Level 2.1, and Level 3 properties implemented. PEP8 Compliant.
 #. **Tested:** UnitTest Coverage
-#. **Permissive:** MIT license
+#. **Permissive:** `MIT license <https://github.com/nueverest/blowdrycss/blob/master/LICENSE>`__
 
 Requirements
 ~~~~~~~~~~~~
@@ -99,7 +112,6 @@ Requirements
 Optional
 ''''''''
 
-- unittest (run unit tests)
 - coverage 4.0.2+ (check test coverage)
 - sphinx 1.3.3+ (docs)
 
@@ -265,7 +277,7 @@ Valuable References
 License
 ~~~~~~~
 
-    The MIT license
+    The `MIT license <https://github.com/nueverest/blowdrycss/blob/master/LICENSE>`__
 
 How to Contribute
 ~~~~~~~~~~~~~~~~~
