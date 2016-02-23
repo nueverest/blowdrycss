@@ -118,7 +118,7 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/nueverest/blowdrycss',
+    url='http://blowdrycss.org',
     download_url='https://github.com/nueverest/blowdrycss/archive/master.zip',
 
     # Author details
