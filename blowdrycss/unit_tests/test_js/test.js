@@ -3,6 +3,10 @@ http://stackoverflow.com/questions/507138/how-do-i-add-a-class-to-a-given-elemen
 http://www.w3schools.com/jquery/html_addclass.asp
 http://www.w3schools.com/jquery/sel_class.asp
 http://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp
+https://dojotoolkit.org/reference-guide/1.7/dojo/addClass.html
+https://dojotoolkit.org/reference-guide/1.7/dojo/removeClass.html
+http://blog.sodhanalibrary.com/2014/08/add-class-remove-class-or-toggle-class.html#.Vs0eSNzm5f8
+http://blog.sodhanalibrary.com/2016/02/add-class-remove-class-toggle-class-to.html#.Vs0fWtzm5f9 (angular 2)
 */
 
 
@@ -102,6 +106,43 @@ document.addEventListener('DOMContentLoaded', function() {
 // getElementByClassName variant 2
 var x = document.getElementsByClassName("example");
 
+
+// dojo
+
+// Add a class dojo 1.7+ (AMD)
+require(["dojo/dom-class"], function(domClass){
+    domClass.add("example1", "style1");
+});
+
+// Add a class dojo < 1.7
+dojo.addClass("example1", "style1");
+
+// Add multiple dojo 1.7+ (AMD)
+require(["dojo/dom-class"], function(domClass){
+    domClass.add("example1", "style1 style2");
+});
+
+// Add mulitple dojo < 1.7
+dojo.addClass("example1", "style1 style2");
+
+// Remove a class. dojo 1.7+
+require(["dojo/dom-class"], function(domClass){
+    // Remove a class from some node:
+    domClass.remove("someNode", "firstClass");
+});
+
+// Remove a class from some node:  dojo < 1.7
+dojo.removeClass("someNode", "firstClass");
+
+// Remove multiple classes dojo 1.7+ (AMD)
+require(["dojo/dom-class"], function(domClass){
+    domClass.remove("example1", "style1 style2");
+});
+
+// Remove multiple classes dojo < 1.7
+dojo.removeClass("example1", "style1 style2");
+
+
 // JQuery
 $(document).ready( function() {
     var padding = "padding-top-10";
@@ -138,3 +179,49 @@ Element("document.body").ClassNames.add("classname");
 Element("document.body").ClassNames.remove("classname");
 // Prototype variant 3
 Element("document.body").ClassNames.set("classname");
+
+
+// AngularJS variant 1
+$scope.myClass = [];
+$scope.myClass.push('red');
+// AngularJS variant 2
+$scope.myClass = [];
+$scope.myClass.pop('red');
+// AngularJS variant 3
+$scope.myClass = ['red'];
+if($scope.myClass.indexOf('red') == -1) {
+    alert('false');
+} else {
+    alert('true');
+}
+// AngularJS variant 4
+$scope.myClass = {red:false};
+$scope.addClass = function() {
+   $scope.myClass.red = true;
+}
+// AngularJS variant 5
+$scope.myClass = {red:false};
+$scope.removeClass = function() {
+    $scope.myClass.red = false;
+}
+// AngularJS variant 6
+$scope.myClass = {red:false};
+$scope.toggleClass = function() {
+     $scope.myClass.red = !$scope.myClass.red;
+};
+// AngularJS variant 7
+$scope.myClass = {red:false};
+$scope.toggleClass = function() {
+     $scope.myClass.red = !$scope.myClass.red;
+};
+// AngularJS variant 8
+var myEl = angular.element( document.querySelector( '#divID' ) );
+myEl.removeClass('red');
+// AngularJS variant 9
+var myEl = angular.element( document.querySelector( '#divID' ) );
+myEl.toggleClass('red');
+// AngularJS variant 10
+var myEl = angular.element( document.querySelector( '#divID' ) );
+if(myEl.hasClass('red')) {
+  alert('has class red');
+}
