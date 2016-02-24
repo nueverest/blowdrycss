@@ -32,21 +32,14 @@ element.classList[length] = arrayclass;
 
 
 var d = document.getElementById("div0");
-// className variant 1
-d.className += " padding-33";
-// className variant 2
-d.className+=' color-h111';
-// className variant 3
+d.className += " padding-33";                                       // className variant 1
+d.className+=' color-h111';                                         // className variant 2
 var center = " text-align-center";
-d.className += center;
-// className variant 4
-d.className += " padding-33 pink margin-left-5_5rem";
-// className variant 5
-d.className=d.className+' color-h111';
-// className variant 6
-d.className = d.className + ' color-h111';
-// className variant 7
-d.className = d.className + ' color-h111 bold green padding-10';
+d.className += center;                                              // className variant 3
+d.className += " padding-33 pink margin-left-5_5rem";               // className variant 4
+d.className=d.className+' color-h111';                              // className variant 5
+d.className = d.className + ' color-h111';                          // className variant 6
+d.className = d.className + ' color-h111 bold green padding-10';    // className variant 7
 
 
 // Replace a class name variant 1
