@@ -108,7 +108,7 @@ chg = path.join('..')
 chdir(chg)                                                  # Navigate up one directory relative to this script.
 cwd = getcwd()
 markdown_directory = cwd                                    # Shows up in root of github repository.
-project_directory = path.join(cwd, 'officialsite')
+project_directory = path.join(cwd, 'examplesite')
 css_directory = path.join(project_directory, 'css')
 docs_directory = path.join(cwd, 'docs')
 chdir(original_directory)                                   # Reset current working directory.
