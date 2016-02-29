@@ -1,15 +1,3 @@
-.blowdry {
-    font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
-    font-weight:100;
-    /*background-color: rgba(0,0,0,1);*/
-    /*background: rgba(0,0,0,0.3);*/
-    color: white;
-    /*padding: 2rem;*/
-    /*margin:2rem;*/
-    font-size: 1.2rem;
-    min-width: 100%;
-    /*height: 22.5em;*/
-}
 h1 {
     font-size: 3rem;
     text-transform: lowercase;
@@ -21,32 +9,41 @@ a {
     text-decoration: none;
 }
 
-a.header-btn {
-    display: inline-block;
-    text-decoration: none;
-    padding: 1.0rem;
-    border-radius: 5px;
-    transition: .6s background;
-    color: rgba(255,255,255,1);
-    background:rgba(255,80,0,0.75);
-}
-a.header-btn:hover {
-    color: rgba(255,255,255,1);
-    background:rgba(255,111,0,1);
+.blowdry {
+    font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
+    font-weight:100;
+    color: white;
+    font-size: 1.2rem;
+    border-bottom: 1rem solid black;
 }
 
-a.blue-btn {
+a.purple-btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 1.0rem;
+    border-radius: 5px;
+    color: rgba(255,255,255,1);
+    background:rgba(111,0,222,0.75);
+    transition: .6s background;
+}
+a.purple-btn:hover {
+    color: rgba(255,255,255,1);
+    background:rgba(111,0,222,1);
+}
+
+a.green-btn {
     display: inline-block;
     text-decoration: none;
     color: rgba(255,255,255,1);
-    background:rgba(0,111,222,0.75);
+    background:rgba(0,192,0,0.75);
     padding: 1.0rem;
+    border: 0.125rem solid lightgray;
     border-radius: 5px;
     transition: .6s background;
 }
-a.blue-btn:hover {
+a.green-btn:hover {
     color: rgba(255,255,255,1);
-    background:rgba(0,111,222,1);
+    background:rgba(0,192,0,1);
 }
 
 a.black-btn {
@@ -61,13 +58,4 @@ a.black-btn {
 a.black-btn:hover {
     color: rgba(255,255,255,1);
     background:rgba(0,0,0,0.85);
-}
-
-/*Handle non-HTML 5 mobile devices*/
-@media screen and (max-device-width: 800px) {
-  html {
-      background: url(../images/blow.jpg) #fff no-repeat center center fixed;
-      /*background:rgba(255,255,255,1);*/
-  }
-  #bgvid { display: none; }
 }
