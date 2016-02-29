@@ -1,55 +1,20 @@
-/* Background Video CSS */
-.banner-video {
-    position: absolute;
-    top: 48%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    /*width: auto;*/
-    /*max-height: 30.5em;*/
-    z-index: -100;
-    transform: translateX(-50%) translateY(-50%);
-    background-color: rgba(0,0,0,1);
-    background-size: contain;
-    transition: 1s opacity;
-}
-.stopfade {
-   /*opacity: 0.5;*/
-}
-
 .blowdry {
     font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
     font-weight:100;
     /*background-color: rgba(0,0,0,1);*/
     /*background: rgba(0,0,0,0.3);*/
     color: white;
-    padding: 2rem;
+    /*padding: 2rem;*/
     /*margin:2rem;*/
     font-size: 1.2rem;
     min-width: 100%;
     /*height: 22.5em;*/
 }
 h1 {
-  font-size: 3rem;
-  text-transform: lowercase;
-  margin-top: 0;
-  letter-spacing: .3rem;
-}
-.blowdry button {
-  display: block;
-  padding: 1.4rem;
-  border: none;
-  margin: 1rem auto;
-  font-size: 1.3rem;
-  /*background: rgba(255,255,255,0.23);*/
-  color: #fff;
-  /*border-radius: 5px;*/
-  cursor: pointer;
-  transition: .3s background;
-}
-.blowdry button:hover {
-    color: rgba(0,204,0,1);
-    /*background: rgba(0,0,0,0.5);*/
+    font-size: 3rem;
+    text-transform: lowercase;
+    margin-top: 0;
+    letter-spacing: .3rem;
 }
 
 a {
