@@ -10,16 +10,47 @@ http://blog.sodhanalibrary.com/2016/02/add-class-remove-class-toggle-class-to.ht
 */
 
 
-// element.classList.add() variant 1
+// create element
 var element = document.getElementById("div1");
+
+// element.classList.add() variant 1
 element.classList.add("addclass1");
 // element.classList.add() variant 2
-element.classList.add( 'addclass2' );
+element.classList.add( " addclass2 " );
+// element.classList.add() variant 3
+element.classList.add(
+    "addclass3"
+);
+// element.classList.add() variant 4
+element.classList.add(" addclass4a addclass4b addclass4c ");
+// element.classList.add() variant 5
+element.classList.add('addclass5');
+// element.classList.add() variant 6
+element.classList.add( ' addclass6 ' );
+// element.classList.add() variant 7
+element.classList.add(
+    'addclass7'
+);
+// element.classList.add() variant 8
+element.classList.add(' addclass8a addclass8b addclass8c ');
+
 
 // element.classList.remove() variant 1
 element.classList.remove("removeclass1");
 // element.classList.remove() variant 2
-element.classList.remove( 'removeclass2' );
+element.classList.remove( " removeclass2 " );
+// element.classList.remove() variant 3
+element.classList.remove(
+    "removeclass3"
+);
+// element.classList.remove() variant 4
+element.classList.remove('removeclass4');
+// element.classList.remove() variant 5
+element.classList.remove( ' removeclass5 ' );
+// element.classList.remove() variant 6
+element.classList.remove(
+    'removeclass6'
+);
 
 // element.classList[] variant 1
 var length = element.classList.length;
@@ -208,13 +239,13 @@ $scope.toggleClass = function() {
      $scope.myClass.red = !$scope.myClass.red;
 };
 // AngularJS variant 8
-var myEl = angular.element( document.querySelector( '#divID' ) );
-myEl.removeClass('red');
+var myEl8 = angular.element( document.querySelector( '#divID' ) );
+myEl8.removeClass('red');
 // AngularJS variant 9
-var myEl = angular.element( document.querySelector( '#divID' ) );
-myEl.toggleClass('red');
+var myEl9 = angular.element( document.querySelector( '#divID' ) );
+myEl9.toggleClass('red');
 // AngularJS variant 10
-var myEl = angular.element( document.querySelector( '#divID' ) );
-if(myEl.hasClass('red')) {
+var myEl10 = angular.element( document.querySelector( '#divID' ) );
+if(myEl10.hasClass('red')) {
   alert('has class red');
 }

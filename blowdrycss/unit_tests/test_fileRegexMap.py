@@ -37,14 +37,22 @@ class TestFileRegexMap(TestCase):
             self.assertRaises(OSError, FileRegexMap, _path)
 
     def test_regexes(self):
+        sub_js = (r'//.*?\n', r'/\*.*?\*/', )
+        sub_html = (r'', ) + sub_js
+
+        findall_regex_js = (
+            r'.classList.add\(\s*[\'"](.*?)["\']\s*\)',
+            r'.classList.remove\(\s*[\'"](.*?)["\']\s*\)',
+        )
+
         expected_dicts = [
             {
-                'sub_regex': r'<%.*?%>',
-                'findall_regex': r'class="(.*?)"',
+                'sub_regexes': (r'<%.*?%>', ) + sub_html,
+                'findall_regexes': (r'class="(.*?)"', ) + findall_regex_js,
             },
             {
-                'sub_regex': r'{.*?}?}',
-                'findall_regex': r'class="(.*?)"',
+                'sub_regexes': (r'{.*?}?}', ) + sub_html,
+                'findall_regexes': (r'class="(.*?)"', ) + findall_regex_js,
             },
         ]
         file_paths = [unittest_file_path('test_aspx', 'test.aspx'), unittest_file_path('test_jinja', 'test.jinja2')]
