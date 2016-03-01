@@ -93,6 +93,12 @@ class TestClassExtractor(TestCase):
         expected_class_set = {
             'addclass1', 'addclass2', 'addclass3', 'addclass4', 'addclass5', 'addclass6',
             'removeclass1', 'removeclass2', 'removeclass3', 'removeclass4', 'removeclass5', 'removeclass6',
+            'className1', 'className2', 'className3', 'className4a', 'className4b', 'className4c', 'className5',
+            'className6', 'className7', 'className8a', 'className8b', 'className8c', 'className9a', 'className9b',
+            'className10', 'className11', 'className12', 'className13', 'className14a', 'className14b', 'className14c',
+            'className15', 'className16', 'className17', 'className18', 'className19', 'className20', 'className21',
+            'className22', 'blue',
+            'setAttribute1', 'setAttribute2', 'setAttribute3a', 'setAttribute3b', 'setAttribute3c',
         }
         js_file = unittest_file_path('test_js', 'test.js')
         file_regex_map = FileRegexMap(file_path=js_file)

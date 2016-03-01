@@ -71,6 +71,8 @@ class FileRegexMap(object):
             findall_regex_js = (
                 r'.classList.add\(\s*[\'"](.*?)["\']\s*\)',
                 r'.classList.remove\(\s*[\'"](.*?)["\']\s*\)',
+                r'.className\s*\+?=\s*.*?\+?[\'"](.*?)["\']',
+                r'.setAttribute\(\s*[\'"]class[\'"],\s*[\'"](.*?)["\']\s*\)',
             )
 
             findall_regex = class_regex + findall_regex_js

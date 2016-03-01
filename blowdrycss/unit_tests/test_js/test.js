@@ -91,32 +91,31 @@ d.className += notimplemented;                                      // className
 // Replace a class name variant 1
 function toggleClass1 (El) {
     if (El.className != "white") {
-        El.className = "white"
+        El.className = "className18";
     }
     else{
-        El.className = "black";
+        El.className = "className19";
     }
 }
 
 // Replace a class name variant 2
 function toggleClass2 (El) {
-    if (El.className != 'white' ) {
-        El.className = 'white'
+    if (El.className == 'blue' ) {                                  // TODO: This should not be returned by regex.
+        El.className = 'className20';
     }
     else{
-        El.className = 'black';
+        El.className = 'className21';
     }
 }
 
-// Replace a class name variant 3
+// Replace a class name NOT Implemented
 function toggleClass3 (El) {
-    var white = "white";
-    var black = 'black';
+    var white = "green";
     if (El.className != white) {
-        El.className = white
+        El.className = notimplemented;
     }
     else{
-        El.className = black;
+        El.className = notimplemented;
     }
 }
 
@@ -125,22 +124,22 @@ function appendClass(elementId, classToAppend){
     var oldClass = document.getElementById(elementId).getAttribute("class");
     if (oldClass.indexOf(classToAdd) == -1)
     {
-        // Test .setAttribute() as variable variant 1
+        // Test .setAttribute() as variable NOT Implemented
         document.getElementById(elementId).setAttribute("class", classToAppend);
     }
 }
 
-// Test .setAttribute() as literal string variant 2
-document.getElementById(elementId).setAttribute("class", "bold");
-// Test .setAttribute() as literal string variant 3
-document.getElementById(elementId).setAttribute( 'class','bold' );
-// Test .setAttribute() as literal string variant 4
-document.getElementById(elementId).setAttribute("class", "bold green padding-bottom-1_2rem");
-
-// getElementByClassName variant 1
+// getElementByClassName variant 22
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementsByClassName('tabGroup')[0].className = "tabGroup ready";
+    document.getElementsByClassName('tabGroup')[0].className = "className22";
 });
+
+// Test .setAttribute() as literal string variant 1
+document.getElementById(elementId).setAttribute("class", "setAttribute1");
+// Test .setAttribute() as literal string variant 2
+document.getElementById(elementId).setAttribute( 'class','setAttribute2' );
+// Test .setAttribute() as literal string variant 3
+document.getElementById(elementId).setAttribute("class", "setAttribute3a setAttribute3b setAttribute3c");
 
 // getElementByClassName variant 2
 var x = document.getElementsByClassName("example");
