@@ -9,8 +9,7 @@ class TestClassExtractor(TestCase):
     # raw_class_list
     def test_raw_class_list_js(self):
         expected_raw_class_list = [
-            'addclass1', ' addclass2 ', 'addclass3', ' addclass4a addclass4b addclass4c ',
-            'addclass5', ' addclass6 ', 'addclass7', ' addclass8a addclass8b addclass8c ',
+            'addclass1', 'addclass2', 'addclass3', 'addclass4', 'addclass5', 'addclass6',
         ]
         js_file = unittest_file_path('test_js', 'test.js')
         sub_js = (r'//.*?\n', r'/\*.*?\*/', )
@@ -45,8 +44,7 @@ class TestClassExtractor(TestCase):
     # class_set
     def test_class_set_js(self):
         expected_class_set = {
-            'addclass1', 'addclass2', 'addclass3', 'addclass4a', 'addclass4b', 'addclass4c',
-            'addclass5', 'addclass6', 'addclass7', 'addclass8a', 'addclass8b', 'addclass8c',
+            'addclass1', 'addclass2', 'addclass3', 'addclass4', 'addclass5', 'addclass6',
         }
         js_file = unittest_file_path('test_js', 'test.js')
         sub_js = (r'//.*?\n', r'/\*.*?\*/', )
@@ -93,10 +91,8 @@ class TestClassExtractor(TestCase):
     # Integration testing
     def test_integration_class_set_js(self):
         expected_class_set = {
-            'addclass1', 'addclass2', 'addclass3', 'addclass4a', 'addclass4b', 'addclass4c',
-            'addclass5', 'addclass6', 'addclass7', 'addclass8a', 'addclass8b', 'addclass8c',
-            'removeclass1', 'removeclass2', 'removeclass3', 'removeclass4a', 'removeclass4b', 'removeclass4c',
-            'removeclass5', 'removeclass6', 'removeclass7', 'removeclass8a', 'removeclass8b', 'removeclass8c',
+            'addclass1', 'addclass2', 'addclass3', 'addclass4', 'addclass5', 'addclass6',
+            'removeclass1', 'removeclass2', 'removeclass3', 'removeclass4', 'removeclass5', 'removeclass6',
         }
         js_file = unittest_file_path('test_js', 'test.js')
         file_regex_map = FileRegexMap(file_path=js_file)

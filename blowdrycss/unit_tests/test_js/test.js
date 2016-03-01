@@ -12,70 +12,80 @@ http://blog.sodhanalibrary.com/2016/02/add-class-remove-class-toggle-class-to.ht
 
 // create element
 var element = document.getElementById("div1");
+var notimplemented = " not implemented ";
 
 // element.classList.add() variant 1
 element.classList.add("addclass1");
 // element.classList.add() variant 2
-element.classList.add( " addclass2 " );
+element.classList.add( "addclass2" );
 // element.classList.add() variant 3
 element.classList.add(
     "addclass3"
 );
 // element.classList.add() variant 4
-element.classList.add(" addclass4a addclass4b addclass4c ");
+element.classList.add('addclass4');
 // element.classList.add() variant 5
-element.classList.add('addclass5');
+element.classList.add( 'addclass5' );
 // element.classList.add() variant 6
-element.classList.add( ' addclass6 ' );
-// element.classList.add() variant 7
 element.classList.add(
-    'addclass7'
+    'addclass6'
 );
-// element.classList.add() variant 8
-element.classList.add(' addclass8a addclass8b addclass8c ');
-
+// className variables not implemented
+element.classList.add(notimplemented);
 
 // element.classList.remove() variant 1
 element.classList.remove("removeclass1");
 // element.classList.remove() variant 2
-element.classList.remove( " removeclass2 " );
+element.classList.remove( "removeclass2" );
 // element.classList.remove() variant 3
 element.classList.remove(
     "removeclass3"
 );
 // element.classList.remove() variant 4
-element.classList.remove(" removeclass4a removeclass4b removeclass4c ");
+element.classList.remove('removeclass4');
 // element.classList.remove() variant 5
-element.classList.remove('removeclass5');
+element.classList.remove( 'removeclass5' );
 // element.classList.remove() variant 6
-element.classList.remove( ' removeclass6 ' );
-// element.classList.remove() variant 7
 element.classList.remove(
-    'removeclass7'
+    'removeclass6'
 );
-// element.classList.remove() variant 8
-element.classList.remove(' removeclass8a removeclass8b removeclass8c ');
+// className variables not implemented
+element.classList.remove(notimplemented);
 
-
-// element.classList[] variant 1
-var length = element.classList.length;
-element.classList[length] = "arrayclass";
-// element.classList[] variant 2
-element.classList[length]='arrayclass';
-// element.classList[] variant 3
-var arrayclass = "arrayclass";
-element.classList[length] = arrayclass;
+// Doesn't seem to work.
+//// element.classList[] variant 1
+//var length = element.classList.length;
+//element.classList[length] = "arrayclass";
+//// element.classList[] variant 2
+//element.classList[length]='arrayclass';
+//// element.classList[] variant 3
+//var arrayclass = "arrayclass";
+//element.classList[length] = arrayclass;
 
 
 var d = document.getElementById("div0");
-d.className += " padding-33";                                       // className variant 1
-d.className+=' color-h111';                                         // className variant 2
-var center = " text-align-center";
-d.className += center;                                              // className variant 3
-d.className += " padding-33 pink margin-left-5_5rem";               // className variant 4
-d.className=d.className+' color-h111';                              // className variant 5
-d.className = d.className + ' color-h111';                          // className variant 6
-d.className = d.className + ' color-h111 bold green padding-10';    // className variant 7
+d.className = "className1";                                         // className variant 1
+d.className="className2";                                           // className variant 2
+d.className = " className3 ";                                       // className variant 3
+d.className = "className4a className4b className4c";                // className variant 4
+d.className = notimplemented;                                       // className variables not implemented
+
+d.className = d.className + "className5";                           // className variant 5
+d.className=d.className+"className6";                               // className variant 6
+d.className = d.className + " className7 ";                         // className variant 7
+d.className = d.className + "className8a className8b className8c";  // className variant 8
+d.className = d.className + "className9a" + notimplemented;         // className variant 9 (only className9a extracted)
+d.className = "className9b" + d.className + notimplemented;         // className variant 9 (only className9b extracted)
+d.className=d.className+"className10"+notimplemented;               // className variant 10 (only className10 extracted)
+
+d.className += "className11";                                       // className variant 11
+d.className+="className12";                                         // className variant 12
+d.className += " className13 ";                                     // className variant 13
+d.className += "className14a className14b className14c";            // className variant 14
+d.className += notimplemented + "className15" + notimplemented;     // className variant 15 (only className15 extracted)
+d.className += notimplemented + "className16";                      // className variant 16 (only className16 extracted)
+d.className+="className17"+notimplemented;                          // className variant 17 (only className17 extracted)
+d.className += notimplemented;                                      // className variables not implemented
 
 
 // Replace a class name variant 1
