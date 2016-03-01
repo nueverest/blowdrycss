@@ -6,6 +6,7 @@ from blowdrycss.utilities import unittest_file_path
 
 
 class TestClassExtractor(TestCase):
+    # raw_class_list
     def test_raw_class_list_js(self):
         expected_raw_class_list = [
             'addclass1', ' addclass2 ', 'addclass3', ' addclass4a addclass4b addclass4c ',
@@ -40,6 +41,19 @@ class TestClassExtractor(TestCase):
         class_extractor = ClassExtractor(file_path=jinja2_file, sub_regexes=jinja2_sub, findall_regexes=jinja2_findall)
         actual_raw_class_list = class_extractor.raw_class_list
         self.assertEqual(actual_raw_class_list, expected_raw_class_list)
+
+    # class_set
+    def test_class_set_js(self):
+        expected_class_set = {
+            'addclass1', 'addclass2', 'addclass3', 'addclass4a', 'addclass4b', 'addclass4c',
+            'addclass5', 'addclass6', 'addclass7', 'addclass8a', 'addclass8b', 'addclass8c',
+        }
+        js_file = unittest_file_path('test_js', 'test.js')
+        sub_js = (r'//.*?\n', r'/\*.*?\*/', )
+        findall_js = (r'.classList.add\(\s*[\'"](.*?)["\']\s*\)', )
+        class_extractor = ClassExtractor(file_path=js_file, sub_regexes=sub_js, findall_regexes=findall_js)
+        actual_class_set = class_extractor.class_set
+        self.assertEqual(actual_class_set, expected_class_set)
 
     def test_class_set_aspx(self):
         expected_class_set = {'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green'}
@@ -77,13 +91,29 @@ class TestClassExtractor(TestCase):
         self.assertRaises(OSError, ClassExtractor, 'wrong_path', r'', r'')
 
     # Integration testing
+    def test_integration_class_set_js(self):
+        expected_class_set = {
+            'addclass1', 'addclass2', 'addclass3', 'addclass4a', 'addclass4b', 'addclass4c',
+            'addclass5', 'addclass6', 'addclass7', 'addclass8a', 'addclass8b', 'addclass8c',
+            'removeclass1', 'removeclass2', 'removeclass3', 'removeclass4a', 'removeclass4b', 'removeclass4c',
+            'removeclass5', 'removeclass6', 'removeclass7', 'removeclass8a', 'removeclass8b', 'removeclass8c',
+        }
+        js_file = unittest_file_path('test_js', 'test.js')
+        file_regex_map = FileRegexMap(file_path=js_file)
+        regex_dict = file_regex_map.regex_dict
+        class_extractor = ClassExtractor(
+            file_path=js_file, sub_regexes=regex_dict['sub_regexes'], findall_regexes=regex_dict['findall_regexes']
+        )
+        actual_class_set = class_extractor.class_set
+        self.assertEqual(actual_class_set, expected_class_set)
+    
     def test_integration_class_set_aspx(self):
         expected_class_set = {'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green'}
         aspx_file = unittest_file_path('test_aspx', 'test.aspx')
         file_regex_map = FileRegexMap(file_path=aspx_file)
         regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(
-                file_path=aspx_file, sub_regexes=regex_dict['sub_regexes'], findall_regexes=regex_dict['findall_regexes']
+            file_path=aspx_file, sub_regexes=regex_dict['sub_regexes'], findall_regexes=regex_dict['findall_regexes']
         )
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
@@ -97,7 +127,7 @@ class TestClassExtractor(TestCase):
         file_regex_map = FileRegexMap(file_path=jinja2_file)
         regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(
-                file_path=jinja2_file, sub_regexes=regex_dict['sub_regexes'], findall_regexes=regex_dict['findall_regexes']
+            file_path=jinja2_file, sub_regexes=regex_dict['sub_regexes'], findall_regexes=regex_dict['findall_regexes']
         )
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
@@ -110,7 +140,7 @@ class TestClassExtractor(TestCase):
         file_regex_map = FileRegexMap(file_path=erb_file)
         regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(
-                file_path=erb_file, sub_regexes=regex_dict['sub_regexes'], findall_regexes=regex_dict['findall_regexes']
+            file_path=erb_file, sub_regexes=regex_dict['sub_regexes'], findall_regexes=regex_dict['findall_regexes']
         )
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)

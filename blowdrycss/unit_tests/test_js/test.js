@@ -44,13 +44,18 @@ element.classList.remove(
     "removeclass3"
 );
 // element.classList.remove() variant 4
-element.classList.remove('removeclass4');
+element.classList.remove(" removeclass4a removeclass4b removeclass4c ");
 // element.classList.remove() variant 5
-element.classList.remove( ' removeclass5 ' );
+element.classList.remove('removeclass5');
 // element.classList.remove() variant 6
+element.classList.remove( ' removeclass6 ' );
+// element.classList.remove() variant 7
 element.classList.remove(
-    'removeclass6'
+    'removeclass7'
 );
+// element.classList.remove() variant 8
+element.classList.remove(' removeclass8a removeclass8b removeclass8c ');
+
 
 // element.classList[] variant 1
 var length = element.classList.length;
