@@ -249,7 +249,7 @@ class ClassExtractor(object):
                     text = sub(sub_regex, '', text)
             for findall_regex in self.findall_regexes:              # Find everything second.
                 class_list += findall(findall_regex, text)
-            print(text)
+            #print(text)
         return class_list
 
     @property
