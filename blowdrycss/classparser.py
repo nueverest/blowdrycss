@@ -13,9 +13,23 @@ from blowdrycss.htmlparser import HTMLClassParser
 class FileRegexMap(object):
     """ Given a file path including the file extension it maps the detected file extension to a regex pattern.
 
+    **Process:**
+
+    - Comments, template variables, or javascript syntax patterns are removed/replaced first with re.sub().
+
+    - Class selector sets are extracted using re.findall().
+
     **Supported Javascript and Typescript extensions:** .js, .ts
 
-    Javascript has a number of cases where a special substitution is performed.
+    Javascript has a number of cases where a special substitution is performed. These cases are stored in ``js_case``.
+    A check is performed if the re.sub() should do a special substitution of text that begins with the ``js_substring``.
+    The ``js_substring`` helps to uniquely designate the locations of class selector sets.
+
+    Javascript can occur in a standalone file or embedded <script> tags inside a file of another type.
+
+    **Supported HTML extension:** .html
+
+    HTML comments are removed.
 
     **Supported jinja and django template extensions:** .jinja, .jinja2, .jnj, .ja, .djt, .djhtml
 
