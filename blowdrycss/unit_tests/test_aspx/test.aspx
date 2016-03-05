@@ -21,5 +21,29 @@
 
     <div class="row <%#Eval("ProductName")%>"><uc1:ucBlowDryerCarousel runat="server" ID="ucBlowDryerCarousel" /></div>
 </asp:Content>
+
+<script>
+    $(document).ready( function() {
+        var padding = "not implemented";
+        $('#div1').addClass( 'jquery1' );                   // .addClass() variant 1
+        $('#div2').addClass('jquery2');                     // .addClass() variant 2
+        $('#div3').addClass("jquery3");                     // .addClass() variant 4
+        $('#div5').addClass('jquery4 jquery5');             // .addClass() variant 5
+        $('#div6').addClass("jquery6 jquery7");             // .addClass() variant 6
+        $('#div7').addClass(padding);                       // not implemented
+
+        var a = document.body, c = ' not implemented';
+        $(a).removeClass(c);                                // not implemented
+        $(a).removeClass('jquery8');                        // .removeClass() variant 1
+        $(a).removeClass('jquery9 jquery10');               // .removeClass() variant 2
+        $(a).removeClass( "jquery11" );                     // .removeClass() variant 3
+        $(a).removeClass( "jquery12 jquery13" );            // .removeClass() variant 4
+
+        var bold = $('.jquery14');                          // Class selector variant 1
+        var bol  = $( '.jquery15' );                        // Class selector variant 2
+        var a_class = $(".jquery16");                       // Class selector variant 3
+        var a_lass = $( ".jquery17" );                      // Class selector variant 4
+    });
+</script>
     
 

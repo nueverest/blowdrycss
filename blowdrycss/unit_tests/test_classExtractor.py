@@ -34,7 +34,11 @@ class TestClassExtractor(TestCase):
     def test_raw_class_list_aspx(self):
         expected_raw_class_list = [
             ' row bgc-green padding-top-30 padding-bottom-30', 'row padding-top-30 padding-bottom-30 ',
-            'row padding-top-30 padding-bottom-30 ', 'row '
+            'row padding-top-30 padding-bottom-30 ', 'row ',
+            # Embedded <script></script>
+            'jquery1', 'jquery2', 'jquery3', 'jquery4 jquery5', 'jquery6 jquery7', 'jquery8',
+            'jquery9 jquery10', 'jquery11', 'jquery12 jquery13', 'jquery14', 'jquery15', 'jquery16',
+            'jquery17',
         ]
         aspx_file = unittest_file_path('test_aspx', 'test.aspx')
         class_extractor = ClassExtractor(file_path=aspx_file)
@@ -76,7 +80,13 @@ class TestClassExtractor(TestCase):
         self.assertEqual(actual_class_set, expected_class_set)
 
     def test_class_set_aspx(self):
-        expected_class_set = {'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green'}
+        expected_class_set = {
+            'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green',
+            # Embedded <script></script>
+            'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
+            'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',
+            'jquery17',
+        }
         aspx_file = unittest_file_path('test_aspx', 'test.aspx')
         class_extractor = ClassExtractor(file_path=aspx_file)
         actual_class_set = class_extractor.class_set
@@ -130,7 +140,13 @@ class TestClassExtractor(TestCase):
         self.assertEqual(actual_class_set, expected_class_set)
     
     def test_integration_class_set_aspx(self):
-        expected_class_set = {'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green'}
+        expected_class_set = {
+            'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green',
+            # Embedded <script></script>
+            'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
+            'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',
+            'jquery17',
+        }
         aspx_file = unittest_file_path('test_aspx', 'test.aspx')
         class_extractor = ClassExtractor(file_path=aspx_file)
         actual_class_set = class_extractor.class_set
