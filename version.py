@@ -111,7 +111,7 @@
       some of the user feedback. Created a new utility method make_directory().
     |
     | **0.1.7** -- Fancy new favicons. Documentation improved. Official site launched
-      `www.blowdrycss.org <www.blowdrycss.org>`__.
+      `www.blowdrycss.org <www.blowdrycss.org>`__. Added the ability parse javascript.
     |
 
 """

@@ -93,10 +93,10 @@ class FileRegexMap(object):
                 r'(.removeClass\(\s*["\'])',
                 r'(\$\(\s*["\']\.)',
             )
-            sub_html = (r'<!--.*?-->', ) + sub_js             # TODO: Missing HTML comment removal.
+            sub_html = (r'<!--.*?-->', ) + sub_js
             sub_jinja = (r'{.*?}?}', ) + sub_html
             sub_django = (r'{.*?}?}', ) + sub_html
-            sub_dotnet = (r'<%.*?%>', ) + sub_html  # TODO: Missing XHTML comment removal.
+            sub_dotnet = (r'<%.*?%>', ) + sub_html
             sub_ruby = (r'<%.*?%>', ) + sub_html
 
             class_regex = (r'class="(.*?)"', )
@@ -114,6 +114,10 @@ class FileRegexMap(object):
 
             self.file_type_dict = {
                 '.js': {
+                    'sub_regexes': sub_js,
+                    'findall_regexes': findall_regex,
+                },
+                '.ts': {
                     'sub_regexes': sub_js,
                     'findall_regexes': findall_regex,
                 },
