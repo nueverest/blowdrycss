@@ -1,7 +1,7 @@
 # builtins
 from unittest import TestCase, main
 # custom
-from blowdrycss.classparser import ClassExtractor, FileRegexMap
+from blowdrycss.classparser import ClassExtractor
 from blowdrycss.utilities import unittest_file_path
 
 
@@ -37,8 +37,6 @@ class TestClassExtractor(TestCase):
             'row padding-top-30 padding-bottom-30 ', 'row '
         ]
         aspx_file = unittest_file_path('test_aspx', 'test.aspx')
-        aspx_sub = (r'<%.*?%>', )
-        aspx_findall = (r'class="(.*?)"', )
         class_extractor = ClassExtractor(file_path=aspx_file)
         actual_raw_class_list = class_extractor.raw_class_list
         self.assertEqual(actual_raw_class_list, expected_raw_class_list)
@@ -48,8 +46,6 @@ class TestClassExtractor(TestCase):
             'purple  padding-left-5', ' squirrel text-align-center', 'large-up  border-1', 'row text-align-center', ''
         ]
         jinja2_file = unittest_file_path('test_jinja', 'test.jinja2')
-        jinja2_sub = (r'{.*?}?}', )
-        jinja2_findall = (r'class="(.*?)"', )
         class_extractor = ClassExtractor(file_path=jinja2_file)
         actual_raw_class_list = class_extractor.raw_class_list
         self.assertEqual(actual_raw_class_list, expected_raw_class_list)
@@ -82,8 +78,6 @@ class TestClassExtractor(TestCase):
     def test_class_set_aspx(self):
         expected_class_set = {'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green'}
         aspx_file = unittest_file_path('test_aspx', 'test.aspx')
-        aspx_sub = (r'<%.*?%>', )
-        aspx_findall = (r'class="(.*?)"', )
         class_extractor = ClassExtractor(file_path=aspx_file)
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
@@ -94,8 +88,6 @@ class TestClassExtractor(TestCase):
             'text-align-center'
         }
         jinja2_file = unittest_file_path('test_jinja', 'test.jinja2')
-        jinja2_sub = (r'{.*?}?}', )
-        jinja2_findall = (r'class="(.*?)"', )
         class_extractor = ClassExtractor(file_path=jinja2_file)
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
@@ -105,8 +97,6 @@ class TestClassExtractor(TestCase):
             'font-size-53', 'brown', 'text-align-right', 'medium-down',
         }
         erb_file = unittest_file_path('test_erb', 'test.erb')
-        erb_sub = (r'{.*?}?}', )
-        erb_findall = (r'class="(.*?)"', )
         class_extractor = ClassExtractor(file_path=erb_file)
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
@@ -135,8 +125,6 @@ class TestClassExtractor(TestCase):
             'yui1', 'yui2', 'yui3', 'yui4', 'yui5', 'yui6', 'yui7', 'yui8',
         }
         js_file = unittest_file_path('test_js', 'test.js')
-        file_regex_map = FileRegexMap(file_path=js_file)
-        regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(file_path=js_file)
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
@@ -144,8 +132,6 @@ class TestClassExtractor(TestCase):
     def test_integration_class_set_aspx(self):
         expected_class_set = {'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green'}
         aspx_file = unittest_file_path('test_aspx', 'test.aspx')
-        file_regex_map = FileRegexMap(file_path=aspx_file)
-        regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(file_path=aspx_file)
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
@@ -156,8 +142,6 @@ class TestClassExtractor(TestCase):
             'text-align-center'
         }
         jinja2_file = unittest_file_path('test_jinja', 'test.jinja2')
-        file_regex_map = FileRegexMap(file_path=jinja2_file)
-        regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(file_path=jinja2_file)
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
@@ -167,8 +151,6 @@ class TestClassExtractor(TestCase):
             'font-size-53', 'brown', 'text-align-right', 'medium-down',
         }
         erb_file = unittest_file_path('test_erb', 'test.erb')
-        file_regex_map = FileRegexMap(file_path=erb_file)
-        regex_dict = file_regex_map.regex_dict
         class_extractor = ClassExtractor(file_path=erb_file)
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
