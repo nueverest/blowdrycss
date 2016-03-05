@@ -37,12 +37,31 @@ class TestFileRegexMap(TestCase):
             self.assertRaises(OSError, FileRegexMap, _path)
 
     def test_regexes(self):
-        sub_js = (r'//.*?\n', r'/\*.*?\*/', )
+        sub_js = (
+            r'//.*?\n',                                                     # Remove JS Comments.
+            r'/\*.*?\*/',
+            r'(domClass.add\(\s*.*?,\s*["\'])',                             # dojo
+            r'(domClass.add\(\s*.*?,\s*["\'])',
+            r'(dojo.addClass\(\s*.*?,\s*["\'])',
+            r'(domClass.remove\(\s*.*?,\s*["\'])',
+            r'(dojo.removeClass\(\s*.*?,\s*["\'])',
+            r'(YAHOO.util.Dom.addClass\(\s*.*?,\s*["\'])',                  # yui
+            r'(YAHOO.util.Dom.hasClass\(\s*.*?,\s*["\'])',
+            r'(YAHOO.util.Dom.removeClass\(\s*.*?,\s*["\'])',
+            r'(.addClass\(\s*["\'])',                                       # jquery
+            r'(.removeClass\(\s*["\'])',
+            r'(\$\(\s*["\']\.)',
+        )
         sub_html = (r'', ) + sub_js
 
+        js_substring = r'extract__class__set'
         findall_regex_js = (
             r'.classList.add\(\s*[\'"](.*?)["\']\s*\)',
             r'.classList.remove\(\s*[\'"](.*?)["\']\s*\)',
+            r'.className\s*\+?=\s*.*?\+?[\'"](.*?)["\']',
+            r'.getElementsByClassName\(\s*[\'"](.*?)["\']\s*\)',
+            r'.setAttribute\(\s*.*?,\s*[\'"](.*?)["\']\s*\)',
+            js_substring + r'\(\s*[\'"](.*?)["\']\s*\)',                           # Find the chopped ones
         )
 
         expected_dicts = [

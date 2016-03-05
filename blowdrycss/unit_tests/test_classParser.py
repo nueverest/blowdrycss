@@ -31,6 +31,12 @@ class TestClassParser(TestCase):
         expected_class_set = {
             'row', 'bgc-green', 'padding-top-30', 'padding-bottom-30',
             'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1',
+            # Embedded <script></script>
+            'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
+            'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',
+            'jquery17',
+            'dojo1', 'dojo2', 'dojo3', 'dojo4', 'dojo5', 'dojo6', 'dojo7', 'dojo8', 'dojo9', 'dojo10', 'dojo11',
+            'dojo12',
         }
         settings.file_types = ('*.aspx', '*.jinja2')                                            # Override file_types
         project_directory = unittest_file_path()
