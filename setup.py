@@ -194,10 +194,10 @@ setup(
     # $ pip install blowdrycss -e .[auto_save, docs, testing]
     extras_require={
         'docs': ['sphinx>=1.3.3', ],
-        'testing': ['coverage>=4.0.2', ],
+        'testing': ['coverage>=4.0.2', 'tox>=2.3.1'],
         'development': [
             'sphinx>=1.3.3',
-            'unittest', 'coverage>=4.0.2',
+            'tox>=2.3.1', 'coverage>=4.0.2',
             'wheel>=0.26.0', 'twine>=1.6.5',
         ],
     },

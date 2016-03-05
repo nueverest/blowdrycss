@@ -111,7 +111,8 @@
       some of the user feedback. Created a new utility method make_directory().
     |
     | **0.1.7** -- Fancy new favicons. Documentation improved. Official site launched
-      `www.blowdrycss.org <www.blowdrycss.org>`__. Added the ability parse javascript.
+      `www.blowdrycss.org <www.blowdrycss.org>`__. Added the ability parse javascript and typescript files for
+      class selectors.
     |
 
 """
@@ -119,6 +120,6 @@ __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.1.6'
+__version__ = '0.1.7'
 
 __release__ = __version__ + 'b1'
