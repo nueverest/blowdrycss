@@ -28,6 +28,7 @@ class TestClassParser(TestCase):
         settings.file_types = ('*.html', )                                                      # Reset file_types
 
     def test_build_class_set(self):
+        # integration test
         expected_class_set = {
             'row', 'bgc-green', 'padding-top-30', 'padding-bottom-30',
             'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1',

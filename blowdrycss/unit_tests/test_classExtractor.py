@@ -81,6 +81,17 @@ class TestClassExtractor(TestCase):
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
 
+    def test_class_set_html(self):
+        expected_class_set = {
+            'c-blue', 'text-align-center', 'padding-10', 'margin-20', 'hide',
+            # Embedded <script></script>
+            'addclass1', 'addclass2', 'addclass3', 'addclass4', 'addclass5', 'addclass6',
+        }
+        html_file = unittest_file_path('test_html', 'test.html')
+        class_extractor = ClassExtractor(file_path=html_file)
+        actual_class_set = class_extractor.class_set
+        self.assertEqual(actual_class_set, expected_class_set)
+
     def test_class_set_aspx(self):
         expected_class_set = {
             'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green',
@@ -145,7 +156,18 @@ class TestClassExtractor(TestCase):
         class_extractor = ClassExtractor(file_path=js_file)
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
-    
+
+    def test_integration_class_set_html(self):
+        expected_class_set = {
+            'c-blue', 'text-align-center', 'padding-10', 'margin-20', 'hide',
+            # Embedded <script></script>
+            'addclass1', 'addclass2', 'addclass3', 'addclass4', 'addclass5', 'addclass6',
+        }
+        html_file = unittest_file_path('test_html', 'test.html')
+        class_extractor = ClassExtractor(file_path=html_file)
+        actual_class_set = class_extractor.class_set
+        self.assertEqual(actual_class_set, expected_class_set)
+
     def test_integration_class_set_aspx(self):
         expected_class_set = {
             'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green',
