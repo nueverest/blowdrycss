@@ -52,7 +52,7 @@ class TestFileRegexMap(TestCase):
             r'(.removeClass\(\s*["\'])',
             r'(\$\(\s*["\']\.)',
         )
-        sub_html = (r'', ) + sub_js
+        sub_html = (r'<!--.*?-->', ) + sub_js
 
         js_substring = r'extract__class__set'
         findall_regex_js = (
