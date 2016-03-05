@@ -58,35 +58,38 @@ class FileRegexMap(object):
     def __init__(self, file_path=''):
         if path.isfile(file_path):
             self._regex_dict = dict()
-            self.file_path = file_path.strip()                              # Remove external whitespace.
+            self.file_path = file_path.strip()                                  # Remove external whitespace.
             self.name, self.extension = path.splitext(self.file_path)
 
-            self.special_js = (
-                r'(domClass.add\(\s*.*?,\s*["\'])',                              # dojo
+            js_substring = r'extract__class__set'
+            self.js_replacement = js_substring + r'("'
+
+            self.js_case = (
+                r'(domClass.add\(\s*.*?,\s*["\'])',                             # dojo
                 r'(domClass.add\(\s*.*?,\s*["\'])',
                 r'(dojo.addClass\(\s*.*?,\s*["\'])',
                 r'(domClass.remove\(\s*.*?,\s*["\'])',
                 r'(dojo.removeClass\(\s*.*?,\s*["\'])',
-                r'(YAHOO.util.Dom.addClass\(\s*.*?,\s*["\'])',                   # yui
+                r'(YAHOO.util.Dom.addClass\(\s*.*?,\s*["\'])',                  # yui
                 r'(YAHOO.util.Dom.hasClass\(\s*.*?,\s*["\'])',
                 r'(YAHOO.util.Dom.removeClass\(\s*.*?,\s*["\'])',
-                r'(.addClass\(\s*["\'])',                                        # jquery
+                r'(.addClass\(\s*["\'])',                                       # jquery
                 r'(.removeClass\(\s*["\'])',
                 r'(\$\(\s*["\']\.)',
             )
 
-            sub_js = (                              # JS Comments could contain unused class selectors code.
-                r'//.*?\n',
+            sub_js = (
+                r'//.*?\n',                                                     # Remove JS Comments.
                 r'/\*.*?\*/',
-                r'(domClass.add\(\s*.*?,\s*["\'])',                              # dojo
+                r'(domClass.add\(\s*.*?,\s*["\'])',                             # dojo
                 r'(domClass.add\(\s*.*?,\s*["\'])',
                 r'(dojo.addClass\(\s*.*?,\s*["\'])',
                 r'(domClass.remove\(\s*.*?,\s*["\'])',
                 r'(dojo.removeClass\(\s*.*?,\s*["\'])',
-                r'(YAHOO.util.Dom.addClass\(\s*.*?,\s*["\'])',                   # yui
+                r'(YAHOO.util.Dom.addClass\(\s*.*?,\s*["\'])',                  # yui
                 r'(YAHOO.util.Dom.hasClass\(\s*.*?,\s*["\'])',
                 r'(YAHOO.util.Dom.removeClass\(\s*.*?,\s*["\'])',
-                r'(.addClass\(\s*["\'])',                                        # jquery
+                r'(.addClass\(\s*["\'])',                                       # jquery
                 r'(.removeClass\(\s*["\'])',
                 r'(\$\(\s*["\']\.)',
             )
@@ -104,8 +107,7 @@ class FileRegexMap(object):
                 r'.className\s*\+?=\s*.*?\+?[\'"](.*?)["\']',
                 r'.getElementsByClassName\(\s*[\'"](.*?)["\']\s*\)',
                 r'.setAttribute\(\s*.*?,\s*[\'"](.*?)["\']\s*\)',
-                r'extract__this__class\(\s*[\'"](.*?)["\']\s*\)',                           # Find the chopped ones
-
+                js_substring + r'\(\s*[\'"](.*?)["\']\s*\)',                           # Find the chopped ones
             )
 
             findall_regex = class_regex + findall_regex_js
@@ -221,7 +223,6 @@ class ClassExtractor(object):
             regex_dict = self.file_regex_map.regex_dict
             self.sub_regexes = regex_dict['sub_regexes']
             self.findall_regexes = regex_dict['findall_regexes']
-
         else:
             raise OSError(file_path + ' does not exist.')
 
@@ -242,12 +243,13 @@ class ClassExtractor(object):
         with open(self.file_path, 'r', encoding='utf-8') as _file:
             text = _file.read()
             for sub_regex in self.sub_regexes:                      # Remove everything first.
-                if sub_regex in self.file_regex_map.special_js:
-                    text = sub(sub_regex, 'extract__this__class("', text)
+                if sub_regex in self.file_regex_map.js_case:
+                    text = sub(sub_regex, self.file_regex_map.js_replacement, text)
                 else:
                     text = sub(sub_regex, '', text)
             for findall_regex in self.findall_regexes:              # Find everything second.
                 class_list += findall(findall_regex, text)
+            print(text)
         return class_list
 
     @property
