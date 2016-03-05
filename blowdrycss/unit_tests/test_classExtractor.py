@@ -110,6 +110,8 @@ class TestClassExtractor(TestCase):
     def test_class_set_ruby_erb(self):
         expected_class_set = {
             'font-size-53', 'brown', 'text-align-right', 'medium-down',
+            # Embedded <script></script>
+            'yui1', 'yui2', 'yui3', 'yui4', 'yui5', 'yui6', 'yui7', 'yui8',
         }
         erb_file = unittest_file_path('test_erb', 'test.erb')
         class_extractor = ClassExtractor(file_path=erb_file)
@@ -173,6 +175,8 @@ class TestClassExtractor(TestCase):
     def test_integration_class_set_ruby_erb(self):
         expected_class_set = {
             'font-size-53', 'brown', 'text-align-right', 'medium-down',
+            # Embedded <script></script>
+            'yui1', 'yui2', 'yui3', 'yui4', 'yui5', 'yui6', 'yui7', 'yui8',
         }
         erb_file = unittest_file_path('test_erb', 'test.erb')
         class_extractor = ClassExtractor(file_path=erb_file)

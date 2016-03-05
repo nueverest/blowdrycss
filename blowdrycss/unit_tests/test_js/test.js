@@ -200,8 +200,8 @@ YAHOO.util.Dom.addClass('div1','yui1');                 // YUI variant 1
 YAHOO.util.Dom.addClass('div2', "yui2" );               // YUI variant 2
 YAHOO.util.Dom.addClass('div1',' yui3 yui4 ');          // YUI variant 3
 YAHOO.util.Dom.addClass('div1'," yui5 yui6 ");          // YUI variant 4
-YAHOO.util.Dom.hasClass(document.body,"yui7");     // YUI variant 5
-YAHOO.util.Dom.removeClass(document.body,"yui8");  // YUI variant 6
+YAHOO.util.Dom.hasClass(document.body,"yui7");          // YUI variant 5
+YAHOO.util.Dom.removeClass(document.body,"yui8");       // YUI variant 6
 //
 //
 //// Prototype variant 1
