@@ -93,7 +93,7 @@ class FileRegexMap(object):
                 r'(.removeClass\(\s*["\'])',
                 r'(\$\(\s*["\']\.)',
             )
-            sub_html = (r'', ) + sub_js             # TODO: Missing HTML comment removal.
+            sub_html = (r'<!--.*?-->', ) + sub_js             # TODO: Missing HTML comment removal.
             sub_jinja = (r'{.*?}?}', ) + sub_html
             sub_django = (r'{.*?}?}', ) + sub_html
             sub_dotnet = (r'<%.*?%>', ) + sub_html  # TODO: Missing XHTML comment removal.
