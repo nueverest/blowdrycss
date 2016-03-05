@@ -99,6 +99,14 @@ class TestClassExtractor(TestCase):
             'className15', 'className16', 'className17', 'className18', 'className19', 'className20', 'className21',
             'className22', 'blue',
             'setAttribute1', 'setAttribute2', 'setAttribute3a', 'setAttribute3b', 'setAttribute3c',
+            'getElementsByClassName1', 'getElementsByClassName2',
+            'dojo1', 'dojo2', 'dojo3', 'dojo4', 'dojo5', 'dojo6', 'dojo7', 'dojo8', 'dojo9', 'dojo10', 'dojo11',
+            'dojo12', 'dojo13', 'dojo14', 'dojo15', 'dojo16', 'dojo17', 'dojo18', 'dojo19', 'dojo20',
+            'dojo21', 'dojo22', 'dojo23', 'dojo24',
+            'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
+            'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',
+            'jquery17',
+            'yui1', 'yui2', 'yui3', 'yui4', 'yui5', 'yui6', 'yui7', 'yui8',
         }
         js_file = unittest_file_path('test_js', 'test.js')
         file_regex_map = FileRegexMap(file_path=js_file)
