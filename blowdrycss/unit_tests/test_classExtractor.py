@@ -47,7 +47,9 @@ class TestClassExtractor(TestCase):
 
     def test_raw_class_list_jinja(self):
         expected_raw_class_list = [
-            'purple  padding-left-5', ' squirrel text-align-center', 'large-up  border-1', 'row text-align-center', ''
+            'purple  padding-left-5', ' squirrel text-align-center', 'large-up  border-1', 'row text-align-center', '',
+            # Embedded <script></script>
+            'dojo1', 'dojo2', 'dojo3 dojo4', 'dojo5 dojo6', 'dojo7', 'dojo8', 'dojo9 dojo10', 'dojo11 dojo12',
         ]
         jinja2_file = unittest_file_path('test_jinja', 'test.jinja2')
         class_extractor = ClassExtractor(file_path=jinja2_file)
@@ -95,7 +97,10 @@ class TestClassExtractor(TestCase):
     def test_class_set_jinja(self):
         expected_class_set = {
             'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1', 'row',
-            'text-align-center'
+            'text-align-center',
+            # Embedded <script></script>
+            'dojo1', 'dojo2', 'dojo3', 'dojo4', 'dojo5', 'dojo6', 'dojo7', 'dojo8', 'dojo9', 'dojo10', 'dojo11',
+            'dojo12',
         }
         jinja2_file = unittest_file_path('test_jinja', 'test.jinja2')
         class_extractor = ClassExtractor(file_path=jinja2_file)
@@ -155,7 +160,10 @@ class TestClassExtractor(TestCase):
     def test_integration_class_set_jinja(self):
         expected_class_set = {
             'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1', 'row',
-            'text-align-center'
+            'text-align-center',
+            # Embedded <script></script>
+            'dojo1', 'dojo2', 'dojo3', 'dojo4', 'dojo5', 'dojo6', 'dojo7', 'dojo8', 'dojo9', 'dojo10', 'dojo11',
+            'dojo12',
         }
         jinja2_file = unittest_file_path('test_jinja', 'test.jinja2')
         class_extractor = ClassExtractor(file_path=jinja2_file)

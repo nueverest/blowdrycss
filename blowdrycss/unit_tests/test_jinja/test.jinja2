@@ -16,3 +16,20 @@
         <li class="{{ loop.cycle('odd', 'even') }}">{{ row }}</li>
     {% endfor %}
 {% endif %}
+
+<script>
+    // dojo reference: https://dojotoolkit.org/reference-guide/1.10/dojo/dom-class.html#id17
+    require(["dojo/dom-class"], function(domClass){             // Add a class dojo 1.7+ (AMD)
+        domClass.add("node", "dojo1");
+        domClass.add('node', 'dojo2');
+        domClass.add("node", "dojo3 dojo4");                    // Add multiple dojo 1.7+ (AMD)
+        domClass.add('node', 'dojo5 dojo6');
+    });
+
+    require(["dojo/dom-class"], function(domClass){             // Remove a class from a node. dojo 1.7+
+        domClass.remove("node", "dojo7");
+        domClass.remove('node', 'dojo8');
+        domClass.remove("node", "dojo9 dojo10");               // Remove multiple.
+        domClass.remove('node', 'dojo11 dojo12');
+    });
+</script>
