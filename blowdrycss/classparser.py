@@ -203,7 +203,7 @@ class ClassExtractor(object):
     >>> aspx_file = 'Default.aspx'
     >>> aspx_sub = r'<%.*?%>'
     >>> aspx_findall = r'class="(.*?)"'
-    >>> class_extractor = ClassExtractor(file_path=aspx_file, sub_regexes=aspx_sub, findall_regexes=aspx_findall)
+    >>> class_extractor = ClassExtractor(file_path=aspx_file)
     >>> class_extractor.class_set
     {'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green'}
     >>> jinja2_file = 'index.jinja2'
@@ -214,12 +214,13 @@ class ClassExtractor(object):
     {'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1', 'row', 'text-align-center'}
 
     """
-    def __init__(self, file_path='', sub_regexes=tuple(), findall_regexes=tuple()):
+    def __init__(self, file_path=''):
         if path.isfile(file_path):
             self.file_path = file_path
             self.file_regex_map = FileRegexMap(file_path=file_path)
-            self.sub_regexes = sub_regexes
-            self.findall_regexes = findall_regexes
+            regex_dict = self.file_regex_map.regex_dict
+            self.sub_regexes = regex_dict['sub_regexes']
+            self.findall_regexes = regex_dict['findall_regexes']
 
         else:
             raise OSError(file_path + ' does not exist.')
@@ -328,11 +329,7 @@ class ClassParser(object):
 
         """
         for file_path in self.file_path_list:
-            file_regex_map = FileRegexMap(file_path=file_path)
-            regex_dict = file_regex_map.regex_dict
-            sub_regex = regex_dict['sub_regexes']
-            findall_regex = regex_dict['findall_regexes']
-            class_extractor = ClassExtractor(file_path=file_path, sub_regexes=sub_regex, findall_regexes=findall_regex)
+            class_extractor = ClassExtractor(file_path=file_path)
             logging.debug(msg='classparser.class_extractor.class_set:\t' + str(class_extractor.class_set))
             self.class_set = self.class_set.union(class_extractor.class_set)
             logging.debug(msg='classparser final class_set:\t' + str(self.class_set))
