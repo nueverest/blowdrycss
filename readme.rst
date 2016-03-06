@@ -14,7 +14,7 @@ Version Changelog
 | See ``version.py`` for full changelog.
 |
 | **0.1.7** -- Fancy new favicons. Documentation improved. Official site launched
-  `www.blowdrycss.org <www.blowdrycss.org>`__. Added the ability parse javascript and typescript files for
+  `www.blowdrycss.org <http://www.blowdrycss.org>`__. Added the ability parse javascript and typescript files for
   class selectors. Fix a logic error that prevented logging enabled when auto_generate is False.
 |
 
