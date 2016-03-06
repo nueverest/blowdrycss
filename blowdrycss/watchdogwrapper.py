@@ -102,10 +102,10 @@ def main():
     ...
 
     """
-    if settings.auto_generate:
-        if settings.logging_enabled:
-            log.enable()
+    if settings.logging_enabled:
+        log.enable()
 
+    if settings.auto_generate:
         event_handler = FileEditEventHandler(
             patterns=list(settings.file_types),
             ignore_patterns=[],
