@@ -92,6 +92,7 @@ Requirements
 Optional
 ''''''''
 
+- tox 2.3.1+ (multi-environment testing)
 - coverage 4.0.2+ (check test coverage)
 - sphinx 1.3.3+ (docs)
 
