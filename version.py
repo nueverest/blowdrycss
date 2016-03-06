@@ -105,14 +105,14 @@
       py35 environments. Fixed unicode issues that caused tests to fail with py27.
     |
     | **0.1.5** -- Upload corrupted on pypi. Everything worked fine on testpypi, but when uploaded to pypi something
-      went wrong.
+      went wrong. (Do not use.)
     |
     | **0.1.6** -- Integrated debug level logging settings. Fixed a logic error in tox_cleanup.py. Compressed
       some of the user feedback. Created a new utility method make_directory().
     |
     | **0.1.7** -- Fancy new favicons. Documentation improved. Official site launched
-      `www.blowdrycss.org <www.blowdrycss.org>`__. Added the ability parse javascript and typescript files for
-      class selectors.
+      `www.blowdrycss.org <http://www.blowdrycss.org>`__. Added the ability parse javascript and typescript files for
+      class selectors. Fix a logic error that prevented logging enabled when auto_generate is False.
     |
 
 """

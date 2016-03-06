@@ -13,29 +13,9 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.1.3** -- Implemented support for auto-generated CSS via Watchdog. Watchdog can now monitor all files
-  associated with the ``file_types`` defined in ``blowdrycss_settings.py``. If a file is modified or deleted,
-  Watchdog will trigger blowdrycss and auto-generate the CSS files. Watchdog is now a required dependency.
-  The setting ``auto-generate`` is currently ``False`` by default.
-|
-| *To enable it* open ``blowdrycss_settings.py``, and set ``auto_generate = True``.
-| *To test it* change one of the project files, and see what happens at the console.
-|
-| ``Timing.py`` was completely re-written and now contains a ``Timer`` class. These changes were needed to
-  accommodate watchdog feature.
-|
-| CSS file size reduction statistics are now printed.
-|
-| An ASCII blow dryer is now printed on program exit.
-|
-| **0.1.4** -- Dropped support for py30, py31, and py32. Integrated tox to support testing of py27, py33, py34, and
-  py35 environments. Fixed unicode issues that caused tests to fail with py27.
-|
-| **0.1.5** -- Upload corrupted on pypi. Everything worked fine on testpypi, but when uploaded to pypi something
-  went wrong.
-|
-| **0.1.6** -- Integrated debug level logging settings. Fixed a logic error in tox_cleanup.py. Compressed
-  some of the user feedback. Created a new utility method make_directory().
+| **0.1.7** -- Fancy new favicons. Documentation improved. Official site launched
+  `www.blowdrycss.org <www.blowdrycss.org>`__. Added the ability parse javascript and typescript files for
+  class selectors. Fix a logic error that prevented logging enabled when auto_generate is False.
 |
 
 Why the name blowdrycss?
