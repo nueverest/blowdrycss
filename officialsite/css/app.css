@@ -14,7 +14,8 @@ a {
     font-weight:100;
     color: white;
     font-size: 1.2rem;
-    border-bottom: 1rem solid black;
+    border-top: 0.25rem solid black;
+    border-bottom: 0.25rem solid black;
 }
 
 a.purple-btn {
@@ -24,7 +25,7 @@ a.purple-btn {
     border-radius: 5px;
     color: rgba(255,255,255,1);
     background:rgba(111,0,222,0.75);
-    transition: .6s background;
+    transition: 0.6s background;
 }
 a.purple-btn:hover {
     color: rgba(255,255,255,1);
