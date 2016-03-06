@@ -122,7 +122,7 @@ class FileRegexMap(object):
                 r'.className\s*\+?=\s*.*?\+?[\'"](.*?)["\']',
                 r'.getElementsByClassName\(\s*[\'"](.*?)["\']\s*\)',
                 r'.setAttribute\(\s*.*?,\s*[\'"](.*?)["\']\s*\)',
-                js_substring + r'\(\s*[\'"](.*?)["\']\s*\)',                           # Find the chopped ones
+                js_substring + r'\(\s*[\'"](.*?)["\']\s*\)',                    # Find cases designated by js_substring.
             )
 
             findall_regex = class_regex + findall_regex_js
