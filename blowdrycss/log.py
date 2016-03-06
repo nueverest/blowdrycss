@@ -5,7 +5,8 @@ Allows logging to std.stdout at the console and logging to a file.
 """
 
 # python 2.7
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
+from builtins import str
 # builtins
 import logging
 import sys
@@ -14,6 +15,14 @@ from os import path
 # custom
 from blowdrycss.utilities import make_directory
 import blowdrycss_settings as settings
+
+
+try:  # Python 2.7+
+    from logging import NullHandler
+except ImportError:
+    class NullHandler(logging.Handler):
+        def emit(self, record):
+            pass
 
 
 def enable():
@@ -31,7 +40,7 @@ def enable():
             stream_handler = logging.StreamHandler(sys.stdout)
             stream_handler.setFormatter(formatter)
             logger.addHandler(stream_handler)
-            logging.debug('Console logging enabled.')
+            logging.info('Console logging enabled.')
 
         if settings.log_to_file:
             make_directory(directory=settings.log_directory)
@@ -43,8 +52,6 @@ def enable():
             )
             rotating_file_handler.setFormatter(formatter)
             logger.addHandler(rotating_file_handler)
-            logging.debug('Rotating file logging enabled.')
+            logging.info('Rotating file logging enabled.' + '\nLog file location: ' + log_file_path)
     else:
-        error_message = 'Logging could not be enabled because settings.logging_enabled is False.'
-        logging.error(error_message)
-        raise ValueError(error_message)
+        print('Logging disabled because settings.logging_enabled is False.')

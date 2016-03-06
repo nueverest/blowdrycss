@@ -42,13 +42,13 @@ class TestEnable(TestCase):
             sys.stdout = saved_stdout
 
     def test_enable_logging_log_to_file_enabled(self):
-        expected = 'Rotating file logging enabled.\n'
         settings.logging_enabled = True
         settings.log_to_console = False
         settings.log_to_file = True
         settings.log_directory = unittest_file_path(folder='log')       # Create the log directory inside of unit_tests.
         settings.logging_level = logging.DEBUG
         log_file_path = path.join(settings.log_directory, settings.log_file_name)
+        expected = 'Rotating file logging enabled.' + '\nLog file location: ' + log_file_path + '\n'
 
         if path.isfile(log_file_path):                                                  # Clear log file.
             with open(log_file_path, 'w'):
@@ -64,14 +64,16 @@ class TestEnable(TestCase):
         self.assertTrue(file_as_string.endswith(expected), msg=file_as_string)          # Contents match.
 
     def test_enable_logging_log_to_console_and_file_enabled(self):
-        expected_console_output = 'Console logging enabled.'
-        expected_console_and_file_output = 'Rotating file logging enabled.\n'
         settings.logging_enabled = True
         settings.log_to_console = True
         settings.log_to_file = True
         settings.logging_level = logging.DEBUG
         settings.log_directory = unittest_file_path(folder='log')       # Create the log directory inside of unit_tests.
         log_file_path = path.join(settings.log_directory, settings.log_file_name)
+        expected_console_output = 'Console logging enabled.'
+        expected_console_and_file_output = (
+            'Rotating file logging enabled.' + '\nLog file location: ' + log_file_path + '\n'
+        )
 
         if path.isfile(log_file_path):                                                  # Clear log file.
             with open(log_file_path, 'w'):
@@ -107,7 +109,21 @@ class TestEnable(TestCase):
         settings.logging_enabled = False
         settings.log_to_console = True                                                  # Should produce no effect.
         settings.log_to_file = True                                                     # Should produce no effect.
-        self.assertRaises(ValueError, log.enable)
+        expected_console_output = 'Logging disabled because settings.logging_enabled is False.\n'
+
+        saved_stdout = sys.stdout                                                       # Monitor console
+        try:
+            out = StringIO()
+            sys.stdout = out
+
+            log.enable()
+
+            output = out.getvalue()
+
+            self.assertTrue(expected_console_output == output, msg=expected_console_output + '\noutput:\n' + output)
+        finally:
+            sys.stdout = saved_stdout
+
 
     def test_logging_level_INFO(self):
         not_expected = 'Console logging enabled.\n'

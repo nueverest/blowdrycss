@@ -124,7 +124,7 @@ def main():
 
     # Filter class names. Only keep classes matching the defined class encoding.
     class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
-    logging.debug(msg='blowdry.class_property_parser.class_set:\t' + str(class_property_parser.class_set))
+    logging.info(msg='blowdry.class_property_parser.class_set:\t' + str(class_property_parser.class_set))
     class_set = class_property_parser.class_set.copy()
 
     # Build a set() of valid css properties. Some classes may be removed during cssutils validation.
@@ -165,6 +165,7 @@ def main():
 
     if settings.minify:
         print_css_stats(file_name='blowdry')
+
 
 if __name__ == '__main__':
     main()
