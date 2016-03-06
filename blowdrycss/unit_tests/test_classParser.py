@@ -16,6 +16,13 @@ else:
 class TestClassParser(TestCase):
     def test_build_file_path_list(self):
         expected_file_paths = {
+            unittest_file_path('test_examplesite', 'clashing_aliases.html'),
+            unittest_file_path('test_examplesite', 'modify.html'),
+            unittest_file_path('test_examplesite', 'property_aliases.html'),
+            unittest_file_path('test_generic', 'blowdry.html'),
+            unittest_file_path('test_html', 'index.html'),
+            unittest_file_path('test_html', 'media_query.html'),
+            unittest_file_path('test_html', 'test.html'),
             unittest_file_path('test_aspx', 'test.aspx'),
             unittest_file_path('test_jinja', 'test.jinja2'),
         }
