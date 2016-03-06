@@ -63,6 +63,10 @@ Contents of `.pypirc` ::
 
 [Test on testPyPi First.]
 twine upload dist/* -r pypitest
+pip uninstall blowdrycss
+pip install -i https://testpypi.python.org/pypi blowdrycss
+blowdrycss
+pip uninstall blowdrycss
 
 Complete testing on testPyPi.
 Go `here <https://testpypi.python.org/>`__ and ensure everything looks correct.
