@@ -116,7 +116,7 @@ chdir(original_directory)                                   # Reset current work
 # Logging
 logging_enabled = True
 logging_level = INFO                                       # Allowed: DEBUG, INFO, WARNING, ERROR, CRITICAL
-log_to_console = True
+log_to_console = False
 log_to_file = True
 log_directory = path.join(cwd, 'log')
 log_file_name = 'blowdrycss.log'

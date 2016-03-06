@@ -41,6 +41,8 @@ def enable():
             stream_handler.setFormatter(formatter)
             logger.addHandler(stream_handler)
             logging.info('Console logging enabled.')
+        # else:
+        #     logger.propagate = False        # Prevent printing to stderr.
 
         if settings.log_to_file:
             make_directory(directory=settings.log_directory)

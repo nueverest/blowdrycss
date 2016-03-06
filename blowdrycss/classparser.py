@@ -1,13 +1,14 @@
 # python 2 compatibility
-from __future__ import print_function, unicode_literals
-from builtins import str
+from __future__ import unicode_literals
+
 from io import open
+
+from builtins import str
 # builtins
 from os import path
 from re import sub, findall
 import logging
 # custom
-from blowdrycss.htmlparser import HTMLClassParser
 
 
 class FileRegexMap(object):
@@ -267,7 +268,7 @@ class ClassExtractor(object):
                     text = sub(sub_regex, '', text)
             for findall_regex in self.findall_regexes:              # Find everything second.
                 class_list += findall(findall_regex, text)
-            #print(text)
+            logging.debug('classectractor.rawclasslist text: ' + text)
         return class_list
 
     @property
@@ -279,18 +280,18 @@ class ClassExtractor(object):
         """
         class_set = set()
 
-        logging.debug(msg='classparser.raw_class_list:\t' + str(self.raw_class_list))
+        logging.debug(msg='classextractor.raw_class_list:\t' + str(self.raw_class_list))
         for classes in self.raw_class_list:
             class_set = set.union(
                 set(classes.split()),               # Split space delimited string into set().
                 class_set                           # Unite the new set with class_set.
             )                                       # Assign union() to class_set.
+        logging.debug(msg='classextractor.class_set:\t' + str(class_set))
         return class_set
 
 
 class ClassParser(object):
-    """ Parses all project files provided by file_dict. HTML files are sent to ``HTMLClassParser``, and all other
-    file types are sent to ``ClassExtractor``.
+    """ Parses all project files provided by file_dict. All file types are sent to ``ClassExtractor`` as of v0.1.7.
 
     **Parameters**
 
@@ -315,17 +316,8 @@ class ClassParser(object):
 
     """
     def __init__(self, file_dict):
-        # Handled 'html' files with HTMLClassParser, and remove *.html files from file_dict.
-        if '.html' in file_dict:
-            self.html_class_parser = HTMLClassParser(files=file_dict['.html'])
-            del file_dict['.html']
-            self.class_set = self.html_class_parser.class_set
-        else:
-            self.html_class_parser = None
-            self.class_set = set()
-
+        self.class_set = set()
         self.file_dict = file_dict
-
         self.file_path_list = []
         self.build_file_path_list()
 
@@ -352,4 +344,4 @@ class ClassParser(object):
             class_extractor = ClassExtractor(file_path=file_path)
             logging.debug(msg='classparser.class_extractor.class_set:\t' + str(class_extractor.class_set))
             self.class_set = self.class_set.union(class_extractor.class_set)
-            logging.debug(msg='classparser final class_set:\t' + str(self.class_set))
+        logging.debug(msg='classparser final class_set:\t' + str(self.class_set))
