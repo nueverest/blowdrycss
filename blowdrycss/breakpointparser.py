@@ -1,9 +1,11 @@
+# builtins
+import re
 # plugins
 from cssutils.css import Property
 # custom
 from blowdrycss.utilities import deny_empty_or_whitespace
 from blowdrycss_settings import use_em, xxsmall, xsmall, small, medium, large, xlarge, xxlarge, \
-    giant, xgiant, xxgiant
+    giant, xgiant, xxgiant, px_to_em
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -89,11 +91,12 @@ class BreakpointParser(object):
         self.css_class = css_class
         self.css_property = css_property
         self.units = 'em' if use_em else 'px'
+        #self.custom_window = px_to_em(100) if use_em else 100       # +/- 100 window around the value for "only" case.
 
         # Dictionary of Breakpoint Dictionaries {'-only': (), '-down': [1], '-up': [0], }
-        # '-only': ('min-width', 'max-width'),    # Lower and Upper Limits of the size.
-        # '-down': ('max-width'),                 # Upper limit_key of size.
-        # '-up': ('min-width'),                   # Lower Limit of size.
+        # '-only': ('min-width', 'max-width'),      # Lower and Upper Limits of the size.
+        # '-down': ('max-width'),                   # Upper limit_key of size.
+        # '-up': ('min-width'),                     # Lower Limit of size.
         self.breakpoint_dict = {
             '-xxsmall': {'-only': xxsmall, '-down': xxsmall[1], '-up': xxsmall[0], },
             '-xsmall': {'-only': xsmall, '-down': xsmall[1], '-up': xsmall[0], },
@@ -105,6 +108,7 @@ class BreakpointParser(object):
             '-giant': {'-only': giant, '-down': giant[1], '-up': giant[0], },
             '-xgiant': {'-only': xgiant, '-down': xgiant[1], '-up': xgiant[0], },
             '-xxgiant': {'-only': xxgiant, '-down': xxgiant[1], '-up': xxgiant[0], },
+            'custom': {'-down': 0, '-up': 0},       # For the custom case, zero is replaced by the custom value.
         }
 
         self.limit_key_set = {'-only', '-down', '-up', }
@@ -115,6 +119,9 @@ class BreakpointParser(object):
         self.is_breakpoint = True       # Naively assume True. set_breakpoint_key and set_limit_key can change to False.
         self.set_breakpoint_key()
         self.set_limit_key()
+
+        if self.limit_key in self.limit_key_set and not self.is_breakpoint:     # Handle custom breakpoints.
+            self.set_custom_breakpoint_key()
 
         self.limit_key_methods = {
             '-only': self.css_for_only,
@@ -179,6 +186,8 @@ class BreakpointParser(object):
 
         **Rules:**
 
+        - The ``limit_key`` is expected to begin with a dash ``-``.
+
         - The ``limit_key`` may appear in the middle of ``self.css_class`` e.g. ``'padding-10-small-up-s-i'``.
 
         - The ``limit_key`` may appear at the end of ``self.css_class`` e.g. ``'margin-20-giant-down'``.
@@ -217,6 +226,51 @@ class BreakpointParser(object):
                 self.limit_key = limit_key
                 return
         self.is_breakpoint = False
+
+    def set_custom_breakpoint_key(self):
+        """ Assuming that a limit key is found, but a standard breakpoint key is not found in the ``css_class``;
+        determine if a properly formatted custom breakpoint is defined.
+
+        **Custom Breakpoint Rules:**
+
+        - Must begin with an integer.
+
+        - May contain underscores ``_`` to represent decimal points.
+
+        - May end with any allowed unit (em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax).
+
+        - Must not be negative.
+
+        - Unit conversion is based on the related setting in blowdrycss_settings.py.
+
+        :return: None
+
+        **Examples:**
+        padding-25-820-up
+        display-480-down
+        margin-5-2-5-2-1000-up
+        display-960-up-i
+        display-3_2rem-down
+
+        """
+        pattern = r'\-([0-9][0-9]?_?[0-9]?(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)?)\-(up|down)\-?'
+        matches = re.findall(pattern, self.css_class)
+        try:
+            encoded_custom_value = matches[0][0]
+            self.breakpoint_key = 'custom'
+            self.is_breakpoint = True
+
+            # Handle underscore to decimal conversion. (negative values are not permitted)
+            custom_value = encoded_custom_value.replace('_', '.')
+
+            # Handle unit conversion.
+            if use_em:
+                custom_value = px_to_em(custom_value)
+
+            # Add transformed value to breakpoint_dict
+            self.breakpoint_dict['custom'][self.limit_key] = custom_value
+        except IndexError:
+            self.is_breakpoint = False          # Default
 
     def strip_breakpoint_limit(self):
         """ Removes breakpoint and limit keywords from ``css_class``.
