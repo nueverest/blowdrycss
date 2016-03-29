@@ -48,13 +48,6 @@ ____
 
 .. automodule:: mediaquerybuilder
 
-____
-
-
-``htmlparser``
---------------
-
-.. automodule:: htmlparser
 
 ____
 
