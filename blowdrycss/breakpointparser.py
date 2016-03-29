@@ -243,6 +243,24 @@ class BreakpointParser(object):
 
         - Unit conversion is based on the related setting in blowdrycss_settings.py.
 
+        **Pattern Explained**
+
+        - ``pattern = r'[a-zA-Z].*\-([0-9]*_?[0-9]*?(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)?)\-(up|down)\-?'``
+
+        - ``[a-zA-Z]`` -- css_class must begin with a letter.
+
+        - ``.*`` -- First letter may be followed by any number of characters.
+
+        - ``\-`` -- A dash will appear before the substring pattern.
+
+        - ``([0-9]*_?[0-9]*?(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)?)`` -- Substring pattern begins with
+          A number that could contain an ``_`` to encode an optional decimal point followed by more numbers.
+          Followed by an optional unit of measure.
+
+        - ``\-(up|down)`` -- Substring pattern must end with either ``-up`` or ``-down``.
+
+        - ``\-?`` -- Substring pattern may or may not be followed by a dash since it could be the end of a string or
+
         :return: None
 
         **Examples:**
@@ -253,7 +271,7 @@ class BreakpointParser(object):
         display-3_2rem-down
 
         """
-        pattern = r'\-([0-9][0-9]?_?[0-9]?(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)?)\-(up|down)\-?'
+        pattern = r'[a-zA-Z].*\-([0-9]*_?[0-9]*?(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)?)\-(up|down)\-?'
         matches = re.findall(pattern, self.css_class)
         try:
             encoded_custom_value = matches[0][0]
