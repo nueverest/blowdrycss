@@ -28,11 +28,11 @@ class TestClassPropertyParser(TestCase):
             self.assertFalse(class_parser.underscores_valid(css_class=css_class), msg=css_class)
 
     def test_clean_class_set(self):
-        # Covers all invalid cases: first char, allowed chars, last char, and underscores.
         valid_classes = {
             'color-hfff', 'font-color-hsla-120-60p-70p-0_3', 'padding-5_2rem', 'height-24_48p',
             'padding-7_3-8_5-9_7-10_2',
         }
+        # Covers all invalid cases: first char, allowed chars, last char, and underscores.
         invalid_classes = {
             '', '   ', '*b', 'bg-color__blue', 'height-m_px', 'lighter-1$', 'margin-2_rem',
             'padding-@1px-2px-1px-2px', 'width-_2', 'bold-', 'green_', 'font-color-#000',

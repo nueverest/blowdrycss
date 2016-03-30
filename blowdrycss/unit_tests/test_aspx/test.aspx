@@ -15,6 +15,9 @@
         Background color is green.
     </div>
 
+    <%--Case Insensitivity Check + CssClass Check--%>
+    <asp:LinkButton ID="lbTableContent1" runat="server" CssClass="color-h979591">Course Dashboard</asp:LinkButton>
+
     <div class="row padding-top-30 padding-bottom-30 <%=ClassSelector.Green %>">Is this green?</div>
 
     <div class="row padding-top-30 padding-bottom-30 <%=ClassSelector.Blue %>">Is this blue?</div>

@@ -6,7 +6,7 @@ from io import open
 from builtins import str
 # builtins
 from os import path
-from re import sub, findall
+from re import sub, findall, IGNORECASE
 import logging
 # custom
 
@@ -114,7 +114,7 @@ class FileRegexMap(object):
             sub_dotnet = (r'<%.*?%>', ) + sub_html
             sub_ruby = (r'<%.*?%>', ) + sub_html
 
-            class_regex = (r'class="(.*?)"', )
+            class_regex = (r'class="(.*?)"', )                                  # general 'class' case
 
             findall_regex_js = (
                 r'.classList.add\(\s*[\'"](.*?)["\']\s*\)',
@@ -261,13 +261,13 @@ class ClassExtractor(object):
         class_list = []
         with open(self.file_path, 'r', encoding='utf-8') as _file:
             text = _file.read()
-            for sub_regex in self.sub_regexes:                      # Remove everything first.
+            for sub_regex in self.sub_regexes:                                      # Remove everything first.
                 if sub_regex in self.file_regex_map.js_case:
                     text = sub(sub_regex, self.file_regex_map.js_replacement, text)
                 else:
                     text = sub(sub_regex, '', text)
-            for findall_regex in self.findall_regexes:              # Find everything second.
-                class_list += findall(findall_regex, text)
+            for findall_regex in self.findall_regexes:                              # Find everything second.
+                class_list += findall(findall_regex, text, IGNORECASE)              # Allow CamelCase i.e. ClaSs="bold"
             logging.debug('classectractor.rawclasslist text: ' + text)
         return class_list
 
