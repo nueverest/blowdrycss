@@ -64,27 +64,59 @@ class TestBreakpointParser(TestCase):
         valid_css_classes = (
             'padding-25-820-up', 'display-480-down', 'margin-5-2-5-2-1000-up', 'display-960-up-i', 'display-3_2rem-down'
         )
-        names = ['padding', 'display', 'margin', 'display', 'display']
+        names = ['padding', 'display', 'margin', 'display', 'display', ]
         values = ['25', 'none', '5-2-5-2', 'none', 'none', ]
         priorities = ['', '', '', 'important', '', ]
+        limit_key = ('-up', '-down', '-up', '-up', '-down', )
+        breakpoint = (px_to_em('820'), px_to_em('480'), px_to_em('1000'), px_to_em('960'), '3.2rem', )
 
         for i, css_class in enumerate(valid_css_classes):
             css_property = Property(name=names[i], value=values[i], priority=priorities[i])
             breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
             self.assertTrue(breakpoint_parser.is_breakpoint, msg=breakpoint_parser.css_class)
+            self.assertEqual(
+                breakpoint_parser.breakpoint_dict['custom'][limit_key[i]],
+                breakpoint[i],
+                msg=breakpoint[i] + ' dict: ' + breakpoint_parser.breakpoint_dict['custom'][limit_key[i]]
+            )
 
     def test_set_custom_breakpoint_key_Invalid(self):
-        valid_css_classes = (
-            '-820-up', '480-down', 'margin-5-2-5-2-1000-', 'display-960-i', 'display-3_2rem'
+        invalid_css_classes = (
+            '-820-up', '480-down', 'margin-5-2-5-2-1000-', 'display-960-i', 'display-3_2rem',
         )
-        names = ['padding', 'display', 'margin', 'display', 'display']
+        names = ['padding', 'display', 'margin', 'display', 'display', ]
         values = ['25', 'none', '5-2-5-2', 'none', 'none', ]
         priorities = ['', '', '', 'important', '', ]
+        limit_key = ('-up', '-down', '-up', '-up', '-down', )
+        breakpoint = (None, None, None, None, None, None, )
 
-        for i, css_class in enumerate(valid_css_classes):
+        for i, css_class in enumerate(invalid_css_classes):
             css_property = Property(name=names[i], value=values[i], priority=priorities[i])
             breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
             self.assertFalse(breakpoint_parser.is_breakpoint, msg=breakpoint_parser.css_class)
+            self.assertEqual(
+                breakpoint_parser.breakpoint_dict['custom'][limit_key[i]],
+                breakpoint[i],
+                msg=str(breakpoint[i]) + ' dict: ' + str(breakpoint_parser.breakpoint_dict['custom'][limit_key[i]])
+            )
+
+    def test_set_custom_breakpoint_key_ONLY(self):
+        invalid_css_class = 'display-3_2rem-only'
+        name = 'display'
+        value = 'none'
+        priority = ''
+        limit_key = '-only'
+        breakpoint = None
+
+        css_property = Property(name=name, value=value, priority=priority)
+        breakpoint_parser = BreakpointParser(css_class=invalid_css_class, css_property=css_property)
+        self.assertFalse(breakpoint_parser.is_breakpoint, msg=breakpoint_parser.css_class)
+
+        try:
+            should_not_exist = breakpoint_parser.breakpoint_dict['custom'][limit_key]
+            self.assertTrue(False, msg=should_not_exist)
+        except KeyError:
+            self.assertTrue(True)
 
     def test_strip_breakpoint_limit(self):
         valid_css_classes = [

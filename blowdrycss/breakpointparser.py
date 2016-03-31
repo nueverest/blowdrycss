@@ -108,7 +108,7 @@ class BreakpointParser(object):
             '-giant': {'-only': giant, '-down': giant[1], '-up': giant[0], },
             '-xgiant': {'-only': xgiant, '-down': xgiant[1], '-up': xgiant[0], },
             '-xxgiant': {'-only': xxgiant, '-down': xxgiant[1], '-up': xxgiant[0], },
-            'custom': {'-down': 0, '-up': 0},       # For the custom case, zero is replaced by the custom value.
+            'custom': {'-down': None, '-up': None},       # For the custom case, zero is replaced by the custom value.
         }
 
         self.limit_key_set = {'-only', '-down', '-up', }
@@ -264,11 +264,26 @@ class BreakpointParser(object):
         :return: None
 
         **Examples:**
-        padding-25-820-up
-        display-480-down
-        margin-5-2-5-2-1000-up
-        display-960-up-i
-        display-3_2rem-down
+
+        padding-25-820-up, display-480-down, margin-5-2-5-2-1000-up, display-960-up-i, display-3_2rem-down
+
+        >>> from cssutils.css import Property
+        >>> # value='inherit' since we do not know if the class is valid yet.
+        >>> name = 'display'
+        >>> value = 'inherit'
+        >>> priority = ''
+        >>> inherit_property = Property(name=name, value=value, priority=priority)
+        >>> breakpoint_parser = BreakpointParser(
+                css_class='padding-25-820-up',
+                css_property=inherit_property
+            )
+        >>> # BreakpointParser() sets limit_key.
+        >>> print(breakpoint_parser.is_breakpoint)
+        True
+        >>> print(breakpoint_parser.limit_key)
+        '-up'
+        >>> print(breakpoint_parser.breakpoint_dict[breakpoint_parser.breakpoint_key][breakpoint_parser.limit_key])
+        '51.25em'
 
         """
         pattern = r'[a-zA-Z].*\-([0-9]*_?[0-9]*?(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)?)\-(up|down)\-?'
@@ -287,8 +302,11 @@ class BreakpointParser(object):
 
             # Add transformed value to breakpoint_dict
             self.breakpoint_dict['custom'][self.limit_key] = custom_value
-        except IndexError:
+        except IndexError:                      # Pattern not found in css_class
             self.is_breakpoint = False          # Default
+        except KeyError:
+            self.is_breakpoint = False          # Default
+
 
     def strip_breakpoint_limit(self):
         """ Removes breakpoint and limit keywords from ``css_class``.
