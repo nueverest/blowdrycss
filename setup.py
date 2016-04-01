@@ -82,6 +82,11 @@ e.g. `blowdrycss\archive\0.1.1`.
 Copy the new egg, build, and dist into this new folder.
 
 
+[Test on PyPi]
+pip install blowdrycss
+blowdrycss
+pip uninstall blowdrycss
+
 [Supplemental: manual registration how to]
 `testpypi <https://testpypi.python.org/pypi?%3Aaction=submit_form>`__
 `pypi <https://pypi.python.org/pypi?%3Aaction=submit_form>`__
