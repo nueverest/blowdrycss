@@ -24,17 +24,19 @@ Delete the old .egg-info, build, and dist from the project root.
 
 Activate a test virtualenv.
 Run Sphinx
-tox                         # tox will run the following two commands:
-                            # python -m unittest discover -s blowdrycss -p "test_*.py"
-                            # python setup.py test
-python setup.py clean --all
-python setup.py sdist bdist bdist_wheel
+tox                                                 # tox will run the following two commands:
+                                                    # python -m unittest discover -s blowdrycss -p "test_*.py"
+                                                    # python setup.py test
+python setup.py clean --all                         # Clean directory of old version
+python setup.py sdist bdist bdist_wheel             # Requires the following setup.cfg:
+                                                    # [bdist_wheel]
+                                                    # universal=1
 
 Test it to see if it works
-pip freeze                  # ensure blowdrycss is not already installed.
-pip uninstall blowdrycss    # uninstall if it is already installed.
-python setup.py install     # install the latest
-blowdrycss                  # run it
+pip freeze                                          # ensure blowdrycss is not already installed.
+pip uninstall blowdrycss                            # uninstall if it is already installed.
+python setup.py install                             # install the latest
+blowdrycss                                          # run it
 
 [If it is the first time, then do this otherwise skip to next step.]
 Reference: `How to setup a .pypirc file <http://stackoverflow.com/a/35087459/1783439>`__.
