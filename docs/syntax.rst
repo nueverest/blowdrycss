@@ -104,21 +104,20 @@ Dashes separate multiple values for properties that take multiple values.
 Dashes separate ``!important`` priority indicator ``'-i'`` (append to the end of the string)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+------------------------+-----------------+
-| Encoded Class Format   | CSS Rule Output |
-+========================+=================+
-| alias-value-i          | .alias-value-i  |
-|                        | {               |
-|                        | property-name:  |
-|                        | value           |
-|                        | !important }    |
-+------------------------+-----------------+
-| font-weight-bold-i     | .font-weight-bo |
-|                        | ld-i            |
-|                        | { font-weight:  |
-|                        | bold !important |
-|                        | }               |
-+------------------------+-----------------+
++------------------------+---------------------+
+| Encoded Class Format   | CSS Rule Output     |
++========================+=====================+
+| alias-value-i          | .alias-value-i      |
+|                        | {                   |
+|                        | property-name:      |
+|                        | value               |
+|                        | !important }        |
++------------------------+---------------------+
+| font-weight-bold-i     | .font-weight-bold-i |
+|                        | { font-weight:      |
+|                        | bold !important     |
+|                        | }                   |
++------------------------+---------------------+
 
 Shorthand can be used in cases where the alias is unambiguously the css property value.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -336,15 +335,27 @@ Media Queries using Breakpoints
 
 - Breakpoints and limits combined. CSS property name defaults to ``display``. ::
 
-    'xxsmall-up'
-    'medium-only'
-    'xxlarge-down'
+    xxsmall-up
+    medium-only
+    xxlarge-down
 
 - Custom CSS Property with breakpoint and limit suffix. ::
 
-    'bold-small-only'
-    'color-hfff-giant-down'
-    'text-align-center-large-up'
+    bold-small-only
+    color-hfff-giant-down
+    text-align-center-large-up
+
+- Set Custom Breakpoints 4/1/2016 as of version 0.1.8.
+  Breakpoints can now be set by specifying a screen width as a custom breakpoint before the limit key
+  ``-up`` or ``-down``.  The limit key ``-only`` is excluded since it would only apply when the width is an exact
+  match. Units default to pixels if not specified.  Unit conversion still applies if ``use_em = True`` in
+  blowdrycss_settings.py. ::
+
+    padding-25-820-up
+    display-480-down
+    margin-5-2-5-2-1000-up
+    display-960-up-i
+    display-3_2rem-down
 
 ----------------------
 
