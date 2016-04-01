@@ -34,7 +34,7 @@ class TestClassExtractor(TestCase):
     def test_raw_class_list_aspx(self):
         expected_raw_class_list = [
             ' row bgc-green padding-top-30 padding-bottom-30', 'color-h979591',
-            'row padding-top-30 padding-bottom-30 ', 'row padding-top-30 padding-bottom-30 ', 'row ',
+            'row padding-top-30 padding-bottom-30 ', 'row padding-top-30 padding-bottom-30 ', 'row padding-25-820-up ',
             # Embedded <script></script>
             'jquery1', 'jquery2', 'jquery3', 'jquery4 jquery5', 'jquery6 jquery7', 'jquery8',
             'jquery9 jquery10', 'jquery11', 'jquery12 jquery13', 'jquery14', 'jquery15', 'jquery16',
@@ -47,7 +47,8 @@ class TestClassExtractor(TestCase):
 
     def test_raw_class_list_jinja(self):
         expected_raw_class_list = [
-            'purple  padding-left-5', ' squirrel text-align-center', 'large-up  border-1', 'row text-align-center', '',
+            'purple  padding-left-5', ' squirrel text-align-center margin-5-2-5-2-1000-up', 'large-up  border-1',
+            'row text-align-center', '',
             # Embedded <script></script>
             'dojo1', 'dojo2', 'dojo3 dojo4', 'dojo5 dojo6', 'dojo7', 'dojo8', 'dojo9 dojo10', 'dojo11 dojo12',
         ]
@@ -83,7 +84,7 @@ class TestClassExtractor(TestCase):
 
     def test_class_set_html(self):
         expected_class_set = {
-            'c-blue', 'text-align-center', 'padding-10', 'margin-20', 'hide',
+            'c-blue', 'text-align-center', 'padding-10', 'margin-20', 'hide', 'display-960-up-i',
             # Embedded <script></script>
             'addclass1', 'addclass2', 'addclass3', 'addclass4', 'addclass5', 'addclass6',
         }
@@ -94,7 +95,7 @@ class TestClassExtractor(TestCase):
 
     def test_class_set_aspx(self):
         expected_class_set = {
-            'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green', 'color-h979591',
+            'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green', 'color-h979591', 'padding-25-820-up',
             # Embedded <script></script>
             'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
             'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',
@@ -108,7 +109,7 @@ class TestClassExtractor(TestCase):
     def test_class_set_jinja(self):
         expected_class_set = {
             'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1', 'row',
-            'text-align-center',
+            'text-align-center', 'margin-5-2-5-2-1000-up',
             # Embedded <script></script>
             'dojo1', 'dojo2', 'dojo3', 'dojo4', 'dojo5', 'dojo6', 'dojo7', 'dojo8', 'dojo9', 'dojo10', 'dojo11',
             'dojo12',
@@ -159,7 +160,7 @@ class TestClassExtractor(TestCase):
 
     def test_integration_class_set_html(self):
         expected_class_set = {
-            'c-blue', 'text-align-center', 'padding-10', 'margin-20', 'hide',
+            'c-blue', 'text-align-center', 'padding-10', 'margin-20', 'hide', 'display-960-up-i',
             # Embedded <script></script>
             'addclass1', 'addclass2', 'addclass3', 'addclass4', 'addclass5', 'addclass6',
         }
@@ -170,7 +171,7 @@ class TestClassExtractor(TestCase):
 
     def test_integration_class_set_aspx(self):
         expected_class_set = {
-            'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green', 'color-h979591',
+            'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green', 'color-h979591', 'padding-25-820-up',
             # Embedded <script></script>
             'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
             'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',
@@ -184,7 +185,7 @@ class TestClassExtractor(TestCase):
     def test_integration_class_set_jinja(self):
         expected_class_set = {
             'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1', 'row',
-            'text-align-center',
+            'text-align-center', 'margin-5-2-5-2-1000-up',
             # Embedded <script></script>
             'dojo1', 'dojo2', 'dojo3', 'dojo4', 'dojo5', 'dojo6', 'dojo7', 'dojo8', 'dojo9', 'dojo10', 'dojo11',
             'dojo12',

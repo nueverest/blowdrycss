@@ -39,6 +39,7 @@ class TestClassParser(TestCase):
         expected_class_set = {
             'row', 'bgc-green', 'padding-top-30', 'padding-bottom-30', 'color-h979591',
             'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1',
+            'padding-25-820-up', 'margin-5-2-5-2-1000-up',
             # Embedded <script></script>
             'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
             'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',

@@ -22,7 +22,7 @@
 
     <div class="row padding-top-30 padding-bottom-30 <%=ClassSelector.Blue %>">Is this blue?</div>
 
-    <div class="row <%#Eval("ProductName")%>"><uc1:ucBlowDryerCarousel runat="server" ID="ucBlowDryerCarousel" /></div>
+    <div class="row padding-25-820-up <%#Eval("ProductName")%>"><uc1:ucBlowDryerCarousel runat="server" ID="ucBlowDryerCarousel" /></div>
 </asp:Content>
 
 <script>

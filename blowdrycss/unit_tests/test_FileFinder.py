@@ -117,7 +117,7 @@ class TestFileFinder(TestCase):
         test_file_path = unittest_file_path('test_html', 'test.html')
         expected_string = (
             '<html>	<body>        <!-- <p class="margin-left-22">Class should not be found in comments</p> -->		' +
-            '<h1 class="c-blue text-align-center padding-10">Blow Dry CSS</h1>        ' +
+            '<h1 class="c-blue text-align-center padding-10 display-960-up-i">Blow Dry CSS</h1>        ' +
             '<div id="div1" class="padding-10 margin-20">Testing<br class="hide" />1 2 3</div>	' +
             '</body></html><script>    // create element    var element = document.getElementById("div1");    ' +
             'var notimplemented = " not implemented ";    // element.classList.add() variant 1    ' +

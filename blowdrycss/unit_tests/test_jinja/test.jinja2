@@ -3,7 +3,7 @@
 {% if latest_question_list %}
     <ul class="purple {{ align.left }} padding-left-5">
     {% for question in latest_question_list %}
-        <li class="{{ li_style }} squirrel text-align-center"><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+        <li class="{{ li_style }} squirrel text-align-center margin-5-2-5-2-1000-up"><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
