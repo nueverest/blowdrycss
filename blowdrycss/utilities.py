@@ -79,7 +79,7 @@ def get_file_path(file_directory='', file_name='blowdry', extension=''):
         - Transform extension to lowercase.
         - Extensions must match this regex r"(^[.][.0-9a-z]*[0-9a-z]$)".
 
-        **Findall ``regex`` Decoded:**
+        **Findall regex Decoded:**
 
         - ``r"(^[.][.0-9a-z]*[0-9a-z]$)"``
         - ``^[.]`` -- ``extension`` must begin with a ``.`` dot.
