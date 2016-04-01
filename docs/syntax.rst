@@ -347,7 +347,7 @@ Media Queries using Breakpoints
 
 - Set Custom Breakpoints 4/1/2016 as of version 0.1.8.
   Breakpoints can now be set by specifying a screen width as a custom breakpoint before the limit key
-  ``-up`` or ``-down``.  The limit key ``-only`` is excluded since it would only apply when the width is an exact
+  ``-up`` or ``-down``.  The ``-only`` limit key is excluded since it would only apply when the width is an exact
   match. Units default to pixels if not specified.  Unit conversion still applies if ``use_em = True`` in
   blowdrycss_settings.py. ::
 
