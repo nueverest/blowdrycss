@@ -108,7 +108,7 @@ class BreakpointParser(object):
             '-giant': {'-only': giant, '-down': giant[1], '-up': giant[0], },
             '-xgiant': {'-only': xgiant, '-down': xgiant[1], '-up': xgiant[0], },
             '-xxgiant': {'-only': xxgiant, '-down': xxgiant[1], '-up': xxgiant[0], },
-            'custom': {'-down': None, '-up': None},       # For the custom case, zero is replaced by the custom value.
+            'custom': {'-down': None, '-up': None, 'breakpoint': None},
         }
 
         self.limit_key_set = {'-only', '-down', '-up', }
@@ -289,35 +289,39 @@ class BreakpointParser(object):
         pattern = r'[a-zA-Z].*\-([0-9]*_?[0-9]*?(em|ex|px|in|cm|mm|pt|pc|q|ch|rem|vw|vh|vmin|vmax)?)\-(up|down)\-?'
         matches = re.findall(pattern, self.css_class)
         try:
-            encoded_custom_value = matches[0][0]
+            encoded_breakpoint = matches[0][0]
             self.breakpoint_key = 'custom'
             self.is_breakpoint = True
 
+            # Add the encoded breakpoint to breakpoint_dict with a prepended dash.
+            self.breakpoint_dict['custom']['breakpoint'] = '-' + encoded_breakpoint
+
             # Handle underscore to decimal conversion. (negative values are not permitted)
-            custom_value = encoded_custom_value.replace('_', '.')
+            custom_breakpoint = encoded_breakpoint.replace('_', '.')
 
             # Handle unit conversion.
             if use_em:
-                custom_value = px_to_em(custom_value)
+                custom_breakpoint = px_to_em(custom_breakpoint)
 
             # Add transformed value to breakpoint_dict
-            self.breakpoint_dict['custom'][self.limit_key] = custom_value
+            self.breakpoint_dict['custom'][self.limit_key] = custom_breakpoint
         except IndexError:                      # Pattern not found in css_class
-            self.is_breakpoint = False          # Default
-        except KeyError:
-            self.is_breakpoint = False          # Default
-
+            self.is_breakpoint = False
+        except KeyError:                        # Dictionary key problems (excludes '-only' case).
+            self.is_breakpoint = False
 
     def strip_breakpoint_limit(self):
         """ Removes breakpoint and limit keywords from ``css_class``.
 
         **Rules:**
 
-        - Return ``''`` if breakpoint limit key pair == ``css_class``.
+        - Return ``''`` if breakpoint limit key pair == ``css_class`` i.e. implied ``display`` property name.
             - ``'xlarge-only'`` becomes ``''``.
 
         - Return ``property_name + property_value - breakpoint_key - limit_key``.
             - ``'bold-large-up'`` becomes ``'bold'``.
+            - ``'padding-12-small-down'`` becomes ``'padding-12'``.
+            - ``'margin-5-2-5-2-1000-up'`` becomes ``'margin-5-2-5-2'`` (custom breakpoint case).
 
         :return: (*str*) -- Returns a modified version ``css_class`` with breakpoint and limit key syntax removed.
 
@@ -341,8 +345,12 @@ class BreakpointParser(object):
         'bold'
 
         """
+        custom_breakpoint = self.breakpoint_dict['custom']['breakpoint']
+
         if self.css_class.startswith(self.breakpoint_key[1:]):
             return self.css_class.replace(self.breakpoint_key[1:], '').replace(self.limit_key, '')
+        elif custom_breakpoint is not None:
+            return self.css_class.replace(custom_breakpoint, '').replace(self.limit_key, '')
         else:
             return self.css_class.replace(self.breakpoint_key, '').replace(self.limit_key, '')
 

@@ -68,7 +68,8 @@ class TestBreakpointParser(TestCase):
         values = ['25', 'none', '5-2-5-2', 'none', 'none', ]
         priorities = ['', '', '', 'important', '', ]
         limit_key = ('-up', '-down', '-up', '-up', '-down', )
-        breakpoint = (px_to_em('820'), px_to_em('480'), px_to_em('1000'), px_to_em('960'), '3.2rem', )
+        breakpoint = ('-820', '-480', '-1000', '-960', '-3_2rem', )
+        converted_breakpoint = (px_to_em('820'), px_to_em('480'), px_to_em('1000'), px_to_em('960'), '3.2rem', )
 
         for i, css_class in enumerate(valid_css_classes):
             css_property = Property(name=names[i], value=values[i], priority=priorities[i])
@@ -76,8 +77,13 @@ class TestBreakpointParser(TestCase):
             self.assertTrue(breakpoint_parser.is_breakpoint, msg=breakpoint_parser.css_class)
             self.assertEqual(
                 breakpoint_parser.breakpoint_dict['custom'][limit_key[i]],
+                converted_breakpoint[i],
+                msg=converted_breakpoint[i] + ' dict: ' + breakpoint_parser.breakpoint_dict['custom'][limit_key[i]]
+            )
+            self.assertEqual(
+                breakpoint_parser.breakpoint_dict['custom']['breakpoint'],
                 breakpoint[i],
-                msg=breakpoint[i] + ' dict: ' + breakpoint_parser.breakpoint_dict['custom'][limit_key[i]]
+                msg=breakpoint[i] + ' dict: ' + breakpoint_parser.breakpoint_dict['custom']['breakpoint']
             )
 
     def test_set_custom_breakpoint_key_Invalid(self):
@@ -88,7 +94,7 @@ class TestBreakpointParser(TestCase):
         values = ['25', 'none', '5-2-5-2', 'none', 'none', ]
         priorities = ['', '', '', 'important', '', ]
         limit_key = ('-up', '-down', '-up', '-up', '-down', )
-        breakpoint = (None, None, None, None, None, None, )
+        breakpoint = None
 
         for i, css_class in enumerate(invalid_css_classes):
             css_property = Property(name=names[i], value=values[i], priority=priorities[i])
@@ -96,8 +102,13 @@ class TestBreakpointParser(TestCase):
             self.assertFalse(breakpoint_parser.is_breakpoint, msg=breakpoint_parser.css_class)
             self.assertEqual(
                 breakpoint_parser.breakpoint_dict['custom'][limit_key[i]],
-                breakpoint[i],
-                msg=str(breakpoint[i]) + ' dict: ' + str(breakpoint_parser.breakpoint_dict['custom'][limit_key[i]])
+                breakpoint,
+                msg=str(breakpoint) + ' dict: ' + str(breakpoint_parser.breakpoint_dict['custom'][limit_key[i]])
+            )
+            self.assertEqual(
+                breakpoint_parser.breakpoint_dict['custom']['breakpoint'],
+                breakpoint,
+                msg=str(breakpoint) + ' dict: ' + str(breakpoint_parser.breakpoint_dict['custom']['breakpoint'])
             )
 
     def test_set_custom_breakpoint_key_ONLY(self):
@@ -106,7 +117,6 @@ class TestBreakpointParser(TestCase):
         value = 'none'
         priority = ''
         limit_key = '-only'
-        breakpoint = None
 
         css_property = Property(name=name, value=value, priority=priority)
         breakpoint_parser = BreakpointParser(css_class=invalid_css_class, css_property=css_property)
@@ -122,10 +132,20 @@ class TestBreakpointParser(TestCase):
         valid_css_classes = [
             'inline-small-up', 'inline-giant-down', 'green-xxsmall-only', 'padding-10-large-up',
             'xlarge-only', 'large-down', 'xsmall-up',
+            'padding-25-820-up', 'display-480-down', 'margin-5-2-5-2-1000-up', 'display-960-up-i', 'display-3_2rem-down'
         ]
-        names = ['display', 'display', 'color', 'padding', 'display', 'display', 'display', ]
-        values = ['inline', 'inline', 'green', '10', 'none', 'none', 'none', ]
-        expected = ['inline', 'inline', 'green', 'padding-10', '', '', '', ]
+        names = [
+            'display', 'display', 'color', 'padding', 'display', 'display', 'display',
+            'padding', 'display', 'margin', 'display', 'display',
+        ]
+        values = [
+            'inline', 'inline', 'green', '10', 'none', 'none', 'none',
+            '25', 'none', '5-2-5-2', 'none', 'none',
+        ]
+        expected = [
+            'inline', 'inline', 'green', 'padding-10', '', '', '',
+            'padding-25', 'display', 'margin-5-2-5-2', 'display-i', 'display',
+        ]
 
         for i, css_class in enumerate(valid_css_classes):
             css_property = Property(name=names[i], value=values[i], priority='')
