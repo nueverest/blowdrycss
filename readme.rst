@@ -13,9 +13,10 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.1.7** -- Fancy new favicons. Documentation improved. Official site launched
-  `www.blowdrycss.org <http://www.blowdrycss.org>`__. Added the ability parse javascript and typescript files for
-  class selectors. Fix a logic error that prevented logging enabled when auto_generate is False.
+| **0.1.8** -- Enable the creation of custom breakpoints e.g. padding--25--820--up, display--480--down,
+  margin--5--2--5--2--1000--up, display--960--up--i, display--3_2rem--down.  Class parser now allows for
+  CamelCase text in findall().  This is especially necessary for ASP.NET applications that define classes using
+  the notation ``CssClass="color-h979591 bold heading--1"``.
 |
 
 Why the name blowdrycss?
