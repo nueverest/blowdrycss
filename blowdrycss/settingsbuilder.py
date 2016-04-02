@@ -147,8 +147,9 @@ rst_docs = False                # Generate a sphinx rst file that provides a qui
 human_readable = True           # Generate a standard human readable css file.
 minify = True                   # Generate a minified version of the css file.
 media_queries_enabled = True    # Generate breakpoint and scaling media queries.
+
 # ...Not Implemented Yet...
-# use_rgb = True
+# use_hex = True                # Using hex and browser performance: http://jsperf.com/css-color-names-vs-hex-codes/18
 # extra_dry = False             # Combine identical CSS discovered under different class selector names.
 # http_server = False           # Auto-Start a simple webserver on localhost:8080.
 # public_url = False            # Uses ngrok to generate a temporary public url for testings and demo purposes.
