@@ -119,12 +119,15 @@
       CamelCase text in findall().  This is especially necessary for ASP.NET applications that define classes using
       the notation ``CssClass="color-h979591 bold heading--1"``.
     |
+    | **0.1.9** -- Fixed a major python 2.7 compatibility error.  Added ``absolute_import`` to all modules and
+      unit tests per `PEP328 <https://www.python.org/dev/peps/pep-0328/#rationale-for-absolute-imports>`__.
+    |
 
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.1.8'
+__version__ = '0.1.9'
 
 __release__ = __version__ + 'b1'

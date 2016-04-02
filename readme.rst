@@ -18,6 +18,10 @@ Version Changelog
   CamelCase text in findall().  This is especially necessary for ASP.NET applications that define classes using
   the notation ``CssClass="color-h979591 bold heading--1"``.
 |
+| **0.1.9** -- Fixed a major python 2.7 import error that prevented imported the correct settings file.
+  Added ``absolute_import`` to all modules and unit tests per
+  `PEP328 <https://www.python.org/dev/peps/pep-0328/#rationale-for-absolute-imports>`__.
+|
 
 Why the name blowdrycss?
 ~~~~~~~~~~~~~~~~~~~~~~~~
