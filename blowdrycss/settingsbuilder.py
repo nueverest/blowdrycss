@@ -6,7 +6,8 @@ Declares string for building blowdrycss - settings.py.
 """
 
 # python 2
-from __future__ import print_function, unicode_literals
+from __future__ import absolute_import, print_function, unicode_literals
+
 # builtins
 import os
 
@@ -102,7 +103,7 @@ The longer more specific name is used to prevent naming conflicts, and increase 
 \"\"\"
 
 # python 2
-from __future__ import division, unicode_literals
+from __future__ import absolute_import, division, unicode_literals
 from builtins import round
 # builtins
 from os import getcwd, path

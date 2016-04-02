@@ -1,25 +1,18 @@
 # python 2
-from __future__ import division
-
+from __future__ import absolute_import, division
 from builtins import round
-# general
+
+# builtins
 from unittest import TestCase, main
 from os import getcwd, path, removedirs
 import sys
 from io import StringIO
+
 # custom
 import blowdrycss.unit_tests.unittest_settings as unittest_settings
 from blowdrycss.utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, unittest_file_path, \
     change_settings_for_testing, print_css_stats, print_blow_dryer, make_directory
-
-__author__ = 'chad nelson'
-__project__ = 'blowdrycss'
-
-# required for pycharm unittest feature to work under both python 2.7 and python 3.x
-if sys.hexversion < 0x03000000:
-    import blowdrycss.blowdrycss_settings as settings
-else:
-    import blowdrycss_settings as settings
+import blowdrycss_settings as settings
 
 change_settings_for_testing()
 

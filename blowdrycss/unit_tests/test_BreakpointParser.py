@@ -1,7 +1,12 @@
+# python 2
+from __future__ import absolute_import
+
 # builtins
 from unittest import TestCase, main
+
 # plugins
 from cssutils.css import Property
+
 # custom
 from blowdrycss.breakpointparser import BreakpointParser
 from blowdrycss_settings import px_to_em

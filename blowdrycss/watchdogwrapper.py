@@ -1,12 +1,15 @@
-# python 27
-from __future__ import unicode_literals, print_function
+# python 2
+from __future__ import absolute_import, unicode_literals, print_function
 from builtins import str
+
 # builtins
 import logging
 from time import sleep
+
 # plugins
 from watchdog.events import PatternMatchingEventHandler, FileModifiedEvent, FileDeletedEvent
 from watchdog.observers import Observer
+
 # custom
 from blowdrycss.utilities import print_blow_dryer
 from blowdrycss import blowdry, log

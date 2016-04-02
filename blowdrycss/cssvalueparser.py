@@ -1,3 +1,5 @@
+# python 2
+from __future__ import absolute_import
 # plugins
 from cssutils.css import Property
 from xml.dom import SyntaxErr

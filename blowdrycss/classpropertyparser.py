@@ -46,6 +46,8 @@ IMPORTANT
 
 """
 
+# python 2
+from __future__ import absolute_import
 # builtins
 from string import ascii_lowercase, digits
 from re import findall

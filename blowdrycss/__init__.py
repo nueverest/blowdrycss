@@ -7,6 +7,8 @@
 # http://stackoverflow.com/questions/23164482/created-a-pypi-package-and-it-installs-but-when-run-it-returns-an-import-error#23164865
 # ``python setup.py test`` produces 1 failure and 19 errors.
 
+# python 2
+from __future__ import absolute_import
 # builtins
 import sys
 import os

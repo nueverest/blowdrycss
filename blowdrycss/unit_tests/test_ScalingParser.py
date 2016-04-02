@@ -1,5 +1,10 @@
+# python 2
+from __future__ import absolute_import
+
+# builtins
 from unittest import TestCase, main
 from cssutils.css import Property
+
 # custom
 from blowdrycss.scalingparser import ScalingParser
 

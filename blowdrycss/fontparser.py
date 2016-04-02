@@ -1,3 +1,6 @@
+# python 2
+from __future__ import absolute_import
+
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 

@@ -1,7 +1,11 @@
+# python 2
+from __future__ import absolute_import
+
 # builtins
 from unittest import TestCase, main
 from os import getcwd, path, remove, chdir
 from logging import DEBUG
+
 # custom
 from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
 

@@ -1,8 +1,6 @@
 # python 2 compatibility
-from __future__ import unicode_literals
-
+from __future__ import absolute_import, unicode_literals
 from io import open
-
 from builtins import str
 # builtins
 from os import path

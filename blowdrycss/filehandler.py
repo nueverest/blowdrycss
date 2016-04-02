@@ -1,13 +1,16 @@
-# python 2 compatibility
-from __future__ import print_function, unicode_literals, with_statement
+# python 2
+from __future__ import absolute_import, print_function, unicode_literals, with_statement
 from builtins import str
 from io import open
+
 # builtins
 from os import path, walk, getcwd
 from glob import glob
 import logging
+
 # plugins
 from cssutils import parseString, ser
+
 # custom
 from blowdrycss.utilities import get_file_path, make_directory
 import blowdrycss_settings as settings

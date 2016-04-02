@@ -1,16 +1,14 @@
+# python 2
+from __future__ import absolute_import
+
 # builtin
-import sys
 from unittest import TestCase, main
 
 # custom
 from blowdrycss.filehandler import FileFinder
 from blowdrycss.classparser import ClassParser
 from blowdrycss.utilities import unittest_file_path
-# required for pycharm unittest feature to work under both python 2.7 and python 3.x
-if sys.hexversion < 0x03000000:
-    import blowdrycss.blowdrycss_settings as settings
-else:
-    import blowdrycss_settings as settings
+import blowdrycss_settings as settings
 
 
 class TestClassParser(TestCase):

@@ -1,11 +1,13 @@
 # python 2
-from __future__ import print_function, division, unicode_literals
+from __future__ import absolute_import, print_function, division, unicode_literals
 from builtins import str, round
+
 # builtins
 from re import search, findall
 from inspect import currentframe
 from os import path, stat, getcwd, makedirs
 import logging
+
 # custom
 import blowdrycss_settings as settings
 

@@ -1,9 +1,11 @@
 # python 2.7
-from __future__ import unicode_literals, with_statement
+from __future__ import absolute_import, unicode_literals, with_statement
 from io import open
+
 # builtins
 from unittest import TestCase, main
 from os import path, getcwd, chdir, remove
+
 # custom
 import tox_cleanup
 

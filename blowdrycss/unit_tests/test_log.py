@@ -1,5 +1,5 @@
 # python 2.7
-from __future__ import unicode_literals, with_statement
+from __future__ import absolute_import, unicode_literals, with_statement
 
 # builtins
 from unittest import TestCase, main
@@ -7,15 +7,11 @@ import sys
 from io import StringIO, open
 from os import path
 import logging
+
 # custom
 from blowdrycss.utilities import change_settings_for_testing, unittest_file_path
 from blowdrycss import log
-
-# required for pycharm unittest feature to work under both python 2.7 and python 3.x
-if sys.hexversion < 0x03000000:
-    import blowdrycss.blowdrycss_settings as settings
-else:
-    import blowdrycss_settings as settings
+import blowdrycss_settings as settings
 
 change_settings_for_testing()
 

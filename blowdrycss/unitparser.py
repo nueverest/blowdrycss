@@ -1,5 +1,9 @@
+# python 2
+from __future__ import absolute_import
+
 # builtins
 from string import digits
+
 # custom
 import blowdrycss_settings as settings
 

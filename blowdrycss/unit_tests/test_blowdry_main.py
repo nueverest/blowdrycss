@@ -1,6 +1,11 @@
+# python 2
+from __future__ import absolute_import
+
+# builtins
 from unittest import TestCase, main
 import sys
 from io import StringIO
+
 # custom
 import blowdrycss.blowdry as blowdry
 

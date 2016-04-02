@@ -1,5 +1,10 @@
+# python 2
+from __future__ import absolute_import
+
+# builtins
 from unittest import TestCase, main
 from os import path, remove
+
 # custom
 from blowdrycss.filehandler import CSSFile
 from blowdrycss.utilities import unittest_file_path

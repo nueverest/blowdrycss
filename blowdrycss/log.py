@@ -5,13 +5,14 @@ Allows logging to std.stdout at the console and logging to a file.
 """
 
 # python 2.7
-from __future__ import unicode_literals, print_function
-from builtins import str
+from __future__ import absolute_import, unicode_literals, print_function
+
 # builtins
 import logging
 import sys
 from logging.handlers import RotatingFileHandler
 from os import path
+
 # custom
 from blowdrycss.utilities import make_directory
 import blowdrycss_settings as settings

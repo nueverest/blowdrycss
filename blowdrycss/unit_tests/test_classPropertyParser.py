@@ -1,5 +1,9 @@
+# python 2
+from __future__ import absolute_import
+
 # builtin
 from unittest import TestCase, main
+
 # custom
 from blowdrycss.classpropertyparser import ClassPropertyParser
 

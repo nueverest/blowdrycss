@@ -61,12 +61,14 @@
 """
 
 # python 2
-from __future__ import division, unicode_literals
+from __future__ import absolute_import, division, unicode_literals
 from builtins import round
+
 # builtins
 from os import getcwd, path
 from string import digits
 from logging import DEBUG, INFO, WARNING, ERROR, CRITICAL
+
 # plugins
 from cssutils import profile
 
@@ -77,7 +79,7 @@ __project__ = 'blowdrycss'
 # Change it to whatever you want.
 cwd = getcwd()
 
-if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+if cwd.endswith('unit_tests'):                                              # Allows running of pycharm unittest.
     markdown_directory = path.join(cwd, 'test_markdown')
     project_directory = path.join(cwd, 'test_examplesite')
     css_directory = path.join(project_directory, 'test_css')

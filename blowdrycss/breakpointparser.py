@@ -1,3 +1,5 @@
+# python 2
+from __future__ import absolute_import
 # builtins
 import re
 # plugins

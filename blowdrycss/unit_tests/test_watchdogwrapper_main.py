@@ -1,7 +1,7 @@
 # python 2
-from __future__ import print_function, unicode_literals, with_statement
-
+from __future__ import absolute_import, print_function, unicode_literals, with_statement
 import _thread
+
 # builtins
 from unittest import TestCase, main
 import logging
@@ -9,15 +9,11 @@ import sys
 from io import StringIO, open
 from time import sleep
 from os import path, remove
+
 # plugins
 from blowdrycss.utilities import unittest_file_path, change_settings_for_testing
 from blowdrycss import watchdogwrapper
-
-# required for pycharm unittest feature to work under both python 2.7 and python 3.x
-if sys.hexversion < 0x03000000:
-    import blowdrycss.blowdrycss_settings as settings
-else:
-    import blowdrycss_settings as settings
+import blowdrycss_settings as settings
 
 change_settings_for_testing()
 

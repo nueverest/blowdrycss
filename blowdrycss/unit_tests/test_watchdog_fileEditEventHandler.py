@@ -1,7 +1,7 @@
 # python 2
-from __future__ import print_function, with_statement, unicode_literals
-
+from __future__ import absolute_import, print_function, with_statement, unicode_literals
 from builtins import str
+
 # builtins
 from unittest import TestCase, main
 from os import path, remove, SEEK_END
@@ -9,17 +9,14 @@ import logging
 import sys
 from io import StringIO, open
 from time import sleep
+
 # plugins
 from watchdog.observers import Observer
+
 # custom
 from blowdrycss.utilities import change_settings_for_testing, unittest_file_path
 from blowdrycss.watchdogwrapper import FileEditEventHandler
-
-# required for pycharm unittest feature to work under both python 2.7 and python 3.x
-if sys.hexversion < 0x03000000:
-    import blowdrycss.blowdrycss_settings as settings
-else:
-    import blowdrycss_settings as settings
+import blowdrycss_settings as settings
 
 change_settings_for_testing()
 

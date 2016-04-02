@@ -1,5 +1,9 @@
+# python 2
+from __future__ import absolute_import
+
 # builtins
 from unittest import TestCase, main
+
 # custom
 from blowdrycss.classparser import FileRegexMap
 from blowdrycss.utilities import unittest_file_path

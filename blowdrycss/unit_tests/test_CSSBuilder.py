@@ -1,22 +1,19 @@
 # python 2
-# from lib2to3.fixes import fix_set_literal  http://python-future.org/futurize.html?highlight=set
+from __future__ import absolute_import
+
 # builtins
-import sys
+# import sys
 from unittest import TestCase, main
 
 # custom
 from blowdrycss.utilities import change_settings_for_testing
 from blowdrycss.classpropertyparser import ClassPropertyParser
 from blowdrycss.cssbuilder import CSSBuilder
+import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 
-# required for pycharm unittest feature to work under both python 2.7 and python 3.x
-if sys.hexversion < 0x03000000:
-    import blowdrycss.blowdrycss_settings as settings
-else:
-    import blowdrycss_settings as settings
 
 change_settings_for_testing()
 

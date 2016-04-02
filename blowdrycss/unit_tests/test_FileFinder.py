@@ -1,17 +1,15 @@
-# python 27
-from __future__ import unicode_literals
+# python 2
+from __future__ import absolute_import, unicode_literals
+
 # builtin
 from unittest import TestCase, main
 import sys
 from io import StringIO
+
 # custom
 from blowdrycss.filehandler import FileFinder, FileConverter
 from blowdrycss.utilities import unittest_file_path
-# required for pycharm unittest feature to work under both python 2.7 and python 3.x
-if sys.hexversion < 0x03000000:
-    import blowdrycss.blowdrycss_settings as settings
-else:
-    import blowdrycss_settings as settings
+import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'

@@ -1,5 +1,9 @@
+# python 2
+from __future__ import absolute_import
+
 # plugins
 from cssutils.css import Property
+
 # custom
 from blowdrycss.utilities import deny_empty_or_whitespace
 from blowdrycss.unitparser import UnitParser
