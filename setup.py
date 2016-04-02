@@ -95,7 +95,7 @@ pip uninstall blowdrycss
 """
 
 # python 2.7
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 from future.utils import exec_
 from io import open
 
