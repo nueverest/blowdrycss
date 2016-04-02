@@ -109,7 +109,6 @@ chdir(chg)                                                  # Navigate up one di
 cwd = getcwd()
 markdown_directory = cwd                                    # Shows up in root of github repository.
 project_directory = path.join(cwd, 'examplesite')
-print('project_directory:', project_directory)              # TESTING REMOVE AFTER
 css_directory = path.join(project_directory, 'css')
 docs_directory = path.join(cwd, 'docs')
 chdir(original_directory)                                   # Reset current working directory.

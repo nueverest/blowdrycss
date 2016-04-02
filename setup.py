@@ -33,10 +33,11 @@ python setup.py sdist bdist bdist_wheel             # Requires the following set
                                                     # universal=1
 
 Test it to see if it works
-pip freeze                                          # ensure blowdrycss is not already installed.
-pip uninstall blowdrycss                            # uninstall if it is already installed.
-python setup.py install                             # install the latest
-blowdrycss                                          # run it
+pip freeze                                          # Ensure blowdrycss is not already installed.
+pip uninstall blowdrycss                            # Uninstall if it is already installed.
+python setup.py install                             # Install the latest.
+blowdrycss                                          # Run it and make sure it created a new blowdry.css file.
+pip uninstall blowdrycss                            # Uninstall blowdrycss.
 
 [If it is the first time, then do this otherwise skip to next step.]
 Reference: `How to setup a .pypirc file <http://stackoverflow.com/a/35087459/1783439>`__.
@@ -97,6 +98,7 @@ pip uninstall blowdrycss
 from __future__ import unicode_literals
 from future.utils import exec_
 from io import open
+
 # builtins
 from setuptools import setup, find_packages     # Always prefer setuptools over distutils
 

@@ -105,10 +105,12 @@ The longer more specific name is used to prevent naming conflicts, and increase 
 # python 2
 from __future__ import absolute_import, division, unicode_literals
 from builtins import round
+
 # builtins
 from os import getcwd, path
 from string import digits
 from logging import DEBUG, INFO, WARNING, ERROR, CRITICAL
+
 # plugins
 from cssutils import profile
 
