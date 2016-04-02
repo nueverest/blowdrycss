@@ -14,8 +14,7 @@ a {
     font-weight:100;
     color: white;
     font-size: 1.2rem;
-    border-top: 0.25rem solid black;
-    border-bottom: 0.25rem solid black;
+
 }
 
 a.purple-btn {
@@ -23,12 +22,12 @@ a.purple-btn {
     text-decoration: none;
     padding: 1.0rem;
     border-radius: 5px;
-    color: rgba(255,255,255,1);
+    color: white;
     background:rgba(111,0,222,0.75);
     transition: 0.6s background;
 }
 a.purple-btn:hover {
-    color: rgba(255,255,255,1);
+    color: white;
     background:rgba(111,0,222,1);
 }
 
@@ -59,4 +58,16 @@ a.black-btn {
 a.black-btn:hover {
     color: rgba(255,255,255,1);
     background:rgba(0,0,0,0.85);
+}
+
+ol > li {
+    padding-bottom: 2rem;
+}
+
+ol > li > i {
+    color: #006fde;
+}
+
+ol > li > strong {
+    color: #006fde;
 }
