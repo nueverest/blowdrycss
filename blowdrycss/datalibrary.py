@@ -241,6 +241,16 @@ class DataLibrary(object):
             'visibility', 'voice-family', 'volume', 'white-space', 'widows', 'width', 'word-spacing', 'z-index'
         }
 
+        self.pseudo_classes = {
+            'active', 'checked', 'disabled', 'empty', 'enabled', 'first-child', 'first-of-type', 'focus', 'hover',
+            'in-range', 'invalid', 'lang()', 'last-child', 'last-of-type', 'link', 'not()',
+            'nth-child()', 'nth-last-child()', 'nth-last-of-type()', 'nth-of-type()', 'only-child',
+            'optional', 'out-of-range', 'read-only', 'read-write', 'required', 'root', 'target', 'valid',
+            'visited',
+        }
+
+        self.pseudo_elements = {'after', 'before', 'first-letter', 'first-line', 'selection', }
+
         self.clashing_alias_dict = {}
         self.property_alias_dict = {}
 
