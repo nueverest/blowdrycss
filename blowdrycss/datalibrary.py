@@ -241,16 +241,6 @@ class DataLibrary(object):
             'visibility', 'voice-family', 'volume', 'white-space', 'widows', 'width', 'word-spacing', 'z-index'
         }
 
-        self.pseudo_classes = {
-            'active', 'checked', 'disabled', 'empty', 'enabled', 'first-child', 'first-of-type', 'focus', 'hover',
-            'in-range', 'invalid', 'lang()', 'last-child', 'last-of-type', 'link', 'not()',
-            'nth-child()', 'nth-last-child()', 'nth-last-of-type()', 'nth-of-type()', 'only-child',
-            'optional', 'out-of-range', 'read-only', 'read-write', 'required', 'root', 'target', 'valid',
-            'visited',
-        }
-
-        self.pseudo_elements = {'after', 'before', 'first-letter', 'first-line', 'selection', }
-
         self.clashing_alias_dict = {}
         self.property_alias_dict = {}
 
@@ -578,6 +568,19 @@ __data_library = DataLibrary()
 property_regex_dict = __data_library.property_regex_dict
 property_alias_dict = __data_library.property_alias_dict
 ordered_property_dict = __data_library.ordered_property_dict
+
+# Pseudo Sets - reference: http://www.w3schools.com/css/css_pseudo_classes.asp
+
+# The following pseudo classes are not implemented due to complexity and verbosity.
+# 'lang([a-zA-Z\-])',
+# 'not(_[a-zA-Z0-9]\-)', 'nth-child([0-9])', 'nth-last-child([0-9])',
+# 'nth-last-of-type([0-9])', 'nth-of-type([0-9])',
+pseudo_classes = {
+    'active', 'checked', 'disabled', 'empty', 'enabled', 'first-child', 'first-of-type', 'focus', 'hover',
+    'in-range', 'invalid', 'last-child', 'last-of-type', 'link', 'only-child',
+    'optional', 'out-of-range', 'read-only', 'read-write', 'required', 'root', 'target', 'valid', 'visited',
+}
+pseudo_elements = {'after', 'before', 'first-letter', 'first-line', 'selection', }
 
 # Markdown
 clashing_alias_markdown = __data_library.clashing_alias_markdown

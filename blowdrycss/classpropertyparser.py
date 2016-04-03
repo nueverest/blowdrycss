@@ -54,7 +54,8 @@ from re import findall
 # plugins
 from cssutils import parseString
 # custom
-from blowdrycss.datalibrary import ordered_property_dict, property_alias_dict, property_regex_dict
+from blowdrycss.datalibrary import ordered_property_dict, property_alias_dict, property_regex_dict, \
+    pseudo_classes, pseudo_elements
 from blowdrycss.utilities import deny_empty_or_whitespace
 from blowdrycss.cssvalueparser import CSSPropertyValueParser
 
@@ -227,7 +228,7 @@ class ClassPropertyParser(object):
             - Classes that use css property names or aliases must set a property value.
 
         **Valid:**
-            - ``font-weight-700`` is valid because ``700`` is a valid property value.
+            - ``font-weight-700`` is valid because ``700`` is a valid ``font-weight`` value.
             - ``fw-700`` is valid because it ``fw-`` is a valid alias for ``font-weight``
             - ``bold`` is valid because the ``bold`` alias implies a property name of ``font-weight``
 
@@ -272,6 +273,121 @@ class ClassPropertyParser(object):
 
         # No match found.
         return ''
+
+    @staticmethod
+    def is_pseudo_class(property_name='', css_class=''):
+        """ Returns True if the CSS class contains a the pseudo class designator ``-1c-``, and False otherwise.
+
+        **Rules**
+
+        - Pseudo-Class designator is ``-1c-`` which means 1 Colon (:).
+
+        - The ``css_class`` must begin with <property_name> + <designator>. Example prefix: ``color-1c-``
+
+        - The ``css_class`` must be longer than the prefix.
+
+        :type css_class: str
+
+        :param css_class: This value may or may not be identical to the property_value.
+        :return: *bool* -- Returns True if the CSS class contains a the pseudo class designator ``-1c-``,
+            and False otherwise.
+
+        """
+        designator = '-1c-'
+        prefix = property_name + designator
+        return True if css_class.startswith(prefix) and len(css_class) > len(prefix) else False
+
+    @staticmethod
+    def is_pseudo_element(property_name='', css_class=''):
+        """ Returns True if the CSS class contains a the pseudo element designator ``-2c-``, and False otherwise.
+
+        **Rules**
+
+        - Pseudo-Element designator is ``-2c-`` which means 2 Colons (::).
+
+        - The ``css_class`` must begin with <property_name> + <designator>. Example prefix: ``color-1c-``
+
+        - The ``css_class`` must be longer than the prefix.
+
+        :type css_class: str
+
+        :param css_class: This value may or may not be identical to the property_value.
+        :return: *bool* -- Returns True if the CSS class contains a the pseudo element designator ``-1c-``,
+            and False otherwise.
+
+        """
+        designator = '-2c-'
+        prefix = property_name + designator
+        return True if css_class.startswith(prefix) and len(css_class) > len(prefix) else False
+
+    def get_pseudo_class(self, css_class=''):
+        """ Check the pseudo class set for a match. Returns the pseudo class if found. Otherwise, returns ''.
+
+        :type css_class: str
+
+        :param css_class: This value may or may not be identical to the property_value.
+        :return: *str* -- Returns the pseudo class found or ''.
+
+        """
+        if self.is_pseudo_class(css_class=css_class):
+            for pseudo_class in pseudo_classes:
+                if pseudo_class in css_class:
+                    return pseudo_class
+        return ''
+
+    def get_pseudo_element(self, css_class=''):
+        """ Check the pseudo element set for a match. Returns the pseudo element if found. Otherwise, returns ''.
+
+        :type css_class: str
+
+        :param css_class: This value may or may not be identical to the property_value.
+        :return: *str* -- Returns the pseudo element found or ''.
+
+        """
+        if self.is_pseudo_element(css_class=css_class):
+            for pseudo_element in pseudo_elements:
+                if pseudo_element in css_class:
+                    return pseudo_element
+        return ''
+
+    def get_pseudo_item(self, property_name='', css_class=''):
+        """ Checks for CSS pseudo classes or elements and returns the pseudo item found or ''.
+
+        List of all pseudo items: http://www.w3schools.com/css/css_pseudo_classes.asp
+
+        Rules:
+
+        - Pseudo-Class designator is ``-1c-`` which means 1 Colon.
+
+        - Pseudo-Element designator is ``-2c-`` which means 2 Colons.
+
+        - Class Format
+          ``<property name>-<pseudo designator>-<pseudo item>-<property value>-<optional media>-<optional priority>``
+          e.g. color-1c-hover-blue
+
+        :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
+
+        :type property_name: str
+        :type css_class: str
+
+        :param property_name: Presumed to match a key or value in the ``property_alias_dict``.
+        :param css_class: This value may or may not be identical to the property_value.
+
+        :return: *str* -- Returns the pseudo item found or ''.
+
+        """
+        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
+        deny_empty_or_whitespace(string=property_name, variable_name='property_name')
+
+        pseudo_class = self.get_pseudo_class(css_class=css_class)
+        if pseudo_class:
+            return pseudo_class
+
+        pseudo_element = self.get_pseudo_element(css_class=css_class)
+        if pseudo_element:
+            return pseudo_element
+
+        return ''       # No match found
 
     @staticmethod
     def strip_property_name(property_name='', css_class=''):
