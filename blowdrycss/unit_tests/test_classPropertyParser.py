@@ -113,25 +113,64 @@ class TestClassPropertyParser(TestCase):
             self.assertTrue(class_parser.is_pseudo_class(property_names[i], valid_input), msg=valid_input)
 
     def test_is_pseudo_class_False(self):
-        invalid_inputs = ('-1c-hover-blue', 'pa-1c-active-10rem-i', 'bgc-1c-', 'margin-2c-10-medium-up')
+        invalid_inputs = ('-1c-hover-blue', 'pa-1c-active-10rem-i', 'bgc-1c-', 'margin-2c-after-10-medium-up')
         property_names = ('color', 'padding', 'bgc', 'margin')
         class_parser = ClassPropertyParser(class_set=set())
         for i, invalid_input in enumerate(invalid_inputs):
             self.assertFalse(class_parser.is_pseudo_class(property_names[i], invalid_input), msg=invalid_input)
 
     def test_is_pseudo_element_True(self):
-        valid_inputs = ('color-2c-hover-blue', 'padding-2c-active-10rem-i', 'bgc-2c-visited-h048')
+        valid_inputs = ('color-2c-after-blue', 'padding-2c-before-10rem-i', 'bgc-2c-selection-h048')
         property_names = ('color', 'padding', 'bgc', )
         class_parser = ClassPropertyParser(class_set=set())
         for i, valid_input in enumerate(valid_inputs):
             self.assertTrue(class_parser.is_pseudo_element(property_names[i], valid_input), msg=valid_input)
 
     def test_is_pseudo_element_False(self):
-        invalid_inputs = ('-2c-hover-blue', 'pa-2c-active-10rem-i', 'bgc-2c-', 'margin-1c-10-medium-up')
+        invalid_inputs = ('-2c-after-blue', 'pa-2c-before-10rem-i', 'bgc-2c-', 'margin-1c-hover-10-medium-up')
         property_names = ('color', 'padding', 'bgc', 'margin')
         class_parser = ClassPropertyParser(class_set=set())
         for i, invalid_input in enumerate(invalid_inputs):
             self.assertFalse(class_parser.is_pseudo_element(property_names[i], invalid_input), msg=invalid_input)
+
+    def test_get_pseudo_class(self):
+        valid_inputs = ('color-1c-hover-blue', 'padding-1c-active-10rem-i', 'bgc-1c-visited-h048')
+        property_names = ('color', 'padding', 'bgc', )
+        expected_classes = ('hover', 'active', 'visited', )
+        class_parser = ClassPropertyParser(class_set=set())
+        for i, valid_input in enumerate(valid_inputs):
+            self.assertEqual(
+                class_parser.get_pseudo_class(property_names[i], valid_input),
+                expected_classes[i],
+                msg=valid_input + " != " + expected_classes[i]
+            )
+
+    def test_get_pseudo_element(self):
+        valid_inputs = ('color-2c-after-blue', 'padding-2c-before-10rem-i', 'bgc-2c-selection-h048')
+        property_names = ('color', 'padding', 'bgc', )
+        expected_elements = ('after', 'before', 'selection', )
+        class_parser = ClassPropertyParser(class_set=set())
+        for i, valid_input in enumerate(valid_inputs):
+            self.assertEqual(
+                class_parser.get_pseudo_element(property_names[i], valid_input),
+                expected_elements[i],
+                msg=valid_input + " != " + expected_elements[i]
+            )
+
+    def test_get_pseudo_item(self):
+        valid_inputs = (
+            'color-1c-hover-blue', 'padding-1c-active-10rem-i', 'bgc-1c-visited-h048',
+            'color-2c-after-blue', 'padding-2c-before-10rem-i', 'bgc-2c-selection-h048',
+        )
+        property_names = ('color', 'padding', 'bgc', 'color', 'padding', 'bgc', )
+        expected_items = ('hover', 'active', 'visited', 'after', 'before', 'selection', )
+        class_parser = ClassPropertyParser(class_set=set())
+        for i, valid_input in enumerate(valid_inputs):
+            self.assertEqual(
+                class_parser.get_pseudo_item(property_names[i], valid_input),
+                expected_items[i],
+                msg=valid_input + " != " + expected_items[i] + ' actual: ' + class_parser.get_pseudo_item(property_names[i], valid_input)
+            )
 
     def test_strip_property_name_matching(self):
         property_name = 'font-weight'

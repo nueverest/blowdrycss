@@ -320,7 +320,7 @@ class ClassPropertyParser(object):
         prefix = property_name + designator
         return True if css_class.startswith(prefix) and len(css_class) > len(prefix) else False
 
-    def get_pseudo_class(self, css_class=''):
+    def get_pseudo_class(self, property_name='', css_class=''):
         """ Check the pseudo class set for a match. Returns the pseudo class if found. Otherwise, returns ''.
 
         :type css_class: str
@@ -329,13 +329,13 @@ class ClassPropertyParser(object):
         :return: *str* -- Returns the pseudo class found or ''.
 
         """
-        if self.is_pseudo_class(css_class=css_class):
+        if self.is_pseudo_class(property_name=property_name, css_class=css_class):
             for pseudo_class in pseudo_classes:
                 if pseudo_class in css_class:
                     return pseudo_class
         return ''
 
-    def get_pseudo_element(self, css_class=''):
+    def get_pseudo_element(self, property_name='', css_class=''):
         """ Check the pseudo element set for a match. Returns the pseudo element if found. Otherwise, returns ''.
 
         :type css_class: str
@@ -344,7 +344,7 @@ class ClassPropertyParser(object):
         :return: *str* -- Returns the pseudo element found or ''.
 
         """
-        if self.is_pseudo_element(css_class=css_class):
+        if self.is_pseudo_element(property_name=property_name, css_class=css_class):
             for pseudo_element in pseudo_elements:
                 if pseudo_element in css_class:
                     return pseudo_element
@@ -379,11 +379,11 @@ class ClassPropertyParser(object):
         deny_empty_or_whitespace(string=css_class, variable_name='css_class')
         deny_empty_or_whitespace(string=property_name, variable_name='property_name')
 
-        pseudo_class = self.get_pseudo_class(css_class=css_class)
+        pseudo_class = self.get_pseudo_class(property_name=property_name, css_class=css_class)
         if pseudo_class:
             return pseudo_class
 
-        pseudo_element = self.get_pseudo_element(css_class=css_class)
+        pseudo_element = self.get_pseudo_element(property_name=property_name, css_class=css_class)
         if pseudo_element:
             return pseudo_element
 
