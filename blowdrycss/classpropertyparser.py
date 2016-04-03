@@ -71,6 +71,8 @@ class ClassPropertyParser(object):
         self.importance_designator = '-i'       # '-i' is used to designate that the priority level is '!important'
         self.removed_class_set = set()
         self.class_set = class_set
+        self.has_pseudo_class = False
+        self.has_pseudo_element = False
         self.clean_class_set()
         # print('clean ran')
 
@@ -274,54 +276,62 @@ class ClassPropertyParser(object):
         # No match found.
         return ''
 
+    # @staticmethod
+    # def has_pseudo_class(property_name='', css_class=''):
+    #     """ Returns True if the CSS class contains a the pseudo class designator ``-1c-``, and False otherwise.
+    #
+    #     **Rules**
+    #
+    #     - Pseudo-Class designator is ``-1c-`` which means 1 Colon (:).
+    #
+    #     - The ``css_class`` must begin with <property_name> + <designator>. Example prefix: ``color-1c-``
+    #
+    #     - The ``css_class`` must be longer than the prefix.
+    #
+    #     :type css_class: str
+    #
+    #     :param css_class: This value may or may not be identical to the property_value.
+    #     :return: *bool* -- Returns True if the CSS class contains a the pseudo class designator ``-1c-``,
+    #         and False otherwise.
+    #
+    #     """
+    #     designator = '-1c-'
+    #     prefix = property_name + designator
+    #     return True if css_class.startswith(prefix) and len(css_class) > len(prefix) else False
+    #
     @staticmethod
-    def is_pseudo_class(property_name='', css_class=''):
-        """ Returns True if the CSS class contains a the pseudo class designator ``-1c-``, and False otherwise.
+    def is_valid_pseudo_format(property_name='', pseudo_item='', css_class=''):
+        """ Returns True if the CSS class contains a properly formatted pseudo class or element, and False otherwise.
 
         **Rules**
 
-        - Pseudo-Class designator is ``-1c-`` which means 1 Colon (:).
-
-        - The ``css_class`` must begin with <property_name> + <designator>. Example prefix: ``color-1c-``
+        - The ``css_class`` must begin with property_name + '-' + pseudo_item + '-'. Example prefix: ``color-hover-``
 
         - The ``css_class`` must be longer than the prefix.
 
+        :type property_name: str
+        :type pseudo_item: str
         :type css_class: str
 
-        :param css_class: This value may or may not be identical to the property_value.
-        :return: *bool* -- Returns True if the CSS class contains a the pseudo class designator ``-1c-``,
-            and False otherwise.
-
-        """
-        designator = '-1c-'
-        prefix = property_name + designator
-        return True if css_class.startswith(prefix) and len(css_class) > len(prefix) else False
-
-    @staticmethod
-    def is_pseudo_element(property_name='', css_class=''):
-        """ Returns True if the CSS class contains a the pseudo element designator ``-2c-``, and False otherwise.
-
-        **Rules**
-
-        - Pseudo-Element designator is ``-2c-`` which means 2 Colons (::).
-
-        - The ``css_class`` must begin with <property_name> + <designator>. Example prefix: ``color-1c-``
-
-        - The ``css_class`` must be longer than the prefix.
-
-        :type css_class: str
-
+        :param property_name: Presumed to match a key or value in the ``property_alias_dict``.
+        :param pseudo_item: Either a pseudo class or pseudo element as defined
+            `here <http://www.w3schools.com/css/css_pseudo_classes.asp>`__
         :param css_class: This value may or may not be identical to the property_value.
         :return: *bool* -- Returns True if the CSS class contains a the pseudo element designator ``-1c-``,
             and False otherwise.
 
         """
-        designator = '-2c-'
-        prefix = property_name + designator
+        if property_name.endswith('-'):
+            prefix = property_name + pseudo_item + '-'
+        else:
+            prefix = property_name + '-' + pseudo_item + '-'
+
         return True if css_class.startswith(prefix) and len(css_class) > len(prefix) else False
 
     def get_pseudo_class(self, property_name='', css_class=''):
         """ Check the pseudo class set for a match. Returns the pseudo class if found. Otherwise, returns ''.
+
+        Set ``has_pseudo_class`` True if a valid pseudo class is found. Otherwise, set it to False.
 
         :type css_class: str
 
@@ -329,25 +339,31 @@ class ClassPropertyParser(object):
         :return: *str* -- Returns the pseudo class found or ''.
 
         """
-        if self.is_pseudo_class(property_name=property_name, css_class=css_class):
-            for pseudo_class in pseudo_classes:
-                if pseudo_class in css_class:
-                    return pseudo_class
+        for pseudo_class in pseudo_classes:
+            if pseudo_class in css_class and self.is_valid_pseudo_format(property_name, pseudo_class, css_class):
+                self.has_pseudo_class = True
+                return pseudo_class
+
+        self.has_pseudo_class = False
         return ''
 
     def get_pseudo_element(self, property_name='', css_class=''):
         """ Check the pseudo element set for a match. Returns the pseudo element if found. Otherwise, returns ''.
 
+        :type property_name: str
         :type css_class: str
 
+        :param property_name: Presumed to match a key or value in the ``property_alias_dict``.
         :param css_class: This value may or may not be identical to the property_value.
         :return: *str* -- Returns the pseudo element found or ''.
 
         """
-        if self.is_pseudo_element(property_name=property_name, css_class=css_class):
-            for pseudo_element in pseudo_elements:
-                if pseudo_element in css_class:
-                    return pseudo_element
+        for pseudo_element in pseudo_elements:
+            if pseudo_element in css_class and self.is_valid_pseudo_format(property_name, pseudo_element, css_class):
+                self.has_pseudo_element = True
+                return pseudo_element
+
+        self.has_pseudo_element = False
         return ''
 
     def get_pseudo_item(self, property_name='', css_class=''):
