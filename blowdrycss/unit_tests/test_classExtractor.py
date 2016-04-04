@@ -88,7 +88,8 @@ class TestClassExtractor(TestCase):
 
     def test_class_set_html(self):
         expected_class_set = {
-            'c-blue', 'text-align-center', 'padding-10', 'margin-20', 'hide', 'display-960-up-i',
+            'c-blue', 'text-align-center', 'padding-10', 'padding-10-s', 'margin-20', 'hide', 'display-960-up-i',
+            'c-red-i-hover',
             # Embedded <script></script>
             'addclass1', 'addclass2', 'addclass3', 'addclass4', 'addclass5', 'addclass6',
         }
@@ -165,6 +166,7 @@ class TestClassExtractor(TestCase):
     def test_integration_class_set_html(self):
         expected_class_set = {
             'c-blue', 'text-align-center', 'padding-10', 'margin-20', 'hide', 'display-960-up-i',
+            'padding-10-s', 'c-red-i-hover',
             # Embedded <script></script>
             'addclass1', 'addclass2', 'addclass3', 'addclass4', 'addclass5', 'addclass6',
         }
