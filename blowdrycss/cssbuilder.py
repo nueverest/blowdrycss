@@ -1,5 +1,6 @@
 # python 2
 from __future__ import absolute_import, print_function, unicode_literals
+from builtins import str
 # builtins
 import logging
 # plugins
@@ -64,11 +65,7 @@ class CSSBuilder(object):
             try:
                 css_property = Property(name=name, value=value, priority=priority)
                 if css_property.valid:
-                    css_class = '.' + css_class                         # prepend dot selector to class name.
-
-                    # TODO: BuildSelector
-
-                    selector = Selector(css_class)
+                    selector = self.build_selector(str(css_class))
                     css_rule = CSSStyleRule(selectorText=selector.selectorText, style=css_property.cssText)
                     self.css_rules.add(css_rule)
                 else:
@@ -87,6 +84,34 @@ class CSSBuilder(object):
             self.property_parser.removed_class_set.add(invalid_css_class + reasons[i])
 
         self.build_stylesheet()
+
+    def build_selector(self, css_class=''):
+        """ Builds a CSS selector by prepending a ``'.'`` to ``css_class``, and appending an optional pseudo item.
+
+        **Rules**
+
+        - Always append a ``'.'`` to ``css_class``.
+
+        - If a pseudo class is found append ``':' + pseuedo_class`` to ``css_class``.
+
+        - If a pseudo element is found append ``'::' + pseudo_element`` to ``css_class``.
+
+        :type css_class: str
+
+        :param css_class: This value may or may not be identical to the property_value.
+        :return: *str* -- The selector with a '.' prepended and an option pseudo item appended.
+
+        """
+        css_class = '.' + self.property_parser.strip_pseudo_item(css_class)
+
+        if self.property_parser.pseudo_class:
+            selector = Selector(css_class + ':' + self.property_parser.pseudo_class)
+        elif self.property_parser.pseudo_element:
+            selector = Selector(css_class + '::' + self.property_parser.pseudo_element)
+        else:
+            selector = Selector(css_class)
+
+        return selector
 
     def build_stylesheet(self):
         """ Builds the stylesheet by adding CSS rules to the CSS stylesheet.

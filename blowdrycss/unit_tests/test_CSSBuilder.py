@@ -19,6 +19,18 @@ change_settings_for_testing()
 
 
 class TestCSSStyleBuilder(TestCase):
+    def test_build_selector(self):
+        css_classes = ('padding-10-i-hover', 'color-hfff-before', 'width-1rem-s-selection', 'color-red-checked',)
+        expected_selector_text = (
+            '.padding-10-i:hover', '.color-hfff::before', '.width-1rem-s::selection', '.color-red:checked',
+        )
+        property_parser = ClassPropertyParser(class_set=set())
+        style_builder = CSSBuilder(property_parser=property_parser)
+
+        for i, css_class in enumerate(css_classes):
+            selector = style_builder.build_selector(css_class=css_class)
+            self.assertEqual(selector.selectorText, expected_selector_text[i])
+
     def test_get_css_text_sets(self):
         # TODO: Check back at bitbucket cssutils to see if a resolution is available.
         # 'rem' units are raise an error in cssutils.css.CSSStyleRule.

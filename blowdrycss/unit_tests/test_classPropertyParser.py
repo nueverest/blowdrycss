@@ -292,8 +292,12 @@ class TestClassPropertyParser(TestCase):
 
     def test_get_property_value_valid_patterns(self):
         property_name = 'color'
-        encoded_property_values = ['green', 'h0ff48f', 'hfff', 'rgba-255-0-0-0_5', 'hsla-120-60p-70p-0_3']
-        expected_property_values = ['green', '#0ff48f', '#fff', 'rgba(255, 0, 0, 0.5)', 'hsla(120, 60%, 70%, 0.3)']
+        encoded_property_values = (
+            'green', 'h0ff48f', 'hfff', 'rgba-255-0-0-0_5', 'hsla-120-60p-70p-0_3', 'blue', 'hf8f8f8',
+        )
+        expected_property_values = (
+            'green', '#0ff48f', '#fff', 'rgba(255, 0, 0, 0.5)', 'hsla(120, 60%, 70%, 0.3)', 'blue', '#f8f8f8',
+        )
         for i, value in enumerate(encoded_property_values):
             css_class = property_name + '-' + value
             class_parser = ClassPropertyParser(class_set={css_class})
@@ -319,13 +323,17 @@ class TestClassPropertyParser(TestCase):
             self.assertRaises(ValueError, class_parser.get_property_value, invalid, 'c-lime')
             self.assertRaises(ValueError, class_parser.get_property_value, 'color', invalid)
 
-    def test_is_important(self):
-        expected_true = 'p-10-i'
+    def test_is_important_True(self):
+        expected_true = ('p-10-i', 'c-green-i-hover')
+        class_parser = ClassPropertyParser(class_set=set())
+        for valid in expected_true:
+            self.assertTrue(class_parser.is_important(css_class=valid), msg=valid)
+
+    def test_is_important_False(self):
         expected_false = 'height-50'
         class_parser = ClassPropertyParser(class_set=set())
-        self.assertTrue(class_parser.is_important(css_class=expected_true))
         self.assertFalse(class_parser.is_important(css_class=expected_false))
-    
+
     def test_is_important_raise_value_error(self):
         invalid_inputs = ['', '      ']
         class_parser = ClassPropertyParser(class_set=set())
@@ -350,7 +358,7 @@ class TestClassPropertyParser(TestCase):
 
     def test_get_property_priority_important(self):
         expected_property_priority = 'important'
-        class_set = {'font-weight-bold-i', 'font-weight-700-i', 'bold-i', 'normal-i'}
+        class_set = {'font-weight-bold-i', 'font-weight-700-i', 'bold-i', 'normal-i-hover', 'padding-10-i-after', }
         class_parser = ClassPropertyParser(class_set=class_set)
         for css_class in class_parser.class_set:
             property_priority = class_parser.get_property_priority(css_class=css_class)
@@ -358,7 +366,7 @@ class TestClassPropertyParser(TestCase):
 
     def test_get_property_priority_not_important(self):
         expected_property_priority = ''
-        class_set = {'font-weight-bold', 'font-weight-700', 'bold', 'normal'}
+        class_set = {'font-weight-bold', 'font-weight-700', 'bold', 'normal-hover', 'padding-10-after', }
         class_parser = ClassPropertyParser(class_set=class_set)
         for css_class in class_parser.class_set:
             property_priority = class_parser.get_property_priority(css_class=css_class)

@@ -432,8 +432,8 @@ class ClassPropertyParser(object):
 
         """
         css_class = self.strip_property_name(property_name, css_class)
-        css_class = self.strip_pseudo_item(css_class)
         css_class = self.strip_property_abbreviation(property_name, css_class)
+        css_class = self.strip_pseudo_item(css_class)
         encoded_property_value = self.strip_priority_designator(css_class)
         return encoded_property_value
 
@@ -503,7 +503,7 @@ class ClassPropertyParser(object):
         ValueError
 
         """
-        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
+        css_class = self.strip_pseudo_item(css_class=css_class)
         return css_class.endswith(self.importance_designator)
 
     def strip_priority_designator(self, css_class=''):
@@ -529,8 +529,6 @@ class ClassPropertyParser(object):
         ValueError
 
         """
-        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
-
         if self.is_important(css_class=css_class):
             return css_class[:-len(self.importance_designator)]
         else:
@@ -559,7 +557,6 @@ class ClassPropertyParser(object):
         ValueError
 
         """
-        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
         css_class = self.strip_pseudo_item(css_class=css_class)
         return 'important' if self.is_important(css_class=css_class) else ''
 
