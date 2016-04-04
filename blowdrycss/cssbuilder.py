@@ -3,7 +3,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 # builtins
 import logging
 # plugins
-from cssutils.css import Property, CSSStyleRule, CSSStyleSheet
+from cssutils.css import Selector, Property, CSSStyleRule, CSSStyleSheet
 from xml.dom import SyntaxErr
 # custom
 from blowdrycss.classpropertyparser import ClassPropertyParser
@@ -65,7 +65,11 @@ class CSSBuilder(object):
                 css_property = Property(name=name, value=value, priority=priority)
                 if css_property.valid:
                     css_class = '.' + css_class                         # prepend dot selector to class name.
-                    css_rule = CSSStyleRule(selectorText=css_class, style=css_property.cssText)
+
+                    # TODO: BuildSelector
+
+                    selector = Selector(css_class)
+                    css_rule = CSSStyleRule(selectorText=selector.selectorText, style=css_property.cssText)
                     self.css_rules.add(css_rule)
                 else:
                     invalid_css_classes.append(css_class)

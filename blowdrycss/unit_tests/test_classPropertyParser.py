@@ -107,15 +107,14 @@ class TestClassPropertyParser(TestCase):
 
     def test_is_valid_pseudo_format_True(self):
         valid_inputs = (
-            'color-hover-blue', 'padding-active-10rem-i', 'bgc-visited-h048',
-            'color-after-red', 'padding-before-20rem-i', 'bgc-selection-h096',
+            'color-blue-hover', 'padding-10rem-i-active', 'bgc-h048-visited',
+            'color-red-after', 'padding-20rem-i-before', 'bgc-h096-selection',
         )
         pseudo_items = ('hover', 'active', 'visited', 'after', 'before', 'selection', )
-        property_names = ('color', 'padding', 'bgc-', 'color', 'padding', 'bgc-', )
         class_parser = ClassPropertyParser(class_set=set())
         for i, valid_input in enumerate(valid_inputs):
             self.assertTrue(
-                class_parser.is_valid_pseudo_format(property_names[i], pseudo_items[i], valid_input),
+                    class_parser.is_valid_pseudo_format(pseudo_items[i], valid_input),
                 msg=valid_input
             )
     
@@ -124,52 +123,37 @@ class TestClassPropertyParser(TestCase):
             '-hover-blue', 'pa-active-10rem-i', 'bgc-', 'margin-10-medium-up',
             '-after-blue', 'pa-before-10rem-i', 'bgc-', 'width-10-small-up'
         )
-        pseudo_items = ('hover', 'active', '', '', 'after', 'before', '', '')
-        property_names = ('color', 'padding', 'bgc-', 'margin', 'color', 'padding', 'bgc-', 'width')
+        pseudo_items = ('hover', 'active', 'invalid', 'invalid', 'after', 'before', 'invalid', 'invalid')
         class_parser = ClassPropertyParser(class_set=set())
         for i, invalid_input in enumerate(invalid_inputs):
             self.assertFalse(
-                class_parser.is_valid_pseudo_format(property_names[i], pseudo_items[i], invalid_input),
+                    class_parser.is_valid_pseudo_format(pseudo_items[i], css_class=invalid_input),
                 msg=invalid_input
             )
 
     def test_get_pseudo_class(self):
-        valid_inputs = ('color-hover-blue', 'padding-active-10rem-i', 'bgc-visited-h048')
-        property_names = ('color', 'padding', 'bgc-', )
+        valid_inputs = ('color-blue-hover', 'padding-10rem-i-active', 'bgc-h048-visited')
         expected_classes = ('hover', 'active', 'visited', )
         class_parser = ClassPropertyParser(class_set=set())
         for i, valid_input in enumerate(valid_inputs):
-            self.assertEqual(
-                class_parser.get_pseudo_class(property_names[i], valid_input),
-                expected_classes[i],
-                msg=valid_input + " != " + expected_classes[i]
-            )
-            self.assertTrue(class_parser.has_pseudo_class)
+            class_parser.set_pseudo_class(css_class=valid_input)
+            self.assertEqual(class_parser.pseudo_class, expected_classes[i])
 
     def test_get_pseudo_class_ValueError(self):
         class_parser = ClassPropertyParser(class_set=set())
-        self.assertRaises(ValueError, class_parser.get_pseudo_class, '', '')
-        self.assertRaises(ValueError, class_parser.get_pseudo_class, 'a', '')
-        self.assertRaises(ValueError, class_parser.get_pseudo_class, '', 'a')
+        self.assertRaises(ValueError, class_parser.set_pseudo_class, '')
 
     def test_get_pseudo_element(self):
-        valid_inputs = ('color-after-blue', 'padding-before-10rem-i', 'bgc-selection-h048')
-        property_names = ('color', 'padding', 'bgc-', )
-        expected_elements = ('after', 'before', 'selection', )
+        valid_inputs = ('color-blue-after', 'padding-10rem-i-before', 'bgc-h048-selection', 'color-hfff-before')
+        expected_elements = ('after', 'before', 'selection', 'before')
         class_parser = ClassPropertyParser(class_set=set())
         for i, valid_input in enumerate(valid_inputs):
-            self.assertEqual(
-                class_parser.get_pseudo_element(property_names[i], valid_input),
-                expected_elements[i],
-                msg=valid_input + " != " + expected_elements[i]
-            )
-            self.assertTrue(class_parser.has_pseudo_element)
+            class_parser.set_pseudo_element(css_class=valid_input)
+            self.assertEqual(class_parser.pseudo_element, expected_elements[i])
 
     def test_get_pseudo_element_ValueError(self):
         class_parser = ClassPropertyParser(class_set=set())
-        self.assertRaises(ValueError, class_parser.get_pseudo_element, '', '')
-        self.assertRaises(ValueError, class_parser.get_pseudo_element, 'a', '')
-        self.assertRaises(ValueError, class_parser.get_pseudo_element, '', 'b')
+        self.assertRaises(ValueError, class_parser.set_pseudo_element, '')
 
     def test_strip_property_name_matching(self):
         property_name = 'font-weight'
@@ -201,24 +185,28 @@ class TestClassPropertyParser(TestCase):
 
     def test_strip_pseudo_item(self):
         pseudo_items = ('hover', 'before', 'selection', )
-        css_classes = ('hover-10-i', 'before-hfff', 'selection-1rem-s', )
-        expected = ('10-i', 'hfff', '1rem-s', )
+        css_classes = ('padding-10-i-hover', 'color-hfff-before', 'width-1rem-s-selection', )
+        expected = ('padding-10-i', 'color-hfff', 'width-1rem-s', )
         class_parser = ClassPropertyParser(class_set=set())
 
         for i, pseudo_item in enumerate(pseudo_items):
-            actual = class_parser.strip_pseudo_item(pseudo_item=pseudo_item, css_class=css_classes[i])
+            class_parser.set_pseudo_class(css_classes[i])
+            class_parser.set_pseudo_element(css_classes[i])
+            actual = class_parser.strip_pseudo_item(css_class=css_classes[i])
             self.assertEqual(expected[i], actual)
 
     def test_strip_pseudo_item_not_matching(self):
-        pseudo_item = 'hover'
         css_class = 'padding-10-i'
         class_parser = ClassPropertyParser(class_set=set())
-        result = class_parser.strip_pseudo_item(pseudo_item=pseudo_item, css_class=css_class)
+        class_parser.set_pseudo_class(css_class)
+        class_parser.set_pseudo_element(css_class)
+        result = class_parser.strip_pseudo_item(css_class=css_class)
         self.assertEqual(result, css_class)     # css_class should remain unchanged.
 
     def test_strip_pseudo_item_empty(self):
+        empty_class = ''
         class_parser = ClassPropertyParser(class_set=set())
-        self.assertRaises(ValueError, class_parser.strip_pseudo_item, '', '')
+        self.assertRaises(ValueError, class_parser.strip_pseudo_item, empty_class)
 
     def test_strip_encoded_property_name_valueerror(self):
         invalid_inputs = ['', '      ']
@@ -283,9 +271,9 @@ class TestClassPropertyParser(TestCase):
         # 'fw-bold-i' --> 'bold'                [abbreviated font-weight property_name]
         # 'padding-1-10-10-5-i' --> '1-10-10-5' [standard property_name]
         # 'height-7_25rem-i' --> '7_25rem'      [contains underscores]
-        property_names = ['font-weight', 'padding', 'height']
-        css_classes = ['fw-bold-i', 'padding-1-10-10-5-i', 'height-7_25rem-i']
-        expected_encoded_property_values = ['bold', '1-10-10-5', '7_25rem']
+        property_names = ['font-weight', 'padding', 'height', 'width', 'background-color', ]
+        css_classes = ['fw-bold-i', 'padding-1-10-10-5-i', 'height-7_25rem-i', 'width-50cm-s-i', 'bgc-red-i-hover', ]
+        expected_encoded_property_values = ['bold', '1-10-10-5', '7_25rem', '50cm-s', 'red', ]
         class_parser = ClassPropertyParser(class_set=set())
 
         for i, css_class in enumerate(css_classes):
@@ -293,7 +281,7 @@ class TestClassPropertyParser(TestCase):
                 property_name=property_names[i],
                 css_class=css_class
             )
-            self.assertEqual(encoded_property_value, expected_encoded_property_values[i], msg=property_names)
+            self.assertEqual(encoded_property_value, expected_encoded_property_values[i], msg=encoded_property_value)
 
     def test_get_encoded_property_value_invalid_raise_value_error(self):
         invalid_inputs = ['', '      ']

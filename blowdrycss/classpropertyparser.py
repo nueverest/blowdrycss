@@ -69,8 +69,8 @@ class ClassPropertyParser(object):
         self.sheet = parseString(css)
         self.rules = []
         self.importance_designator = '-i'       # '-i' is used to designate that the priority level is '!important'
-        self.has_pseudo_class = False
-        self.has_pseudo_element = False
+        self.pseudo_class = ''
+        self.pseudo_element = ''
         self.removed_class_set = set()
         self.class_set = class_set
         self.clean_class_set()
@@ -277,83 +277,6 @@ class ClassPropertyParser(object):
         return ''
 
     @staticmethod
-    def is_valid_pseudo_format(property_name='', pseudo_item='', css_class=''):
-        """ Returns True if the CSS class contains a properly formatted pseudo class or element, and False otherwise.
-
-        **Rules**
-
-        - The ``css_class`` must begin with property_name + '-' + pseudo_item + '-'. Example prefix: ``color-hover-``
-
-        - The ``css_class`` must be longer than the prefix.
-
-        :type property_name: str
-        :type pseudo_item: str
-        :type css_class: str
-
-        :param property_name: Presumed to match a key or value in the ``property_alias_dict``.
-        :param pseudo_item: Either a pseudo class or pseudo element as defined
-            `here <http://www.w3schools.com/css/css_pseudo_classes.asp>`__
-        :param css_class: This value may or may not be identical to the property_value.
-        :return: *bool* -- Returns True if the CSS class contains a the pseudo element designator ``-1c-``,
-            and False otherwise.
-
-        """
-        if property_name.endswith('-'):
-            prefix = property_name + pseudo_item + '-'
-        else:
-            prefix = property_name + '-' + pseudo_item + '-'
-
-        return True if css_class.startswith(prefix) and len(css_class) > len(prefix) else False
-
-    def get_pseudo_class(self, property_name='', css_class=''):
-        """ Check the pseudo class set for a match. Returns the pseudo class if found. Otherwise, returns ''.
-
-        Set ``has_pseudo_class`` True if a valid pseudo class is found. Otherwise, set it to False.
-
-        :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
-
-        :type property_name: str
-        :type css_class: str
-
-        :param property_name: Presumed to match a key or value in the ``property_alias_dict``.
-        :param css_class: This value may or may not be identical to the property_value.
-        :return: *str* -- Returns the pseudo class found or ''.
-
-        """
-        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
-        deny_empty_or_whitespace(string=property_name, variable_name='property_name')
-
-        for pseudo_class in pseudo_classes:
-            if pseudo_class in css_class and self.is_valid_pseudo_format(property_name, pseudo_class, css_class):
-                self.has_pseudo_class = True
-                return pseudo_class
-        self.has_pseudo_class = False
-        return ''
-
-    def get_pseudo_element(self, property_name='', css_class=''):
-        """ Check the pseudo element set for a match. Returns the pseudo element if found. Otherwise, returns ''.
-
-        :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
-
-        :type property_name: str
-        :type css_class: str
-
-        :param property_name: Presumed to match a key or value in the ``property_alias_dict``.
-        :param css_class: This value may or may not be identical to the property_value.
-        :return: *str* -- Returns the pseudo element found or ''.
-
-        """
-        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
-        deny_empty_or_whitespace(string=property_name, variable_name='property_name')
-
-        for pseudo_element in pseudo_elements:
-            if pseudo_element in css_class and self.is_valid_pseudo_format(property_name, pseudo_element, css_class):
-                self.has_pseudo_element = True
-                return pseudo_element
-        self.has_pseudo_element = False
-        return ''
-
-    @staticmethod
     def strip_property_name(property_name='', css_class=''):
         """
         Strip property name from css_class if applicable and return the css_class.
@@ -387,44 +310,6 @@ class ClassPropertyParser(object):
         if css_class.startswith(property_name):                     # Strip property name
             return css_class[len(property_name):]
         else:                                                       # If it doesn't have a property name ignore it.
-            return css_class
-
-    @staticmethod
-    def strip_pseudo_item(pseudo_item='', css_class=''):
-        """ Strip property name from css_class if applicable and return the css_class.
-
-        *Note:* This method must be called after ``strip_property_name()``.
-
-        :raises ValueError: If either pseudo_item or css_class are empty or only contain whitespace values.
-
-        :type pseudo_item: str
-        :type css_class: str
-
-        :param pseudo_item: Presumed to match an item in ``datalibrary.pseudo_classes`` or
-            ``datalibrary.pseudo_elements``.
-        :param css_class: This value may or may not be identical to the property_value.
-        :return: (str) -- Returns the encoded property value portion of the css_class.
-
-        **Examples:**
-
-        >>> ClassPropertyParser.strip_pseudo_item('hover', 'hover-1-2-1-2')
-        '1-2-1-2'
-        >>> ClassPropertyParser.strip_pseudo_item('before', 'before-bold')
-        'bold'
-        >>> ClassPropertyParser.strip_pseudo_item('', 'after-1-2-1-2')
-        ValueError
-        >>> ClassPropertyParser.strip_pseudo_item('active', '    ')
-        ValueError
-
-        """
-        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
-        deny_empty_or_whitespace(string=pseudo_item, variable_name='pseudo_item')
-
-        pseudo_item += '-'                                          # Append '-' to property to match the class format.
-
-        if css_class.startswith(pseudo_item):                       # Strip pseudo item
-            return css_class[len(pseudo_item):]
-        else:                                                       # If it doesn't have a pseudo item ignore it.
             return css_class
 
     @staticmethod
@@ -547,6 +432,7 @@ class ClassPropertyParser(object):
 
         """
         css_class = self.strip_property_name(property_name, css_class)
+        css_class = self.strip_pseudo_item(css_class)
         css_class = self.strip_property_abbreviation(property_name, css_class)
         encoded_property_value = self.strip_priority_designator(css_class)
         return encoded_property_value
@@ -674,4 +560,109 @@ class ClassPropertyParser(object):
 
         """
         deny_empty_or_whitespace(string=css_class, variable_name='css_class')
+        css_class = self.strip_pseudo_item(css_class=css_class)
         return 'important' if self.is_important(css_class=css_class) else ''
+
+    @staticmethod
+    def is_valid_pseudo_format(pseudo_item='', css_class=''):
+        """ Returns True if the CSS class contains a properly formatted pseudo class or element, and False otherwise.
+
+        **Rules**
+
+        - The ``css_class`` must end with '-' + pseudo_item. Example prefix: ``color-green-i-hover``
+
+        - The ``css_class`` must be longer than the suffix.
+
+        :type pseudo_item: str
+        :type css_class: str
+
+        :param pseudo_item: Either a pseudo class or pseudo element as defined
+            `here <http://www.w3schools.com/css/css_pseudo_classes.asp>`__
+        :param css_class: This value may or may not be identical to the property_value.
+        :return: *bool* -- Returns True if the CSS class contains the pseudo item, and False otherwise.
+
+        """
+        deny_empty_or_whitespace(string=pseudo_item, variable_name='pseudo_item')
+        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
+
+        suffix = '-' + pseudo_item
+        return True if css_class.endswith(suffix) and len(css_class) > len(suffix) else False
+
+    def set_pseudo_class(self, css_class=''):
+        """ Check the pseudo class set for a match. Sets ``pseudo_class`` if found. Otherwise, returns ''.
+
+        Set ``has_pseudo_class`` True if a valid pseudo class is found. Otherwise, set it to False.
+
+        :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
+
+        :type css_class: str
+
+        :param css_class: This value may or may not be identical to the property_value.
+        :return: None
+
+        """
+        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
+
+        self.pseudo_class = ''
+        for pseudo_class in pseudo_classes:
+            if self.is_valid_pseudo_format(pseudo_class, css_class):
+                self.pseudo_class = pseudo_class
+
+    def set_pseudo_element(self, css_class=''):
+        """ Check the pseudo element set for a match. Sets the ``pseudo_element`` if found. Otherwise, returns ''.
+
+        :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
+
+        :type css_class: str
+
+        :param css_class: This value may or may not be identical to the property_value.
+        :return: None
+
+        """
+        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
+
+        self.pseudo_element = ''
+        for pseudo_element in pseudo_elements:
+            if self.is_valid_pseudo_format(pseudo_element, css_class):
+                self.pseudo_element = pseudo_element
+
+    def strip_pseudo_item(self, css_class=''):
+        """ Strip property name from css_class if applicable and return the css_class.
+
+        *Note:* This method must be called after ``strip_property_name()``.
+
+        :raises ValueError: If either pseudo_item or css_class are empty or only contain whitespace values.
+
+        :type css_class: str
+
+        :param css_class: This value may or may not be identical to the property_value.
+        :return: (str) -- Returns the encoded property value portion of the css_class.
+
+        **Examples:**
+
+        >>> ClassPropertyParser.strip_pseudo_item('hover-padding-1-2-1-2')
+        '1-2-1-2'
+        >>> ClassPropertyParser.strip_pseudo_item('before-bold')
+        'bold'
+        >>> ClassPropertyParser.strip_pseudo_item('after-1-2-1-2')
+        ValueError
+        >>> ClassPropertyParser.strip_pseudo_item('    ')
+        ValueError
+
+        """
+        deny_empty_or_whitespace(string=css_class, variable_name='css_class')
+
+        self.set_pseudo_class(css_class=css_class)
+        self.set_pseudo_element(css_class=css_class)
+
+        if self.pseudo_class:                                       # Prepend '-' to property to match the class format.
+            pseudo_item = '-' + self.pseudo_class
+        elif self.pseudo_element:
+            pseudo_item = '-' + self.pseudo_element
+        else:                                                       # No pseudo encoding found.
+            return css_class
+
+        if css_class.endswith(pseudo_item):                         # Strip pseudo item
+            return css_class.replace(pseudo_item, '')
+        else:                                                       # If it doesn't have a pseudo item ignore it.
+            return css_class
