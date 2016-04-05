@@ -102,7 +102,10 @@ class CSSBuilder(object):
         :return: *str* -- The selector with a '.' prepended and an option pseudo item appended.
 
         """
-        css_class = '.' + self.property_parser.strip_pseudo_item(css_class)
+        self.property_parser.set_pseudo_class(css_class)
+        self.property_parser.set_pseudo_element(css_class)
+
+        css_class = '.' + css_class
 
         if self.property_parser.pseudo_class:
             selector = Selector(css_class + ':' + self.property_parser.pseudo_class)
