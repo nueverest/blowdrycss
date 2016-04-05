@@ -25,11 +25,12 @@ class TestMediaQueryBuilder(TestCase):
             'font-size-AA-s',                                                               # invalid property value
             'height-150px', 'valign-middle', 'font-size-48',
             'b', 'cue-x5_0p', 'hide', 'padding-b1 a5 c1% e5', 'margin-1a% 10x% 3q% 1mp3',
+            'display-720-down',
         }
         expected_clean_set = {
             'margin-top-50px-xlarge-down', 'small-up', 'giant-only-i', 'display-large-down',
             'text-align-center-medium-down', 'bold-small-only', 'color-hfff-xsmall-only',
-            'font-size-13-s-i', 'font-size-48em-s',
+            'font-size-13-s-i', 'font-size-48em-s', 'display-720-down',
         }
         expected_removed_set = {
             'width-100-xxlarge-down-s (Breakpoint and scaling media query syntax cannot be combined.)',
@@ -61,6 +62,7 @@ class TestMediaQueryBuilder(TestCase):
             'text-align-center-medium-down',
             'bold-small-only',
             'color-hfff-xsmall-only',
+            'display-720-up',
 
             'font-size-13-s-i',
             'font-size-48em-s',
@@ -149,6 +151,13 @@ class TestMediaQueryBuilder(TestCase):
                 '}\n\n' +
                 '@media only screen and (max-width: 30.0em) {\n' +
                 '\t.padding-16-s-i { padding: 0.8em !important; }\n' +
+                '}\n\n'
+            ),
+            (
+                '@media only screen and (max-width: 45.0em) {\n' +
+                '\t.display-720-up {\n' +
+                '\t\tdisplay: none;\n' +
+                '\t}\n' +
                 '}\n\n'
             ),
         }

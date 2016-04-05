@@ -381,12 +381,19 @@ class BreakpointParser(object):
         'bold'
 
         """
+        # Keyed Breakpoint cases
         pair = self.breakpoint_key + self.limit_key
-        case1 = 'display' + pair == self.css_class
-        case2 = pair[1:] == self.css_class
-        case3 = pair[1:] + '-i' == self.css_class
+        if self.css_class.startswith('display' + pair):
+            return True
+        if self.css_class.startswith(pair[1:]):
+            return True
 
-        return case1 or case2 or case3
+        # Custom Breakpoint case
+        try:
+            custom = 'display' + self.breakpoint_dict['custom']['breakpoint'] + self.limit_key
+            return self.css_class.startswith(custom)
+        except TypeError:
+            return False
 
     def css_for_only(self):
         """ Generates css
@@ -539,7 +546,7 @@ class BreakpointParser(object):
             upper_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key])
 
             # Special 'display' usage case min/max reverse logic. Does not apply to 'custom' case.
-            if self.is_display() and not self.breakpoint_key == 'custom':
+            if self.is_display():# and not self.breakpoint_key == 'custom':
                 css = (
                     '@media only screen and (min-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
@@ -613,7 +620,7 @@ class BreakpointParser(object):
             lower_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key])
 
             # Special 'display' usage case min/max reverse logic. Does not apply to 'custom' case.
-            if self.is_display() and not self.breakpoint_key == 'custom':
+            if self.is_display():# and not self.breakpoint_key == 'custom':
                 css = (
                     '@media only screen and (max-width: ' + lower_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
