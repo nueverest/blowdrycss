@@ -171,7 +171,8 @@ class TestBreakpointParser(TestCase):
     def test_is_display_False(self):
         invalid_css_classes = (
             'inline-small-up', 'inline-giant-down', 'green-xxsmall-only', 'padding-10-large-up',
-            'padding-25-820-up', 'margin-5-2-5-2-1000-up', )
+            'padding-25-820-up', 'margin-5-2-5-2-1000-up',
+        )
         names = ('display', 'display', 'color', 'padding', 'padding', 'margin', )
         values = ('inline', 'inline', 'green', '10', '25', '5-2-5-2', )
 

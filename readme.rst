@@ -13,14 +13,19 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.1.8** -- Enable the creation of custom breakpoints e.g. padding--25--820--up, display--480--down,
-  margin--5--2--5--2--1000--up, display--960--up--i, display--3_2rem--down.  Class parser now allows for
-  CamelCase text in findall().  This is especially necessary for ASP.NET applications that define classes using
-  the notation ``CssClass="color-h979591 bold heading--1"``.
-|
-| **0.1.9** -- Fixed a major python 2.7 import error that prevented imported the correct settings file.
+| **0.1.9** -- Fixed a major python 2.7 import error that prevented importing the correct settings file.
   Added ``absolute_import`` to all modules and unit tests per
   `PEP328 <https://www.python.org/dev/peps/pep-0328/#rationale-for-absolute-imports>`__.
+|
+| **0.2.0** -- Fixed an error that occurred with the ``display`` property was used with custom breakpoints.
+  Enabled the use of `pseudo classes and pseudo elements <http://www.w3schools.com/css/css_pseudo_elements.asp>`__.
+
+  For example: ::
+
+  'color-blue-hover', 'padding-10rem-i-active', 'bgc-h048-visited', 'color-red-after', 'padding-20rem-i-before',
+  'bgc-h096-selection'
+
+  Note that pseudo classes with parenthesis are excluded. Also, chaining pseudo items together is not implemented.
 |
 
 Why the name blowdrycss?
