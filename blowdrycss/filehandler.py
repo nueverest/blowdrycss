@@ -52,7 +52,7 @@ class FileFinder(object):
             self.set_file_dict()
             logging.debug(msg='File Types:' + ', '.join(settings.file_types))
             logging.debug(msg='Project Directory:' + str(project_directory))
-            print('\nProject Files Found:')
+            logging.debug('\nProject Files Found:')
             self.print_collection(self.files)
         else:
             raise OSError(project_directory + ' is not a directory.')
@@ -69,8 +69,8 @@ class FileFinder(object):
 
         """
         for item in collection:
-            print(str(item))        # Python 2 requires str().
-        print(' ')                  # Add a blank line
+            logging.debug(str(item))        # Python 2 requires str().
+        logging.debug(' ')                  # Add a blank line
 
     def set_files(self):
         """
