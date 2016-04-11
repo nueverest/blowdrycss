@@ -61,6 +61,8 @@ class TestDataLibrary(TestCase):
 
     def test_autogen_property_alias_dict(self):
         expected_dict = {
+            'all': set(),
+            'align-items': {'ai-', 'align-i-'},
             'outline': {'out-'}, 'border-left-width': {'blw-', 'border-l-width-'},
             'counter-reset': {'cr-', 'counter-r-'}, 'counter-increment': {'counter-i-', 'ci-'},
             'cue-before': {'cb-', 'cue-b-'}, 'text-decoration': {'td-', 'text-d-'},
@@ -118,7 +120,7 @@ class TestDataLibrary(TestCase):
         self.assertEqual(
                 self.data_library.property_alias_dict,
                 expected_dict,
-                msg=expected_dict
+                msg=self.data_library.property_alias_dict
         )
 
     def test_merge_dictionaries(self):
@@ -217,6 +219,8 @@ class TestDataLibrary(TestCase):
     def test_default_property_alias_dict(self):
         self.maxDiff = None
         expected = {
+            'all': set(),
+            'align-items': {'ai-', 'align-i-', },
             'min-width': {'min-w-'}, 'speak': {'spell-out'}, 'width': {'w-'},
             'page-break-inside': {'page-b-inside-', 'pbi-'}, 'padding-right': {'padding-r-'}, 'outline': {'out-'},
             'margin-right': {'mr-', 'margin-r-'}, 'speak-numeral': {'digits', 'speak-n-', 'sn-', 'continuous'},
@@ -293,11 +297,14 @@ class TestDataLibrary(TestCase):
             'padding-top': {'p-top-', 'padding-t-', 'pt-'}, 'max-width': {'max-w-'}, 'background': {'bg-', 'bac-'},
             'border-bottom-style': {'border-b-style-', 'bbs-'},
             'text-transform': {'tt-', 'text-t-', 'uppercase', 'capitalize', 'lowercase'},
-            'display': {'block', 'list-item', 'table-header-group', 'table-caption', 'inline', 'table-column-group',
-                        'table-row', 'inline-block', 'inline-table', 'table', 'table-cell', 'dis-',
-                        'table-footer-group', 'table-row-group', 'table-column',
-                        'xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge',
-                        'giant', 'xgiant', 'xxgiant',},
+            'display': {
+                'block', 'list-item', 'flex', 'inline-flex', 'run-in',
+                'table-header-group', 'table-caption', 'inline', 'table-column-group',
+                'table-row', 'inline-block', 'inline-table', 'table', 'table-cell', 'dis-',
+                'table-footer-group', 'table-row-group', 'table-column',
+                'xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge',
+                'giant', 'xgiant', 'xxgiant',
+            },
             'border-top-color': {'btc-', 'border-t-color-'}, 'letter-spacing': {'letter-s-'},
             'border-radius': set(),
             'border-top-left-radius': {'btl-', 'border-t-left-radius-'},

@@ -17,7 +17,7 @@ Version Changelog
   Added ``absolute_import`` to all modules and unit tests per
   `PEP328 <https://www.python.org/dev/peps/pep-0328/#rationale-for-absolute-imports>`__.
 |
-| **0.2.0** -- Fixed an error that occurred with the ``display`` property was used with custom breakpoints.
+| **0.2.0** -- Fixed an error that occurred when the ``display`` property was used with custom breakpoints.
   Enabled the use of `pseudo classes and pseudo elements <http://www.w3schools.com/css/css_pseudo_elements.asp>`__.
 
   For example: ::
