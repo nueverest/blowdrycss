@@ -128,10 +128,13 @@
 
       For example: ::
 
-      'color-blue-hover', 'padding-10rem-i-active', 'bgc-h048-visited', 'color-red-after', 'padding-20rem-i-before',
-      'bgc-h096-selection'
+        'color-blue-hover', 'padding-10rem-i-active', 'bgc-h048-visited', 'color-red-after', 'padding-20rem-i-before',
+        'bgc-h096-selection'
 
-      Note that pseudo classes with parenthesis are excluded. Also, chaining pseudo items together is not implemented.
+    | Note that pseudo classes with parenthesis are excluded. Also, chaining pseudo items together is not implemented.
+      Replaced the print statements in FileHandler with logging.debug to increase efficiency.
+      Added ``'flex', 'inline-flex', and 'run-in'`` to ``display`` key in ``datalibrary.property_value_as_alias_dict``.
+      Added ``'all' and 'align-items'`` properties.
     |
 
 """

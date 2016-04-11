@@ -181,7 +181,8 @@ class DataLibrary(object):
             'cursor': {'crosshair', 'default', 'pointer', 'move', 'e-resize', 'ne-resize', 'nw-resize', 'n-resize',
                        'se-resize', 'sw-resize', 's-resize', 'w-resize', 'text', 'wait', 'help', 'progress', },
             'direction': {'ltr', 'rtl'},
-            'display': {'inline', 'block', 'list-item', 'inline-block', 'table', 'inline-table', 'table-row-group',
+            'display': {'inline', 'block', 'flex', 'list-item', 'inline-block', 'inline-flex', 'run-in',
+                        'table', 'inline-table', 'table-row-group',
                         'table-header-group', 'table-footer-group', 'table-row', 'table-column-group', 'table-column',
                         'table-cell', 'table-caption',
                         'xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge',
@@ -218,7 +219,8 @@ class DataLibrary(object):
         }
 
         self.property_names = {
-            'azimuth', 'background', 'background-attachment', 'background-color', 'background-image',
+            'all', 'align-items', 'azimuth',
+            'background', 'background-attachment', 'background-color', 'background-image',
             'background-position', 'background-repeat', 'border', 'border-bottom', 'border-bottom-color',
             'border-bottom-style', 'border-bottom-width', 'border-collapse', 'border-color', 'border-left',
             'border-left-color', 'border-left-style', 'border-left-width', 'border-right', 'border-right-color',

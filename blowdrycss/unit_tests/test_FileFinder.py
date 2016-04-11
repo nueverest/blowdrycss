@@ -22,35 +22,35 @@ class TestFileFinder(TestCase):
 
     # Reference:
     # http://stackoverflow.com/questions/4219717/how-to-assert-output-with-nosetest-unittest-in-python#answer-4220278
-    def test_print_collection1(self):
-        expected_output = 'test1\ntest2'
-        project_directory = unittest_file_path()
-        file_finder = FileFinder(project_directory=project_directory)
-        collection1 = ['test1', 'test2']
-        saved_stdout = sys.stdout
-        try:
-            out = StringIO()
-            sys.stdout = out
-            file_finder.print_collection(collection1)
-            output = out.getvalue().strip()
-            self.assertEqual(output, expected_output)
-        finally:
-            sys.stdout = saved_stdout
-
-    def test_print_collection2(self):
-        expected_output = 'test1\ntest2'
-        project_directory = unittest_file_path()
-        file_finder = FileFinder(project_directory=project_directory)
-        collection2 = ('test1', 'test2')
-        saved_stdout = sys.stdout
-        try:
-            out = StringIO()
-            sys.stdout = out
-            file_finder.print_collection(collection2)
-            output = out.getvalue().strip()
-            self.assertEqual(output, expected_output)
-        finally:
-            sys.stdout = saved_stdout
+    # def test_print_collection1(self):
+    #     expected_output = 'test1\ntest2'
+    #     project_directory = unittest_file_path()
+    #     file_finder = FileFinder(project_directory=project_directory)
+    #     collection1 = ['test1', 'test2']
+    #     saved_stdout = sys.stdout
+    #     try:
+    #         out = StringIO()
+    #         sys.stdout = out
+    #         file_finder.print_collection(collection1)
+    #         output = out.getvalue().strip()
+    #         self.assertEqual(output, expected_output)
+    #     finally:
+    #         sys.stdout = saved_stdout
+    #
+    # def test_print_collection2(self):
+    #     expected_output = 'test1\ntest2'
+    #     project_directory = unittest_file_path()
+    #     file_finder = FileFinder(project_directory=project_directory)
+    #     collection2 = ('test1', 'test2')
+    #     saved_stdout = sys.stdout
+    #     try:
+    #         out = StringIO()
+    #         sys.stdout = out
+    #         file_finder.print_collection(collection2)
+    #         output = out.getvalue().strip()
+    #         self.assertEqual(output, expected_output)
+    #     finally:
+    #         sys.stdout = saved_stdout
 
     def test_set_files(self):
         expected_files = {
