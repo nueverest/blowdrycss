@@ -15,6 +15,11 @@
         Background color is green.
     </div>
 
+    <div Class='bgc-pink'>
+        Class Capitalized<br>
+        Single Quotes used
+    </div>
+
     <%--Case Insensitivity Check + CssClass Check--%>
     <asp:LinkButton ID="lbTableContent1" runat="server" CssClass="color-h979591">Course Dashboard</asp:LinkButton>
 

@@ -35,7 +35,7 @@ class TestClassParser(TestCase):
     def test_build_class_set(self):
         # integration test
         expected_class_set = {
-            'row', 'bgc-green', 'padding-top-30', 'padding-bottom-30', 'color-h979591',
+            'row', 'bgc-green', 'padding-top-30', 'padding-bottom-30', 'bgc-pink', 'color-h979591',
             'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1',
             'padding-25-820-up', 'margin-5-2-5-2-1000-up',
             # Embedded <script></script>

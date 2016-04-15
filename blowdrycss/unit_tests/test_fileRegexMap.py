@@ -71,11 +71,11 @@ class TestFileRegexMap(TestCase):
         expected_dicts = [
             {
                 'sub_regexes': (r'<%.*?%>', ) + sub_html,
-                'findall_regexes': (r'class="(.*?)"', ) + findall_regex_js,
+                'findall_regexes': (r'class=[\'"](.*?)["\']', ) + findall_regex_js,
             },
             {
                 'sub_regexes': (r'{.*?}?}', ) + sub_html,
-                'findall_regexes': (r'class="(.*?)"', ) + findall_regex_js,
+                'findall_regexes': (r'class=[\'"](.*?)["\']', ) + findall_regex_js,
             },
         ]
         file_paths = [unittest_file_path('test_aspx', 'test.aspx'), unittest_file_path('test_jinja', 'test.jinja2')]

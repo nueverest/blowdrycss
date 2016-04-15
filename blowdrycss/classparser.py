@@ -112,7 +112,7 @@ class FileRegexMap(object):
             sub_dotnet = (r'<%.*?%>', ) + sub_html
             sub_ruby = (r'<%.*?%>', ) + sub_html
 
-            class_regex = (r'class="(.*?)"', )                                  # general 'class' case
+            class_regex = (r'class=[\'"](.*?)["\']', )                          # general 'class' case
 
             findall_regex_js = (
                 r'.classList.add\(\s*[\'"](.*?)["\']\s*\)',

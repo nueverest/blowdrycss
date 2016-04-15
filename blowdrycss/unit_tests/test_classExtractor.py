@@ -37,7 +37,7 @@ class TestClassExtractor(TestCase):
 
     def test_raw_class_list_aspx(self):
         expected_raw_class_list = [
-            ' row bgc-green padding-top-30 padding-bottom-30', 'color-h979591',
+            ' row bgc-green padding-top-30 padding-bottom-30', 'bgc-pink', 'color-h979591',
             'row padding-top-30 padding-bottom-30 ', 'row padding-top-30 padding-bottom-30 ', 'row padding-25-820-up ',
             # Embedded <script></script>
             'jquery1', 'jquery2', 'jquery3', 'jquery4 jquery5', 'jquery6 jquery7', 'jquery8',
@@ -100,7 +100,7 @@ class TestClassExtractor(TestCase):
 
     def test_class_set_aspx(self):
         expected_class_set = {
-            'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green', 'color-h979591', 'padding-25-820-up',
+            'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green', 'bgc-pink', 'color-h979591', 'padding-25-820-up',
             # Embedded <script></script>
             'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
             'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',
@@ -177,7 +177,7 @@ class TestClassExtractor(TestCase):
 
     def test_integration_class_set_aspx(self):
         expected_class_set = {
-            'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green', 'color-h979591', 'padding-25-820-up',
+            'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green', 'bgc-pink', 'color-h979591', 'padding-25-820-up',
             # Embedded <script></script>
             'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
             'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',
