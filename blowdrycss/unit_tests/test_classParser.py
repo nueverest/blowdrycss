@@ -61,6 +61,9 @@ class TestClassParser(TestCase):
             'hide', 'small-6', 'columns', 'border-right-width-2',
             'incorrect-class-25', 'squirrel',
             'material-icons', 'large-3', 'xlarge-2', 'vertical-align-middle', 'padding-bottom-17',
+            'orange', 'h000', 'margin-top-10', 'margin-bottom-72',
+            # Attributes.Add("class", ...)
+            'pink', 'xsmall-only', 'height-12', 'width-100p', 'inline',
         }
         settings.file_types = ('*.cs', )                                            # Override file_types
         project_directory = unittest_file_path()

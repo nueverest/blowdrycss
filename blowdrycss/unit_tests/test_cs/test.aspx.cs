@@ -84,6 +84,21 @@ public partial class individual_courses_courseplay : System.Web.UI.Page
                 pnContentList.Visible = true;
 
                 string strVideoCd = dt.Rows[0]["currVideoCd"].ToObjectString();
+
+                // CssClass Pattern source: http://stackoverflow.com/questions/3742010/add-css-class-to-a-div-in-code-behind
+                continuousPlayDiv.CssClass="orange";
+                continuousPlayDiv.CssClass = strVideoCd + ' h000 ';
+                continuousPlayDiv.CssClass = " margin-top-10 margin-bottom-72 ";
+
+                // .Attributes.Add("class", ...) cases
+                BtnventCss.Attributes.Add("class", "pink");
+                BtnventCss.Attributes.Add(
+                    "class",
+                    "xsmall-only"
+                );
+                BtnventCss.Attributes.Add( "class", strVideoCd + ' height-12 ' );
+                BtnventCss.Attributes.Add("class"," width-100p inline ");
+
                 if (strVideoCd != "Coming Soon")
                 {
                     lbDisplayVideo.Text = (

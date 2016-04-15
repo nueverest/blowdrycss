@@ -51,6 +51,7 @@ class TestClassExtractor(TestCase):
 
     def test_raw_class_list_cs(self):
         expected_raw_class_list = [
+            # class=*
             'font-size-14', 'large-up', 'padding-bottom-2', 'white-hover',
             'hide small-6 columns border-right-width-2',
             'material-icons vertical-align-middle padding-bottom-2',
@@ -59,8 +60,13 @@ class TestClassExtractor(TestCase):
             'material-icons vertical-align-middle padding-bottom-2',
             'squirrel', 'padding-bottom-17',
             'material-icons vertical-align-middle padding-bottom-2',
+            'orange',   # In this case 'orange' appears twice as it is detected by both regexes.
             # iframe concatentation case returns empty string
             '',
+            # CssClass
+            'orange', ' h000 ', ' margin-top-10 margin-bottom-72 ',
+            # Attributes.Add("class", ...)
+            'pink', 'xsmall-only', ' height-12 ', ' width-100p inline ',
         ]
         cs_file = unittest_file_path('test_cs', 'test.aspx.cs')
         class_extractor = ClassExtractor(file_path=cs_file)
@@ -131,10 +137,15 @@ class TestClassExtractor(TestCase):
 
     def test_class_set_cs(self):
         expected_class_set = {
+            # class=*
             'font-size-14', 'large-up', 'padding-bottom-2', 'white-hover',
             'hide', 'small-6', 'columns', 'border-right-width-2',
             'incorrect-class-25', 'squirrel',
             'material-icons', 'large-3', 'xlarge-2', 'vertical-align-middle', 'padding-bottom-17',
+            # CssClass
+            'orange', 'h000', 'margin-top-10', 'margin-bottom-72',
+            # Attributes.Add("class", ...)
+            'pink', 'xsmall-only', 'height-12', 'width-100p', 'inline',
         }
         cs_file = unittest_file_path('test_cs', 'test.aspx.cs')
         class_extractor = ClassExtractor(file_path=cs_file)
@@ -220,10 +231,15 @@ class TestClassExtractor(TestCase):
 
     def test_integration_class_set_cs(self):
         expected_class_set = {
+            # class=*
             'font-size-14', 'large-up', 'padding-bottom-2', 'white-hover',
             'hide', 'small-6', 'columns', 'border-right-width-2',
             'incorrect-class-25', 'squirrel',
             'material-icons', 'large-3', 'xlarge-2', 'vertical-align-middle', 'padding-bottom-17',
+            # CssClass
+            'orange', 'h000', 'margin-top-10', 'margin-bottom-72',
+            # Attributes.Add("class", ...)
+            'pink', 'xsmall-only', 'height-12', 'width-100p', 'inline',
         }
         cs_file = unittest_file_path('test_cs', 'test.aspx.cs')
         class_extractor = ClassExtractor(file_path=cs_file)

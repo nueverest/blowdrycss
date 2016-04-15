@@ -109,7 +109,7 @@ class FileRegexMap(object):
             sub_html = (r'<!--.*?-->', ) + sub_js
             sub_jinja = (r'{.*?}?}', ) + sub_html
             sub_django = (r'{.*?}?}', ) + sub_html
-            sub_csharp = (r'//.*?\n', r'\n', r'/\*.*?\*/', )                          # Remove CS Comments.
+            sub_csharp = (r'//.*?\n', r'\n', r'/\*.*?\*/', )                    # Remove CS Comments.
             sub_dotnet = (r'<%.*?%>', ) + sub_html
             sub_ruby = (r'<%.*?%>', ) + sub_html
 
@@ -122,6 +122,11 @@ class FileRegexMap(object):
                 r'.getElementsByClassName\(\s*[\'"](.*?)["\']\s*\)',
                 r'.setAttribute\(\s*.*?,\s*[\'"](.*?)["\']\s*\)',
                 js_substring + r'\(\s*[\'"](.*?)["\']\s*\)',                    # Find cases designated by js_substring.
+            )
+
+            findall_regex_cs = class_regex + (
+                r'.CssClass\s*\+?=\s*.*?\+?[\'"](.*?)["\']',
+                r'.Attributes.Add\(\s*[\'"]class["\'],\s*.*?[\'"](.*?)["\']\s*\)',
             )
 
             findall_regex = class_regex + findall_regex_js
@@ -165,7 +170,7 @@ class FileRegexMap(object):
                 },
                 '.cs': {
                     'sub_regexes': sub_csharp,
-                    'findall_regexes': class_regex,
+                    'findall_regexes': findall_regex_cs,
                 },
                 '.aspx': {
                     'sub_regexes': sub_dotnet,
