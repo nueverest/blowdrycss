@@ -41,7 +41,7 @@ class FileRegexMap(object):
     | ``}`` -- Match with an ending ``}``.
     | ``?}`` -- Optionally allow one more ``}``
 
-    **Supported XHTML, asp.net, and ruby template extensions:** .aspx, .ascx, .master, .erb
+    **Supported XHTML, asp.net, c#, and ruby template extensions:** .aspx, .ascx, .master, .cs, .erb
 
     **XHTML sub_regexes regex explained:**
 
@@ -109,6 +109,7 @@ class FileRegexMap(object):
             sub_html = (r'<!--.*?-->', ) + sub_js
             sub_jinja = (r'{.*?}?}', ) + sub_html
             sub_django = (r'{.*?}?}', ) + sub_html
+            sub_csharp = (r'//.*?\n', r'\n', r'/\*.*?\*/', )                          # Remove CS Comments.
             sub_dotnet = (r'<%.*?%>', ) + sub_html
             sub_ruby = (r'<%.*?%>', ) + sub_html
 
@@ -130,7 +131,7 @@ class FileRegexMap(object):
                     'sub_regexes': sub_js,
                     'findall_regexes': findall_regex,
                 },
-                '.ts': {
+                '.ts': {                                                        # Typescript
                     'sub_regexes': sub_js,
                     'findall_regexes': findall_regex,
                 },
@@ -161,6 +162,10 @@ class FileRegexMap(object):
                 '.djhtml': {
                     'sub_regexes': sub_django,
                     'findall_regexes': findall_regex,
+                },
+                '.cs': {
+                    'sub_regexes': sub_csharp,
+                    'findall_regexes': class_regex,
                 },
                 '.aspx': {
                     'sub_regexes': sub_dotnet,

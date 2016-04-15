@@ -49,6 +49,24 @@ class TestClassExtractor(TestCase):
         actual_raw_class_list = class_extractor.raw_class_list
         self.assertEqual(actual_raw_class_list, expected_raw_class_list)
 
+    def test_raw_class_list_cs(self):
+        expected_raw_class_list = [
+            'font-size-14', 'large-up', 'padding-bottom-2', 'white-hover',
+            'hide small-6 columns border-right-width-2',
+            'material-icons vertical-align-middle padding-bottom-2',
+            'incorrect-class-25',
+            'large-up large-3 xlarge-2 columns',
+            'material-icons vertical-align-middle padding-bottom-2',
+            'squirrel', 'padding-bottom-17',
+            'material-icons vertical-align-middle padding-bottom-2',
+            # iframe concatentation case returns empty string
+            '',
+        ]
+        cs_file = unittest_file_path('test_cs', 'test.aspx.cs')
+        class_extractor = ClassExtractor(file_path=cs_file)
+        actual_raw_class_list = class_extractor.raw_class_list
+        self.assertEqual(actual_raw_class_list, expected_raw_class_list, msg=actual_raw_class_list)
+
     def test_raw_class_list_jinja(self):
         expected_raw_class_list = [
             'purple  padding-left-5', ' squirrel text-align-center margin-5-2-5-2-1000-up', 'large-up  border-1',
@@ -108,6 +126,18 @@ class TestClassExtractor(TestCase):
         }
         aspx_file = unittest_file_path('test_aspx', 'test.aspx')
         class_extractor = ClassExtractor(file_path=aspx_file)
+        actual_class_set = class_extractor.class_set
+        self.assertEqual(actual_class_set, expected_class_set)
+
+    def test_class_set_cs(self):
+        expected_class_set = {
+            'font-size-14', 'large-up', 'padding-bottom-2', 'white-hover',
+            'hide', 'small-6', 'columns', 'border-right-width-2',
+            'incorrect-class-25', 'squirrel',
+            'material-icons', 'large-3', 'xlarge-2', 'vertical-align-middle', 'padding-bottom-17',
+        }
+        cs_file = unittest_file_path('test_cs', 'test.aspx.cs')
+        class_extractor = ClassExtractor(file_path=cs_file)
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
 
@@ -185,6 +215,18 @@ class TestClassExtractor(TestCase):
         }
         aspx_file = unittest_file_path('test_aspx', 'test.aspx')
         class_extractor = ClassExtractor(file_path=aspx_file)
+        actual_class_set = class_extractor.class_set
+        self.assertEqual(actual_class_set, expected_class_set)
+
+    def test_integration_class_set_cs(self):
+        expected_class_set = {
+            'font-size-14', 'large-up', 'padding-bottom-2', 'white-hover',
+            'hide', 'small-6', 'columns', 'border-right-width-2',
+            'incorrect-class-25', 'squirrel',
+            'material-icons', 'large-3', 'xlarge-2', 'vertical-align-middle', 'padding-bottom-17',
+        }
+        cs_file = unittest_file_path('test_cs', 'test.aspx.cs')
+        class_extractor = ClassExtractor(file_path=cs_file)
         actual_class_set = class_extractor.class_set
         self.assertEqual(actual_class_set, expected_class_set)
 

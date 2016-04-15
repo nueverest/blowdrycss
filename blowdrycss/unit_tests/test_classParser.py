@@ -54,6 +54,23 @@ class TestClassParser(TestCase):
         self.assertEqual(class_parser.class_set, expected_class_set, msg=class_parser.class_set)
         settings.file_types = ('*.html', )                                                      # Reset file_types
 
+    def test_build_class_set_CSharp_cs_file(self):
+        # integration test
+        expected_class_set = {
+            'font-size-14', 'large-up', 'padding-bottom-2', 'white-hover',
+            'hide', 'small-6', 'columns', 'border-right-width-2',
+            'incorrect-class-25', 'squirrel',
+            'material-icons', 'large-3', 'xlarge-2', 'vertical-align-middle', 'padding-bottom-17',
+        }
+        settings.file_types = ('*.cs', )                                            # Override file_types
+        project_directory = unittest_file_path()
+        file_finder = FileFinder(project_directory=project_directory)
+        self.assertFalse('.html' in list(file_finder.file_dict), msg=settings.file_types)
+        self.assertTrue('.cs' in list(file_finder.file_dict), msg=settings.file_types)
+        class_parser = ClassParser(file_dict=file_finder.file_dict)
+        self.assertEqual(class_parser.class_set, expected_class_set, msg=class_parser.class_set)
+        settings.file_types = ('*.html', )                                                      # Reset file_types
+
 
 if __name__ == '__main__':
     main()

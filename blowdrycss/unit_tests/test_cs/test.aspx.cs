@@ -90,7 +90,7 @@ public partial class individual_courses_courseplay : System.Web.UI.Page
                         // Test inline comment.
                         // "<div class='flex-video widescreen vimeo margin-bottom-0'>" +
 
-                            // Contrived string concatenation
+                            // Contrived string concatenation NOT HANDLED
                             "<iframe class='" + "vimeo xlarge-only" + "' id='player1' src='//player.vimeo.com/video/"
 
 
