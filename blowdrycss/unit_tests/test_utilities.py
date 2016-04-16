@@ -6,12 +6,12 @@ from builtins import round
 from unittest import TestCase, main
 from os import getcwd, path, removedirs
 import sys
-from io import StringIO
+from io import StringIO, open
 
 # custom
 import blowdrycss.unit_tests.unittest_settings as unittest_settings
 from blowdrycss.utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, unittest_file_path, \
-    change_settings_for_testing, print_css_stats, print_blow_dryer, make_directory
+    change_settings_for_testing, print_css_stats, print_blow_dryer, make_directory, delete_file_paths
 import blowdrycss_settings as settings
 
 change_settings_for_testing()
@@ -237,6 +237,29 @@ class Test_utilities(TestCase):
         make_directory(directory=directory)             # should do nothing
         self.assertTrue(path.isdir(directory))
 
+    def test_delete_file_paths(self):
+        file_paths = (
+            unittest_file_path('test_examplesite', 'file1.html'),
+            unittest_file_path('test_examplesite', 'file2.html'),
+            unittest_file_path('test_examplesite', 'file3.html'),
+        )
+
+        # create files to delete
+        text = 'test123'
+        for file_path in file_paths:
+            with open(file_path, 'wb') as generic_file:
+                generic_file.write(bytearray(text, 'utf-8'))
+
+        # assert they exist
+        for file_path in file_paths:
+            self.assertTrue(path.isfile(file_path))
+
+        # delete them
+        delete_file_paths(file_paths=file_paths)
+
+        # assert they don't exist
+        for file_path in file_paths:
+            self.assertFalse(path.isfile(file_path))
 
 if __name__ == '__main__':
     main()
