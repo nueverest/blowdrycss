@@ -7,16 +7,23 @@ from unittest import TestCase, main
 # custom
 from blowdrycss.filehandler import FileFinder
 from blowdrycss.classparser import ClassParser
-from blowdrycss.utilities import unittest_file_path
+from blowdrycss.utilities import unittest_file_path, delete_file_paths
 import blowdrycss_settings as settings
 
 
 class TestClassParser(TestCase):
     def test_build_file_path_list(self):
-        expected_file_paths = {
+        delete_these = (
             unittest_file_path('test_examplesite', 'clashing_aliases.html'),
             unittest_file_path('test_examplesite', 'modify.html'),
             unittest_file_path('test_examplesite', 'property_aliases.html'),
+        )
+        delete_file_paths(file_paths=delete_these)
+
+        expected_file_paths = {
+            # unittest_file_path('test_examplesite', 'clashing_aliases.html'),
+            # unittest_file_path('test_examplesite', 'modify.html'),
+            # unittest_file_path('test_examplesite', 'property_aliases.html'),
             unittest_file_path('test_generic', 'blowdry.html'),
             unittest_file_path('test_html', 'index.html'),
             unittest_file_path('test_html', 'media_query.html'),
@@ -29,7 +36,10 @@ class TestClassParser(TestCase):
         file_finder = FileFinder(project_directory=project_directory)
         self.assertTrue('.aspx' in list(file_finder.file_dict), msg=settings.file_types)
         class_parser = ClassParser(file_dict=file_finder.file_dict)
-        self.assertEqual(set(class_parser.file_path_list), expected_file_paths, msg=class_parser.file_path_list)
+        self.assertEqual(
+                set(class_parser.file_path_list), expected_file_paths,
+                msg='\n' + str(set(class_parser.file_path_list)) + '\n' + str(expected_file_paths) + '\nsettings: ' + str(settings.html_docs)
+        )
         settings.file_types = ('*.html', )                                                      # Reset file_types
 
     def test_build_class_set(self):

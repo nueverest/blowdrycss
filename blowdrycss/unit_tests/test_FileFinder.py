@@ -3,12 +3,10 @@ from __future__ import absolute_import, unicode_literals
 
 # builtin
 from unittest import TestCase, main
-import sys
-from io import StringIO
 
 # custom
 from blowdrycss.filehandler import FileFinder, FileConverter
-from blowdrycss.utilities import unittest_file_path
+from blowdrycss.utilities import unittest_file_path, delete_file_paths
 import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
@@ -54,9 +52,9 @@ class TestFileFinder(TestCase):
 
     def test_set_files(self):
         expected_files = {
-            unittest_file_path('test_examplesite', 'clashing_aliases.html'),
-            unittest_file_path('test_examplesite', 'property_aliases.html'),
-            unittest_file_path('test_examplesite', 'modify.html'),
+            # unittest_file_path('test_examplesite', 'clashing_aliases.html'),
+            # unittest_file_path('test_examplesite', 'property_aliases.html'),
+            # unittest_file_path('test_examplesite', 'modify.html'),
             unittest_file_path('test_generic', 'blowdry.html'),
             unittest_file_path('test_html', 'index.html'),
             unittest_file_path('test_html', 'test.html'),
@@ -68,11 +66,15 @@ class TestFileFinder(TestCase):
             self.assertTrue(expected_file in file_finder.files)
 
     def test_set_file_dict(self):
+        delete_these = (
+            unittest_file_path('test_examplesite', 'clashing_aliases.html'),
+            unittest_file_path('test_examplesite', 'modify.html'),
+            unittest_file_path('test_examplesite', 'property_aliases.html'),
+        )
+        delete_file_paths(file_paths=delete_these)
+
         valid_dict = {
             '.html': {
-                unittest_file_path('test_examplesite', 'clashing_aliases.html'),
-                unittest_file_path('test_examplesite', 'modify.html'),
-                unittest_file_path('test_examplesite', 'property_aliases.html'),
                 unittest_file_path('test_generic', 'blowdry.html'),
                 unittest_file_path('test_html', 'index.html'),
                 unittest_file_path('test_html', 'test.html'),

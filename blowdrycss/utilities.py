@@ -5,7 +5,7 @@ from builtins import str, round
 # builtins
 from re import search, findall
 from inspect import currentframe
-from os import path, stat, getcwd, makedirs
+from os import path, stat, getcwd, makedirs, remove
 import logging
 
 # custom
@@ -234,3 +234,23 @@ def make_directory(directory=''):
     except OSError:
         if not path.isdir(directory):               # Verify directory existences
             raise OSError(directory + ' is not a directory, and could not be created.')
+
+
+def delete_file_paths(file_paths):
+    """ Delete all file_paths. Use Caution.
+
+    Note::
+
+        Ignores files that do not exist.
+
+    :type file_paths: iterable of strings
+
+    :param file_paths: An iterable containing file path strings.
+    :return: None
+
+    """
+    for file_path in file_paths:
+        try:
+            remove(file_path)
+        except:
+            pass
