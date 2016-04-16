@@ -77,7 +77,7 @@ class Timer(object):
 
         """
         seconds_elapsed = self.end - self.start
-        print('end' + str(self.end) + 'start' +  str(self.start))
+        print('end: ' + str(self.end) + ' start: ' + str(self.start) + ' elapsed: ' + str(seconds_elapsed))
         return self.seconds_to_string(seconds_elapsed=seconds_elapsed)
 
     def print_time(self):
