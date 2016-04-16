@@ -136,6 +136,9 @@
       Added ``'flex', 'inline-flex', and 'run-in'`` to ``display`` key in ``datalibrary.property_value_as_alias_dict``.
       Added ``'all' and 'align-items'`` properties.
     |
+    | **0.2.1** -- Allow single quotes in HTML ``class='green'`` pattern. Enable parsing of ``*.cs`` files for HTML
+      class declarations, CssClass, and ``*Attributes.Add("class", "bold padding-42");``
+    |
 
 """
 __author__ = 'chad nelson'
