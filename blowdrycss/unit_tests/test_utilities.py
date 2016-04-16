@@ -247,7 +247,7 @@ class Test_utilities(TestCase):
         # create files to delete
         text = 'test123'
         for file_path in file_paths:
-            with open(file_path, 'wb') as generic_file:
+            with open(file_path, 'wb+') as generic_file:
                 generic_file.write(bytearray(text, 'utf-8'))
 
         # assert they exist
