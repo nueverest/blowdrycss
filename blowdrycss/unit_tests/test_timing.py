@@ -18,21 +18,21 @@ __project__ = 'blowdrycss'
 
 class TestTiming(TestCase):
     def test_seconds_to_string(self):
-        allowed = set(digits + '.')
         timer = Timer()
+        allowed = set(digits + '.')
         time_string = timer.seconds_to_string(seconds_elapsed=time())
         self.assertTrue(set(time_string) <= allowed)
 
     def test_elapsed_end_set(self):
-        allowed = set(digits + '.')
         timer = Timer()
+        allowed = set(digits + '.')
         timer.end = time()
-        self.assertTrue(set(timer.elapsed) <= allowed, msg=str(set(timer.elapsed)) + '\nAllowed: ' + str(allowed))
+        self.assertTrue(set(timer.elapsed) <= allowed, msg=str(timer.elapsed) + '\nAllowed: ' + str(allowed))
 
     def test_elapsed_end_not_set(self):
-        allowed = set(digits + '.')
         timer = Timer()
-        self.assertTrue(set(timer.elapsed) <= allowed, msg=str(set(timer.elapsed)) + '\nAllowed: ' + str(allowed))
+        allowed = set(digits + '.')
+        self.assertTrue(set(timer.elapsed) <= allowed, msg=str(timer.elapsed) + '\nAllowed: ' + str(allowed))
 
     def test_print_time(self):
         timer = Timer()
