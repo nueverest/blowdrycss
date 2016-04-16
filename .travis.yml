@@ -7,8 +7,6 @@ python:
 # command to install dependencies
 install:
   - python -m pip install --upgrade pip
-  - pip install future
-  - pip install tox
-  - pip install tox-travis
+  - pip install travis_requirements.txt
 # command to run tests
 script: tox
