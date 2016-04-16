@@ -27,12 +27,12 @@ class TestTiming(TestCase):
         allowed = set(digits + '.')
         timer = Timer()
         timer.end = time()
-        self.assertTrue(set(timer.elapsed) <= allowed, msg=str(set(timer.elapsed)) + ' \nAllowed: ' + str(allowed))
+        self.assertTrue(set(timer.elapsed) <= allowed, msg=str(set(timer.elapsed)) + '\nAllowed: ' + str(allowed))
 
     def test_elapsed_end_not_set(self):
         allowed = set(digits + '.')
         timer = Timer()
-        self.assertTrue(set(timer.elapsed) <= allowed, msg=str(set(timer.elapsed)) + ' \nAllowed: ' + str(allowed))
+        self.assertTrue(set(timer.elapsed) <= allowed, msg=str(set(timer.elapsed)) + '\nAllowed: ' + str(allowed))
 
     def test_print_time(self):
         timer = Timer()
