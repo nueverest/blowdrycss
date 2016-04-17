@@ -43,7 +43,7 @@ class TestWatchdogWrapperMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            sleep(0.25)                     # Wait for main() to start.  0.1
+            sleep(2)                     # Wait for main() to start.  0.1
             remove(file_path_to_delete)     # Delete delete.html
             sleep(0.25)                     # IMPORTANT: Must wait for output otherwise test will fail.  0.25
 
@@ -67,9 +67,7 @@ class TestWatchdogWrapperMain(TestCase):
         delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
 
         # Directory must be created for Travis CI case
-        if not path.isdir(test_examplesite):
-            make_directory(test_examplesite)
-
+        make_directory(test_examplesite)
         self.assertTrue(path.isdir(test_examplesite))
 
         # Create file delete.html
