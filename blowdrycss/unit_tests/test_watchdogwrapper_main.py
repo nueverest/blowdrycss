@@ -11,7 +11,7 @@ from time import sleep
 from os import path, remove
 
 # plugins
-from blowdrycss.utilities import unittest_file_path, change_settings_for_testing
+from blowdrycss.utilities import unittest_file_path, change_settings_for_testing, make_directory
 from blowdrycss import watchdogwrapper
 import blowdrycss_settings as settings
 
@@ -37,9 +37,10 @@ class TestWatchdogWrapperMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            sleep(5)                      # Wait for main() to start.
+            sleep(0.25)                      # Wait for main() to start.  0.1
+            self.assertTrue(path.isfile(file_path_to_delete))
             remove(file_path_to_delete)     # Delete delete.html
-            sleep(5)                     # IMPORTANT: Must wait for output otherwise test will fail.
+            sleep(0.25)                     # IMPORTANT: Must wait for output otherwise test will fail.  0.25
 
             output = out.getvalue()
 
@@ -54,13 +55,16 @@ class TestWatchdogWrapperMain(TestCase):
         # Integration test
         logging.basicConfig(level=logging.DEBUG)
         html_text = '<html></html>'
+        test_examplesite = unittest_file_path(folder='test_examplesite', filename='')
+        delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
 
-        directory = unittest_file_path(folder='test_html', filename='')
-        self.assertTrue(path.isdir(directory), msg=directory)
+        # Directory must be created for Travis CI case
+        if not path.isdir(test_examplesite):
+            make_directory(test_examplesite)
 
-        delete_dot_html = unittest_file_path(folder='test_html', filename='delete.html')
+        self.assertTrue(path.isdir(test_examplesite))
 
-        # Create delete.html
+        # Create file delete.html
         with open(delete_dot_html, 'w') as _file:
             _file.write(html_text)
 
@@ -81,9 +85,14 @@ class TestWatchdogWrapperMain(TestCase):
             'blowdry.min.css',
         ]
         html_text = '<html></html>'
+        test_examplesite = unittest_file_path(folder='test_examplesite', filename='')
+        delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
 
-        self.assertTrue(path.isdir(folder='test_html', filename=''))
-        delete_dot_html = unittest_file_path(folder='test_html', filename='delete.html')
+        # Directory must be created for Travis CI case
+        if not path.isdir(test_examplesite):
+            make_directory(test_examplesite)
+
+        self.assertTrue(path.isdir(test_examplesite))
 
         # Create delete.html
         with open(delete_dot_html, 'w') as _file:
