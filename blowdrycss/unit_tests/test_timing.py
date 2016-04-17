@@ -32,8 +32,8 @@ class TestTiming(TestCase):
         self.assertTrue(set(timer.elapsed) <= allowed, msg=str(timer.elapsed) + '\nAllowed: ' + str(allowed))
 
     def test_elapsed_end_not_set(self):
-        # set(str(float(timer.elapsed)) is required to be compatible with Ubuntu.
-        # On windows set(timer.elapsed) is sufficient.
+        # On Ubuntu timer.elapsed is return in scientific notation e.g. '1e-2'
+        # On windows timer.elapsed is return in decimal notation e.g. '0.01'
         timer = Timer()
         allowed = set(digits + '.eE-+')
         self.assertTrue(set(timer.elapsed) <= allowed, msg=str(timer.elapsed) + '\nAllowed: ' + str(allowed))
