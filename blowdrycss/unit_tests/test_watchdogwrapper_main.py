@@ -46,15 +46,8 @@ class TestWatchdogWrapperMain(TestCase):
             while 'Ctrl + C' not in out.getvalue():
                 sleep(0.05)
 
-            #sleep(5)                     # Wait for main() to start.  0.1
-            # Create file delete.html
-            # with open(file_path_to_delete, 'w') as _file:
-            #     _file.write(html_text)
-
-            # self.passing = path.isfile(file_path_to_delete)
-            # self.output = file_path_to_delete
-
-            remove(file_path_to_delete)     # Delete delete.html
+            # Delete the file.
+            remove(file_path_to_delete)
 
             # IMPORTANT: Must wait for output otherwise test will fail.  0.25
             count = 0
@@ -64,8 +57,6 @@ class TestWatchdogWrapperMain(TestCase):
                 else:
                     sleep(0.05)
                     count += 1
-
-            # sleep(1.25)                     # IMPORTANT: Must wait for output otherwise test will fail.  0.25
 
             output = out.getvalue()
 
@@ -94,6 +85,7 @@ class TestWatchdogWrapperMain(TestCase):
         with open(delete_dot_html, 'w') as _file:
             _file.write(html_text)
 
+        # Double check to ensure it got created.
         self.assertTrue(path.isfile(delete_dot_html))
 
         settings.auto_generate = True
