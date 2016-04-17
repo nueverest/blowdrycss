@@ -246,7 +246,7 @@ class Test_utilities(TestCase):
 
         # create files to delete
         text = 'test123'
-        self.assertTrue(path.isdir(unittest_file_path('test_examplesite', '')))
+        make_directory(unittest_file_path('test_examplesite', ''))
 
         for file_path in file_paths:
             with open(file_path, 'wb') as generic_file:
