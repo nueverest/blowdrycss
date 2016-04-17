@@ -5,6 +5,8 @@ Read Me
 
 .. image:: https://img.shields.io/pypi/dm/blowdrycss.svg?maxAge=28?style=plastic   :target: https://pypi.python.org/pypi/blowdrycss
 
+.. image:: https://img.shields.io/travis/nueverest/blowdrycss.svg?maxAge=2592000   :target: https://travis-ci.org/nueverest/blowdrycss
+
 |
 
 `blowdrycss` is a rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
