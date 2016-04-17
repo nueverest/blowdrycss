@@ -19,3 +19,7 @@ install:
 script:
   - tox
   - sudo ls -l
+  - sudo cd blowdrycss
+  - sudo ls -l
+  - sudo cd unit_tests
+  - sudo ls -l
