@@ -176,13 +176,20 @@ class Test_utilities(TestCase):
             'blowdry.min.css: 0.2kB',
             'CSS file size reduced by 67.5%.'
         ]
+
+        # On Travis CI these auto-generated files are inaccessible and need to be recreated.
+        # Change the expected file size reduction percentage since Ubuntu's math is different.
+        # Create directories and CSS files if they do not exist.
         blowdry_css = unittest_file_path('test_examplesite/test_css', 'blowdry.css')
         blowdry_min_css = unittest_file_path('test_examplesite/test_css', 'blowdry.min.css')
 
-
-        # On Travis CI these auto-generated files are inaccessible and need to be recreated.
-        # Create directories and CSS files if they do not exist.
         if not path.isfile(blowdry_css) or not path.isfile(blowdry_min_css):
+            substrings = [
+                'blowdry.css:\t 0.3kB',
+                'blowdry.min.css: 0.2kB',
+                'CSS file size reduced by 71.6%.'
+            ]
+
             blowdry_css_text = '.bgc-hf8f8f8 {\n    background-color: #f8f8f8\n    }\n.border-1px-solid-gray {\n    border: 1px solid gray\n    }\n.padding-5 {\n    padding: 0.3125em\n    }\n.bold {\n    font-weight: bold\n    }\n.talign-center {\n    text-align: center\n    }\n.display-inline {\n    display: inline\n    }'
             blowdry_min_css_text = '.bgc-hf8f8f8{background-color:#f8f8f8}.border-1px-solid-gray{border:1px solid gray}.padding-5{padding:.3125em}.bold{font-weight:bold}.talign-center{text-align:center}.display-inline{display:inline}'
 
