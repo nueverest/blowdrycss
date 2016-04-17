@@ -36,26 +36,36 @@ class TestWatchdogWrapperMain(TestCase):
             'blowdry.min.css',
         ]
         html_text = '<html></html>'
-        # self.assertTrue(path.isfile(file_path_to_delete))       # Ensure file exists before deleting.
 
         saved_stdout = sys.stdout           # Monitor console
         try:
             out = StringIO()
             sys.stdout = out
 
+            # Wait for main() to start.
             while 'Ctrl + C' not in out.getvalue():
                 sleep(0.05)
 
             #sleep(5)                     # Wait for main() to start.  0.1
             # Create file delete.html
-            with open(file_path_to_delete, 'w') as _file:
-                _file.write(html_text)
+            # with open(file_path_to_delete, 'w') as _file:
+            #     _file.write(html_text)
 
-            self.passing = path.isfile(file_path_to_delete)
-            self.output = file_path_to_delete
+            # self.passing = path.isfile(file_path_to_delete)
+            # self.output = file_path_to_delete
 
             remove(file_path_to_delete)     # Delete delete.html
-            sleep(1.25)                     # IMPORTANT: Must wait for output otherwise test will fail.  0.25
+
+            # IMPORTANT: Must wait for output otherwise test will fail.  0.25
+            count = 0
+            while substrings[-1] not in out.getvalue():
+                if count > 100:             # Max wait is 5 seconds.
+                    break
+                else:
+                    sleep(0.05)
+                    count += 1
+
+            # sleep(1.25)                     # IMPORTANT: Must wait for output otherwise test will fail.  0.25
 
             output = out.getvalue()
 
@@ -80,11 +90,11 @@ class TestWatchdogWrapperMain(TestCase):
         make_directory(test_examplesite)
         self.assertTrue(path.isdir(test_examplesite))
 
-        # # Create file delete.html
-        # with open(delete_dot_html, 'w') as _file:
-        #     _file.write(html_text)
-        #
-        # self.assertTrue(path.isfile(delete_dot_html))
+        # Create file delete.html
+        with open(delete_dot_html, 'w') as _file:
+            _file.write(html_text)
+
+        self.assertTrue(path.isfile(delete_dot_html))
 
         settings.auto_generate = True
         _thread.start_new_thread(self.monitor_delete_stop, (delete_dot_html,))
