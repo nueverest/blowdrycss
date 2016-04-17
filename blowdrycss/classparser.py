@@ -71,7 +71,7 @@ class FileRegexMap(object):
     def __init__(self, file_path=''):
         self.file_path = file_path.strip()                                      # Remove external whitespace.
 
-        if path.isfile(file_path):
+        if path.isfile(self.file_path):
             self._regex_dict = dict()
             self.name, self.extension = path.splitext(self.file_path)
 
