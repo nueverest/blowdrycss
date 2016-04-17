@@ -37,9 +37,9 @@ class TestWatchdogWrapperMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            sleep(1)                      # Wait for main() to start.
+            sleep(5)                      # Wait for main() to start.
             remove(file_path_to_delete)     # Delete delete.html
-            sleep(1)                     # IMPORTANT: Must wait for output otherwise test will fail.
+            sleep(5)                     # IMPORTANT: Must wait for output otherwise test will fail.
 
             output = out.getvalue()
 
