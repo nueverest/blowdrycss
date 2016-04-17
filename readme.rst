@@ -7,6 +7,8 @@ Read Me
 
 .. image:: https://img.shields.io/travis/nueverest/blowdrycss.svg?maxAge=2592000   :target: https://travis-ci.org/nueverest/blowdrycss
 
+.. image:: https://coveralls.io/repos/github/nueverest/blowdrycss/badge.svg?branch=master :target: https://coveralls.io/github/nueverest/blowdrycss?branch=master
+
 |
 
 `blowdrycss` is a rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
@@ -114,9 +116,10 @@ Requirements
 Optional
 ''''''''
 
-- tox 2.3.1+ (multi-environment testing)
+- tox 2.3.1+ (Multi-environment testing)
 - `tox-travis 0.4+ <https://pypi.python.org/pypi/tox-travis>`__ (Allows tox to be used on Travis CI.)
-- coverage 4.0.2+ (check test coverage)
+- coverage 4.0.2+ (Check test coverage)
+- `coveralls 1.1+ <https://github.com/coagulant/coveralls-python>`__ (Used to report coverage when tox is run via Travis CI.)
 - sphinx 1.3.3+ (docs)
 
 Pre-Requisite Knowledge
