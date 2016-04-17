@@ -19,5 +19,5 @@ install:
 script:
   - tox
   - sudo ls -l
-  - sudo blowdrycss ls -l
-  - sudo blowdrycss/unit_tests ls -l
+  - sudo ls -l blowdrycss
+  - sudo ls -R blowdrycss/unit_tests
