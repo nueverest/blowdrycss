@@ -37,7 +37,7 @@ class TestWatchdogWrapperMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            sleep(0.25)                      # Wait for main() to start.  0.1
+            sleep(5.25)                      # Wait for main() to start.  0.1
             self.assertTrue(path.isfile(file_path_to_delete))
             remove(file_path_to_delete)     # Delete delete.html
             sleep(0.25)                     # IMPORTANT: Must wait for output otherwise test will fail.  0.25
