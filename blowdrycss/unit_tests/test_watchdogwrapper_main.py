@@ -20,6 +20,8 @@ change_settings_for_testing()
 
 class TestWatchdogWrapperMain(TestCase):
     passing = True
+    non_matching = ''
+    output = ''
 
     def monitor_delete_stop(self, file_path_to_delete):
         """ Monitor console output. Delete file at file_path_to_delete. Stop watchdogwrapper.main()
@@ -41,7 +43,7 @@ class TestWatchdogWrapperMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            sleep(0.25)                      # Wait for main() to start.  0.1
+            sleep(0.25)                     # Wait for main() to start.  0.1
             remove(file_path_to_delete)     # Delete delete.html
             sleep(0.25)                     # IMPORTANT: Must wait for output otherwise test will fail.  0.25
 
@@ -50,6 +52,8 @@ class TestWatchdogWrapperMain(TestCase):
             for substring in substrings:
                 if substring not in output:
                     self.passing = False
+                    self.non_matching = substring
+                    self.output = output
                 self.assertTrue(substring in output, msg=substring + '\noutput:\n' + output)
         finally:
             sys.stdout = saved_stdout
@@ -77,7 +81,7 @@ class TestWatchdogWrapperMain(TestCase):
         settings.auto_generate = True
         _thread.start_new_thread(self.monitor_delete_stop, (delete_dot_html,))
         watchdogwrapper.main()          # Caution: Nothing will run after this line unless _thread.interrupt_main() is called.
-        self.assertTrue(self.passing)
+        self.assertTrue(self.passing, msg=self.non_matching + ' not found in output:\n' + self.output)
 
     def test_main_auto_generate_False(self):
         # Integration test
