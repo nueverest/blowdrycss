@@ -191,7 +191,7 @@ class FileRegexMap(object):
                 },
             }
         else:
-            raise OSError(file_path + ' does not exist.')
+            raise OSError('"' + file_path + '" does not exist.')
 
     def is_valid_extension(self):
         """ Validates the extension. Returns whether True or False based on whether the extension is a key in
@@ -252,7 +252,7 @@ class ClassExtractor(object):
             self.sub_regexes = regex_dict['sub_regexes']
             self.findall_regexes = regex_dict['findall_regexes']
         else:
-            raise OSError(file_path + ' does not exist.')
+            raise OSError('"' + file_path + '" does not exist.')
 
     @property
     def raw_class_list(self):
