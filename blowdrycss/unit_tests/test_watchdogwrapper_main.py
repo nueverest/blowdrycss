@@ -55,7 +55,8 @@ class TestWatchdogWrapperMain(TestCase):
         logging.basicConfig(level=logging.DEBUG)
         html_text = '<html></html>'
 
-        self.assertTrue(path.isdir(unittest_file_path(folder='test_html', filename='')))
+        directory = unittest_file_path(folder='test_html', filename='')
+        self.assertTrue(path.isdir(directory), msg=directory)
 
         delete_dot_html = unittest_file_path(folder='test_html', filename='delete.html')
 
