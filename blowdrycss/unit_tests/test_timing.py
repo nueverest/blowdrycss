@@ -27,7 +27,7 @@ class TestTiming(TestCase):
         # set(str(float(timer.elapsed)) is required to be compatible with Ubuntu.
         # On windows set(timer.elapsed) is sufficient.
         timer = Timer()
-        allowed = set(digits + '.')
+        allowed = set(digits + '.eE-+')
         timer.end = time()
         self.assertTrue(set(timer.elapsed) <= allowed, msg=str(timer.elapsed) + '\nAllowed: ' + str(allowed))
 
@@ -35,7 +35,7 @@ class TestTiming(TestCase):
         # set(str(float(timer.elapsed)) is required to be compatible with Ubuntu.
         # On windows set(timer.elapsed) is sufficient.
         timer = Timer()
-        allowed = set(digits + '.')
+        allowed = set(digits + '.eE-+')
         self.assertTrue(set(timer.elapsed) <= allowed, msg=str(timer.elapsed) + '\nAllowed: ' + str(allowed))
 
     def test_print_time(self):
