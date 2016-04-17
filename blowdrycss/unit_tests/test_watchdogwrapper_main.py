@@ -54,7 +54,10 @@ class TestWatchdogWrapperMain(TestCase):
         # Integration test
         logging.basicConfig(level=logging.DEBUG)
         html_text = '<html></html>'
-        delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
+
+        self.assertTrue(path.isdir(folder='test_html', filename=''))
+
+        delete_dot_html = unittest_file_path(folder='test_html', filename='delete.html')
 
         # Create delete.html
         with open(delete_dot_html, 'w') as _file:
@@ -77,7 +80,9 @@ class TestWatchdogWrapperMain(TestCase):
             'blowdry.min.css',
         ]
         html_text = '<html></html>'
-        delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
+
+        self.assertTrue(path.isdir(folder='test_html', filename=''))
+        delete_dot_html = unittest_file_path(folder='test_html', filename='delete.html')
 
         # Create delete.html
         with open(delete_dot_html, 'w') as _file:
