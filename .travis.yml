@@ -18,6 +18,8 @@ install:
 # command to run tests
 script:
   - tox
-  - sudo ls -l
-  - sudo ls -l blowdrycss
-  - sudo ls -R blowdrycss/unit_tests
+  - ls -l blowdrycss/unit_tests/test_aspx
+  - pwd
+#  - sudo ls -l
+#  - sudo ls -l blowdrycss
+#  - sudo ls -R blowdrycss/unit_tests
