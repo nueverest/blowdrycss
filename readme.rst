@@ -23,22 +23,26 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.1.9** -- Fixed a major python 2.7 import error that prevented importing the correct settings file.
-  Added ``absolute_import`` to all modules and unit tests per
-  `PEP328 <https://www.python.org/dev/peps/pep-0328/#rationale-for-absolute-imports>`__.
-|
 | **0.2.0** -- Fixed an error that occurred when the ``display`` property was used with custom breakpoints.
   Enabled the use of `pseudo classes and pseudo elements <http://www.w3schools.com/css/css_pseudo_elements.asp>`__.
 
   For example: ::
 
-    'color-blue-hover', 'padding-10rem-i-active', 'bgc-h048-visited', 'color-red-after', 'padding-20rem-i-before',
-    'bgc-h096-selection'
+    'color-blue-hover', 'padding-10rem-i-active', 'bgc-h048-visited',
+    'color-red-after', 'padding-20rem-i-before', 'bgc-h096-selection'
 
 | Note that pseudo classes with parenthesis are excluded. Also, chaining pseudo items together is not implemented.
   Replaced the print statements in FileHandler with logging.debug to increase efficiency.
   Added ``'flex', 'inline-flex', and 'run-in'`` to ``display`` key in ``datalibrary.property_value_as_alias_dict``.
   Added ``'all' and 'align-items'`` properties.
+|
+| **0.2.1** -- Allow single quotes in HTML ``class='green'`` pattern. Enable parsing of ``*.cs`` files for HTML
+  class declarations, CssClass, and ``*Attributes.Add("class", "bold padding-42");``.
+
+  - Integrated Travis CI
+  - Integrated Coveralls
+  - Added shield.io badges from PyPi, Travis CI, and Coveralls to readme.
+
 |
 
 Why the name blowdrycss?

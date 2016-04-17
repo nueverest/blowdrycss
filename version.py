@@ -137,7 +137,12 @@
       Added ``'all' and 'align-items'`` properties.
     |
     | **0.2.1** -- Allow single quotes in HTML ``class='green'`` pattern. Enable parsing of ``*.cs`` files for HTML
-      class declarations, CssClass, and ``*Attributes.Add("class", "bold padding-42");``
+      class declarations, CssClass, and ``*Attributes.Add("class", "bold padding-42");``.
+
+      - Integrated Travis CI
+      - Integrated Coveralls
+      - Added shield.io badges from PyPi, Travis CI, and Coveralls to readme.
+
     |
 
 """
@@ -145,6 +150,6 @@ __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 __release__ = __version__ + 'b2'
