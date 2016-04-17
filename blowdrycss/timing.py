@@ -65,7 +65,7 @@ class Timer(object):
         :return: (*str*) -- Returns a string version of the total time elapsed in seconds_elapsed.
 
         """
-        return str(timedelta(seconds=seconds_elapsed).total_seconds())
+        return str(float(timedelta(seconds=seconds_elapsed).total_seconds()))
 
     @property
     def elapsed(self):

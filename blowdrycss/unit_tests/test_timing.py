@@ -29,14 +29,14 @@ class TestTiming(TestCase):
         timer = Timer()
         allowed = set(digits + '.')
         timer.end = time()
-        self.assertTrue(set(str(float(timer.elapsed))) <= allowed, msg=str(timer.elapsed) + '\nAllowed: ' + str(allowed))
+        self.assertTrue(set(timer.elapsed) <= allowed, msg=str(timer.elapsed) + '\nAllowed: ' + str(allowed))
 
     def test_elapsed_end_not_set(self):
         # set(str(float(timer.elapsed)) is required to be compatible with Ubuntu.
         # On windows set(timer.elapsed) is sufficient.
         timer = Timer()
         allowed = set(digits + '.')
-        self.assertTrue(set(str(float(timer.elapsed))) <= allowed, msg=str(timer.elapsed) + '\nAllowed: ' + str(allowed))
+        self.assertTrue(set(timer.elapsed) <= allowed, msg=str(timer.elapsed) + '\nAllowed: ' + str(allowed))
 
     def test_print_time(self):
         timer = Timer()
