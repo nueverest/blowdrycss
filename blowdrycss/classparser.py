@@ -191,7 +191,7 @@ class FileRegexMap(object):
                 },
             }
         else:
-            raise OSError('"' + file_path + '" does not exist.')
+            raise OSError('"' + self.file_path + '" does not exist.')
 
     def is_valid_extension(self):
         """ Validates the extension. Returns whether True or False based on whether the extension is a key in
