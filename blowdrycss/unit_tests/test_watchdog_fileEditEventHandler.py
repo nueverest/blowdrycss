@@ -154,6 +154,7 @@ class TestFileEditEventHandler(TestCase):
             '-' * 96,
         ]
         html_text = '<html></html>'
+        test_examplesite = unittest_file_path(folder='test_examplesite')
         delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
         file_types = '(' + ', '.join(settings.file_types) + ')'
 
@@ -163,6 +164,10 @@ class TestFileEditEventHandler(TestCase):
             ignore_directories=True
         )
 
+        # Directory must be created for Travis CI case
+        make_directory(test_examplesite)
+        self.assertTrue(path.isdir(test_examplesite))
+
         # Create delete.html
         with open(delete_dot_html, 'w', encoding='utf-8') as _file:
             _file.write(html_text)
@@ -170,7 +175,7 @@ class TestFileEditEventHandler(TestCase):
         self.assertTrue(path.isfile(delete_dot_html))
 
         observer = Observer()
-        observer.schedule(event_handler, unittest_file_path(folder='test_examplesite'), recursive=True)
+        observer.schedule(event_handler, test_examplesite, recursive=True)
         observer.start()
 
         saved_stdout = sys.stdout
@@ -180,7 +185,14 @@ class TestFileEditEventHandler(TestCase):
 
             remove(delete_dot_html)     # Delete delete.html
 
-            sleep(0.25)                 # IMPORTANT: Must wait for output otherwise test will fail.
+            # IMPORTANT: Must wait for output otherwise test will fail.  0.25
+            count = 0
+            while substrings[-1] not in out.getvalue():
+                if count > 100:             # Max wait is 5 seconds.
+                    break
+                else:
+                    sleep(0.05)
+                    count += 1
 
             output = out.getvalue()
 
