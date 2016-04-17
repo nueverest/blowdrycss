@@ -107,13 +107,15 @@ Requirements
 - `Python 2.7.x or 3.3+ <https://www.python.org/downloads/>`__ (required)
 - `cssutils 1.0.1+ <https://bitbucket.org/cthedot/cssutils>`__ (required)
 - `future 0.15.2+ <https://pypi.python.org/pypi/future>`__ (required - for Python 2.7)
-- pypandoc 1.1.2+ (required - file type conversion)
+- `pandoc <https://pypi.python.org/pypi/pypandoc/1.1.3#installing-pandoc>`__ (required - file type conversion)
+- `pypandoc 1.1.2+ <pypi.python.org/pypi/pypandoc/1.1.3>`__ (required - file type conversion)
 - `watchdog 0.8.2+ <https://pypi.python.org/pypi/watchdog/0.8.3>`__ (required - monitor directory and auto-generate CSS)
 
 Optional
 ''''''''
 
 - tox 2.3.1+ (multi-environment testing)
+- `tox-travis 0.4+ <https://pypi.python.org/pypi/tox-travis>`__ (Allows tox to be used on Travis CI.)
 - coverage 4.0.2+ (check test coverage)
 - sphinx 1.3.3+ (docs)
 

@@ -23,9 +23,10 @@ This guide rapidly shows you how to:
     > cd blowdrycss_tutorial
     > virtualenv
     > source bin/activate
+    > Install pandoc `click here for os-specific instructions <https://pypi.python.org/pypi/pypandoc/1.1.3#installing-pandoc>`__.
     > pip install blowdrycss
 
-- Download the zip version of ``blowdrycss`` from the `github repository <https://github.com/nueverest/blowdrycss>`__.
+- Download the zipped version of ``blowdrycss`` from the `github repository <https://github.com/nueverest/blowdrycss>`__.
 
 - Copy and paste the entire ``examplesite`` folder from the downloaded zip file to the new ``blowdrycss_tutorial`` folder.
 

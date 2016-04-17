@@ -50,6 +50,8 @@ Part 1 - Setup virtualenv and install blowdrycss
     >>> exit()
     > pip freeze
 
+- Install pandoc `click here for os-specific instructions <https://pypi.python.org/pypi/pypandoc/1.1.3#installing-pandoc>`__.
+
 - Install ``blowdrycss``. ::
 
     > pip install blowdrycss
