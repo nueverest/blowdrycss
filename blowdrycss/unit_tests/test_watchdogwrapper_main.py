@@ -74,7 +74,7 @@ class TestWatchdogWrapperMain(TestCase):
         # Integration test
         logging.basicConfig(level=logging.DEBUG)
         html_text = '<html></html>'
-        test_examplesite = unittest_file_path(folder='test_examplesite', filename='')
+        test_examplesite = unittest_file_path(folder='test_examplesite')
         delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
 
         # Directory must be created for Travis CI case
@@ -104,7 +104,7 @@ class TestWatchdogWrapperMain(TestCase):
             'blowdry.min.css',
         ]
         html_text = '<html></html>'
-        test_examplesite = unittest_file_path(folder='test_examplesite', filename='')
+        test_examplesite = unittest_file_path(folder='test_examplesite')
         delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
 
         # Directory must be created for Travis CI case

@@ -14,7 +14,7 @@ from time import sleep
 from watchdog.observers import Observer
 
 # custom
-from blowdrycss.utilities import change_settings_for_testing, unittest_file_path
+from blowdrycss.utilities import change_settings_for_testing, unittest_file_path, make_directory
 from blowdrycss.watchdogwrapper import FileEditEventHandler
 import blowdrycss_settings as settings
 
@@ -93,8 +93,13 @@ class TestFileEditEventHandler(TestCase):
             '-' * 96,
         ]
         html_text = '<html></html>'
+        test_examplesite = unittest_file_path(folder='test_examplesite')
         modify_dot_html = unittest_file_path(folder='test_examplesite', filename='modify.html')
         file_types = '(' + ', '.join(settings.file_types) + ')'
+
+        # Directory must be created for Travis CI case
+        make_directory(test_examplesite)
+        self.assertTrue(path.isdir(test_examplesite))
 
         # Add contents to modify.html
         with open(modify_dot_html, 'w', encoding='utf-8') as _file:
