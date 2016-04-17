@@ -82,7 +82,6 @@ class TestFileEditEventHandler(TestCase):
     def test_on_modified(self):
         # Integration test
         logging.basicConfig(level=logging.DEBUG)
-        original_file = ''
         substrings = [
             '~~~ blowdrycss started ~~~',
             'Auto-Generated CSS',
@@ -125,7 +124,14 @@ class TestFileEditEventHandler(TestCase):
                 _file.seek(-1, SEEK_END)
                 _file.truncate()
 
-            sleep(0.25)     # IMPORTANT: Must wait for output otherwise test will fail.
+            # IMPORTANT: Must wait for output otherwise test will fail.
+            count = 0
+            while substrings[-1] not in out.getvalue():
+                if count > 100:             # Max wait is 5 seconds.
+                    break
+                else:
+                    sleep(0.05)
+                    count += 1
 
             output = out.getvalue()
 
