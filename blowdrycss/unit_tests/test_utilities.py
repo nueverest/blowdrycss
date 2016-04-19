@@ -4,7 +4,7 @@ from builtins import round
 
 # builtins
 from unittest import TestCase, main
-from os import getcwd, path, removedirs
+from os import getcwd, path, removedirs, chdir
 import sys
 from io import StringIO, open
 
@@ -140,10 +140,22 @@ class Test_utilities(TestCase):
 
         test_path = unittest_file_path(folder=folder, filename=filename)
 
-        if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
+        if cwd.endswith('unit_tests'):                                          # Allows running of pycharm unittest.
             self.assertTrue(test_path, expected_if_path)
-        else:                                                       # Run unittest cmd from the root directory.
+            chdir('../..')
+            test_path = unittest_file_path(folder=folder, filename=filename)    # Re-run for else path.
+            cwd_else = getcwd()
+            expecetd_else_path = path.join(cwd_else, 'blowdrycss', 'unit_tests', folder, filename)
             self.assertTrue(test_path, expecetd_else_path)
+        else:                                                               # Run unittest cmd from the root directory.
+            self.assertTrue(test_path, expecetd_else_path)
+            chdir(path.join(cwd, 'blowdrycss', 'unit_tests'))
+            test_path = unittest_file_path(folder=folder, filename=filename)    # Re-run for else path.
+            cwd_if = getcwd()
+            expected_if_path = path.join(cwd_if, folder, filename)
+            self.assertTrue(test_path, expected_if_path)
+
+        chdir(cwd)                                                              # Return current directory.
 
     def test_change_settings_for_testing(self):
         cwd = getcwd()
@@ -166,9 +178,33 @@ class Test_utilities(TestCase):
         if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
             for if_case in if_cases:
                 self.assertTrue(if_case)
+            chdir('../..')
+            cwd_else = getcwd()
+            change_settings_for_testing()                           # Re-run with new directory
+            else_cases = (
+                settings.markdown_directory == path.join(cwd_else, 'blowdrycss', 'unit_tests', 'test_markdown'),
+                settings.project_directory == path.join(cwd_else, 'blowdrycss', 'unit_tests', 'test_examplesite'),
+                settings.css_directory == path.join(settings.project_directory, 'test_css'),
+                settings.docs_directory == path.join(cwd_else, 'blowdrycss', 'unit_tests', 'test_docs'),
+            )
+            for else_case in else_cases:
+                self.assertTrue(else_case)
         else:                                                       # Run unittest cmd from the root directory.
             for else_case in else_cases:
                 self.assertTrue(else_case)
+            chdir(path.join(cwd, 'blowdrycss', 'unit_tests'))
+            cwd_if = getcwd()
+            change_settings_for_testing()                           # Re-run with new directory
+            if_cases = (
+                settings.markdown_directory == path.join(cwd_if, 'test_markdown'),
+                settings.project_directory == path.join(cwd_if, 'test_examplesite'),
+                settings.css_directory == path.join(settings.project_directory, 'test_css'),
+                settings.docs_directory == path.join(cwd_if, 'test_docs'),
+            )
+            for if_case in if_cases:
+                self.assertTrue(if_case)
+
+        chdir(cwd)                                                  # Reset directory back to the way it was.
 
     def test_print_css_stats(self):
         # On Travis CI these auto-generated files are inaccessible and need to be recreated.
