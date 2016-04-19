@@ -654,12 +654,9 @@ class ClassPropertyParser(object):
 
         if self.pseudo_class:                                       # Prepend '-' to property to match the class format.
             pseudo_item = '-' + self.pseudo_class
+            return css_class.replace(pseudo_item, '')
         elif self.pseudo_element:
             pseudo_item = '-' + self.pseudo_element
-        else:                                                       # No pseudo encoding found.
-            return css_class
-
-        if css_class.endswith(pseudo_item):                         # Strip pseudo item
             return css_class.replace(pseudo_item, '')
-        else:                                                       # If it doesn't have a pseudo item ignore it.
+        else:                                                       # No pseudo encoding found.
             return css_class

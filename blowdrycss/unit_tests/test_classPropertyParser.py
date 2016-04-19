@@ -86,8 +86,18 @@ class TestClassPropertyParser(TestCase):
         self.assertEqual(class_parser.class_set, expected_empty_set, msg=class_parser.class_set)
 
     def test_get_property_name_by_alias(self):
-        class_alias_set = {'bold', 'bolder', 'lighter', 'fweight-200', 'f-weight-100', 'fw-bold', 'font-w-900'}
+        class_alias_set = {'bold', 'bolder', 'lighter', 'fweight-200', 'f-weight-100', 'fw-bold', 'font-w-900', }
         expected_property_name = 'font-weight'
+        class_parser = ClassPropertyParser(class_set=set())
+
+        class_list = list(class_alias_set)
+        for css_class in class_list:
+            property_name = class_parser.get_property_name(css_class=css_class)
+            self.assertEqual(property_name, expected_property_name, msg=css_class)
+
+    def test_get_property_name_by_regex(self):
+        class_alias_set = {'h0e2', 'h2ad', 'h987fcb', 'h15af36', }
+        expected_property_name = 'color'
         class_parser = ClassPropertyParser(class_set=set())
 
         class_list = list(class_alias_set)
@@ -190,16 +200,12 @@ class TestClassPropertyParser(TestCase):
         class_parser = ClassPropertyParser(class_set=set())
 
         for i, pseudo_item in enumerate(pseudo_items):
-            class_parser.set_pseudo_class(css_classes[i])
-            class_parser.set_pseudo_element(css_classes[i])
             actual = class_parser.strip_pseudo_item(css_class=css_classes[i])
             self.assertEqual(expected[i], actual)
 
     def test_strip_pseudo_item_not_matching(self):
         css_class = 'padding-10-i'
         class_parser = ClassPropertyParser(class_set=set())
-        class_parser.set_pseudo_class(css_class)
-        class_parser.set_pseudo_element(css_class)
         result = class_parser.strip_pseudo_item(css_class=css_class)
         self.assertEqual(result, css_class)     # css_class should remain unchanged.
 
