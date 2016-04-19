@@ -43,7 +43,8 @@ class TestFileRegexMap(TestCase):
     def test_regexes(self):
         sub_js = (
             r'//.*?\n',                                                     # Remove JS Comments.
-            r'/\*.*?\*/',
+            r'\n',                                                          # Remove new lines before block quotes.
+            r'/\*.*?\*/',                                                   # Remove block quotes.
             r'(domClass.add\(\s*.*?,\s*["\'])',                             # dojo
             r'(domClass.add\(\s*.*?,\s*["\'])',
             r'(dojo.addClass\(\s*.*?,\s*["\'])',
@@ -56,21 +57,21 @@ class TestFileRegexMap(TestCase):
             r'(.removeClass\(\s*["\'])',
             r'(\$\(\s*["\']\.)',
         )
-        sub_html = (r'<!--.*?-->', ) + sub_js
+        sub_html = sub_js + (r'<!--.*?-->', )
 
         js_substring = r'extract__class__set'
         findall_regex_js = (
             r'.classList.add\(\s*[\'"](.*?)["\']\s*\)',
             r'.classList.remove\(\s*[\'"](.*?)["\']\s*\)',
-            r'.className\s*\+?=\s*.*?\+?[\'"](.*?)["\']',
+            r'.className\s*\+?=\s*.*?[\'"](.*?)["\']',
             r'.getElementsByClassName\(\s*[\'"](.*?)["\']\s*\)',
-            r'.setAttribute\(\s*.*?,\s*[\'"](.*?)["\']\s*\)',
-            js_substring + r'\(\s*[\'"](.*?)["\']\s*\)',                           # Find the chopped ones
+            r'.setAttribute\(\s*[\'"]class["\']\s*,\s*[\'"](.*?)["\']\s*\)',
+            js_substring + r'\(\s*[\'"](.*?)["\']\s*\)',                    # Find cases designated by js_substring.
         )
 
         expected_dicts = [
             {
-                'sub_regexes': (r'<%.*?%>', ) + sub_html,
+                'sub_regexes': sub_html + (r'<%.*?%>', ),
                 'findall_regexes': (r'class=[\'"](.*?)["\']', ) + findall_regex_js,
             },
             {

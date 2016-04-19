@@ -52,6 +52,17 @@ element.classList.remove(
 // className variables not implemented
 element.classList.remove(notimplemented);
 
+/* This block quote should be removed by the regex.
+
+element.classList.add("addclass101");
+
+element.classList.add( "addclass102" );
+
+element.classList.add(
+    "addclass103"
+);
+*/
+
 // Doesn't seem to work.
 //// element.classList[] variant 1
 //var length = element.classList.length;
@@ -100,7 +111,7 @@ function toggleClass1 (El) {
 
 // Replace a class name variant 2
 function toggleClass2 (El) {
-    if (El.className == 'blue' ) {                                  // TODO: This should not be returned by regex.
+    if (El.className == 'blue' ) {
         El.className = 'className20';
     }
     else{
@@ -138,7 +149,7 @@ var x = document.getElementsByClassName("getElementsByClassName2");
 
 
 // Test .setAttribute() as literal string variant 1
-document.getElementById(elementId).setAttribute("class", "setAttribute1");
+document.getElementById(elementId).setAttribute("class" , "setAttribute1");
 // Test .setAttribute() as literal string variant 2
 document.getElementById(elementId).setAttribute( 'class','setAttribute2' );
 // Test .setAttribute() as literal string variant 3
@@ -254,5 +265,5 @@ YAHOO.util.Dom.removeClass(document.body,"yui8");       // YUI variant 6
 //// AngularJS variant 10
 //var myEl10 = angular.element( document.querySelector( '#divID' ) );
 //if(myEl10.hasClass('red')) {
-//  alert('has class red');
+//  alert('has red');
 //}

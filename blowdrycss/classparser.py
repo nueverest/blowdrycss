@@ -94,7 +94,8 @@ class FileRegexMap(object):
 
             sub_js = (
                 r'//.*?\n',                                                     # Remove JS Comments.
-                r'/\*.*?\*/',
+                r'\n',                                                          # Remove new lines before block quotes.
+                r'/\*.*?\*/',                                                   # Remove block quotes.
                 r'(domClass.add\(\s*.*?,\s*["\'])',                             # dojo
                 r'(domClass.add\(\s*.*?,\s*["\'])',
                 r'(dojo.addClass\(\s*.*?,\s*["\'])',
@@ -107,26 +108,26 @@ class FileRegexMap(object):
                 r'(.removeClass\(\s*["\'])',
                 r'(\$\(\s*["\']\.)',
             )
-            sub_html = (r'<!--.*?-->', ) + sub_js
+            sub_html = sub_js + (r'<!--.*?-->', )
             sub_jinja = (r'{.*?}?}', ) + sub_html
             sub_django = (r'{.*?}?}', ) + sub_html
             sub_csharp = (r'//.*?\n', r'\n', r'/\*.*?\*/', )                    # Remove CS Comments.
-            sub_dotnet = (r'<%.*?%>', ) + sub_html
-            sub_ruby = (r'<%.*?%>', ) + sub_html
+            sub_dotnet = sub_html + (r'<%.*?%>', )
+            sub_ruby = sub_html + (r'<%.*?%>', )
 
             class_regex = (r'class=[\'"](.*?)["\']', )                          # general 'class' case
 
             findall_regex_js = (
                 r'.classList.add\(\s*[\'"](.*?)["\']\s*\)',
                 r'.classList.remove\(\s*[\'"](.*?)["\']\s*\)',
-                r'.className\s*\+?=\s*.*?\+?[\'"](.*?)["\']',
+                r'.className\s*\+?=\s*.*?[\'"](.*?)["\']',
                 r'.getElementsByClassName\(\s*[\'"](.*?)["\']\s*\)',
-                r'.setAttribute\(\s*.*?,\s*[\'"](.*?)["\']\s*\)',
+                r'.setAttribute\(\s*[\'"]class["\']\s*,\s*[\'"](.*?)["\']\s*\)',
                 js_substring + r'\(\s*[\'"](.*?)["\']\s*\)',                    # Find cases designated by js_substring.
             )
 
             findall_regex_cs = class_regex + (
-                r'.CssClass\s*\+?=\s*.*?\+?[\'"](.*?)["\']',
+                r'.CssClass\s*\+?=\s*.*?[\'"](.*?)["\']',
                 r'.Attributes.Add\(\s*[\'"]class["\'],\s*.*?[\'"](.*?)["\']\s*\)',
             )
 
