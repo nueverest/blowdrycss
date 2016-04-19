@@ -28,6 +28,13 @@
     <div class="row padding-top-30 padding-bottom-30 <%=ClassSelector.Blue %>">Is this blue?</div>
 
     <div class="row padding-25-820-up <%#Eval("ProductName")%>"><uc1:ucBlowDryerCarousel runat="server" ID="ucBlowDryerCarousel" /></div>
+
+   <%-- Test block XHTML multi-line block quote.
+
+        <div class="invalid padding-top-303 padding-bottom-304 <%=ClassSelector.Blue %>">These should not be detected</div>
+
+   --%>
+
 </asp:Content>
 
 <script>
