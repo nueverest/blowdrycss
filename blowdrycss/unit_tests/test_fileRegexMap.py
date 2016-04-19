@@ -75,7 +75,7 @@ class TestFileRegexMap(TestCase):
                 'findall_regexes': (r'class=[\'"](.*?)["\']', ) + findall_regex_js,
             },
             {
-                'sub_regexes': (r'{.*?}?}', ) + sub_html,
+                'sub_regexes': (r'{.*?}?}', ) + sub_html + (r'{#.*?#}', ),
                 'findall_regexes': (r'class=[\'"](.*?)["\']', ) + findall_regex_js,
             },
         ]

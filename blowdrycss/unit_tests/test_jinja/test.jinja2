@@ -17,6 +17,17 @@
     {% endfor %}
 {% endif %}
 
+{#
+    <div class="should-not-show commented-out-jinja">
+        Should be undetected.
+    </div>
+
+    Line statements are not currently handeled:
+    http://jinja.pocoo.org/docs/dev/templates/#line-statements
+#}
+
+
+
 <script>
     // dojo reference: https://dojotoolkit.org/reference-guide/1.10/dojo/dom-class.html#id17
     require(["dojo/dom-class"], function(domClass){             // Add a class dojo 1.7+ (AMD)

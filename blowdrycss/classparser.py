@@ -109,8 +109,7 @@ class FileRegexMap(object):
                 r'(\$\(\s*["\']\.)',
             )
             sub_html = sub_js + (r'<!--.*?-->', )
-            sub_jinja = (r'{.*?}?}', ) + sub_html
-            sub_django = (r'{.*?}?}', ) + sub_html
+            sub_jinja = (r'{.*?}?}', ) + sub_html + (r'{#.*?#}', )
             sub_csharp = (r'//.*?\n', r'\n', r'/\*.*?\*/', )                    # Remove CS Comments.
             sub_dotnet = sub_html + (r'<%.*?%>', )
             sub_ruby = sub_html + (r'<%.*?%>', )
@@ -163,11 +162,11 @@ class FileRegexMap(object):
                     'findall_regexes': findall_regex,
                 },
                 '.djt': {
-                    'sub_regexes': sub_django,
+                    'sub_regexes': sub_jinja,
                     'findall_regexes': findall_regex,
                 },
                 '.djhtml': {
-                    'sub_regexes': sub_django,
+                    'sub_regexes': sub_jinja,
                     'findall_regexes': findall_regex,
                 },
                 '.cs': {
