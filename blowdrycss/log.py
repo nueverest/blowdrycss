@@ -18,9 +18,9 @@ from blowdrycss.utilities import make_directory
 import blowdrycss_settings as settings
 
 
-try:  # Python 2.7+
+try:                                            # Python 2.7+ log.py
     from logging import NullHandler
-except ImportError:
+except ImportError:                             # Python 3.3+ log.py
     class NullHandler(logging.Handler):
         def emit(self, record):
             pass
