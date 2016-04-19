@@ -395,7 +395,7 @@ class DataLibrary(object):
                 try:
                     self.property_alias_dict[property_name] = self.property_alias_dict[property_name].union(alias_set)
                 except KeyError:
-                    print('KeyError: property_name ->', property_name, '<- not found in property_alias_dict.')
+                    print('KeyError: property_name ->', property_name, '<- not found in custom_property_alias_dict.')
                     raise KeyError
 
     def set_clashing_aliases(self):

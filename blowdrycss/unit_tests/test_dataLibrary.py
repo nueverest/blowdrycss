@@ -6,6 +6,7 @@ from unittest import TestCase, main
 
 # custom
 from blowdrycss.datalibrary import DataLibrary
+import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -163,6 +164,18 @@ class TestDataLibrary(TestCase):
         self.data_library.property_alias_dict = dict1
         self.data_library.property_value_as_alias_dict = dict2
         self.assertRaises(KeyError, self.data_library.merge_dictionaries)
+
+    def test_merge_dictionaries_custom_property_alias_dict_invalid_key(self):
+        original = settings.custom_property_alias_dict                      # Save settings.
+
+        dict1 = {'font-size': {'fsize-', 'f-size-', }, }
+        dict2 = {'invalid_key': {'col-', }, }
+        self.data_library.property_alias_dict = dict1
+        self.data_library.property_value_as_alias_dict = dict1
+        settings.custom_property_alias_dict = dict2
+        self.assertRaises(KeyError, self.data_library.merge_dictionaries)
+
+        settings.custom_property_alias_dict = original                      # Reset settings.
 
     # Expects that dict1 will pass straight through since there is nothing to merge with it.
     def test_merge_dictionaries_empty_custom_dict(self):
