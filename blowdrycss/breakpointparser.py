@@ -308,8 +308,8 @@ class BreakpointParser(object):
             self.breakpoint_dict['custom'][self.limit_key] = custom_breakpoint
         except IndexError:                      # Pattern not found in css_class
             self.is_breakpoint = False
-        except KeyError:                        # Dictionary key problems (excludes '-only' case).
-            self.is_breakpoint = False
+        except KeyError:                        # Impossible to get here unless the regex pattern fails.
+            self.is_breakpoint = False          # Dictionary key problems (excludes '-only' case).
 
     def strip_breakpoint_limit(self):
         """ Removes breakpoint and limit keywords from ``css_class``.
