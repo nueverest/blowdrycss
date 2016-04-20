@@ -33,11 +33,11 @@ class TestBreakpointParser(TestCase):
             self.assertEqual(breakpoint_parser.breakpoint_key, expected[i])
 
     def test_set_breakpoint_key_ValueError(self):
-        valid_css_classes = ['inline-small', 'inline-down', 'custom-class', '-xsmall-', '-xxlarge-up']
+        invalid_css_classes = ['inline-small', 'inline-down', 'custom-class', '-xsmall-', '-xxlarge-up']
         names = ['display', 'display', 'padding', 'invalid', 'invalid', ]
         values = ['inherit', 'inherit', '10', 'invalid', 'invalid', ]
 
-        for i, css_class in enumerate(valid_css_classes):
+        for i, css_class in enumerate(invalid_css_classes):
             css_property = Property(name=names[i], value=values[i], priority='')
             breakpoint_parser = BreakpointParser(css_class=css_class, css_property=css_property)
             self.assertFalse(breakpoint_parser.is_breakpoint)
@@ -117,7 +117,7 @@ class TestBreakpointParser(TestCase):
             )
 
     def test_set_custom_breakpoint_key_ONLY(self):
-        invalid_css_class = 'display-3_2rem-only'
+        invalid_css_class = 'display-3_2rem-920-only'
         name = 'display'
         value = 'none'
         priority = ''
