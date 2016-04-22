@@ -179,7 +179,10 @@ def print_css_stats(file_name=''):
     css_size = stat(css_dir).st_size                                                # Get file size in Bytes.
     min_size = stat(min_dir).st_size
 
-    percent_reduced = round(float(min_size) / float(css_size) * float(100), 1)      # Calculate percentage size reduced.
+    percent_reduced = round(                                                        # Calculate percentage size reduced.
+        float(100) - float(min_size) / float(css_size) * float(100),
+        1                                                                           # Precision
+    )
 
     css_kb = round(float(css_size) / float(1000), 1)                                # Convert to kiloBytes.
     min_kb = round(float(min_size) / float(1000), 1)
@@ -232,7 +235,7 @@ def make_directory(directory=''):
         makedirs(directory)                         # Make 'log' directory
         logging.debug('%s created.', directory)
     except OSError:
-        if not path.isdir(directory):               # Verify directory existences
+        if not path.isdir(directory):               # Verify directory existence
             raise OSError(directory + ' is not a directory, and could not be created.')
 
 

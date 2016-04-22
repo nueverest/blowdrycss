@@ -217,7 +217,7 @@ class Test_utilities(TestCase):
         substrings = [
             'blowdry.css:\t 0.3kB',
             'blowdry.min.css: 0.2kB',
-            'CSS file size reduced by 71.6%.'
+            'CSS file size reduced by 28.4%.'
         ]
 
         blowdry_css_text = '.bgc-hf8f8f8 {\n    background-color: #f8f8f8\n    }\n.border-1px-solid-gray {\n    border: 1px solid gray\n    }\n.padding-5 {\n    padding: 0.3125em\n    }\n.bold {\n    font-weight: bold\n    }\n.talign-center {\n    text-align: center\n    }\n.display-inline {\n    display: inline\n    }'
