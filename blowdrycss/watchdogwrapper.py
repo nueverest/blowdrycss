@@ -124,6 +124,8 @@ def main():
         try:
             while True:
                 sleep(1)
+        # except OSError:                 # Handle unexpected deletion of a file during the handling of an event
+        #     main()                      # recursively call main()
         except KeyboardInterrupt:
             observer.stop()
             print_blow_dryer()

@@ -52,7 +52,7 @@ class TestWatchdogWrapperMain(TestCase):
             # IMPORTANT: Must wait for output otherwise test will fail.  0.25
             count = 0
             while substrings[-1] not in out.getvalue():
-                if count > 100:             # Max wait is 5 seconds.
+                if count > 100:             # Max wait is 5 seconds = 100 count * 0.05 sleep
                     break
                 else:
                     sleep(0.05)
@@ -71,31 +71,6 @@ class TestWatchdogWrapperMain(TestCase):
             _thread.interrupt_main()        # Stop watchdogwrapper.main().
 
     def test_main_auto_generate_True(self):
-        # Integration test
-        logging.basicConfig(level=logging.DEBUG)
-        html_text = '<html></html>'
-        test_examplesite = unittest_file_path(folder='test_examplesite')
-        delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
-
-        # Directory must be created for Travis CI case
-        make_directory(test_examplesite)
-        self.assertTrue(path.isdir(test_examplesite))
-
-        # Create file delete.html
-        with open(delete_dot_html, 'w') as _file:
-            _file.write(html_text)
-
-        # Double check to ensure it got created.
-        self.assertTrue(path.isfile(delete_dot_html))
-
-        auto_generate = settings.auto_generate          # original
-        settings.auto_generate = True
-        _thread.start_new_thread(self.monitor_delete_stop, (delete_dot_html,))
-        watchdogwrapper.main()    # Caution: Nothing will run after this line unless _thread.interrupt_main() is called.
-        self.assertTrue(self.passing, msg=self.non_matching + ' not found in output:\n' + self.output)
-        settings.auto_generate = auto_generate          # reset setting
-
-    def test_main_auto_generate_True_File_Deleted_During_event_handling_DynamicOSError_Case(self):
         # Integration test
         logging.basicConfig(level=logging.DEBUG)
         html_text = '<html></html>'

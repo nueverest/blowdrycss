@@ -134,8 +134,8 @@ def main():
     # Build Media Queries
     if settings.media_queries_enabled:
         unassigned_class_set = class_set.difference(css_builder.property_parser.class_set)
-        css_builder.property_parser.class_set = unassigned_class_set                # Only use unassigned classes
-        css_builder.property_parser.removed_class_set = set()                       # Clear set
+        css_builder.property_parser.class_set = unassigned_class_set                    # Only use unassigned classes
+        css_builder.property_parser.removed_class_set = set()                           # Clear set
         media_query_builder = MediaQueryBuilder(property_parser=class_property_parser)
         logging.debug(
             msg=(
