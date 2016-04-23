@@ -139,8 +139,6 @@ class DataLibrary(object):
         self.custom_property_alias_dict = settings.custom_property_alias_dict
 
         self.property_value_as_alias_dict = {
-            'azimuth': {'left-side', 'far-left', 'center-left', 'center-right', 'far-right', 'right-side', 'behind',
-                        'leftwards', 'rightwards', },
             'background-repeat': {'repeat', 'repeat-x', 'repeat-y', 'no-repeat', },
             'color': {
                 # Special format cases
@@ -219,7 +217,7 @@ class DataLibrary(object):
         }
 
         self.property_names = {
-            'all', 'align-items', 'azimuth',
+            'all', 'align-items',
             'background', 'background-attachment', 'background-color', 'background-image',
             'background-position', 'background-repeat', 'border', 'border-bottom', 'border-bottom-color',
             'border-bottom-style', 'border-bottom-width', 'border-collapse', 'border-color', 'border-left',

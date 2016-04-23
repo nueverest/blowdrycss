@@ -187,12 +187,17 @@ xxgiant = (px_to_em(2801), px_to_em(10**6))     # 175.0625 - float("inf")) # Pyt
 
 # Custom CSS Property Syntax
 # When adding a new alias it must end with a '-'.
-# To add a new alias 'azi' for 'azimuth' add the (key: value) pair 'azimuth': {'azi-'}, to custom_property_alias_dict.
-# key = A valid CSS property name (consult the W3C standard and datalibrary.DataLibrary.property_names).
+# To add a new alias 'bgc-' for 'background-color' add the (key: value) pair 'background-color': {'bgc-'},
+# to custom_property_alias_dict.
+#
+#  key = A valid CSS property name (consult the W3C standard and datalibrary.DataLibrary.property_names).
 # value = An alias set().
-# If 'azi' is used without the '-', then blowdrycss assumes that 'azi' is a valid CSS property (which it is not).
-# Defining 'azi-' allows the following encoded class selector syntax:
-# 'azi-left-side', 'azi-far-left', ..., 'azi-rightwards'
+#
+# If 'bgc' is used without the '-', then blowdrycss assumes that 'bgc' is a valid CSS property (which it is not).
+# This will result in 'bgc' being discarded later on as an invalid css class selector.
+#
+# Defining 'bgc-' allows the following encoded class selector syntax:
+# 'bgc-blue', 'bgc-h000', ..., 'bgc-red'
 #
 # These encoded class selectors can be used inside of Web project files matching 'file_type' defined above.
 custom_property_alias_dict = {

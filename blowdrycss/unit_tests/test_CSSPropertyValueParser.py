@@ -13,8 +13,8 @@ __project__ = 'blowdrycss'
 
 class TestCSSPropertyValueParser(TestCase):
     def test_is_built_in_valid(self):
-        property_names = ['font-weight', 'color', 'azimuth', 'background-repeat']
-        input_values = ['bold', 'white', 'left-side', 'no-repeat']
+        property_names = ['font-weight', 'color', 'background-repeat']
+        input_values = ['bold', 'white', 'no-repeat']
         property_parser = CSSPropertyValueParser()
         for i, value in enumerate(input_values):
             property_parser.property_name = property_names[i]

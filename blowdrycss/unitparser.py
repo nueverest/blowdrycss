@@ -64,7 +64,6 @@ class UnitParser(object):
         # IDEA: Build webscraper that auto-extracts these. May not be deterministic enough.  Would need to build a
         # Page based on the standard that includes all property name/value combos.
         self.default_property_units_dict = {     # Number of possible values:
-            'azimuth': 'deg',                    # single
             'background-position': '%',          # single or double
 
             # 'border': 'px',                    # single   Shorthand Property unit addition Not implemented
