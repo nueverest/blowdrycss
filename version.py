@@ -143,7 +143,8 @@
       - Integrated Coveralls
       - Added shield.io badges from PyPi, Travis CI, and Coveralls to readme.
 
-    | **0.2.2** -- Increased code test coverage. Fixed a math error in the CSS statistics printer.
+    | **0.2.2** -- Increased code test coverage. Fixed a math error in the CSS statistics printer. Azimuth was removed
+      as it is now obsolete and has inconsistent browser support.
     |
 
 """
@@ -151,6 +152,6 @@ __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 
 __release__ = __version__ + 'b2'
