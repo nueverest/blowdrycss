@@ -63,7 +63,7 @@ Example Usage in HTML Tags:
 
 ``blowdrycss`` decodes the class names ``text-align-center``,
 ``margin-top-30``, ``font-size-25``, and ``green``; and generates the
-following CSS in ``blowdry.css``:
+following atomic CSS in ``blowdry.css``:
 
 ::
 
