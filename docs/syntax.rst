@@ -191,41 +191,32 @@ Color Declarations
 +--------------+----------------------------+-----------------------------------+
 | Color Format | Encoded Class Format       | CSS Rule Output                   |
 +==============+============================+===================================+
-| keyword      | color-silver               | .color-silver {                   |
-|              | (most efficient)           |   color: silver                   |
-|              |                            | }                                 |
+| keyword      | color-silver               | .color-silver                     |
+|              | (most efficient)           | { color: silver }                 |
 +--------------+----------------------------+-----------------------------------+
-| rgb          | color-rgb-0-255-0          | .color-rgb-0-255-0 {              |
-|              |                            |   color: rgb(0, 255, 0)           |
-|              |                            | }                                 |
+| rgb          | color-rgb-0-255-0          | .color-rgb-0-255-0                |
+|              |                            | { color: rgb(0, 255, 0) }         |
 +--------------+----------------------------+-----------------------------------+
-| rgba         | color-rgba-255-0-0-0_5     | .color-rgba-255-0-0-0_5 {         |
-|              |                            |   color: rgba(255, 0, 0, 0.5)     |
-|              |                            | }                                 |
+| rgba         | color-rgba-255-0-0-0_5     | .color-rgba-255-0-0-0_5           |
+|              |                            | { color: rgba(255, 0, 0, 0.5) }   |
 +--------------+----------------------------+-----------------------------------+
-| hex6         | color-h0ff23f              | .color-h0ff23f {                  |
-|              | (prepend ``h``)            |   color: #0ff23f                  |
-|              |                            | }                                 |
+| hex6         | color-h0ff23f              | .color-h0ff23f                    |
+|              | (prepend ``h``)            | { color: #0ff23f }                |
 +--------------+----------------------------+-----------------------------------+
-| hex6         | h0ff23f                    | .h0ff23f {                        |
-|              | (no property name)         |   color: #0ff23f                  |
-|              |                            | }                                 |
+| hex6         | h0ff23f                    | .h0ff23f                          |
+|              | (no property name)         | { color: #0ff23f }                |
 +--------------+----------------------------+-----------------------------------+
-| hex3         | color-h03f                 | .color-h03f {                     |
-|              | (prepend ``h``)            |   color: #03f                     |
-|              |                            | }                                 |
+| hex3         | color-h03f                 | .color-h03f                       |
+|              | (prepend ``h``)            | { color: #03f }                   |
 +--------------+----------------------------+-----------------------------------+
-| hex3         | hfd4                       | .hfd4 {                           |
-|              |                            |   color: #fd4                     |
-|              |                            | }                                 |
+| hex3         | hfd4                       | .hfd4                             |
+|              |                            | { color: #fd4 }                   |
 +--------------+----------------------------+-----------------------------------+
-| hsl          | color-hsl-120-60p-70p      | .color-hsl-120-60p-70p {          |
-|              |                            |   color: hsl(120, 60%, 70%)       |
-|              |                            | }                                 |
+| hsl          | color-hsl-120-60p-70p      | .color-hsl-120-60p-70p            |
+|              |                            | { color: hsl(120, 60%, 70%) }     |
 +--------------+----------------------------+-----------------------------------+
-| hsla         | color-hsla-120-60p-70p-0_3 | .color-hsla-120-60p-70p-0_3 {     |
-|              |                            |   color: hsl(120, 60%, 70%, 0.3)  |
-|              |                            | }                                 |
+| hsla         | color-hsla-120-60p-70p-0_3 | .color-hsla-120-60p-70p-0_3       |
+|              |                            | { color: hsl(120, 60%, 70%, 0.3) }|
 +--------------+----------------------------+-----------------------------------+
 
 
@@ -248,7 +239,7 @@ A ``-n`` prefix for a number becomes a minus sign ``-``, and creates a negative 
 
 .. note::
 
-    The ``n`` in ``margin`` and ``-9in`` are unaffected.
+    The ``'n'`` in ``margin`` and ``-9in`` are unaffected.
 
 
 Use underscores to indicate Decimal point.
@@ -332,8 +323,8 @@ Pseudo classes and pseudo elements are documented `here <http://www.w3schools.co
 
 Examples: ::
 
-    'color-blue-hover', 'padding-10rem-i-active', 'bgc-h048-visited', 'color-red-after', 'padding-20rem-i-before',
-    'bgc-h096-selection'
+    'color-blue-hover', 'padding-10rem-i-active', 'bgc-h048-visited',
+    'color-red-after', 'padding-20rem-i-before', 'bgc-h096-selection'
 
 .. note::
 
@@ -343,9 +334,8 @@ Examples: ::
 +-------------------------+-----------------------------+
 | Value Encoding Format   | CSS Output                  |
 +=========================+=============================+
-| pink-hover              | .pink-hover:hover {         |
-|                         |    color: pink              |
-|                         | }                           |
+| pink-hover              | .pink-hover:hover           |
+|                         | { color: pink }             |
 +-------------------------+-----------------------------+
 
 
