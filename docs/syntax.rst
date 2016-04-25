@@ -188,90 +188,103 @@ font, it tries the next font.
 Color Declarations
 ~~~~~~~~~~~~~~~~~~
 
-+--------------+------------------------+-----------------+
-| Color Format | Encoded Class Format   | CSS Rule Output |
-+==============+========================+=================+
-| keyword      | color-silver           | .color-silver { |
-|              |                        | color: silver } |
-+--------------+------------------------+-----------------+
-| rgb          | color-rgb-0-255-0      | .color-rgb-0-25 |
-|              |                        | 5-0             |
-|              |                        | { color: rgb(0, |
-|              |                        | 255, 0) }       |
-+--------------+------------------------+-----------------+
-| rgba         | color-rgba-255-0-0-0\_ | .color-rgba-255 |
-|              | 5                      | -0-0-0\_5       |
-|              |                        | { color:        |
-|              |                        | rgba(255, 0, 0, |
-|              |                        | 0.5) }          |
-+--------------+------------------------+-----------------+
-| hex6         | color-h0ff23f (prepend | .color-h0ff23f  |
-|              | 'h')                   | { color:        |
-|              |                        | #0ff23f }       |
-+--------------+------------------------+-----------------+
-| hex6         | h0ff23f                | .h0ff23f {      |
-|              |                        | color: C#0ff23f |
-|              |                        | }               |
-+--------------+------------------------+-----------------+
-| hex3         | color-h03f (prepend    | .color-h03f {   |
-|              | 'h')                   | color: #03f }   |
-+--------------+------------------------+-----------------+
-| hex3         | hfd4                   | .hfd4 { color:  |
-|              |                        | C#fd4 }         |
-+--------------+------------------------+-----------------+
-| hsl          | color-hsl-120-60p-70p  | .color-hsl-120- |
-|              |                        | 60p-70p         |
-|              |                        | { color:        |
-|              |                        | hsl(120, 60%,   |
-|              |                        | 70%) }          |
-+--------------+------------------------+-----------------+
-| hsla         | color-hsla-120-60p-70p | .color-hsla-120 |
-|              | -0\_3                  | -60p-70p-0\_3   |
-|              |                        | { color:        |
-|              |                        | hsl(120, 60%,   |
-|              |                        | 70%, 0.3) }     |
-+--------------+------------------------+-----------------+
++--------------+----------------------------+-----------------------------------+
+| Color Format | Encoded Class Format       | CSS Rule Output                   |
++==============+============================+===================================+
+| keyword      | color-silver               | .color-silver {                   |
+|              | (most efficient)           |   color: silver                   |
+|              |                            | }                                 |
++--------------+----------------------------+-----------------------------------+
+| rgb          | color-rgb-0-255-0          | .color-rgb-0-255-0 {              |
+|              |                            |   color: rgb(0, 255, 0)           |
+|              |                            | }                                 |
++--------------+----------------------------+-----------------------------------+
+| rgba         | color-rgba-255-0-0-0_5     | .color-rgba-255-0-0-0_5 {         |
+|              |                            |   color: rgba(255, 0, 0, 0.5)     |
+|              |                            | }                                 |
++--------------+----------------------------+-----------------------------------+
+| hex6         | color-h0ff23f              | .color-h0ff23f {                  |
+|              | (prepend ``h``)            |   color: #0ff23f                  |
+|              |                            | }                                 |
++--------------+----------------------------+-----------------------------------+
+| hex6         | h0ff23f                    | .h0ff23f {                        |
+|              | (no property name)         |   color: #0ff23f                  |
+|              |                            | }                                 |
++--------------+----------------------------+-----------------------------------+
+| hex3         | color-h03f                 | .color-h03f {                     |
+|              | (prepend ``h``)            |   color: #03f                     |
+|              |                            | }                                 |
++--------------+----------------------------+-----------------------------------+
+| hex3         | hfd4                       | .hfd4 {                           |
+|              |                            |   color: #fd4                     |
+|              |                            | }                                 |
++--------------+----------------------------+-----------------------------------+
+| hsl          | color-hsl-120-60p-70p      | .color-hsl-120-60p-70p {          |
+|              |                            |   color: hsl(120, 60%, 70%)       |
+|              |                            | }                                 |
++--------------+----------------------------+-----------------------------------+
+| hsla         | color-hsla-120-60p-70p-0_3 | .color-hsla-120-60p-70p-0_3 {     |
+|              |                            |   color: hsl(120, 60%, 70%, 0.3)  |
+|              |                            | }                                 |
++--------------+----------------------------+-----------------------------------+
+
 
 Negative Values
 ~~~~~~~~~~~~~~~
 
-'n' :point\_right: '-'
+A ``-n`` prefix for a number becomes a minus sign ``-``, and creates a negative value.
 
-Value Encoding Format \| CSS Property Value Output ---------------------
-\| ------------------------- 'n48' \| '-48' 'n5cm n6cm' \| '-5cm -6cm'
-'n9in' \| '-9in' ###### Note that the 'n' at the end of ``-9in`` is not
-affected.
+``padding-n25px`` becomes ``padding: -25px``
+
++-----------------------+---------------------------+
+| Value Encoding Format | CSS Property Value Output |
++=======================+===========================+
+| width-n48             | width: -48px              |
++-----------------------+---------------------------+
+| margin-n5cm-n6cm      | margin: -5cm -6cm         |
++-----------------------+---------------------------+
+| height-n9in           | height: -9in              |
++-----------------------+---------------------------+
+
+.. note::
+
+    The ``n`` in ``margin`` and ``-9in`` are unaffected.
+
 
 Use underscores to indicate Decimal point.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-'1\_25' :point\_right: '1.25'
+``1_25`` becomes ``1.25``
 
 +-------------------------+-----------------------------+
 | Value Encoding Format   | CSS Property Value Output   |
 +=========================+=============================+
-| '1\_32rem'              | '1.32rem'                   |
+| margin-1_32rem          | margin: 1.32rem             |
++-------------------------+-----------------------------+
+| padding-n40_2rem        | padding: -40.2rem           |
 +-------------------------+-----------------------------+
 
-Special Note: Underscores can 'only' be used as decimal points.
+.. note::
+
+    Underscores can only be used as decimal points.
 
 
-Other usage of underscores will invalidate the class. e.g. 'padding\_1',
-'*padding-1', or 'padding-1*' are considered invalid and will not be
+Other usage of underscores will invalidate the class. e.g. ``padding_1``,
+``*padding-1``, or ``padding-1*`` are considered invalid and will not be
 decoded. Classes may still be defined with these names, but CSS would
 not be generated by this tool.
 
 Using Percentages 'p' becomes '%'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-'p' :point\_right: '%'
+``p`` becomes ``%``
 
 +-------------------------+-----------------------------+
 | Value Encoding Format   | CSS Property Value Output   |
 +=========================+=============================+
-| '1p-10p-3p-1p'          | '1% 10% 3% 1%'              |
+| margin-1p-10p-3p-1p     | margin: 1% 10% 3% 1%        |
 +-------------------------+-----------------------------+
-| '32p'                   | '32%'                       |
+| width-n3_2p             | width: -3.2%                |
 +-------------------------+-----------------------------+
 
 Default Units:
@@ -309,6 +322,32 @@ Explicitly Encoding Units in Class Name
 +-------------------------+-----------------------------+
 | width-120vmin           | width: 120vmin              |
 +-------------------------+-----------------------------+
+
+Pseudo Class and Pseudo Element Selectors
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Implemented as of version: 0.2.0
+
+Pseudo classes and pseudo elements are documented `here <http://www.w3schools.com/css/css_pseudo_elements.asp>`__.
+
+Examples: ::
+
+    'color-blue-hover', 'padding-10rem-i-active', 'bgc-h048-visited', 'color-red-after', 'padding-20rem-i-before',
+    'bgc-h096-selection'
+
+.. note::
+
+    Pseudo classes with parenthesis are excluded. Also, chaining pseudo items together is not implemented.
+    Replaced the print statements in FileHandler with logging.debug to increase efficiency.
+
++-------------------------+-----------------------------+
+| Value Encoding Format   | CSS Output                  |
++=========================+=============================+
+| pink-hover              | .pink-hover:hover {         |
+|                         |    color: pink              |
+|                         | }                           |
++-------------------------+-----------------------------+
+
 
 Media Queries using Breakpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

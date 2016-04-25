@@ -37,7 +37,7 @@ Enable watchdog
 
 - If the virtualenv is not already active, then activate the virtualenv with ``source/bin activate``.
 
-- Navigate to ``<path>/blowdrycss_tutorial`` at the command line.
+- Navigate to ``<path>/blowdrycss_tutorial``.
 
 - Open ``blowdrycss_settings.py``.
 
