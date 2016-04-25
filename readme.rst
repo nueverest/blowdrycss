@@ -80,7 +80,7 @@ Advantages of blowdrycss
 #. **Symbiotic:**
     * Can be integrated with the current ecosystem of CSS compilers and frameworks.
       Compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
-    * Supports HTML, JINJA, XHTML, .NET, Ruby Template ERB class selector discovery.
+    * Supports class selector discovery within HTML, JINJA, XHTML, .NET, Ruby ERB Templates, Javascript, and C#.
 #. **Documented:** Hands-on `tutorial <http://blowdrycss.readthedocs.org/en/latest/quickstart.html>`__ and sphinx `documentation <http://blowdrycss.readthedocs.org/en/latest/index.html>`__ to get you up and running fast.
 #. **Robust:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all phases of a products lifecycle from prototype to production.
 #. **Customizable:** Features can be turned on and off inside of `blowdrycss_settings.py <https://github.com/nueverest/blowdrycss/blob/master/blowdrycss/blowdrycss_settings.py>`__. Examples include:
@@ -91,7 +91,7 @@ Advantages of blowdrycss
     * Font parsing
     * CSS Minification
     * Media query parsing.
-#. **Extensible:** Want to extract class selectors from javascript files? Build a plugin.
+#. **Atomic:** Allows the creation of Atomic CSS declarations.
 #. **Standardized:** HTML5 compatible. All `W3C CSS <http://www.w3.org/Style/CSS/Overview.en.html>`__ Level 2.1, and Level 3 properties implemented. PEP8 Compliant.
 #. **Tested:** UnitTest Coverage
 #. **Permissive:** `MIT license <https://github.com/nueverest/blowdrycss/blob/master/LICENSE>`__
@@ -166,7 +166,7 @@ Inside a CSS file you find the following:
 Six months later the person who wrote this CSS is then asked to remove
 banner-video from the homepage. More often than not the
 front-end developer will remove the CSS class from the HTML file, but
-not from the CSS file.
+not from the CSS file. This leaves unused CSS lurking in the project.
 
 Reasons include:
 ^^^^^^^^^^^^^^^^
@@ -282,6 +282,6 @@ License
 How to Contribute
 ~~~~~~~~~~~~~~~~~
 
--  Open an Issue first
+-  Open an Issue first and get community buy-in.
 -  Write Code
 -  Write Unit Tests (All tests must pass. 100% coverage preferred.)
