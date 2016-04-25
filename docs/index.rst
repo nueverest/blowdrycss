@@ -12,7 +12,6 @@ Documentation
 
 .. image:: https://img.shields.io/coveralls/nueverest/blowdrycss.svg?maxAge=2592000   :target: https://coveralls.io/github/nueverest/blowdrycss
 
-|
 
 About
 ~~~~~
