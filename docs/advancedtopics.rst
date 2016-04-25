@@ -9,8 +9,7 @@ Advanced Topics
 - How to change settings in ``blowdrycss_settings.py``.
 - Customizing the alias dictionary.
 - Where are the semicolons?
-- How to build a plugin. [missing]
-- Non-HTML files (jinja, .NET, and ruby templates). [missing]
+- How to build a plugin. [todo]
 - Pro-tip: Want to share your site with a client, co-worker, or colleague. Use `ngrok <https://ngrok.com/>`__.
 - DRYness
 - Syntax Guide
