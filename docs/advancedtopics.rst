@@ -191,6 +191,30 @@ Where are the semicolons in the CSS file?
 
 After opening ``blowdry.css``, it becomes evident that semicolons are not used for most of the css rule declarations.
 
+Sample ``blowdry.css`` contents ::
+
+    .padding-5 {
+        padding: 0.3125em
+        }
+    .margin-top-50px {
+        margin-top: 3.125em
+        }
+    .t-align-center {
+        text-align: center
+        }
+    .padding-10 {
+        padding: 0.625em
+        }
+    .display-none {
+        display: none
+        }
+    .height-150px {
+        height: 9.375em
+        }
+    .margin-25 {
+        margin: 1.5625em
+        }
+
 Why?
 ''''
 
@@ -205,7 +229,7 @@ Why?
 
 - It is compatible with all browsers.
 
-- It results in faster page loads due to smaller ``*.css`` file size.
+- It results in slightly faster page loads due to smaller ``*.css`` file size.
 
 
 DRY-ness must be balanced with other factors.
