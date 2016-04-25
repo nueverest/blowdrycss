@@ -13,10 +13,16 @@ Read Me
 
 `blowdrycss` is a rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
 
-Quick Start
-~~~~~~~~~~~
+
+Getting Started
+~~~~~~~~~~~~~~~
 
 `Quick Start Docs <http://blowdrycss.readthedocs.org/en/latest/quickstart.html>`__
+
+`Official site blowdrycss.org <http://blowdrycss.org>`__
+
+`Full documentation <http://blowdrycss.readthedocs.org/en/latest/index.html>`__
+
 
 Version Changelog
 ~~~~~~~~~~~~~~~~~
@@ -91,7 +97,7 @@ Advantages of blowdrycss
     * Font parsing
     * CSS Minification
     * Media query parsing.
-#. **Atomic:** Allows the creation of Atomic CSS declarations.
+#. **Atomic:** Generates atomic CSS declarations.
 #. **Standardized:** HTML5 compatible. All `W3C CSS <http://www.w3.org/Style/CSS/Overview.en.html>`__ Level 2.1, and Level 3 properties implemented. PEP8 Compliant.
 #. **Tested:** UnitTest Coverage
 #. **Permissive:** `MIT license <https://github.com/nueverest/blowdrycss/blob/master/LICENSE>`__

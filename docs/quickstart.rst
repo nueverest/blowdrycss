@@ -3,6 +3,8 @@ Quick Start Guide
 
 .. index:: single: Quick Start Guide
 
+`Documentation home. <http://blowdrycss.readthedocs.org/en/latest/index.html>`__
+
 This guide rapidly shows you how to:
 
 - Setup a virtual environment.
@@ -117,3 +119,6 @@ This guide rapidly shows you how to:
 | Go to Part 5 of the :doc:`tutorial`.
 |
 | Head on over to :doc:`advancedtopics`.
+|
+| `Documentation home. <http://blowdrycss.readthedocs.org/en/latest/index.html>`__
+|
