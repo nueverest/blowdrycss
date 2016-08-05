@@ -28,10 +28,10 @@ class TestColorParser(TestCase):
 
     def test_is_valid_hex_Integer_case(self):
         values_true = [
-            'h0ff48f', 'hfff', ' habc123 ', 'hfdec78', 'h000', ' hbcd ', '5px solid hd0d', '5px-hidden-hd0d987',
+            'h0ff48f', 'hfff', ' hABC123 ', 'hfdec78', 'h000', ' hbcd ', '5px solid hd0d', '5px-hidden-hd0d987',
             '13px dashed hd0d',
             'h000-i', 'h484848-i',
-            'hf2f-hover-i', 'hf3f-i-hover', 'color-hf4f-hover-i', 'color-hf5f-i-hover',
+            'hf2f-hover-i', 'hF3F-i-hover', 'color-hf4f-hover-i', 'color-hf5f-i-hover',
             'hf2f2f2-hover-i', 'hf3f3f3-i-hover', 'color-hf4f4f4f-hover-i', 'color-hf5f5f5-i-hover',
         ]
         expected = [

@@ -34,14 +34,14 @@ class DataLibrary(object):
         - Hexidecimal (3 digit) -- 'h123', 'h123 bold', 'underline h123 bold'
         - Hexidecimal (6 digit) -- 'h123456', 'h123456 underline', 'underline h123456 bold'
         - Hexidecimal (3 digit + pseudo-class + importance designator) -- 'h123-hover-i', 'h123-after-i bold',
-        - Hexidecimal (6 digit + pseudo-class + importance designator) -- 'h123456-hover-i', 'h123456-hover-i underline'
-        - Hexidecimal (3 digit + importance designator + pseudo-class) -- 'h123-i-hover', 'h123-i-hover bold'
+        - Hexidecimal (6 digit + pseudo-class + importance designator) -- 'h12ad56-hover-i', 'h12AD56-hover-i underline'
+        - Hexidecimal (3 digit + importance designator + pseudo-class) -- 'h1f3-i-hover', 'h1F3-i-hover bold'
         - Hexidecimal (6 digit + importance designator + pseudo-class) -- 'h123456-i-hover', 'h123456-i-hover underline'
 
         - Hexidecimal Regex explained
-            - ``r"(h[0-9a-f]{3} ?)$"`` or ``r"(h[0-9a-f]{6} ?)$"``
+            - ``r"(h[0-9a-fA-F]{3} ?)$"`` or ``r"(h[0-9a-fA-F]{6} ?)$"``
             - ``h`` -- The substring must begin with an ``h``.
-            - ``[0-9a-f]`` -- The characters that follow must be a hexidecimal characters.
+            - ``[0-9a-fA-F]`` -- The characters that follow must be a hexidecimal characters.
             - ``{3}`` or ``{6}`` -- Limit the number of hexidecimal characters to either 3 or 6 only.
             - ``' ?'`` -- The substring may optionally be followed by a space.
 
@@ -139,10 +139,10 @@ class DataLibrary(object):
     def __init__(self):
         self.property_regex_dict = {
             'color': {
-                r"(h[0-9a-f]{3} ?)$", r"(h[0-9a-f]{6} ?)$",
-                r"(h[0-9a-f]{3}-i ?)$", r"(h[0-9a-f]{6}-i ?)$",
-                r"(h[0-9a-f]{3}.*?-i ?)$", r"(h[0-9a-f]{6}.*-i ?)$",
-                r"(h[0-9a-f]{3}-i.*? ?)$", r"(h[0-9a-f]{6}-i.*? ?)$",
+                r"(h[0-9a-fA-F]{3} ?)$", r"(h[0-9a-fA-F]{6} ?)$",
+                r"(h[0-9a-fA-F]{3}-i ?)$", r"(h[0-9a-fA-F]{6}-i ?)$",
+                r"(h[0-9a-fA-F]{3}.*?-i ?)$", r"(h[0-9a-fA-F]{6}.*-i ?)$",
+                r"(h[0-9a-fA-F]{3}-i.*? ?)$", r"(h[0-9a-fA-F]{6}-i.*? ?)$",
             },
         }
 
