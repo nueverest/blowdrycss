@@ -142,7 +142,7 @@
       - Integrated Travis CI
       - Integrated Coveralls
       - Added shield.io badges from PyPi, Travis CI, and Coveralls to readme.
-    |
+
     | **0.2.2** -- Increased code test coverage. Fixed a math error in the CSS statistics printer. Azimuth was removed
       as it is now obsolete and has inconsistent browser support.
     |

@@ -22,10 +22,10 @@ Delete the old .egg-info, build, and dist from the project root.
 
 ``unittest`` Reference: https://docs.python.org/2/library/unittest.html
 
-Activate a test virtualenv.
+Activate a test virtualenv (test_blowdrycss_pypi).
 Run Sphinx.
 Check Travis CI for passing build.
-tox                                                 # tox will run the following two commands:
+tox     # coveralls setup brakes this.              # tox will run the following two commands:
                                                     # python -m unittest discover -s blowdrycss -p "test_*.py"
                                                     # python setup.py test
 python setup.py clean --all                         # Clean directory of old version
