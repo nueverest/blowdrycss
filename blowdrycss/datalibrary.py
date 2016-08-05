@@ -133,7 +133,12 @@ class DataLibrary(object):
     """
     def __init__(self):
         self.property_regex_dict = {
-            'color': {r"(h[0-9a-f]{3} ?)$", r"(h[0-9a-f]{6} ?)$"},
+            'color': {
+                r"(h[0-9a-f]{3} ?)$", r"(h[0-9a-f]{6} ?)$",
+                r"(h[0-9a-f]{3}-i ?)$", r"(h[0-9a-f]{6}-i ?)$",
+                r"(h[0-9a-f]{3}.*?-i ?)$", r"(h[0-9a-f]{6}.*-i ?)$",
+                r"(h[0-9a-f]{3}-i.*? ?)$", r"(h[0-9a-f]{6}-i.*? ?)$",
+            },
         }
 
         self.custom_property_alias_dict = settings.custom_property_alias_dict
