@@ -20,10 +20,14 @@ change_settings_for_testing()
 
 class TestCSSStyleBuilder(TestCase):
     def test_build_selector(self):
-        css_classes = ('padding-10-i-hover', 'color-hfff-before', 'width-1rem-s-selection', 'color-red-checked',)
+        css_classes = (
+            'padding-10-i-hover', 'color-hfff-before', 'width-1rem-s-selection', 'color-red-checked',
+            'hfff-hover-i', 'hfff-i-hover', 'color-hfff-hover-i', 'color-hfff-i-hover',
+        )
         expected_selector_text = (
             '.padding-10-i-hover:hover', '.color-hfff-before::before', '.width-1rem-s-selection::selection',
-            '.color-red-checked:checked',
+            '.color-red-checked:checked', '.hfff-hover-i:hover', '.hfff-i-hover:hover',
+            '.color-hfff-hover-i:hover', '.color-hfff-i-hover:hover',
         )
         property_parser = ClassPropertyParser(class_set=set())
         style_builder = CSSBuilder(property_parser=property_parser)
