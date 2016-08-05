@@ -330,7 +330,7 @@ Examples: ::
     Replaced the print statements in FileHandler with logging.debug to increase efficiency.
 
 +-------------------------+-----------------------------+
-| Value Encoding Format   | CSS Output                  |
+| Value Encoding Format   | CSS Rule Output             |
 +=========================+=============================+
 | pink-hover              | .pink-hover:hover           |
 |                         | { color: pink }             |

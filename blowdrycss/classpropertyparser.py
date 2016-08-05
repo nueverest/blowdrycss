@@ -437,7 +437,8 @@ class ClassPropertyParser(object):
         encoded_property_value = self.strip_priority_designator(css_class)
         return encoded_property_value
 
-    def get_property_value(self, property_name='', encoded_property_value=''):
+    @staticmethod
+    def get_property_value(property_name='', encoded_property_value=''):
         """
         Accepts an encoded_property_value that's been stripped of it's property named and priority
         Uses CSSPropertyValueParser, and returns a valid css property value or ''.
@@ -587,8 +588,6 @@ class ClassPropertyParser(object):
 
     def set_pseudo_class(self, css_class=''):
         """ Check the pseudo class set for a match. Sets ``pseudo_class`` if found. Otherwise, returns ''.
-
-        Set ``has_pseudo_class`` True if a valid pseudo class is found. Otherwise, set it to False.
 
         :raises ValueError: If either property_name or css_class are empty or only contain whitespace values.
 

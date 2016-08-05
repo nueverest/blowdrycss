@@ -34,7 +34,7 @@ class TestClassPropertyParser(TestCase):
     def test_clean_class_set(self):
         valid_classes = {
             'color-hfff', 'font-color-hsla-120-60p-70p-0_3', 'padding-5_2rem', 'height-24_48p',
-            'padding-7_3-8_5-9_7-10_2',
+            'padding-7_3-8_5-9_7-10_2', 'hfff-hover-i', 'hfff-i-hover', 'color-hfff-hover-i',
         }
         # Covers all invalid cases: first char, allowed chars, last char, and underscores.
         invalid_classes = {
@@ -119,8 +119,9 @@ class TestClassPropertyParser(TestCase):
         valid_inputs = (
             'color-blue-hover', 'padding-10rem-i-active', 'bgc-h048-visited',
             'color-red-after', 'padding-20rem-i-before', 'bgc-h096-selection',
+            'hfff-hover-i', 'hfff-i-hover', 'color-hfff-hover-i', 'color-hfff-i-hover',
         )
-        pseudo_items = ('hover', 'active', 'visited', 'after', 'before', 'selection', )
+        pseudo_items = ('hover', 'active', 'visited', 'after', 'before', 'selection', 'hover', 'hover', 'hover', )
         class_parser = ClassPropertyParser(class_set=set())
         for i, valid_input in enumerate(valid_inputs):
             self.assertTrue(
@@ -330,7 +331,7 @@ class TestClassPropertyParser(TestCase):
             self.assertRaises(ValueError, class_parser.get_property_value, 'color', invalid)
 
     def test_is_important_True(self):
-        expected_true = ('p-10-i', 'c-green-i-hover')
+        expected_true = ('p-10-i', 'c-green-i-hover', 'hfff-hover-i', 'hfff-i-hover', 'color-hfff-hover-i',)
         class_parser = ClassPropertyParser(class_set=set())
         for valid in expected_true:
             self.assertTrue(class_parser.is_important(css_class=valid), msg=valid)
@@ -364,7 +365,10 @@ class TestClassPropertyParser(TestCase):
 
     def test_get_property_priority_important(self):
         expected_property_priority = 'important'
-        class_set = {'font-weight-bold-i', 'font-weight-700-i', 'bold-i', 'normal-i-hover', 'padding-10-i-after', }
+        class_set = {
+            'font-weight-bold-i', 'font-weight-700-i', 'bold-i', 'normal-i-hover', 'padding-10-i-after',
+            'hfff-hover-i', 'hfff-i-hover', 'color-hfff-hover-i',
+        }
         class_parser = ClassPropertyParser(class_set=class_set)
         for css_class in class_parser.class_set:
             property_priority = class_parser.get_property_priority(css_class=css_class)
