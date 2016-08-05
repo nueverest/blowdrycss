@@ -148,6 +148,7 @@ class ScalingParser(object):
         """ Returns CSS media queries that scales pixel / em values in response to screen size changes.
 
         **Generated CSS for ``font-size-24-s`` minus the inline comments & line breaks**::
+
             // Default size above medium
             .font-size-24-s { font-size: 24px; }
 
