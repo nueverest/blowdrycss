@@ -62,6 +62,9 @@ class TestBreakpointParser(TestCase):
         css_property = Property(name=name, value=value, priority=priority)
         expected = (
             '.font-size-24-s { font-size: ' + value + '; }\n\n' +
+            '@media only screen and (max-width: 64.0em) {\n' +
+            '\t.font-size-24-s { font-size: 23.0105px; }\n' +
+            '}\n\n' +
             '@media only screen and (max-width: 45.0em) {\n' +
             '\t.font-size-24-s { font-size: 21.3333px; }\n' +
             '}\n\n' +
@@ -81,6 +84,9 @@ class TestBreakpointParser(TestCase):
         css_property = Property(name=name, value=value, priority=priority)
         expected = (
             '.font-size-24-s { font-size: ' + value + '; }\n\n' +
+            '@media only screen and (max-width: 64.0em) {\n' +
+            '\t.font-size-24-s { font-size: 1.4382em; }\n' +
+            '}\n\n' +
             '@media only screen and (max-width: 45.0em) {\n' +
             '\t.font-size-24-s { font-size: 1.3333em; }\n' +
             '}\n\n' +
@@ -100,6 +106,9 @@ class TestBreakpointParser(TestCase):
         css_property = Property(name=name, value=value, priority=priority)
         expected = (
             '.font-size-24-s-i { font-size: ' + value + ' !important; }\n\n' +
+            '@media only screen and (max-width: 64.0em) {\n' +
+            '\t.font-size-24-s-i { font-size: 1.4382em !important; }\n' +
+            '}\n\n' +
             '@media only screen and (max-width: 45.0em) {\n' +
             '\t.font-size-24-s-i { font-size: 1.3333em !important; }\n' +
             '}\n\n' +
@@ -130,6 +139,9 @@ class TestBreakpointParser(TestCase):
         css_property = Property(name=name, value=value, priority=priority)
         expected = (
             '.font-size-24rem-s-i { font-size: ' + value + ' !important; }\n\n' +
+            '@media only screen and (max-width: 64.0em) {\n' +
+            '\t.font-size-24rem-s-i { font-size: 23.0105rem !important; }\n' +
+            '}\n\n' +
             '@media only screen and (max-width: 45.0em) {\n' +
             '\t.font-size-24rem-s-i { font-size: 21.3333rem !important; }\n' +
             '}\n\n' +
@@ -150,6 +162,9 @@ class TestBreakpointParser(TestCase):
         css_property = Property(name=name, value=value, priority=priority)
         expected = (
             '.font-size-24parsecs-s-i { font-size: ' + value + ' !important; }\n\n' +
+            '@media only screen and (max-width: 64.0em) {\n' +
+            '\t.font-size-24parsecs-s-i { font-size: 23.0105parsecs !important; }\n' +
+            '}\n\n' +
             '@media only screen and (max-width: 45.0em) {\n' +
             '\t.font-size-24parsecs-s-i { font-size: 21.3333parsecs !important; }\n' +
             '}\n\n' +

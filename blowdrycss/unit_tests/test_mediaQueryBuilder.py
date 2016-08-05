@@ -128,6 +128,9 @@ class TestMediaQueryBuilder(TestCase):
             ),
             (
                 '.font-size-13-s-i { font-size: 0.8125em !important; }\n\n' +
+                '@media only screen and (max-width: 64.0em) {\n' +
+                '\t.font-size-13-s-i { font-size: 0.779em !important; }\n' +
+                '}\n\n' +
                 '@media only screen and (max-width: 45.0em) {\n' +
                 '\t.font-size-13-s-i { font-size: 0.7222em !important; }\n' +
                 '}\n\n' +
@@ -137,6 +140,9 @@ class TestMediaQueryBuilder(TestCase):
             ),
             (
                 '.font-size-48em-s { font-size: 48em; }\n\n' +
+                '@media only screen and (max-width: 64.0em) {\n' +
+                '\t.font-size-48em-s { font-size: 46.0211em; }\n' +
+                '}\n\n' +
                 '@media only screen and (max-width: 45.0em) {\n' +
                 '\t.font-size-48em-s { font-size: 42.6667em; }\n' +
                 '}\n\n' +
@@ -146,6 +152,9 @@ class TestMediaQueryBuilder(TestCase):
             ),
             (
                 '.padding-16-s-i { padding: 1em !important; }\n\n' +
+                '@media only screen and (max-width: 64.0em) {\n' +
+                '\t.padding-16-s-i { padding: 0.9588em !important; }\n' +
+                '}\n\n' +
                 '@media only screen and (max-width: 45.0em) {\n' +
                 '\t.padding-16-s-i { padding: 0.8889em !important; }\n' +
                 '}\n\n' +
@@ -193,6 +202,9 @@ class TestMediaQueryBuilder(TestCase):
             ),
             (
                 '.font-size-13-s-i { font-size: 0.8125em !important; }\n\n' +
+                '@media only screen and (max-width: 64.0em) {\n' +
+                '\t.font-size-13-s-i { font-size: 0.779em !important; }\n' +
+                '}\n\n' +
                 '@media only screen and (max-width: 45.0em) {\n' +
                 '\t.font-size-13-s-i { font-size: 0.7222em !important; }\n' +
                 '}\n\n' +
