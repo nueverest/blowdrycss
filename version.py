@@ -149,7 +149,8 @@
     | **0.2.3** -- Fixed parsing errors associated with hexidecimal values that are mixed with the
       importance designator or pseudo classes. Changed readthedocs.org to readthedocs.io. Cleaned comments.
     |
-    | **0.2.4** -- Allow upper case letters for encoded hexidecimal values.
+    | **0.2.4** -- The `-s` designated scaling media queries now start scaling on large screens. Allow upper case
+      letters for encoded hexidecimal values.
     |
 
 
