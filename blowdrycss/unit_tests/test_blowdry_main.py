@@ -57,7 +57,7 @@ class TestMain(TestCase):
             if os.path.isfile(expected_file):
                 os.remove(expected_file)
 
-        blowdry.main()
+        blowdry.main()                                                              # Run It
 
         for expected_file in expected_files:
             self.assertTrue(os.path.isfile(expected_file), msg=expected_file)
