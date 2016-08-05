@@ -399,7 +399,7 @@ class ClassPropertyParser(object):
     #
     def get_encoded_property_value(self, property_name='', css_class=''):
         """
-        Strip property name or alias abbreviation prefix from front, and property priority designator from end.
+        Strip property name or alias abbreviation prefix from front, pseudo item, and property priority designator.
         Returns the encoded_property_value.
 
         The term encoded_property_value means a property value that represents a css property value,
@@ -561,15 +561,16 @@ class ClassPropertyParser(object):
         css_class = self.strip_pseudo_item(css_class=css_class)
         return 'important' if self.is_important(css_class=css_class) else ''
 
-    @staticmethod
-    def is_valid_pseudo_format(pseudo_item='', css_class=''):
+    def is_valid_pseudo_format(self, pseudo_item='', css_class=''):
         """ Returns True if the CSS class contains a properly formatted pseudo class or element, and False otherwise.
 
         **Rules**
 
-        - The ``css_class`` must end with '-' + pseudo_item. Example prefix: ``color-green-i-hover``
+        - The ``css_class`` may end with '-' + pseudo_item. Example prefix: ``color-green-i-hover``
 
-        - The ``css_class`` must be longer than the suffix.
+        - The ``css_class`` may end with '-' + pseudo_item + '-i'. Example prefix: ``color-green-hover-i``
+
+        - The ``css_class`` must be longer than the suffix or suffix + '-i'.
 
         :type pseudo_item: str
         :type css_class: str
@@ -584,7 +585,15 @@ class ClassPropertyParser(object):
         deny_empty_or_whitespace(string=css_class, variable_name='css_class')
 
         suffix = '-' + pseudo_item
-        return True if css_class.endswith(suffix) and len(css_class) > len(suffix) else False
+        isuffix = suffix + self.importance_designator
+
+        if css_class.endswith(suffix) and len(css_class) > len(suffix):     # '-i-hover' case
+            return True
+
+        if css_class.endswith(isuffix) and len(css_class) > len(isuffix):   # '-hover-i' case
+            return True
+
+        return False
 
     def set_pseudo_class(self, css_class=''):
         """ Check the pseudo class set for a match. Sets ``pseudo_class`` if found. Otherwise, returns ''.
@@ -631,7 +640,7 @@ class ClassPropertyParser(object):
 
         :type css_class: str
 
-        :param css_class: This value may or may not be identical to the property_value.
+        :param css_class:  _value.
         :return: (str) -- Returns the encoded property value portion of the css_class.
 
         **Examples:**

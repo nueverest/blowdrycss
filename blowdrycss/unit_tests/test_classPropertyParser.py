@@ -121,11 +121,14 @@ class TestClassPropertyParser(TestCase):
             'color-red-after', 'padding-20rem-i-before', 'bgc-h096-selection',
             'hfff-hover-i', 'hfff-i-hover', 'color-hfff-hover-i', 'color-hfff-i-hover',
         )
-        pseudo_items = ('hover', 'active', 'visited', 'after', 'before', 'selection', 'hover', 'hover', 'hover', )
+        pseudo_items = (
+            'hover', 'active', 'visited', 'after', 'before', 'selection',
+            'hover', 'hover', 'hover', 'hover',
+        )
         class_parser = ClassPropertyParser(class_set=set())
         for i, valid_input in enumerate(valid_inputs):
             self.assertTrue(
-                    class_parser.is_valid_pseudo_format(pseudo_items[i], valid_input),
+                class_parser.is_valid_pseudo_format(pseudo_items[i], valid_input),
                 msg=valid_input
             )
     
@@ -138,7 +141,7 @@ class TestClassPropertyParser(TestCase):
         class_parser = ClassPropertyParser(class_set=set())
         for i, invalid_input in enumerate(invalid_inputs):
             self.assertFalse(
-                    class_parser.is_valid_pseudo_format(pseudo_items[i], css_class=invalid_input),
+                class_parser.is_valid_pseudo_format(pseudo_items[i], css_class=invalid_input),
                 msg=invalid_input
             )
 
@@ -278,9 +281,18 @@ class TestClassPropertyParser(TestCase):
         # 'fw-bold-i' --> 'bold'                [abbreviated font-weight property_name]
         # 'padding-1-10-10-5-i' --> '1-10-10-5' [standard property_name]
         # 'height-7_25rem-i' --> '7_25rem'      [contains underscores]
-        property_names = ['font-weight', 'padding', 'height', 'width', 'background-color', ]
-        css_classes = ['fw-bold-i', 'padding-1-10-10-5-i', 'height-7_25rem-i', 'width-50cm-s-i', 'bgc-red-i-hover', ]
-        expected_encoded_property_values = ['bold', '1-10-10-5', '7_25rem', '50cm-s', 'red', ]
+        property_names = [
+            'font-weight', 'padding', 'height', 'width', 'background-color',
+            'color', 'color', 'color', 'color',
+        ]
+        css_classes = [
+            'fw-bold-i', 'padding-1-10-10-5-i', 'height-7_25rem-i', 'width-50cm-s-i', 'bgc-red-i-hover',
+            'hfff-hover-i', 'hfff-i-hover', 'color-hfff-hover-i', 'color-hfff-i-hover',
+        ]
+        expected_encoded_property_values = [
+            'bold', '1-10-10-5', '7_25rem', '50cm-s', 'red',
+            'hfff', 'hfff', 'hfff', 'hfff',
+        ]
         class_parser = ClassPropertyParser(class_set=set())
 
         for i, css_class in enumerate(css_classes):
