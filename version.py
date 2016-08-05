@@ -159,6 +159,6 @@ __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.2.3'
+__version__ = '0.2.4'
 
 __release__ = __version__ + 'b2'

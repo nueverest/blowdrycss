@@ -3,8 +3,6 @@ Read Me
 
 .. image:: https://img.shields.io/pypi/v/blowdrycss.svg?maxAge=2592000?style=plastic   :target: https://pypi.python.org/pypi/blowdrycss
 
-.. image:: https://img.shields.io/pypi/dm/blowdrycss.svg?maxAge=2592000?style=plastic   :target: https://pypi.python.org/pypi/blowdrycss
-
 .. image:: https://img.shields.io/travis/nueverest/blowdrycss.svg?maxAge=2592000   :target: https://travis-ci.org/nueverest/blowdrycss
 
 .. image:: https://img.shields.io/coveralls/nueverest/blowdrycss.svg?maxAge=2592000   :target: https://coveralls.io/github/nueverest/blowdrycss
@@ -29,11 +27,11 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.2.2** -- Increased code test coverage. Fixed a math error in the CSS statistics printer. Azimuth was removed
-  as it is now obsolete and has inconsistent browser support.
-|
 | **0.2.3** -- Fixed parsing errors associated with hexidecimal values that are mixed with the
-  importance designator or pseudo classes. Changed readthedocs.org to readthedocs.io. Cleaned comments.
+      importance designator or pseudo classes. Changed readthedocs.org to readthedocs.io. Cleaned comments.
+|
+| **0.2.4** -- The `-s` designated scaling media queries now start scaling on large screens. Allow upper case
+  letters for encoded hexidecimal values.
 |
 
 
