@@ -147,7 +147,7 @@
       as it is now obsolete and has inconsistent browser support.
     |
     | **0.2.3** -- Fixed parsing errors associated with hexidecimal values that are mixed with the
-      importance designator or pseudo classes. Cleaned comments.
+      importance designator or pseudo classes. Changed readthedocs.org to readthedocs.io. Cleaned comments.
     |
 
 
