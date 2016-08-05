@@ -29,16 +29,13 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.2.1** -- Allow single quotes in HTML ``class='green'`` pattern. Enable parsing of ``*.cs`` files for HTML
-  class declarations, CssClass, and ``*Attributes.Add("class", "bold padding-42");``.
-
-  - Integrated Travis CI
-  - Integrated Coveralls
-  - Added shield.io badges from PyPi, Travis CI, and Coveralls to readme.
-
 | **0.2.2** -- Increased code test coverage. Fixed a math error in the CSS statistics printer. Azimuth was removed
   as it is now obsolete and has inconsistent browser support.
 |
+| **0.2.3** -- Fixed parsing errors associated with hexidecimal values that are mixed with the
+  importance designator or pseudo classes. Changed readthedocs.org to readthedocs.io. Cleaned comments.
+|
+
 
 Why the name blowdrycss?
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -47,12 +44,6 @@ Inspiration for the name came from the blow dryer. A blow dryer rapidly drys and
 
 Similarly, ``blowdrycss`` is used to rapidly style HTML and generate DRY CSS files using encoded class names.
 
-Decomposition
-~~~~~~~~~~~~~
-
--  **Blow** means to expel a current of air causing it to be in a state of motion. Resembles the dynamic nature of the development process.
--  **DRY** stands for `Don't Repeat Yourself <https://en.wikipedia.org/wiki/Don%27t_repeat_yourself>`__.
--  **CSS** stands for Cascading Style Sheets.
 
 Example Usage in HTML Tags:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
