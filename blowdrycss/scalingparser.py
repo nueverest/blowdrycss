@@ -7,7 +7,7 @@ from cssutils.css import Property
 # custom
 from blowdrycss.utilities import deny_empty_or_whitespace
 from blowdrycss.unitparser import UnitParser
-from blowdrycss_settings import small, medium
+from blowdrycss_settings import small, medium, large
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -40,7 +40,9 @@ class ScalingParser(object):
         +-------------+-------------------+----------------+------+-------+
         | Screen Size |   Trigger Range   | Scaling Factor |  px  | em    |
         +-------------+-------------------+----------------+------+-------+
-        | Large       | > 720px or 45.0em |        1       |  24  | 1.5   |
+        | XLarge      | > 1024 or 64.0em  |        1       |  24  | 1.5   |
+        +-------------+-------------------+----------------+------+-------+
+        | Large       | > 720px & <= 1024 |      1.043     | 23.0 | 1.438 |
         +-------------+-------------------+----------------+------+-------+
         | Medium      | < 720px or 45.0em |      1.125     | 21.3 | 1.333 |
         +-------------+-------------------+----------------+------+-------+
@@ -71,6 +73,7 @@ class ScalingParser(object):
         self.css_class = css_class
         self.css_property = css_property
         self.scale_dict = {
+            'large': 1.043,
             'medium': 1.125,
             'small': 1.25,
         }
@@ -144,31 +147,41 @@ class ScalingParser(object):
     def build_media_query(self):
         """ Returns CSS media queries that scales pixel / em values in response to screen size changes.
 
-        **Generated CSS for ``font-size-24-s`` minus the inline comments**::
+        **Generated CSS for ``font-size-24-s`` minus the inline comments & line breaks**::
+            // Default size above medium
+            .font-size-24-s { font-size: 24px; }
 
-            .font-size-24-s {
-                // Default size above medium
-                font-size: 24px;
-
-                // medium screen font size reduction
-                @media only screen and (max-width: 45.0em) {
-                    font-size: 21.3px;
-                }
-
-                // small screen font size reduction
-                @media only screen and (max-width: 30.0em) {
-                    font-size: 19.2px;
-                }
+            // medium screen font size reduction
+            @media only screen and (max-width: 64.0em) {
+                .font-size-24-s { font-size: 23.0px; }
             }
 
-        **Priority !important -- Generated CSS for ``font-size-24-s-i`` minus the inline comments**::
+            // medium screen font size reduction
+            @media only screen and (max-width: 45.0em) {
+                .font-size-24-s { font-size: 21.3px; }
+            }
+
+            // small screen font size reduction
+            @media only screen and (max-width: 30.0em) {
+                .font-size-24-s { font-size: 19.2px; }
+            }
+
+
+        **Priority !important -- Generated CSS for ``font-size-24-s-i`` minus the inline comments & line breaks**::
 
             // Default size above the maximum 'medium' width breakpoint.
             .font-size-24-s-i { font-size: 24px !important; }
+
+            // medium screen font size reduction
+            @media only screen and (max-width: 64.0em) {
+                .font-size-24-s-i { font-size: 23.0px !important; }
+            }
+
             // Apply 'medium' screen font size reduction.
             @media only screen and (max-width: 45.0em) {
                 .font-size-24-s-i { font-size: 21.3px !important; }
             }
+
             // Apply 'small' screen font size reduction.
             @media only screen and (max-width: 30.0em) {
                 .font-size-24-s-i { font-size: 19.2px !important; }
@@ -188,26 +201,29 @@ class ScalingParser(object):
         float_value = float(value.replace(units, ''))                           # Remove units.
 
         _max = 1
-        small_max = small[_max]
-        medium_max = medium[_max]
 
+        large_property = Property(name=name, value=value, priority=priority)
         medium_property = Property(name=name, value=value, priority=priority)
         small_property = Property(name=name, value=value, priority=priority)
 
-        medium_value = round(float_value / self.scale_dict['medium'], 4)        # Scale to medium screen
-        medium_value = str(medium_value) + units                                # Add units
-        small_value = round(float_value / self.scale_dict['small'], 4)          # Scale to small screen
-        small_value = str(small_value) + units                                  # Add units
+        large_value = round(float_value / self.scale_dict['large'], 4)          # Scale to large screen
+        large_property.value = str(large_value) + units                         # Add units
 
-        medium_property.value = medium_value
-        small_property.value = small_value
+        medium_value = round(float_value / self.scale_dict['medium'], 4)        # Scale to medium screen
+        medium_property.value = str(medium_value) + units                       # Add units
+
+        small_value = round(float_value / self.scale_dict['small'], 4)          # Scale to small screen
+        small_property.value = str(small_value) + units                         # Add units
 
         return (
             '.' + self.css_class + ' { ' + self.css_property.cssText + '; }\n\n' +
-            '@media only screen and (max-width: ' + medium_max + ') {\n' +
+            '@media only screen and (max-width: ' + large[_max] + ') {\n' +
+            '\t.' + self.css_class + ' { ' + large_property.cssText + '; }\n' +
+            '}\n\n' +
+            '@media only screen and (max-width: ' + medium[_max] + ') {\n' +
             '\t.' + self.css_class + ' { ' + medium_property.cssText + '; }\n' +
             '}\n\n' +
-            '@media only screen and (max-width: ' + small_max + ') {\n' +
+            '@media only screen and (max-width: ' + small[_max] + ') {\n' +
             '\t.' + self.css_class + ' { ' + small_property.cssText + '; }\n' +
             '}\n\n'
         )
