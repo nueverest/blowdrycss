@@ -29,7 +29,7 @@ class DataLibrary(object):
         - The ``key`` is the official CSS property name.
         - The ``value`` is a ``set()`` of regex strings.
 
-        **Regexes Explained:**
+        **Regexes Cases:**
 
         - Hexidecimal (3 digit) -- 'h123', 'h123 bold', 'underline h123 bold'
         - Hexidecimal (6 digit) -- 'h123456', 'h123456 underline', 'underline h123456 bold'
@@ -37,6 +37,7 @@ class DataLibrary(object):
         - Hexidecimal (6 digit + pseudo-class + importance designator) -- 'h123456-hover-i', 'h123456-hover-i underline'
         - Hexidecimal (3 digit + importance designator + pseudo-class) -- 'h123-i-hover', 'h123-i-hover bold'
         - Hexidecimal (6 digit + importance designator + pseudo-class) -- 'h123456-i-hover', 'h123456-i-hover underline'
+
         - Hexidecimal Regex explained
             - ``r"(h[0-9a-f]{3} ?)$"`` or ``r"(h[0-9a-f]{6} ?)$"``
             - ``h`` -- The substring must begin with an ``h``.
