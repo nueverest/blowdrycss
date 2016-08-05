@@ -90,7 +90,7 @@ Part 1 - Setup virtualenv and install blowdrycss
 **Good References:**
 
 - `Python Guide <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`__
-- `The virtualenv docs <http://virtualenv.readthedocs.org/en/latest/userguide.html>`__
+- `The virtualenv docs <http://virtualenv.readthedocs.io/en/latest/userguide.html>`__
 - `PyCharm virtualenv How To <https://www.jetbrains.com/pycharm/help/creating-virtual-environment.html>`__
 
 

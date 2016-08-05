@@ -21,15 +21,15 @@ import shlex
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 
-# Required to get readthedocs.org to work.
+# Required to get readthedocs.io to work.
 # 'cd' to root folder e.g. /blowdrycss/.
 # Create a file named rtd_requirements.txt that contains only the bare minimum dependencies.
-# Go to Advanced Settings: https://readthedocs.org/dashboard/blowdrycss/advanced/
+# Go to Advanced Settings: https://readthedocs.io/dashboard/blowdrycss/advanced/
 # Check "Install your project inside a virtualenv.
 # In the requirement file field type: rtd_requirements.txt
 # Set Python Interpreter to: CPython 3.x
 # Click Submit.
-sys.path.insert(0, os.path.abspath('../blowdrycss/'))       # Required to get '.. automodule::' working on readthedocs.org.
+sys.path.insert(0, os.path.abspath('../blowdrycss/'))       # Required to get '.. automodule::' working on readthedocs.io.
 
 # -- General configuration ------------------------------------------------
 
@@ -161,7 +161,7 @@ html_favicon = 'favicon.ico'
 # so a file named "default.css" will overwrite the builtin "default.css".
 
 # Changed to prevent readthedocs from looking inside the empty _static folder.
-# Reference: https://github.com/rtfd/readthedocs.org/issues/1776#issuecomment-149684640
+# Reference: https://github.com/rtfd/readthedocs.io/issues/1776#issuecomment-149684640
 html_static_path = []   # ['_static']
 
 # Add any extra paths that contain custom files (such as robots.txt or

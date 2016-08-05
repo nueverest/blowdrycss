@@ -1,7 +1,7 @@
 # Exclude the untestable code block that begins with the line 'if __name__ == .__main__.:'
 # Resolves Issue: http://stackoverflow.com/questions/5850268/how-to-test-or-mock-if-name-main-contents
-# Docs: http://coverage.readthedocs.org/en/latest/config.html
-# http://coverage.readthedocs.org/en/coverage-4.0.3/config.html#config
+# Docs: http://coverage.readthedocs.io/en/latest/config.html
+# http://coverage.readthedocs.io/en/coverage-4.0.3/config.html#config
 
 [report]
 exclude_lines =

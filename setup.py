@@ -2,17 +2,17 @@
 blowdrycss setup module.
 
 Repository: https://github.com/nueverest/blowdrycss
-Docs: http://blowdrycss.readthedocs.org/en/latest/index.html
+Docs: http://blowdrycss.readthedocs.io/en/latest/index.html
 
 setup.py references:
-https://python-packaging-user-guide.readthedocs.org/en/latest/distributing/
+https://python-packaging-user-guide.readthedocs.io/en/latest/distributing/
 http://peterdowns.com/posts/first-time-with-pypi.html
 https://www.jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/
 
 If the reStructuredText for the long_description does not turn out correctly, then test it here:
 http://rst.ninjs.org
 
-Setup Guide: https://python-packaging-user-guide.readthedocs.org/en/latest/distributing/#register-your-project
+Setup Guide: https://python-packaging-user-guide.readthedocs.io/en/latest/distributing/#register-your-project
 
 Steps:
 pip install wheel

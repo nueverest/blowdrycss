@@ -3,7 +3,7 @@ Quick Start Guide
 
 .. index:: single: Quick Start Guide
 
-`Documentation home <http://blowdrycss.readthedocs.org/en/latest/index.html>`__
+`Documentation home <http://blowdrycss.readthedocs.io/en/latest/index.html>`__
 
 This guide rapidly shows you how to:
 
@@ -120,5 +120,5 @@ This guide rapidly shows you how to:
 |
 | Head on over to :doc:`advancedtopics`.
 |
-| `Documentation home <http://blowdrycss.readthedocs.org/en/latest/index.html>`__
+| `Documentation home <http://blowdrycss.readthedocs.io/en/latest/index.html>`__
 |

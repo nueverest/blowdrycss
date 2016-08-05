@@ -17,11 +17,11 @@ Read Me
 Getting Started
 ~~~~~~~~~~~~~~~
 
-`Quick Start Docs <http://blowdrycss.readthedocs.org/en/latest/quickstart.html>`__
+`Quick Start Docs <http://blowdrycss.readthedocs.io/en/latest/quickstart.html>`__
 
 `Official site blowdrycss.org <http://blowdrycss.org>`__
 
-`Full documentation <http://blowdrycss.readthedocs.org/en/latest/index.html>`__
+`Full documentation <http://blowdrycss.readthedocs.io/en/latest/index.html>`__
 
 
 Version Changelog
@@ -87,7 +87,7 @@ Advantages of blowdrycss
     * Can be integrated with the current ecosystem of CSS compilers and frameworks.
       Compatible with SASS, SCSS, PostCSS, LESS, Foundation, Bootstrap.
     * Supports class selector discovery within HTML, JINJA, XHTML, .NET, Ruby ERB Templates, Javascript, and C#.
-#. **Documented:** Hands-on `tutorial <http://blowdrycss.readthedocs.org/en/latest/quickstart.html>`__ and sphinx `documentation <http://blowdrycss.readthedocs.org/en/latest/index.html>`__ to get you up and running fast.
+#. **Documented:** Hands-on `tutorial <http://blowdrycss.readthedocs.io/en/latest/quickstart.html>`__ and sphinx `documentation <http://blowdrycss.readthedocs.io/en/latest/index.html>`__ to get you up and running fast.
 #. **Robust:** Built for the real world in which deadlines and division of labor is not always taken into account. Can be used across all phases of a products lifecycle from prototype to production.
 #. **Customizable:** Features can be turned on and off inside of `blowdrycss_settings.py <https://github.com/nueverest/blowdrycss/blob/master/blowdrycss/blowdrycss_settings.py>`__. Examples include:
     * Watchdog file monitoring
@@ -264,7 +264,7 @@ generate, and something that still needs to be written by hand.
 Valuable References
 ~~~~~~~~~~~~~~~~~~~
 
-    `Blowdrycss Documentation <http://blowdrycss.readthedocs.org/en/latest/index.html>`__
+    `Blowdrycss Documentation <http://blowdrycss.readthedocs.io/en/latest/index.html>`__
 
     `Github Repo <https://github.com/nueverest/blowdrycss>`__
 
