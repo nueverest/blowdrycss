@@ -35,7 +35,7 @@ Version Changelog
   before ``<%...%>`` standard XHTML decorated expressions are removed since the regex is non-greedy and
   an XHTML expression decorated with ``<%...%>`` may exist within the multi-line comment. This results in an
   early non-greedy match between ``<%--`` and the closing ``%>`` of a commented out expression.
-  Which contrast with the desired closing substring of ``--%>``.
+  Which contrasts with the desired closing substring of ``--%>``.
 |
 
 
