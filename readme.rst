@@ -27,11 +27,15 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.2.3** -- Fixed parsing errors associated with hexidecimal values that are mixed with the
-      importance designator or pseudo classes. Changed readthedocs.org to readthedocs.io. Cleaned comments.
-|
 | **0.2.4** -- The `-s` designated scaling media queries now start scaling on large screens. Allow upper case
   letters for encoded hexidecimal values.
+|
+| **0.2.5** -- Fixed two regex errors: URIs (http://, ftp://) resemble inline JS comments (//) and `://`
+  needs to be removed first and foremost.  XHTML multi--line comment syntax `<%-- ... --%>` needs to be removed
+  before `<%...%>` standard XHTML decorated expressions are removed since the regex is non-greedy and
+  an XHTML expression decorated with `<%...%>` may exist within the multi-line comment. This results in an
+  early non-greedy match between `<%--` and the closing `%>` of a commented out expression.
+  Which contrast with the desired closing substring of `--%>`.
 |
 
 
