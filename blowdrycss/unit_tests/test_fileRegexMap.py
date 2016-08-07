@@ -41,6 +41,7 @@ class TestFileRegexMap(TestCase):
             self.assertRaises(OSError, FileRegexMap, _path)
 
     def test_regexes(self):
+        sub_uri = (r'://', )
         sub_js = (
             r'//.*?\n',                                                     # Remove JS Comments.
             r'\n',                                                          # Remove new lines before block quotes.
@@ -57,7 +58,8 @@ class TestFileRegexMap(TestCase):
             r'(.removeClass\(\s*["\'])',
             r'(\$\(\s*["\']\.)',
         )
-        sub_html = sub_js + (r'<!--.*?-->', )
+        sub_html = sub_uri + sub_js + (r'<!--.*?-->', )
+        sub_dotnet = sub_html + (r'<%--.*?--%>', r'<%.*?%>', )
 
         js_substring = r'extract__class__set'
         findall_regex_js = (
@@ -71,7 +73,7 @@ class TestFileRegexMap(TestCase):
 
         expected_dicts = [
             {
-                'sub_regexes': sub_html + (r'<%.*?%>', ),
+                'sub_regexes': sub_dotnet,
                 'findall_regexes': (r'class=[\'"](.*?)["\']', ) + findall_regex_js,
             },
             {

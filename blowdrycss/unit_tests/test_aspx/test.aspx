@@ -35,6 +35,40 @@
 
    --%>
 
+   <%-- Problematic Material Design plus Instagram Code --%>
+   <div class="row">
+        <div class="font-size-12 arial h4b4f54 margin-top-33">Title</div>
+        <div class="font-size-42 bold h333333 margin-top-13">INSTAGRAM</div>
+        <br />
+
+        <%--<div class="block1 small-6 medium-4 large-3 xlarge-2 xxlarge-2 columns padding-left-5-i padding-right-5-i margin-top-10"><a href="https://www.instagram.com/p/BBqRrG2iJN-/?taken-by=Title" title="Head over heals"><img src="https://instagram.com/p/BBqRrG2iJN-/media/?size=l" alt="Title - Instagram" title="Title - Instagram" /></a></div>        --%>
+
+        <asp:Repeater ID="rptInstagram" runat="server">
+            <ItemTemplate>
+                <div class="small-6 medium-4 large-3 xlarge-2 xxlarge-2 columns end padding-left-5-i padding-right-5-i margin-top-10">
+                    <a href='https://www.instagram.com/p/<%#Eval("id") %>/?taken-by=Title' title="Head over heals"><img src='https://instagram.com/p/<%#Eval("id") %>/media/?size=l' alt="Title - Instagram" title="Title - Instagram" /></a>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
+
+        <div class="bgc-h1989ce width-250 hide">&nbsp;</div>
+        <div id="more"></div>
+        <%--<asp:Repeater ID="rptInstagramMore" runat="server">
+            <ItemTemplate>
+                <div class="instamore small-6 medium-4 large-3 xlarge-2 xxlarge-2 columns end padding-left-5-i padding-right-5-i margin-top-10">
+                    <a href='https://www.instagram.com/p/<%#Eval("id") %>/?taken-by=Title' title="Head over heals"><img src='https://instagram.com/p/<%#Eval("id") %>/media/?size=l' alt="Title - Instagram" title="Title - Instagram" /></a>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>--%>
+
+        <div class="small-12 columns text-align-center margin-top-40">
+            <a href="#more" title="load more"><div class="inline-block bgc-h333333 width-140 height-48 white bold padding-top-16 padding-bottom-19 border-radius-5">LOAD MORE...</div></a>
+            <a href='https://www.instagram.com/Title' title='snth Instagram'><div class="inline-block bgc-h1989ce width-250 height-48 white bold padding-top-16 padding-bottom-19 border-radius-5 margin-left-16"><i class="material-icons vertical-align-middle font-size-18-i">&#xE412;</i> FOLLOW ON INSTAGRAM</div></a>
+        <%--https://www.instagram.com/Title--%>
+        </div>
+
+    </div>
+
 </asp:Content>
 
 <script>

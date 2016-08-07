@@ -70,10 +70,17 @@ class FileRegexMap(object):
     """
     def __init__(self, file_path=''):
         self.file_path = file_path.strip()                                      # Remove external whitespace.
+        self._regex_dict = dict()
+        self.name = ''
+        self.extension = ''
+        self.js_replacement = r''
+        self.js_case = ()
+        self.file_type_dict = dict()
 
         if path.isfile(self.file_path):
-            self._regex_dict = dict()
             self.name, self.extension = path.splitext(self.file_path)
+
+            sub_uri = (r'://', )                            # URIs (http://, ftp://) resemble inline JS comments (//)
 
             js_substring = r'extract__class__set'
             self.js_replacement = js_substring + r'("'
@@ -108,11 +115,11 @@ class FileRegexMap(object):
                 r'(.removeClass\(\s*["\'])',
                 r'(\$\(\s*["\']\.)',
             )
-            sub_html = sub_js + (r'<!--.*?-->', )
+            sub_html = sub_uri + sub_js + (r'<!--.*?-->', )
             sub_jinja = (r'{.*?}?}', ) + sub_html + (r'{#.*?#}', )
-            sub_csharp = (r'//.*?\n', r'\n', r'/\*.*?\*/', )                    # Remove CS Comments.
-            sub_dotnet = sub_html + (r'<%.*?%>', )
-            sub_ruby = sub_html + (r'<%.*?%>', )
+            sub_csharp = (r'//.*?\n', r'\n', r'/\*.*?\*/', )                    # Remove CS comments.
+            sub_dotnet = sub_html + (r'<%--.*?--%>', r'<%.*?%>', )              # Remove XHTML comments before elements.
+            sub_ruby = sub_html + (r'<%--.*?--%>', r'<%.*?%>', )                # Remove XHTML comments before elements.
 
             class_regex = (r'class=[\'"](.*?)["\']', )                          # general 'class' case
 

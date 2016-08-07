@@ -48,6 +48,13 @@ class TestClassParser(TestCase):
             'row', 'bgc-green', 'padding-top-30', 'padding-bottom-30', 'bgc-pink', 'color-h979591',
             'purple', 'padding-left-5', 'squirrel', 'text-align-center', 'large-up', 'border-1',
             'padding-25-820-up', 'margin-5-2-5-2-1000-up',
+            # Previously problematic section
+            'font-size-12', 'arial', 'h4b4f54', 'margin-top-33', 'font-size-42', 'bold', 'h333333', 'margin-top-13',
+            'small-6', 'medium-4', 'large-3', 'xlarge-2', 'xxlarge-2', 'columns', 'end', 'padding-left-5-i',
+            'padding-right-5-i', 'margin-top-10', 'bgc-h1989ce', 'width-250', 'hide', 'small-12', 'columns',
+            'text-align-center', 'margin-top-40', 'inline-block', 'bgc-h333333', 'width-140', 'height-48', 'white',
+            'padding-top-16', 'padding-bottom-19', 'border-radius-5', 'height-48', 'white', 'bold', 'margin-left-16',
+            'material-icons', 'vertical-align-middle', 'font-size-18-i',
             # Embedded <script></script>
             'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
             'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',

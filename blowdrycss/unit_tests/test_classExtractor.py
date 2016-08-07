@@ -39,6 +39,20 @@ class TestClassExtractor(TestCase):
         expected_raw_class_list = [
             ' row bgc-green padding-top-30 padding-bottom-30', 'bgc-pink', 'color-h979591',
             'row padding-top-30 padding-bottom-30 ', 'row padding-top-30 padding-bottom-30 ', 'row padding-25-820-up ',
+
+            'row', 'font-size-12 arial h4b4f54 margin-top-33', 'font-size-42 bold h333333 margin-top-13',
+
+            # These two were missed in the past. (URI / Inline comment match issue)
+            'small-6 medium-4 large-3 xlarge-2 xxlarge-2 columns end padding-left-5-i padding-right-5-i margin-top-10',
+            'bgc-h1989ce width-250 hide',
+
+            'small-12 columns text-align-center margin-top-40',
+            'inline-block bgc-h333333 width-140 height-48 white bold padding-top-16 padding-bottom-19 border-radius-5',
+
+            # These two were missed in the past. (URI / Inline comment match issue)
+            'inline-block bgc-h1989ce width-250 height-48 white bold padding-top-16 padding-bottom-19 border-radius-5 margin-left-16',
+            'material-icons vertical-align-middle font-size-18-i',
+
             # Embedded <script></script>
             'jquery1', 'jquery2', 'jquery3', 'jquery4 jquery5', 'jquery6 jquery7', 'jquery8',
             'jquery9 jquery10', 'jquery11', 'jquery12 jquery13', 'jquery14', 'jquery15', 'jquery16',
@@ -47,7 +61,7 @@ class TestClassExtractor(TestCase):
         aspx_file = unittest_file_path('test_aspx', 'test.aspx')
         class_extractor = ClassExtractor(file_path=aspx_file)
         actual_raw_class_list = class_extractor.raw_class_list
-        self.assertEqual(actual_raw_class_list, expected_raw_class_list)
+        self.assertEqual(actual_raw_class_list, expected_raw_class_list, msg=actual_raw_class_list)
 
     def test_raw_class_list_cs(self):
         expected_raw_class_list = [
@@ -125,6 +139,13 @@ class TestClassExtractor(TestCase):
     def test_class_set_aspx(self):
         expected_class_set = {
             'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green', 'bgc-pink', 'color-h979591', 'padding-25-820-up',
+            # Previously problematic section
+            'font-size-12', 'arial', 'h4b4f54', 'margin-top-33', 'font-size-42', 'bold', 'h333333', 'margin-top-13',
+            'small-6', 'medium-4', 'large-3', 'xlarge-2', 'xxlarge-2', 'columns', 'end', 'padding-left-5-i',
+            'padding-right-5-i', 'margin-top-10', 'bgc-h1989ce', 'width-250', 'hide', 'small-12', 'columns',
+            'text-align-center', 'margin-top-40', 'inline-block', 'bgc-h333333', 'width-140', 'height-48', 'white',
+            'padding-top-16', 'padding-bottom-19', 'border-radius-5', 'height-48', 'white', 'bold', 'margin-left-16',
+            'material-icons', 'vertical-align-middle', 'font-size-18-i',
             # Embedded <script></script>
             'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
             'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',
@@ -219,6 +240,13 @@ class TestClassExtractor(TestCase):
     def test_integration_class_set_aspx(self):
         expected_class_set = {
             'row', 'padding-top-30', 'padding-bottom-30', 'bgc-green', 'bgc-pink', 'color-h979591', 'padding-25-820-up',
+            # Previously problematic section
+            'font-size-12', 'arial', 'h4b4f54', 'margin-top-33', 'font-size-42', 'bold', 'h333333', 'margin-top-13',
+            'small-6', 'medium-4', 'large-3', 'xlarge-2', 'xxlarge-2', 'columns', 'end', 'padding-left-5-i',
+            'padding-right-5-i', 'margin-top-10', 'bgc-h1989ce', 'width-250', 'hide', 'small-12', 'columns',
+            'text-align-center', 'margin-top-40', 'inline-block', 'bgc-h333333', 'width-140', 'height-48', 'white',
+            'padding-top-16', 'padding-bottom-19', 'border-radius-5', 'height-48', 'white', 'bold', 'margin-left-16',
+            'material-icons', 'vertical-align-middle', 'font-size-18-i',
             # Embedded <script></script>
             'jquery1', 'jquery2', 'jquery3', 'jquery4', 'jquery5', 'jquery6', 'jquery7', 'jquery8',
             'jquery9', 'jquery10', 'jquery11', 'jquery12', 'jquery13', 'jquery14', 'jquery15', 'jquery16',
