@@ -142,7 +142,7 @@ media_queries_enabled = True    # Generate breakpoint and scaling media queries.
 # ...Not Implemented Yet...
 # use_hex = True                # Using hex and browser performance: http://jsperf.com/css-color-names-vs-hex-codes/18
 # extra_dry = False             # Combine identical CSS discovered under different class selector names.
-# http_server = False           # Auto-Start a simple webserver on localhost:8080.
+# http_server = False           # Auto-Start a simple web server on localhost:8080.
 # public_url = False            # Uses ngrok to generate a temporary public url for testings and demo purposes.
 # condense_classes = False      # Edits HTML Files after discovering common patterns (Not DRY do not implement).
 

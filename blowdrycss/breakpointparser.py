@@ -146,7 +146,7 @@ class BreakpointParser(object):
         - The length of ``self.css_class`` must be greater than the length of the key + 2.  This prevents a
           ``css_class`` like ``'-xsmall-'`` or ``'-xxlarge-up'`` from being accepted as valid by themselves.
 
-        - The ``key`` minus the preceeding dash is allowed if it the key is the first word in the string. This allows
+        - The ``key`` minus the preceding dash is allowed if it the key is the first word in the string. This allows
           the shorthand cases, for example: ``small-only``, ``medium-up``, ``giant-down``.  These cases imply that
           the CSS property name is ``display``.
 

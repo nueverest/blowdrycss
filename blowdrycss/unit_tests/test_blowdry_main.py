@@ -20,7 +20,6 @@ class TestMain(TestCase):
     def test_main(self):
         substrings = [
             '~~~ blowdrycss started ~~~',
-            #'Project Files Found:',        Log instead of print to increase performance speed.
             'CSSBuilder Running...',
             '.css',
         ]

@@ -38,7 +38,11 @@ class TestFileConverter(TestCase):
             'element.classList.add(notimplemented);</script>'
         )
         file_converter = FileConverter(file_path=test_file_path)
-        self.assertEqual(file_converter.get_file_as_string(), expected_string, msg='\n' + file_converter.get_file_as_string() + '\n' + expected_string)
+        self.assertEqual(
+                file_converter.get_file_as_string(),
+                expected_string,
+                msg='\n' + file_converter.get_file_as_string() + '\n' + expected_string
+        )
 
 
 if __name__ == '__main__':

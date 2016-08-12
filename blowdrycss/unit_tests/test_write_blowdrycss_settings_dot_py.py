@@ -10,7 +10,7 @@ from logging import DEBUG
 from blowdrycss.settingsbuilder import write_blowdrycss_settings_dot_py
 
 
-class TestWrite_blowdrycss_settings_dot_py(TestCase):
+class TestWriteBlowdrycssSettingsDotPy(TestCase):
     def test_write_blowdrycss_settings_dot_py(self):
         settings_file = 'blowdrycss_settings.py'
 

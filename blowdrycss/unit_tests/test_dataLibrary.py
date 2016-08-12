@@ -34,7 +34,7 @@ class TestDataLibrary(TestCase):
         expected_abbreviation = set()
         for property_name in property_names:
             abbreviations = self.data_library.get_property_aliases(property_name=property_name)
-            self.assertEqual(abbreviations,expected_abbreviation, msg=abbreviations)
+            self.assertEqual(abbreviations, expected_abbreviation, msg=abbreviations)
 
     def test_get_property_aliases_single_word(self):
         property_names = ['padding', 'margin', 'background', ]
@@ -201,7 +201,7 @@ class TestDataLibrary(TestCase):
             'border-color': {'border-c-', 'bc-'}, 'pause-before': {'pb-'}, 'min-height': {'mh-'}, 'list-style': {'ls-'},
             'font-size': {'font-s-', 'fs-'}
         }
-        initial_dict = self.data_library.autogen_property_alias_dict()
+        unused_on_purpose_dict = self.data_library.autogen_property_alias_dict()
         self.data_library.set_clashing_aliases()
         actual_clashes = self.data_library.clashing_alias_dict
         self.assertEqual(actual_clashes, expected_clashes)

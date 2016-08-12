@@ -60,8 +60,8 @@ def main():
     **Note:** The default locations of these files can be overridden to suit your needs.
 
     **Directory assignments**
-    ``project_directory`` -- Allows ``blowdrycss`` to know where the HTML project is located. It will only search the files
-    in the directory specified here.
+    ``project_directory`` -- Allows ``blowdrycss`` to know where the HTML project is located. It will only search
+    the files in the directory specified here.
 
 .. |sp| raw:: html
 

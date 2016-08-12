@@ -93,8 +93,11 @@ class TestFileFinder(TestCase):
         file_finder = FileFinder(project_directory=project_directory)
         for valid_key in valid_keys:
             self.assertTrue(valid_key in file_finder.file_dict, msg=file_finder.file_dict)
-            self.assertEqual(file_finder.file_dict[valid_key], valid_dict[valid_key],
-                             msg='\n' + valid_key + str(file_finder.file_dict[valid_key]) + '\n\n' + str(valid_dict[valid_key]))
+            self.assertEqual(
+                file_finder.file_dict[valid_key],
+                valid_dict[valid_key],
+                msg='\n' + valid_key + str(file_finder.file_dict[valid_key]) + '\n\n' + str(valid_dict[valid_key])
+            )
         settings.file_types = ('*.html', )                                                  # Reset file_types
 
     def test_set_file_dict_extension_not_found(self):

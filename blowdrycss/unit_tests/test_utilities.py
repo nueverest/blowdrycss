@@ -17,7 +17,7 @@ import blowdrycss_settings as settings
 change_settings_for_testing()
 
 
-class Test_utilities(TestCase):
+class TestUtilities(TestCase):
     def test_contains_a_digit_true(self):
         digits = ['n12px', '1p 7p 1p 7p', '-1_25em', '-1.35%', 'rgba 255 0 0 0.5', 'h0ff48f']
         for value in digits:

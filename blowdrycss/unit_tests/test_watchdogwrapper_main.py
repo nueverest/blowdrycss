@@ -35,7 +35,6 @@ class TestWatchdogWrapperMain(TestCase):
             'blowdry.css',
             'blowdry.min.css',
         ]
-        html_text = '<html></html>'
 
         saved_stdout = sys.stdout           # Monitor console
         try:

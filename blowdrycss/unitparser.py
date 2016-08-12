@@ -38,20 +38,22 @@ class UnitParser(object):
     **What does (em) actually stand for?:**
         **Source:** W3C -- http://www.w3.org/WAI/GL/css2em.htm
 
-        The foremost tool for writing scalable style sheets is the "em" unit, and it therefore goes on top of the list of
-        guidelines that we will compile throughout this chapter: use ems to make scalable style sheets. Named after the
-        letter "M", the em unit has a long-standing tradition in typography where it has been used to measure
-        horizontal widths.
+        The foremost tool for writing scalable style sheets is the "em" unit, and it therefore goes on top of
+        the list of guidelines that we will compile throughout this chapter: use ems to make scalable style sheets.
+        Named after the letter "M", the em unit has a long-standing tradition in typography where it has been used
+        to measure horizontal widths.
         ...
-        In CSS, the em unit is a general unit for measuring lenghts, for example page margins and padding around elements.
-        You can use it both horizontally and vertically, and this shocks traditional typographers who always have used
-        em exclusively for horizontal measurements. By extending the em unit to also work vertically, it has become
-        a very powerful unit - so powerful that you seldom have to use other length units.
+        In CSS, the em unit is a general unit for measuring lengths, for example page margins and padding
+        around elements. You can use it both horizontally and vertically, and this shocks traditional
+        typographers who always have used em exclusively for horizontal measurements. By extending the em unit
+        to also work vertically, it has become a very powerful unit - so powerful that you seldom have to
+        use other length units.
 
         **Source:** Wikipedia -- https://en.wikipedia.org/wiki/Em_%28typography%29
 
-        An em is a unit in the field of typography, equal to the currently specified point size. For example, one em in a
-        16-point typeface is 16 points. Therefore, this unit is the same for all typefaces at a given point size.
+        An em is a unit in the field of typography, equal to the currently specified point size. For example,
+        one em in a 16-point typeface is 16 points. Therefore, this unit is the same for all typefaces at a
+        given point size.
 
     """
 

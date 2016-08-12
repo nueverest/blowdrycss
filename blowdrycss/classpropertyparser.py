@@ -241,7 +241,8 @@ class ClassPropertyParser(object):
 
         :type css_class: str
 
-        :param css_class: A class name containing a property name and value pair, or just a property value from which the property name may be inferred.
+        :param css_class: A class name containing a property name and value pair, or just a property value
+            from which the property name may be inferred.
         :return: (str) -- Class returns the property_name OR if unrecognized returns ``''``.
         
         """
@@ -423,7 +424,7 @@ class ClassPropertyParser(object):
         '1-10-10-5'
         >>> property_parser.get_encoded_property_value('height', 'height-7_25rem-i')        # contains underscores
         '7_25rem'
-        >>> property_parser.get_encoded_property_value('font-style', 'font-style-oblique')  # no priority desginator
+        >>> property_parser.get_encoded_property_value('font-style', 'font-style-oblique')  # no priority designator
         'oblique'
         >>> property_parser.get_encoded_property_value('', 'c-lime')
         ValueError

@@ -38,7 +38,8 @@ class TestClassParser(TestCase):
         class_parser = ClassParser(file_dict=file_finder.file_dict)
         self.assertEqual(
                 set(class_parser.file_path_list), expected_file_paths,
-                msg='\n' + str(set(class_parser.file_path_list)) + '\n' + str(expected_file_paths) + '\nsettings: ' + str(settings.html_docs)
+                msg='\n' + str(set(class_parser.file_path_list)) + '\n' + str(expected_file_paths) +
+                    '\nsettings: ' + str(settings.html_docs)
         )
         settings.file_types = ('*.html', )                                                      # Reset file_types
 

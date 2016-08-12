@@ -13,7 +13,8 @@ __project__ = 'blowdrycss'
 class TestColorParser(TestCase):
     def test_property_name_allows_color(self):
         property_names_true = {
-            'color', 'background-color', 'border-color', 'border-top-color', 'border-right-color', 'border-bottom-color',
+            'color', 'background-color', 'border-color', 'border-top-color', 'border-right-color',
+            'border-bottom-color',
             'border-left-color', 'outline_color',
             'background', 'border-top', 'border-right', 'border-bottom', 'border-left', 'border', 'outline',
         }
@@ -109,7 +110,6 @@ class TestColorParser(TestCase):
         # rgba: rgba 255 0 0 0.5        --> rgba(255, 0, 0, 0.5)
         #  hsl: hsl 120 60% 70%         -->  hsl(120, 60%, 70%)
         # hsla: hsla 120 60% 70% 0.3    --> hsla(120, 60%, 70%, 0.3)
-        valid_property_name = 'height'
         input_values = ['rgb 0 255 0', 'rgba 255 0 0 0.5', 'hsl 120 60% 70%', 'hsla 120 60% 70% 0.3', 'blue', '#000']
         expected_values = input_values
         color_parser = ColorParser()
