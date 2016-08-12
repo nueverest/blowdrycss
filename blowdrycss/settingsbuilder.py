@@ -38,9 +38,10 @@ The longer more specific name is used to prevent naming conflicts, and increase 
 | file_types = (*tuple of strings*) -- All file types/extensions to search for in the defined project_directory
   that contain encoded class selectors.
 
-  *Example format:* ::
+  *Available extensions:* ::
 
-    ('*.html', )
+    ('*.html', '*.js', '*.ts', '*.jinja', '*.jinja2', '*.jnj', '*.ja', '*.djt', '*.djhtml', '*.cs', '*.aspx', '*.ascx',
+     '*.master', '*.erb', )
 
 | timing_enabled (*bool*) -- Run performance timer to see the performance of ``blowdrycss``.
 
@@ -137,7 +138,9 @@ log_file_size = 4 * one_mega_byte                           # Max log file size
 log_backup_count = 1                                        # Maximum number of backup log files.
 
 # All file types/extensions to search for in the defined project_directory that contain encoded class selectors.
-# Example format: ('*.html', )
+# Available formats:
+# ('*.html', '*.js', '*.ts', '*.jinja', '*.jinja2', '*.jnj', '*.ja', '*.djt', '*.djhtml', '*.cs', '*.aspx', '*.ascx',
+#  '*.master', '*.erb', )
 file_types = ('*.html', )
 
 # Boolean Flags
