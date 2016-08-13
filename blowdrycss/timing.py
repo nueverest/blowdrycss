@@ -25,6 +25,10 @@ from builtins import str
 # builtins
 from time import time
 from datetime import timedelta, datetime
+from os import path
+
+# custom
+import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -100,3 +104,44 @@ class Timer(object):
         """
         self.end = time()
         self.print_time()
+
+
+class LimitTimer(object):
+    """ Timer governs when to perform a full and comprehensive run of blowdrycss.main(). It parses every
+    eligible file in the project i.e. file type matches an element of settings.file_types.  This ensures that
+    from time to time unused CSS class selectors are removed.
+
+    .. note::   This is independent of file modification watchdog triggers which only scan the file(s) that changed
+        since the last run.
+
+    :return: None
+
+    **Example**
+
+    >>> from blowdrycss.timing import LimitTimer
+    >>> limit_timer = LimitTimer()
+    >>> if limit_timer.limit_exceeded:
+    >>>     print("30 minutes elapses.")
+    >>>     limit_timer.reset()
+    """
+    def __init__(self):
+        self.start = time()                                         # TODO: add time_limit to settings file.
+        self.time_limit = 1800                                      # 30 minutes * 60 seconds / minute = 1800 seconds
+
+    @property
+    def limit_exceeded(self):
+        """ Compares the current time to the start time, and returns True if ``self.time_limit``
+        is exceeded and False otherwise.
+
+        :return: (*bool*) -- Returns True if ``self.time_limit`` is exceeded and False otherwise.
+
+        """
+        return time() - self.start >= self.time_limit
+
+    def reset(self):
+        """ Resets ``self.start`` to the current time.
+
+        :return: None
+
+        """
+        self.start = time()
