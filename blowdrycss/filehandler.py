@@ -329,3 +329,41 @@ class GenericFile(object):
                 generic_file.write(bytearray(text, 'utf-8'))
         else:
             raise TypeError('In GenericFile.write() "' + text + '" input must be a str type.')
+
+
+class FileModificationComparator(object):
+    """ A Comparator that compares the last modified time of blowdry.css with the last modified time of another file.
+
+    :return: None
+
+    **Example**
+
+    >>> import blowdrycss_settings as settings
+    >>> from blowdrycss.filehandler import FileModificationComparator
+    >>> file_age_comparator = FileModificationComparator()
+    >>> print(file_age_comparator.file_is_newer(file_path=path.join(settings.project_directory, '/index.html'))
+
+    """
+    def __init__(self):
+        self.blowdrycss_file = path.join(settings.css_directory, 'blowdry.css')
+
+    def file_is_newer(self, file_path):
+        """ Detects if ``self.file_path`` was modified more recently than blowdry.css.  If ``self.file_path`` is
+        newer than blowdry.css it returns True otherwise it returns false.
+
+        :type file_path: str
+        :param file_path: The full path to a file.
+        :return: (*bool*) Returns True if modification time of blowdry.css is older i.e. less than the
+            ``self.file_path`` under consideration.
+        """
+        try:
+            a = path.getmtime(self.blowdrycss_file)
+        except OSError:
+            raise OSError('"' + self.blowdrycss_file + '" does not exist.')
+
+        try:
+            b = path.getmtime(file_path)
+        except OSError:
+            raise OSError('"' + file_path + '" does not exist.')
+
+        return a < b
