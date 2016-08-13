@@ -5,12 +5,16 @@ from __future__ import absolute_import
 from unittest import TestCase, main
 import sys
 from datetime import datetime
-from time import time
+from time import time, sleep
 from string import digits
 from io import StringIO
 
 # custom
-from blowdrycss.timing import Timer
+from blowdrycss.timing import Timer, LimitTimer
+from blowdrycss.utilities import change_settings_for_testing
+import blowdrycss_settings as settings
+
+change_settings_for_testing()
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -79,6 +83,22 @@ class TestTiming(TestCase):
                 self.assertTrue(substring in output, msg=substring)
         finally:
             sys.stdout = saved_stdout
+
+    def test_limit_exceeded(self):
+        time_limit = settings.time_limit                    # original time limit
+        settings.time_limit = 0.0001                        # in seconds
+        limit_timer = LimitTimer()
+        sleep(0.001)
+        self.assertTrue(limit_timer.limit_exceeded, msg=limit_timer.start_time)
+        settings.time_limit = time_limit                    # reset time limit
+
+    def test_reset(self):
+        limit_timer = LimitTimer()
+        start1 = limit_timer.start_time
+        sleep(0.001)
+        limit_timer.reset()
+        start2 = limit_timer.start_time
+        self.assertTrue(start1 < start2)
 
 
 if __name__ == '__main__':

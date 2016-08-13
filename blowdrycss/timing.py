@@ -25,7 +25,6 @@ from builtins import str
 # builtins
 from time import time
 from datetime import timedelta, datetime
-from os import path
 
 # custom
 import blowdrycss_settings as settings
@@ -36,6 +35,13 @@ __project__ = 'blowdrycss'
 
 class Timer(object):
     """ A performance Timer that reports the amount of time it took to run a block of code.
+
+    | **Parameters:**
+
+    | **start** (*time*) -- Time that the program started.
+
+    | **end** (*time*) -- Time that the program ended.
+
 
     :return: None
 
@@ -97,7 +103,8 @@ class Timer(object):
         print(str(border))
 
     def report(self):
-        """ Sets ``end`` time and prints the time elapsed (delta T).  Calls ``print_time()``, and prints temporal metadata.
+        """ Sets ``end`` time and prints the time elapsed (delta T).  Calls ``print_time()``, and prints
+        temporal metadata.
 
         :return: None
 
@@ -112,6 +119,10 @@ class LimitTimer(object):
     .. note::   This is independent of file modification watchdog triggers which only scan the file(s) that changed
         since the last run.
 
+    | **Parameters:**
+
+    | **start_time** (*str*) -- Time that the timer started.
+
     :return: None
 
     **Example**
@@ -123,8 +134,7 @@ class LimitTimer(object):
     >>>     limit_timer.reset()
     """
     def __init__(self):
-        self.start = time()
-        self.time_limit = settings.time_limit
+        self.start_time = time()
 
     @property
     def limit_exceeded(self):
@@ -134,7 +144,7 @@ class LimitTimer(object):
         :return: (*bool*) -- Returns True if ``self.time_limit`` is exceeded and False otherwise.
 
         """
-        return time() - self.start >= self.time_limit
+        return time() - self.start_time >= settings.time_limit
 
     def reset(self):
         """ Resets ``self.start`` to the current time.
@@ -142,4 +152,4 @@ class LimitTimer(object):
         :return: None
 
         """
-        self.start = time()
+        self.start_time = time()
