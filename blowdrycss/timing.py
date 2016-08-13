@@ -125,8 +125,8 @@ class LimitTimer(object):
     >>>     limit_timer.reset()
     """
     def __init__(self):
-        self.start = time()                                         # TODO: add time_limit to settings file.
-        self.time_limit = 1800                                      # 30 minutes * 60 seconds / minute = 1800 seconds
+        self.start = time()
+        self.time_limit = settings.time_limit
 
     @property
     def limit_exceeded(self):
