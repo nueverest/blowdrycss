@@ -20,60 +20,17 @@ __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
 
 
-def main():
-    """ This is the main script.
+def boilerplate():
+    """ Watchdog wrapper only calls this once to eliminate recurring performance impact.
 
-    **Order of Operations:**
-
-    - Initialize settings.
-    - Start performance timer.
     - Generate Markdown documentation files.
     - Generate HTML documentation files. (This location is important since it allows encoded css to be included
       in the documentation files.)
     - Generate reStructuredText documentation files.
-    - Define File all file types/extensions to search for in project_directory
-    - Get all files associated with defined file_types in project_directory
-    - Get set of all defined classes
-    - Filter class names only keeping classes that match the defined class encoding.
-    - Build a set() of valid css properties. Some classes may be removed during cssutils validation.
-    - Output the DRY CSS file. (user command option)
-    - Output the Minified DRY CSS file. (user command option)
 
-    **Depending on the settings this script generates the following:**
-
-    - DRY CSS files
-        - blowdry.css |sp| |sp| |sp| |sp| |sp| **human readable**
-        - blowdry.min.css |sp| **minified**
-
-    - Clashing Alias files (Encoded class selector aliases that are invalid and cannot be used because they clash.)
-        - Markdown |sp| |sp| |sp| |sp| |sp| |sp| **Github**
-        - HTML |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| **Browser**
-        - reStructuredText |sp| **Sphinx**
-
-    - Property Alias File (Encoded class selector aliases that are valid and can be used to construct class selectors.)
-        - Markdown |sp| |sp| |sp| |sp| |sp| |sp| **Github**
-        - HTML |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| **Browser**
-        - reStructuredText |sp| **Sphinx**
-
-    - Temporal Statistics
-
-    **Note:** The default locations of these files can be overridden to suit your needs.
-
-    **Directory assignments**
-    ``project_directory`` -- Allows ``blowdrycss`` to know where the HTML project is located. It will only search
-    the files in the directory specified here.
-
-.. |sp| raw:: html
-
-    &nbsp;
+    :return: None
 
     """
-    if settings.timing_enabled:
-        from blowdrycss.timing import Timer
-        timer = Timer()
-
-    print('\n~~~ blowdrycss started ~~~')
-
     if settings.hide_css_errors:
         cssutils.log.setLevel(logging.CRITICAL)
 
@@ -115,6 +72,74 @@ def main():
         rst_file.write(str(clashing_alias_rst))
         rst_file = GenericFile(file_directory=settings.docs_directory, file_name='property_aliases', extension='.rst')
         rst_file.write(str(property_alias_rst))
+
+
+def quick_parser():
+    """ Parses only the files that changed after the last modification of blowdry.css.
+
+    :return: None
+
+    """
+    if settings.timing_enabled:
+        from blowdrycss.timing import Timer
+        timer = Timer()
+
+    print('\n~~~ blowdrycss quick parser started ~~~')
+
+    # Get all files associated with defined file_types in project_directory
+    file_finder = FileFinder(project_directory=settings.project_directory)
+
+
+def comprehensive_parser():
+    """ It parses every eligible file in the project i.e. file type matches an element of settings.file_types.
+    This ensures that from time to time unused CSS class selectors are removed from blowdry.css.
+
+    **Order of Operations:**
+
+    - Initialize settings.
+    - Start performance timer.
+    - Define File all file types/extensions to search for in project_directory
+    - Get all files associated with defined file_types in project_directory
+    - Get set of all defined classes
+    - Filter class names only keeping classes that match the defined class encoding.
+    - Build a set() of valid css properties. Some classes may be removed during cssutils validation.
+    - Output the DRY CSS file. (user command option)
+    - Output the Minified DRY CSS file. (user command option)
+
+    **Depending on the settings this script generates the following:**
+
+    - DRY CSS files
+        - blowdry.css |sp| |sp| |sp| |sp| |sp| **human readable**
+        - blowdry.min.css |sp| **minified**
+
+    - Clashing Alias files (Encoded class selector aliases that are invalid and cannot be used because they clash.)
+        - Markdown |sp| |sp| |sp| |sp| |sp| |sp| **Github**
+        - HTML |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| **Browser**
+        - reStructuredText |sp| **Sphinx**
+
+    - Property Alias File (Encoded class selector aliases that are valid and can be used to construct class selectors.)
+        - Markdown |sp| |sp| |sp| |sp| |sp| |sp| **Github**
+        - HTML |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| |sp| **Browser**
+        - reStructuredText |sp| **Sphinx**
+
+    - Temporal Statistics
+
+    **Note:** The default locations of these files can be overridden to suit your needs.
+
+    **Directory assignments**
+    ``project_directory`` -- Allows ``blowdrycss`` to know where the HTML project is located. It will only search
+    the files in the directory specified here.
+
+.. |sp| raw:: html
+
+    &nbsp;
+
+    """
+    if settings.timing_enabled:
+        from blowdrycss.timing import Timer
+        timer = Timer()
+
+    print('\n~~~ blowdrycss comprehensive parser started ~~~')
 
     # Get all files associated with defined file_types in project_directory
     file_finder = FileFinder(project_directory=settings.project_directory)
@@ -165,7 +190,3 @@ def main():
 
     if settings.minify:
         print_css_stats(file_name='blowdry')
-
-
-if __name__ == '__main__':
-    main()

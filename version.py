@@ -159,6 +159,21 @@
       early non-greedy match between ``<%--`` and the closing ``%>`` of a commented out expression.
       Which contrasts with the desired closing substring of ``--%>``.
     |
+    | **0.2.6** -- Created a filehandler.FileModificationComparator which runs under watchdog mode. This
+      feature dramatically improves efficiency by only adding classes based on the files that changed
+      before the last run of blowdrycss. The current used and unused CSS class selectors are stored in
+      two separate set's within the scope of the watchdog wrapper.
+
+      Class selectors that were deleted by the user during file
+      modification are temporarily ignored since all eligible files (including the ones
+      not modified) would need to be parsed before deletion should be authorized. Deletion and full,
+      comprehensive scans of all files now occurs every 1800 seconds (30 minutes). This value can be
+      increased or decreased in the settings file by changing ``time_limit``.
+
+      Force pypandoc==1.1.3 since pandoc doesn't properly install on Windows.
+
+      PEP8 and typo corrections.
+    |
 
 """
 __author__ = 'chad nelson'

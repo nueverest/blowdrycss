@@ -12,14 +12,15 @@ from watchdog.observers import Observer
 
 # custom
 from blowdrycss.utilities import print_blow_dryer
+from blowdrycss.timing import LimitTimer
 from blowdrycss import blowdry, log
 import blowdrycss_settings as settings
 
 
 class FileEditEventHandler(PatternMatchingEventHandler):
-    """ Child of PatternMatchingEventHandler that only runs blowdry.main() during file 'modified' or 'deleted' events.
+    """ Child of PatternMatchingEventHandler that only runs blowdry.quick_parser() during file 'modified' or 'deleted' events.
     The 'modified' case handles both the 'created' and 'moved' case. When a file is created or moved/copy/pasted
-    into the project_directory, 'modified' is triggered. This reduces a number of unnecessary calls to blowdry.main().
+    into the project_directory, 'modified' is triggered. This reduces a number of unnecessary calls to blowdry.quick_parser().
 
     """
     @staticmethod
@@ -65,11 +66,11 @@ class FileEditEventHandler(PatternMatchingEventHandler):
         """
         if type(event) == FileModifiedEvent and not self.excluded(src_path=event.src_path):
             logging.debug('File ' + event.event_type + ' --> ' + str(event.src_path))
-            blowdry.main()
+            blowdry.quick_parser()
             self.print_status()
 
     def on_deleted(self, event):
-        """ Called when a file or directory is deleted. Only FileDeletedEvents triggers blowdry.main().
+        """ Called when a file or directory is deleted. Only FileDeletedEvents triggers blowdry.quick_parser().
 
         :type event: :class:`watchdog.event.DirDeletedEvent` or :class:`watchdog.event.FileDeletedEvent`
         :param event: Event representing file deletion.
@@ -77,16 +78,16 @@ class FileEditEventHandler(PatternMatchingEventHandler):
         """
         if type(event) == FileDeletedEvent and not self.excluded(src_path=event.src_path):
             logging.debug('File ' + event.event_type.capitalize() + ' --> ' + str(event))
-            blowdry.main()
+            blowdry.quick_parser()
             self.print_status()
 
 
 def main():
     """ If ``settings.auto_generate == True`` indefinitely run blowdrycss inside of the watchdog wrapper.
     The wrapper creates and attaches an file event handler to an observer. When a file is modified or
-    deleted it triggers blowdry.main().
+    deleted it triggers blowdry.quick_parser().
 
-    Else, blowdry.main() is run once.
+    Else, blowdry.comprehensive_parser() is run once.
 
     :return: None
 
@@ -122,18 +123,20 @@ def main():
 
         event_handler.print_status()
 
+        limit_timer = LimitTimer()
+
         try:
             while True:
                 sleep(1)
-        # except OSError:                 # Handle unexpected deletion of a file during the handling of an event
-        #     main()                      # recursively call main()
+                if limit_timer.limit_exceeded:                      # Infrequently remove unused CSS class selectors.
+                    blowdry.comprehensive_parser()
         except KeyboardInterrupt:
             observer.stop()
             print_blow_dryer()
 
         observer.join()
     else:
-        blowdry.main()
+        blowdry.comprehensive_parser()
 
 
 if __name__ == '__main__':

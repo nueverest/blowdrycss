@@ -32,7 +32,7 @@ class FileFinder(object):
     | **files** (*str list*) -- List of all paths to all parsable files.
 
     | **file_dict** (*dict*) -- Dictionary of all paths to all parsable files where the file extension e.g. ``*.html``
-      is the key and the full file path is is the value.
+      is the key and the full file path is the value.
 
     **Example:**
 

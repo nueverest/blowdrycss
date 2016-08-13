@@ -107,9 +107,7 @@ class Timer(object):
 
 
 class LimitTimer(object):
-    """ Timer governs when to perform a full and comprehensive run of blowdrycss.main(). It parses every
-    eligible file in the project i.e. file type matches an element of settings.file_types.  This ensures that
-    from time to time unused CSS class selectors are removed.
+    """ Timer governs when to perform a full and comprehensive run of blowdrycss.main().
 
     .. note::   This is independent of file modification watchdog triggers which only scan the file(s) that changed
         since the last run.
