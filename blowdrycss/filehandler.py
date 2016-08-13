@@ -29,8 +29,10 @@ class FileFinder(object):
     | **project_directory** (*str*) -- Full path to the project directory containing parsable files e.g.
       ``/home/usr/web_project``.
 
-    | **file_types** (*str tuple*) -- A tuple containing file extensions of project files to be parsed. Extensions
-      are in the wildcard form ``'*.<ext>'``.  Replace ``<ext>`` with the desired file extension.
+    | **files** (*str list*) -- List of all paths to all parsable files.
+
+    | **file_dict** (*dict*) -- Dictionary of all paths to all parsable files where the file extension e.g. ``*.html``
+      is the key and the full file path is is the value.
 
     **Example:**
 
