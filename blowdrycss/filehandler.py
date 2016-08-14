@@ -45,13 +45,20 @@ class FileFinder(object):
     >>> files = file_finder.files
 
     """
-    def __init__(self, project_directory=''):
+    def __init__(self, project_directory='', recent=True):
         if path.isdir(project_directory):
             self.project_directory = project_directory
+            self.recent = recent
+
             self.files = []
-            self.file_dict = {}
             self.set_files()
-            self.set_file_dict()
+
+            self.file_dict = {}
+            if self.recent:
+                self.set_recent_file_dict()
+            else:
+                self.set_file_dict()
+
             logging.debug(msg='File Types:' + ', '.join(settings.file_types))
             logging.debug(msg='Project Directory:' + str(project_directory))
             logging.debug('\nProject Files Found:')
@@ -110,6 +117,31 @@ class FileFinder(object):
         for file_type in settings.file_types:
             file_type = file_type.replace('*', '')  # Remove the * wildcard.
             self.file_dict[file_type] = {_file for _file in self.files if path.splitext(_file)[1] == file_type}
+
+    def set_recent_file_dict(self):
+        """ Filter and organize recent files by type in ``file_dict``. Meaning only files that are newer than
+        the latest version of blowdry.css are added.
+
+        Dictionary Format: ::
+
+            self.file_dict = {
+                '.html': {'filepath_1.html', 'filepath_2.html', ..., 'filepath_n.html'},
+                '.aspx': {'filepath_1.aspx', 'filepath_2.aspx', ..., 'filepath_n.aspx'},
+                ...
+                '.file_type': {'filepath_1.file_type', 'filepath_2.file_type', ..., 'filepath_n.file_type'},
+            }
+
+        Automatically removes the * wildcard from ``file_type``.
+
+        :return: None
+
+        """
+        comparator = FileModificationComparator()
+        for file_type in settings.file_types:
+            file_type = file_type.replace('*', '')  # Remove the * wildcard.
+            self.file_dict[file_type] = {
+                _file for _file in self.files if path.splitext(_file)[1] == file_type and comparator.is_newer(_file)
+            }
 
 
 class FileConverter(object):

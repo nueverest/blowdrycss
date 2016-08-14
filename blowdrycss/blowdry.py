@@ -90,8 +90,8 @@ def quick_parser():
 
     print('\n~~~ blowdrycss quick parser started ~~~')
 
-    # Get all files associated with defined file_types in project_directory
-    file_finder = FileFinder(project_directory=settings.project_directory)
+    # Get all files associated with eligible file_types in project_directory
+    file_finder = FileFinder(project_directory=settings.project_directory, recent=True)
     file_comparator = FileModificationComparator()
     modified_files = []
 
@@ -99,6 +99,8 @@ def quick_parser():
     for _file in file_finder.files:
         if file_comparator.is_newer(_file):
             modified_files += _file
+
+
 
 
 def comprehensive_parser():
@@ -153,7 +155,7 @@ def comprehensive_parser():
     print('\n~~~ blowdrycss comprehensive parser started ~~~')
 
     # Get all files associated with defined file_types in project_directory
-    file_finder = FileFinder(project_directory=settings.project_directory)
+    file_finder = FileFinder(project_directory=settings.project_directory, recent=False)
 
     # Create set of all defined classes
     class_parser = ClassParser(file_dict=file_finder.file_dict)
