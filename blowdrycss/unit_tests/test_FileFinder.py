@@ -126,8 +126,7 @@ class TestFileFinder(TestCase):
         css_directory = settings.css_directory                                              # Save original setting
         settings.css_directory = unittest_file_path(folder='test_css')                      # Change Setting
 
-        # Directory must be created for Travis CI case
-        make_directory(settings.css_directory)
+        make_directory(settings.css_directory)                                              # Create dir for Travis CI
         self.assertTrue(os.path.isdir(settings.css_directory))
 
         temp_file = unittest_file_path('test_css', 'new.html')                              # Create a temporary file

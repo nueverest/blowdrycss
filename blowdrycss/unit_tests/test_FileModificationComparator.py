@@ -4,11 +4,12 @@ from __future__ import absolute_import, unicode_literals
 # builtin
 from unittest import TestCase, main
 from shutil import copyfile
+from time import sleep
 import os
 
 # custom
 from blowdrycss.filehandler import FileModificationComparator
-from blowdrycss.utilities import unittest_file_path, change_settings_for_testing, delete_file_paths
+from blowdrycss.utilities import unittest_file_path, change_settings_for_testing, delete_file_paths, make_directory
 import blowdrycss_settings as settings
 
 change_settings_for_testing()
@@ -26,9 +27,12 @@ class TestFileModificationComparator(TestCase):
 
     def test_is_newer_blowdry_css_missing(self):
         css_directory = settings.css_directory                                      # Save original setting
-        settings.css_directory = unittest_file_path('test_css', '')                 # Change Setting
+        settings.css_directory = unittest_file_path(folder='test_css')              # Change Setting
 
-        html_file = unittest_file_path('test_html', 'index.html')                   # Create a temporary file
+        make_directory(settings.css_directory)                                      # Create dir for Travis CI
+        self.assertTrue(os.path.isdir(settings.css_directory))
+        
+        fake_file = unittest_file_path(filename='fake.html')                        # Define a fake file path
 
         copy_of_css = unittest_file_path('test_css', 'copy.css')
         css_file = unittest_file_path('test_css', 'blowdry.css')                    # Modify css_file
@@ -36,7 +40,7 @@ class TestFileModificationComparator(TestCase):
         delete_file_paths(file_paths=(css_file, ))                                  # Delete blowdry.css
 
         comparator = FileModificationComparator()
-        self.assertRaises(OSError, comparator.is_newer, html_file)
+        self.assertRaises(OSError, comparator.is_newer, fake_file)
 
         copyfile(copy_of_css, css_file)                                             # Copy back original file
         delete_file_paths(file_paths=(copy_of_css, ))                               # Delete temporary file
@@ -44,12 +48,20 @@ class TestFileModificationComparator(TestCase):
 
     def test_is_newer(self):
         css_directory = settings.css_directory                                      # Save original setting
-        settings.css_directory = unittest_file_path('test_css', '')                 # Change Setting
+        settings.css_directory = unittest_file_path(folder='test_css')              # Change Setting
+
+        make_directory(settings.css_directory)                                      # Create dir for Travis CI
+        self.assertTrue(os.path.isdir(settings.css_directory))
+
+        css_file = unittest_file_path('test_css', 'blowdry.css')
+        if not os.path.isfile(css_file):                                            # Create blowdry.css for Travis CI
+            with open(css_file, 'w') as generic_file:
+                generic_file.write('.bold {font-weight: bold}')
+
         temp_file = unittest_file_path('test_css', 'temp.html')                     # Create a temporary file
         with open(temp_file, 'w') as generic_file:
             generic_file.write('test test test')
 
-        css_file = unittest_file_path('test_css', 'blowdry.css')
         a = os.path.getmtime(css_file)                                              # Get Modification Times
         b = os.path.getmtime(temp_file)
 
@@ -63,15 +75,20 @@ class TestFileModificationComparator(TestCase):
 
     def test_file_is_NOT_newer(self):
         css_directory = settings.css_directory                                      # Save original setting
-        settings.css_directory = unittest_file_path('test_css', '')                 # Change Setting
+        settings.css_directory = unittest_file_path(folder='test_css')              # Change Setting
+
+        make_directory(settings.css_directory)                                      # Create dir for Travis CI
+        self.assertTrue(os.path.isdir(settings.css_directory))
 
         temp_file = unittest_file_path('test_css', 'temp.html')                     # Create a temporary file
         with open(temp_file, 'w') as generic_file:
             generic_file.write('test test test')
 
-        copy_of_css = unittest_file_path('test_css', 'copy.css')
-        css_file = unittest_file_path('test_css', 'blowdry.css')                    # Modify css_file
-        copyfile(css_file, copy_of_css)                                             # Copy of blowdry.css
+        css_file = unittest_file_path('test_css', 'blowdry.css')
+        if os.path.isfile(css_file):                                                # If not Travis CI case
+            copy_of_css = unittest_file_path('test_css', 'copy.css')
+            css_file = unittest_file_path('test_css', 'blowdry.css')                # Modify css_file
+            copyfile(css_file, copy_of_css)                                         # Copy of blowdry.css
 
         with open(css_file, 'w') as generic_file:
             generic_file.write('.bold {font-weight: bold}')
