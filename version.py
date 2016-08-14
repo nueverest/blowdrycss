@@ -170,7 +170,7 @@
       comprehensive scans of all files now occurs every 1800 seconds (30 minutes). This value can be
       increased or decreased in the settings file by changing ``time_limit``.
 
-      Force pypandoc==1.1.3 since pandoc doesn't properly install on Windows.
+      Force pypandoc==1.1.3 since pandoc doesn't properly install on Windows in version 1.2.
 
       PEP8 and typo corrections.
     |

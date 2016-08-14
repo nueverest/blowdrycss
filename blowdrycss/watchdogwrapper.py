@@ -7,7 +7,7 @@ import logging
 from time import sleep
 
 # plugins
-from watchdog.events import PatternMatchingEventHandler, FileModifiedEvent, FileDeletedEvent
+from watchdog.events import PatternMatchingEventHandler, FileModifiedEvent
 from watchdog.observers import Observer
 
 # custom
@@ -66,18 +66,6 @@ class FileEditEventHandler(PatternMatchingEventHandler):
         """
         if type(event) == FileModifiedEvent and not self.excluded(src_path=event.src_path):
             logging.debug('File ' + event.event_type + ' --> ' + str(event.src_path))
-            blowdry.quick_parser()
-            self.print_status()
-
-    def on_deleted(self, event):
-        """ Called when a file or directory is deleted. Only FileDeletedEvents triggers blowdry.quick_parser().
-
-        :type event: :class:`watchdog.event.DirDeletedEvent` or :class:`watchdog.event.FileDeletedEvent`
-        :param event: Event representing file deletion.
-
-        """
-        if type(event) == FileDeletedEvent and not self.excluded(src_path=event.src_path):
-            logging.debug('File ' + event.event_type.capitalize() + ' --> ' + str(event))
             blowdry.quick_parser()
             self.print_status()
 
