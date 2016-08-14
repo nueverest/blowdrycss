@@ -3,10 +3,11 @@ from __future__ import absolute_import, unicode_literals
 
 # builtin
 from unittest import TestCase, main
+import os
 
 # custom
 from blowdrycss.filehandler import FileFinder, FileConverter
-from blowdrycss.utilities import unittest_file_path, delete_file_paths
+from blowdrycss.utilities import unittest_file_path, delete_file_paths, make_directory
 import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
@@ -123,15 +124,19 @@ class TestFileFinder(TestCase):
 
     def test_set_recent_file_dict(self):
         css_directory = settings.css_directory                                              # Save original setting
-        settings.css_directory = unittest_file_path('test_css', '')                         # Change Setting
+        settings.css_directory = unittest_file_path(folder='test_css')                      # Change Setting
 
-        temp_file = unittest_file_path('test_html', 'new.html')                             # Create a temporary file
+        # Directory must be created for Travis CI case
+        make_directory(settings.css_directory)
+        self.assertTrue(os.path.isdir(settings.css_directory))
+
+        temp_file = unittest_file_path('test_css', 'new.html')                              # Create a temporary file
         with open(temp_file, 'w') as generic_file:
             generic_file.write('<html></html>')
 
         valid_dict = {
             '.html': {
-                unittest_file_path('test_html', 'new.html'),
+                unittest_file_path('test_css', 'new.html'),
             },
             '.aspx': set(),
             '.jinja2': set(),
@@ -139,7 +144,7 @@ class TestFileFinder(TestCase):
         valid_keys = ['.html', '.aspx', '.jinja2']
         settings.file_types = ('*.html', '*.aspx', '*.jinja2')                              # Override file_types
         project_directory = settings.project_directory
-        settings.project_directory = unittest_file_path()
+        settings.project_directory = unittest_file_path(folder='test_css')
         file_finder = FileFinder(recent=True)
         for valid_key in valid_keys:
             self.assertTrue(valid_key in file_finder.file_dict, msg=file_finder.file_dict)

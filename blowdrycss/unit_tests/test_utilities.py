@@ -176,8 +176,8 @@ class TestUtilities(TestCase):
         change_settings_for_testing()
 
         if cwd.endswith('unit_tests'):                              # Allows running of pycharm unittest.
-            for if_case in if_cases:
-                self.assertTrue(if_case)
+            for i, if_case in enumerate(if_cases):
+                self.assertTrue(if_case, msg="index %s\n%s\n%s" % (i, settings.project_directory, path.join(cwd, 'test_examplesite')))
             chdir('../..')
             cwd_else = getcwd()
             change_settings_for_testing()                           # Re-run with new directory
