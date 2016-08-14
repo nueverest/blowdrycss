@@ -91,7 +91,7 @@ class TestFileEditEventHandler(TestCase):
             'The blowdrycss watchdog is watching all (*.html) files',
             '-' * 96,
         ]
-        html_text = '<html></html>'
+        html_text = '<html></html> '
         test_examplesite = unittest_file_path(folder='test_examplesite')
         modify_dot_html = unittest_file_path(folder='test_examplesite', filename='modify.html')
         file_types = '(' + ', '.join(settings.file_types) + ')'
