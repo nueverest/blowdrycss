@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 # builtin
 from unittest import TestCase, main
+from time import sleep
 import os
 
 # custom
@@ -128,6 +129,12 @@ class TestFileFinder(TestCase):
 
         make_directory(settings.css_directory)                                              # Create dir for Travis CI
         self.assertTrue(os.path.isdir(settings.css_directory))
+
+        css_file = unittest_file_path('test_css', 'blowdry.css')
+        if not os.path.isfile(css_file):                                            # Create blowdry.css for Travis CI
+            with open(css_file, 'w') as generic_file:
+                generic_file.write('.bold {font-weight: bold}')
+            sleep(0.001)
 
         temp_file = unittest_file_path('test_css', 'new.html')                              # Create a temporary file
         with open(temp_file, 'w') as generic_file:

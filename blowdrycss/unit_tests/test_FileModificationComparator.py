@@ -57,8 +57,7 @@ class TestFileModificationComparator(TestCase):
         if not os.path.isfile(css_file):                                            # Create blowdry.css for Travis CI
             with open(css_file, 'w') as generic_file:
                 generic_file.write('.bold {font-weight: bold}')
-
-        sleep(0.001)
+            sleep(0.001)
 
         temp_file = unittest_file_path('test_css', 'temp.html')                     # Create a temporary file
         with open(temp_file, 'w') as generic_file:
