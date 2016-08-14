@@ -26,8 +26,12 @@ class FileFinder(object):
 
     | **Parameters:**
 
-    | **project_directory** (*str*) -- Full path to the project directory containing parsable files e.g.
-      ``/home/usr/web_project``.
+    | **recent** (*str*) -- Flag that indicates whether to gather the most recently modified files (True Case)
+      on whether to gather all files (False Case).
+
+    | **Members:**
+
+    | **project_directory** (*str*) -- Set to settings.project_directory.
 
     | **files** (*str list*) -- List of all paths to all parsable files.
 
@@ -36,18 +40,13 @@ class FileFinder(object):
 
     **Example:**
 
-    >>> from os import getcwd, chdir, path
-    >>> current_dir = getcwd()
-    >>> chdir('..')
-    >>> project_directory = path.join(current_dir, 'examplesite')
-    >>> chdir(current_dir)    # Change it back.
-    >>> file_finder = FileFinder(project_directory=project_directory)
+    >>> file_finder = FileFinder(recent=False)
     >>> files = file_finder.files
 
     """
-    def __init__(self, project_directory='', recent=True):
-        if path.isdir(project_directory):
-            self.project_directory = project_directory
+    def __init__(self, recent=True):
+        self.project_directory = settings.project_directory
+        if path.isdir(self.project_directory):
             self.recent = recent
 
             self.files = []
@@ -60,11 +59,14 @@ class FileFinder(object):
                 self.set_file_dict()
 
             logging.debug(msg='File Types:' + ', '.join(settings.file_types))
-            logging.debug(msg='Project Directory:' + str(project_directory))
+            logging.debug(msg='Project Directory:' + str(self.project_directory))
             logging.debug('\nProject Files Found:')
             self.print_collection(self.files)
         else:
-            raise OSError(project_directory + ' is not a directory.')
+            raise OSError(
+                self.project_directory +
+                ' is not a directory. Check project_directory setting in blowdrycss_settings.py'
+            )
 
     @staticmethod
     def print_collection(collection):

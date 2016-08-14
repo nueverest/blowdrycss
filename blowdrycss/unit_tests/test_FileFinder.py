@@ -60,16 +60,19 @@ class TestFileFinder(TestCase):
             unittest_file_path('test_html', 'test.html'),
             unittest_file_path('test_html', 'media_query.html'),
         }
-        project_directory = unittest_file_path()
-        file_finder = FileFinder(project_directory=project_directory, recent=False)
+        project_directory = settings.project_directory
+        settings.project_directory = unittest_file_path()
+        file_finder = FileFinder(recent=False)
         for expected_file in expected_files:
             self.assertTrue(expected_file in file_finder.files)
+        settings.project_directory = project_directory                                          # Reset
 
     def test_set_file_dict(self):
         delete_these = (
             unittest_file_path('test_examplesite', 'clashing_aliases.html'),
             unittest_file_path('test_examplesite', 'modify.html'),
             unittest_file_path('test_examplesite', 'property_aliases.html'),
+            # unittest_file_path('test_html', 'new.html'),
         )
         delete_file_paths(file_paths=delete_these)
 
@@ -89,8 +92,9 @@ class TestFileFinder(TestCase):
         }
         valid_keys = ['.html', '.aspx', '.jinja2']
         settings.file_types = ('*.html', '*.aspx', '*.jinja2')                              # Override file_types
-        project_directory = unittest_file_path()
-        file_finder = FileFinder(project_directory=project_directory, recent=False)
+        project_directory = settings.project_directory
+        settings.project_directory = unittest_file_path()
+        file_finder = FileFinder(recent=False)
         for valid_key in valid_keys:
             self.assertTrue(valid_key in file_finder.file_dict, msg=file_finder.file_dict)
             self.assertEqual(
@@ -99,18 +103,21 @@ class TestFileFinder(TestCase):
                 msg='\n' + valid_key + str(file_finder.file_dict[valid_key]) + '\n\n' + str(valid_dict[valid_key])
             )
         settings.file_types = ('*.html', )                                                  # Reset file_types
+        settings.project_directory = project_directory
 
     def test_set_file_dict_extension_not_found(self):
         valid_dict = {'.not_found': set(), }
         valid_keys = ['.not_found']
         settings.file_types = ('*.not_found', )                                             # Override file_types
-        project_directory = unittest_file_path()
-        file_finder = FileFinder(project_directory=project_directory, recent=False)
+        project_directory = settings.project_directory
+        settings.project_directory = unittest_file_path()
+        file_finder = FileFinder(recent=False)
         for valid_key in valid_keys:
             self.assertTrue(valid_key in file_finder.file_dict, msg=file_finder.file_dict)
             self.assertEqual(file_finder.file_dict[valid_key], valid_dict[valid_key],
                              msg=file_finder.file_dict[valid_key])
         settings.file_types = ('*.html', )                                                  # Reset file_types
+        settings.project_directory = project_directory
 
     def test_set_recent_file_dict(self):
         css_directory = settings.css_directory                                              # Save original setting
@@ -129,8 +136,9 @@ class TestFileFinder(TestCase):
         }
         valid_keys = ['.html', '.aspx', '.jinja2']
         settings.file_types = ('*.html', '*.aspx', '*.jinja2')                              # Override file_types
-        project_directory = unittest_file_path()
-        file_finder = FileFinder(project_directory=project_directory, recent=True)
+        project_directory = settings.project_directory
+        settings.project_directory = unittest_file_path()
+        file_finder = FileFinder(recent=True)
         for valid_key in valid_keys:
             self.assertTrue(valid_key in file_finder.file_dict, msg=file_finder.file_dict)
             self.assertEqual(
@@ -142,6 +150,7 @@ class TestFileFinder(TestCase):
         delete_file_paths(file_paths=(temp_file, ))                                         # Delete test files
         settings.css_directory = css_directory                                              # Reset settings
         settings.file_types = ('*.html', )
+        settings.project_directory = project_directory
 
     def test_fileconverter_wrongpath(self):
         wrong_file_path = '/this/is/wrong/file/path'

@@ -33,7 +33,7 @@ class TestClassParser(TestCase):
         }
         settings.file_types = ('*.html', '*.aspx', '*.jinja2')                                  # Override file_types
         project_directory = unittest_file_path()
-        file_finder = FileFinder(project_directory=project_directory)
+        file_finder = FileFinder()
         self.assertTrue('.aspx' in list(file_finder.file_dict), msg=settings.file_types)
         class_parser = ClassParser(file_dict=file_finder.file_dict)
         self.assertEqual(
@@ -65,7 +65,7 @@ class TestClassParser(TestCase):
         }
         settings.file_types = ('*.aspx', '*.jinja2')                                            # Override file_types
         project_directory = unittest_file_path()
-        file_finder = FileFinder(project_directory=project_directory)
+        file_finder = FileFinder()
         self.assertFalse('.html' in list(file_finder.file_dict), msg=settings.file_types)
         self.assertTrue('.aspx' in list(file_finder.file_dict), msg=settings.file_types)
         class_parser = ClassParser(file_dict=file_finder.file_dict)
@@ -85,7 +85,7 @@ class TestClassParser(TestCase):
         }
         settings.file_types = ('*.cs', )                                            # Override file_types
         project_directory = unittest_file_path()
-        file_finder = FileFinder(project_directory=project_directory)
+        file_finder = FileFinder()
         self.assertFalse('.html' in list(file_finder.file_dict), msg=settings.file_types)
         self.assertTrue('.cs' in list(file_finder.file_dict), msg=settings.file_types)
         class_parser = ClassParser(file_dict=file_finder.file_dict)
