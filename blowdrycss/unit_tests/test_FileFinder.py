@@ -14,9 +14,12 @@ __project__ = 'blowdrycss'
 
 
 class TestFileFinder(TestCase):
-    def test_file_finder_wrong_path(self):
-        not_a_directory = 'not/a/ valid /directory\\file.txt'
-        self.assertRaises(OSError, FileFinder, not_a_directory)
+    def test_file_finder_wrong_setting_project_directory(self):
+        project_directory = settings.project_directory
+        settings.project_directory = 'not/a/ valid /directory\\file.txt'
+        recent = False
+        self.assertRaises(OSError, FileFinder, recent)
+        settings.project_directory = project_directory
 
     # Reference:
     # http://stackoverflow.com/questions/4219717/how-to-assert-output-with-nosetest-unittest-in-python#answer-4220278
