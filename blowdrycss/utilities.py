@@ -179,10 +179,13 @@ def print_css_stats(file_name=''):
     css_size = stat(css_dir).st_size                                                # Get file size in Bytes.
     min_size = stat(min_dir).st_size
 
-    percent_reduced = round(                                                        # Calculate percentage size reduced.
-        float(100) - float(min_size) / float(css_size) * float(100),
-        1                                                                           # Precision
-    )
+    try:
+        percent_reduced = round(                                                        # Calculate percentage size reduced.
+            float(100) - float(min_size) / float(css_size) * float(100),
+            1                                                                           # Precision
+        )
+    except ZeroDivisionError:
+        percent_reduced = round(0.0, 1)
 
     css_kb = round(float(css_size) / float(1000), 1)                                # Convert to kiloBytes.
     min_kb = round(float(min_size) / float(1000), 1)

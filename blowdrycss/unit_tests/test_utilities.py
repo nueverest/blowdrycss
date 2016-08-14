@@ -248,6 +248,45 @@ class TestUtilities(TestCase):
         finally:
             sys.stdout = saved_stdout
 
+    def test_print_css_stats_ZeroDivisionError(self):
+        # On Travis CI these auto-generated files are inaccessible and need to be recreated.
+        # Change the expected file size reduction percentage since Ubuntu's math is different.
+        # Create directories and CSS files if they do not exist.
+        empty_css = unittest_file_path('test_examplesite/test_css', 'empty.css')
+        empty_min_css = unittest_file_path('test_examplesite/test_css', 'empty.min.css')
+
+        #if not path.isfile(blowdry_css) or not path.isfile(blowdry_min_css):
+        substrings = [
+            'empty.css:\t 0.0kB',
+            'empty.min.css: 0.0kB',
+            'CSS file size reduced by 0.0%.'
+        ]
+
+        # Create directories.
+        make_directory(unittest_file_path('test_examplesite', ''))
+        make_directory(unittest_file_path('test_examplesite/test_css', ''))
+
+        # Create files.
+        with open(empty_css, 'w') as generic_file:
+            generic_file.write(u'')
+
+        with open(empty_min_css, 'w') as generic_file:
+            generic_file.write(u'')
+
+        # Handle printed output.
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+
+            print_css_stats(file_name='empty')
+
+            output = out.getvalue()
+            for substring in substrings:
+                self.assertTrue(substring in output, msg=substring + '\noutput:\n' + output)
+        finally:
+            sys.stdout = saved_stdout
+
     def test_print_blow_dryer(self):
         # Warning: Do not change the indentation.
         expected_ascii = """
