@@ -119,6 +119,7 @@ def main():
                 sleep(1)
                 if limit_timer.limit_exceeded:                      # Infrequently remove unused CSS class selectors.
                     blowdry.blowdry(recent=False)
+                    event_handler.print_status()
         except KeyboardInterrupt:
             observer.stop()
             print_blow_dryer()
