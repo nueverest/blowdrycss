@@ -58,6 +58,8 @@ class TestFileModificationComparator(TestCase):
             with open(css_file, 'w') as generic_file:
                 generic_file.write('.bold {font-weight: bold}')
 
+        sleep(0.001)
+
         temp_file = unittest_file_path('test_css', 'temp.html')                     # Create a temporary file
         with open(temp_file, 'w') as generic_file:
             generic_file.write('test test test')
@@ -85,10 +87,12 @@ class TestFileModificationComparator(TestCase):
             generic_file.write('test test test')
 
         css_file = unittest_file_path('test_css', 'blowdry.css')
-        if os.path.isfile(css_file):                                                # If not Travis CI case
+        try:
             copy_of_css = unittest_file_path('test_css', 'copy.css')
             css_file = unittest_file_path('test_css', 'blowdry.css')                # Modify css_file
             copyfile(css_file, copy_of_css)                                         # Copy of blowdry.css
+        except UnboundLocalError:
+            sleep(0.001)                                                            # Travis Case
 
         with open(css_file, 'w') as generic_file:
             generic_file.write('.bold {font-weight: bold}')
