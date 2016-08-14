@@ -75,7 +75,6 @@ class TestFileFinder(TestCase):
             unittest_file_path('test_examplesite', 'clashing_aliases.html'),
             unittest_file_path('test_examplesite', 'modify.html'),
             unittest_file_path('test_examplesite', 'property_aliases.html'),
-            # unittest_file_path('test_html', 'new.html'),
         )
         delete_file_paths(file_paths=delete_these)
 

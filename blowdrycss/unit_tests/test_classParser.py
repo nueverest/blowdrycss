@@ -32,8 +32,9 @@ class TestClassParser(TestCase):
             unittest_file_path('test_jinja', 'test.jinja2'),
         }
         settings.file_types = ('*.html', '*.aspx', '*.jinja2')                                  # Override file_types
-        project_directory = unittest_file_path()
-        file_finder = FileFinder()
+        project_directory = settings.project_directory
+        settings.project_directory = unittest_file_path()
+        file_finder = FileFinder(recent=False)
         self.assertTrue('.aspx' in list(file_finder.file_dict), msg=settings.file_types)
         class_parser = ClassParser(file_dict=file_finder.file_dict)
         self.assertEqual(
@@ -42,6 +43,7 @@ class TestClassParser(TestCase):
                     '\nsettings: ' + str(settings.html_docs)
         )
         settings.file_types = ('*.html', )                                                      # Reset file_types
+        settings.project_directory = project_directory
 
     def test_build_class_set(self):
         # integration test
@@ -64,13 +66,15 @@ class TestClassParser(TestCase):
             'dojo12',
         }
         settings.file_types = ('*.aspx', '*.jinja2')                                            # Override file_types
-        project_directory = unittest_file_path()
-        file_finder = FileFinder()
+        project_directory = settings.project_directory
+        settings.project_directory = unittest_file_path()
+        file_finder = FileFinder(recent=False)
         self.assertFalse('.html' in list(file_finder.file_dict), msg=settings.file_types)
         self.assertTrue('.aspx' in list(file_finder.file_dict), msg=settings.file_types)
         class_parser = ClassParser(file_dict=file_finder.file_dict)
         self.assertEqual(class_parser.class_set, expected_class_set, msg=class_parser.class_set)
         settings.file_types = ('*.html', )                                                      # Reset file_types
+        settings.project_directory = project_directory
 
     def test_build_class_set_CSharp_cs_file(self):
         # integration test
@@ -84,13 +88,15 @@ class TestClassParser(TestCase):
             'pink', 'xsmall-only', 'height-12', 'width-100p', 'inline',
         }
         settings.file_types = ('*.cs', )                                            # Override file_types
-        project_directory = unittest_file_path()
-        file_finder = FileFinder()
+        project_directory = settings.project_directory
+        settings.project_directory = unittest_file_path()
+        file_finder = FileFinder(recent=False)
         self.assertFalse('.html' in list(file_finder.file_dict), msg=settings.file_types)
         self.assertTrue('.cs' in list(file_finder.file_dict), msg=settings.file_types)
         class_parser = ClassParser(file_dict=file_finder.file_dict)
         self.assertEqual(class_parser.class_set, expected_class_set, msg=class_parser.class_set)
         settings.file_types = ('*.html', )                                                      # Reset file_types
+        settings.project_directory = project_directory
 
 
 if __name__ == '__main__':

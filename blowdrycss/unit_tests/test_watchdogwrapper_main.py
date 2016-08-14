@@ -23,8 +23,9 @@ class TestWatchdogWrapperMain(TestCase):
     non_matching = ''
     output = ''
 
-    def monitor_delete_stop(self, file_path_to_delete):
-        """ Monitor console output. Delete file at file_path_to_delete. Stop watchdogwrapper.main()
+    def monitor_modify_delete_stop(self, file_path):
+        """ Monitor console output. Modify the file to trigger watchdog on_modified().
+        Delete file at file_path_to_delete. Wait for output. Stop watchdogwrapper.main()
         Reference: http://stackoverflow.com/questions/7602120/sending-keyboard-interrupt-programmatically
 
         """
@@ -45,10 +46,14 @@ class TestWatchdogWrapperMain(TestCase):
             while 'Ctrl + C' not in out.getvalue():
                 sleep(0.05)
 
-            # Delete the file.
-            remove(file_path_to_delete)
+            # Modify file
+            with open(file_path, 'w') as generic_file:
+                generic_file.write('<html></html>')
 
-            # IMPORTANT: Must wait for output otherwise test will fail.  0.25
+            # Delete the file.
+            remove(file_path)
+
+            # IMPORTANT: Must wait up to 5 seconds for output otherwise test will fail.
             count = 0
             while substrings[-1] not in out.getvalue():
                 if count > 100:             # Max wait is 5 seconds = 100 count * 0.05 sleep
@@ -89,7 +94,7 @@ class TestWatchdogWrapperMain(TestCase):
 
         auto_generate = settings.auto_generate          # original
         settings.auto_generate = True
-        _thread.start_new_thread(self.monitor_delete_stop, (delete_dot_html,))
+        _thread.start_new_thread(self.monitor_modify_delete_stop, (delete_dot_html,))
         watchdogwrapper.main()    # Caution: Nothing will run after this line unless _thread.interrupt_main() is called.
         self.assertTrue(self.passing, msg=self.non_matching + ' not found in output:\n' + self.output)
         settings.auto_generate = auto_generate          # reset setting
