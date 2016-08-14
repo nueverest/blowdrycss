@@ -13,7 +13,7 @@ from watchdog.observers import Observer
 # custom
 from blowdrycss.utilities import print_blow_dryer
 from blowdrycss.timing import LimitTimer
-from blowdrycss import blowdry, log
+from blowdrycss import blowdry
 import blowdrycss_settings as settings
 
 
@@ -95,8 +95,7 @@ def main():
     ...
 
     """
-    if settings.logging_enabled:
-        log.enable()
+    blowdry.boilerplate()
 
     if settings.auto_generate:
         event_handler = FileEditEventHandler(

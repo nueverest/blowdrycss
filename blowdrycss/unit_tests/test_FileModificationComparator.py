@@ -19,12 +19,12 @@ __project__ = 'blowdrycss'
 
 
 class TestFileModificationComparator(TestCase):
-    def test_file_is_newer_wrong_path(self):
+    def test_is_newer_wrong_path(self):
         not_a_directory = 'not/a/ valid /directory\\file.txt'
         file_modification_comparator = FileModificationComparator()
-        self.assertRaises(OSError, file_modification_comparator.file_is_newer, not_a_directory)
+        self.assertRaises(OSError, file_modification_comparator.is_newer, not_a_directory)
 
-    def test_file_is_newer_blowdry_css_missing(self):
+    def test_is_newer_blowdry_css_missing(self):
         css_directory = settings.css_directory                                      # Save original setting
         settings.css_directory = unittest_file_path('test_css', '')                 # Change Setting
 
@@ -36,13 +36,13 @@ class TestFileModificationComparator(TestCase):
         delete_file_paths(file_paths=(css_file, ))                                  # Delete blowdry.css
 
         comparator = FileModificationComparator()
-        self.assertRaises(OSError, comparator.file_is_newer, html_file)
+        self.assertRaises(OSError, comparator.is_newer, html_file)
 
         copyfile(copy_of_css, css_file)                                             # Copy back original file
         delete_file_paths(file_paths=(copy_of_css, ))                               # Delete temporary file
         settings.css_directory = css_directory                                      # Reset Settings
 
-    def test_file_is_newer(self):
+    def test_is_newer(self):
         css_directory = settings.css_directory                                      # Save original setting
         settings.css_directory = unittest_file_path('test_css', '')                 # Change Setting
         temp_file = unittest_file_path('test_css', 'temp.html')                     # Create a temporary file
@@ -56,7 +56,7 @@ class TestFileModificationComparator(TestCase):
         file_modification_comparator = FileModificationComparator()
 
         self.assertTrue(a < b)
-        self.assertTrue(file_modification_comparator.file_is_newer(file_path=temp_file))
+        self.assertTrue(file_modification_comparator.is_newer(file_path=temp_file))
 
         delete_file_paths(file_paths=(temp_file, ))                                 # Delete temporary file
         settings.css_directory = css_directory                                      # Reset Settings
@@ -82,7 +82,7 @@ class TestFileModificationComparator(TestCase):
         comparator = FileModificationComparator()
 
         self.assertFalse(a < b)
-        self.assertFalse(comparator.file_is_newer(file_path=temp_file))
+        self.assertFalse(comparator.is_newer(file_path=temp_file))
 
         copyfile(copy_of_css, css_file)                                             # Copy back original file
         delete_file_paths(file_paths=(temp_file, copy_of_css, ))                    # Delete temporary file

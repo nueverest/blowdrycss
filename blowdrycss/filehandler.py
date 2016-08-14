@@ -343,13 +343,13 @@ class FileModificationComparator(object):
     >>> import blowdrycss_settings as settings
     >>> from blowdrycss.filehandler import FileModificationComparator
     >>> file_age_comparator = FileModificationComparator()
-    >>> print(file_age_comparator.file_is_newer(file_path=path.join(settings.project_directory, '/index.html'))
+    >>> print(file_age_comparator.is_newer(file_path=path.join(settings.project_directory, '/index.html'))
 
     """
     def __init__(self):
         self.blowdrycss_file = path.join(settings.css_directory, 'blowdry.css')
 
-    def file_is_newer(self, file_path):
+    def is_newer(self, file_path):
         """ Detects if ``self.file_path`` was modified more recently than blowdry.css.  If ``self.file_path`` is
         newer than blowdry.css it returns True otherwise it returns false.
 

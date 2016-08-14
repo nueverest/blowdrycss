@@ -6,7 +6,8 @@ import logging
 import cssutils
 from os import path
 # custom
-from blowdrycss.filehandler import FileFinder, CSSFile, GenericFile
+from blowdrycss import log
+from blowdrycss.filehandler import FileFinder, CSSFile, GenericFile, FileModificationComparator
 from blowdrycss.classparser import ClassParser
 from blowdrycss.classpropertyparser import ClassPropertyParser
 from blowdrycss.cssbuilder import CSSBuilder
@@ -31,6 +32,9 @@ def boilerplate():
     :return: None
 
     """
+    if settings.logging_enabled:
+        log.enable()
+
     if settings.hide_css_errors:
         cssutils.log.setLevel(logging.CRITICAL)
 
@@ -88,6 +92,13 @@ def quick_parser():
 
     # Get all files associated with defined file_types in project_directory
     file_finder = FileFinder(project_directory=settings.project_directory)
+    file_comparator = FileModificationComparator()
+    modified_files = []
+
+    # Remove all but the most recently modified files.
+    for _file in file_finder.files:
+        if file_comparator.is_newer(_file):
+            modified_files += _file
 
 
 def comprehensive_parser():
