@@ -27,7 +27,7 @@ class FileFinder(object):
     | **Parameters:**
 
     | **recent** (*str*) -- Flag that indicates whether to gather the most recently modified files (True Case)
-      on whether to gather all files (False Case).
+      or all eligible files (False Case).
 
     | **Members:**
 

@@ -28,7 +28,7 @@ class TestMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            blowdry.main()
+            blowdry.blowdry(recent=False)
 
             output = out.getvalue()
             for substring in substrings:
@@ -56,7 +56,7 @@ class TestMain(TestCase):
             if os.path.isfile(expected_file):
                 os.remove(expected_file)
 
-        blowdry.main()                                                              # Run It
+        blowdry.boilerplate()                                                       # Run It
 
         for expected_file in expected_files:
             self.assertTrue(os.path.isfile(expected_file), msg=expected_file)
@@ -87,7 +87,7 @@ class TestMain(TestCase):
             if os.path.isfile(expected_file):
                 os.remove(expected_file)
 
-        blowdry.main()
+        blowdry.boilerplate()
 
         for expected_file in expected_files:
             self.assertTrue(os.path.isfile(expected_file), msg=expected_file)

@@ -78,32 +78,7 @@ def boilerplate():
         rst_file.write(str(property_alias_rst))
 
 
-def quick_parser():
-    """ Parses only the files that changed after the last modification of blowdry.css.
-
-    :return: None
-
-    """
-    if settings.timing_enabled:
-        from blowdrycss.timing import Timer
-        timer = Timer()
-
-    print('\n~~~ blowdrycss quick parser started ~~~')
-
-    # Get all files associated with eligible file_types in project_directory
-    file_finder = FileFinder(recent=True)
-    file_comparator = FileModificationComparator()
-    modified_files = []
-
-    # Remove all but the most recently modified files.
-    for _file in file_finder.files:
-        if file_comparator.is_newer(_file):
-            modified_files += _file
-
-
-
-
-def comprehensive_parser():
+def blowdry(recent=True):
     """ It parses every eligible file in the project i.e. file type matches an element of settings.file_types.
     This ensures that from time to time unused CSS class selectors are removed from blowdry.css.
 
@@ -147,15 +122,19 @@ def comprehensive_parser():
 
     &nbsp;
 
+    :type recent: bool
+    :param recent: Flag that indicates whether to parse the most recently modified files (True Case)
+      or all eligible files (False Case).
+
     """
     if settings.timing_enabled:
         from blowdrycss.timing import Timer
         timer = Timer()
 
-    print('\n~~~ blowdrycss comprehensive parser started ~~~')
+    print('\n~~~ blowdrycss started ~~~')
 
-    # Get all files associated with defined file_types in project_directory
-    file_finder = FileFinder(recent=False)
+    # Get files to parse.
+    file_finder = FileFinder(recent=recent)
 
     # Create set of all defined classes
     class_parser = ClassParser(file_dict=file_finder.file_dict)

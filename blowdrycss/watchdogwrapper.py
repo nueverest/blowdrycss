@@ -60,13 +60,15 @@ class FileEditEventHandler(PatternMatchingEventHandler):
     def on_modified(self, event):
         """ Called when a file or directory is modified. Only FileModifiedEvents trigger action.
 
+        .. note:: Only parse the modified file(s) ``blowdry(recent=True)`` to enhance efficiency.
+
         :type event: :class:`watchdog.event.DirModifiedEvent` or :class:`watchdog.event.FileModifiedEvent`
         :param event: Event representing file modification.
 
         """
         if type(event) == FileModifiedEvent and not self.excluded(src_path=event.src_path):
             logging.debug('File ' + event.event_type + ' --> ' + str(event.src_path))
-            blowdry.quick_parser()
+            blowdry.blowdry(recent=True)
             self.print_status()
 
 
@@ -116,14 +118,14 @@ def main():
             while True:
                 sleep(1)
                 if limit_timer.limit_exceeded:                      # Infrequently remove unused CSS class selectors.
-                    blowdry.comprehensive_parser()
+                    blowdry.blowdry(recent=False)
         except KeyboardInterrupt:
             observer.stop()
             print_blow_dryer()
 
         observer.join()
     else:
-        blowdry.comprehensive_parser()
+        blowdry.blowdry(recent=False)
 
 
 if __name__ == '__main__':
