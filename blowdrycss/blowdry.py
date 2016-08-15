@@ -142,12 +142,14 @@ def parse(recent=True, class_set=set()):
     # Create set of all defined classes
     class_parser = ClassParser(file_dict=file_finder.file_dict)
 
-    # Union of class sets (only really matters during on_modified case)
+    # Unite class sets during on_modified case.
     if recent:
-        class_set |= class_parser.class_set
+        class_set = class_set.union(class_parser.class_set)
+    else:
+        class_set = class_parser.class_set
 
     # Filter class names. Only keep classes matching the defined class encoding.
-    class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
+    class_property_parser = ClassPropertyParser(class_set=class_set)
     logging.info(msg='blowdry.class_property_parser.class_set:\t' + str(class_property_parser.class_set))
     class_set = class_property_parser.class_set.copy()
 
