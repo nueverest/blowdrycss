@@ -23,6 +23,9 @@ class FileEditEventHandler(PatternMatchingEventHandler):
     created or moved/copy/pasted into the project_directory, 'modified' is triggered. This reduces a number
     of unnecessary calls to blowdry.blowdry().
 
+    __init__ override reference:
+    https://github.com/gorakhargosh/watchdog/blob/d7ceb7ddd48037f6d04ab37297a63116655926d9/src/watchdog/events.py
+
     class_set (*set*) -- Keeps track of the current set of css class selectors.
 
     """
@@ -57,9 +60,12 @@ class FileEditEventHandler(PatternMatchingEventHandler):
     def excluded(src_path=''):
         """ Returns True if the src_path matches an excluded file. Otherwise, it returns False.
 
+        Reference:
+        https://github.com/gorakhargosh/watchdog/blob/c05183a96a5a307f00dd3a775244c98b156fc001/src/watchdog/events.py
+
         :type src_path: str
         :param src_path: Source path of the file system object that triggered this event.
-          `Reference <https://github.com/gorakhargosh/watchdog/blob/c05183a96a5a307f00dd3a775244c98b156fc001/src/watchdog/events.py>`__
+
         :return: (*bool*) -- Return True if ``src_path`` ends with a file in ``excluded_files``
 
         """
