@@ -286,6 +286,7 @@ class TestUtilities(TestCase):
                 self.assertTrue(substring in output, msg=substring + '\noutput:\n' + output)
         finally:
             sys.stdout = saved_stdout
+            delete_file_paths((empty_css, empty_min_css, ))
 
     def test_print_blow_dryer(self):
         # Warning: Do not change the indentation.

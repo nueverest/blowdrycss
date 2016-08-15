@@ -74,7 +74,50 @@ class TestWatchdogWrapperMain(TestCase):
             sys.stdout = saved_stdout
             _thread.interrupt_main()        # Stop watchdogwrapper.main().
 
-    def test_main_auto_generate_True(self):
+    def monitor_limit_expires_stop(self):
+        """ Monitor console output. Wait for output based on LimitTimer expiration. Stop watchdogwrapper.main()
+        Reference: http://stackoverflow.com/questions/7602120/sending-keyboard-interrupt-programmatically
+
+        """
+        substrings = [
+            '~~~ blowdrycss started ~~~',
+            'Auto-Generated CSS',
+            'Completed',
+            'blowdry.css',
+            'blowdry.min.css',
+        ]
+
+        saved_stdout = sys.stdout           # Monitor console
+        try:
+            out = StringIO()
+            sys.stdout = out
+
+            # Wait for main() to start.
+            while 'Ctrl + C' not in out.getvalue():
+                sleep(0.05)
+
+            # IMPORTANT: Must wait up to 5 seconds for output otherwise test will fail.
+            count = 0
+            while substrings[-1] not in out.getvalue():
+                if count > 100:             # Max wait is 5 seconds = 100 count * 0.05 sleep
+                    break
+                else:
+                    sleep(0.05)
+                    count += 1
+
+            output = out.getvalue()
+
+            for substring in substrings:
+                if substring not in output:
+                    self.passing = False
+                    self.non_matching = substring
+                    self.output = output
+                self.assertTrue(substring in output, msg=substring + '\noutput:\n' + output)
+        finally:
+            sys.stdout = saved_stdout
+            _thread.interrupt_main()        # Stop watchdogwrapper.main().
+
+    def test_main_auto_generate_True_on_modify(self):
         # Integration test
         logging.basicConfig(level=logging.DEBUG)
         html_text = '<html></html>'
@@ -98,6 +141,37 @@ class TestWatchdogWrapperMain(TestCase):
         watchdogwrapper.main()    # Caution: Nothing will run after this line unless _thread.interrupt_main() is called.
         self.assertTrue(self.passing, msg=self.non_matching + ' not found in output:\n' + self.output)
         settings.auto_generate = auto_generate          # reset setting
+
+    def test_main_auto_generate_True_limit_timer_expired(self):
+        # Integration test
+        logging.basicConfig(level=logging.DEBUG)
+        html_text = '<html><div class="blue"></div></html>'
+        test_examplesite = unittest_file_path(folder='test_examplesite')
+        limit_dot_html = unittest_file_path(folder='test_examplesite', filename='limit_expired.html')
+
+        # Directory must be created for Travis CI case
+        make_directory(test_examplesite)
+        self.assertTrue(path.isdir(test_examplesite))
+
+        # Create file delete.html
+        with open(limit_dot_html, 'w') as _file:
+            _file.write(html_text)
+
+        # Double check to ensure it got created.
+        self.assertTrue(path.isfile(limit_dot_html))
+
+        auto_generate = settings.auto_generate          # original
+        time_limit = settings.time_limit
+
+        settings.auto_generate = True
+        settings.time_limit = 0.1                       # reduce the time_limit
+        _thread.start_new_thread(self.monitor_limit_expires_stop, ())
+        watchdogwrapper.main()    # Caution: Nothing will run after this line unless _thread.interrupt_main() is called.
+        self.assertTrue(self.passing, msg=self.non_matching + ' not found in output:\n' + self.output)
+
+        remove(limit_dot_html)                          # delete files
+        settings.auto_generate = auto_generate          # reset setting
+        settings.time_limit = time_limit
 
     def test_main_auto_generate_False(self):
         # Integration test
