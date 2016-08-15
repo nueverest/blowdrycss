@@ -382,20 +382,33 @@ class FileModificationComparator(object):
     """
     def __init__(self):
         self.blowdrycss_file = path.join(settings.css_directory, 'blowdry.css')
+        self.blowdrymincss_file = path.join(settings.css_directory, 'blowdry.min.css')
 
     def is_newer(self, file_path):
         """ Detects if ``self.file_path`` was modified more recently than blowdry.css.  If ``self.file_path`` is
-        newer than blowdry.css it returns True otherwise it returns false.
+        newer than blowdry.css or blowdry.min.css it returns True otherwise it returns false.
+
+        If blowdry.css or blowdry.min.css do not exist, then the file under comparison is newer.
 
         :type file_path: str
         :param file_path: The full path to a file.
-        :return: (*bool*) Returns True if modification time of blowdry.css is older i.e. less than the
-            ``self.file_path`` under consideration.
+        :return: (*bool*) Returns True if modification time of blowdry.css or blowdry.min.css do not exist, or are older
+            i.e. less than the ``self.file_path`` under consideration.
         """
-        try:
-            a = path.getmtime(self.blowdrycss_file)
-        except OSError:
-            raise OSError('"' + self.blowdrycss_file + '" does not exist.')
+        if settings.human_readable:
+            try:
+                a = path.getmtime(self.blowdrycss_file)
+            except OSError:                                                                     # file doesn't exist
+                return True
+        elif settings.minify:
+            try:
+                a = path.getmtime(self.blowdrymincss_file)
+            except OSError:                                                                     # file doesn't exist
+                return True
+        else:
+            raise SystemError(
+                'Review blowdrycss_settings.py. Either settings.human_readable or settings.minify must be set to True.'
+            )
 
         try:
             b = path.getmtime(file_path)

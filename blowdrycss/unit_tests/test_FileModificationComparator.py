@@ -24,6 +24,34 @@ class TestFileModificationComparator(TestCase):
         file_modification_comparator = FileModificationComparator()
         self.assertRaises(OSError, file_modification_comparator.is_newer, not_a_directory)
 
+    def test_is_newer_SystemError_wrong_settings(self):
+        css_directory = settings.css_directory                                      # Save original setting
+        human_readable = settings.human_readable
+        minify = settings.minify
+
+        settings.css_directory = unittest_file_path(folder='test_recent')           # Change Setting
+        settings.human_readable = False
+        settings.minify = False
+
+        make_directory(settings.css_directory)                                      # Create dir for Travis CI
+        self.assertTrue(os.path.isdir(settings.css_directory))
+
+        css_file = unittest_file_path(settings.css_directory, 'blowdry.css')
+        with open(css_file, 'w') as generic_file:
+            generic_file.write('test test test')
+
+        temp_file = unittest_file_path('test_recent', 'temp.html')                  # Create a temporary file
+        with open(temp_file, 'w') as generic_file:
+            generic_file.write('.bold {font-weight: bold}')
+
+        comparator = FileModificationComparator()
+        self.assertRaises(SystemError, comparator.is_newer, temp_file)
+
+        delete_file_paths((temp_file, css_file, ))
+        settings.css_directory = css_directory                                      # Reset Settings
+        settings.human_readable = human_readable
+        settings.minify = minify
+
     def test_is_newer_blowdry_css_missing(self):
         css_directory = settings.css_directory                                      # Save original setting
         settings.css_directory = unittest_file_path(folder='test_recent')           # Change Setting
@@ -31,17 +59,46 @@ class TestFileModificationComparator(TestCase):
         make_directory(settings.css_directory)                                      # Create dir for Travis CI
         self.assertTrue(os.path.isdir(settings.css_directory))
         
-        fake_file = unittest_file_path(filename='fake.html')                        # Define a fake file path
+        temp_file = unittest_file_path('test_recent', 'temp.html')                  # Create a temporary file
+        with open(temp_file, 'w') as generic_file:
+            generic_file.write('.bold {font-weight: bold}')
 
         css_file = unittest_file_path('test_recent', 'blowdry.css')                 # Modify css_file
         delete_file_paths(file_paths=(css_file, ))                                  # Delete blowdry.css
 
         comparator = FileModificationComparator()
-        self.assertRaises(OSError, comparator.is_newer, fake_file)
+        self.assertTrue(comparator.is_newer(temp_file))
 
         settings.css_directory = css_directory                                      # Reset Settings
 
-    def test_is_newer(self):
+    def test_is_newer_blowdry_min_css_missing(self):
+        css_directory = settings.css_directory                                      # Save original setting
+        human_readable = settings.human_readable
+        minify = settings.minify
+
+        settings.css_directory = unittest_file_path(folder='test_recent')           # Change Setting
+        settings.human_readable = False
+        settings.minify = True
+
+        make_directory(settings.css_directory)                                      # Create dir for Travis CI
+        self.assertTrue(os.path.isdir(settings.css_directory))
+
+        temp_file = unittest_file_path('test_recent', 'temp.html')                  # Create a temporary file
+        with open(temp_file, 'w') as generic_file:
+            generic_file.write('.bold {font-weight: bold}')
+
+        css_file = unittest_file_path('test_recent', 'blowdry.css')                 # Modify css_file
+        delete_file_paths(file_paths=(css_file, ))                                  # Delete blowdry.css
+
+        comparator = FileModificationComparator()
+        self.assertTrue(comparator.is_newer(temp_file))
+
+        delete_file_paths((temp_file, css_file))
+        settings.css_directory = css_directory                                      # Reset Settings
+        settings.human_readable = human_readable
+        settings.minify = minify
+
+    def test_is_newer_blowdry_css(self):
         css_directory = settings.css_directory                                      # Save original setting
         settings.css_directory = unittest_file_path(folder='test_recent')           # Change Setting
 
@@ -50,11 +107,11 @@ class TestFileModificationComparator(TestCase):
 
         css_file = unittest_file_path(settings.css_directory, 'blowdry.css')
         with open(css_file, 'w') as generic_file:
-            generic_file.write('.bold {font-weight: bold}')
+            generic_file.write('test test test')
 
         temp_file = unittest_file_path('test_recent', 'temp.html')                  # Create a temporary file
         with open(temp_file, 'w') as generic_file:
-            generic_file.write('test test test')
+            generic_file.write('.bold {font-weight: bold}')
 
         a = os.path.getmtime(css_file)                                              # Get Modification Times
         b = os.path.getmtime(temp_file)
@@ -64,8 +121,42 @@ class TestFileModificationComparator(TestCase):
         self.assertTrue(a <= b, msg='%s is not less than or equal to %s' % (a, b))
         self.assertTrue(file_modification_comparator.is_newer(file_path=temp_file))
 
-        delete_file_paths(file_paths=(temp_file, ))                                 # Clean up files
+        delete_file_paths(file_paths=(temp_file, css_file))                         # Clean up files
         settings.css_directory = css_directory                                      # Reset Settings
+
+    def test_is_newer_blowdry_min_css(self):
+        css_directory = settings.css_directory                                      # Save original setting
+        settings.css_directory = unittest_file_path(folder='test_recent')           # Change Setting
+        human_readable = settings.human_readable
+        minify = settings.minify
+
+        settings.css_directory = unittest_file_path(folder='test_recent')           # Change Setting
+        settings.human_readable = False
+        settings.minify = True
+
+        make_directory(settings.css_directory)                                      # Create dir for Travis CI
+        self.assertTrue(os.path.isdir(settings.css_directory))
+
+        css_min_file = unittest_file_path(settings.css_directory, 'blowdry.min.css')
+        with open(css_min_file, 'w') as generic_file:
+            generic_file.write('test test test')
+
+        temp_file = unittest_file_path('test_recent', 'temp.html')                  # Create a temporary file
+        with open(temp_file, 'w') as generic_file:
+            generic_file.write('.bold {font-weight: bold}')
+
+        a = os.path.getmtime(css_min_file)                                          # Get Modification Times
+        b = os.path.getmtime(temp_file)
+
+        file_modification_comparator = FileModificationComparator()
+
+        self.assertTrue(a <= b, msg='%s is not less than or equal to %s' % (a, b))
+        self.assertTrue(file_modification_comparator.is_newer(file_path=temp_file))
+
+        delete_file_paths((temp_file, css_min_file))
+        settings.css_directory = css_directory                                      # Reset Settings
+        settings.human_readable = human_readable
+        settings.minify = minify
 
     def test_file_is_NOT_newer(self):
         css_directory = settings.css_directory                                      # Save original setting
