@@ -54,7 +54,11 @@ class TestFileModificationComparator(TestCase):
         self.assertTrue(os.path.isdir(settings.css_directory))
 
         css_file = unittest_file_path('test_css', 'blowdry.css')
-        if not os.path.isfile(css_file):                                            # Create blowdry.css for Travis CI
+        try:
+            copy_of_css = unittest_file_path('test_css', 'copy.css')
+            css_file = unittest_file_path('test_css', 'blowdry.css')                # Modify css_file
+            copyfile(css_file, copy_of_css)                                         # Copy of blowdry.css
+        except UnboundLocalError:                                                   # Create blowdry.css for Travis CI
             with open(css_file, 'w') as generic_file:
                 generic_file.write('.bold {font-weight: bold}')
             sleep(0.001)
@@ -71,7 +75,8 @@ class TestFileModificationComparator(TestCase):
         self.assertTrue(a < b)
         self.assertTrue(file_modification_comparator.is_newer(file_path=temp_file))
 
-        delete_file_paths(file_paths=(temp_file, ))                                 # Delete temporary file
+        #copyfile(copy_of_css, css_file)                                             # Copy back original file
+        delete_file_paths(file_paths=(temp_file, copy_of_css))                      # Clean up files
         settings.css_directory = css_directory                                      # Reset Settings
 
     def test_file_is_NOT_newer(self):
