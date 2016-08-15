@@ -132,6 +132,9 @@ def main():
 
         limit_timer = LimitTimer()
 
+        event_handler.class_set = blowdry.parse(recent=False, class_set=set())          # Full run first. Fill class_set
+        event_handler.print_status()
+
         try:
             while True:
                 sleep(1)

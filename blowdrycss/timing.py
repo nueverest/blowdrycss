@@ -114,10 +114,39 @@ class Timer(object):
 
 
 class LimitTimer(object):
-    """ Timer governs when to perform a full and comprehensive run of blowdrycss.main().
+    """ Timer governs when to perform a full and comprehensive run of blowdry.parse().
 
     .. note::   This is independent of file modification watchdog triggers which only scan the file(s) that changed
         since the last run.
+
+    ** Why is a LimitTimer needed? **
+
+    *Understanding the Truth Table*
+
+    #. The project only contains two files: File 1  and File 2.
+    #. Each file either contains the CSS class selector 'blue' or not i.e. set().
+    #. File 2 is modified. Either the class ``blue`` is added or removed i.e. set().
+    #. X means don't care whether the file contains blue or set().
+    #. Case #3 is the reason why the LimitTimer is required. The css class selector ``blue``
+       was only defined in File 2. Then blue was removed from File 2. Since blue existed in the
+       combined class_set before File 2 was modified, it will remain in the
+       combined class_set after the union with set(). This is undesirable in Case #3 since ``blue`` is not
+       used anymore in either of the two files. The LimitTimer runs periodically to clear these unused selectors.
+
+    +--------+------------------+------------------+--------------------+-----------------+--------------------+
+    | Case # | File 1 class_set | File 2 class_set | Combined class_set | File 2 modified | Combined class_set |
+    +========+==================+==================+====================+=================+====================+
+    |    1   |       blue       |       blue       |        blue        |      set()      |        blue        |
+    +--------+------------------+------------------+--------------------+-----------------+--------------------+
+    |    2   |       blue       |       set()      |        blue        |        X        |        blue        |
+    +--------+------------------+------------------+--------------------+-----------------+--------------------+
+    |    3   |       set()      |       blue       |        blue        |      set()      |        blue        |
+    +--------+------------------+------------------+--------------------+-----------------+--------------------+
+    |    4   |       set()      |       set()      |        set()       |       blue      |        blue        |
+    +--------+------------------+------------------+--------------------+-----------------+--------------------+
+    |    5   |       set()      |       set()      |        set()       |      set()      |        set()       |
+    +--------+------------------+------------------+--------------------+-----------------+--------------------+
+
 
     | **Parameters:**
 

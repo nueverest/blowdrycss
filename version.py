@@ -161,8 +161,13 @@
     |
     | **0.2.6** -- Created a filehandler.FileModificationComparator which runs under watchdog mode. This
       feature dramatically improves efficiency by only adding classes based on the files that changed
-      before the last run of blowdrycss. The current used and unused CSS class selectors are stored in
-      two separate set's within the scope of the watchdog wrapper.
+      before the last run of blowdrycss. The current CSS class selectors are now stored within the
+      scope of the watchdog wrapper.
+
+      A LimitTimer expires periodically (default is 30 minutes). The expiration triggers a parses
+      of all files to delete unused classes.
+
+      For those upgrading the package be sure to add ``time_limit = 1800`` to your current ``blowdrycss_settings.py``.
 
       Class selectors that were deleted by the user during file
       modification are temporarily ignored since all eligible files (including the ones
@@ -170,16 +175,20 @@
       comprehensive scans of all files now occurs every 1800 seconds (30 minutes). This value can be
       increased or decreased in the settings file by changing ``time_limit``.
 
-      Force pypandoc==1.1.3 since pandoc doesn't properly install on Windows in version 1.2.
+      Added basic high-level design files.
+
+      Force pypandoc==1.1.3 since pandoc doesn't properly install/upgrade on Windows in version 1.2.
+
+      Commented out pip and setuptools from requirements.txt.
 
       PEP8 and typo corrections.
-    |
+
 
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.2.5'
+__version__ = '0.2.6'
 
 __release__ = __version__ + 'b2'

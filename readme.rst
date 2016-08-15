@@ -27,9 +27,6 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.2.4** -- The ``-s`` designated scaling media queries now start scaling on large screens. Allow upper case
-  letters for encoded hexidecimal values.
-|
 | **0.2.5** -- Fixed two regex errors: URIs (http://, ftp://) resemble inline JS comments (//) and ``://``
   needs to be removed first and foremost.  XHTML multi--line comment syntax ``<%-- ... --%>`` needs to be removed
   before ``<%...%>`` standard XHTML decorated expressions are removed since the regex is non-greedy and
@@ -37,7 +34,29 @@ Version Changelog
   early non-greedy match between ``<%--`` and the closing ``%>`` of a commented out expression.
   Which contrasts with the desired closing substring of ``--%>``.
 |
+| **0.2.6** -- Created a filehandler.FileModificationComparator which runs under watchdog mode. This
+  feature dramatically improves efficiency by only adding classes based on the files that changed
+  before the last run of blowdrycss. The current CSS class selectors are now stored within the
+  scope of the watchdog wrapper.
 
+  A LimitTimer expires periodically (default is 30 minutes). The expiration triggers a parses
+  of all files to delete unused classes.
+
+  For those upgrading the package be sure to add ``time_limit = 1800`` to your current ``blowdrycss_settings.py``.
+
+  Class selectors that were deleted by the user during file
+  modification are temporarily ignored since all eligible files (including the ones
+  not modified) would need to be parsed before deletion should be authorized. Deletion and full,
+  comprehensive scans of all files now occurs every 1800 seconds (30 minutes). This value can be
+  increased or decreased in the settings file by changing ``time_limit``.
+
+  Added basic high-level design files.
+
+  Force pypandoc==1.1.3 since pandoc doesn't properly install on Windows in version 1.2.
+
+  Commented out pip and setuptools from requirements.txt.
+
+  PEP8 and typo corrections.
 
 Why the name blowdrycss?
 ~~~~~~~~~~~~~~~~~~~~~~~~
