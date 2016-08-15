@@ -51,14 +51,6 @@ class TestFileModificationComparator(TestCase):
         css_file = unittest_file_path(settings.css_directory, 'blowdry.css')
         with open(css_file, 'w') as generic_file:
             generic_file.write('.bold {font-weight: bold}')
-            sleep(0.1)                                                              # blowdry.css for Travis CI
-
-        # try:                        # http://effbot.org/zone/python-with-statement.htm 'with' is more safe to open file
-        #     with open(css_file) as _file:
-        #         pass
-        # except IOError as e:
-        #     print("({})".format(e))
-        #     raise IOError
 
         temp_file = unittest_file_path('test_recent', 'temp.html')                  # Create a temporary file
         with open(temp_file, 'w') as generic_file:
@@ -69,7 +61,7 @@ class TestFileModificationComparator(TestCase):
 
         file_modification_comparator = FileModificationComparator()
 
-        self.assertTrue(a <= b, msg='%s is not less than %s' % (a, b))
+        self.assertTrue(a <= b, msg='%s is not less than or equal to %s' % (a, b))
         self.assertTrue(file_modification_comparator.is_newer(file_path=temp_file))
 
         delete_file_paths(file_paths=(temp_file, ))                                 # Clean up files
@@ -89,14 +81,6 @@ class TestFileModificationComparator(TestCase):
         css_file = unittest_file_path(settings.css_directory, 'blowdry.css')
         with open(css_file, 'w') as generic_file:
             generic_file.write('.bold {font-weight: bold}')
-            sleep(0.01)                                                             # blowdry.css for Travis CI
-
-        try:                        # http://effbot.org/zone/python-with-statement.htm 'with' is more safe to open file
-            with open(css_file) as _file:
-                pass
-        except IOError as e:
-            print("({})".format(e))
-            raise IOError
 
         with open(css_file, 'w') as generic_file:
             generic_file.write('.bold {font-weight: bold}')
