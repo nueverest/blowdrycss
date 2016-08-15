@@ -35,7 +35,6 @@ class FileEditEventHandler(PatternMatchingEventHandler):
         self._ignore_directories = ignore_directories
         self._case_sensitive = case_sensitive
 
-
     @staticmethod
     def print_status():
         """ Prints the current status of the watchdog process. Lets the user know that the project directory is
