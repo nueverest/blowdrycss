@@ -3,7 +3,6 @@ from __future__ import absolute_import, unicode_literals
 
 # builtin
 from unittest import TestCase, main
-from shutil import copyfile
 from time import sleep
 import os
 
@@ -27,42 +26,41 @@ class TestFileModificationComparator(TestCase):
 
     def test_is_newer_blowdry_css_missing(self):
         css_directory = settings.css_directory                                      # Save original setting
-        settings.css_directory = unittest_file_path(folder='test_css')              # Change Setting
+        settings.css_directory = unittest_file_path(folder='test_recent')           # Change Setting
 
         make_directory(settings.css_directory)                                      # Create dir for Travis CI
         self.assertTrue(os.path.isdir(settings.css_directory))
         
         fake_file = unittest_file_path(filename='fake.html')                        # Define a fake file path
 
-        copy_of_css = unittest_file_path('test_css', 'copy.css')
-        css_file = unittest_file_path('test_css', 'blowdry.css')                    # Modify css_file
-        copyfile(css_file, copy_of_css)                                             # Copy of blowdry.css
+        css_file = unittest_file_path('test_recent', 'blowdry.css')                 # Modify css_file
         delete_file_paths(file_paths=(css_file, ))                                  # Delete blowdry.css
 
         comparator = FileModificationComparator()
         self.assertRaises(OSError, comparator.is_newer, fake_file)
 
-        copyfile(copy_of_css, css_file)                                             # Copy back original file
-        delete_file_paths(file_paths=(copy_of_css, ))                               # Delete temporary file
         settings.css_directory = css_directory                                      # Reset Settings
 
     def test_is_newer(self):
         css_directory = settings.css_directory                                      # Save original setting
-        settings.css_directory = unittest_file_path(folder='test_css')              # Change Setting
+        settings.css_directory = unittest_file_path(folder='test_recent')           # Change Setting
 
         make_directory(settings.css_directory)                                      # Create dir for Travis CI
         self.assertTrue(os.path.isdir(settings.css_directory))
 
-        try:
-            copy_of_css = unittest_file_path('test_css', 'copy.css')
-            css_file = unittest_file_path('test_css', 'blowdry.css')                # Modify css_file
-            copyfile(css_file, copy_of_css)                                         # Copy of blowdry.css
-        except UnboundLocalError:                                                   # Create blowdry.css for Travis CI
-            with open(css_file, 'w') as generic_file:
-                generic_file.write('.bold {font-weight: bold}')
-            sleep(0.001)
+        css_file = unittest_file_path(settings.css_directory, 'blowdry.css')
+        with open(css_file, 'w') as generic_file:
+            generic_file.write('.bold {font-weight: bold}')
+            sleep(0.01)                                                             # blowdry.css for Travis CI
 
-        temp_file = unittest_file_path('test_css', 'temp.html')                     # Create a temporary file
+        try:                        # http://effbot.org/zone/python-with-statement.htm 'with' is more safe to open file
+            with open(css_file) as _file:
+                pass
+        except IOError as e:
+            print("({})".format(e))
+            raise IOError
+
+        temp_file = unittest_file_path('test_recent', 'temp.html')                  # Create a temporary file
         with open(temp_file, 'w') as generic_file:
             generic_file.write('test test test')
 
@@ -74,28 +72,31 @@ class TestFileModificationComparator(TestCase):
         self.assertTrue(a < b)
         self.assertTrue(file_modification_comparator.is_newer(file_path=temp_file))
 
-        #copyfile(copy_of_css, css_file)                                             # Copy back original file
-        delete_file_paths(file_paths=(temp_file, copy_of_css))                      # Clean up files
+        delete_file_paths(file_paths=(temp_file, ))                                 # Clean up files
         settings.css_directory = css_directory                                      # Reset Settings
 
     def test_file_is_NOT_newer(self):
         css_directory = settings.css_directory                                      # Save original setting
-        settings.css_directory = unittest_file_path(folder='test_css')              # Change Setting
+        settings.css_directory = unittest_file_path(folder='test_recent')           # Change Setting
 
         make_directory(settings.css_directory)                                      # Create dir for Travis CI
         self.assertTrue(os.path.isdir(settings.css_directory))
 
-        temp_file = unittest_file_path('test_css', 'temp.html')                     # Create a temporary file
+        temp_file = unittest_file_path('test_recent', 'temp.html')                  # Create a temporary file
         with open(temp_file, 'w') as generic_file:
             generic_file.write('test test test')
 
-        css_file = unittest_file_path('test_css', 'blowdry.css')
-        try:
-            copy_of_css = unittest_file_path('test_css', 'copy.css')
-            css_file = unittest_file_path('test_css', 'blowdry.css')                # Modify css_file
-            copyfile(css_file, copy_of_css)                                         # Copy of blowdry.css
-        except UnboundLocalError:
-            sleep(0.001)                                                            # Travis Case
+        css_file = unittest_file_path(settings.css_directory, 'blowdry.css')
+        with open(css_file, 'w') as generic_file:
+            generic_file.write('.bold {font-weight: bold}')
+            sleep(0.01)                                                             # blowdry.css for Travis CI
+
+        try:                        # http://effbot.org/zone/python-with-statement.htm 'with' is more safe to open file
+            with open(css_file) as _file:
+                pass
+        except IOError as e:
+            print("({})".format(e))
+            raise IOError
 
         with open(css_file, 'w') as generic_file:
             generic_file.write('.bold {font-weight: bold}')
@@ -108,8 +109,7 @@ class TestFileModificationComparator(TestCase):
         self.assertFalse(a < b)
         self.assertFalse(comparator.is_newer(file_path=temp_file))
 
-        copyfile(copy_of_css, css_file)                                             # Copy back original file
-        delete_file_paths(file_paths=(temp_file, copy_of_css, ))                    # Delete temporary file
+        delete_file_paths(file_paths=(temp_file, ))                    # Delete temporary file
         settings.css_directory = css_directory                                      # Reset Settings
 
 

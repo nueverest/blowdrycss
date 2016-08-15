@@ -134,10 +134,9 @@ class TestFileFinder(TestCase):
         css_file = unittest_file_path(settings.css_directory, 'blowdry.css')
         with open(css_file, 'w') as generic_file:
             generic_file.write('.bold {font-weight: bold}')
-            sleep(1.0)                                                                    # blowdry.css for Travis CI
+            sleep(0.01)                                                                     # blowdry.css for Travis CI
 
-        try:
-            # http://effbot.org/zone/python-with-statement.htm 'with' is more safe to open file
+        try:                        # http://effbot.org/zone/python-with-statement.htm 'with' is more safe to open file
             with open(css_file) as _file:
                 pass
         except IOError as e:
