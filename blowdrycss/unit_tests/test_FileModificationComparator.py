@@ -92,7 +92,7 @@ class TestFileModificationComparator(TestCase):
         self.assertFalse(a < b)
         self.assertFalse(comparator.is_newer(file_path=temp_file))
 
-        delete_file_paths(file_paths=(temp_file, ))                    # Delete temporary file
+        delete_file_paths(file_paths=(temp_file, ))                                 # Delete temporary file
         settings.css_directory = css_directory                                      # Reset Settings
 
 
