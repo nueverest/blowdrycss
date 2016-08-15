@@ -78,7 +78,7 @@ def boilerplate():
         rst_file.write(str(property_alias_rst))
 
 
-def blowdry(recent=True):
+def parse(recent=True, class_set=set()):
     """ It parses every eligible file in the project i.e. file type matches an element of settings.file_types.
     This ensures that from time to time unused CSS class selectors are removed from blowdry.css.
 
@@ -126,6 +126,9 @@ def blowdry(recent=True):
     :param recent: Flag that indicates whether to parse the most recently modified files (True Case)
       or all eligible files (False Case).
 
+    :type class_set: set
+    :param class_set: The set of known css class selectors.
+
     """
     if settings.timing_enabled:
         from blowdrycss.timing import Timer
@@ -138,6 +141,10 @@ def blowdry(recent=True):
 
     # Create set of all defined classes
     class_parser = ClassParser(file_dict=file_finder.file_dict)
+
+    # Union of class sets (only really matters during on_modified case)
+    if recent:
+        class_set |= class_parser.class_set
 
     # Filter class names. Only keep classes matching the defined class encoding.
     class_property_parser = ClassPropertyParser(class_set=class_parser.class_set)
@@ -165,13 +172,13 @@ def blowdry(recent=True):
     logging.debug('\nCSS Text:\n\n' + str(css_text))
     print('\nAuto-Generated CSS:')
 
-    # Output the DRY CSS file. (user command option)
+    # Output the DRY CSS file. (user setting option)
     if settings.human_readable:
         css_file = CSSFile(file_directory=settings.css_directory, file_name='blowdry')
         css_file.write(css_text=css_text)
         print(path.join(settings.css_directory, css_file.file_name) + '.css')
 
-    # Output the Minified DRY CSS file. (user command option)
+    # Output the Minified DRY CSS file. (user setting option)
     if settings.minify:
         css_file = CSSFile(file_directory=settings.css_directory, file_name='blowdry')
         css_file.minify(css_text=css_text)
@@ -182,3 +189,5 @@ def blowdry(recent=True):
 
     if settings.minify:
         print_css_stats(file_name='blowdry')
+
+    return class_set

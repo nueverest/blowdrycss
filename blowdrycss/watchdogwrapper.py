@@ -18,11 +18,18 @@ import blowdrycss_settings as settings
 
 
 class FileEditEventHandler(PatternMatchingEventHandler):
-    """ Child of PatternMatchingEventHandler that only runs blowdry.quick_parser() during file 'modified' or 'deleted' events.
-    The 'modified' case handles both the 'created' and 'moved' case. When a file is created or moved/copy/pasted
-    into the project_directory, 'modified' is triggered. This reduces a number of unnecessary calls to blowdry.quick_parser().
+    """ Child of PatternMatchingEventHandler that only runs blowdry.quick_parser() during file 'modified'
+    events. The 'modified' case handles both the 'created' and 'moved' case. When a file is
+    created or moved/copy/pasted into the project_directory, 'modified' is triggered. This reduces a number
+    of unnecessary calls to blowdry.blowdry().
+
+    class_set (*set*) -- Keeps track of the current set of css class selectors.
 
     """
+    def __init__(self):
+        super(PatternMatchingEventHandler, self).__init__()
+        self.class_set = set()
+
     @staticmethod
     def print_status():
         """ Prints the current status of the watchdog process. Lets the user know that the project directory is
@@ -68,7 +75,7 @@ class FileEditEventHandler(PatternMatchingEventHandler):
         """
         if type(event) == FileModifiedEvent and not self.excluded(src_path=event.src_path):
             logging.debug('File ' + event.event_type + ' --> ' + str(event.src_path))
-            blowdry.blowdry(recent=True)
+            self.class_set = blowdry.parse(recent=True, class_set=self.class_set)
             self.print_status()
 
 
@@ -117,8 +124,8 @@ def main():
         try:
             while True:
                 sleep(1)
-                if limit_timer.limit_exceeded:                      # Infrequently remove unused CSS class selectors.
-                    blowdry.blowdry(recent=False)
+                if limit_timer.limit_exceeded:                                          # Periodically parse all files.
+                    event_handler.class_set = blowdry.parse(recent=False, class_set=set())
                     event_handler.print_status()
         except KeyboardInterrupt:
             observer.stop()
@@ -126,7 +133,7 @@ def main():
 
         observer.join()
     else:
-        blowdry.blowdry(recent=False)
+        blowdry.parse(recent=False, class_set=set())
 
 
 if __name__ == '__main__':

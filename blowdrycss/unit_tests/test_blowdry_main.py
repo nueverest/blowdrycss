@@ -28,7 +28,7 @@ class TestMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            blowdry.blowdry(recent=False)
+            blowdry.parse(recent=False)
 
             output = out.getvalue()
             for substring in substrings:
