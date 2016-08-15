@@ -134,7 +134,7 @@ class TestFileFinder(TestCase):
         css_file = unittest_file_path(settings.css_directory, 'blowdry.css')
         with open(css_file, 'w') as generic_file:
             generic_file.write('.bold {font-weight: bold}')
-            sleep(0.001)                                                                    # blowdry.css for Travis CI
+            sleep(0.01)                                                                    # blowdry.css for Travis CI
 
         temp_file = unittest_file_path('test_recent', 'new.html')                           # Create a temporary file
         with open(temp_file, 'w') as generic_file:
@@ -160,7 +160,7 @@ class TestFileFinder(TestCase):
                 msg='\n' + valid_key + str(file_finder.file_dict[valid_key]) + '\n\n' + str(valid_dict[valid_key])
             )
 
-        delete_file_paths(file_paths=(temp_file, ))                                         # Delete test files
+        delete_file_paths(file_paths=(temp_file, css_file, ))                               # Delete test files
         settings.css_directory = css_directory                                              # Reset settings
         settings.file_types = ('*.html', )
         settings.project_directory = project_directory
