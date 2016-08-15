@@ -26,9 +26,15 @@ class FileEditEventHandler(PatternMatchingEventHandler):
     class_set (*set*) -- Keeps track of the current set of css class selectors.
 
     """
-    def __init__(self):
-        super(PatternMatchingEventHandler, self).__init__()
+    def __init__(self, patterns=None, ignore_patterns=None, ignore_directories=False, case_sensitive=False):
         self.class_set = set()
+        super(PatternMatchingEventHandler, self).__init__()
+
+        self._patterns = patterns
+        self._ignore_patterns = ignore_patterns
+        self._ignore_directories = ignore_directories
+        self._case_sensitive = case_sensitive
+
 
     @staticmethod
     def print_status():
