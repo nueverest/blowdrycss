@@ -134,7 +134,7 @@ class TestFileFinder(TestCase):
         css_file = unittest_file_path(settings.css_directory, 'blowdry.css')
         with open(css_file, 'w') as generic_file:
             generic_file.write('.bold {font-weight: bold}')
-            sleep(0.1)                                                                    # blowdry.css for Travis CI
+            sleep(1.0)                                                                    # blowdry.css for Travis CI
 
         try:
             # http://effbot.org/zone/python-with-statement.htm 'with' is more safe to open file
@@ -166,7 +166,7 @@ class TestFileFinder(TestCase):
         valid_keys = ['.html', '.aspx', '.jinja2']
         settings.file_types = ('*.html', '*.aspx', '*.jinja2')                              # Override file_types
         project_directory = settings.project_directory
-        settings.project_directory = unittest_file_path(folder='test_recent')
+        settings.project_directory = unittest_file_path()
         file_finder = FileFinder(recent=True)
         for valid_key in valid_keys:
             self.assertTrue(valid_key in file_finder.file_dict, msg=file_finder.file_dict)
