@@ -126,28 +126,23 @@ class TestFileFinder(TestCase):
 
     def test_set_recent_file_dict(self):
         css_directory = settings.css_directory                                              # Save original setting
-        settings.css_directory = unittest_file_path(folder='test_css')                      # Change Setting
+        settings.css_directory = unittest_file_path(folder='test_recent')                   # Change Setting
 
         make_directory(settings.css_directory)                                              # Create dir for Travis CI
         self.assertTrue(os.path.isdir(settings.css_directory))
 
-        css_file = unittest_file_path('test_css', 'blowdry.css')
-        try:
-            copy_of_css = unittest_file_path('test_css', 'copy.css')
-            css_file = unittest_file_path('test_css', 'blowdry.css')                # Modify css_file
-            copyfile(css_file, copy_of_css)                                         # Copy of blowdry.css
-        except UnboundLocalError:                                                   # Create blowdry.css for Travis CI
-            with open(css_file, 'w') as generic_file:
-                generic_file.write('.bold {font-weight: bold}')
-            sleep(0.001)                                                   # Create blowdry.css for Travis CI
+        css_file = unittest_file_path(settings.css_directory, 'blowdry.css')
+        with open(css_file, 'w') as generic_file:
+            generic_file.write('.bold {font-weight: bold}')
+            sleep(0.001)                                                                    # blowdry.css for Travis CI
 
-        temp_file = unittest_file_path('test_css', 'new.html')                              # Create a temporary file
+        temp_file = unittest_file_path('test_recent', 'new.html')                           # Create a temporary file
         with open(temp_file, 'w') as generic_file:
             generic_file.write('<html></html>')
 
         valid_dict = {
             '.html': {
-                unittest_file_path('test_css', 'new.html'),
+                unittest_file_path('test_recent', 'new.html'),
             },
             '.aspx': set(),
             '.jinja2': set(),
@@ -155,7 +150,7 @@ class TestFileFinder(TestCase):
         valid_keys = ['.html', '.aspx', '.jinja2']
         settings.file_types = ('*.html', '*.aspx', '*.jinja2')                              # Override file_types
         project_directory = settings.project_directory
-        settings.project_directory = unittest_file_path(folder='test_css')
+        settings.project_directory = unittest_file_path(folder='test_recent')
         file_finder = FileFinder(recent=True)
         for valid_key in valid_keys:
             self.assertTrue(valid_key in file_finder.file_dict, msg=file_finder.file_dict)

@@ -53,7 +53,6 @@ class TestFileModificationComparator(TestCase):
         make_directory(settings.css_directory)                                      # Create dir for Travis CI
         self.assertTrue(os.path.isdir(settings.css_directory))
 
-        css_file = unittest_file_path('test_css', 'blowdry.css')
         try:
             copy_of_css = unittest_file_path('test_css', 'copy.css')
             css_file = unittest_file_path('test_css', 'blowdry.css')                # Modify css_file
