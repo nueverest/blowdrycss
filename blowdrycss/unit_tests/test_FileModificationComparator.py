@@ -84,16 +84,6 @@ class TestFileModificationComparator(TestCase):
         with open(css_file, 'w') as generic_file:
             generic_file.write('.bold {font-weight: bold}')
 
-        # try:                        # http://effbot.org/zone/python-with-statement.htm 'with' is more safe to open file
-        #     with open(css_file) as _file:
-        #         pass
-        # except IOError as e:
-        #     print("({})".format(e))
-        #     raise IOError
-        #
-        # with open(css_file, 'w') as generic_file:
-        #     generic_file.write('.bold {font-weight: bold}')
-
         a = os.path.getmtime(css_file)                                              # Get Modification Times
         b = os.path.getmtime(temp_file)
 
