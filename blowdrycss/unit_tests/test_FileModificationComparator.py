@@ -78,12 +78,21 @@ class TestFileModificationComparator(TestCase):
         with open(temp_file, 'w') as generic_file:
             generic_file.write('test test test')
 
+        sleep(0.1)                                                                  # blowdry.css for Travis CI
+
         css_file = unittest_file_path(settings.css_directory, 'blowdry.css')
         with open(css_file, 'w') as generic_file:
             generic_file.write('.bold {font-weight: bold}')
 
-        with open(css_file, 'w') as generic_file:
-            generic_file.write('.bold {font-weight: bold}')
+        # try:                        # http://effbot.org/zone/python-with-statement.htm 'with' is more safe to open file
+        #     with open(css_file) as _file:
+        #         pass
+        # except IOError as e:
+        #     print("({})".format(e))
+        #     raise IOError
+        #
+        # with open(css_file, 'w') as generic_file:
+        #     generic_file.write('.bold {font-weight: bold}')
 
         a = os.path.getmtime(css_file)                                              # Get Modification Times
         b = os.path.getmtime(temp_file)
