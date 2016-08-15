@@ -69,7 +69,7 @@ class TestFileModificationComparator(TestCase):
 
         file_modification_comparator = FileModificationComparator()
 
-        self.assertTrue(a < b, msg='%s is not less than %s' % (a, b))
+        self.assertTrue(a <= b, msg='%s is not less than %s' % (a, b))
         self.assertTrue(file_modification_comparator.is_newer(file_path=temp_file))
 
         delete_file_paths(file_paths=(temp_file, ))                                 # Clean up files

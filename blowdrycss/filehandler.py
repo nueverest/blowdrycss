@@ -402,4 +402,4 @@ class FileModificationComparator(object):
         except OSError:
             raise OSError('"' + file_path + '" does not exist.')
 
-        return a < b
+        return a <= b
