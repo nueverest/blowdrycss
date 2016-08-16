@@ -91,6 +91,8 @@ pip install blowdrycss
 blowdrycss
 pip uninstall blowdrycss
 
+Tag the GitHub commit for the version. In menu VCS -> Git -> Tag..
+
 [Supplemental: manual registration how to]
 `testpypi <https://testpypi.python.org/pypi?%3Aaction=submit_form>`__
 `pypi <https://pypi.python.org/pypi?%3Aaction=submit_form>`__
