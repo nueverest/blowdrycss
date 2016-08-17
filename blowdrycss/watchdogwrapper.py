@@ -141,6 +141,7 @@ def main():
                 if limit_timer.limit_exceeded:                                          # Periodically parse all files.
                     event_handler.class_set = blowdry.parse(recent=False, class_set=set())
                     event_handler.print_status()
+                    limit_timer.reset()
         except KeyboardInterrupt:
             observer.stop()
             print_blow_dryer()
