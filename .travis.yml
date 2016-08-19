@@ -12,10 +12,14 @@ python:
   - "3.4"
   - "3.5"
 
+addons:
+  apt_packages:
+    - pandoc
+
 # command to install dependencies
 install:
-  - sudo apt-get install pandoc
-  - python -m pip install --upgrade pip
+#  - sudo apt-get install pandoc
+#  - python -m pip install --upgrade pip
   - pip --version
   - pip install -r travis_requirements.txt
 

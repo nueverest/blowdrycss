@@ -162,7 +162,7 @@ class TestMain(TestCase):
             settings.css_directory = css_directory
             delete_file_paths((css_file, css_min_file, modify_file, ))
 
-    def test_parse_on_modify_css_text(self):
+    def test_parse_on_modify_css_text_PREXISTING(self):
         # WARNING Indentation must be preserved.
         expected_css_text = b""".green {
             color: green
