@@ -183,12 +183,15 @@
 
       PEP8 and typo corrections.
 
+    | **0.2.7** -- Added a call to LimitTimer.reset() to fix a bug in which the LimitTimer never expired.
+      Add two more color regexes which allow the case in which hex is be combined with a pseudo class.
+      e.g. ``hffffff-hover`` or ``hfff-before``.
 
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.2.6'
+__version__ = '0.2.7'
 
 __release__ = __version__ + 'b2'

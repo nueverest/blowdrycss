@@ -34,6 +34,9 @@ __project__ = 'blowdrycss'
 
 
 class ColorParser(object):
+    """ Extracts plain text, hexidecimal, rgb, rgba, hsl, and hsla color codes from encoded class selectors.
+
+    """
     def __init__(self, property_name='', value=''):
         self.color_regexes = property_regex_dict['color']
         self.property_name = property_name

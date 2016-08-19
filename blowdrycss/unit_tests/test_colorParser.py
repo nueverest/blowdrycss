@@ -32,15 +32,15 @@ class TestColorParser(TestCase):
             'h0ff48f', 'hfff', ' hABC123 ', 'hfdec78', 'h000', ' hbcd ', '5px solid hd0d', '5px-hidden-hd0d987',
             '13px dashed hd0d',
             'h000-i', 'h484848-i',
-            'hf2f-hover-i', 'hF3F-i-hover', 'color-hf4f-hover-i', 'color-hf5f-i-hover',
-            'hf2f2f2-hover-i', 'hf3f3f3-i-hover', 'color-hf4f4f4f-hover-i', 'color-hf5f5f5-i-hover',
+            'hd9d-hover', 'hd9d9d8-hover', 'hf2f-hover-i', 'hF3F-i-hover',
+            'hf2f2f2-hover-i', 'hf3f3f3-i-hover',
         ]
         expected = [
             0, 0, 1, 0, 0, 1, 10, 11,
             12,
             0, 0,
-            0, 0, 6, 6,
-            0, 0, 6, 6,
+            0, 0, 0, 0,
+            0, 0,
         ]
         color_parser = ColorParser()
         for i, value in enumerate(values_true):

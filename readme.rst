@@ -27,13 +27,6 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.2.5** -- Fixed two regex errors: URIs (http://, ftp://) resemble inline JS comments (//) and ``://``
-  needs to be removed first and foremost.  XHTML multi--line comment syntax ``<%-- ... --%>`` needs to be removed
-  before ``<%...%>`` standard XHTML decorated expressions are removed since the regex is non-greedy and
-  an XHTML expression decorated with ``<%...%>`` may exist within the multi-line comment. This results in an
-  early non-greedy match between ``<%--`` and the closing ``%>`` of a commented out expression.
-  Which contrasts with the desired closing substring of ``--%>``.
-|
 | **0.2.6** -- Created a filehandler.FileModificationComparator which runs under watchdog mode. This
   feature dramatically improves efficiency by only adding classes based on the files that changed
   before the last run of blowdrycss. The current CSS class selectors are now stored within the
@@ -57,6 +50,11 @@ Version Changelog
   Commented out pip and setuptools from requirements.txt.
 
   PEP8 and typo corrections.
+
+| **0.2.7** -- Added a call to LimitTimer.reset() to fix a bug in which the LimitTimer never expired.
+  Add two more color regexes which allow the case in which hex is be combined with a pseudo class.
+  e.g. ``hffffff-hover`` or ``hfff-before``.
+
 
 Why the name blowdrycss?
 ~~~~~~~~~~~~~~~~~~~~~~~~
