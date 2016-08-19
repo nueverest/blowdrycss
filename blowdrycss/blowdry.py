@@ -130,7 +130,7 @@ def parse(recent=True, class_set=set(), css_text=b''):
     :type class_set: set
     :param class_set: The set of known css class selectors.
 
-    :type css_text: string
+    :type css_text: bytes
     :param css_text: The current version of the CSS text.
 
     """
@@ -160,7 +160,7 @@ def parse(recent=True, class_set=set(), css_text=b''):
 
     # Build a set() of valid css properties. Some classes may be removed during cssutils validation.
     css_builder = CSSBuilder(property_parser=class_property_parser)
-    css_text += bytes(css_builder.get_css_text(), 'utf-8')
+    css_text += bytes(css_builder.get_css_text())
     builder_class_set = css_builder.property_parser.class_set.copy()
 
     # Build Media Queries

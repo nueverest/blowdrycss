@@ -1,6 +1,6 @@
 # python 2
 from __future__ import absolute_import, unicode_literals
-
+from builtins import bytes
 # builtins
 from unittest import TestCase, main
 import sys
@@ -105,7 +105,7 @@ class TestMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            class_set, css_text = blowdry.parse(recent=False)
+            class_set, css_text = blowdry.parse(recent=False, class_set=set(), css_text=b'')
             self.assertTrue(expected_class_set == class_set, msg=class_set)
 
             output = out.getvalue()

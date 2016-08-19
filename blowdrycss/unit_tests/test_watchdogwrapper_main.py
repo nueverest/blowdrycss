@@ -48,10 +48,7 @@ class TestWatchdogWrapperMain(TestCase):
 
             # Modify file
             with open(file_path, 'w') as generic_file:
-                generic_file.write('<html></html>')
-
-            # Delete the file.
-            remove(file_path)
+                generic_file.write('<html>modified</html>')
 
             # IMPORTANT: Must wait up to 5 seconds for output otherwise test will fail.
             count = 0
@@ -72,6 +69,7 @@ class TestWatchdogWrapperMain(TestCase):
                 self.assertTrue(substring in output, msg=substring + '\noutput:\n' + output)
         finally:
             sys.stdout = saved_stdout
+            remove(file_path)               # Remove html file.
             _thread.interrupt_main()        # Stop watchdogwrapper.main().
 
     def monitor_limit_expires_stop(self):
@@ -123,11 +121,14 @@ class TestWatchdogWrapperMain(TestCase):
         logging.basicConfig(level=logging.DEBUG)
         html_text = '<html></html>'
         test_examplesite = unittest_file_path(folder='test_examplesite')
+        test_css = unittest_file_path(folder='test_examplesite/test_css')
         delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
 
         # Directory must be created for Travis CI case
         make_directory(test_examplesite)
+        make_directory(test_css)
         self.assertTrue(path.isdir(test_examplesite))
+        self.assertTrue(path.isdir(test_css))
 
         # Create file delete.html
         with open(delete_dot_html, 'w') as _file:
@@ -148,11 +149,14 @@ class TestWatchdogWrapperMain(TestCase):
         logging.basicConfig(level=logging.DEBUG)
         html_text = '<html><div class="blue"></div></html>'
         test_examplesite = unittest_file_path(folder='test_examplesite')
+        test_css = unittest_file_path(folder='test_examplesite/test_css')
         limit_dot_html = unittest_file_path(folder='test_examplesite', filename='limit_expired.html')
 
         # Directory must be created for Travis CI case
         make_directory(test_examplesite)
+        make_directory(test_css)
         self.assertTrue(path.isdir(test_examplesite))
+        self.assertTrue(path.isdir(test_css))
 
         # Create file limit_expired.html
         with open(limit_dot_html, 'w') as _file:
@@ -186,14 +190,15 @@ class TestWatchdogWrapperMain(TestCase):
         ]
         html_text = '<html></html>'
         test_examplesite = unittest_file_path(folder='test_examplesite')
+        test_css = unittest_file_path(folder='test_css')
         delete_dot_html = unittest_file_path(folder='test_examplesite', filename='delete.html')
         auto_generate = settings.auto_generate          # original
 
         # Directory must be created for Travis CI case
-        if not path.isdir(test_examplesite):
-            make_directory(test_examplesite)
-
+        make_directory(test_examplesite)
+        make_directory(test_css)
         self.assertTrue(path.isdir(test_examplesite))
+        self.assertTrue(path.isdir(test_css))
 
         # Create delete.html
         with open(delete_dot_html, 'w') as _file:
