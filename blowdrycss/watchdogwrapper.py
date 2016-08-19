@@ -143,6 +143,7 @@ def main():
                     event_handler.class_set = blowdry.parse(recent=False, class_set=set())
                     event_handler.print_status()
                     limit_timer.reset()
+                    print('----- Limit timer reset -----')
 
         except KeyboardInterrupt:
             observer.stop()

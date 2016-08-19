@@ -85,6 +85,7 @@ class TestWatchdogWrapperMain(TestCase):
             'Completed',
             'blowdry.css',
             'blowdry.min.css',
+            '----- Limit timer reset -----',
         ]
 
         saved_stdout = sys.stdout           # Monitor console
