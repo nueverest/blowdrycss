@@ -31,6 +31,7 @@ class FileEditEventHandler(PatternMatchingEventHandler):
     """
     def __init__(self, patterns=None, ignore_patterns=None, ignore_directories=False, case_sensitive=False):
         self.class_set = set()
+        self.css_text = b''
         super(PatternMatchingEventHandler, self).__init__()
 
         self._patterns = patterns
@@ -86,7 +87,7 @@ class FileEditEventHandler(PatternMatchingEventHandler):
         """
         if type(event) == FileModifiedEvent and not self.excluded(src_path=event.src_path):
             logging.debug('File ' + event.event_type + ' --> ' + str(event.src_path))
-            self.class_set = blowdry.parse(recent=True, class_set=self.class_set)
+            self.class_set, self.css_text = blowdry.parse(recent=True, class_set=self.class_set, css_text=self.css_text)
             self.print_status()
 
 
@@ -132,7 +133,7 @@ def main():
 
         limit_timer = LimitTimer()
 
-        event_handler.class_set = blowdry.parse(recent=False, class_set=set())          # Full run first. Fill class_set
+        event_handler.class_set = blowdry.parse(recent=False, class_set=set(), css_text=b'')  # Parse all files.
         event_handler.print_status()
 
         try:
@@ -140,7 +141,7 @@ def main():
                 sleep(1)
                 if limit_timer.limit_exceeded:                                          # Periodically parse all files.
                     print('----- Limit timer expired -----')
-                    event_handler.class_set = blowdry.parse(recent=False, class_set=set())
+                    event_handler.class_set = blowdry.parse(recent=False, class_set=set(), css_text=b'')
                     event_handler.print_status()
                     limit_timer.reset()
                     print('----- Limit timer reset -----')

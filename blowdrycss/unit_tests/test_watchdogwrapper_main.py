@@ -154,7 +154,7 @@ class TestWatchdogWrapperMain(TestCase):
         make_directory(test_examplesite)
         self.assertTrue(path.isdir(test_examplesite))
 
-        # Create file delete.html
+        # Create file limit_expired.html
         with open(limit_dot_html, 'w') as _file:
             _file.write(html_text)
 

@@ -1,5 +1,5 @@
 # python 2
-from __future__ import absolute_import
+from __future__ import absolute_import, unicode_literals
 
 # builtins
 from unittest import TestCase, main
@@ -82,12 +82,14 @@ class TestMain(TestCase):
     def test_parse(self):
         expected_class_set = {
             u'medium-up', u'border-1px-solid-gray', u'padding-5', u'margin-top-10', u'display-none',
-            u'width-50', u'height-150px', u'color-hfff', u'hide', u'font-size-25-s', u't-align-center',
-            u'display-inline', u'margin-top-50px', u'talign-center', u'addclass3', u'width-150',
+            u'width-50', u'height-150px', u'color-hfff', u'font-size-25-s', u't-align-center',
+            u'display-inline', u'margin-top-50px', u'talign-center', u'width-150',
             u'display-960-up-i', u'font-size-48', u'bold', u'margin-20', u'bgc-h000', u'c-red-i-hover',
-            u'hfff-hover-i', u'addclass6', u'padding-10', u'bgc-hf8f8f8', u'b', u'text-align-center',
-            u'alex-grey-125', u'addclass2', u'c-blue', u'addclass4', u'addclass5', u'height-200',
-            u'padding-10-s', u'addclass1', u'height-50px', u'padding-top-10',
+            u'hfff-hover-i', u'padding-10', u'bgc-hf8f8f8', u'text-align-center',
+            u'c-blue', u'height-200',
+            u'padding-10-s', u'height-50px', u'padding-top-10',
+            # Invalid though they exist in the HTML
+            # u'addclass3', u'addclass6', u'addclass1', u'addclass4', u'addclass5', u'hide', u'alex-grey-125', u'b',
         }
         substrings = [
             '~~~ blowdrycss started ~~~',
@@ -103,7 +105,7 @@ class TestMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            class_set = blowdry.parse(recent=False)
+            class_set, css_text = blowdry.parse(recent=False)
             self.assertTrue(expected_class_set == class_set, msg=class_set)
 
             output = out.getvalue()
@@ -113,10 +115,12 @@ class TestMain(TestCase):
             sys.stdout = saved_stdout
             settings.project_directory = project_directory
 
-    def test_parse_on_modify(self):
+    def test_parse_on_modify_class_set(self):
         expected_class_set = {
-            'green', 'purple-medium-up', 'bgc-h454545', 'unrecognized',                     # Pre-existing
-            'pink-hover', 'not-valid',                                                      # Modify.html
+            'green', 'purple-medium-up', 'bgc-h454545',                                     # Pre-existing
+            'pink-hover',                                                                   # Modify.html
+            # Exists in HTML but should not be returned
+            # 'not-valid',
         }
         substrings = [
             '~~~ blowdrycss started ~~~',
@@ -130,7 +134,7 @@ class TestMain(TestCase):
         settings.project_directory = unittest_file_path()
         settings.css_directory = unittest_file_path()
 
-        current_set = {'green', 'purple-medium-up', 'bgc-h454545', 'unrecognized', }
+        current_set = {'green', 'purple-medium-up', 'bgc-h454545', }
 
         css_file = unittest_file_path(filename='blowdry.css')                                       # CSS file
         css_min_file = unittest_file_path(filename='blowdry.min.css')                               # CSS.min file
@@ -146,8 +150,61 @@ class TestMain(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            class_set = blowdry.parse(recent=True, class_set=current_set)
-            self.assertTrue(expected_class_set == class_set, msg=str(class_set))
+            class_set, css_text = blowdry.parse(recent=True, class_set=current_set)
+            self.assertTrue(expected_class_set == class_set, msg=class_set)
+
+            output = out.getvalue()
+            for substring in substrings:
+                self.assertTrue(substring in output, msg=output + '\tsubstring: ' + substring)
+        finally:
+            sys.stdout = saved_stdout
+            settings.project_directory = project_directory
+            settings.css_directory = css_directory
+            delete_file_paths((css_file, css_min_file, modify_file, ))
+
+    def test_parse_on_modify_css_text(self):
+        # WARNING Indentation must be preserved.
+        expected_css_text = b""".green {
+            color: green
+            }
+        .pink-hover:hover {
+    color: pink
+    }"""
+        substrings = [
+            '~~~ blowdrycss started ~~~',
+            'CSSBuilder Running...',
+            '.css',
+        ]
+
+        project_directory = settings.project_directory
+        css_directory = settings.css_directory
+
+        settings.project_directory = unittest_file_path()
+        settings.css_directory = unittest_file_path()
+
+        current_set = {'green', }
+
+        current_css_text = b""".green {
+            color: green
+            }
+        """
+
+        css_file = unittest_file_path(filename='blowdry.css')                                       # CSS file
+        css_min_file = unittest_file_path(filename='blowdry.min.css')                               # CSS.min file
+        with open(css_file, 'w') as generic_file:
+            generic_file.write('test test test')
+
+        modify_file = unittest_file_path(filename='modify.html')                                    # Modify file
+        with open(modify_file, 'w') as generic_file:
+            generic_file.write('<html><div class="pink-hover not-valid">Modified</div></html>')
+
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+
+            class_set, css_text = blowdry.parse(recent=True, class_set=current_set, css_text=current_css_text)
+            self.assertTrue(expected_css_text == css_text, msg=css_text)
 
             output = out.getvalue()
             for substring in substrings:

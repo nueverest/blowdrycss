@@ -7,7 +7,7 @@ import cssutils
 from os import path
 # custom
 from blowdrycss import log
-from blowdrycss.filehandler import FileFinder, CSSFile, GenericFile, FileModificationComparator
+from blowdrycss.filehandler import FileFinder, CSSFile, GenericFile
 from blowdrycss.classparser import ClassParser
 from blowdrycss.classpropertyparser import ClassPropertyParser
 from blowdrycss.cssbuilder import CSSBuilder
@@ -78,7 +78,7 @@ def boilerplate():
         rst_file.write(str(property_alias_rst))
 
 
-def parse(recent=True, class_set=set()):
+def parse(recent=True, class_set=set(), css_text=b''):
     """ It parses every eligible file in the project i.e. file type matches an element of settings.file_types.
     This ensures that from time to time unused CSS class selectors are removed from blowdry.css.
 
@@ -122,12 +122,16 @@ def parse(recent=True, class_set=set()):
 
     &nbsp;
 
+    :param css_text:
     :type recent: bool
     :param recent: Flag that indicates whether to parse the most recently modified files (True Case)
       or all eligible files (False Case).
 
     :type class_set: set
     :param class_set: The set of known css class selectors.
+
+    :type css_text: string
+    :param css_text: The current version of the CSS text.
 
     """
     if settings.timing_enabled:
@@ -144,23 +148,25 @@ def parse(recent=True, class_set=set()):
 
     # Unite class sets during on_modified case.
     if recent:
-        class_set = class_set.union(class_parser.class_set)
+        modified_class_set = class_parser.class_set
+        use_this_set = modified_class_set.difference(class_set)
     else:
-        class_set = class_parser.class_set
+        use_this_set = class_parser.class_set
 
     # Filter class names. Only keep classes matching the defined class encoding.
-    class_property_parser = ClassPropertyParser(class_set=class_set)
+    class_property_parser = ClassPropertyParser(class_set=use_this_set)
     logging.info(msg='blowdry.class_property_parser.class_set:\t' + str(class_property_parser.class_set))
-    class_set = class_property_parser.class_set.copy()
+    use_this_set = class_property_parser.class_set.copy()
 
     # Build a set() of valid css properties. Some classes may be removed during cssutils validation.
     css_builder = CSSBuilder(property_parser=class_property_parser)
-    css_text = css_builder.get_css_text()
+    css_text += bytes(css_builder.get_css_text(), 'utf-8')
+    builder_class_set = css_builder.property_parser.class_set.copy()
 
     # Build Media Queries
     if settings.media_queries_enabled:
-        unassigned_class_set = class_set.difference(css_builder.property_parser.class_set)
-        css_builder.property_parser.class_set = unassigned_class_set                    # Only use unassigned classes
+        unassigned_class_set = use_this_set.difference(css_builder.property_parser.class_set)
+        css_builder.property_parser.class_set = unassigned_class_set.copy()             # Only use unassigned classes
         css_builder.property_parser.removed_class_set = set()                           # Clear set
         media_query_builder = MediaQueryBuilder(property_parser=class_property_parser)
         logging.debug(
@@ -170,6 +176,20 @@ def parse(recent=True, class_set=set()):
             )
         )
         css_text += bytes(media_query_builder.get_css_text(), 'utf-8')
+
+        media_class_set = unassigned_class_set.intersection(media_query_builder.property_parser.class_set)
+
+        if recent:
+            class_set = class_set.union(builder_class_set)
+            class_set = class_set.union(media_class_set)
+        else:
+            class_set = builder_class_set.copy()
+            class_set = class_set.union(media_class_set)
+    else:
+        if recent:
+            class_set = class_set.union(builder_class_set)
+        else:
+            class_set = builder_class_set.copy()
 
     logging.debug('\nCSS Text:\n\n' + str(css_text))
     print('\nAuto-Generated CSS:')
@@ -192,4 +212,4 @@ def parse(recent=True, class_set=set()):
     if settings.minify:
         print_css_stats(file_name='blowdry')
 
-    return class_set
+    return class_set, css_text

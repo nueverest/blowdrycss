@@ -186,6 +186,11 @@
     | **0.2.7** -- Added a call to LimitTimer.reset() to fix a bug in which the LimitTimer never expired.
       Add two more color regexes which allow the case in which hex is be combined with a pseudo class.
       e.g. ``hffffff-hover`` or ``hfff-before``.
+    |
+    | **0.2.8** -- Performance enhancement during recent/on_modify case.  Only build the css_text based on new
+      class selectors created during the most recent modification.  Append this to the pre-existing css_text then
+      overwrite blowdry.css or blowdry.min.css. A new parameter css_text was added to blowdry.parse() and
+      to the override for the watchdog event handler.
 
 """
 __author__ = 'chad nelson'
