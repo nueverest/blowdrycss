@@ -12,6 +12,7 @@ python:
   - "3.4"
   - "3.5"
 
+# pandoc Reference: https://github.com/travis-ci/travis-ci/issues/3094
 addons:
   apt_packages:
     - pandoc
