@@ -140,6 +140,7 @@ class TestWatchdogWrapperMain(TestCase):
         auto_generate = settings.auto_generate          # original
         settings.auto_generate = True
         _thread.start_new_thread(self.monitor_modify_delete_stop, (delete_dot_html,))
+        sleep(1.0)
         watchdogwrapper.main()    # Caution: Nothing will run after this line unless _thread.interrupt_main() is called.
         self.assertTrue(self.passing, msg=self.non_matching + ' not found in output:\n' + self.output)
         settings.auto_generate = auto_generate          # reset setting
