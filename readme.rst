@@ -27,33 +27,15 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.2.6** -- Created a filehandler.FileModificationComparator which runs under watchdog mode. This
-  feature dramatically improves efficiency by only adding classes based on the files that changed
-  before the last run of blowdrycss. The current CSS class selectors are now stored within the
-  scope of the watchdog wrapper.
-
-  A LimitTimer expires periodically (default is 30 minutes). The expiration triggers a parses
-  of all files to delete unused classes.
-
-  For those upgrading the package be sure to add ``time_limit = 1800`` to your current ``blowdrycss_settings.py``.
-
-  Class selectors that were deleted by the user during file
-  modification are temporarily ignored since all eligible files (including the ones
-  not modified) would need to be parsed before deletion should be authorized. Deletion and full,
-  comprehensive scans of all files now occurs every 1800 seconds (30 minutes). This value can be
-  increased or decreased in the settings file by changing ``time_limit``.
-
-  Added basic high-level design files.
-
-  Force pypandoc==1.1.3 since pandoc doesn't properly install on Windows in version 1.2.
-
-  Commented out pip and setuptools from requirements.txt.
-
-  PEP8 and typo corrections.
-
 | **0.2.7** -- Added a call to LimitTimer.reset() to fix a bug in which the LimitTimer never expired.
   Add two more color regexes which allow the case in which hex is be combined with a pseudo class.
   e.g. ``hffffff-hover`` or ``hfff-before``.
+|
+| **0.2.8** -- Performance enhancement during recent/on_modify case.  Only build the css_text based on new
+      class selectors created during the most recent modification.  Append this to the pre-existing css_text then
+      overwrite blowdry.css or blowdry.min.css. A new parameter css_text was added to blowdry.parse() and
+      to the override for the watchdog event handler. Special test created to verify that the css_text is
+      handled properly.
 
 
 Why the name blowdrycss?
