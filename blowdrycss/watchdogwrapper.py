@@ -129,11 +129,10 @@ def main():
         observer.schedule(event_handler, settings.project_directory, recursive=True)
         observer.start()
 
-        event_handler.print_status()
-
         limit_timer = LimitTimer()
 
-        event_handler.class_set = blowdry.parse(recent=False, class_set=set(), css_text=b'')  # Parse all files.
+        # Parse all files.
+        event_handler.class_set, event_handler.css_text = blowdry.parse(recent=False, class_set=set(), css_text=b'')
         event_handler.print_status()
 
         try:
@@ -141,7 +140,9 @@ def main():
                 sleep(1)
                 if limit_timer.limit_exceeded:                                          # Periodically parse all files.
                     print('----- Limit timer expired -----')
-                    event_handler.class_set = blowdry.parse(recent=False, class_set=set(), css_text=b'')
+                    event_handler.class_set, event_handler.css_text = blowdry.parse(
+                        recent=False, class_set=set(), css_text=b''
+                    )
                     event_handler.print_status()
                     limit_timer.reset()
                     print('----- Limit timer reset -----')
