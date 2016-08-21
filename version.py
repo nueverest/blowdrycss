@@ -192,6 +192,10 @@
       overwrite blowdry.css or blowdry.min.css. A new parameter css_text was added to blowdry.parse() and
       to the override for the watchdog event handler. Special test created to verify that the css_text is
       handled properly.
+    |
+    | **0.2.9** -- Extended LimitTimer with setters and getters for ``limit_time``. This prevents duplicate runs
+      during watchdog mode. Since the watchdog modify event triggers twice on windows and mac. It can also
+      depending on the IDE being used since some IDEs auto-save.
 
 """
 __author__ = 'chad nelson'

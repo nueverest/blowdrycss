@@ -4,7 +4,7 @@ from builtins import str
 
 # builtins
 from unittest import TestCase, main
-from os import path, remove, SEEK_END
+from os import path, SEEK_END
 import logging
 import sys
 from io import StringIO, open

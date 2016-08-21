@@ -32,6 +32,8 @@ class FileEditEventHandler(PatternMatchingEventHandler):
     def __init__(self, patterns=None, ignore_patterns=None, ignore_directories=False, case_sensitive=False):
         self.class_set = set()
         self.css_text = b''
+        self.limit_timer = LimitTimer()
+        self.limit_timer.time_limit = 0
         super(PatternMatchingEventHandler, self).__init__()
 
         self._patterns = patterns
@@ -77,18 +79,32 @@ class FileEditEventHandler(PatternMatchingEventHandler):
         return False
 
     def on_modified(self, event):
-        """ Called when a file or directory is modified. Only FileModifiedEvents trigger action.
+        """ Called when a file or directory is modified. Only FileModifiedEvents trigger action.  The
+        limit_time must be exceeded as this prevents a double run for the same modification event.
 
         .. note:: Only parse the modified file(s) ``blowdry(recent=True)`` to enhance efficiency.
 
         :type event: :class:`watchdog.event.DirModifiedEvent` or :class:`watchdog.event.FileModifiedEvent`
         :param event: Event representing file modification.
 
+        :return: None
+
         """
-        if type(event) == FileModifiedEvent and not self.excluded(src_path=event.src_path):
+        file_modified = type(event) == FileModifiedEvent
+        not_excluded = not self.excluded(src_path=event.src_path)
+        limit = 3
+
+        if self.limit_timer.time_limit == limit:
+            limit_exceeded = self.limit_timer.limit_exceeded
+        else:                                                                   # Special case only runs the first time.
+            self.limit_timer.time_limit = limit
+            limit_exceeded = True
+
+        if file_modified and not_excluded and limit_exceeded:
             logging.debug('File ' + event.event_type + ' --> ' + str(event.src_path))
             self.class_set, self.css_text = blowdry.parse(recent=True, class_set=self.class_set, css_text=self.css_text)
             self.print_status()
+            self.limit_timer.reset()
 
 
 def main():

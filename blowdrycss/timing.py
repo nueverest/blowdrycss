@@ -147,8 +147,16 @@ class LimitTimer(object):
     |    5   |       set()      |       set()      |        set()       |      set()      |        set()       |
     +--------+------------------+------------------+--------------------+-----------------+--------------------+
 
+    ** Another reason why the LimitTimer is needed. **
 
-    | **Parameters:**
+    On windows and mac watchdog on_modify event gets triggered twice on save. In order to prevent a duplicate run
+    for the same change or set of changes this class is implemented. It can also depend on the IDE being
+    used since some IDEs auto-save.
+
+    | **Members:**
+
+    | **time_limit** (*str*) -- Number of seconds that must pass before the limit is exceeded. Default is
+      settings.time_limit.
 
     | **start_time** (*str*) -- Time that the timer started.
 
@@ -163,7 +171,29 @@ class LimitTimer(object):
     >>>     limit_timer.reset()
     """
     def __init__(self):
+        self._time_limit = settings.time_limit
         self.start_time = time()
+
+    @property
+    def time_limit(self):
+        """ Getter returns ``_time_limit``.
+
+        :return: (*int*) -- Returns ``_time_limit``.
+
+        """
+        return self._time_limit
+
+    @time_limit.setter
+    def time_limit(self, custom_limit):
+        """ Set time_limit in units of seconds.
+
+        :type custom_limit: int
+        :param custom_limit: Time limit in units of seconds.
+
+        :return: None
+
+        """
+        self._time_limit = custom_limit
 
     @property
     def limit_exceeded(self):
@@ -173,7 +203,7 @@ class LimitTimer(object):
         :return: (*bool*) -- Returns True if ``self.time_limit`` is exceeded and False otherwise.
 
         """
-        return time() - self.start_time >= settings.time_limit
+        return time() - self.start_time >= self.time_limit
 
     def reset(self):
         """ Resets ``self.start`` to the current time.
