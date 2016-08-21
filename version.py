@@ -195,13 +195,13 @@
     |
     | **0.2.9** -- Extended LimitTimer with setters and getters for ``limit_time``. This prevents duplicate runs
       during watchdog mode. Since the watchdog modify event triggers twice on windows and mac. It can also
-      depending on the IDE being used since some IDEs auto-save.
+      depending on the IDE being used since some IDEs auto-save. Created an associated integration test.
 
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.2.8'
+__version__ = '0.2.9'
 
 __release__ = __version__ + 'b2'
