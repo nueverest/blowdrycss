@@ -4,7 +4,7 @@ from builtins import str
 
 # builtins
 from unittest import TestCase, main
-from os import path, SEEK_END
+from os import path, SEEK_END, remove
 import logging
 import sys
 from io import StringIO, open
@@ -140,9 +140,95 @@ class TestFileEditEventHandler(TestCase):
         finally:
             sys.stdout = saved_stdout
 
-        # Delete contents of modify.html.
-        with open(modify_dot_html, 'w'):
-            pass
+        remove(modify_dot_html)                                                         # Delete modify.html.
+
+        observer.stop()
+        observer.join()
+
+    def test_on_modified_verify_do_double_runs(self):
+        # Integration test
+        logging.basicConfig(level=logging.DEBUG)
+        once = [
+            '~~~ blowdrycss started ~~~',
+            'Auto-Generated CSS',
+            'Completed',
+            'The blowdrycss watchdog is watching all (*.html) files',
+        ]
+        twice = [
+            'blowdry.css',
+            'blowdry.min.css',
+            '-' * 96,
+        ]
+        html_text = '<html class="bold"></html>  '
+        test_examplesite = unittest_file_path(folder='test_examplesite')
+        modify_dot_html = unittest_file_path(folder='test_examplesite', filename='modify.html')
+        file_types = '(' + ', '.join(settings.file_types) + ')'
+
+        # Directory must be created for Travis CI case
+        make_directory(test_examplesite)
+        self.assertTrue(path.isdir(test_examplesite))
+
+        # Add contents to modify.html
+        with open(modify_dot_html, 'w', encoding='utf-8') as _file:
+            _file.write(html_text)
+
+        event_handler = FileEditEventHandler(
+            patterns=list(file_types),
+            ignore_patterns=[],
+            ignore_directories=True
+        )
+
+        observer = Observer()
+        observer.schedule(event_handler, unittest_file_path(folder='test_examplesite'), recursive=True)
+        observer.start()
+
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+
+            # Modify remove one character (triggers on_modified).
+            with open(modify_dot_html, 'rb+') as _file:
+                _file.seek(-1, SEEK_END)
+                _file.truncate()
+
+            # IMPORTANT: Must wait for output otherwise test will fail.
+            count = 0
+            while once[-1] not in out.getvalue():
+                if count > 100:             # Max wait is 2.0 seconds.
+                    break
+                else:
+                    sleep(0.02)
+                    count += 1
+
+            # IMMEDIATELY Trigger on_modify / FileEditEventHandler again.
+
+            # Modify remove one character (triggers on_modified).
+            with open(modify_dot_html, 'rb+') as _file:
+                _file.seek(-1, SEEK_END)
+                _file.truncate()
+
+            # IMPORTANT: Must wait for output otherwise test will fail.
+            count = 0
+            while once[-1] not in out.getvalue():
+                if count > 100:             # Max wait is 2.0 seconds.
+                    break
+                else:
+                    sleep(0.02)
+                    count += 1
+
+            output = out.getvalue()
+
+            for substring in once:
+                self.assertTrue(output.count(substring) == 1, msg=substring + ' only allowed once.\noutput:\n' + output)
+
+            for substring in twice:
+                self.assertTrue(output.count(substring) == 2, msg=substring + ' only allowed twice\noutput:\n' + output)
+
+        finally:
+            sys.stdout = saved_stdout
+
+        remove(modify_dot_html)                                                         # Delete modify.html.
 
         observer.stop()
         observer.join()
