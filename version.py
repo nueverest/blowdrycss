@@ -195,13 +195,16 @@
     |
     | **0.2.9** -- Extended LimitTimer with setters and getters for ``limit_time``. This prevents duplicate runs
       during watchdog mode. Since the watchdog modify event triggers twice on windows and mac. It can also
-      depending on the IDE being used since some IDEs auto-save. Created an associated integration test.
+      depend on the IDE being used since some IDEs auto-save. Created an associated integration test.
+    |
+    | **0.3.0** -- Enabled support for the *.vue extension and added integration tests along with a
+      simple test_vue folder. Requirements cleanup.
 
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '0.2.9'
+__version__ = '0.3.0'
 
-__release__ = __version__ + 'b2'
+__release__ = __version__ + 'b3'

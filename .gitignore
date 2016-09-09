@@ -18,8 +18,8 @@ env/
 archive/0.2.9/build/
 develop-eggs/
 archive/0.2.9/dist/
-build/
-dist/
+archive/0.3.0/build/
+archive/0.3.0/dist/
 downloads/
 eggs/
 .eggs/
