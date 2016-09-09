@@ -546,7 +546,7 @@ class BreakpointParser(object):
             upper_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key])
 
             # Special 'display' usage case min/max reverse logic. Does not apply to 'custom' case.
-            if self.is_display():# and not self.breakpoint_key == 'custom':
+            if self.is_display():
                 css = (
                     '@media only screen and (min-width: ' + upper_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
@@ -620,7 +620,7 @@ class BreakpointParser(object):
             lower_limit = str(self.breakpoint_dict[self.breakpoint_key][self.limit_key])
 
             # Special 'display' usage case min/max reverse logic. Does not apply to 'custom' case.
-            if self.is_display():# and not self.breakpoint_key == 'custom':
+            if self.is_display():
                 css = (
                     '@media only screen and (max-width: ' + lower_limit + ') {\n' +
                     '\t.' + self.css_class + ' {\n' +
