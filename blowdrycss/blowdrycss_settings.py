@@ -126,8 +126,8 @@ log_backup_count = 1                                        # Maximum number of 
 
 # All file types/extensions to search for in the defined project_directory that contain encoded class selectors.
 # Available formats:
-# ('*.html', '*.js', '*.ts', '*.jinja', '*.jinja2', '*.jnj', '*.ja', '*.djt', '*.djhtml', '*.cs', '*.aspx', '*.ascx',
-#  '*.master', '*.erb', )
+# ('*.html', '*.js', '*.ts', '*.vue', '*.jinja', '*.jinja2', '*.jnj', '*.ja', '*.djt', '*.djhtml',
+#  '*.cs', '*.aspx', '*.ascx', '*.master', '*.erb', )
 file_types = ('*.html', )
 
 # Timing

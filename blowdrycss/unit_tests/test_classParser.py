@@ -98,6 +98,23 @@ class TestClassParser(TestCase):
         settings.file_types = ('*.html', )                                                      # Reset file_types
         settings.project_directory = project_directory
 
+    def test_build_class_set_vue_file(self):
+        # integration test
+        expected_class_set = {
+            'blue', 'testing-123',
+            'text-align-center', 'incremental', 'cssclasses',
+        }
+        settings.file_types = ('*.vue', )                                            # Override file_types
+        project_directory = settings.project_directory
+        settings.project_directory = unittest_file_path()
+        file_finder = FileFinder(recent=False)
+        self.assertFalse('.html' in list(file_finder.file_dict), msg=settings.file_types)
+        self.assertTrue('.vue' in list(file_finder.file_dict), msg=settings.file_types)
+        class_parser = ClassParser(file_dict=file_finder.file_dict)
+        self.assertEqual(class_parser.class_set, expected_class_set, msg=class_parser.class_set)
+        settings.file_types = ('*.html', )                                                      # Reset file_types
+        settings.project_directory = project_directory
+
 
 if __name__ == '__main__':
     main()

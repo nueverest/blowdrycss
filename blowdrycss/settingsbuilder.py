@@ -40,8 +40,8 @@ The longer more specific name is used to prevent naming conflicts, and increase 
 
   *Available extensions:* ::
 
-    ('*.html', '*.js', '*.ts', '*.jinja', '*.jinja2', '*.jnj', '*.ja', '*.djt', '*.djhtml', '*.cs', '*.aspx', '*.ascx',
-     '*.master', '*.erb', )
+    ('*.html', '*.js', '*.ts', '*.vue', '*.jinja', '*.jinja2', '*.jnj', '*.ja', '*.djt', '*.djhtml',
+     '*.cs', '*.aspx', '*.ascx', '*.master', '*.erb', )
 
 | timing_enabled (*bool*) -- Run performance timer to see the performance of ``blowdrycss``.
 

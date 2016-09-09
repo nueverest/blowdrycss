@@ -18,7 +18,7 @@ class FileRegexMap(object):
 
     - Class selector sets are extracted using re.findall().
 
-    **Supported Javascript and Typescript extensions:** .js, .ts
+    **Supported Javascript, Typescript, VueJs vue-loader extensions:** .js, .ts, .vue
 
     Javascript has a number of cases where a special substitution is performed. These cases are stored in ``js_case``.
     A check is performed if the re.sub() should do a special substitution of text that begins with the ``js_substring``.
@@ -146,6 +146,10 @@ class FileRegexMap(object):
                 },
                 '.ts': {                                                        # Typescript
                     'sub_regexes': sub_js,
+                    'findall_regexes': findall_regex,
+                },
+                '.vue': {                                                       # VueJs modular vue-loader
+                    'sub_regexes': sub_html,
                     'findall_regexes': findall_regex,
                 },
                 '.html': {
