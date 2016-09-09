@@ -138,64 +138,6 @@ class MediaQueryBuilder(object):
             self.property_parser.class_set.remove(invalid_css_class)
             self.property_parser.removed_class_set.add(invalid_css_class + reason)
 
-    # @staticmethod
-    # def class_is_parsable(css_class, property_name):
-    #     """ Returns True if breakpoint and scaling syntax are not combined.  Otherwise returns False.
-    #
-    #     **Rule:**
-    #
-    #     Breakpoint and scaling syntax cannot be mixed or combined.
-    #
-    #     | Allowed: ``display-medium-down``, ``large-up``, and ``font-size-24-s``
-    #     | Not Allowed: ``display-medium-down-s``, ``large-up-s``, and ``font-size-24-small-only-s``
-    #
-    #     :type css_class: str
-    #     :type property_name: str
-    #
-    #     :param css_class: An encoded css class.
-    #     :param property_name: A CSS property property_name.
-    #     :return: (*str*) -- Returns True if breakpoint and scaling syntax are not combined.  Otherwise returns False.
-    #
-    #     **Example**
-    #
-    #     >>> from classpropertyparser import ClassPropertyParser
-    #     >>> class_set = {'bold', 'large-down', 'font-size-25-s'}
-    #     >>> # Filter class names. Only keep classes matching the defined class encoding.
-    #     >>> property_parser = ClassPropertyParser(class_set=class_set)
-    #     >>> # Build Media Queries
-    #     >>> media_query_builder = MediaQueryBuilder(property_parser=property_parser)
-    #     >>> print(
-    #             media_query_builder.class_is_parsable(
-    #                 css_class='bold',
-    #                 property_name='font-weight'
-    #             )
-    #         )
-    #     False
-    #     >>> print(
-    #             media_query_builder.class_is_parsable(
-    #                 css_class='large-down',
-    #                 property_name='display'
-    #             )
-    #         )
-    #     True
-    #
-    #     """
-    #     scaling_parser = ScalingParser(css_class=css_class, css_property=property_name)
-    #
-    #     # Scaling but not Breakpoint case.
-    #     if scaling_parser.is_scaling:
-    #         try:
-    #             BreakpointParser(css_class=css_class)
-    #         except ValueError:
-    #             return True
-    #
-    #     # Breakpoint but not Scaling
-    #     try:
-    #         BreakpointParser(css_class=css_class)
-    #         return not scaling_parser.is_scaling
-    #     except ValueError:
-    #         return False
-
     def get_css_text(self):
         """ Joins ``css_media_queries`` together with an empty separator string ``''``.
 
