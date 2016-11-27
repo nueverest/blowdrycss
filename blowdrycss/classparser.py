@@ -120,6 +120,7 @@ class FileRegexMap(object):
             sub_csharp = (r'//.*?\n', r'\n', r'/\*.*?\*/', )                    # Remove CS comments.
             sub_dotnet = sub_html + (r'<%--.*?--%>', r'<%.*?%>', )              # Remove XHTML comments before elements.
             sub_ruby = sub_html + (r'<%--.*?--%>', r'<%.*?%>', )                # Remove XHTML comments before elements.
+            sub_php = sub_html                                                  # Treat PHP like HTML and JS.
 
             class_regex = (r'class=[\'"](.*?)["\']', )                          # general 'class' case
 
@@ -200,6 +201,10 @@ class FileRegexMap(object):
                     'sub_regexes': sub_ruby,
                     'findall_regexes': findall_regex,
                 },
+                '.php': {
+                    'sub_regexes': sub_php,
+                    'findall_regexes': findall_regex,
+                }
             }
         else:
             raise OSError('"' + self.file_path + '" does not exist.')
