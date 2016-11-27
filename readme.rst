@@ -30,7 +30,7 @@ Version Changelog
 | **0.3.0** -- Enabled support for the ``*.vue`` extension and added integration tests along with a
     simple test_vue folder. Requirements cleanup.
 |
-| **1.0.0** -- Enabled support for *.php extension and added integration tests. Incremented to 1.0.0 since the
+| **1.0.0** -- Enabled support for ``*.php`` extension and added integration tests. Incremented to 1.0.0 since the
       code is stable and working well.
 
 
