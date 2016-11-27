@@ -132,7 +132,7 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version=version['__version__'],
 
-    description='The revolutionary CSS compiler',
+    description='The atomic CSS compiler',
     long_description=long_description,
 
     # The project's main homepage.
