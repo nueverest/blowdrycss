@@ -80,18 +80,18 @@ Go `here <https://testpypi.python.org/>`__ and ensure everything looks correct.
 Upload to official PyPi. Back at the command line run:
 twine upload dist/* -r pypi
 
-
-Create a new folder inside of the ``archive`` folder named after the current version number
-e.g. `blowdrycss\archive\0.1.1`.
-Copy the new egg, build, and dist into this new folder.
-
-
 [Test on PyPi]
 pip install blowdrycss
 blowdrycss
 pip uninstall blowdrycss
 
 Tag the GitHub commit for the version. In menu VCS -> Git -> Tag..
+
+Create a new folder inside of the ``archive`` folder named after the current version number
+e.g. `blowdrycss\archive\0.1.1`.
+Copy the new egg, build, and dist into this new folder.
+
+Delete the new egg, build, and dist folders.
 
 [Supplemental: manual registration how to]
 `testpypi <https://testpypi.python.org/pypi?%3Aaction=submit_form>`__
