@@ -27,12 +27,11 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.2.9** -- Extended LimitTimer with setters and getters for ``limit_time``. This prevents duplicate runs
-    during watchdog mode. Since the watchdog modify event triggers twice on windows and mac. It can also
-    depend on the IDE being used since some IDEs auto-save. Created an associated integration test.
-|
 | **0.3.0** -- Enabled support for the ``*.vue`` extension and added integration tests along with a
     simple test_vue folder. Requirements cleanup.
+|
+| **1.0.0** -- Enabled support for *.php extension and added integration tests. Incremented to 1.0.0 since the
+      code is stable and working well.
 
 
 
