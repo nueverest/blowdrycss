@@ -199,6 +199,9 @@
     |
     | **0.3.0** -- Enabled support for the *.vue extension and added integration tests along with a
       simple test_vue folder. Requirements cleanup.
+    |
+    | **1.0.0** -- Enabled support for *.php extension and added integration tests. Incremented to 1.0.0 since the
+      code is stable and working well.
 
 """
 __author__ = 'chad nelson'
@@ -207,4 +210,4 @@ __project__ = 'blowdrycss'
 
 __version__ = '0.3.0'
 
-__release__ = __version__ + 'b3'
+__release__ = __version__
