@@ -38,11 +38,6 @@ The longer more specific name is used to prevent naming conflicts, and increase 
 | file_types = (*tuple of strings*) -- All file types/extensions to search for in the defined project_directory
   that contain encoded class selectors.
 
-  *Available extensions:* ::
-
-    ('*.html', '*.js', '*.ts', '*.vue', '*.jinja', '*.jinja2', '*.jnj', '*.ja', '*.djt', '*.djhtml',
-     '*.cs', '*.aspx', '*.ascx', '*.master', '*.erb', )
-
 | timing_enabled (*bool*) -- Run performance timer to see the performance of ``blowdrycss``.
 
 | markdown_docs (*bool*) -- Generate a markdown files that provides a quick syntax and clashing alias reference.
