@@ -195,7 +195,7 @@ class FileConverter(object):
 
 
 class CSSFile(object):
-    """ A tool for writing and minifying CSS files.
+    """ A tool for writing and minifying CSS to files.
 
     *Reference:*
     stackoverflow.com/questions/273192/in-python-check-if-a-directory-exists-and-create-it-if-necessary#answer-14364249
@@ -204,10 +204,15 @@ class CSSFile(object):
 
     | **css_directory** (*str*) -- File directory where the .css and .min.css output files are stored.
 
-    | **file_name** (*str*) -- The name of the CSS output file. Default is 'blowdry'. The output file
-      is named blowdry.css or blowdry.min.css.
+    | **Members:**
 
-    | *Note:* ``file_name`` does not include extension because ``write_css()`` and ``minify()`` append the extension.
+    | **file_name** (*str*) -- Defined in blowdrycss_settings.py as ``output_file_name``. Default is 'blowdry'.
+
+    | **extension** (*str*) -- Defined in blowdrycss_settings.py as ``output_extension``. Default is '.css'.
+
+    | *Note:* The output file is named ``file_name + extension`` or ``file_name + .min + extension``.
+      ex1: blowdry.css or blowdry.min.css
+      ex2: _custom.scss or _custom.min.scss
 
     **Example:**
 
@@ -225,10 +230,11 @@ class CSSFile(object):
     >>> css_file.minify(css_text=css_text)
 
     """
-    def __init__(self, file_directory=getcwd(), file_name='blowdry'):
-        self.file_directory = file_directory
-        self.file_name = file_name
-        make_directory(file_directory)
+    def __init__(self):
+        self.file_directory = settings.css_directory
+        self.file_name = settings.output_file_name
+        self.extension = settings.output_extension
+        make_directory(self.file_directory)
 
     def write(self, css_text=''):
         """ Output a human readable version of the css file in utf-8 format.
@@ -252,7 +258,11 @@ class CSSFile(object):
         """
         parse_string = parseString(css_text)
         ser.prefs.useDefaults()                # Enables Default / Verbose Mode
-        file_path = get_file_path(file_directory=self.file_directory, file_name=self.file_name, extension='.css')
+        file_path = get_file_path(
+            file_directory=self.file_directory,
+            file_name=self.file_name,
+            extension=self.extension
+        )
         with open(file_path, 'w') as css_file:
             css_file.write(parse_string.cssText.decode('utf-8'))
 
@@ -297,11 +307,15 @@ class CSSFile(object):
 
         """
         parse_string = parseString(css_text)
-        ser.prefs.useMinified()                 # Enable minification.
-        file_path = get_file_path(file_directory=self.file_directory, file_name=self.file_name, extension='.min.css')
+        ser.prefs.useMinified()                                     # Enable minification.
+        file_path = get_file_path(
+            file_directory=self.file_directory,
+            file_name=self.file_name,
+            extension=str('.min' + self.extension)                  # prepend '.min'
+        )
         with open(file_path, 'w') as css_file:
             css_file.write(parse_string.cssText.decode('utf-8'))
-        ser.prefs.useDefaults()                 # Disable minification.
+        ser.prefs.useDefaults()                                     # Disable minification.
 
 
 class GenericFile(object):

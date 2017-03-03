@@ -196,20 +196,20 @@ def parse(recent=True, class_set=set(), css_text=b''):
 
     # Output the DRY CSS file. (user setting option)
     if settings.human_readable:
-        css_file = CSSFile(file_directory=settings.css_directory, file_name='blowdry')
+        css_file = CSSFile()
         css_file.write(css_text=css_text)
-        print(path.join(settings.css_directory, css_file.file_name) + '.css')
+        print(path.join(css_file.file_directory, css_file.file_name) + '.css')
 
     # Output the Minified DRY CSS file. (user setting option)
     if settings.minify:
-        css_file = CSSFile(file_directory=settings.css_directory, file_name='blowdry')
+        css_file = CSSFile()
         css_file.minify(css_text=css_text)
-        print(path.join(settings.css_directory, css_file.file_name) + '.min.css')
+        print(path.join(css_file.file_directory, css_file.file_name) + '.min' + css_file.extension)
 
     if settings.timing_enabled:
         timer.report()
 
     if settings.minify:
-        print_css_stats(file_name='blowdry')
+        print_css_stats(file_name=settings.output_file_name)
 
     return class_set, css_text

@@ -8,6 +8,7 @@ from os import path, remove
 # custom
 from blowdrycss.filehandler import CSSFile
 from blowdrycss.utilities import unittest_file_path
+import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
 __project__ = 'blowdrycss'
@@ -15,15 +16,26 @@ __project__ = 'blowdrycss'
 
 class TestCSSFile(TestCase):
     def test_not_a_directory(self):
-        not_a_directory = '/a/ invalid /directory/file.txt'    # Spaces added around 'invalid' to make it invalid.
-        file_name = 'some_file'
-        self.assertRaises(OSError, CSSFile, not_a_directory, file_name)
+        # Save original values.
+        css_directory = settings.css_directory
+
+        # Change settings
+        settings.css_directory = '/a/ invalid /directory/file.txt'    # Spaces added around 'invalid' to make it invalid.
+
+        self.assertRaises(OSError, CSSFile)
+
+        # Reset settings values.
+        settings.css_directory = css_directory
 
     def test_write_created(self):
-        css_directory = unittest_file_path(folder='test_css')
-        file_name = 'blowdry'
-        css_file = CSSFile(file_directory=css_directory, file_name=file_name)
-        file_path = path.join(css_directory, css_file.file_name + '.css')
+        # Save original values.
+        css_directory = settings.css_directory
+
+        # Change settings
+        settings.css_directory = unittest_file_path(folder='test_css')
+
+        css_file = CSSFile()
+        file_path = path.join(settings.css_directory, 'blowdry.css')
 
         if path.isfile(file_path):      # Ensure that file is deleted before testing.
             remove(file_path)
@@ -31,11 +43,18 @@ class TestCSSFile(TestCase):
         css_file.write()
         self.assertTrue(path.isfile(file_path))
 
+        # Reset settings values.
+        settings.css_directory = css_directory
+
     def test_write_verify_css_text(self):
-        css_directory = unittest_file_path(folder='test_css')
-        file_name = 'blowdry'
-        css_file = CSSFile(file_directory=css_directory, file_name=file_name)
-        file_path = path.join(css_directory, css_file.file_name + '.css')
+        # Save original values.
+        css_directory = settings.css_directory
+
+        # Change settings
+        settings.css_directory = unittest_file_path(folder='test_css')
+
+        css_file = CSSFile()
+        file_path = path.join(settings.css_directory, css_file.file_name + '.css')
 
         if path.isfile(file_path):      # Ensure that file is deleted before testing.
             remove(file_path)
@@ -51,11 +70,18 @@ class TestCSSFile(TestCase):
             file_string = css_file.read()
         self.assertEqual(file_string, expected_string)
 
+        # Reset settings values.
+        settings.css_directory = css_directory
+
     def test_minify_created(self):
-        css_directory = unittest_file_path(folder='test_css')
-        file_name = 'blowdry'
-        css_file = CSSFile(file_directory=css_directory, file_name=file_name)
-        file_path = path.join(css_directory, css_file.file_name + '.min.css')
+        # Save original values.
+        css_directory = settings.css_directory
+
+        # Change settings
+        settings.css_directory = unittest_file_path(folder='test_css')
+
+        css_file = CSSFile()
+        file_path = path.join(css_file.file_directory, 'blowdry.min.css')
 
         if path.isfile(file_path):      # Ensure that file is deleted before testing.
             remove(file_path)
@@ -63,11 +89,18 @@ class TestCSSFile(TestCase):
         css_file.minify()
         self.assertTrue(path.isfile(file_path))
 
+        # Reset settings values.
+        settings.css_directory = css_directory
+
     def test_minify_verify_css_text(self):
-        css_directory = unittest_file_path(folder='test_css')
-        file_name = 'blowdry'
-        css_file = CSSFile(file_directory=css_directory, file_name=file_name)
-        file_path = path.join(css_directory, css_file.file_name + '.min.css')
+        # Save original values.
+        css_directory = settings.css_directory
+
+        # Change settings
+        settings.css_directory = unittest_file_path(folder='test_css')
+
+        css_file = CSSFile()
+        file_path = path.join(settings.css_directory, css_file.file_name + '.min.css')
 
         if path.isfile(file_path):      # Ensure that file is deleted before testing.
             remove(file_path)
@@ -85,6 +118,9 @@ class TestCSSFile(TestCase):
         with open(file_path, 'r') as css_file:
             file_string = css_file.read()
         self.assertEqual(file_string, expected_string, msg=file_string)
+
+        # Reset settings values.
+        settings.css_directory = css_directory
 
 
 if __name__ == '__main__':

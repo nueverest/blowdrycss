@@ -19,6 +19,10 @@ The longer more specific name is used to prevent naming conflicts, and increase 
 
 | docs_directory (*string*) -- Path where Sphinx docs are located (requires sphinx to be installed and run).
 
+| output_file_name (*string*) -- Name of the generated output file contain DRY CSS definitions.
+
+| output_extension (*string*) -- File extension of the generated output file. Must begin with '.'
+
 | file_types = (*tuple of strings*) -- All file types/extensions to search for in the defined project_directory
   that contain encoded class selectors.
 
@@ -113,9 +117,13 @@ css_directory = path.join(project_directory, 'css')
 docs_directory = path.join(cwd, 'docs')
 chdir(original_directory)                                   # Reset current working directory.
 
+# Output File
+output_file_name = 'blowdry'
+output_extension = '.css'                                   # Must begin with '.' Could be anything .scss, .less, etc.
+
 # Logging
 logging_enabled = True
-logging_level = INFO                                       # Allowed: DEBUG, INFO, WARNING, ERROR, CRITICAL
+logging_level = INFO                                        # Allowed: DEBUG, INFO, WARNING, ERROR, CRITICAL
 log_to_console = False
 log_to_file = True
 log_directory = path.join(cwd, 'log')

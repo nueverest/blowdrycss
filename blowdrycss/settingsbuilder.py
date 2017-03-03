@@ -35,6 +35,10 @@ The longer more specific name is used to prevent naming conflicts, and increase 
 
 | docs_directory (*string*) -- Path where Sphinx docs are located (requires sphinx to be installed and run).
 
+| output_file_name (*string*) -- Name of the generated output file contain DRY CSS definitions.
+
+| output_extension (*string*) -- File extension of the generated output file. Must begin with '.'
+
 | file_types = (*tuple of strings*) -- All file types/extensions to search for in the defined project_directory
   that contain encoded class selectors.
 
@@ -131,6 +135,10 @@ log_file_name = 'blowdrycss.log'
 one_mega_byte = 1048576
 log_file_size = 4 * one_mega_byte                           # Max log file size
 log_backup_count = 1                                        # Maximum number of backup log files.
+
+# Output File
+output_file_name = 'blowdry'
+output_extension = '.css'                                   # Must begin with '.' Could be anything .scss, .less, etc.
 
 # All file types/extensions to search for in the defined project_directory that contain encoded class selectors.
 # Available formats:
