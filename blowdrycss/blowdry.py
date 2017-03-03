@@ -14,7 +14,7 @@ from blowdrycss.cssbuilder import CSSBuilder
 from blowdrycss.datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, \
     property_alias_html, clashing_alias_rst, property_alias_rst
 from blowdrycss.mediaquerybuilder import MediaQueryBuilder
-from blowdrycss.utilities import print_css_stats
+from blowdrycss.utilities import print_css_stats, validate_output_file_name_setting, validate_output_extension_setting
 import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
@@ -24,6 +24,7 @@ __project__ = 'blowdrycss'
 def boilerplate():
     """ Watchdog wrapper only calls this once to eliminate recurring performance impact.
 
+    - Validate the output_file_name and output_extenion settings.
     - Generate Markdown documentation files.
     - Generate HTML documentation files. (This location is important since it allows encoded css to be included
       in the documentation files.)
@@ -32,6 +33,9 @@ def boilerplate():
     :return: None
 
     """
+    validate_output_file_name_setting()
+    validate_output_extension_setting()
+
     if settings.logging_enabled:
         log.enable()
 

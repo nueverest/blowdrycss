@@ -11,7 +11,8 @@ from io import StringIO, open
 # custom
 import blowdrycss.unit_tests.unittest_settings as unittest_settings
 from blowdrycss.utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, unittest_file_path, \
-    change_settings_for_testing, print_css_stats, print_blow_dryer, make_directory, delete_file_paths
+    change_settings_for_testing, print_css_stats, print_blow_dryer, make_directory, delete_file_paths, \
+    validate_output_file_name_setting, validate_output_extension_setting
 import blowdrycss_settings as settings
 
 change_settings_for_testing()
@@ -361,6 +362,41 @@ class TestUtilities(TestCase):
         # assert they don't exist
         for file_path in file_paths:
             self.assertFalse(path.isfile(file_path))
+
+    def test_validate_output_file_name_setting_valid_input(self):
+        validate_output_file_name_setting()                             # No exceptions raised with default settings.
+
+    def test_validate_output_file_name_setting_invalid_inputs(self):
+        # Save original values.
+        output_file_name = settings.output_file_name
+
+        invalid_file_names = [' custom', '/co/a', 'a\\cat', 'custom.']
+
+        # Change settings
+        for invalid_file_name in invalid_file_names:
+            settings.output_file_name = invalid_file_name
+            self.assertRaises(SyntaxError, validate_output_file_name_setting)
+
+        # Reset settings values.
+        settings.output_file_name = output_file_name
+
+    def test_validate_output_extension_setting_valid_input(self):
+        validate_output_extension_setting()                             # No exceptions raised with default settings.
+
+    def test_validate_output_extension_setting_invalid_inputs(self):
+        # Save original values.
+        output_extension = settings.output_extension
+
+        invalid_extensions = ['custom', '. custom', './co/a', '.a\\cat', '.custom.']
+
+        # Change settings
+        for invalid_extension in invalid_extensions:
+            settings.output_extension = invalid_extension
+            self.assertRaises(SyntaxError, validate_output_extension_setting)
+
+        # Reset settings values.
+        settings.output_extension = output_extension
+
 
 if __name__ == '__main__':
     main()

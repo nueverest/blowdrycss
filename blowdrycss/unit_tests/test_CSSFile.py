@@ -122,6 +122,32 @@ class TestCSSFile(TestCase):
         # Reset settings values.
         settings.css_directory = css_directory
 
+    def test_write_created_custom_output_file_data(self):
+        # Save original values.
+        css_directory = settings.css_directory
+        output_file_name = settings.output_file_name
+        output_extension = settings.output_extension
+
+        # Change settings
+        settings.css_directory = unittest_file_path(folder='test_css')
+        settings.output_file_name = '_custom'
+        settings.output_extension = '.scss'
+
+        css_file = CSSFile()
+        expected = '_custom.scss'
+        file_path = path.join(settings.css_directory, expected)
+
+        if path.isfile(file_path):      # Ensure that file is deleted before testing.
+            remove(file_path)
+
+        css_file.write()
+        self.assertTrue(path.isfile(file_path))
+
+        # Reset settings values.
+        settings.css_directory = css_directory
+        settings.output_file_name = output_file_name
+        settings.output_extension = output_extension
+
 
 if __name__ == '__main__':
     main()

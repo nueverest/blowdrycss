@@ -112,6 +112,67 @@ def get_file_path(file_directory='', file_name='blowdry', extension=''):
             )
 
 
+def validate_output_file_name_setting():
+    """ Validates output_file_name and output_extension from blowdrycss_settings.py.
+
+    :raises SyntaxError: If settings.output_file_name or settings.output_extension contain
+        '\', '/', whitespace or ends with a dot.
+
+    :return: None
+    """
+    output_file_name = settings.output_file_name
+
+    if search(r"\s", output_file_name):             # Prevent whitespace
+        raise SyntaxError(
+            'The output_file_name "' + output_file_name + '" in blowdrycss_settings.py must not contain whitespace.'
+        )
+
+    invalid_chars = ['\\', '/']            # Prevent '\' and '/'
+    for invalid_char in invalid_chars:
+        if invalid_char in output_file_name:
+            raise SyntaxError(
+                'The output_file_name "' + output_file_name + '" in blowdrycss_settings.py must not contain / or \.'
+            )
+
+    if output_file_name.endswith('.'):              # Prevent final '.'
+        raise SyntaxError(
+            'The output_file_name "' + output_file_name + '" in blowdrycss_settings.py must not end with a dot.'
+        )
+
+
+def validate_output_extension_setting():
+    """ Validates output_extension from blowdrycss_settings.py.
+
+    :raises SyntaxError: If settings.output_extension does not begin with a dot or contains '\', '/', whitespace
+        or ends with a dot.
+
+    :return: None
+    """
+    output_extension = settings.output_extension
+
+    if not output_extension.startswith('.'):
+        raise SyntaxError(
+            'The output_extension "' + output_extension + '" in blowdrycss_settings.py must begin with a dot.'
+        )
+
+    if search(r"\s", output_extension):             # Prevent whitespace
+        raise SyntaxError(
+            'The output_extension "' + output_extension + '" in blowdrycss_settings.py must not contain whitespace.'
+        )
+
+    invalid_chars = ['\\', '/']                     # Prevent '\' and '/'
+    for invalid_char in invalid_chars:
+        if invalid_char in output_extension:
+            raise SyntaxError(
+                'The output_extension "' + output_extension + '" in blowdrycss_settings.py must not contain / or \.'
+            )
+
+    if output_extension.endswith('.'):              # Prevent final '.'
+        raise SyntaxError(
+            'The output_extension "' + output_extension + '" in blowdrycss_settings.py must not end with a dot.'
+        )
+
+
 def change_settings_for_testing():
     """ Change settings directories for testing.
 
