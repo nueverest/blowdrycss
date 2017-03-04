@@ -27,12 +27,12 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **0.3.0** -- Enabled support for the ``*.vue`` extension and added integration tests along with a
-    simple test_vue folder. Requirements cleanup.
-|
 | **1.0.0** -- Enabled support for ``*.php`` extension and added integration tests. Incremented to 1.0.0 since the
-      code is stable and working well.
-
+  code is stable and working well.
+|
+| **1.0.1** -- Enabled support for output file_name and extension customization. Created settings validation
+  utility functions and unit tests. Custom output file examples: _blowdry.scss and custom.css. Added support for
+  Python 3.6.
 
 
 Why the name blowdrycss?

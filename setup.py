@@ -85,7 +85,8 @@ pip install blowdrycss
 blowdrycss
 pip uninstall blowdrycss
 
-Tag the GitHub commit for the version. In menu VCS -> Git -> Tag..
+Tag the GitHub commit for the version. In menu VCS -> Git -> Tag.
+Tag Format: Version 1.0.0 Released on PyPi
 
 Create a new folder inside of the ``archive`` folder named after the current version number
 e.g. `blowdrycss\archive\0.1.1`.
@@ -182,6 +183,7 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
 
     # What does your project relate to?

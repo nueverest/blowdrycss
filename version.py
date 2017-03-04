@@ -202,12 +202,16 @@
     |
     | **1.0.0** -- Enabled support for ``*.php`` extension and added integration tests. Incremented to 1.0.0 since the
       code is stable and working well.
+    |
+    | **1.0.1** -- Enabled support for output file_name and extension customization. Created settings validation
+      utility functions and unit tests. Custom output file examples: _blowdry.scss and custom.css. Added support for
+      Python 3.6.
 
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 __release__ = __version__

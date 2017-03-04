@@ -113,7 +113,7 @@ def get_file_path(file_directory='', file_name='blowdry', extension=''):
 
 
 def validate_output_file_name_setting():
-    """ Validates output_file_name and output_extension from blowdrycss_settings.py.
+    """ Validates output_file_name from blowdrycss_settings.py. First thing that runs.
 
     :raises SyntaxError: If settings.output_file_name or settings.output_extension contain
         '\', '/', whitespace or ends with a dot.
@@ -141,7 +141,7 @@ def validate_output_file_name_setting():
 
 
 def validate_output_extension_setting():
-    """ Validates output_extension from blowdrycss_settings.py.
+    """ Validates output_extension from blowdrycss_settings.py. First thing that runs.
 
     :raises SyntaxError: If settings.output_extension does not begin with a dot or contains '\', '/', whitespace
         or ends with a dot.
