@@ -253,7 +253,7 @@ class TestUtilities(TestCase):
         # On Travis CI these auto-generated files are inaccessible and need to be recreated.
         # Change the expected file size reduction percentage since Ubuntu's math is different.
         # Create directories and SCSS files if they do not exist.
-        _folder = 'test_examplesite/test_scss'
+        _folder = 'test_examplesite/test_css'
         blowdry_scss = unittest_file_path(_folder, '_blowdry.scss')
         blowdry_min_scss = unittest_file_path(_folder, '_blowdry.min.scss')
 
