@@ -35,10 +35,10 @@ python setup.py sdist bdist bdist_wheel             # Requires the following set
 
 Test it to see if it works
 pip freeze                                          # Ensure blowdrycss is not already installed.
-pip uninstall blowdrycss                            # Uninstall if it is already installed.
+pip uninstall blowdrycss -y                         # Uninstall if it is already installed.
 python setup.py install                             # Install the latest.
 blowdrycss                                          # Run in project root and ensure it created a new blowdry.css file.
-pip uninstall blowdrycss                            # Uninstall blowdrycss.
+pip uninstall blowdrycss -y                         # Uninstall blowdrycss.
 
 [If it is the first time, then do this otherwise skip to next step.]
 Reference: `How to setup a .pypirc file <http://stackoverflow.com/a/35087459/1783439>`__.
@@ -67,12 +67,12 @@ Contents of `.pypirc` ::
 
 [Test on testPyPi First.]
 twine upload dist/* -r pypitest
-pip uninstall blowdrycss
+pip uninstall blowdrycss -y
 pip install -i https://testpypi.python.org/pypi blowdrycss
 
 Delete CSS files from examplesite/css
 blowdrycss
-pip uninstall blowdrycss
+pip uninstall blowdrycss -y
 
 Complete testing on testPyPi.
 Go `here <https://testpypi.python.org/>`__ and ensure everything looks correct.
@@ -83,7 +83,7 @@ twine upload dist/* -r pypi
 [Test on PyPi]
 pip install blowdrycss
 blowdrycss
-pip uninstall blowdrycss
+pip uninstall blowdrycss -y
 
 Tag the GitHub commit for the version. In menu VCS -> Git -> Tag.
 Tag Format: Version 1.0.0 Released on PyPi
