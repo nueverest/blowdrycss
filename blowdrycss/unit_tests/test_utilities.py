@@ -11,7 +11,7 @@ from io import StringIO, open
 # custom
 import blowdrycss.unit_tests.unittest_settings as unittest_settings
 from blowdrycss.utilities import contains_a_digit, deny_empty_or_whitespace, get_file_path, unittest_file_path, \
-    change_settings_for_testing, print_css_stats, print_blow_dryer, make_directory, delete_file_paths, \
+    change_settings_for_testing, print_minification_stats, print_blow_dryer, make_directory, delete_file_paths, \
     validate_output_file_name_setting, validate_output_extension_setting
 import blowdrycss_settings as settings
 
@@ -207,7 +207,7 @@ class TestUtilities(TestCase):
 
         chdir(cwd)                                                  # Reset directory back to the way it was.
 
-    def test_print_css_stats(self):
+    def test_print_minification_stats(self):
         # On Travis CI these auto-generated files are inaccessible and need to be recreated.
         # Change the expected file size reduction percentage since Ubuntu's math is different.
         # Create directories and CSS files if they do not exist.
@@ -218,7 +218,7 @@ class TestUtilities(TestCase):
         substrings = [
             'blowdry.css:\t 0.3kB',
             'blowdry.min.css: 0.2kB',
-            'CSS file size reduced by 28.4%.'
+            'File size reduced by 28.4%.'
         ]
 
         blowdry_css_text = '.bgc-hf8f8f8 {\n    background-color: #f8f8f8\n    }\n.border-1px-solid-gray {\n    border: 1px solid gray\n    }\n.padding-5 {\n    padding: 0.3125em\n    }\n.bold {\n    font-weight: bold\n    }\n.talign-center {\n    text-align: center\n    }\n.display-inline {\n    display: inline\n    }'
@@ -241,7 +241,7 @@ class TestUtilities(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            print_css_stats(file_name='blowdry')
+            print_minification_stats(file_name='blowdry', extension='.css')
 
             output = out.getvalue()
             for substring in substrings:
@@ -249,7 +249,50 @@ class TestUtilities(TestCase):
         finally:
             sys.stdout = saved_stdout
 
-    def test_print_css_stats_ZeroDivisionError(self):
+    def test_print_minification_stats_SCSS(self):
+        # On Travis CI these auto-generated files are inaccessible and need to be recreated.
+        # Change the expected file size reduction percentage since Ubuntu's math is different.
+        # Create directories and SCSS files if they do not exist.
+        _folder = 'test_examplesite/test_scss'
+        blowdry_scss = unittest_file_path(_folder, '_blowdry.scss')
+        blowdry_min_scss = unittest_file_path(_folder, '_blowdry.min.scss')
+
+        #if not path.isfile(blowdry_css) or not path.isfile(blowdry_min_css):
+        substrings = [
+            '_blowdry.scss:\t 0.3kB',
+            '_blowdry.min.scss: 0.2kB',
+            'File size reduced by 28.4%.'
+        ]
+
+        blowdry_scss_text = '.bgc-hf8f8f8 {\n    background-color: #f8f8f8\n    }\n.border-1px-solid-gray {\n    border: 1px solid gray\n    }\n.padding-5 {\n    padding: 0.3125em\n    }\n.bold {\n    font-weight: bold\n    }\n.talign-center {\n    text-align: center\n    }\n.display-inline {\n    display: inline\n    }'
+        blowdry_min_scss_text = '.bgc-hf8f8f8{background-color:#f8f8f8}.border-1px-solid-gray{border:1px solid gray}.padding-5{padding:.3125em}.bold{font-weight:bold}.talign-center{text-align:center}.display-inline{display:inline}'
+
+        # Create directories.
+        make_directory(unittest_file_path('test_examplesite', ''))
+        make_directory(unittest_file_path(_folder, ''))
+
+        # Create files.
+        with open(blowdry_scss, 'wb') as generic_file:
+            generic_file.write(bytearray(blowdry_scss_text, 'utf-8'))
+
+        with open(blowdry_min_scss, 'wb') as generic_file:
+            generic_file.write(bytearray(blowdry_min_scss_text, 'utf-8'))
+
+        # Handle printed output.
+        saved_stdout = sys.stdout
+        try:
+            out = StringIO()
+            sys.stdout = out
+
+            print_minification_stats(file_name='_blowdry', extension='.scss')
+
+            output = out.getvalue()
+            for substring in substrings:
+                self.assertTrue(substring in output, msg=substring + '\noutput:\n' + output)
+        finally:
+            sys.stdout = saved_stdout
+
+    def test_print_minification_stats_ZeroDivisionError(self):
         # On Travis CI these auto-generated files are inaccessible and need to be recreated.
         # Change the expected file size reduction percentage since Ubuntu's math is different.
         # Create directories and CSS files if they do not exist.
@@ -260,7 +303,7 @@ class TestUtilities(TestCase):
         substrings = [
             'empty.css:\t 0.0kB',
             'empty.min.css: 0.0kB',
-            'CSS file size reduced by 0.0%.'
+            'File size reduced by 0.0%.'
         ]
 
         # Create directories.
@@ -280,7 +323,7 @@ class TestUtilities(TestCase):
             out = StringIO()
             sys.stdout = out
 
-            print_css_stats(file_name='empty')
+            print_minification_stats(file_name='empty', extension='.css')
 
             output = out.getvalue()
             for substring in substrings:

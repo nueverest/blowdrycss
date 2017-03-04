@@ -14,7 +14,7 @@ from blowdrycss.cssbuilder import CSSBuilder
 from blowdrycss.datalibrary import clashing_alias_markdown, property_alias_markdown, clashing_alias_html, \
     property_alias_html, clashing_alias_rst, property_alias_rst
 from blowdrycss.mediaquerybuilder import MediaQueryBuilder
-from blowdrycss.utilities import print_css_stats, validate_output_file_name_setting, validate_output_extension_setting
+from blowdrycss.utilities import print_minification_stats, validate_output_file_name_setting, validate_output_extension_setting
 import blowdrycss_settings as settings
 
 __author__ = 'chad nelson'
@@ -214,6 +214,6 @@ def parse(recent=True, class_set=set(), css_text=b''):
         timer.report()
 
     if settings.minify:
-        print_css_stats(file_name=settings.output_file_name)
+        print_minification_stats(file_name=settings.output_file_name, extension=settings.output_extension)
 
     return class_set, css_text
