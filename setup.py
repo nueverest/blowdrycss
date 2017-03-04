@@ -68,7 +68,6 @@ Contents of `.pypirc` ::
 
 [Test on testPyPi First.]
 twine upload dist/* -r pypitest
-pip uninstall blowdrycss -y
 pip install -i https://testpypi.python.org/pypi blowdrycss
 
 Delete CSS files from examplesite/css
