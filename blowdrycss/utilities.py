@@ -227,7 +227,7 @@ def print_minification_stats(file_name='', extension=''):
     :type file_name: str
     :param file_name: The file name excluding extension e.g. 'blowdry' or 'site'.
     :type extension: str
-    :param extension: Appened to the file_name and begins with a dot e.g. '.css', '.scss', etc.
+    :param extension: Appended to the file_name and begins with a dot e.g. '.css', '.scss', etc.
     :return: None
 
     """
