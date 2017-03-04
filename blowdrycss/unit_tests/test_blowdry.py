@@ -173,7 +173,8 @@ class TestMain(TestCase):
         substrings = [
             '~~~ blowdrycss started ~~~',
             'CSSBuilder Running...',
-            '.css',
+            settings.output_file_name,
+            settings.output_extension,
         ]
 
         project_directory = settings.project_directory

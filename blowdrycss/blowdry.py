@@ -202,7 +202,7 @@ def parse(recent=True, class_set=set(), css_text=b''):
     if settings.human_readable:
         css_file = CSSFile()
         css_file.write(css_text=css_text)
-        print(path.join(css_file.file_directory, css_file.file_name) + '.css')
+        print(path.join(css_file.file_directory, css_file.file_name) + css_file.extension)
 
     # Output the Minified DRY CSS file. (user setting option)
     if settings.minify:

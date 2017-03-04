@@ -37,6 +37,7 @@ Test it to see if it works
 pip freeze                                          # Ensure blowdrycss is not already installed.
 pip uninstall blowdrycss -y                         # Uninstall if it is already installed.
 python setup.py install                             # Install the latest.
+Delete files in examplesite/css if they exist.
 blowdrycss                                          # Run in project root and ensure it created a new blowdry.css file.
 pip uninstall blowdrycss -y                         # Uninstall blowdrycss.
 

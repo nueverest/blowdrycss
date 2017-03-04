@@ -33,6 +33,8 @@ Version Changelog
 | **1.0.1** -- Enabled support for output file_name and extension customization. Created settings validation
   utility functions and unit tests. Custom output file examples: _blowdry.scss and custom.css. Added support for
   Python 3.6.
+|
+| **1.0.2** -- Fixed file extension printing error. Now it uses the settings output_extension. Updated unit test.
 
 
 Why the name blowdrycss?
