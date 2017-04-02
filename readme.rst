@@ -17,8 +17,6 @@ Getting Started
 
 `Quick Start Docs <http://blowdrycss.readthedocs.io/en/latest/quickstart.html>`__
 
-`Official site blowdrycss.org <http://blowdrycss.org>`__
-
 `Full documentation <http://blowdrycss.readthedocs.io/en/latest/index.html>`__
 
 
