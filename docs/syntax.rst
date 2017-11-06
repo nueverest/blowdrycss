@@ -228,7 +228,7 @@ A ``-n`` prefix for a number becomes a minus sign ``-``, and creates a negative 
 +-----------------------+---------------------------+
 | Value Encoding Format | CSS Property Value Output |
 +=======================+===========================+
-| width-n48             | width: -48px              |
+| top-n48               | top: -48px                |
 +-----------------------+---------------------------+
 | margin-n5cm-n6cm      | margin: -5cm -6cm         |
 +-----------------------+---------------------------+
@@ -250,7 +250,7 @@ Decimal points are substituted for all underscores.
 +=========================+=============================+
 | margin-1_32rem          | margin: 1.32rem             |
 +-------------------------+-----------------------------+
-| padding-n40_2rem        | padding: -40.2rem           |
+| left-n4_2rem            | left: -4.2rem               |
 +-------------------------+-----------------------------+
 
 .. note::
@@ -273,7 +273,7 @@ Use a suffix of ``p`` to indicated a percentage value.
 +=========================+=============================+
 | margin-1p-10p-3p-1p     | margin: 1% 10% 3% 1%        |
 +-------------------------+-----------------------------+
-| width-n3_2p             | width: -3.2%                |
+| right-n3_2p             | right: -3.2%                |
 +-------------------------+-----------------------------+
 
 Default Units:
