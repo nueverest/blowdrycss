@@ -3,8 +3,6 @@ Read Me
 
 .. image:: https://img.shields.io/pypi/v/blowdrycss.svg?maxAge=2592000?style=plastic   :target: https://pypi.python.org/pypi/blowdrycss
 
-.. image:: https://img.shields.io/travis/nueverest/blowdrycss.svg?maxAge=2592000   :target: https://travis-ci.org/nueverest/blowdrycss
-
 .. image:: https://img.shields.io/coveralls/nueverest/blowdrycss.svg?maxAge=2592000   :target: https://coveralls.io/github/nueverest/blowdrycss
 
 |
