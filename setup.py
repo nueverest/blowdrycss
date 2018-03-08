@@ -206,7 +206,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['cssutils>=1.0.1', 'pypandoc==1.1.3', 'future>=0.15.2', 'watchdog>=0.8.3'],
+    install_requires=['cssutils>=1.0.2', 'pypandoc>=1.4', 'future>=0.16.0', 'watchdog>=0.8.3'],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
