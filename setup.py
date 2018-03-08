@@ -54,21 +54,21 @@ Contents of `.pypirc` ::
     [distutils]
     index-servers =
         pypi
-        pypitest
+        testpypi
 
-    [pypitest]
-    repository = https://testpypi.python.org/pypi
-    username = <your user name goes here>
-    password = <your password goes here>
+    [testpypi]
+    repository: https://test.pypi.org/legacy/
+    username: your testpypi username
+    password: your testpypi password
 
     [pypi]
-    repository = https://pypi.python.org/pypi
-    username = <your user name goes here>
-    password = <your password goes here>
+    # repository: https://upload.pypi.org/legacy/
+    username: <your user name goes here>
+    password: <your password goes here>
 
 [Test on testPyPi First.]
-twine upload dist/* -r pypitest
-pip install -i https://testpypi.python.org/pypi blowdrycss
+twine upload dist/* -r testpypi
+pip install -i https://test.pypi.org/legacy/ blowdrycss
 
 Delete CSS files from examplesite/css
 blowdrycss
