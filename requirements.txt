@@ -3,13 +3,13 @@
 # setuptools>=19.6.2
 
 # CSS Creation
-cssutils>=1.0.1
+cssutils>=1.0.2
 
 # Markdown to reStructuredText Conversion
-pypandoc>=1.1.2
+pypandoc>=1.4
 
 # Python 2.7 Support
-future>=0.15.2
+future>=0.16.0
 
 # Automatic CSS generation on save
 watchdog>=0.8.3

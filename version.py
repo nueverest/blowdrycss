@@ -208,12 +208,15 @@
       Python 3.6.
     |
     | **1.0.2** -- Fixed file extension printing error. Now it uses the settings output_extension. Updated unit test.
+    |
+    | **1.0.3** -- Changed requirements.txt so that versions must be ``>=``.  The pypandoc requirement in particular
+      caused issues on both windows and linux installs.
 
 """
 __author__ = 'chad nelson'
 
 __project__ = 'blowdrycss'
 
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 
 __release__ = __version__
