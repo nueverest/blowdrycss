@@ -1,10 +1,6 @@
 Read Me
 =======
 
-.. image:: https://img.shields.io/pypi/v/blowdrycss.svg?maxAge=2592000?style=plastic   :target: https://pypi.python.org/pypi/blowdrycss
-
-.. image:: https://img.shields.io/coveralls/nueverest/blowdrycss.svg?maxAge=2592000   :target: https://coveralls.io/github/nueverest/blowdrycss
-
 |
 
 `blowdrycss` is a rapid styling tool that compiles DRY CSS from encoded class selectors in your web project files.
@@ -23,14 +19,14 @@ Version Changelog
 
 | See ``version.py`` for full changelog.
 |
-| **1.0.0** -- Enabled support for ``*.php`` extension and added integration tests. Incremented to 1.0.0 since the
-  code is stable and working well.
-|
 | **1.0.1** -- Enabled support for output file_name and extension customization. Created settings validation
   utility functions and unit tests. Custom output file examples: _blowdry.scss and custom.css. Added support for
   Python 3.6.
 |
 | **1.0.2** -- Fixed file extension printing error. Now it uses the settings output_extension. Updated unit test.
+|
+| **1.0.3** -- Changed requirements.txt so that versions must be ``>=``.  The pypandoc requirement in particular
+      caused issues on both windows and linux installs.
 
 
 Why the name blowdrycss?
